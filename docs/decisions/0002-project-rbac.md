@@ -1,0 +1,20 @@
+# ADR 0002: Use global super administration and project-scoped RBAC
+
+Date: 2026-06-24  
+Status: proposed
+
+## Decision
+
+Store `super_admin` globally and all ordinary authorization in project-scoped roles composed from stable permission codes. Each project member has one role.
+
+## Safety invariants
+
+- At least one active `super_admin` always exists.
+- At least one active Project Admin always exists per active project.
+- The built-in Admin role retains project, member, and role administration permissions.
+- UI, Nitro API, and MCP use the same permission evaluator.
+
+## Consequences
+
+Role names may be localized or changed without altering authorization behavior. Individual per-user permission overrides are deferred.
+

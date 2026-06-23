@@ -1,0 +1,32 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Dependencies and build output
+node_modules/
+.nuxt/
+.output/
+dist/
+coverage/
+playwright-report/
+test-results/
+
+# Local data
+data/
+uploads/
+backups/
+*.log
+
+# Tesserae local knowledge graph and imported sessions
+.tesserae/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+

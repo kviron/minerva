@@ -1,0 +1,52 @@
+# Minerva backlog
+
+These items are valuable but not required to prove the first secure end-to-end product workflow.
+
+## Knowledge experience
+
+- Tags.
+- Favorites.
+- Recently viewed pages.
+- Page owner and scheduled review/verification workflow.
+- Project-local custom templates.
+- Generic file attachments beyond images.
+- Project ZIP export and import.
+- Side-by-side visual version diff.
+- Comments, mentions, and approval workflows.
+- Realtime collaborative editing.
+- Page- or branch-level permissions.
+
+## Users and clients
+
+- Customer/guest portal.
+- Public or expiring share links.
+- Groups and multiple roles per project member.
+- Individual permission overrides.
+- Mandatory MFA policies.
+- SSO/SAML/LDAP.
+- Email delivery and notifications.
+
+## MCP
+
+- Project creation and mutation through MCP.
+- Member invitations and role assignment through MCP.
+- Role-matrix administration through MCP.
+- Global or `super_admin` tools.
+- Service accounts and machine-to-machine grants.
+- Secret-vault access.
+
+## Operations and integrations
+
+- Import from Notion, Confluence, Markdown archives, or Minerva ZIP exports.
+- Webhooks and general public API keys.
+- External search/vector database.
+- Automatic article translation.
+- Website monitoring and asset inventory.
+
+## Sensitive data
+
+- Client credentials, FTP access, hosting panels, and password vault.
+- Credential sharing, reveal auditing, breach checks, and rotation workflows.
+
+This area requires a separate threat model, encryption/key-management ADR, recovery design, and MCP exclusion policy before implementation.
+
