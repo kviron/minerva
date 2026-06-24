@@ -21,10 +21,10 @@ Stage 0 and stage 0.5 are in progress. Application implementation is blocked pen
 - Completed the final interactive MVP audit and resolved project-bound invitations, immediate OAuth/MCP revocation, complete immutable document snapshots, and reproducible foundation setup.
 - Added ADR 0005 for MCP resource binding and immediate token revocation.
 - Audited the MVP information architecture and drafted the eight-screen shadcn-vue Figma prototype specification.
+- Received user approval for the written UX/UI prototype specification and prepared its detailed Figma implementation plan.
 
 ## Remaining before application implementation
 
-- Obtain user approval of the written UX/UI prototype specification.
 - Build and review the eight-screen prototype in the supplied Figma file.
 - Obtain final user approval of the updated canonical documents, UX/UI prototype, and plans.
 - After approval, create detailed plans for later slices only when the preceding slice has established their real interfaces.
