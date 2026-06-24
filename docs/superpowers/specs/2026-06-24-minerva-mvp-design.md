@@ -36,17 +36,17 @@ The original MVP combined too many independent product surfaces. The following c
 
 ## Architecture and data flow
 
-Web, Nitro API, and MCP adapters authenticate a caller and construct one actor context. Shared application services validate input, evaluate permissions, execute a transaction, and append an audit event. Adapters only translate protocols and errors.
+Web, Nitro API, and MCP adapters authenticate a caller and construct one actor context. Shared application services validate input, evaluate permissions, execute a transaction, and append an audit event. Adapters only translate protocols and errors. A Project Admin may issue a project-bound invitation with a fixed initial role; accepting it creates or activates the account and membership atomically without granting global privileges.
 
-Document drafts use Tiptap JSON and optimistic revision numbers. Publication creates immutable snapshots with required change summaries. Search indexes normalized published text and filters results through project membership. Images use private S3 objects and authorized access.
+Document drafts use Tiptap JSON and optimistic revision numbers. Publication creates complete immutable snapshots of the title, content, internal links, and referenced images with required change summaries. Restore copies that snapshot into a new draft while preserving the stable slug. Images used by published versions may be archived but cannot be physically deleted. Search indexes normalized published text and filters results through project membership. Images use private S3 objects and authorized access.
 
-MCP uses Streamable HTTP. Better Auth's OAuth Provider plugin supplies OAuth 2.1 authorization and MCP-compatible discovery. A tool call must satisfy both its OAuth scope and the user's current RBAC permission.
+MCP uses Streamable HTTP. Better Auth's OAuth Provider plugin supplies OAuth 2.1 authorization and MCP-compatible discovery. Tokens are bound to the canonical MCP resource URI. Every request checks token activity, resource/audience, scope, and current RBAC. Revocation atomically invalidates consent, access tokens, and refresh tokens before the next tool call.
 
 ## Failure and recovery behavior
 
 - Stale autosaves return `DRAFT_CONFLICT`; they never overwrite silently.
 - Removing the last system or project administrator fails atomically.
-- Revoked OAuth grants fail before tool execution.
+- Revoked OAuth grants fail with `401 Unauthorized` on the next request before tool execution.
 - Retryable MCP mutations use idempotency keys.
 - Object uploads are not considered complete until metadata and storage checks succeed.
 - Projects, documents, and images are archived rather than physically deleted.
@@ -68,4 +68,3 @@ A slice is complete only when:
 - documentation and `docs/progress.md` are updated;
 - Tesserae is refreshed;
 - Superpowers verification finds no unsupported completion claim.
-

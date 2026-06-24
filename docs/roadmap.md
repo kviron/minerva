@@ -8,13 +8,13 @@ Deliver Superpowers, Tesserae, canonical documentation, ADRs, and implementation
 
 ## Slice 1: Executable foundation
 
-Deliver a reproducible Nuxt 4 workspace, lint/type/test commands, PostgreSQL and MinIO development services, Drizzle migrations, health checks, CI, environment validation, and Russian/English shell pages.
+Deliver a reproducible Nuxt 4 workspace with exact Node, pnpm, Nuxt, and dependency versions; lint/type/test commands; PostgreSQL and MinIO development services; idempotent bucket initialization; Drizzle migrations; health checks; CI; environment validation; and Russian/English shell pages.
 
 Acceptance: a clean checkout starts through documented commands and all checks pass.
 
 ## Slice 2: Identity and global administration
 
-Deliver Better Auth email/password login, invitation-only enrollment, session protection, `super_admin` bootstrap, account disabling, optional TOTP, recovery codes, and global audit events.
+Deliver Better Auth email/password login, global and project-bound invitation enrollment, atomic project membership creation, session protection, `super_admin` bootstrap, account disabling, optional TOTP, recovery codes, and global audit events.
 
 Acceptance: no public registration exists; the last active `super_admin` invariant is enforced in services and tests.
 
@@ -26,7 +26,7 @@ Acceptance: authorization results match across UI and API, and inaccessible proj
 
 ## Slice 4: Document core
 
-Deliver document tree, Tiptap editor, draft autosave, optimistic conflicts, publication summaries, immutable versions, restore, archive, internal links, backlinks, and system templates.
+Deliver document tree, Tiptap editor, draft autosave, optimistic conflicts, publication summaries, complete immutable version snapshots, full-snapshot restore with stable slugs, archive, internal links, backlinks, protected historical image references, and system templates.
 
 Acceptance: an Editor completes the full draft-to-publish-to-restore journey while a Viewer remains read-only.
 
@@ -38,13 +38,12 @@ Acceptance: search and image access cannot leak data across projects.
 
 ## Slice 6: MCP documentation interface
 
-Deliver Better Auth OAuth Provider integration, OAuth metadata/discovery, Streamable HTTP MCP endpoint, document resources/tools, scopes, grant management UI, revocation, idempotency, rate limiting, and MCP audit attribution.
+Deliver Better Auth OAuth Provider integration, OAuth metadata/discovery, canonical MCP resource binding, Streamable HTTP MCP endpoint, document resources/tools, scopes, grant management UI, atomic immediate revocation of consent and tokens, idempotency, rate limiting, and MCP audit attribution.
 
-Acceptance: a real MCP client can connect, read, edit, and publish only within both delegated scopes and RBAC.
+Acceptance: a real MCP client can connect, read, edit, and publish only within both delegated scopes and RBAC; the first request after grant revocation receives `401 Unauthorized`.
 
 ## Slice 7: Production readiness
 
 Deliver VPS Compose configuration, reverse-proxy guidance, backup jobs, restore drill, structured logs, audit browsing, security headers, dependency scanning, and release checklist.
 
 Acceptance: a clean VPS deployment and documented restore test succeed.
-

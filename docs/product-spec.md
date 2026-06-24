@@ -24,6 +24,9 @@ The first usable release must let a small internal team:
 - The system must always retain at least one active `super_admin`.
 - A bootstrap command creates the first `super_admin`; it must be idempotent and must not print a password.
 - Public registration is disabled. Users join through expiring, single-use invitations.
+- A `super_admin` may issue a global invitation without project membership.
+- A Project Admin may invite a new user only into a project they administer. The invitation fixes the target project and initial project role before it is sent.
+- Accepting a project invitation creates or activates the user account and its project membership atomically. It grants no global administrative privilege.
 
 ### Project authorization
 
@@ -53,10 +56,11 @@ A project contains a name, optional description, lifecycle status, timestamps, c
 - A document has a title, slug, parent, order, owner, draft revision number, publication state, and soft-deletion metadata.
 - Draft content is stored as validated Tiptap JSON.
 - Autosave uses optimistic concurrency. A client submits the draft revision it edited; a stale revision returns a conflict and never silently overwrites newer work.
-- Publishing requires a change summary and creates an immutable version snapshot.
-- Restoring a version copies its content into a new draft; it never mutates historical versions.
+- Publishing requires a change summary and creates an immutable snapshot of the title, validated Tiptap content, internal-link targets, and referenced images.
+- Restoring a version copies the complete snapshot into a new draft while retaining the document's current stable slug. It never mutates historical versions.
 - Internal links reference stable document IDs rather than slugs.
 - Backlinks are derived when a draft or version is saved.
+- An image referenced by any published version cannot be physically deleted. It may be archived so that new drafts cannot select it while historical versions remain renderable.
 - Project permissions apply to the entire document tree in the first release.
 
 The initial editor supports paragraphs, headings, emphasis, lists, blockquotes, code blocks, tables, links, and images. Generic file attachments can follow after the image path is proven.
@@ -91,6 +95,8 @@ The first MCP release supports project discovery and documentation workflows:
 
 MCP uses Streamable HTTP and OAuth 2.1. Better Auth's OAuth Provider plugin is the authorization server. Scopes and RBAC are both required: a scope limits the delegated client, while RBAC limits the user.
 
+Access tokens are bound to the canonical MCP resource URI. Every MCP request validates token activity, resource/audience binding, scopes, and the user's current RBAC permissions. Revoking a grant atomically invalidates its consent, access tokens, and refresh tokens so that the next request fails with `401 Unauthorized`.
+
 Initial scopes:
 
 - `projects:read`
@@ -107,6 +113,7 @@ Every MCP mutation records the user, OAuth client, grant, scopes, tool name, pro
 - Password authentication uses Better Auth; optional TOTP and recovery codes are available to all users.
 - Session, invitation, OAuth, and MCP endpoints are rate-limited.
 - MCP validates `Origin`, tool schemas, OAuth audience/resource binding, scopes, and RBAC.
+- OAuth grant revocation and token invalidation are audited and checked before MCP tool execution.
 - Images are stored in S3-compatible storage with private objects and authorized download endpoints or short-lived signed URLs.
 - PostgreSQL and object storage receive automatic backups with a documented restore test.
 - Audit records are append-only through application APIs.
@@ -115,6 +122,7 @@ Every MCP mutation records the user, OAuth client, grant, scopes, tool name, pro
 ## Acceptance criteria for the first release
 
 - A bootstrapped `super_admin` can invite a user and create a project.
+- A Project Admin can invite a new user into their project with a predetermined role without granting global privileges.
 - A Project Admin can configure a safe custom role and assign it to a member.
 - A Viewer cannot mutate projects or documents through UI, HTTP API, or MCP.
 - An Editor can create a page, autosave a draft, resolve a stale-edit conflict, and publish a version.
@@ -128,4 +136,3 @@ Every MCP mutation records the user, OAuth client, grant, scopes, tool name, pro
 ## Explicitly deferred
 
 See `docs/backlog.md`. Deferred functionality is not implied by the first-release interfaces unless an accepted ADR says otherwise.
-

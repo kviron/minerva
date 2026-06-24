@@ -23,8 +23,9 @@ Detailed plan: `docs/superpowers/plans/2026-06-24-foundation.md`
 Gate:
 
 - Clean checkout installs deterministically.
+- Node, pnpm, Nuxt, and package versions are exact and upgrades are reviewed separately.
 - Nuxt renders Russian and English shell routes.
-- PostgreSQL and MinIO are healthy through Docker Compose.
+- PostgreSQL and MinIO, including an idempotently initialized private bucket, are healthy through Docker Compose.
 - Migration, unit-test, type-check, lint, and browser-smoke commands pass.
 - CI runs the same checks.
 
@@ -32,7 +33,8 @@ Gate:
 
 Plan after Slice 1 approval. Required outcome:
 
-- Invitation-only Better Auth flow.
+- Global and project-bound invitation-only Better Auth flows.
+- Project-bound acceptance atomically creates or activates the account, assigns the fixed role, and grants no global privilege.
 - Idempotent first-`super_admin` bootstrap.
 - Account disabling, optional TOTP, recovery codes.
 - Last-active-`super_admin` invariant.
@@ -54,8 +56,9 @@ Plan after Slice 3 approval. Required outcome:
 
 - Ordered document tree and Tiptap editor.
 - Optimistic draft autosave.
-- Publication summaries and immutable versions.
-- Version restore, archive/restore, internal links, backlinks.
+- Publication summaries and complete immutable snapshots of title, content, links, and images.
+- Full-snapshot restore with a stable slug, archive/restore, internal links, backlinks.
+- Historical image references that prevent physical deletion while a version depends on them.
 - System page templates.
 
 ### Slice 5: Search and images
@@ -70,11 +73,11 @@ Plan after Slice 4 approval. Required outcome:
 
 Plan after Slice 5 approval and threat-model review. Required outcome:
 
-- Better Auth OAuth Provider and MCP discovery metadata.
+- Better Auth OAuth Provider, MCP discovery metadata, and canonical resource binding.
 - Streamable HTTP MCP endpoint.
 - Project/document resources and document tools.
 - Scope plus RBAC enforcement.
-- Grant management, immediate revocation, idempotency, rate limiting, and AI attribution in audit.
+- Grant management, atomic invalidation of consent/access/refresh tokens, next-request revocation enforcement, idempotency, rate limiting, and AI attribution in audit.
 
 ### Slice 7: Production readiness
 
@@ -97,4 +100,3 @@ Plan after Slice 6 approval. Required outcome:
 - [ ] Tesserae is refreshed.
 - [ ] `superpowers:verification-before-completion` is run before claiming completion.
 - [ ] User approves the slice before the next slice begins.
-

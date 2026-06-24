@@ -13,7 +13,7 @@ This keeps the first release operable on one VPS while preserving boundaries tha
 
 ### Identity
 
-Owns Better Auth configuration, sessions, invitations, TOTP, account status, global `super_admin`, and OAuth 2.1 provider behavior.
+Owns Better Auth configuration, sessions, global and project-bound invitations, TOTP, account status, global `super_admin`, OAuth grants, token lifecycle, and OAuth 2.1 provider behavior. Accepting a project-bound invitation creates or activates the account and membership in one transaction.
 
 ### Authorization
 
@@ -25,7 +25,7 @@ Owns project lifecycle and project metadata. It depends on Authorization for acc
 
 ### Documents
 
-Owns document trees, draft concurrency, Tiptap validation, publication, immutable versions, restore behavior, links, backlinks, and templates.
+Owns document trees, draft concurrency, Tiptap validation, publication, complete immutable snapshots, restore behavior, links, backlinks, and templates. A version snapshot fixes the title, content, internal-link targets, and referenced image IDs; restore keeps the document's current slug.
 
 ### Search
 
@@ -33,7 +33,7 @@ Owns document text extraction, PostgreSQL search vectors, ranking, filters, and 
 
 ### Files
 
-Owns image metadata, validation, S3 object keys, upload completion, authorized reads, and lifecycle cleanup. Raw object-store credentials never leave the server.
+Owns image metadata, validation, S3 object keys, upload completion, authorized reads, and lifecycle cleanup. Images referenced by published versions may be archived but not physically deleted. Raw object-store credentials never leave the server.
 
 ### Audit
 
@@ -41,11 +41,11 @@ Owns append-only security and business events. Events include actor, channel (`w
 
 ### MCP
 
-Owns Streamable HTTP framing, capability/resource/tool registration, OAuth token validation, scope enforcement, schema validation, idempotency, and translation to shared application-service calls.
+Owns Streamable HTTP framing, capability/resource/tool registration, canonical resource metadata, OAuth token activity and audience validation, scope enforcement, schema validation, idempotency, and translation to shared application-service calls.
 
 ## Request flow
 
-1. A web, API, or MCP adapter authenticates the caller.
+1. A web, API, or MCP adapter authenticates the caller. MCP rejects inactive or wrongly targeted tokens before tool dispatch.
 2. It builds an actor context containing user ID, global flags, project membership, OAuth client, scopes, locale, and request ID.
 3. An application service validates input and asks Authorization for a permission decision.
 4. The service executes one transaction and appends its audit event.
@@ -59,6 +59,7 @@ Owns Streamable HTTP framing, capability/resource/tool registration, OAuth token
 - Store Tiptap JSON as `jsonb`; store search text and `tsvector` separately.
 - Number published document versions monotonically per document inside a transaction.
 - Store internal links as stable source/target IDs with link type and version/draft origin.
+- Store immutable version references to image IDs and prevent physical deletion while any published version references an image.
 - Use a numeric draft revision for optimistic concurrency.
 
 ## Error contract
@@ -86,4 +87,3 @@ Docker Compose initially runs:
 - A backup job with retention configuration.
 
 Tesserae and Superpowers are development tools and are not runtime dependencies of Minerva.
-

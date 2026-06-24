@@ -6,7 +6,9 @@
 
 **Architecture:** Use Nuxt as the single application and Nitro server. Keep infrastructure adapters under `server/infrastructure`, shared configuration validation under `shared`, and UI shell code under `app`. This slice proves the runtime, database, storage, localization, and testing seams used by every later slice.
 
-**Tech Stack:** Node.js 22 LTS, pnpm, Nuxt 4, Vue 3, TypeScript, Tailwind CSS, shadcn-vue, `@nuxtjs/i18n`, `@nuxtjs/color-mode`, PostgreSQL, Drizzle ORM, MinIO, Vitest, Playwright, ESLint, Docker Compose.
+**Tech Stack:** Node.js 22.23.1 LTS, pnpm 11.8.0, Nuxt 4.4.8, Vue 3, TypeScript, Tailwind CSS, shadcn-vue, `@nuxtjs/i18n`, `@nuxtjs/color-mode`, PostgreSQL, Drizzle ORM, MinIO, Vitest, Playwright, ESLint, Docker Compose.
+
+All package versions are exact in `package.json` and `pnpm-lock.yaml`. `.npmrc` sets `save-exact=true`. Dependency upgrades are separate reviewed tasks and never occur implicitly while implementing this plan.
 
 ---
 
@@ -14,6 +16,7 @@
 
 **Files:**
 - Create: `.nvmrc`
+- Create: `.npmrc`
 - Create: `package.json`
 - Create: `pnpm-lock.yaml`
 - Create: `pnpm-workspace.yaml`
@@ -28,7 +31,13 @@
 Create `.nvmrc`:
 
 ```text
-22
+22.23.1
+```
+
+Create `.npmrc`:
+
+```ini
+save-exact=true
 ```
 
 Create `pnpm-workspace.yaml`:
@@ -38,17 +47,37 @@ packages:
   - .
 ```
 
-- [ ] **Step 2: Scaffold Nuxt without Git initialization**
+- [ ] **Step 2: Create the minimal Nuxt foundation manually**
 
-Run:
+Create `package.json` with the exact package-manager and Nuxt versions:
+
+```json
+{
+  "name": "minerva",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.8.0",
+  "engines": {
+    "node": "22.23.1",
+    "pnpm": "11.8.0"
+  },
+  "dependencies": {
+    "nuxt": "4.4.8"
+  }
+}
+```
+
+Create the listed minimal `nuxt.config.ts`, `tsconfig.json`, `app/app.vue`, `app/pages/index.vue`, and public files directly. Do not run a project generator in the repository root and do not use `--force`.
+
+Activate the pinned package manager:
 
 ```powershell
 corepack enable
-corepack prepare pnpm@latest --activate
-pnpm create nuxt@latest . --package-manager pnpm --git-init false --force
+corepack prepare pnpm@11.8.0 --activate
+pnpm install --frozen-lockfile=false
 ```
 
-Expected: Nuxt files are created while existing `AGENTS.md` and `docs/` remain intact.
+Expected: the minimal Nuxt application installs without modifying `AGENTS.md` or existing documentation.
 
 - [ ] **Step 3: Normalize scripts**
 
@@ -85,7 +114,7 @@ Expected: both commands exit successfully.
 - [ ] **Step 5: Commit**
 
 ```powershell
-git add .nvmrc package.json pnpm-lock.yaml pnpm-workspace.yaml nuxt.config.ts tsconfig.json app public
+git add .nvmrc .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml nuxt.config.ts tsconfig.json app public
 git commit -m "chore: scaffold Nuxt foundation"
 ```
 
@@ -117,7 +146,7 @@ describe('test harness', () => {
 Run:
 
 ```powershell
-pnpm add -D vitest @vitest/coverage-v8 @playwright/test eslint @nuxt/eslint
+pnpm add --save-exact -D vitest @vitest/coverage-v8 @playwright/test eslint @nuxt/eslint
 pnpm exec playwright install chromium
 ```
 
@@ -232,8 +261,8 @@ Expected: FAIL because localized routes and messages do not exist.
 Run:
 
 ```powershell
-pnpm add @nuxtjs/i18n @nuxtjs/color-mode
-pnpm add -D tailwindcss @tailwindcss/vite
+pnpm add --save-exact @nuxtjs/i18n @nuxtjs/color-mode
+pnpm add --save-exact -D tailwindcss @tailwindcss/vite
 pnpm dlx shadcn-vue@latest init
 ```
 
@@ -351,7 +380,7 @@ Expected: FAIL because `shared/config/env.ts` does not exist.
 Install Zod:
 
 ```powershell
-pnpm add zod
+pnpm add --save-exact zod
 ```
 
 Create `shared/config/env.ts`:
@@ -397,6 +426,7 @@ git commit -m "feat: validate runtime configuration"
 
 **Files:**
 - Create: `compose.yaml`
+- Create: `ops/minio/create-bucket.ps1`
 - Create: `server/infrastructure/database/client.ts`
 - Create: `server/infrastructure/database/schema/health.ts`
 - Create: `server/infrastructure/storage/client.ts`
@@ -428,15 +458,17 @@ describe('GET /api/health', () => {
 
 - [ ] **Step 2: Add local infrastructure**
 
-Create `compose.yaml` with PostgreSQL 17 and MinIO services, named volumes, health checks, and localhost-only development ports. Do not place production secrets in the file.
+Create `compose.yaml` with PostgreSQL 17, MinIO, and a one-shot `minio-init` service; named volumes; health checks; and localhost-only development ports. Do not place production secrets in the file.
+
+The init service must wait for MinIO readiness, create the configured private bucket if absent, and succeed without changing state when the bucket already exists. `infra:up` must wait for PostgreSQL, MinIO, and successful bucket initialization before returning.
 
 - [ ] **Step 3: Add Drizzle and S3 clients**
 
 Run:
 
 ```powershell
-pnpm add drizzle-orm postgres @aws-sdk/client-s3
-pnpm add -D drizzle-kit
+pnpm add --save-exact drizzle-orm postgres @aws-sdk/client-s3
+pnpm add --save-exact -D drizzle-kit
 ```
 
 Add scripts:
@@ -445,12 +477,12 @@ Add scripts:
 {
   "db:generate": "drizzle-kit generate",
   "db:migrate": "drizzle-kit migrate",
-  "infra:up": "docker compose up -d",
+  "infra:up": "docker compose up -d --wait",
   "infra:down": "docker compose down"
 }
 ```
 
-The health handler must execute `select 1` through Drizzle and `HeadBucket` through the S3 client. It returns `503` with stable component states when either dependency fails.
+The health handler must execute `select 1` through Drizzle and `HeadBucket` through the S3 client. It runs only after the idempotent bucket initializer has succeeded and returns `503` with stable component states when either dependency fails.
 
 - [ ] **Step 4: Start infrastructure and run migrations**
 
@@ -462,7 +494,7 @@ pnpm db:generate
 pnpm db:migrate
 ```
 
-Expected: PostgreSQL and MinIO become healthy and migration succeeds.
+Expected: PostgreSQL and MinIO become healthy, the configured private bucket exists, a repeated `pnpm infra:up` remains successful, and migration succeeds.
 
 - [ ] **Step 5: Run the integration test**
 
@@ -477,7 +509,7 @@ Expected: PASS with both dependencies reported `ok`.
 - [ ] **Step 6: Commit**
 
 ```powershell
-git add compose.yaml server drizzle drizzle.config.ts tests/integration package.json pnpm-lock.yaml
+git add compose.yaml ops/minio server drizzle drizzle.config.ts tests/integration package.json pnpm-lock.yaml
 git commit -m "feat: add database and object storage foundation"
 ```
 
@@ -493,13 +525,13 @@ git commit -m "feat: add database and object storage foundation"
 
 Configure `.github/workflows/ci.yml` to:
 
-1. Use Node.js 22 and pnpm cache.
+1. Use Node.js 22.23.1 and pnpm 11.8.0 with pnpm cache.
 2. Install with `pnpm install --frozen-lockfile`.
 3. Run `pnpm lint`.
 4. Run `pnpm typecheck`.
 5. Run `pnpm test:unit`.
 6. Run `pnpm build`.
-7. Run Playwright smoke tests with PostgreSQL and MinIO service containers.
+7. Run the same idempotent bucket initializer before Playwright smoke tests with PostgreSQL and MinIO service containers.
 
 - [ ] **Step 2: Document the exact local workflow**
 
@@ -507,6 +539,7 @@ Configure `.github/workflows/ci.yml` to:
 
 ```powershell
 corepack enable
+corepack prepare pnpm@11.8.0 --activate
 pnpm install
 Copy-Item .env.example .env
 pnpm infra:up
@@ -551,4 +584,3 @@ Mark Slice 1 complete in `docs/progress.md`, then:
 git add .github README.md docs
 git commit -m "docs: complete foundation delivery guide"
 ```
-

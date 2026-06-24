@@ -18,8 +18,10 @@ Stage 0 and stage 0.5 are in progress. Application implementation is blocked pen
 - Registered Tesserae as the enabled `minerva-memory` Codex MCP server.
 - Created the vertical MVP delivery plan and detailed TDD plan for Slice 1.
 - Scanned the canonical documents and plans for placeholders and internal scope conflicts.
+- Completed the final interactive MVP audit and resolved project-bound invitations, immediate OAuth/MCP revocation, complete immutable document snapshots, and reproducible foundation setup.
+- Added ADR 0005 for MCP resource binding and immediate token revocation.
 
 ## Remaining before application implementation
 
-- Obtain explicit user approval.
+- Obtain final user approval of the updated canonical documents and plans.
 - After approval, create detailed plans for later slices only when the preceding slice has established their real interfaces.
