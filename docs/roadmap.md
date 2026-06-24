@@ -4,7 +4,7 @@ Status: proposed after Superpowers audit
 
 ## Slice 0: Project memory and approved design
 
-Deliver Superpowers, Tesserae, canonical documentation, ADRs, and implementation plans. No application code begins until user approval.
+Deliver Superpowers, Tesserae, canonical documentation, ADRs, an approved Figma UX/UI prototype, and implementation plans. No application code begins until user approval.
 
 ## Slice 1: Executable foundation
 
