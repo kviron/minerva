@@ -51,6 +51,15 @@ The alternatives were rejected for the following reasons:
 - `/administration` is restricted to `super_admin` and groups global users, invitations, and audit browsing.
 - `/settings` groups the current user's profile, security controls, sessions, and OAuth/MCP grants.
 
+## Document hierarchy and URLs
+
+- The route identifies one document by its stable ID; ancestor slugs and IDs are not encoded into the URL.
+- Every document may contain content and may also be the parent of child documents.
+- The project sidebar and breadcrumbs derive the current document's ancestry from parent relationships.
+- Moving a document changes its parent and sibling order without changing its route or breaking internal links.
+- Parent assignment is limited to the same project and must reject cycles.
+- A project/document ID mismatch is handled as an inaccessible or missing resource according to the authorization error contract.
+
 ## Flows without separate pages
 
 - Global documentation search uses a command dialog.

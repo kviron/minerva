@@ -54,6 +54,10 @@ A project contains a name, optional description, lifecycle status, timestamps, c
 
 - Documents form a manually ordered adjacency-list tree within one project.
 - A document has a title, slug, parent, order, owner, draft revision number, publication state, and soft-deletion metadata.
+- Every tree node is a document that may contain both its own content and child documents; folders are not a separate entity.
+- A root document has no parent. A child document must have a parent in the same project, and parent changes must never create a cycle.
+- Moving or reordering a document changes only its parent and sibling order. Its stable ID, slug, URL, internal links, and published history remain unchanged.
+- The document tree, ancestor breadcrumbs, and descendant lists are derived from parent relationships and sibling order rather than encoded into the route path.
 - Draft content is stored as validated Tiptap JSON.
 - Autosave uses optimistic concurrency. A client submits the draft revision it edited; a stale revision returns a conflict and never silently overwrites newer work.
 - Publishing requires a change summary and creates an immutable snapshot of the title, validated Tiptap content, internal-link targets, and referenced images.
