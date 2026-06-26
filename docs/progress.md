@@ -26,6 +26,7 @@ Stage 0 and stage 0.5 are in progress. Application implementation remains blocke
 - Created the buildable Nuxt page-file skeleton for the approved MVP route map without UI or business behavior.
 - Added public empty route stubs for Terms of Service and Privacy Policy under `/legal`.
 - Added secure password recovery to the MVP design while preserving invitation-only registration.
+- Added a safe Tesserae refresh wrapper that prevents the recurring Windows `WinError 183` workflow failure.
 
 ## Remaining before application implementation
 

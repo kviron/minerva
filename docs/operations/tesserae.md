@@ -38,20 +38,14 @@ Never ingest:
 ## Refresh
 
 ```powershell
-$env:PYTHONUTF8='1'
-$env:PYTHONIOENCODING='utf-8'
-tesserae refresh
+./scripts/refresh-tesserae.ps1
 ```
 
 Run refresh after accepted documentation changes and after each completed implementation slice.
 
-Tesserae 0.10.1 can fail on Windows when replacing an existing generated JSON file. If refresh reports `WinError 183` for `graph.tmp` or `code-graph.tmp`, remove only the corresponding generated `.json` targets inside `.tesserae` and rerun:
+The wrapper prevents the recurring Tesserae 0.10.1 Windows `WinError 183` by removing only the generated `.tesserae/graph.json` and `.tesserae/code-graph.json` targets before refresh. It also sets the required UTF-8 process environment, runs from the repository root, restores the caller's environment and working directory, and propagates refresh failures.
 
-```powershell
-Remove-Item -LiteralPath '.tesserae\graph.json' -Force -ErrorAction SilentlyContinue
-Remove-Item -LiteralPath '.tesserae\code-graph.json' -Force -ErrorAction SilentlyContinue
-tesserae refresh
-```
+Do not call `tesserae refresh` directly on Windows and do not remove any other `.tesserae` files.
 
 ## MCP
 

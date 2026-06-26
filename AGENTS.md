@@ -24,7 +24,7 @@ Application implementation is blocked until the user approves the audited design
 - Check authorization server-side using permission codes, never UI visibility or role names.
 - Record material architecture or security choices as ADRs.
 - Update `docs/progress.md` after every completed slice.
-- Refresh Tesserae after canonical documentation or implementation changes.
+- Refresh Tesserae after canonical documentation or implementation changes by running `./scripts/refresh-tesserae.ps1`; do not call `tesserae refresh` directly on Windows.
 - Do not commit `.tesserae`, session transcripts, secrets, `.env` files, uploads, backups, or generated indexes.
 
 ## Safety
@@ -33,4 +33,3 @@ Application implementation is blocked until the user approves the audited design
 - Do not add high-risk MCP administration tools without an accepted ADR and explicit user approval.
 - Prefer archival and recoverable deletion over physical deletion.
 - Preserve Russian as the default locale and English as the secondary locale.
-
