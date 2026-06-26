@@ -1,0 +1,15 @@
+{
+  "title": "Minerva MVP UX/UI prototype design",
+  "kind": "sources",
+  "body_text": "# Minerva MVP UX/UI prototype design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Connected node types\n\n- Metric: 1",
+  "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-24-minerva-ui-prototype-design.md",
+  "links": [],
+  "body": "# Minerva MVP UX/UI prototype design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Connected node types\n\n- Metric: 1",
+  "frontmatter": {
+    "kind": "sources",
+    "node_id": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+    "node_type": "SourceDocument",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-24-minerva-ui-prototype-design.md",
+    "title": "Minerva MVP UX/UI prototype design"
+  }
+}

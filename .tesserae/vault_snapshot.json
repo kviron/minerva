@@ -1,0 +1,164 @@
+{
+  "nodes": {
+    "Metric:map:592bcbe13f80": {
+      "aliases": [],
+      "description": "",
+      "metadata": {},
+      "name": "mAP"
+    },
+    "SourceDocument:adr-0001-use-a-modular-nuxt-nitro-monolith:36bf23e62f88": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0001: Use a modular Nuxt/Nitro monolith"
+    },
+    "SourceDocument:adr-0002-use-global-super-administration-and-pro:81e426d58974": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0002: Use global super administration and project-scoped RBAC"
+    },
+    "SourceDocument:adr-0003-separate-mutable-drafts-from-immutable-:27a2a19ac4f3": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0003: Separate mutable drafts from immutable published versions"
+    },
+    "SourceDocument:adr-0004-limit-the-first-mcp-release-to-document:e9d59fced9d7": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0004: Limit the first MCP release to documentation workflows"
+    },
+    "SourceDocument:adr-0005-bind-mcp-tokens-to-one-resource-and-enf:af1463e26f9f": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation"
+    },
+    "SourceDocument:adr-0006-use-bun-as-the-package-manager:05f6bbd9bc76": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0006: Use Bun as the package manager"
+    },
+    "SourceDocument:minerva-agent-instructions:7b4afaaff5ff": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva agent instructions"
+    },
+    "SourceDocument:minerva-architecture:ed1ca257adb0": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva architecture"
+    },
+    "SourceDocument:minerva-backlog:b1487ed798f6": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva backlog"
+    },
+    "SourceDocument:minerva-executable-foundation-implementation-pla:1198f8e0bcc8": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva Executable Foundation Implementation Plan"
+    },
+    "SourceDocument:minerva-figma-prototype-implementation-plan:bd4f720816db": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva Figma Prototype Implementation Plan"
+    },
+    "SourceDocument:minerva-mvp-delivery-plan:caeac15a4a5c": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva MVP Delivery Plan"
+    },
+    "SourceDocument:minerva-mvp-design:3d9f5f00ca9b": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva MVP design"
+    },
+    "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva MVP UX/UI prototype design"
+    },
+    "SourceDocument:minerva-product-specification:d29f24b551b5": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva product specification"
+    },
+    "SourceDocument:minerva-progress:c476087b907f": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva progress"
+    },
+    "SourceDocument:minerva-roadmap:973bcf26cc8a": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva roadmap"
+    },
+    "SourceDocument:tesserae-development-memory:4143790d0cae": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Tesserae development memory"
+    },
+    "Synthesis:synthesis-project-pulse:edf62281b49c": {
+      "aliases": [],
+      "description": "Top-level snapshot of the wiki at compile time.",
+      "metadata": {
+        "content_hash": "sha256-6db8cdb45f11bbd5d8713266a83ee4ae49794a316b03aa4e60e13d8866623e63",
+        "synthesis_kind": "pulse"
+      },
+      "name": "Project Pulse"
+    }
+  },
+  "version": 1
+}

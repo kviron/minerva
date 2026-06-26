@@ -1,0 +1,22 @@
+0001-modular-monolith.md
+========================
+
+# ADR 0001: Use a modular Nuxt/Nitro monolith
+
+Date: 2026-06-24  
+Status: proposed
+
+## Decision
+
+Build the first release as one Nuxt 4/Nitro deployment with explicit domain modules and shared application services.
+
+## Rationale
+
+The team needs one deployable system on a VPS. Separate frontend, API, auth, search, and MCP services would increase deployment and transactional complexity before there is evidence they need independent scaling.
+
+## Consequences
+
+- UI, API, and MCP share types and business rules.
+- Module imports must follow documented boundaries.
+- Transport handlers stay thin.
+- A future extraction remains possible because modules communicate through application-service interfaces.

@@ -1,0 +1,21 @@
+0004-mcp-first-release-boundary.md
+==================================
+
+# ADR 0004: Limit the first MCP release to documentation workflows
+
+Date: 2026-06-24  
+Status: proposed
+
+## Decision
+
+The first MCP release exposes project discovery and document read/write/publish operations. User administration, memberships, role-matrix mutation, global settings, and super-admin operations remain web-only.
+
+## Rationale
+
+Documentation automation is the product's differentiator. Administrative mutation adds a much larger privilege-escalation and recovery surface without being required to validate the core AI workflow.
+
+## Consequences
+
+- OAuth scopes initially cover project reads and document operations.
+- Administrative MCP scopes remain reserved and unimplemented.
+- Expansion requires security review, threat modelling, audit evidence, and a new ADR.

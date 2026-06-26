@@ -1,0 +1,76 @@
+{
+  "files": {
+    "D:\\develop\\minerva\\AGENTS.md": {
+      "sha256": "4646506ca354e24faadd53980f79ab6a7ae94970a3a9b8a9ec5bf83d7583578f",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\architecture.md": {
+      "sha256": "da0c7760b90a5bbf87525281afec29f8f4ef042cdc1abec0066c8ab506a99443",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\backlog.md": {
+      "sha256": "d8f01db3791d77c1f479a1835a78a7b4bda138fdcb0ce764eb169f2d2ed8fc70",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0001-modular-monolith.md": {
+      "sha256": "88d6ee3bdbe4a873f9b83ff216708496ea344f27cdd5069813065a78032586ed",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0002-project-rbac.md": {
+      "sha256": "db2a180d645fe7081119c801875ffb5da177c3f4610229f868b2a16fff30f1a0",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0003-document-versioning.md": {
+      "sha256": "7ec9c71cf85b91d545ef089d1a5ce8a7ed0dd3203bb0f5b5f246ff75c11af5d0",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0004-mcp-first-release-boundary.md": {
+      "sha256": "e71ad88565e4616b478d5309691439b6fa974c55c8ab38a87c549f8d505c1440",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0005-mcp-oauth-resource-and-revocation.md": {
+      "sha256": "9384aa5ffb6e764c305eeffd2c7b8f049385d95575f7dcbff2690a8ffc992c1c",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0006-use-bun-package-manager.md": {
+      "sha256": "8fee41800930f0b720792226e585f2e773160b0a72be914a8f0edc31c3aacdfd",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\operations\\tesserae.md": {
+      "sha256": "6d37ca0ad744a9a979e25edc409280df150d067c968ab5210fa4866f8b2d8294",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\product-spec.md": {
+      "sha256": "138321864c691e04535509faef0e8c29645dc9e9b0ae20a156db686a7d14f73e",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\progress.md": {
+      "sha256": "1331b7cfa028f91a127816864710a7a91e87752cade1a3cc7dc59769a9619b84",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\roadmap.md": {
+      "sha256": "6962e91023875b463782590e33a7078ad83b1712eb840677a2e3ca57dd77e889",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-foundation.md": {
+      "sha256": "a8971512dc695dab132e9cefcea0753ed3ec84fe12ab5921cec22cdc4a55ccc0",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-minerva-figma-prototype.md": {
+      "sha256": "d439955b866c6550b9803ef3ce76da653810fa319db9495f5fd53b7c38356bab",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-minerva-mvp-roadmap.md": {
+      "sha256": "9869d57be193faf8000017a057c47003473c4b4a088c39e2d903219abda99e1f",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-mvp-design.md": {
+      "sha256": "68951988868ab0b552312d71c3b4dc0a03a9be2c3a1eb6582f4a3dcd292e85e4",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-ui-prototype-design.md": {
+      "sha256": "d15a2a23f2a237708971d692ee98f195c9e78aa4f89d03db6215f67f65753383",
+      "source_kind": "SourceDocument"
+    }
+  }
+}

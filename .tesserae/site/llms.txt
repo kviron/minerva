@@ -1,0 +1,32 @@
+# Tesserae
+
+> Auto-generated wiki layer for AI agents and humans. Browse the same content as HTML at /, or fetch graph.jsonld for the structured view.
+
+## Sources
+
+- [ADR 0001: Use a modular Nuxt/Nitro monolith](sources/adr-0001-use-a-modular-nuxt-nitro-monolith.html)
+- [ADR 0002: Use global super administration and project-scoped RBAC](sources/adr-0002-use-global-super-administration-and-project-scoped-rbac.html)
+- [ADR 0003: Separate mutable drafts from immutable published versions](sources/adr-0003-separate-mutable-drafts-from-immutable-published-versions.html)
+- [ADR 0004: Limit the first MCP release to documentation workflows](sources/adr-0004-limit-the-first-mcp-release-to-documentation-workflows.html)
+- [ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation](sources/adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation.html)
+- [ADR 0006: Use Bun as the package manager](sources/adr-0006-use-bun-as-the-package-manager.html)
+- [Minerva agent instructions](sources/minerva-agent-instructions.html)
+- [Minerva architecture](sources/minerva-architecture.html)
+- [Minerva backlog](sources/minerva-backlog.html)
+- [Minerva Executable Foundation Implementation Plan](sources/minerva-executable-foundation-implementation-plan.html)
+- [Minerva Figma Prototype Implementation Plan](sources/minerva-figma-prototype-implementation-plan.html)
+- [Minerva MVP Delivery Plan](sources/minerva-mvp-delivery-plan.html)
+- [Minerva MVP design](sources/minerva-mvp-design.html)
+- [Minerva MVP UX/UI prototype design](sources/minerva-mvp-ux-ui-prototype-design.html): - **uses_metric** → mAP _(Metric)_
+- [Minerva product specification](sources/minerva-product-specification.html)
+- [Minerva progress](sources/minerva-progress.html)
+- [Minerva roadmap](sources/minerva-roadmap.html)
+- [Tesserae development memory](sources/tesserae-development-memory.html)
+
+## Entities
+
+- [mAP](entities/map.html): - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_
+
+## Syntheses
+
+- [Project Pulse](syntheses/pulse.html): Snapshot of the wiki at the most recent compile.

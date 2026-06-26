@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "minerva": {
+      "command": "python3",
+      "args": [
+        "-m",
+        "tesserae.mcp_server",
+        "--graph",
+        "D:\\develop\\minerva\\.tesserae\\graph.json"
+      ]
+    }
+  }
+}

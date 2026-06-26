@@ -1,0 +1,4 @@
+ADR 0001: Use a modular Nuxt/Nitro monolith
+===========================================
+
+# ADR 0001: Use a modular Nuxt/Nitro monolith

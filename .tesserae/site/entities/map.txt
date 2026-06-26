@@ -1,0 +1,12 @@
+mAP
+===
+
+# mAP
+
+## Incoming relations
+
+- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_
+
+## Connected node types
+
+- SourceDocument: 1

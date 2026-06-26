@@ -1,0 +1,31 @@
+{
+  "project_name": "minerva",
+  "supported_targets": [
+    "claude-code",
+    "codex",
+    "gemini",
+    "kiro",
+    "cursor",
+    "opencode"
+  ],
+  "selected_targets": [
+    "claude-code",
+    "codex",
+    "gemini",
+    "kiro",
+    "cursor",
+    "opencode"
+  ],
+  "node_count": 20,
+  "edge_count": 19,
+  "mcp": {
+    "command": "python3",
+    "args": [
+      "-m",
+      "tesserae.mcp_server",
+      "--graph",
+      "D:\\develop\\minerva\\.tesserae\\graph.json"
+    ]
+  },
+  "notes": "Copy or symlink the target-specific files into the project root for the corresponding agent."
+}

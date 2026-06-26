@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {
+      "id": "CodeProject:minerva:a939ffff79a4",
+      "name": "minerva",
+      "type": "CodeProject",
+      "aliases": [],
+      "description": "Development code project at D:\\develop\\minerva",
+      "source_path": "D:\\develop\\minerva",
+      "metadata": {
+        "layer": "project",
+        "source_kind": "CodeProject"
+      }
+    }
+  ],
+  "edges": []
+}

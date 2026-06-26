@@ -1,0 +1,12 @@
+Minerva MVP UX/UI prototype design
+==================================
+
+# Minerva MVP UX/UI prototype design
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Connected node types
+
+- Metric: 1

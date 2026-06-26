@@ -1,0 +1,416 @@
+[
+  {
+    "id": "entities:map",
+    "title": "mAP",
+    "kind": "entities",
+    "href": "entities/map.html",
+    "summary": "- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-24-minerva-ui-prototype-design.md",
+    "tokens": [
+      "map",
+      "uses_metric",
+      "minerva",
+      "mvp",
+      "ux",
+      "ui",
+      "prototype",
+      "design",
+      "sourcedocument",
+      "entities"
+    ],
+    "len": 10,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0001-use-a-modular-nuxt-nitro-monolith",
+    "title": "ADR 0001: Use a modular Nuxt/Nitro monolith",
+    "kind": "sources",
+    "href": "sources/adr-0001-use-a-modular-nuxt-nitro-monolith.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0001-modular-monolith.md",
+    "tokens": [
+      "adr",
+      "0001",
+      "use",
+      "modular",
+      "nuxt",
+      "nitro",
+      "monolith",
+      "sources"
+    ],
+    "len": 8,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0002-use-global-super-administration-and-project-scoped-rbac",
+    "title": "ADR 0002: Use global super administration and project-scoped RBAC",
+    "kind": "sources",
+    "href": "sources/adr-0002-use-global-super-administration-and-project-scoped-rbac.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0002-project-rbac.md",
+    "tokens": [
+      "adr",
+      "0002",
+      "use",
+      "global",
+      "super",
+      "administration",
+      "project",
+      "scoped",
+      "rbac",
+      "sources"
+    ],
+    "len": 10,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0003-separate-mutable-drafts-from-immutable-published-versions",
+    "title": "ADR 0003: Separate mutable drafts from immutable published versions",
+    "kind": "sources",
+    "href": "sources/adr-0003-separate-mutable-drafts-from-immutable-published-versions.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0003-document-versioning.md",
+    "tokens": [
+      "adr",
+      "0003",
+      "separate",
+      "mutable",
+      "drafts",
+      "immutable",
+      "published",
+      "versions",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0004-limit-the-first-mcp-release-to-documentation-workflows",
+    "title": "ADR 0004: Limit the first MCP release to documentation workflows",
+    "kind": "sources",
+    "href": "sources/adr-0004-limit-the-first-mcp-release-to-documentation-workflows.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0004-mcp-first-release-boundary.md",
+    "tokens": [
+      "adr",
+      "0004",
+      "limit",
+      "first",
+      "mcp",
+      "release",
+      "documentation",
+      "workflows",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation",
+    "title": "ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation",
+    "kind": "sources",
+    "href": "sources/adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0005-mcp-oauth-resource-and-revocation.md",
+    "tokens": [
+      "adr",
+      "0005",
+      "bind",
+      "mcp",
+      "tokens",
+      "one",
+      "resource",
+      "enforce",
+      "immediate",
+      "revocation",
+      "sources"
+    ],
+    "len": 11,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0006-use-bun-as-the-package-manager",
+    "title": "ADR 0006: Use Bun as the package manager",
+    "kind": "sources",
+    "href": "sources/adr-0006-use-bun-as-the-package-manager.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0006-use-bun-package-manager.md",
+    "tokens": [
+      "adr",
+      "0006",
+      "use",
+      "bun",
+      "package",
+      "manager",
+      "sources"
+    ],
+    "len": 7,
+    "created_ts": null
+  },
+  {
+    "id": "sources:minerva-agent-instructions",
+    "title": "Minerva agent instructions",
+    "kind": "sources",
+    "href": "sources/minerva-agent-instructions.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\AGENTS.md",
+    "tokens": [
+      "minerva",
+      "agent",
+      "instructions",
+      "sources"
+    ],
+    "len": 4,
+    "created_ts": null
+  },
+  {
+    "id": "sources:minerva-architecture",
+    "title": "Minerva architecture",
+    "kind": "sources",
+    "href": "sources/minerva-architecture.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\architecture.md",
+    "tokens": [
+      "minerva",
+      "architecture",
+      "sources"
+    ],
+    "len": 3,
+    "created_ts": null
+  },
+  {
+    "id": "sources:minerva-backlog",
+    "title": "Minerva backlog",
+    "kind": "sources",
+    "href": "sources/minerva-backlog.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\backlog.md",
+    "tokens": [
+      "minerva",
+      "backlog",
+      "sources"
+    ],
+    "len": 3,
+    "created_ts": null
+  },
+  {
+    "id": "sources:minerva-executable-foundation-implementation-plan",
+    "title": "Minerva Executable Foundation Implementation Plan",
+    "kind": "sources",
+    "href": "sources/minerva-executable-foundation-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-06-24-foundation.md",
+    "tokens": [
+      "minerva",
+      "executable",
+      "foundation",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:minerva-figma-prototype-implementation-plan",
+    "title": "Minerva Figma Prototype Implementation Plan",
+    "kind": "sources",
+    "href": "sources/minerva-figma-prototype-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-06-24-minerva-figma-prototype.md",
+    "tokens": [
+      "minerva",
+      "figma",
+      "prototype",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:minerva-mvp-delivery-plan",
+    "title": "Minerva MVP Delivery Plan",
+    "kind": "sources",
+    "href": "sources/minerva-mvp-delivery-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-06-24-minerva-mvp-roadmap.md",
+    "tokens": [
+      "minerva",
+      "mvp",
+      "delivery",
+      "plan",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:minerva-mvp-design",
+    "title": "Minerva MVP design",
+    "kind": "sources",
+    "href": "sources/minerva-mvp-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-24-minerva-mvp-design.md",
+    "tokens": [
+      "minerva",
+      "mvp",
+      "design",
+      "sources"
+    ],
+    "len": 4,
+    "created_ts": null
+  },
+  {
+    "id": "sources:minerva-mvp-ux-ui-prototype-design",
+    "title": "Minerva MVP UX/UI prototype design",
+    "kind": "sources",
+    "href": "sources/minerva-mvp-ux-ui-prototype-design.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-24-minerva-ui-prototype-design.md",
+    "tokens": [
+      "minerva",
+      "mvp",
+      "ux",
+      "ui",
+      "prototype",
+      "design",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 10,
+    "created_ts": null
+  },
+  {
+    "id": "sources:minerva-product-specification",
+    "title": "Minerva product specification",
+    "kind": "sources",
+    "href": "sources/minerva-product-specification.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\product-spec.md",
+    "tokens": [
+      "minerva",
+      "product",
+      "specification",
+      "sources"
+    ],
+    "len": 4,
+    "created_ts": null
+  },
+  {
+    "id": "sources:minerva-progress",
+    "title": "Minerva progress",
+    "kind": "sources",
+    "href": "sources/minerva-progress.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
+    "tokens": [
+      "minerva",
+      "progress",
+      "sources"
+    ],
+    "len": 3,
+    "created_ts": null
+  },
+  {
+    "id": "sources:minerva-roadmap",
+    "title": "Minerva roadmap",
+    "kind": "sources",
+    "href": "sources/minerva-roadmap.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\roadmap.md",
+    "tokens": [
+      "minerva",
+      "roadmap",
+      "sources"
+    ],
+    "len": 3,
+    "created_ts": null
+  },
+  {
+    "id": "sources:tesserae-development-memory",
+    "title": "Tesserae development memory",
+    "kind": "sources",
+    "href": "sources/tesserae-development-memory.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\operations\\\\tesserae.md",
+    "tokens": [
+      "tesserae",
+      "development",
+      "memory",
+      "sources"
+    ],
+    "len": 4,
+    "created_ts": null
+  },
+  {
+    "id": "syntheses:pulse",
+    "title": "Project Pulse",
+    "kind": "syntheses",
+    "href": "syntheses/pulse.html",
+    "summary": "Snapshot of the wiki at the most recent compile.",
+    "source_path": "D:\\develop\\minerva\\.tesserae\\wiki\\syntheses\\pulse.md",
+    "tokens": [
+      "project",
+      "pulse",
+      "snapshot",
+      "wiki",
+      "most",
+      "recent",
+      "compile",
+      "syntheses",
+      "project",
+      "pulse",
+      "snapshot",
+      "wiki",
+      "most",
+      "recent",
+      "compile",
+      "counts",
+      "codeproject",
+      "1",
+      "metric",
+      "1",
+      "sourcedocument",
+      "18",
+      "recently",
+      "added",
+      "none",
+      "top",
+      "fields",
+      "none",
+      "tagline",
+      "tesserae",
+      "self",
+      "evolving",
+      "research",
+      "notebook"
+    ],
+    "len": 34,
+    "created_ts": null
+  },
+  {
+    "id": "Synthesis:synthesis-project-pulse:edf62281b49c",
+    "title": "Project Pulse",
+    "kind": "syntheses",
+    "href": "syntheses/project-pulse.html",
+    "summary": "Top-level snapshot of the wiki at compile time.",
+    "source_path": "",
+    "tokens": [
+      "project",
+      "pulse",
+      "top",
+      "level",
+      "snapshot",
+      "wiki",
+      "compile",
+      "time",
+      "syntheses"
+    ],
+    "len": 9,
+    "created_ts": null
+  }
+]

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tesserae</title>
+    <description>Recent syntheses from Tesserae</description>
+    <link>/</link>
+    <atom:link href="/rss.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <copyright>Copyright 1970 Tesserae</copyright>
+    <generator>tesserae</generator>
+    <lastBuildDate>Thu, 01 Jan 1970 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Project Pulse</title>
+      <link>syntheses/pulse.html</link>
+      <guid isPermaLink="false">synthesis:pulse</guid>
+      <description><![CDATA[Snapshot of the wiki at the most recent compile. ## Counts - CodeProject: 1 - Metric: 1 - SourceDocument: 18 ## Recently added - (none) ## Top fields - (none) ## Tagline Tesserae — a self-evolving research notebook.]]></description>
+      <dc:creator>Tesserae</dc:creator>
+      <category>pulse</category>
+      <pubDate>Thu, 01 Jan 1970 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>

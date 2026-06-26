@@ -1,0 +1,172 @@
+# Tesserae
+
+> Auto-generated wiki layer for AI agents and humans. Browse the same content as HTML at /, or fetch graph.jsonld for the structured view.
+
+## Sources
+
+- [ADR 0001: Use a modular Nuxt/Nitro monolith](sources/adr-0001-use-a-modular-nuxt-nitro-monolith.html)
+- [ADR 0002: Use global super administration and project-scoped RBAC](sources/adr-0002-use-global-super-administration-and-project-scoped-rbac.html)
+- [ADR 0003: Separate mutable drafts from immutable published versions](sources/adr-0003-separate-mutable-drafts-from-immutable-published-versions.html)
+- [ADR 0004: Limit the first MCP release to documentation workflows](sources/adr-0004-limit-the-first-mcp-release-to-documentation-workflows.html)
+- [ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation](sources/adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation.html)
+- [ADR 0006: Use Bun as the package manager](sources/adr-0006-use-bun-as-the-package-manager.html)
+- [Minerva agent instructions](sources/minerva-agent-instructions.html)
+- [Minerva architecture](sources/minerva-architecture.html)
+- [Minerva backlog](sources/minerva-backlog.html)
+- [Minerva Executable Foundation Implementation Plan](sources/minerva-executable-foundation-implementation-plan.html)
+- [Minerva Figma Prototype Implementation Plan](sources/minerva-figma-prototype-implementation-plan.html)
+- [Minerva MVP Delivery Plan](sources/minerva-mvp-delivery-plan.html)
+- [Minerva MVP design](sources/minerva-mvp-design.html)
+- [Minerva MVP UX/UI prototype design](sources/minerva-mvp-ux-ui-prototype-design.html): - **uses_metric** → mAP _(Metric)_
+- [Minerva product specification](sources/minerva-product-specification.html)
+- [Minerva progress](sources/minerva-progress.html)
+- [Minerva roadmap](sources/minerva-roadmap.html)
+- [Tesserae development memory](sources/tesserae-development-memory.html)
+
+## Entities
+
+- [mAP](entities/map.html): - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_
+
+## Syntheses
+
+- [Project Pulse](syntheses/pulse.html): Snapshot of the wiki at the most recent compile.
+
+# Full content
+
+## Sources
+
+### ADR 0001: Use a modular Nuxt/Nitro monolith
+_sources/adr-0001-use-a-modular-nuxt-nitro-monolith.html_
+
+# ADR 0001: Use a modular Nuxt/Nitro monolith
+
+### ADR 0002: Use global super administration and project-scoped RBAC
+_sources/adr-0002-use-global-super-administration-and-project-scoped-rbac.html_
+
+# ADR 0002: Use global super administration and project-scoped RBAC
+
+### ADR 0003: Separate mutable drafts from immutable published versions
+_sources/adr-0003-separate-mutable-drafts-from-immutable-published-versions.html_
+
+# ADR 0003: Separate mutable drafts from immutable published versions
+
+### ADR 0004: Limit the first MCP release to documentation workflows
+_sources/adr-0004-limit-the-first-mcp-release-to-documentation-workflows.html_
+
+# ADR 0004: Limit the first MCP release to documentation workflows
+
+### ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation
+_sources/adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation.html_
+
+# ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation
+
+### ADR 0006: Use Bun as the package manager
+_sources/adr-0006-use-bun-as-the-package-manager.html_
+
+# ADR 0006: Use Bun as the package manager
+
+### Minerva agent instructions
+_sources/minerva-agent-instructions.html_
+
+# Minerva agent instructions
+
+### Minerva architecture
+_sources/minerva-architecture.html_
+
+# Minerva architecture
+
+### Minerva backlog
+_sources/minerva-backlog.html_
+
+# Minerva backlog
+
+### Minerva Executable Foundation Implementation Plan
+_sources/minerva-executable-foundation-implementation-plan.html_
+
+# Minerva Executable Foundation Implementation Plan
+
+### Minerva Figma Prototype Implementation Plan
+_sources/minerva-figma-prototype-implementation-plan.html_
+
+# Minerva Figma Prototype Implementation Plan
+
+### Minerva MVP Delivery Plan
+_sources/minerva-mvp-delivery-plan.html_
+
+# Minerva MVP Delivery Plan
+
+### Minerva MVP design
+_sources/minerva-mvp-design.html_
+
+# Minerva MVP design
+
+### Minerva MVP UX/UI prototype design
+_sources/minerva-mvp-ux-ui-prototype-design.html_
+
+# Minerva MVP UX/UI prototype design
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Connected node types
+
+- Metric: 1
+
+### Minerva product specification
+_sources/minerva-product-specification.html_
+
+# Minerva product specification
+
+### Minerva progress
+_sources/minerva-progress.html_
+
+# Minerva progress
+
+### Minerva roadmap
+_sources/minerva-roadmap.html_
+
+# Minerva roadmap
+
+### Tesserae development memory
+_sources/tesserae-development-memory.html_
+
+# Tesserae development memory
+
+## Entities
+
+### mAP
+_entities/map.html_
+
+# mAP
+
+## Incoming relations
+
+- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_
+
+## Connected node types
+
+- SourceDocument: 1
+
+## Syntheses
+
+### Project Pulse
+_syntheses/pulse.html_
+
+# Project Pulse
+
+Snapshot of the wiki at the most recent compile.
+
+## Counts
+- CodeProject: 1
+- Metric: 1
+- SourceDocument: 18
+
+## Recently added
+- (none)
+
+## Top fields
+- (none)
+
+## Tagline
+Tesserae — a self-evolving research notebook.

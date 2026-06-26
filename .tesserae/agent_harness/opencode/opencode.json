@@ -1,0 +1,14 @@
+{
+  "mcp": {
+    "minerva": {
+      "type": "local",
+      "command": [
+        "python3",
+        "-m",
+        "tesserae.mcp_server",
+        "--graph",
+        "D:\\develop\\minerva\\.tesserae\\graph.json"
+      ]
+    }
+  }
+}

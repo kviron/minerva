@@ -1,0 +1,1145 @@
+{
+  "edges": [
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0001-use-a-modular-nuxt-nitro-monolith:36bf23e62f88",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0002-use-global-super-administration-and-pro:81e426d58974",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0003-separate-mutable-drafts-from-immutable-:27a2a19ac4f3",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0004-limit-the-first-mcp-release-to-document:e9d59fced9d7",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0005-bind-mcp-tokens-to-one-resource-and-enf:af1463e26f9f",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0006-use-bun-as-the-package-manager:05f6bbd9bc76",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-agent-instructions:7b4afaaff5ff",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-architecture:ed1ca257adb0",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-backlog:b1487ed798f6",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-executable-foundation-implementation-pla:1198f8e0bcc8",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-figma-prototype-implementation-plan:bd4f720816db",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-mvp-delivery-plan:caeac15a4a5c",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-mvp-design:3d9f5f00ca9b",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-product-specification:d29f24b551b5",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-progress:c476087b907f",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-roadmap:973bcf26cc8a",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:tesserae-development-memory:4143790d0cae",
+      "type": "summarizes"
+    }
+  ],
+  "nodes": [
+    {
+      "aliases": [],
+      "description": "",
+      "id": "Metric:map:592bcbe13f80",
+      "metadata": {},
+      "name": "mAP",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-ui-prototype-design.md",
+      "type": "Metric"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0001-use-a-modular-nuxt-nitro-monolith:36bf23e62f88",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0001-use-a-modular-nuxt-nitro-monolith",
+            "level": 1,
+            "text": "ADR 0001: Use a modular Nuxt/Nitro monolith"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "rationale",
+            "level": 2,
+            "text": "Rationale"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0001: Use a modular Nuxt/Nitro monolith",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0001-modular-monolith.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0002-use-global-super-administration-and-pro:81e426d58974",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0002-use-global-super-administration-and-project-scoped-rbac",
+            "level": 1,
+            "text": "ADR 0002: Use global super administration and project-scoped RBAC"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "safety-invariants",
+            "level": 2,
+            "text": "Safety invariants"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0002: Use global super administration and project-scoped RBAC",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0002-project-rbac.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0003-separate-mutable-drafts-from-immutable-:27a2a19ac4f3",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0003-separate-mutable-drafts-from-immutable-published-versions",
+            "level": 1,
+            "text": "ADR 0003: Separate mutable drafts from immutable published versions"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "rationale",
+            "level": 2,
+            "text": "Rationale"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0003: Separate mutable drafts from immutable published versions",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0003-document-versioning.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0004-limit-the-first-mcp-release-to-document:e9d59fced9d7",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0004-limit-the-first-mcp-release-to-documentation-workflows",
+            "level": 1,
+            "text": "ADR 0004: Limit the first MCP release to documentation workflows"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "rationale",
+            "level": 2,
+            "text": "Rationale"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0004: Limit the first MCP release to documentation workflows",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0004-mcp-first-release-boundary.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0005-bind-mcp-tokens-to-one-resource-and-enf:af1463e26f9f",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation",
+            "level": 1,
+            "text": "ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0005-mcp-oauth-resource-and-revocation.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0006-use-bun-as-the-package-manager:05f6bbd9bc76",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0006-use-bun-as-the-package-manager",
+            "level": 1,
+            "text": "ADR 0006: Use Bun as the package manager"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0006: Use Bun as the package manager",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0006-use-bun-package-manager.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:minerva-agent-instructions:7b4afaaff5ff",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "minerva-agent-instructions",
+            "level": 1,
+            "text": "Minerva agent instructions"
+          },
+          {
+            "anchor": "source-of-truth",
+            "level": 2,
+            "text": "Source of truth"
+          },
+          {
+            "anchor": "current-gate",
+            "level": 2,
+            "text": "Current gate"
+          },
+          {
+            "anchor": "required-workflow",
+            "level": 2,
+            "text": "Required workflow"
+          },
+          {
+            "anchor": "safety",
+            "level": 2,
+            "text": "Safety"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva agent instructions",
+      "source_path": "D:\\develop\\minerva\\AGENTS.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:minerva-architecture:ed1ca257adb0",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "minerva-architecture",
+            "level": 1,
+            "text": "Minerva architecture"
+          },
+          {
+            "anchor": "architectural-style",
+            "level": 2,
+            "text": "Architectural style"
+          },
+          {
+            "anchor": "module-boundaries",
+            "level": 2,
+            "text": "Module boundaries"
+          },
+          {
+            "anchor": "identity",
+            "level": 3,
+            "text": "Identity"
+          },
+          {
+            "anchor": "authorization",
+            "level": 3,
+            "text": "Authorization"
+          },
+          {
+            "anchor": "projects",
+            "level": 3,
+            "text": "Projects"
+          },
+          {
+            "anchor": "documents",
+            "level": 3,
+            "text": "Documents"
+          },
+          {
+            "anchor": "search",
+            "level": 3,
+            "text": "Search"
+          },
+          {
+            "anchor": "files",
+            "level": 3,
+            "text": "Files"
+          },
+          {
+            "anchor": "audit",
+            "level": 3,
+            "text": "Audit"
+          },
+          {
+            "anchor": "mcp",
+            "level": 3,
+            "text": "MCP"
+          },
+          {
+            "anchor": "request-flow",
+            "level": 2,
+            "text": "Request flow"
+          },
+          {
+            "anchor": "data-rules",
+            "level": 2,
+            "text": "Data rules"
+          },
+          {
+            "anchor": "error-contract",
+            "level": 2,
+            "text": "Error contract"
+          },
+          {
+            "anchor": "deployment",
+            "level": 2,
+            "text": "Deployment"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva architecture",
+      "source_path": "D:\\develop\\minerva\\docs\\architecture.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:minerva-backlog:b1487ed798f6",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "minerva-backlog",
+            "level": 1,
+            "text": "Minerva backlog"
+          },
+          {
+            "anchor": "knowledge-experience",
+            "level": 2,
+            "text": "Knowledge experience"
+          },
+          {
+            "anchor": "users-and-clients",
+            "level": 2,
+            "text": "Users and clients"
+          },
+          {
+            "anchor": "mcp",
+            "level": 2,
+            "text": "MCP"
+          },
+          {
+            "anchor": "operations-and-integrations",
+            "level": 2,
+            "text": "Operations and integrations"
+          },
+          {
+            "anchor": "sensitive-data",
+            "level": 2,
+            "text": "Sensitive data"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva backlog",
+      "source_path": "D:\\develop\\minerva\\docs\\backlog.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:minerva-executable-foundation-implementation-pla:1198f8e0bcc8",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "minerva-executable-foundation-implementation-plan",
+            "level": 1,
+            "text": "Minerva Executable Foundation Implementation Plan"
+          },
+          {
+            "anchor": "task-1-pin-the-toolchain-and-scaffold-nuxt",
+            "level": 3,
+            "text": "Task 1: Pin the toolchain and scaffold Nuxt"
+          },
+          {
+            "anchor": "task-2-add-unit-browser-and-lint-harnesses",
+            "level": 3,
+            "text": "Task 2: Add unit, browser, and lint harnesses"
+          },
+          {
+            "anchor": "task-3-add-russian-first-localization-and-themes",
+            "level": 3,
+            "text": "Task 3: Add Russian-first localization and themes"
+          },
+          {
+            "anchor": "task-4-add-validated-runtime-configuration",
+            "level": 3,
+            "text": "Task 4: Add validated runtime configuration"
+          },
+          {
+            "anchor": "task-5-add-postgresql-minio-and-health-checks",
+            "level": 3,
+            "text": "Task 5: Add PostgreSQL, MinIO, and health checks"
+          },
+          {
+            "anchor": "task-6-add-continuous-integration-and-developer-documentation",
+            "level": 3,
+            "text": "Task 6: Add continuous integration and developer documentation"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva Executable Foundation Implementation Plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-foundation.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:minerva-figma-prototype-implementation-plan:bd4f720816db",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "minerva-figma-prototype-implementation-plan",
+            "level": 1,
+            "text": "Minerva Figma Prototype Implementation Plan"
+          },
+          {
+            "anchor": "execution-rules",
+            "level": 2,
+            "text": "Execution rules"
+          },
+          {
+            "anchor": "task-1-audit-the-target-file-and-establish-page-structure",
+            "level": 3,
+            "text": "Task 1: Audit the target file and establish page structure"
+          },
+          {
+            "anchor": "task-2-build-semantic-foundations",
+            "level": 3,
+            "text": "Task 2: Build semantic foundations"
+          },
+          {
+            "anchor": "task-3-create-the-minimal-local-component-set",
+            "level": 3,
+            "text": "Task 3: Create the minimal local component set"
+          },
+          {
+            "anchor": "task-4-build-the-shared-desktop-shells",
+            "level": 3,
+            "text": "Task 4: Build the shared desktop shells"
+          },
+          {
+            "anchor": "task-5-build-authentication-and-project-entry-screens",
+            "level": 3,
+            "text": "Task 5: Build authentication and project-entry screens"
+          },
+          {
+            "anchor": "task-6-build-the-document-lifecycle-screens",
+            "level": 3,
+            "text": "Task 6: Build the document lifecycle screens"
+          },
+          {
+            "anchor": "task-7-build-project-settings",
+            "level": 3,
+            "text": "Task 7: Build project settings"
+          },
+          {
+            "anchor": "task-8-arrange-connect-and-audit-the-full-prototype",
+            "level": 3,
+            "text": "Task 8: Arrange, connect, and audit the full prototype"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva Figma Prototype Implementation Plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-minerva-figma-prototype.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:minerva-mvp-delivery-plan:caeac15a4a5c",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "minerva-mvp-delivery-plan",
+            "level": 1,
+            "text": "Minerva MVP Delivery Plan"
+          },
+          {
+            "anchor": "planning-rule",
+            "level": 2,
+            "text": "Planning rule"
+          },
+          {
+            "anchor": "slice-order-and-gates",
+            "level": 2,
+            "text": "Slice order and gates"
+          },
+          {
+            "anchor": "slice-1-executable-foundation",
+            "level": 3,
+            "text": "Slice 1: Executable foundation"
+          },
+          {
+            "anchor": "slice-2-identity-and-global-administration",
+            "level": 3,
+            "text": "Slice 2: Identity and global administration"
+          },
+          {
+            "anchor": "slice-3-projects-and-rbac",
+            "level": 3,
+            "text": "Slice 3: Projects and RBAC"
+          },
+          {
+            "anchor": "slice-4-document-core",
+            "level": 3,
+            "text": "Slice 4: Document core"
+          },
+          {
+            "anchor": "slice-5-search-and-images",
+            "level": 3,
+            "text": "Slice 5: Search and images"
+          },
+          {
+            "anchor": "slice-6-mcp-documentation-interface",
+            "level": 3,
+            "text": "Slice 6: MCP documentation interface"
+          },
+          {
+            "anchor": "slice-7-production-readiness",
+            "level": 3,
+            "text": "Slice 7: Production readiness"
+          },
+          {
+            "anchor": "cross-slice-definition-of-done",
+            "level": 2,
+            "text": "Cross-slice Definition of Done"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva MVP Delivery Plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-minerva-mvp-roadmap.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:minerva-mvp-design:3d9f5f00ca9b",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "minerva-mvp-design",
+            "level": 1,
+            "text": "Minerva MVP design"
+          },
+          {
+            "anchor": "summary",
+            "level": 2,
+            "text": "Summary"
+          },
+          {
+            "anchor": "evaluated-approaches",
+            "level": 2,
+            "text": "Evaluated approaches"
+          },
+          {
+            "anchor": "recommended-modular-monolith-with-vertical-slices",
+            "level": 3,
+            "text": "Recommended: modular monolith with vertical slices"
+          },
+          {
+            "anchor": "alternative-separate-frontend-and-api-services",
+            "level": 3,
+            "text": "Alternative: separate frontend and API services"
+          },
+          {
+            "anchor": "alternative-microservices-from-the-start",
+            "level": 3,
+            "text": "Alternative: microservices from the start"
+          },
+          {
+            "anchor": "audit-corrections",
+            "level": 2,
+            "text": "Audit corrections"
+          },
+          {
+            "anchor": "architecture-and-data-flow",
+            "level": 2,
+            "text": "Architecture and data flow"
+          },
+          {
+            "anchor": "failure-and-recovery-behavior",
+            "level": 2,
+            "text": "Failure and recovery behavior"
+          },
+          {
+            "anchor": "test-strategy",
+            "level": 2,
+            "text": "Test strategy"
+          },
+          {
+            "anchor": "definition-of-done",
+            "level": 2,
+            "text": "Definition of done"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva MVP design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-mvp-design.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+      "metadata": {
+        "candidate_paper_titles": [
+          "Sign in",
+          "Projects",
+          "Project overview",
+          "Document reading",
+          "Document editor",
+          "Publish dialog",
+          "Version history",
+          "Project settings"
+        ],
+        "sections": [
+          {
+            "anchor": "minerva-mvp-ux-ui-prototype-design",
+            "level": 1,
+            "text": "Minerva MVP UX/UI prototype design"
+          },
+          {
+            "anchor": "purpose",
+            "level": 2,
+            "text": "Purpose"
+          },
+          {
+            "anchor": "evaluated-approaches",
+            "level": 2,
+            "text": "Evaluated approaches"
+          },
+          {
+            "anchor": "selected-confluence-like-information-architecture-with-shadcn-vue-presentation",
+            "level": 3,
+            "text": "Selected: Confluence-like information architecture with shadcn-vue presentation"
+          },
+          {
+            "anchor": "rejected-one-combined-sidebar",
+            "level": 3,
+            "text": "Rejected: one combined sidebar"
+          },
+          {
+            "anchor": "rejected-header-only-global-navigation",
+            "level": 3,
+            "text": "Rejected: header-only global navigation"
+          },
+          {
+            "anchor": "desktop-application-shell",
+            "level": 2,
+            "text": "Desktop application shell"
+          },
+          {
+            "anchor": "global-navigation-rail",
+            "level": 3,
+            "text": "Global navigation rail"
+          },
+          {
+            "anchor": "project-sidebar",
+            "level": 3,
+            "text": "Project sidebar"
+          },
+          {
+            "anchor": "content-header",
+            "level": 3,
+            "text": "Content header"
+          },
+          {
+            "anchor": "responsive-behavior",
+            "level": 3,
+            "text": "Responsive behavior"
+          },
+          {
+            "anchor": "visual-system",
+            "level": 2,
+            "text": "Visual system"
+          },
+          {
+            "anchor": "prototype-screens",
+            "level": 2,
+            "text": "Prototype screens"
+          },
+          {
+            "anchor": "1-sign-in",
+            "level": 3,
+            "text": "1. Sign in"
+          },
+          {
+            "anchor": "2-projects",
+            "level": 3,
+            "text": "2. Projects"
+          },
+          {
+            "anchor": "3-project-overview",
+            "level": 3,
+            "text": "3. Project overview"
+          },
+          {
+            "anchor": "4-document-reading",
+            "level": 3,
+            "text": "4. Document reading"
+          },
+          {
+            "anchor": "5-document-editor",
+            "level": 3,
+            "text": "5. Document editor"
+          },
+          {
+            "anchor": "6-publish-dialog",
+            "level": 3,
+            "text": "6. Publish dialog"
+          },
+          {
+            "anchor": "7-version-history",
+            "level": 3,
+            "text": "7. Version history"
+          },
+          {
+            "anchor": "8-project-settings",
+            "level": 3,
+            "text": "8. Project settings"
+          },
+          {
+            "anchor": "document-state-behavior",
+            "level": 2,
+            "text": "Document-state behavior"
+          },
+          {
+            "anchor": "primary-prototype-flow",
+            "level": 2,
+            "text": "Primary prototype flow"
+          },
+          {
+            "anchor": "component-mapping",
+            "level": 2,
+            "text": "Component mapping"
+          },
+          {
+            "anchor": "prototype-organization-in-figma",
+            "level": 2,
+            "text": "Prototype organization in Figma"
+          },
+          {
+            "anchor": "validation-criteria",
+            "level": 2,
+            "text": "Validation criteria"
+          },
+          {
+            "anchor": "explicitly-deferred",
+            "level": 2,
+            "text": "Explicitly deferred"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva MVP UX/UI prototype design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-ui-prototype-design.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:minerva-product-specification:d29f24b551b5",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "minerva-product-specification",
+            "level": 1,
+            "text": "Minerva product specification"
+          },
+          {
+            "anchor": "product-goal",
+            "level": 2,
+            "text": "Product goal"
+          },
+          {
+            "anchor": "users-and-authorization",
+            "level": 2,
+            "text": "Users and authorization"
+          },
+          {
+            "anchor": "global-administration",
+            "level": 3,
+            "text": "Global administration"
+          },
+          {
+            "anchor": "project-authorization",
+            "level": 3,
+            "text": "Project authorization"
+          },
+          {
+            "anchor": "projects",
+            "level": 2,
+            "text": "Projects"
+          },
+          {
+            "anchor": "documentation",
+            "level": 2,
+            "text": "Documentation"
+          },
+          {
+            "anchor": "search-and-templates",
+            "level": 2,
+            "text": "Search and templates"
+          },
+          {
+            "anchor": "localization-and-appearance",
+            "level": 2,
+            "text": "Localization and appearance"
+          },
+          {
+            "anchor": "mcp-release-boundary",
+            "level": 2,
+            "text": "MCP release boundary"
+          },
+          {
+            "anchor": "security-and-operations",
+            "level": 2,
+            "text": "Security and operations"
+          },
+          {
+            "anchor": "acceptance-criteria-for-the-first-release",
+            "level": 2,
+            "text": "Acceptance criteria for the first release"
+          },
+          {
+            "anchor": "explicitly-deferred",
+            "level": 2,
+            "text": "Explicitly deferred"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva product specification",
+      "source_path": "D:\\develop\\minerva\\docs\\product-spec.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:minerva-progress:c476087b907f",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "minerva-progress",
+            "level": 1,
+            "text": "Minerva progress"
+          },
+          {
+            "anchor": "current-state",
+            "level": 2,
+            "text": "Current state"
+          },
+          {
+            "anchor": "completed",
+            "level": 2,
+            "text": "Completed"
+          },
+          {
+            "anchor": "remaining-before-application-implementation",
+            "level": 2,
+            "text": "Remaining before application implementation"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva progress",
+      "source_path": "D:\\develop\\minerva\\docs\\progress.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:minerva-roadmap:973bcf26cc8a",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "minerva-roadmap",
+            "level": 1,
+            "text": "Minerva roadmap"
+          },
+          {
+            "anchor": "slice-0-project-memory-and-approved-design",
+            "level": 2,
+            "text": "Slice 0: Project memory and approved design"
+          },
+          {
+            "anchor": "slice-1-executable-foundation",
+            "level": 2,
+            "text": "Slice 1: Executable foundation"
+          },
+          {
+            "anchor": "slice-2-identity-and-global-administration",
+            "level": 2,
+            "text": "Slice 2: Identity and global administration"
+          },
+          {
+            "anchor": "slice-3-projects-and-rbac",
+            "level": 2,
+            "text": "Slice 3: Projects and RBAC"
+          },
+          {
+            "anchor": "slice-4-document-core",
+            "level": 2,
+            "text": "Slice 4: Document core"
+          },
+          {
+            "anchor": "slice-5-search-and-images",
+            "level": 2,
+            "text": "Slice 5: Search and images"
+          },
+          {
+            "anchor": "slice-6-mcp-documentation-interface",
+            "level": 2,
+            "text": "Slice 6: MCP documentation interface"
+          },
+          {
+            "anchor": "slice-7-production-readiness",
+            "level": 2,
+            "text": "Slice 7: Production readiness"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva roadmap",
+      "source_path": "D:\\develop\\minerva\\docs\\roadmap.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:tesserae-development-memory:4143790d0cae",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "tesserae-development-memory",
+            "level": 1,
+            "text": "Tesserae development memory"
+          },
+          {
+            "anchor": "installation",
+            "level": 2,
+            "text": "Installation"
+          },
+          {
+            "anchor": "initialize-or-rebuild",
+            "level": 2,
+            "text": "Initialize or rebuild"
+          },
+          {
+            "anchor": "session-policy",
+            "level": 2,
+            "text": "Session policy"
+          },
+          {
+            "anchor": "refresh",
+            "level": 2,
+            "text": "Refresh"
+          },
+          {
+            "anchor": "mcp",
+            "level": 2,
+            "text": "MCP"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Tesserae development memory",
+      "source_path": "D:\\develop\\minerva\\docs\\operations\\tesserae.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "Top-level snapshot of the wiki at compile time.",
+      "id": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "metadata": {
+        "content_hash": "sha256-6db8cdb45f11bbd5d8713266a83ee4ae49794a316b03aa4e60e13d8866623e63",
+        "input_ids": [],
+        "synthesis_kind": "pulse"
+      },
+      "name": "Project Pulse",
+      "source_path": null,
+      "type": "Synthesis"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "minerva",
+  "site_title": "Tesserae",
+  "project_root": "D:\\develop\\minerva",
+  "created": "2026-06-24",
+  "source_kind": "Repository",
+  "sources": [
+    "AGENTS.md",
+    "docs"
+  ],
+  "graph_path": ".tesserae/graph.json",
+  "manifest_path": ".tesserae/manifest.json",
+  "sqlite_path": ".tesserae/sqlite.db",
+  "markdown_projection_path": ".tesserae/markdown_projection",
+  "cognee_bundle_path": ".tesserae/cognee_bundle",
+  "report_path": ".tesserae/report.md",
+  "temporal_facts_path": ".tesserae/temporal_facts.jsonl",
+  "competitive_report_path": ".tesserae/competitive_report.md",
+  "graphiti_episodes_path": ".tesserae/graphiti_episodes.jsonl",
+  "agent_harness_path": ".tesserae/agent_harness",
+  "harness_sessions_path": ".tesserae/harness_sessions",
+  "obsidian_vault_path": ".tesserae/obsidian_vault",
+  "site_path": ".tesserae/site",
+  "memory_backends": {},
+  "project": {
+    "name": "minerva",
+    "source_kind": "Repository"
+  },
+  "extraction": {
+    "backend": "codex",
+    "claude_config_dir": null,
+    "claude_model": null,
+    "codex_model": "gpt-5.4"
+  },
+  "external_tools": [],
+  "setup": {
+    "wizard": "tesserae init",
+    "updated": "2026-06-24"
+  }
+}
