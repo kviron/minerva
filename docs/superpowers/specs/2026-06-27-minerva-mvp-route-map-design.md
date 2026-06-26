@@ -22,6 +22,9 @@ The alternatives were rejected for the following reasons:
 /
 |-- auth/
 |-- invitations/[token]
+|-- legal/
+|   |-- terms
+|   `-- privacy
 |-- projects/
 |-- projects/[id]/
 |   |-- documents/[documentId]/
@@ -43,6 +46,8 @@ The alternatives were rejected for the following reasons:
 - `/` redirects authenticated users to `/projects` and unauthenticated users to `/auth`.
 - `/auth` contains sign-in. Public registration is absent.
 - `/invitations/[token]` handles global and project-bound invitation enrollment.
+- `/legal/terms` contains the public Terms of Service.
+- `/legal/privacy` contains the public Privacy Policy.
 - `/projects` lists accessible projects and contains project creation as a permission-aware dialog.
 - `/projects/[id]` is the project overview and owns the contextual document-tree sidebar.
 - `/projects/[id]/documents/[documentId]` opens a document in reading mode.
@@ -70,7 +75,7 @@ The alternatives were rejected for the following reasons:
 
 ## Layout boundaries
 
-- Authentication and invitation enrollment use a public layout.
+- Authentication, invitation enrollment, and legal pages use a public layout.
 - Projects, administration, and personal settings use the authenticated global shell.
 - Project overview, documents, and project settings add the contextual project sidebar.
 - Navigation visibility reflects server-provided permissions but never replaces server-side authorization.
@@ -84,6 +89,7 @@ The alternatives were rejected for the following reasons:
 ## Later implementation checks
 
 - Verify root redirects for authenticated and unauthenticated users.
+- Verify legal pages remain accessible without authentication and receive localized `/en` routes through the localization layer.
 - Verify route middleware denies inaccessible projects and unauthorized administration pages without leaking resource existence.
 - Verify Russian routes have no locale prefix and English routes use `/en` through the localization layer rather than duplicated page files.
 - Verify direct links to document editing, history, settings tabs, and OAuth/MCP grant management preserve authorization behavior.
