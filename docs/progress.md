@@ -24,6 +24,7 @@ Stage 0 and stage 0.5 are in progress. Application implementation remains blocke
 - Received user approval for the written UX/UI prototype specification and prepared its detailed Figma implementation plan.
 - Added ADR 0006 to replace pnpm with Bun as the package manager before application implementation begins.
 - Created the buildable Nuxt page-file skeleton for the approved MVP route map without UI or business behavior.
+- Added public empty route stubs for Terms of Service and Privacy Policy under `/legal`.
 
 ## Remaining before application implementation
 
