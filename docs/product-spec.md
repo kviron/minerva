@@ -27,6 +27,8 @@ The first usable release must let a small internal team:
 - A `super_admin` may issue a global invitation without project membership.
 - A Project Admin may invite a new user only into a project they administer. The invitation fixes the target project and initial project role before it is sent.
 - Accepting a project invitation creates or activates the user account and its project membership atomically. It grants no global administrative privilege.
+- An active password-authenticated user may request a password reset without the response revealing whether an account exists for the submitted email.
+- Password-reset tokens are short-lived and single-use. A successful reset invalidates the token and revokes the user's existing sessions.
 
 ### Project authorization
 
@@ -115,7 +117,7 @@ Every MCP mutation records the user, OAuth client, grant, scopes, tool name, pro
 ## Security and operations
 
 - Password authentication uses Better Auth; optional TOTP and recovery codes are available to all users.
-- Session, invitation, OAuth, and MCP endpoints are rate-limited.
+- Session, invitation, password-recovery, OAuth, and MCP endpoints are rate-limited.
 - MCP validates `Origin`, tool schemas, OAuth audience/resource binding, scopes, and RBAC.
 - OAuth grant revocation and token invalidation are audited and checked before MCP tool execution.
 - Images are stored in S3-compatible storage with private objects and authorized download endpoints or short-lived signed URLs.

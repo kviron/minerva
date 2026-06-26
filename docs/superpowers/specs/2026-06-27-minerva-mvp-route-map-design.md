@@ -21,6 +21,8 @@ The alternatives were rejected for the following reasons:
 ```text
 /
 |-- auth/
+|   |-- forgot-password
+|   `-- reset-password/[token]
 |-- invitations/[token]
 |-- legal/
 |   |-- terms
@@ -45,6 +47,8 @@ The alternatives were rejected for the following reasons:
 
 - `/` redirects authenticated users to `/projects` and unauthenticated users to `/auth`.
 - `/auth` contains sign-in. Public registration is absent.
+- `/auth/forgot-password` accepts password-reset requests without exposing whether an account exists.
+- `/auth/reset-password/[token]` accepts a new password for a valid short-lived, single-use reset token.
 - `/invitations/[token]` handles global and project-bound invitation enrollment.
 - `/legal/terms` contains the public Terms of Service.
 - `/legal/privacy` contains the public Privacy Policy.
@@ -89,6 +93,7 @@ The alternatives were rejected for the following reasons:
 ## Later implementation checks
 
 - Verify root redirects for authenticated and unauthenticated users.
+- Verify password-recovery pages are public, do not enable registration, and receive localized `/en` routes through the localization layer.
 - Verify legal pages remain accessible without authentication and receive localized `/en` routes through the localization layer.
 - Verify route middleware denies inaccessible projects and unauthorized administration pages without leaking resource existence.
 - Verify Russian routes have no locale prefix and English routes use `/en` through the localization layer rather than duplicated page files.
