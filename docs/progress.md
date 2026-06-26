@@ -4,7 +4,7 @@ Last updated: 2026-06-27
 
 ## Current state
 
-Stage 0 and stage 0.5 are in progress. Application implementation is blocked pending user approval of the audited specification and plans.
+Stage 0 and stage 0.5 are in progress. Application implementation remains blocked pending user approval of the audited specification and plans. The user explicitly approved the empty MVP route skeleton; it contains no UI or business behavior.
 
 ## Completed
 
@@ -23,6 +23,7 @@ Stage 0 and stage 0.5 are in progress. Application implementation is blocked pen
 - Audited the MVP information architecture and drafted the eight-screen shadcn-vue Figma prototype specification.
 - Received user approval for the written UX/UI prototype specification and prepared its detailed Figma implementation plan.
 - Added ADR 0006 to replace pnpm with Bun as the package manager before application implementation begins.
+- Created the buildable Nuxt page-file skeleton for the approved MVP route map without UI or business behavior.
 
 ## Remaining before application implementation
 

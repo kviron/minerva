@@ -1,0 +1,156 @@
+# MVP Route Skeleton Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Create a buildable Nuxt page-file skeleton for every approved MVP route without adding UI, data loading, authorization, or business behavior.
+
+**Architecture:** Nuxt file-based routing mirrors the approved domain-oriented route map. Each page is a valid but visually empty Vue component; nested project routes replace the conflicting flat `projects/[id].vue` file.
+
+**Tech Stack:** Nuxt 4, Vue 3, TypeScript, Bun
+
+---
+
+### Task 1: Establish the route manifest check
+
+**Files:**
+- Verify: `app/pages/**`
+
+- [ ] **Step 1: Run the route-file assertion before scaffolding**
+
+```powershell
+$required = @(
+  'app/pages/auth/index.vue',
+  'app/pages/invitations/[token].vue',
+  'app/pages/projects/index.vue',
+  'app/pages/projects/[id]/index.vue',
+  'app/pages/projects/[id]/documents/[documentId]/index.vue',
+  'app/pages/projects/[id]/documents/[documentId]/edit.vue',
+  'app/pages/projects/[id]/documents/[documentId]/history.vue',
+  'app/pages/projects/[id]/settings.vue',
+  'app/pages/administration/index.vue',
+  'app/pages/administration/users.vue',
+  'app/pages/administration/invitations.vue',
+  'app/pages/administration/audit.vue',
+  'app/pages/settings/index.vue',
+  'app/pages/settings/profile.vue',
+  'app/pages/settings/security.vue',
+  'app/pages/settings/connections.vue'
+)
+$missing = $required | Where-Object { -not (Test-Path -LiteralPath $_) }
+if ($missing) { throw "Missing route files: $($missing -join ', ')" }
+```
+
+Expected: FAIL and list the routes that have not been scaffolded yet.
+
+### Task 2: Create valid empty page components
+
+**Files:**
+- Delete: `app/pages/dashboard/index.vue`
+- Delete: `app/pages/projects/[id].vue`
+- Create: `app/pages/invitations/[token].vue`
+- Create: `app/pages/projects/[id]/index.vue`
+- Create: `app/pages/projects/[id]/documents/[documentId]/index.vue`
+- Create: `app/pages/projects/[id]/documents/[documentId]/edit.vue`
+- Create: `app/pages/projects/[id]/documents/[documentId]/history.vue`
+- Create: `app/pages/projects/[id]/settings.vue`
+- Create: `app/pages/administration/index.vue`
+- Create: `app/pages/administration/users.vue`
+- Create: `app/pages/administration/invitations.vue`
+- Create: `app/pages/administration/audit.vue`
+- Create: `app/pages/settings/profile.vue`
+- Create: `app/pages/settings/security.vue`
+- Create: `app/pages/settings/connections.vue`
+- Modify: `app/pages/auth/index.vue`
+- Modify: `app/pages/projects/index.vue`
+- Modify: `app/pages/settings/index.vue`
+- Modify: `app/layouts/default.vue`
+
+- [ ] **Step 1: Remove the two obsolete route files**
+
+Delete the empty dashboard page because `/dashboard` is outside the approved MVP map. Delete the flat project page because it conflicts with the nested `[id]/index.vue` structure.
+
+- [ ] **Step 2: Give every route page the minimal valid Vue SFC content**
+
+Use this complete content in every route file listed above:
+
+```vue
+<template>
+  <div />
+</template>
+```
+
+This intentionally renders nothing while allowing Nuxt's Vue compiler to process the route.
+
+- [ ] **Step 3: Make the default layout a valid empty shell**
+
+```vue
+<template>
+  <slot />
+</template>
+```
+
+- [ ] **Step 4: Re-run the route-file assertion**
+
+Run the PowerShell assertion from Task 1.
+
+Expected: PASS with exit code 0 and no missing paths.
+
+- [ ] **Step 5: Confirm obsolete routes are absent**
+
+```powershell
+if (Test-Path -LiteralPath 'app/pages/dashboard/index.vue') { throw 'Dashboard route still exists' }
+if (Test-Path -LiteralPath 'app/pages/projects/[id].vue') { throw 'Flat project route still exists' }
+```
+
+Expected: PASS with exit code 0.
+
+### Task 3: Verify the Nuxt scaffold
+
+**Files:**
+- Verify: `app/pages/**`
+
+- [ ] **Step 1: Build with the approved package manager**
+
+```powershell
+bun run build
+```
+
+Expected: Nuxt build exits with code 0 and reports no duplicate or invalid page-component errors.
+
+- [ ] **Step 2: Review the final page tree**
+
+```powershell
+rg --files app/pages | Sort-Object
+```
+
+Expected: the approved route files are present, while `dashboard/index.vue` and the flat `projects/[id].vue` are absent.
+
+### Task 4: Record completion
+
+**Files:**
+- Modify: `docs/progress.md`
+
+- [ ] **Step 1: Add the completed scaffold item**
+
+Add this bullet to the completed-work section:
+
+```markdown
+- Created the buildable Nuxt page-file skeleton for the approved MVP route map without UI or business behavior.
+```
+
+- [ ] **Step 2: Refresh Tesserae**
+
+```powershell
+tesserae refresh
+```
+
+Expected: `sessions-import`, `compile`, and `obsidian-sync` report `ok`. If Tesserae 0.10.1 raises the documented Windows `WinError 183`, apply only the generated-JSON workaround from `docs/operations/tesserae.md` and rerun.
+
+- [ ] **Step 3: Commit only the route skeleton and progress update**
+
+```powershell
+git add -- app/pages app/layouts/default.vue docs/progress.md docs/superpowers/plans/2026-06-27-mvp-route-skeleton.md
+git commit -m "core: scaffold MVP routes"
+```
+
+Do not stage `.tesserae` or unrelated working-tree files.
