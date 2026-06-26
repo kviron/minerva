@@ -1,6 +1,6 @@
 # Minerva progress
 
-Last updated: 2026-06-24
+Last updated: 2026-06-27
 
 ## Current state
 
@@ -22,6 +22,7 @@ Stage 0 and stage 0.5 are in progress. Application implementation is blocked pen
 - Added ADR 0005 for MCP resource binding and immediate token revocation.
 - Audited the MVP information architecture and drafted the eight-screen shadcn-vue Figma prototype specification.
 - Received user approval for the written UX/UI prototype specification and prepared its detailed Figma implementation plan.
+- Added ADR 0006 to replace pnpm with Bun as the package manager before application implementation begins.
 
 ## Remaining before application implementation
 

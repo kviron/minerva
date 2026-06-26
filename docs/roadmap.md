@@ -8,7 +8,7 @@ Deliver Superpowers, Tesserae, canonical documentation, ADRs, an approved Figma 
 
 ## Slice 1: Executable foundation
 
-Deliver a reproducible Nuxt 4 workspace with exact Node, pnpm, Nuxt, and dependency versions; lint/type/test commands; PostgreSQL and MinIO development services; idempotent bucket initialization; Drizzle migrations; health checks; CI; environment validation; and Russian/English shell pages.
+Deliver a reproducible Nuxt 4 workspace with exact Node, Bun, Nuxt, and dependency versions; lint/type/test commands; PostgreSQL and MinIO development services; idempotent bucket initialization; Drizzle migrations; health checks; CI; environment validation; and Russian/English shell pages.
 
 Acceptance: a clean checkout starts through documented commands and all checks pass.
 
