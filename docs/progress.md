@@ -28,6 +28,7 @@ Stage 0 and stage 0.5 are in progress. Application implementation remains blocke
 - Added secure password recovery to the MVP design while preserving invitation-only registration.
 - Added a safe Tesserae refresh wrapper that prevents the recurring Windows `WinError 183` workflow failure.
 - Added public empty route stubs for password recovery under `/auth`.
+- Added a local PostgreSQL 17 Docker Compose service with loopback-only access, persistent storage, and a readiness health check.
 
 ## Remaining before application implementation
 
