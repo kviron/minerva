@@ -1,0 +1,42 @@
+# PostgreSQL Docker Compose design
+
+Status: approved for implementation
+
+## Goal
+
+Provide a reproducible PostgreSQL service for local Minerva development without starting the application or MinIO.
+
+## Configuration
+
+- The repository root contains `docker-compose.yml`.
+- The Compose file defines one service named `postgres` using PostgreSQL 17.
+- PostgreSQL listens on container port 5432 and is exposed only on `127.0.0.1:5432`.
+- The local development database, user, and password are all named `minerva`.
+- Database files persist in a named Docker volume called `postgres-data`.
+- A health check uses `pg_isready` and identifies when the database can accept connections.
+- The container restarts automatically unless it was explicitly stopped.
+
+The local application connection string will be:
+
+```text
+postgresql://minerva:minerva@localhost:5432/minerva
+```
+
+These credentials are development-only and must not be reused in production.
+
+## Operation and failure behavior
+
+Developers start the service with `docker compose up -d` and stop it with `docker compose down`. Stopping or recreating the container preserves data in the named volume. Removing the volume remains an explicit manual action.
+
+If PostgreSQL cannot initialize or accept connections, the health check reports the service as unhealthy. Compose configuration must validate successfully before startup.
+
+## Verification
+
+1. Run `docker compose config` and require a successful result.
+2. Run `docker compose up -d --wait` and require the service to become healthy.
+3. Run `docker compose exec postgres pg_isready -U minerva -d minerva` and require an accepting-connections response.
+4. Run `docker compose down` without deleting the named volume.
+
+## Deferred scope
+
+MinIO, the Nuxt/Nitro application container, backups, production secrets, and production deployment configuration are deferred to their planned infrastructure slices.
