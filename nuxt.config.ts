@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   ssr: false,
-  modules: ['shadcn-nuxt'],
+  modules: ['shadcn-nuxt', '@nuxtjs/color-mode'],
   shadcn: {
     /**
      * Prefix for all the imported component.
