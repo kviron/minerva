@@ -1,0 +1,156 @@
+# PostgreSQL Docker Compose Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Add a local PostgreSQL 17 service in the repository-root `docker-compose.yml` and verify that it starts healthy.
+
+**Architecture:** Docker Compose owns one development-only `postgres` service. PostgreSQL binds only to the loopback interface, persists data in a named volume, and exposes readiness through `pg_isready`; MinIO and the application container remain outside this change.
+
+**Tech Stack:** Docker Compose v2, PostgreSQL 17 Alpine, PowerShell
+
+---
+
+## File structure
+
+- Create `docker-compose.yml`: define the PostgreSQL development service, health check, loopback port binding, restart policy, and persistent named volume.
+- Modify `docs/progress.md`: record the completed local PostgreSQL infrastructure increment.
+
+### Task 1: Add and validate the PostgreSQL service
+
+**Files:**
+- Create: `docker-compose.yml`
+
+- [ ] **Step 1: Verify the expected configuration test fails before the file exists**
+
+Run:
+
+```powershell
+docker compose -f docker-compose.yml config
+```
+
+Expected: FAIL because `docker-compose.yml` does not exist.
+
+- [ ] **Step 2: Create the minimal Compose configuration**
+
+Create `docker-compose.yml` with exactly:
+
+```yaml
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: minerva
+      POSTGRES_USER: minerva
+      POSTGRES_PASSWORD: minerva
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U minerva -d minerva"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  postgres-data:
+```
+
+- [ ] **Step 3: Validate the Compose configuration**
+
+Run:
+
+```powershell
+docker compose -f docker-compose.yml config --quiet
+```
+
+Expected: exit code 0 with no validation errors.
+
+- [ ] **Step 4: Start PostgreSQL and wait for readiness**
+
+Run:
+
+```powershell
+docker compose -f docker-compose.yml up -d --wait
+```
+
+Expected: service `postgres` starts and reports healthy.
+
+- [ ] **Step 5: Check PostgreSQL directly inside the container**
+
+Run:
+
+```powershell
+docker compose -f docker-compose.yml exec postgres pg_isready -U minerva -d minerva
+```
+
+Expected: output ends with `accepting connections` and exit code 0.
+
+- [ ] **Step 6: Stop the service without deleting its data volume**
+
+Run:
+
+```powershell
+docker compose -f docker-compose.yml down
+```
+
+Expected: the container and network are removed; the named `postgres-data` volume is not removed because `--volumes` is absent.
+
+### Task 2: Record and verify the infrastructure increment
+
+**Files:**
+- Modify: `docs/progress.md`
+- Verify: `docker-compose.yml`
+
+- [ ] **Step 1: Add the completed item to project progress**
+
+Append this bullet to the `## Completed` list in `docs/progress.md`:
+
+```markdown
+- Added a local PostgreSQL 17 Docker Compose service with loopback-only access, persistent storage, and a readiness health check.
+```
+
+- [ ] **Step 2: Refresh Tesserae after documentation and infrastructure changes**
+
+Run:
+
+```powershell
+./scripts/refresh-tesserae.ps1
+```
+
+Expected: `sessions-import`, `compile`, and `obsidian-sync` report `ok`. Do not stage any `.tesserae` files.
+
+- [ ] **Step 3: Run final static verification**
+
+Run:
+
+```powershell
+docker compose -f docker-compose.yml config --quiet
+git diff --check -- docker-compose.yml docs/progress.md
+```
+
+Expected: both commands exit with code 0 and print no errors.
+
+- [ ] **Step 4: Review the scoped diff**
+
+Run:
+
+```powershell
+git diff -- docker-compose.yml docs/progress.md
+git status --short
+```
+
+Expected: the intended Compose and progress changes are visible; `app/layouts/empty.vue` and generated `.tesserae` files remain unstaged and unchanged by this implementation.
+
+- [ ] **Step 5: Commit only the implementation files**
+
+Run:
+
+```powershell
+git add -- docker-compose.yml docs/progress.md
+git commit -m "infra: add local PostgreSQL compose service"
+```
+
+Expected: the commit contains only `docker-compose.yml` and `docs/progress.md`.
