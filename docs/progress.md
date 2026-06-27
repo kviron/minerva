@@ -1,6 +1,6 @@
 # Minerva progress
 
-Last updated: 2026-06-27
+Last updated: 2026-06-28
 
 ## Current state
 
@@ -29,6 +29,7 @@ Stage 0 and stage 0.5 are in progress. Application implementation remains blocke
 - Added a safe Tesserae refresh wrapper that prevents the recurring Windows `WinError 183` workflow failure.
 - Added public empty route stubs for password recovery under `/auth`.
 - Added a local PostgreSQL 17 Docker Compose service with loopback-only access, persistent storage, and a readiness health check.
+- Approved the Better Auth identity, optional profile, dynamic contact, privacy, and project-role data model, with phone authentication deferred until an SMS provider is selected.
 
 ## Remaining before application implementation
 

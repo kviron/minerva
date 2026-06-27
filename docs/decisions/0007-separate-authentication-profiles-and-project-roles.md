@@ -1,0 +1,24 @@
+# ADR 0007: Separate authentication identity, user profiles, contacts, and project roles
+
+Date: 2026-06-28  
+Status: accepted
+
+## Decision
+
+Use Better Auth for authentication identity, credential accounts, sessions, verification records, username support, and future verified phone authentication. Store optional personal details in a one-to-one `user_profiles` table and repeatable messenger or social links in `user_contacts`. Keep ordinary authorization exclusively in project memberships and project-scoped roles.
+
+Email, username, and password are required during invitation activation. Better Auth's required `name` initially uses the display username. Phone number is optional and cannot be used for sign-in until it is verified through an approved SMS provider.
+
+## Security rules
+
+- Password hashes exist only in Better Auth credential records.
+- Email, normalized username, and non-null phone number are unique.
+- Username availability is checked only in an authorized invitation or profile-update flow; the public availability endpoint is disabled.
+- Phone sign-in requires OTP verification and remains deferred until an SMS provider is selected.
+- Phone number, date of birth, private contacts, and account-disable reasons are not exposed to ordinary unrelated users.
+- Avatars use authorized file access and never expose storage credentials, raw object keys, or filesystem paths.
+- `super_admin` is the only global authorization flag; project permissions are evaluated from stable permission codes.
+
+## Consequences
+
+Authentication upgrades remain compatible with Better Auth plugins without coupling profile fields or dynamic contacts to credential storage. Profile privacy can be enforced per field and per contact. Queries require explicit joins, but the resulting boundaries reduce accidental credential and authorization leaks.

@@ -1,0 +1,140 @@
+# User identity and profile design
+
+Status: approved in interactive design review; awaiting written review
+
+## Goal and scope
+
+Add invitation-only password authentication through Better Auth and define the PostgreSQL model for user identity, optional personal details, dynamic contacts, account state, and project-scoped roles.
+
+This design does not enable phone sign-in yet. It preserves the fields and boundaries needed to add verified phone authentication after an SMS provider is selected.
+
+## Authentication boundary
+
+Better Auth remains the authentication system because Minerva requires database-backed sessions, password recovery, optional two-factor authentication, and an OAuth 2.1 provider for MCP.
+
+The enabled authentication features are:
+
+- email and password;
+- the Better Auth Username plugin;
+- invitation-only account activation;
+- session persistence and revocation.
+
+Public sign-up is disabled. An invitation fixes the email address. Successful acceptance of an invitation delivered to that address marks the email as verified. During activation, the user chooses a unique username and password. The application supplies the username as Better Auth's initial required `name`; a later profile update may derive a friendlier display name from the available personal-name fields.
+
+The password is stored only as a Better Auth credential hash in the account table. It is never stored in the user or profile table and is never returned through application APIs or MCP.
+
+## Data model
+
+All identifiers use UUIDs and all timestamps are stored in UTC.
+
+### Better Auth user and credential records
+
+The Better Auth `user` table owns authentication identity and account state:
+
+- `id`;
+- `name`, initially populated from the display username;
+- unique normalized `email` and `email_verified`;
+- unique normalized `username` and `display_username` from the Username plugin;
+- nullable unique normalized `phone_number` and `phone_number_verified`, initially `false`;
+- `super_admin`;
+- `status`, restricted to `active` or `disabled` in the first release;
+- nullable `disabled_at` and `disabled_reason`;
+- nullable `last_login_at`;
+- `created_at` and `updated_at`.
+
+Better Auth also owns its required `account`, `session`, and `verification` records. The credential account contains the password hash. Disabling an account prevents new sessions and revokes its existing sessions.
+
+The phone fields are reserved now to avoid duplicating a phone number in generic contacts. Phone-number login and password recovery remain disabled until an SMS provider is selected and the Better Auth Phone Number plugin can require OTP verification.
+
+### User profile
+
+`user_profiles` is a one-to-one extension of the user record. It contains only optional profile data:
+
+- `user_id` as both primary key and foreign key;
+- `family_name`;
+- `given_name`;
+- `middle_name`;
+- `bio`;
+- `date_of_birth` as a date without time;
+- `job_title`;
+- nullable `avatar_file_id` referencing an authorized Minerva image record;
+- `locale`, defaulting to `ru-RU`;
+- `time_zone`, defaulting to the deployment's configured time zone;
+- `created_at` and `updated_at`.
+
+Age, profile-completion percentages, and a combined full name are derived rather than stored.
+
+### Dynamic contacts
+
+`user_contacts` stores zero or more ordered contacts per user:
+
+- `id`;
+- `user_id`;
+- `type`, using stable codes such as `telegram`, `whatsapp`, `vk`, `github`, `website`, or `custom`;
+- nullable `label` for a user-facing caption or custom contact type;
+- `value`, such as `@username`;
+- nullable normalized `url`;
+- `visibility`, restricted to `private` or `shared_projects`;
+- `sort_order`;
+- `created_at` and `updated_at`.
+
+The application validates and normalizes known contact types. Unknown arbitrary links use `custom` plus a required label. Contacts are rows rather than a JSON column so they can be validated, ordered, filtered by visibility, and changed independently.
+
+### Roles and memberships
+
+Roles do not live on the user record. `super_admin` is the only global authorization flag. Ordinary authorization remains in `project_memberships`, where each membership references exactly one project-scoped `role_id`. Role permissions use stable permission codes and are checked server-side.
+
+## Sign-in and account lifecycle
+
+The sign-in form accepts one identifier and one password. The server classifies a syntactically valid email as email, a valid E.164 number as phone, and any remaining supported value as username. Email and username are enabled initially. A phone identifier receives the same generic authentication failure while phone login is disabled.
+
+All failed credential flows return one stable public error and do not reveal whether an email, username, or phone number exists. The Better Auth public username-availability endpoint is disabled; availability is checked only inside an authorized invitation flow. Rate limits apply to activation, sign-in, password recovery, authorized username checks, and future phone OTP endpoints.
+
+Invitation acceptance creates or activates the user, credential account, profile, and any fixed project membership atomically. A failed step leaves none of the invitation effects committed. The invitation is single-use and expires.
+
+`last_login_at` changes only after successful authentication. Disabling records the time and an administrator-only reason, revokes sessions, and respects the last-active-super-admin invariant.
+
+## Privacy and avatar access
+
+The user and `super_admin` may access the complete profile. Users sharing at least one active project may see the name fields, job title, bio, avatar, and only contacts marked `shared_projects`. Phone number, date of birth, disabled reason, and private contacts are hidden by default. Unauthenticated callers receive no profile data.
+
+An avatar references private S3-compatible storage through the Files module. APIs expose an authorized application URL or short-lived signed URL, never an object-store credential, raw object key, or storage path.
+
+## Error contract
+
+Application services use stable codes, including:
+
+- `AUTH_REQUIRED`;
+- `INVALID_CREDENTIALS`;
+- `ACCOUNT_DISABLED`;
+- `INVITATION_INVALID`;
+- `INVITATION_EXPIRED`;
+- `USERNAME_UNAVAILABLE`;
+- `EMAIL_UNAVAILABLE`;
+- `PHONE_LOGIN_UNAVAILABLE` for authenticated configuration flows only, not public sign-in enumeration;
+- `INVALID_PROFILE_DATA`;
+- `INVALID_CONTACT`;
+- `PERMISSION_DENIED`.
+
+The UI localizes these codes. Transport responses never include credential hashes, internal database errors, private contacts, or storage paths.
+
+## Testing
+
+Tests must prove:
+
+- email, normalized username, and non-null phone values are unique;
+- username casing preserves `display_username` while uniqueness uses the normalized value;
+- invitation acceptance and project membership creation are atomic;
+- public registration remains unavailable;
+- public username enumeration remains unavailable;
+- email and username sign-in succeed with valid credentials and share enumeration-safe failures;
+- phone sign-in remains unavailable until verification is implemented;
+- disabled users cannot create sessions and existing sessions are revoked;
+- last-super-admin and last-Project-Admin invariants remain enforced;
+- profile visibility is filtered for self, `super_admin`, shared-project users, unrelated users, and unauthenticated callers;
+- known and custom contact types validate, normalize, order, and filter correctly;
+- private avatar storage details never leave server-side boundaries.
+
+## Deferred scope
+
+SMS provider selection, phone OTP verification, phone sign-in, phone password recovery, public registration, multiple roles per project membership, and profile exposure through MCP are deferred.

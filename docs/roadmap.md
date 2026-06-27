@@ -14,7 +14,7 @@ Acceptance: a clean checkout starts through documented commands and all checks p
 
 ## Slice 2: Identity and global administration
 
-Deliver Better Auth email/password login, enumeration-safe password recovery, global and project-bound invitation enrollment, atomic project membership creation, session protection, `super_admin` bootstrap, account disabling, optional TOTP, recovery codes, and global audit events.
+Deliver Better Auth email/password and username login, enumeration-safe password recovery, global and project-bound invitation enrollment, atomic user/profile/project-membership creation, optional profile fields, private and shared-project contacts, session protection, `super_admin` bootstrap, account disabling, optional TOTP, recovery codes, and global audit events. Reserve an optional unique phone number for later OTP-verified phone authentication without enabling phone sign-in in this slice.
 
 Acceptance: no public registration exists; the last active `super_admin` invariant is enforced in services and tests.
 
