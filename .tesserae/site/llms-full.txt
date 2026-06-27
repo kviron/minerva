@@ -23,6 +23,8 @@
 - [Minerva progress](sources/minerva-progress.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva roadmap](sources/minerva-roadmap.html)
 - [MVP Route Skeleton Implementation Plan](sources/mvp-route-skeleton-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
+- [PostgreSQL Docker Compose design](sources/postgresql-docker-compose-design.html)
+- [PostgreSQL Docker Compose Implementation Plan](sources/postgresql-docker-compose-implementation-plan.html)
 - [Tesserae development memory](sources/tesserae-development-memory.html)
 - [Tesserae refresh wrapper design](sources/tesserae-refresh-wrapper-design.html)
 - [Tesserae Refresh Wrapper Implementation Plan](sources/tesserae-refresh-wrapper-implementation-plan.html)
@@ -186,6 +188,16 @@ _sources/mvp-route-skeleton-implementation-plan.html_
 - CommunitySummary: 1
 - Metric: 1
 
+### PostgreSQL Docker Compose design
+_sources/postgresql-docker-compose-design.html_
+
+# PostgreSQL Docker Compose design
+
+### PostgreSQL Docker Compose Implementation Plan
+_sources/postgresql-docker-compose-implementation-plan.html_
+
+# PostgreSQL Docker Compose Implementation Plan
+
 ### Tesserae development memory
 _sources/tesserae-development-memory.html_
 
@@ -234,7 +246,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 22
+- SourceDocument: 24
 
 ## Recently added
 - (none)

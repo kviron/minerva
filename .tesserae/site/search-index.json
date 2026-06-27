@@ -388,6 +388,41 @@
     "created_ts": null
   },
   {
+    "id": "sources:postgresql-docker-compose-design",
+    "title": "PostgreSQL Docker Compose design",
+    "kind": "sources",
+    "href": "sources/postgresql-docker-compose-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-27-postgresql-compose-design.md",
+    "tokens": [
+      "postgresql",
+      "docker",
+      "compose",
+      "design",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:postgresql-docker-compose-implementation-plan",
+    "title": "PostgreSQL Docker Compose Implementation Plan",
+    "kind": "sources",
+    "href": "sources/postgresql-docker-compose-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-06-27-postgresql-compose.md",
+    "tokens": [
+      "postgresql",
+      "docker",
+      "compose",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
     "id": "sources:tesserae-development-memory",
     "title": "Tesserae development memory",
     "kind": "sources",
@@ -469,7 +504,7 @@
       "metric",
       "1",
       "sourcedocument",
-      "22",
+      "24",
       "recently",
       "added",
       "none",

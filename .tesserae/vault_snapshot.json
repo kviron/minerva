@@ -167,6 +167,22 @@
       },
       "name": "MVP Route Skeleton Implementation Plan"
     },
+    "SourceDocument:postgresql-docker-compose-design:1d13eb67950d": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "PostgreSQL Docker Compose design"
+    },
+    "SourceDocument:postgresql-docker-compose-implementation-plan:9887e9a9c654": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "PostgreSQL Docker Compose Implementation Plan"
+    },
     "SourceDocument:tesserae-development-memory:4143790d0cae": {
       "aliases": [],
       "description": "",
@@ -195,7 +211,7 @@
       "aliases": [],
       "description": "Top-level snapshot of the wiki at compile time.",
       "metadata": {
-        "content_hash": "sha256-4c460fe1ff68f85795018f77bd10d189326c6d8862eacc81e495780a52cfa110",
+        "content_hash": "sha256-353c01b65112283c50577d8ae3d7a9f1f6b3f43b5c81c7a9e37fbc6b3c79d89a",
         "synthesis_kind": "pulse"
       },
       "name": "Project Pulse"

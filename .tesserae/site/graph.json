@@ -210,6 +210,20 @@
       "evidence": null,
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:postgresql-docker-compose-design:1d13eb67950d",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:postgresql-docker-compose-implementation-plan:9887e9a9c654",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:tesserae-development-memory:4143790d0cae",
       "type": "summarizes"
     },
@@ -1319,6 +1333,82 @@
     {
       "aliases": [],
       "description": "",
+      "id": "SourceDocument:postgresql-docker-compose-design:1d13eb67950d",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "postgresql-docker-compose-design",
+            "level": 1,
+            "text": "PostgreSQL Docker Compose design"
+          },
+          {
+            "anchor": "goal",
+            "level": 2,
+            "text": "Goal"
+          },
+          {
+            "anchor": "configuration",
+            "level": 2,
+            "text": "Configuration"
+          },
+          {
+            "anchor": "operation-and-failure-behavior",
+            "level": 2,
+            "text": "Operation and failure behavior"
+          },
+          {
+            "anchor": "verification",
+            "level": 2,
+            "text": "Verification"
+          },
+          {
+            "anchor": "deferred-scope",
+            "level": 2,
+            "text": "Deferred scope"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "PostgreSQL Docker Compose design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-postgresql-compose-design.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:postgresql-docker-compose-implementation-plan:9887e9a9c654",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "postgresql-docker-compose-implementation-plan",
+            "level": 1,
+            "text": "PostgreSQL Docker Compose Implementation Plan"
+          },
+          {
+            "anchor": "file-structure",
+            "level": 2,
+            "text": "File structure"
+          },
+          {
+            "anchor": "task-1-add-and-validate-the-postgresql-service",
+            "level": 3,
+            "text": "Task 1: Add and validate the PostgreSQL service"
+          },
+          {
+            "anchor": "task-2-record-and-verify-the-infrastructure-increment",
+            "level": 3,
+            "text": "Task 2: Record and verify the infrastructure increment"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "PostgreSQL Docker Compose Implementation Plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-postgresql-compose.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
       "id": "SourceDocument:tesserae-development-memory:4143790d0cae",
       "metadata": {
         "sections": [
@@ -1435,7 +1525,7 @@
       "description": "Top-level snapshot of the wiki at compile time.",
       "id": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "metadata": {
-        "content_hash": "sha256-4c460fe1ff68f85795018f77bd10d189326c6d8862eacc81e495780a52cfa110",
+        "content_hash": "sha256-353c01b65112283c50577d8ae3d7a9f1f6b3f43b5c81c7a9e37fbc6b3c79d89a",
         "input_ids": [],
         "synthesis_kind": "pulse"
       },

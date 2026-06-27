@@ -23,6 +23,8 @@
 - [Minerva progress](sources/minerva-progress.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva roadmap](sources/minerva-roadmap.html)
 - [MVP Route Skeleton Implementation Plan](sources/mvp-route-skeleton-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
+- [PostgreSQL Docker Compose design](sources/postgresql-docker-compose-design.html)
+- [PostgreSQL Docker Compose Implementation Plan](sources/postgresql-docker-compose-implementation-plan.html)
 - [Tesserae development memory](sources/tesserae-development-memory.html)
 - [Tesserae refresh wrapper design](sources/tesserae-refresh-wrapper-design.html)
 - [Tesserae Refresh Wrapper Implementation Plan](sources/tesserae-refresh-wrapper-implementation-plan.html)

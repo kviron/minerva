@@ -1,14 +1,14 @@
 {
-  "file_count": 247,
+  "file_count": 265,
   "files": [
     {
       "path": "about.html",
-      "sha256": "352d6e65e69877654c86937c7aee62c847299fef9d142a734194003068465d7f",
-      "size": 16628
+      "sha256": "885a7f0823b56b9453c9a0b2620a7cf613b882c3cf754d689457e4507b56c8e8",
+      "size": 17258
     },
     {
       "path": "ai-readme.md",
-      "sha256": "73816ad3a4835432ee1c2c7b56598cfddf7958fd7fa4c8d93c2c2858400c7f69",
+      "sha256": "2666479c76da78d52934d41fe3e39a35f5b9d7ee99f62c7c07fe9fa7dd4170fd",
       "size": 1278
     },
     {
@@ -43,18 +43,18 @@
     },
     {
       "path": "concepts/index.html",
-      "sha256": "ef05a34da5cb0e2780bd27c83c776d0b3c490e39e0f0de3582af63b622fe8400",
-      "size": 15761
+      "sha256": "7025ba0b1c804aeac98e8231a02c5a1f6fe016d62bd4b58e1aaf429eaaf1d1fa",
+      "size": 16397
     },
     {
       "path": "entities/index.html",
-      "sha256": "e75a5e8a4e01ef46622ffd008545096cc25fe3c14e9e531cd22ba58097126a26",
-      "size": 16343
+      "sha256": "af5babb142c62ee8c9020a31d3c5098ea4420507d4d2457411afbaa1e20c480b",
+      "size": 16979
     },
     {
       "path": "entities/map.html",
-      "sha256": "698b914e48ec9409067e90972c9db49553f78132003ddfad55a8be05c05b001f",
-      "size": 21534
+      "sha256": "b674fb57bc186c57317b4e69c5de0513bba5c7dacfeb4a2075c9cab130a039ba",
+      "size": 22170
     },
     {
       "path": "entities/map.json",
@@ -68,8 +68,8 @@
     },
     {
       "path": "graph/index.html",
-      "sha256": "72896982b0ae575979efebbea3910efdf6b5969422840e80543cafe73a27384d",
-      "size": 21861
+      "sha256": "12f060eadc199aaab9f2f08e17e226ad146750ea0fc489b293fd2037926476d3",
+      "size": 22497
     },
     {
       "path": "graph/payload-core.json",
@@ -103,33 +103,33 @@
     },
     {
       "path": "graph.json",
-      "sha256": "96f0d647184bd6ae8dc9e73a53425bb7a880ea821866f4886c594aca21d4117f",
-      "size": 45209
+      "sha256": "ff942405603fdd3f0ae44c1c89b273d3bafbc321409f8e779c56fe7d585a5944",
+      "size": 48161
     },
     {
       "path": "graph.json.gz",
-      "sha256": "747e1980f7333bc1c1210e629d0f29b7fb519ad9c16127d7764959f5e45bf1bb",
-      "size": 5185
+      "sha256": "2913463e4d3d5fb72d4e48ec453a80b041060996073e99c48a6abbf1784744ee",
+      "size": 5463
     },
     {
       "path": "graph.jsonld",
-      "sha256": "e9df3bc4396a061e3ac2937341019ce953d951e9d9a2dfc1a6ec27bbbb28a0d7",
-      "size": 7235
+      "sha256": "0e73d5eda2f2aa7ca9ac20137da897de2531d3c8227ba016723baac1eb3905c2",
+      "size": 7838
     },
     {
       "path": "index.html",
-      "sha256": "88848e78159320f4f08ad14696622feb16d7607d1329d2bf05c0120b5365e1f0",
-      "size": 45407
+      "sha256": "63be2b65fc6596230dc2f852f99799a2c92f36ce0c9f1d2fd2d4e9d7abb1a7bb",
+      "size": 46037
     },
     {
       "path": "llms-full.txt",
-      "sha256": "32ec098967d90cae1d6678841e217efe8598fa263ccc87fa5b788ee29d143afd",
-      "size": 7681
+      "sha256": "1ba9cdcb4bb617f01c8a9b7d9f4fb8a986eb92a76cf0ca974c3fb52bb5f44fda",
+      "size": 8170
     },
     {
       "path": "llms.txt",
-      "sha256": "9ad00284faac21dd91b82a891e581e88e248392ce7de12f39aadcb24403b93df",
-      "size": 2806
+      "sha256": "40e87b2c4e8c00b1a085239d96f15b77a73fa6c5b6b78f73967c1a0671caf68c",
+      "size": 3002
     },
     {
       "path": "nginx.snippet.conf",
@@ -138,18 +138,18 @@
     },
     {
       "path": "papers/index.html",
-      "sha256": "d4a4d4e8b2fe4649b2f65996f367fc383fd6f39283a7d2792472b24c0056973b",
-      "size": 15725
+      "sha256": "fee170e28735abfd6d53916fbbbdb2a78196ed92031e04085aa2f428cba36f93",
+      "size": 16361
     },
     {
       "path": "questions/index.html",
-      "sha256": "86929d0e20b63510f211e8a5ff50b540f61f7f4d3ee6c9f32c476b8180af1ae9",
-      "size": 15730
+      "sha256": "20a78a0b6425fbfddbe418270369c72a34b44e9138a29b7089872eb449bf9dc7",
+      "size": 16366
     },
     {
       "path": "raw/agents-md.html",
-      "sha256": "e26de647b4af5ac3a318f13e07c8388bbd2b04f17bbf7d3dcf7b1b9f506a827f",
-      "size": 18584
+      "sha256": "26507b73311f58bb0bf3e41616b52163d47ceb194344fae5f6aa50917845a19e",
+      "size": 19220
     },
     {
       "path": "raw/agents-md.json",
@@ -163,8 +163,8 @@
     },
     {
       "path": "raw/d-develop-minerva-agents-md.html",
-      "sha256": "3709e22405b90f555b1b190d95891007ea7cb3fe2f4351af11032b2a73c59a74",
-      "size": 18628
+      "sha256": "74a0ae87517773fedbee9aa3283b79ca76f9a32bc4661ba5644c735c54f552b9",
+      "size": 19264
     },
     {
       "path": "raw/d-develop-minerva-agents-md.json",
@@ -178,8 +178,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-architecture-md.html",
-      "sha256": "a8bd8cecd256915ecc62f662de998aacedf3fa651f11bc926b2076e350b0edfc",
-      "size": 22238
+      "sha256": "518d368480a42f2238e3824beb5f9c66d0d0dfbc60b2a9109e4f55cf28e4a4a0",
+      "size": 22874
     },
     {
       "path": "raw/d-develop-minerva-docs-architecture-md.json",
@@ -193,8 +193,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-backlog-md.html",
-      "sha256": "8bd90f4ac2834b2d734bde67f790e061ab59c1f4574ad67577ed93f3a1ffef3d",
-      "size": 18590
+      "sha256": "23e7c2a02ee3cd50d6989da2325ec758ddbbfa9aff61d38f75a083ee63b0d84b",
+      "size": 19226
     },
     {
       "path": "raw/d-develop-minerva-docs-backlog-md.json",
@@ -208,8 +208,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0001-modular-monolith-md.html",
-      "sha256": "13b7570e4cd96f7d30bd5c0381b7d18abb2272fe70235ecdda6458b8ac5ad42e",
-      "size": 17274
+      "sha256": "74ba7b2e8b141be007ae2e2e1c251f99453728ae8b41a35479311f106dc60d1c",
+      "size": 17910
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0001-modular-monolith-md.json",
@@ -223,8 +223,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0002-project-rbac-md.html",
-      "sha256": "8268b24569d74b2a7f45dc6b0d61c0bfb73c0555ce959976742347630d133e5a",
-      "size": 17638
+      "sha256": "976a48e26aacd07799cba36aa1d3727ddf1a2c0c035b5f877367959cf43e6bc4",
+      "size": 18274
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0002-project-rbac-md.json",
@@ -238,8 +238,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0003-document-versioning-md.html",
-      "sha256": "a6289db9d3a6da50b5a81addb8646a751bb6becd6c9a2d99c20a5f8f8fda4794",
-      "size": 17662
+      "sha256": "27f9c235e9cc45552a19fba8b0de0515a76be976a6794cae311c6556c4e2f447",
+      "size": 18298
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0003-document-versioning-md.json",
@@ -253,8 +253,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0004-mcp-first-release-boundary-md.html",
-      "sha256": "eae5340a2fe528581c16758fcf8df9449621a2cded0e476d78fba16b11c7b00b",
-      "size": 17420
+      "sha256": "c33ea82678c938cfccd976be900b97e3a92a9c1121936fd5c6cdaaed9a7589f0",
+      "size": 18056
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0004-mcp-first-release-boundary-md.json",
@@ -268,8 +268,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0005-mcp-oauth-resource-and-revocation-md.html",
-      "sha256": "d310c11477a520d0d1b44d56c2d6e5c37f5bc237406034a31994b56c3ca04b0e",
-      "size": 18500
+      "sha256": "8a3516fad19015a16ff835304e32bef5e13eb510b36111ba2279645f4fc84310",
+      "size": 19136
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0005-mcp-oauth-resource-and-revocation-md.json",
@@ -283,8 +283,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0006-use-bun-package-manager-md.html",
-      "sha256": "062aad1c7b69f7299f7dadee97a4b48428dc0816dfe97a91e406eed2f9a4e9b2",
-      "size": 17903
+      "sha256": "d972d1c68123725106e89e2d49b5a2b26a933422f52f521f31a6612909a99a42",
+      "size": 18539
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0006-use-bun-package-manager-md.json",
@@ -298,8 +298,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-operations-tesserae-md.html",
-      "sha256": "1183f46c4e0ee1160e0d7a9e5b1aa2cbd0424e7188932cbdf5990354dd00f251",
-      "size": 18980
+      "sha256": "8ef3d741e4505689c41cd41dfc1602100a1a8ed1b5409e76429997297dc61e8a",
+      "size": 19616
     },
     {
       "path": "raw/d-develop-minerva-docs-operations-tesserae-md.json",
@@ -313,8 +313,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-product-spec-md.html",
-      "sha256": "9623c23c4567b30e2b80cb49e35509407f7f49b0e23e233832b6d4f6644b9344",
-      "size": 28119
+      "sha256": "5364c92f22ccae61456db39993f014ef4e973b024617d395afc7a4651a443344",
+      "size": 28755
     },
     {
       "path": "raw/d-develop-minerva-docs-product-spec-md.json",
@@ -328,23 +328,23 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-progress-md.html",
-      "sha256": "2461478c3f3650c03a20ee9425a6ce3f7a6fc5a6748b67ea62fe2dcdfb12c557",
-      "size": 19222
+      "sha256": "22ef0f011527e24dac54ef6c09ef598c4b9401dfd863a466a40f76b3d6813277",
+      "size": 19994
     },
     {
       "path": "raw/d-develop-minerva-docs-progress-md.json",
-      "sha256": "698a19910eb11ea377cd4c55ad7a477277c6e96af600f67b6ade0c46656558d0",
-      "size": 5120
+      "sha256": "f1500fd019ba6fd5beb2d54499f5fd194d9a45c806af2248870762f5757a70d7",
+      "size": 5382
     },
     {
       "path": "raw/d-develop-minerva-docs-progress-md.txt",
-      "sha256": "a82d51a6fcabd1712094ceab13fff5ab0eb2f41fb9f3bd7fd0243483dd367a13",
-      "size": 2508
+      "sha256": "cd4eae92a3dfb7d35796e8fb20e9b1d5af246b1ca3bea03745728cdb806ce64e",
+      "size": 2639
     },
     {
       "path": "raw/d-develop-minerva-docs-roadmap-md.html",
-      "sha256": "604f1b3122af12e2a8252962b285ee550cabd5fde6ee64583167056c2fe48d30",
-      "size": 20728
+      "sha256": "d648918451bf9f1fa03b42c49d7dec79c1b3b5db5cc3ce930944ca71f15d986a",
+      "size": 21364
     },
     {
       "path": "raw/d-develop-minerva-docs-roadmap-md.json",
@@ -358,8 +358,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-foundation-md.html",
-      "sha256": "f240cf31dc8c28c72400824c75ae5d1a72f1e57aeefe5fea0bc438a2bf7e8d43",
-      "size": 37856
+      "sha256": "b176e109866ee414963da38b4754474075b14e7017161dbf809d6318e9d9c8d4",
+      "size": 38492
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-foundation-md.json",
@@ -373,8 +373,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.html",
-      "sha256": "f13141f387afb09b146b0ba7cc0a59a7b2bb04fd3eb8ed2a9291c515c9ab8c66",
-      "size": 38272
+      "sha256": "c3292aa11355f7b38d5ae6c8efb1823484e5cdb5d04c0af9e8b0006ec8c45933",
+      "size": 38908
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.json",
@@ -388,8 +388,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.html",
-      "sha256": "abaa24c2001da1bf77ae23ef0b45459fa7f67ec141adffc16519c54e481fb6d1",
-      "size": 23102
+      "sha256": "c2ed48f548db491e40e1b7bcc92a8f7b1f32ec6552c84c159144f8d23154b4b2",
+      "size": 23738
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.json",
@@ -403,8 +403,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.html",
-      "sha256": "90df0df847624f7817738be37e7ff238c72f70ce81fd5ccb99b35ce4e93b0173",
-      "size": 29783
+      "sha256": "9c4cd7158da09bdba4cf7f56a6b28858478822923c1fa1fc9a1cba837e5b53dc",
+      "size": 30419
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.json",
@@ -417,9 +417,24 @@
       "size": 9385
     },
     {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-postgresql-compose-md.html",
+      "sha256": "a783e56a0aaa62b7ae62dcfab5b13349affc700e2e7ab4ce3e37ac116eeb9e5d",
+      "size": 23194
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-postgresql-compose-md.json",
+      "sha256": "395ea26729a27ba06a7e27e58e920cc0f23dae5c2420474e5723960a9db18010",
+      "size": 9100
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-postgresql-compose-md.txt",
+      "sha256": "e527c111b4863c11301f742d8acfa1adf702d54a6709f2a792efb750a715fa74",
+      "size": 4501
+    },
+    {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.html",
-      "sha256": "13bd9d2fc1a1d5d18a34896e348511ea77dc75505f224f61992be62520a1fd7e",
-      "size": 22946
+      "sha256": "74fe6651b727cb3306f9b22f46b8048b0f5a50f8af7dbaef822640b73a07d76f",
+      "size": 23582
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.json",
@@ -433,8 +448,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html",
-      "sha256": "c1745931d5706508ed0e7b20e8b178abd9abfcf714421843b19bad3ae7fa35d7",
-      "size": 23320
+      "sha256": "8d7f888d6a51c1f59d537305c4d99fa6272fde6d4742ea7a7d39d78b8acc7df4",
+      "size": 23956
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.json",
@@ -448,8 +463,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.html",
-      "sha256": "637fc09e8ca236e2e4d2aa80be825a9b9519f472e708c6f1a8ac0d25c25dc65d",
-      "size": 30828
+      "sha256": "552c7a38c300b164add39b14e66f6a012aeb4fc3209d8fe1f8bccc6ecb206c78",
+      "size": 31464
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.json",
@@ -463,8 +478,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.html",
-      "sha256": "c18ac53cfef3f5ad26e375119bd3947535a6c2fdb7c8606bbd2e5a34c6143673",
-      "size": 23317
+      "sha256": "f0bd69f1725db891a8f4987c8f56b69a66742fb799302789cd658eef1f7ed553",
+      "size": 23953
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.json",
@@ -477,9 +492,24 @@
       "size": 5217
     },
     {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.html",
+      "sha256": "bc951f6c2d4245da7f28a0f4a383d9eb6ea3bd4640f4da092dad96a33bea9d37",
+      "size": 19754
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.json",
+      "sha256": "900bfcbdf44b97de2758d4f9ce3a8b0d75abc372198e63e0f47decbe1bdbbfd4",
+      "size": 4130
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.txt",
+      "sha256": "8f05c8354032dfd9b7e157b462033d2e3b5c2ebf3ce8a7cb5be6044c131420c0",
+      "size": 2031
+    },
+    {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.html",
-      "sha256": "7d5a6c066f908181bddc607b856619e80903eaf00dcd3b6b493a33b6a63aa8e5",
-      "size": 18533
+      "sha256": "6a8f421d65e1581cdc866fa4d3bc471f279781aab00ad6f89d4bf6995de9a419",
+      "size": 19169
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.json",
@@ -493,8 +523,8 @@
     },
     {
       "path": "raw/docs-architecture-md.html",
-      "sha256": "794464d8dd53063d1b00b31965854e96d0efb561b91b53810811108b41c079e0",
-      "size": 22192
+      "sha256": "97904ac41991b4a211e4cf181d44732cbac86e645f29fce4f4371bec58ce7a0c",
+      "size": 22828
     },
     {
       "path": "raw/docs-architecture-md.json",
@@ -508,8 +538,8 @@
     },
     {
       "path": "raw/docs-backlog-md.html",
-      "sha256": "813fb58518366189b53af32d26803277120d3a6cc63179566d652acf60174f5a",
-      "size": 18544
+      "sha256": "4b45278ca06d6b892ddd86f477735285fb03c67bea3236ac8b1fa00c6c88aa4d",
+      "size": 19180
     },
     {
       "path": "raw/docs-backlog-md.json",
@@ -523,8 +553,8 @@
     },
     {
       "path": "raw/docs-decisions-0001-modular-monolith-md.html",
-      "sha256": "17a114dbd0bffdee7e9753be9fe943c4a0a93949c80343e0d1ea9c26c6b5e4d6",
-      "size": 17226
+      "sha256": "33b2f41518c14b8023b3326c8ddf4d3158efc565f730e7c40932799696538129",
+      "size": 17862
     },
     {
       "path": "raw/docs-decisions-0001-modular-monolith-md.json",
@@ -538,8 +568,8 @@
     },
     {
       "path": "raw/docs-decisions-0002-project-rbac-md.html",
-      "sha256": "53ea04556f696d48c7840e0c9f988400263d0911a6466887322170352fda308f",
-      "size": 17590
+      "sha256": "d5c90f5c72e40daeac5955573033ee98566ef279f4f4a06543ac1f19a8fc9db8",
+      "size": 18226
     },
     {
       "path": "raw/docs-decisions-0002-project-rbac-md.json",
@@ -553,8 +583,8 @@
     },
     {
       "path": "raw/docs-decisions-0003-document-versioning-md.html",
-      "sha256": "df7c59bbcee539b8e7ed030f46645ca0190581440682d6b536badce11964a4cf",
-      "size": 17614
+      "sha256": "ad288db4de50083afb2245cd7754a57fb94674b706e4d8fe4060044a95f78c70",
+      "size": 18250
     },
     {
       "path": "raw/docs-decisions-0003-document-versioning-md.json",
@@ -568,8 +598,8 @@
     },
     {
       "path": "raw/docs-decisions-0004-mcp-first-release-boundary-md.html",
-      "sha256": "402deb240eb7ac3ca349e95ef44c634a318911093cbb22fa0467b1396d41ba7b",
-      "size": 17372
+      "sha256": "5ae7e0f0a7197d9f89aba8b664fef77b6edcf55cd6e465b719767652bb679078",
+      "size": 18008
     },
     {
       "path": "raw/docs-decisions-0004-mcp-first-release-boundary-md.json",
@@ -583,8 +613,8 @@
     },
     {
       "path": "raw/docs-decisions-0005-mcp-oauth-resource-and-revocation-md.html",
-      "sha256": "ea453bf6eda75f06eae99dff3e9f3523ebd0d3b3be8c004905e40b7d406e6159",
-      "size": 18452
+      "sha256": "9a139baaa4ceb645b976fe510b6d05772c0adf89010e5561ed51d200bbdf5607",
+      "size": 19088
     },
     {
       "path": "raw/docs-decisions-0005-mcp-oauth-resource-and-revocation-md.json",
@@ -598,8 +628,8 @@
     },
     {
       "path": "raw/docs-decisions-0006-use-bun-package-manager-md.html",
-      "sha256": "16f376aeb73a7e99766a589a2af279cd0661e552974983b25594619cdcb3f544",
-      "size": 17855
+      "sha256": "918435ae066b84fdedfcbbc0b40a0b3e9f74211b58b0684df347235ab801c5f6",
+      "size": 18491
     },
     {
       "path": "raw/docs-decisions-0006-use-bun-package-manager-md.json",
@@ -613,8 +643,8 @@
     },
     {
       "path": "raw/docs-operations-tesserae-md.html",
-      "sha256": "30fa128288b3da0081255dfc843e6da146d4b3921a9e866ba9f43ee1dc27bd2d",
-      "size": 18932
+      "sha256": "e121db2ff25df7a9c474d604bfccfaecec01a6ffe6cfa0874cf4a484599fd58f",
+      "size": 19568
     },
     {
       "path": "raw/docs-operations-tesserae-md.json",
@@ -628,8 +658,8 @@
     },
     {
       "path": "raw/docs-product-spec-md.html",
-      "sha256": "45070d5c521265a78d6ffef5e4463285f714c588450ac4eafeab4bb922200d1b",
-      "size": 28073
+      "sha256": "99f94d7b4370645acdc88527162b2708d1fbec15e3c9687eb12ac19eb8f0eab5",
+      "size": 28709
     },
     {
       "path": "raw/docs-product-spec-md.json",
@@ -643,23 +673,23 @@
     },
     {
       "path": "raw/docs-progress-md.html",
-      "sha256": "2c3ac978e216ea9e9835280a7a2edd761a459886639d28b7062fb4af9979a689",
-      "size": 19176
+      "sha256": "928b1b6862ef2dfc3eb24cdcc6ebc568bf32935c74294766230952044664a9a4",
+      "size": 19948
     },
     {
       "path": "raw/docs-progress-md.json",
-      "sha256": "843bf2038bd9a4268fef23eea5bf127717f3c4f3acac43f064ebb4245d44e16f",
-      "size": 5097
+      "sha256": "d9e15d1a9effd54041791676051204975c77917ea6d66c5cef095ff74399b1a6",
+      "size": 5359
     },
     {
       "path": "raw/docs-progress-md.txt",
-      "sha256": "a82d51a6fcabd1712094ceab13fff5ab0eb2f41fb9f3bd7fd0243483dd367a13",
-      "size": 2508
+      "sha256": "cd4eae92a3dfb7d35796e8fb20e9b1d5af246b1ca3bea03745728cdb806ce64e",
+      "size": 2639
     },
     {
       "path": "raw/docs-roadmap-md.html",
-      "sha256": "95af13dc15f150ff81fd29f0814e0c38640bec77fefa9dbb17bc8e78a244ea81",
-      "size": 20682
+      "sha256": "c6149e5bae516e47ea40aa0325374cf3258ddcebd86d72fcfc5ebe64912dc7e0",
+      "size": 21318
     },
     {
       "path": "raw/docs-roadmap-md.json",
@@ -673,8 +703,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-foundation-md.html",
-      "sha256": "0e8b341ff1f5458f1b05b4d9c5959f6c5e416e09e4b4fcec380e1449782aca53",
-      "size": 37806
+      "sha256": "9848712c035f5e848bfb894681b5774bf20b86846431b11ea15e348e17d12086",
+      "size": 38442
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-foundation-md.json",
@@ -688,8 +718,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.html",
-      "sha256": "f4ecbeb882341dd1166d5032ed2ed8599aa32e2d0a21508e1385cb5a8f3db39f",
-      "size": 38222
+      "sha256": "c28abb7200b8c272d917ef0651da0ca0900bdfa29ccb31f0c4e0460e3c714eea",
+      "size": 38858
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.json",
@@ -703,8 +733,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.html",
-      "sha256": "8f3bc6146a4dc2cd9504aa0f6dcf20ca931b312ff58ec73ec9da391a10531986",
-      "size": 23052
+      "sha256": "e1b0309ce94c737265d6972e27a575b70c502cfc39141f73587037ce12a4bd4d",
+      "size": 23688
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.json",
@@ -718,8 +748,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.html",
-      "sha256": "dcd8de213b3a5e3fc5eeef0ab038d0b45c2ef9711a714f457ceb54ca3ac2072d",
-      "size": 29733
+      "sha256": "2c6b5694bca49ba0f7b7ec2a07199c1b73ac9394a6700a39b76675c628e56634",
+      "size": 30369
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.json",
@@ -732,9 +762,24 @@
       "size": 9385
     },
     {
+      "path": "raw/docs-superpowers-plans-2026-06-27-postgresql-compose-md.html",
+      "sha256": "a76401a9cc56bf528992090aa7dc40501704d6e6d781ca8566fab3a516eef935",
+      "size": 23144
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-06-27-postgresql-compose-md.json",
+      "sha256": "f978513b5d8a3feb9a10e6db163e8898d6be7caaf95f09ea4a9911d2f9fdaa26",
+      "size": 9075
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-06-27-postgresql-compose-md.txt",
+      "sha256": "e527c111b4863c11301f742d8acfa1adf702d54a6709f2a792efb750a715fa74",
+      "size": 4501
+    },
+    {
       "path": "raw/docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.html",
-      "sha256": "2937eca615ced0d93137d6684bbf706b1823289c5f6712888ca803199e24a46b",
-      "size": 22896
+      "sha256": "b4e24e0d5ec61703e244ba5202f872987cb7627d28335ee19e0975201ff7ba0e",
+      "size": 23532
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.json",
@@ -748,8 +793,8 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html",
-      "sha256": "0dc032df4d7cab96f0534b0db767c79af44507d280aa6989314df1aa0aa0f072",
-      "size": 23270
+      "sha256": "786cf5adf3c45f4ff127977f17247e20cdee403266fac8de07351ccf0318d477",
+      "size": 23906
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.json",
@@ -763,8 +808,8 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.html",
-      "sha256": "fa9114b625c203410f7b21b861afd592f874b61b5f2844cab3219209a73f9d44",
-      "size": 30778
+      "sha256": "4c87665347e132aaf901f07ded4581b0866bc1e4476711f5a00d3fc2c7aea703",
+      "size": 31414
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.json",
@@ -778,8 +823,8 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.html",
-      "sha256": "288c0ebdf03ae84d123128a5213356cbb2570fe2283e673d8226b8c4f7b62db9",
-      "size": 23267
+      "sha256": "10e3f712a0a398fcd68d2248ddb5c688a870d56b90115705d82aa8690c31c478",
+      "size": 23903
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.json",
@@ -792,9 +837,24 @@
       "size": 5217
     },
     {
+      "path": "raw/docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.html",
+      "sha256": "e65501888c72d85153863ad9b5d2148b3ed774e1e529ebb031d03aa61b04f0cb",
+      "size": 19704
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.json",
+      "sha256": "e13f64028d50e5bc634d9d2b4c0b8c14f0fbc11693c1cff6d70959001b7f1d5b",
+      "size": 4105
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.txt",
+      "sha256": "8f05c8354032dfd9b7e157b462033d2e3b5c2ebf3ce8a7cb5be6044c131420c0",
+      "size": 2031
+    },
+    {
       "path": "raw/docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.html",
-      "sha256": "c647a75961cebfd4df7895044b2870974e32914593c717d4f2be9eeecdda42ef",
-      "size": 18483
+      "sha256": "c9bf5e99c64892b9b1fba9d9622f72338537d36372b19c28eb8ebc465974a40f",
+      "size": 19119
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.json",
@@ -808,8 +868,8 @@
     },
     {
       "path": "repos/index.html",
-      "sha256": "a1d008147f1c507cdfac39ee99c496845f98b19ac7dc9bf25ac67ea2466aebf2",
-      "size": 15689
+      "sha256": "eff75ad31a2ec53bb840b5bb3778045528e5ca5a7aeb671bb53f645b40ea7f7a",
+      "size": 16325
     },
     {
       "path": "robots.txt",
@@ -818,33 +878,33 @@
     },
     {
       "path": "rss.xml",
-      "sha256": "a640b4a7bbc825a1d23d9bc7328d4f2b41b13d881ee443cffd5cff6a7336c31a",
+      "sha256": "859efcb8fbb11c79f465c0c2ef7aa831ce945ed844389ff2a1707b0880080309",
       "size": 1129
     },
     {
       "path": "search-index.json",
-      "sha256": "949471fbc117b128488293bbd3d89e346d3d72aa73f4d31cc10fe005f256bd02",
-      "size": 13732
+      "sha256": "168f8cfaec6ff7bfe67a4628310fc141cf29810965a74ead5006ec7315b5d55c",
+      "size": 14785
     },
     {
       "path": "search-index.json.gz",
-      "sha256": "1fd39cbc8fb27d04f1f630d5175ce872d9cb50ac8f7209a633dd3ba83d5d6711",
-      "size": 2001
+      "sha256": "4c394afa0950b486f4967d10ceca63d3b21c5d85ad4d566e7d161086b995720f",
+      "size": 2086
     },
     {
       "path": "sessions/index.html",
-      "sha256": "63e3a42dd10eaa29c52a3e13758220ba7c3e719101c598ff24d5f7927c588a71",
+      "sha256": "0b74f80707c82c39b9417350d7878d85f927a87143b1d8600c3d9a7a3f19ecc2",
       "size": 12054
     },
     {
       "path": "sitemap.xml",
-      "sha256": "dccde19ffce196514c201242ad03b51de78182c1dae466c1546bad0eebe6304e",
-      "size": 16460
+      "sha256": "dbd324ef46f5e03082da321e90fe09c735737b03df317a6f7233c945eb1b6999",
+      "size": 17761
     },
     {
       "path": "sources/adr-0001-use-a-modular-nuxt-nitro-monolith.html",
-      "sha256": "1163d7126ed4418e3e0c8e745ac8066a3d0530c65a5a7de7af528b2ada4aef16",
-      "size": 19953
+      "sha256": "44762145471883a01a392265111b760eee4ab695dcec1d1ef50960e9c56c3732",
+      "size": 20589
     },
     {
       "path": "sources/adr-0001-use-a-modular-nuxt-nitro-monolith.json",
@@ -858,8 +918,8 @@
     },
     {
       "path": "sources/adr-0002-use-global-super-administration-and-project-scoped-rbac.html",
-      "sha256": "4e7d26c37c7d8b1f21ab45ea9d039e0f30cbaa01d71df767b1b8bd684a97a35f",
-      "size": 20061
+      "sha256": "8216a442ab4c930bab31412d73a820751185da9a0c06bc46d4a78ef2ba1063a6",
+      "size": 20697
     },
     {
       "path": "sources/adr-0002-use-global-super-administration-and-project-scoped-rbac.json",
@@ -873,8 +933,8 @@
     },
     {
       "path": "sources/adr-0003-separate-mutable-drafts-from-immutable-published-versions.html",
-      "sha256": "ab5e249c2cf8e46e822923b5b28707c1a88b55950fddb20b46e87c285bcb2180",
-      "size": 20085
+      "sha256": "244bd0cd4e37dc8f35d9fbace17572155610cc4b37d3779f6054513ee79b01ac",
+      "size": 20721
     },
     {
       "path": "sources/adr-0003-separate-mutable-drafts-from-immutable-published-versions.json",
@@ -888,8 +948,8 @@
     },
     {
       "path": "sources/adr-0004-limit-the-first-mcp-release-to-documentation-workflows.html",
-      "sha256": "22ddfc067ee45dbfe91c985ddbcf8fc5175d57dc4c8b591a7c02cc73cbfaf404",
-      "size": 20084
+      "sha256": "f215be3a398f5e14bd421263a606ee17381709505be8b3c759f76c68d955ec66",
+      "size": 20720
     },
     {
       "path": "sources/adr-0004-limit-the-first-mcp-release-to-documentation-workflows.json",
@@ -903,8 +963,8 @@
     },
     {
       "path": "sources/adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation.html",
-      "sha256": "86bf845a28835b67aee9de3130bc77dd22bfa7d1d02f6948c92a70cfbd873726",
-      "size": 20148
+      "sha256": "9a1918f484efdf6bdcc9c73dee76809402091d52b06686824f4780753d8b58ea",
+      "size": 20784
     },
     {
       "path": "sources/adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation.json",
@@ -918,8 +978,8 @@
     },
     {
       "path": "sources/adr-0006-use-bun-as-the-package-manager.html",
-      "sha256": "3dc73e9618995da0ed744e365de9af0e9c238b1d1b57e3d5c9b3a11076a94ac0",
-      "size": 19949
+      "sha256": "557276a98c6a29b24b79c58e0dc473d86c3372ad25731574927386448f68954b",
+      "size": 20585
     },
     {
       "path": "sources/adr-0006-use-bun-as-the-package-manager.json",
@@ -933,13 +993,13 @@
     },
     {
       "path": "sources/index.html",
-      "sha256": "8ad0c52b4c2a8d1d200ce7cba9d7a35f7d4be34bad15efc7e97cf265b3414a46",
-      "size": 21039
+      "sha256": "4fd87a22005cc58f67ef72743c51b888920d4ccd9f513882cdc0d363dbe79cf8",
+      "size": 22121
     },
     {
       "path": "sources/minerva-agent-instructions.html",
-      "sha256": "00a514eea38de74eb3672f75d8c5033c20ec9a005d375601b73c9c23e64ad437",
-      "size": 19790
+      "sha256": "586da6ad8d849ed4650db1883ef2201f94d36f8f9cabe4f6ff8218359ad3cba3",
+      "size": 20426
     },
     {
       "path": "sources/minerva-agent-instructions.json",
@@ -953,8 +1013,8 @@
     },
     {
       "path": "sources/minerva-architecture.html",
-      "sha256": "5a43c37b81ffdffa2aac84e107de97652443becfc6b77c78730c86191330324c",
-      "size": 19778
+      "sha256": "acbfc05724f4c0c2f19b38c5f70b832688d2268160fcc8d5bb6298d45dfb69a1",
+      "size": 20414
     },
     {
       "path": "sources/minerva-architecture.json",
@@ -968,8 +1028,8 @@
     },
     {
       "path": "sources/minerva-backlog.html",
-      "sha256": "aad8ee9a3c4f2b400b40a2db51bccd485beb57be564e215aca0274ef45127227",
-      "size": 19728
+      "sha256": "d1edb8621de9ebd225d678359caa12367238995591327dbc50a36664f4345d0b",
+      "size": 20364
     },
     {
       "path": "sources/minerva-backlog.json",
@@ -983,8 +1043,8 @@
     },
     {
       "path": "sources/minerva-executable-foundation-implementation-plan.html",
-      "sha256": "61204f092442d5378b9e004c717ead61bda35424b8fbd415acfec5c2cb589f51",
-      "size": 20065
+      "sha256": "8cbfd18b4ceeea0a40fa51d9473ee0f74fa3d2c278b46d8e99bcc1473c6bc0d9",
+      "size": 20701
     },
     {
       "path": "sources/minerva-executable-foundation-implementation-plan.json",
@@ -998,8 +1058,8 @@
     },
     {
       "path": "sources/minerva-figma-prototype-implementation-plan.html",
-      "sha256": "58a142793ba8306e5ff839681a986c70d0d7bd524efef774409595806fd13fd3",
-      "size": 20044
+      "sha256": "414cff024c75ee7cf5691c18e536bb6c26f7dc42addf2b25604acf9af229dfe7",
+      "size": 20680
     },
     {
       "path": "sources/minerva-figma-prototype-implementation-plan.json",
@@ -1013,8 +1073,8 @@
     },
     {
       "path": "sources/minerva-mvp-delivery-plan.html",
-      "sha256": "5b167ec7731d2ddc597d27f58180e347536c3b0b06b738eeacd6b5e80dfdea16",
-      "size": 19892
+      "sha256": "c11ba0411c995d460b390370bfbc3db76c20641e6ac1b14534db070137844989",
+      "size": 20528
     },
     {
       "path": "sources/minerva-mvp-delivery-plan.json",
@@ -1028,8 +1088,8 @@
     },
     {
       "path": "sources/minerva-mvp-design.html",
-      "sha256": "4e2db773064dc71262b068751fc88c4113d57df3a1c13f5f73ac1406cc749cae",
-      "size": 19834
+      "sha256": "a77ef4923dd6a6b317b7299bdff0e608ca19bbacd4e148cdbb208cced9d6f49f",
+      "size": 20470
     },
     {
       "path": "sources/minerva-mvp-design.json",
@@ -1043,8 +1103,8 @@
     },
     {
       "path": "sources/minerva-mvp-route-map-design.html",
-      "sha256": "7b9c58ff7cc217c771766e144f4a51ad07d7d1faac64195759d7028e1b99bcc0",
-      "size": 20415
+      "sha256": "912f0032ed4bc1736aeb593710da99f78ccd4092e90dd115725951afba971c24",
+      "size": 21051
     },
     {
       "path": "sources/minerva-mvp-route-map-design.json",
@@ -1058,8 +1118,8 @@
     },
     {
       "path": "sources/minerva-mvp-ux-ui-prototype-design.html",
-      "sha256": "9bf5822e1d841636ed7fc7d65d8dd9f247771a56bda8e8c615b858834533ab66",
-      "size": 20449
+      "sha256": "dd3568b962c54f370f8905cd445f36bb1f789f50560b69d39f6bd3953178e78f",
+      "size": 21085
     },
     {
       "path": "sources/minerva-mvp-ux-ui-prototype-design.json",
@@ -1073,8 +1133,8 @@
     },
     {
       "path": "sources/minerva-product-specification.html",
-      "sha256": "9fdeec1770c8607121319ffa44d114fc3524b9267a827ccf13f861639c4a88bd",
-      "size": 19850
+      "sha256": "fa3a47c53de2f44d45f6241f90608f1436f24700a3b371152ecdbb3646c4e545",
+      "size": 20486
     },
     {
       "path": "sources/minerva-product-specification.json",
@@ -1088,8 +1148,8 @@
     },
     {
       "path": "sources/minerva-progress.html",
-      "sha256": "6d9e431115b48adb5822a62e2cafd46b85cb22cb038dd3c2068973fec8a56796",
-      "size": 20243
+      "sha256": "b578324d3ff8eea67e46e009adf3bda8ffde52b0808ec71ca8d933fd706bc4b1",
+      "size": 20879
     },
     {
       "path": "sources/minerva-progress.json",
@@ -1103,8 +1163,8 @@
     },
     {
       "path": "sources/minerva-roadmap.html",
-      "sha256": "ea6295432789ce1a2ff1356400addab96dcf3370abf54d22bfd4f267f075e63a",
-      "size": 19728
+      "sha256": "a211a6d105741b0b7d18fac2281463a695dac14eace8609c5c0d1862c8182998",
+      "size": 20364
     },
     {
       "path": "sources/minerva-roadmap.json",
@@ -1118,8 +1178,8 @@
     },
     {
       "path": "sources/mvp-route-skeleton-implementation-plan.html",
-      "sha256": "6920d87ae134fef82b9ae6d6b3d6eb9e6e0d28151d3cb33c0cf82a1f9118ec19",
-      "size": 20455
+      "sha256": "d1e67f852897291c8524eee2b7d5e3cc8dbbc0a5959127ca57f58590c3b545a7",
+      "size": 21091
     },
     {
       "path": "sources/mvp-route-skeleton-implementation-plan.json",
@@ -1132,9 +1192,39 @@
       "size": 345
     },
     {
+      "path": "sources/postgresql-docker-compose-design.html",
+      "sha256": "dc941c31e781090d2a448e27c6bf6809ab94e9443e25a8cb9db8e734f9ae2f40",
+      "size": 20596
+    },
+    {
+      "path": "sources/postgresql-docker-compose-design.json",
+      "sha256": "6ced57aca88ec7d48a54fe10aaed1e1880733f50873ea8f390f691986cd059f5",
+      "size": 653
+    },
+    {
+      "path": "sources/postgresql-docker-compose-design.txt",
+      "sha256": "977de1c6a9e0dbf8d9fa21e0a1e9e02995415cc3daae6a16baa9e109fcaf5153",
+      "size": 106
+    },
+    {
+      "path": "sources/postgresql-docker-compose-implementation-plan.html",
+      "sha256": "ace2a0b532b5c278e3f5df24cf18bcd295339b579640d02321d19af6fe5b3fc3",
+      "size": 20686
+    },
+    {
+      "path": "sources/postgresql-docker-compose-implementation-plan.json",
+      "sha256": "ada936d8bcf393cafdd3871e2832b74b923ae5585d4d8ef7e68b4e7b62ecc00c",
+      "size": 704
+    },
+    {
+      "path": "sources/postgresql-docker-compose-implementation-plan.txt",
+      "sha256": "07d45b2cbd589f468b1e126e7f1a0a116d1c4c90de1d8cb49756bcbf31273e3c",
+      "size": 145
+    },
+    {
       "path": "sources/tesserae-development-memory.html",
-      "sha256": "9800becb13f23ffe9e95c96df178727d8899941955918dc3b76cb50c9ce39c58",
-      "size": 19850
+      "sha256": "88c51dc2ffd23bff8949b27bd7daf9e185adfad9665a82bf00be7bb7cd5ca572",
+      "size": 20486
     },
     {
       "path": "sources/tesserae-development-memory.json",
@@ -1148,8 +1238,8 @@
     },
     {
       "path": "sources/tesserae-refresh-wrapper-design.html",
-      "sha256": "e0b4dd1553d0834e6e13c88bb12d90f619fea0620713059224283f736add97b4",
-      "size": 19964
+      "sha256": "37e848b3ff2b20408b6ec502b380a2f787591d6df7524c88dc7c806e45183388",
+      "size": 20600
     },
     {
       "path": "sources/tesserae-refresh-wrapper-design.json",
@@ -1163,8 +1253,8 @@
     },
     {
       "path": "sources/tesserae-refresh-wrapper-implementation-plan.html",
-      "sha256": "d45be16e9de57038f28e1f6d41c24ca3437aee9b7419af7ad7727d91ffb47c41",
-      "size": 20054
+      "sha256": "fc3cc0c5c48299430eda0630ee8e62e705809389ac88bfbd6076f1368d648081",
+      "size": 20690
     },
     {
       "path": "sources/tesserae-refresh-wrapper-implementation-plan.json",
@@ -1178,28 +1268,28 @@
     },
     {
       "path": "syntheses/index.html",
-      "sha256": "9df06c72af5484eb5fe2b8bf61e1faeb4e7204150eac578e8626bbae1d5906b1",
-      "size": 16418
+      "sha256": "f7bb334f1097c4ba2d2024a048ce01ba7aad25680fdcb2614d202dd91494b7c2",
+      "size": 17054
     },
     {
       "path": "syntheses/pulse.html",
-      "sha256": "6490acb05eb2f61debc120dfa322857c90e13a36a874e55484fe229b2a8b1086",
-      "size": 20045
+      "sha256": "c9f31254e7ce6209182bda380ba2cfda67dd98ca0bc6c3ff47fc6b5883a37713",
+      "size": 20681
     },
     {
       "path": "syntheses/pulse.json",
-      "sha256": "e190dc8eb1489084b73f5604befcc260c94487dcdc4b324a665e081cde304f5a",
-      "size": 2160
+      "sha256": "bbf1392e6660c6fe17abd66e6b010d8009d708d0a6d210aa0c255e39a3117280",
+      "size": 2299
     },
     {
       "path": "syntheses/pulse.txt",
-      "sha256": "614d81f3eec2626e2c4fef4906118b64e217ac899ee0958a14c83d337d13113e",
+      "sha256": "4f20a324085f5ec1af3f87692522e95381e3bd920d7a049c7952fb057421dc5e",
       "size": 311
     },
     {
       "path": "timeline/2026-06-24.html",
-      "sha256": "e57785e31b399377a81b537ad168c9fbb9554d46aa111f589792adcc3d5c89d9",
-      "size": 18183
+      "sha256": "ba539f6732052cc7e6e864a70e753d5822774e8a640e493efd1d52c0828dc344",
+      "size": 18819
     },
     {
       "path": "timeline/2026-06-24.json",
@@ -1213,28 +1303,28 @@
     },
     {
       "path": "timeline/2026-06-27.html",
-      "sha256": "46f12a41a62688b3fdedb02b26020dd143c0fc8161da02c439101b79bf0ca9d4",
-      "size": 17924
+      "sha256": "8e91672c922f8c044e0850231cf62aef10923769dd39a77f3ec38a6eb33297db",
+      "size": 19169
     },
     {
       "path": "timeline/2026-06-27.json",
-      "sha256": "9acaef444550b5ea090bb0052fd378dee29bffa6224f65d8cccdd35f238c4e47",
-      "size": 687
+      "sha256": "fbadd07e3bc6cb717a6ebe5d9b49353750b5e9c574bb55345a0085cdef7eefbc",
+      "size": 876
     },
     {
       "path": "timeline/2026-06-27.txt",
-      "sha256": "ccd32f7a6b534287695896308bc27f07afa871b994564fd2c1b267f9821afe43",
+      "sha256": "ec140649640895903be8f956d8ce4489fb1e5f53ccecb1289f35cb8664783e29",
       "size": 71
     },
     {
       "path": "timeline/index.html",
-      "sha256": "a6ea95c4ae9462d4187dbfcfdc0502b6d13c3c73ae8e60c2f7a17313f3efe327",
-      "size": 42643
+      "sha256": "7faa826bac2a887e0b98330729ddafc91ba7f58e92473441b7197d605ebda781",
+      "size": 43279
     },
     {
       "path": "topics/index.html",
-      "sha256": "bd3624711fbf59d9d50dea099d1a7086511155f17884a77063dc66380cc65812",
-      "size": 15709
+      "sha256": "30029d2228a4f679c9e6227558d342d9b40499dcbc166767fbe903abed719197",
+      "size": 16345
     }
   ],
   "generator": "tesserae",

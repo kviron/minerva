@@ -149,6 +149,20 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:postgresql-docker-compose-design:1d13eb67950d",
+      "@type": "CreativeWork",
+      "name": "PostgreSQL Docker Compose design",
+      "url": "sources/postgresql-docker-compose-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:postgresql-docker-compose-implementation-plan:9887e9a9c654",
+      "@type": "CreativeWork",
+      "name": "PostgreSQL Docker Compose Implementation Plan",
+      "url": "sources/postgresql-docker-compose-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:tesserae-development-memory:4143790d0cae",
       "@type": "CreativeWork",
       "name": "Tesserae development memory",

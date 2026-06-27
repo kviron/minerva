@@ -45,7 +45,7 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\progress.md": {
-      "sha256": "6648e9b87ccf69d08acb16547355ed58479786b75e7ca3d70dbb155acab324cf",
+      "sha256": "995f886590558865c9eba67c5526daafbfe1eb137315d7c0e1e9907e92371379",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\roadmap.md": {
@@ -68,6 +68,10 @@
       "sha256": "9d884f2671b14fe934a1f8b2ed3deafada5cafefe8ab51c9f4e7b08305a02620",
       "source_kind": "SourceDocument"
     },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-postgresql-compose.md": {
+      "sha256": "235317bdf13c9d33364609291ec1b7c3bc67b3cd161e4829a56d3b6e5b5204b0",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-tesserae-refresh-wrapper.md": {
       "sha256": "65be26323bbf4180b1e013811b60c7317e424ee2188d50e553d3dad3751fecb1",
       "source_kind": "SourceDocument"
@@ -82,6 +86,10 @@
     },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-minerva-mvp-route-map-design.md": {
       "sha256": "6857bd2000f1d66db4690a48a462f8716e8d1e59c254f1645b875b05bd538187",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-postgresql-compose-design.md": {
+      "sha256": "26703bd00226c530fe30a1db0dbbb6d2e93d767b5998ecd13216b875801b22f4",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-tesserae-refresh-wrapper-design.md": {
