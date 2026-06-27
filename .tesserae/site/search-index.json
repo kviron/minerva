@@ -4,10 +4,22 @@
     "title": "mAP",
     "kind": "entities",
     "href": "entities/map.html",
-    "summary": "- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_",
-    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-24-minerva-ui-prototype-design.md",
+    "summary": "- **summarizes** → Minerva MVP Planning _(CommunitySummary)_ - **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_ - **uses_metric** → Minerva MVP UX/UI prototype design _(Sou…",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
     "tokens": [
       "map",
+      "summarizes",
+      "minerva",
+      "mvp",
+      "planning",
+      "communitysummary",
+      "uses_metric",
+      "mvp",
+      "route",
+      "skeleton",
+      "implementation",
+      "plan",
+      "sourcedocument",
       "uses_metric",
       "minerva",
       "mvp",
@@ -15,10 +27,10 @@
       "ui",
       "prototype",
       "design",
-      "sourcedocument",
+      "sou",
       "entities"
     ],
-    "len": 10,
+    "len": 22,
     "created_ts": null
   },
   {
@@ -263,6 +275,27 @@
     "created_ts": null
   },
   {
+    "id": "sources:minerva-mvp-route-map-design",
+    "title": "Minerva MVP route map design",
+    "kind": "sources",
+    "href": "sources/minerva-mvp-route-map-design.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-27-minerva-mvp-route-map-design.md",
+    "tokens": [
+      "minerva",
+      "mvp",
+      "route",
+      "map",
+      "design",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
     "id": "sources:minerva-mvp-ux-ui-prototype-design",
     "title": "Minerva MVP UX/UI prototype design",
     "kind": "sources",
@@ -305,14 +338,17 @@
     "title": "Minerva progress",
     "kind": "sources",
     "href": "sources/minerva-progress.html",
-    "summary": "",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
     "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
     "tokens": [
       "minerva",
       "progress",
+      "uses_metric",
+      "map",
+      "metric",
       "sources"
     ],
-    "len": 3,
+    "len": 6,
     "created_ts": null
   },
   {
@@ -331,6 +367,27 @@
     "created_ts": null
   },
   {
+    "id": "sources:mvp-route-skeleton-implementation-plan",
+    "title": "MVP Route Skeleton Implementation Plan",
+    "kind": "sources",
+    "href": "sources/mvp-route-skeleton-implementation-plan.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-06-27-mvp-route-skeleton.md",
+    "tokens": [
+      "mvp",
+      "route",
+      "skeleton",
+      "implementation",
+      "plan",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
     "id": "sources:tesserae-development-memory",
     "title": "Tesserae development memory",
     "kind": "sources",
@@ -344,6 +401,41 @@
       "sources"
     ],
     "len": 4,
+    "created_ts": null
+  },
+  {
+    "id": "sources:tesserae-refresh-wrapper-design",
+    "title": "Tesserae refresh wrapper design",
+    "kind": "sources",
+    "href": "sources/tesserae-refresh-wrapper-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-27-tesserae-refresh-wrapper-design.md",
+    "tokens": [
+      "tesserae",
+      "refresh",
+      "wrapper",
+      "design",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:tesserae-refresh-wrapper-implementation-plan",
+    "title": "Tesserae Refresh Wrapper Implementation Plan",
+    "kind": "sources",
+    "href": "sources/tesserae-refresh-wrapper-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-06-27-tesserae-refresh-wrapper.md",
+    "tokens": [
+      "tesserae",
+      "refresh",
+      "wrapper",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
     "created_ts": null
   },
   {
@@ -372,10 +464,12 @@
       "counts",
       "codeproject",
       "1",
+      "communitysummary",
+      "1",
       "metric",
       "1",
       "sourcedocument",
-      "18",
+      "22",
       "recently",
       "added",
       "none",
@@ -389,7 +483,7 @@
       "research",
       "notebook"
     ],
-    "len": 34,
+    "len": 36,
     "created_ts": null
   },
   {

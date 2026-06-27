@@ -2,9 +2,10 @@
 node_id: Metric:map:592bcbe13f80
 title: mAP
 type: Metric
-source_path: D:\develop\minerva\docs\superpowers\specs\2026-06-24-minerva-ui-prototype-design.md
+source_path: D:\develop\minerva\docs\progress.md
 edges_in:
-  uses_metric: [minerva-mvp-ux-ui-prototype-design]
+  summarizes: [minerva-mvp-planning]
+  uses_metric: [minerva-mvp-route-map-design, minerva-mvp-ux-ui-prototype-design, minerva-progress, mvp-route-skeleton-implementation-plan]
 ---
 
 # mAP
@@ -15,7 +16,11 @@ _None._
 
 ## Incoming
 
+- [[minerva-mvp-planning]] → summarizes
+- [[minerva-mvp-route-map-design]] → uses_metric
 - [[minerva-mvp-ux-ui-prototype-design]] → uses_metric
+- [[minerva-progress]] → uses_metric
+- [[mvp-route-skeleton-implementation-plan]] → uses_metric
 
 ## Related (dataview)
 

@@ -16,8 +16,8 @@
     "cursor",
     "opencode"
   ],
-  "node_count": 20,
-  "edge_count": 19,
+  "node_count": 25,
+  "edge_count": 31,
   "mcp": {
     "command": "python3",
     "args": [

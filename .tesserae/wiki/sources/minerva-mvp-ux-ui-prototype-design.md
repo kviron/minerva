@@ -11,6 +11,11 @@ title: Minerva MVP UX/UI prototype design
 
 - **uses_metric** → mAP _(Metric)_
 
+## Incoming relations
+
+- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+
 ## Connected node types
 
+- CommunitySummary: 1
 - Metric: 1

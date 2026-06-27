@@ -107,6 +107,13 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+      "@type": "CreativeWork",
+      "name": "Minerva MVP route map design",
+      "url": "sources/minerva-mvp-route-map-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
       "@type": "CreativeWork",
       "name": "Minerva MVP UX/UI prototype design",
@@ -135,10 +142,31 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
+      "@type": "CreativeWork",
+      "name": "MVP Route Skeleton Implementation Plan",
+      "url": "sources/mvp-route-skeleton-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:tesserae-development-memory:4143790d0cae",
       "@type": "CreativeWork",
       "name": "Tesserae development memory",
       "url": "sources/tesserae-development-memory.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:tesserae-refresh-wrapper-design:b05d0219a17b",
+      "@type": "CreativeWork",
+      "name": "Tesserae refresh wrapper design",
+      "url": "sources/tesserae-refresh-wrapper-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:tesserae-refresh-wrapper-implementation-plan:0fcadea655b1",
+      "@type": "CreativeWork",
+      "name": "Tesserae Refresh Wrapper Implementation Plan",
+      "url": "sources/tesserae-refresh-wrapper-implementation-plan.html",
       "additionalType": "SourceDocument"
     },
     {

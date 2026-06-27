@@ -1,4 +1,12 @@
+{"evidence": null, "metadata": {"community_id": "CommunitySummary:7eb26794a6d944fd"}, "relationship": "summarizes", "source_id": "CommunitySummary:7eb26794a6d944fd", "target_id": "Metric:map:592bcbe13f80"}
+{"evidence": null, "metadata": {"community_id": "CommunitySummary:7eb26794a6d944fd"}, "relationship": "summarizes", "source_id": "CommunitySummary:7eb26794a6d944fd", "target_id": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9"}
+{"evidence": null, "metadata": {"community_id": "CommunitySummary:7eb26794a6d944fd"}, "relationship": "summarizes", "source_id": "CommunitySummary:7eb26794a6d944fd", "target_id": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13"}
+{"evidence": null, "metadata": {"community_id": "CommunitySummary:7eb26794a6d944fd"}, "relationship": "summarizes", "source_id": "CommunitySummary:7eb26794a6d944fd", "target_id": "SourceDocument:minerva-progress:c476087b907f"}
+{"evidence": null, "metadata": {"community_id": "CommunitySummary:7eb26794a6d944fd"}, "relationship": "summarizes", "source_id": "CommunitySummary:7eb26794a6d944fd", "target_id": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72"}
+{"evidence": null, "metadata": {}, "relationship": "uses_metric", "source_id": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9", "target_id": "Metric:map:592bcbe13f80"}
 {"evidence": null, "metadata": {}, "relationship": "uses_metric", "source_id": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13", "target_id": "Metric:map:592bcbe13f80"}
+{"evidence": null, "metadata": {}, "relationship": "uses_metric", "source_id": "SourceDocument:minerva-progress:c476087b907f", "target_id": "Metric:map:592bcbe13f80"}
+{"evidence": null, "metadata": {}, "relationship": "uses_metric", "source_id": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72", "target_id": "Metric:map:592bcbe13f80"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:adr-0001-use-a-modular-nuxt-nitro-monolith:36bf23e62f88"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:adr-0002-use-global-super-administration-and-pro:81e426d58974"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:adr-0003-separate-mutable-drafts-from-immutable-:27a2a19ac4f3"}
@@ -12,8 +20,12 @@
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:minerva-figma-prototype-implementation-plan:bd4f720816db"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:minerva-mvp-delivery-plan:caeac15a4a5c"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:minerva-mvp-design:3d9f5f00ca9b"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:minerva-product-specification:d29f24b551b5"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:minerva-progress:c476087b907f"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:minerva-roadmap:973bcf26cc8a"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:tesserae-development-memory:4143790d0cae"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:tesserae-refresh-wrapper-design:b05d0219a17b"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:tesserae-refresh-wrapper-implementation-plan:0fcadea655b1"}

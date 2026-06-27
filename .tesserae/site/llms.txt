@@ -17,15 +17,19 @@
 - [Minerva Figma Prototype Implementation Plan](sources/minerva-figma-prototype-implementation-plan.html)
 - [Minerva MVP Delivery Plan](sources/minerva-mvp-delivery-plan.html)
 - [Minerva MVP design](sources/minerva-mvp-design.html)
+- [Minerva MVP route map design](sources/minerva-mvp-route-map-design.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva MVP UX/UI prototype design](sources/minerva-mvp-ux-ui-prototype-design.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva product specification](sources/minerva-product-specification.html)
-- [Minerva progress](sources/minerva-progress.html)
+- [Minerva progress](sources/minerva-progress.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva roadmap](sources/minerva-roadmap.html)
+- [MVP Route Skeleton Implementation Plan](sources/mvp-route-skeleton-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [Tesserae development memory](sources/tesserae-development-memory.html)
+- [Tesserae refresh wrapper design](sources/tesserae-refresh-wrapper-design.html)
+- [Tesserae Refresh Wrapper Implementation Plan](sources/tesserae-refresh-wrapper-implementation-plan.html)
 
 ## Entities
 
-- [mAP](entities/map.html): - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_
+- [mAP](entities/map.html): - **summarizes** → Minerva MVP Planning _(CommunitySummary)_ - **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_ - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_ - **uses_metric** → Minerv…
 
 ## Syntheses
 

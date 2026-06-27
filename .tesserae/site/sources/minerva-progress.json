@@ -1,10 +1,10 @@
 {
   "title": "Minerva progress",
   "kind": "sources",
-  "body_text": "# Minerva progress",
+  "body_text": "# Minerva progress\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
   "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
   "links": [],
-  "body": "# Minerva progress",
+  "body": "# Minerva progress\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
   "frontmatter": {
     "kind": "sources",
     "node_id": "SourceDocument:minerva-progress:c476087b907f",

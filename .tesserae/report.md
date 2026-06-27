@@ -1,19 +1,20 @@
 # Research Graph Report
 
-node_count: 21
-edge_count: 19
+node_count: 26
+edge_count: 31
 
 ## Node Types
 
 - CodeProject: 1
+- CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 18
+- SourceDocument: 22
 - Synthesis: 1
 
 ## Edge Types
 
-- summarizes: 18
-- uses_metric: 1
+- summarizes: 27
+- uses_metric: 4
 
 ## Papers by Analysis Date
 
@@ -27,8 +28,13 @@ _None._
 
 ## Top Degree Nodes
 
-- Project Pulse (Synthesis): 18
-- Minerva MVP UX/UI prototype design (SourceDocument): 2
+- Project Pulse (Synthesis): 22
+- Minerva MVP Planning (CommunitySummary): 5
+- mAP (Metric): 5
+- MVP Route Skeleton Implementation Plan (SourceDocument): 3
+- Minerva MVP UX/UI prototype design (SourceDocument): 3
+- Minerva MVP route map design (SourceDocument): 3
+- Minerva progress (SourceDocument): 3
 - ADR 0001: Use a modular Nuxt/Nitro monolith (SourceDocument): 1
 - ADR 0002: Use global super administration and project-scoped RBAC (SourceDocument): 1
 - ADR 0003: Separate mutable drafts from immutable published versions (SourceDocument): 1
@@ -42,11 +48,6 @@ _None._
 - Minerva agent instructions (SourceDocument): 1
 - Minerva architecture (SourceDocument): 1
 - Minerva backlog (SourceDocument): 1
-- Minerva product specification (SourceDocument): 1
-- Minerva progress (SourceDocument): 1
-- Minerva roadmap (SourceDocument): 1
-- Tesserae development memory (SourceDocument): 1
-- mAP (Metric): 1
 
 ## Trends
 

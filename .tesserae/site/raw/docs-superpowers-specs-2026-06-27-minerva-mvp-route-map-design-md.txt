@@ -1,0 +1,103 @@
+2026-06-27-minerva-mvp-route-map-design.md
+==========================================
+
+# Minerva MVP route map design
+
+Status: approved for later implementation
+Date: 2026-06-27
+
+## Scope
+
+This document defines the Nuxt page skeleton required for the Minerva MVP. It does not authorize application implementation and does not include deferred backlog areas.
+
+## Chosen approach
+
+Use domain-oriented nested routes. Project documents and project administration remain under the owning project, while global administration and personal settings have separate route groups.
+
+The alternatives were rejected for the following reasons:
+
+- A skeleton limited to the eight prototype screens omits invitation enrollment, global administration, personal security, and MCP grant management required by the MVP.
+- A separate route for every tab, dialog, and action creates unnecessary navigation and page files before those flows justify them.
+
+## Route map
+
+```text
+/
+|-- auth/
+|   |-- forgot-password
+|   `-- reset-password/[token]
+|-- invitations/[token]
+|-- legal/
+|   |-- terms
+|   `-- privacy
+|-- projects/
+|-- projects/[id]/
+|   |-- documents/[documentId]/
+|   |   |-- edit
+|   |   `-- history
+|   `-- settings
+|-- administration/
+|   |-- users
+|   |-- invitations
+|   `-- audit
+`-- settings/
+    |-- profile
+    |-- security
+    `-- connections
+```
+
+## Route responsibilities
+
+- `/` redirects authenticated users to `/projects` and unauthenticated users to `/auth`.
+- `/auth` contains sign-in. Public registration is absent.
+- `/auth/forgot-password` accepts password-reset requests without exposing whether an account exists.
+- `/auth/reset-password/[token]` accepts a new password for a valid short-lived, single-use reset token.
+- `/invitations/[token]` handles global and project-bound invitation enrollment.
+- `/legal/terms` contains the public Terms of Service.
+- `/legal/privacy` contains the public Privacy Policy.
+- `/projects` lists accessible projects and contains project creation as a permission-aware dialog.
+- `/projects/[id]` is the project overview and owns the contextual document-tree sidebar.
+- `/projects/[id]/documents/[documentId]` opens a document in reading mode.
+- The nested `edit` and `history` routes represent explicit editing and immutable version history.
+- `/projects/[id]/settings` is one page with General, Members, Roles and permissions, and Audit tabs.
+- `/administration` is restricted to `super_admin` and groups global users, invitations, and audit browsing.
+- `/settings` groups the current user's profile, security controls, sessions, and OAuth/MCP grants.
+
+## Document hierarchy and URLs
+
+- The route identifies one document by its stable ID; ancestor slugs and IDs are not encoded into the URL.
+- Every document may contain content and may also be the parent of child documents.
+- The project sidebar and breadcrumbs derive the current document's ancestry from parent relationships.
+- Moving a document changes its parent and sibling order without changing its route or breaking internal links.
+- Parent assignment is limited to the same project and must reject cycles.
+- A project/document ID mismatch is handled as an inaccessible or missing resource according to the authorization error contract.
+
+## Flows without separate pages
+
+- Global documentation search uses a command dialog.
+- Project creation, document publication, and version restoration use dialogs.
+- Project archives are exposed as a projects-list filter.
+- Templates and images are part of document creation and editing workflows.
+- Project settings tabs may use query state for direct linking without becoming separate Nuxt pages.
+
+## Layout boundaries
+
+- Authentication, invitation enrollment, and legal pages use a public layout.
+- Projects, administration, and personal settings use the authenticated global shell.
+- Project overview, documents, and project settings add the contextual project sidebar.
+- Navigation visibility reflects server-provided permissions but never replaces server-side authorization.
+
+## Current skeleton impact
+
+- The existing `/dashboard` route is not part of the approved MVP map.
+- The existing `app/pages/projects/[id].vue` will need to become `app/pages/projects/[id]/index.vue` before nested project routes are added.
+- The existing global `settings` route remains distinct from project settings.
+
+## Later implementation checks
+
+- Verify root redirects for authenticated and unauthenticated users.
+- Verify password-recovery pages are public, do not enable registration, and receive localized `/en` routes through the localization layer.
+- Verify legal pages remain accessible without authentication and receive localized `/en` routes through the localization layer.
+- Verify route middleware denies inaccessible projects and unauthorized administration pages without leaking resource existence.
+- Verify Russian routes have no locale prefix and English routes use `/en` through the localization layer rather than duplicated page files.
+- Verify direct links to document editing, history, settings tabs, and OAuth/MCP grant management preserve authorization behavior.

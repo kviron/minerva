@@ -79,7 +79,7 @@ The reference desktop frame is `1440 × 1024`.
 
 ### 1. Sign in
 
-A centered shadcn card contains email, password, sign-in action, locale selection, and theme control. Public registration and unplanned password-recovery UI are absent.
+A centered shadcn card contains email, password, sign-in action, locale selection, and theme control. Public registration is absent. Password recovery belongs to the full MVP route set but remains outside this eight-screen prototype flow.
 
 ### 2. Projects
 

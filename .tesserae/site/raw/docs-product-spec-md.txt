@@ -30,6 +30,8 @@ The first usable release must let a small internal team:
 - A `super_admin` may issue a global invitation without project membership.
 - A Project Admin may invite a new user only into a project they administer. The invitation fixes the target project and initial project role before it is sent.
 - Accepting a project invitation creates or activates the user account and its project membership atomically. It grants no global administrative privilege.
+- An active password-authenticated user may request a password reset without the response revealing whether an account exists for the submitted email.
+- Password-reset tokens are short-lived and single-use. A successful reset invalidates the token and revokes the user's existing sessions.
 
 ### Project authorization
 
@@ -57,6 +59,10 @@ A project contains a name, optional description, lifecycle status, timestamps, c
 
 - Documents form a manually ordered adjacency-list tree within one project.
 - A document has a title, slug, parent, order, owner, draft revision number, publication state, and soft-deletion metadata.
+- Every tree node is a document that may contain both its own content and child documents; folders are not a separate entity.
+- A root document has no parent. A child document must have a parent in the same project, and parent changes must never create a cycle.
+- Moving or reordering a document changes only its parent and sibling order. Its stable ID, slug, URL, internal links, and published history remain unchanged.
+- The document tree, ancestor breadcrumbs, and descendant lists are derived from parent relationships and sibling order rather than encoded into the route path.
 - Draft content is stored as validated Tiptap JSON.
 - Autosave uses optimistic concurrency. A client submits the draft revision it edited; a stale revision returns a conflict and never silently overwrites newer work.
 - Publishing requires a change summary and creates an immutable snapshot of the title, validated Tiptap content, internal-link targets, and referenced images.
@@ -114,7 +120,7 @@ Every MCP mutation records the user, OAuth client, grant, scopes, tool name, pro
 ## Security and operations
 
 - Password authentication uses Better Auth; optional TOTP and recovery codes are available to all users.
-- Session, invitation, OAuth, and MCP endpoints are rate-limited.
+- Session, invitation, password-recovery, OAuth, and MCP endpoints are rate-limited.
 - MCP validates `Origin`, tool schemas, OAuth audience/resource binding, scopes, and RBAC.
 - OAuth grant revocation and token invalidation are audited and checked before MCP tool execution.
 - Images are stored in S3-compatible storage with private objects and authorized download endpoints or short-lived signed URLs.

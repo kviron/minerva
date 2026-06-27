@@ -1,5 +1,5 @@
 ---
-content_hash: sha256-6db8cdb45f11bbd5d8713266a83ee4ae49794a316b03aa4e60e13d8866623e63
+content_hash: sha256-4c460fe1ff68f85795018f77bd10d189326c6d8862eacc81e495780a52cfa110
 generator: heuristic-v1
 inputs: []
 slug: pulse
@@ -21,8 +21,12 @@ sources:
   - docs/superpowers/plans/2026-06-24-foundation.md
   - docs/superpowers/plans/2026-06-24-minerva-figma-prototype.md
   - docs/superpowers/plans/2026-06-24-minerva-mvp-roadmap.md
+  - docs/superpowers/plans/2026-06-27-mvp-route-skeleton.md
+  - docs/superpowers/plans/2026-06-27-tesserae-refresh-wrapper.md
   - docs/superpowers/specs/2026-06-24-minerva-mvp-design.md
   - docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md
+  - docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md
+  - docs/superpowers/specs/2026-06-27-tesserae-refresh-wrapper-design.md
 synthesis_kind: pulse
 title: Project Pulse
 ---
@@ -32,8 +36,9 @@ Snapshot of the wiki at the most recent compile.
 
 ## Counts
 - CodeProject: 1
+- CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 18
+- SourceDocument: 22
 
 ## Recently added
 - (none)

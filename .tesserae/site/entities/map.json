@@ -1,15 +1,15 @@
 {
   "title": "mAP",
   "kind": "entities",
-  "body_text": "# mAP\n\n## Incoming relations\n\n- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_\n\n## Connected node types\n\n- SourceDocument: 1",
-  "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-24-minerva-ui-prototype-design.md",
+  "body_text": "# mAP\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n- **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_\n- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_\n- **uses_metric** → Minerva MVP route map design _(SourceDocument)_\n- **uses_metric** → Minerva progress _(SourceDocument)_\n\n## Connected node types\n\n- SourceDocument: 4\n- CommunitySummary: 1",
+  "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
   "links": [],
-  "body": "# mAP\n\n## Incoming relations\n\n- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_\n\n## Connected node types\n\n- SourceDocument: 1",
+  "body": "# mAP\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n- **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_\n- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_\n- **uses_metric** → Minerva MVP route map design _(SourceDocument)_\n- **uses_metric** → Minerva progress _(SourceDocument)_\n\n## Connected node types\n\n- SourceDocument: 4\n- CommunitySummary: 1",
   "frontmatter": {
     "kind": "entities",
     "node_id": "Metric:map:592bcbe13f80",
     "node_type": "Metric",
-    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-24-minerva-ui-prototype-design.md",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
     "title": "mAP"
   }
 }

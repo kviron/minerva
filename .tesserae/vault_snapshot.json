@@ -1,5 +1,14 @@
 {
   "nodes": {
+    "CommunitySummary:7eb26794a6d944fd": {
+      "aliases": [],
+      "description": "Documents and a metric centered on Minerva MVP route design, UX/UI prototyping, implementation planning, progress tracking, and evaluation context.",
+      "metadata": {
+        "extractor": "community_summaries.compile_community_summaries",
+        "member_count": 5
+      },
+      "name": "Minerva MVP Planning"
+    },
     "Metric:map:592bcbe13f80": {
       "aliases": [],
       "description": "",
@@ -110,6 +119,14 @@
       },
       "name": "Minerva MVP design"
     },
+    "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Minerva MVP route map design"
+    },
     "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13": {
       "aliases": [],
       "description": "",
@@ -142,6 +159,14 @@
       },
       "name": "Minerva roadmap"
     },
+    "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "MVP Route Skeleton Implementation Plan"
+    },
     "SourceDocument:tesserae-development-memory:4143790d0cae": {
       "aliases": [],
       "description": "",
@@ -150,11 +175,27 @@
       },
       "name": "Tesserae development memory"
     },
+    "SourceDocument:tesserae-refresh-wrapper-design:b05d0219a17b": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Tesserae refresh wrapper design"
+    },
+    "SourceDocument:tesserae-refresh-wrapper-implementation-plan:0fcadea655b1": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Tesserae Refresh Wrapper Implementation Plan"
+    },
     "Synthesis:synthesis-project-pulse:edf62281b49c": {
       "aliases": [],
       "description": "Top-level snapshot of the wiki at compile time.",
       "metadata": {
-        "content_hash": "sha256-6db8cdb45f11bbd5d8713266a83ee4ae49794a316b03aa4e60e13d8866623e63",
+        "content_hash": "sha256-4c460fe1ff68f85795018f77bd10d189326c6d8862eacc81e495780a52cfa110",
         "synthesis_kind": "pulse"
       },
       "name": "Project Pulse"

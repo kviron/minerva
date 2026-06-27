@@ -17,15 +17,19 @@
 - [Minerva Figma Prototype Implementation Plan](sources/minerva-figma-prototype-implementation-plan.html)
 - [Minerva MVP Delivery Plan](sources/minerva-mvp-delivery-plan.html)
 - [Minerva MVP design](sources/minerva-mvp-design.html)
+- [Minerva MVP route map design](sources/minerva-mvp-route-map-design.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva MVP UX/UI prototype design](sources/minerva-mvp-ux-ui-prototype-design.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva product specification](sources/minerva-product-specification.html)
-- [Minerva progress](sources/minerva-progress.html)
+- [Minerva progress](sources/minerva-progress.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva roadmap](sources/minerva-roadmap.html)
+- [MVP Route Skeleton Implementation Plan](sources/mvp-route-skeleton-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [Tesserae development memory](sources/tesserae-development-memory.html)
+- [Tesserae refresh wrapper design](sources/tesserae-refresh-wrapper-design.html)
+- [Tesserae Refresh Wrapper Implementation Plan](sources/tesserae-refresh-wrapper-implementation-plan.html)
 
 ## Entities
 
-- [mAP](entities/map.html): - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_
+- [mAP](entities/map.html): - **summarizes** → Minerva MVP Planning _(CommunitySummary)_ - **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_ - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_ - **uses_metric** → Minerv…
 
 ## Syntheses
 
@@ -100,6 +104,24 @@ _sources/minerva-mvp-design.html_
 
 # Minerva MVP design
 
+### Minerva MVP route map design
+_sources/minerva-mvp-route-map-design.html_
+
+# Minerva MVP route map design
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Incoming relations
+
+- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+
+## Connected node types
+
+- CommunitySummary: 1
+- Metric: 1
+
 ### Minerva MVP UX/UI prototype design
 _sources/minerva-mvp-ux-ui-prototype-design.html_
 
@@ -109,8 +131,13 @@ _sources/minerva-mvp-ux-ui-prototype-design.html_
 
 - **uses_metric** → mAP _(Metric)_
 
+## Incoming relations
+
+- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+
 ## Connected node types
 
+- CommunitySummary: 1
 - Metric: 1
 
 ### Minerva product specification
@@ -123,15 +150,56 @@ _sources/minerva-progress.html_
 
 # Minerva progress
 
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Incoming relations
+
+- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+
+## Connected node types
+
+- CommunitySummary: 1
+- Metric: 1
+
 ### Minerva roadmap
 _sources/minerva-roadmap.html_
 
 # Minerva roadmap
 
+### MVP Route Skeleton Implementation Plan
+_sources/mvp-route-skeleton-implementation-plan.html_
+
+# MVP Route Skeleton Implementation Plan
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Incoming relations
+
+- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+
+## Connected node types
+
+- CommunitySummary: 1
+- Metric: 1
+
 ### Tesserae development memory
 _sources/tesserae-development-memory.html_
 
 # Tesserae development memory
+
+### Tesserae refresh wrapper design
+_sources/tesserae-refresh-wrapper-design.html_
+
+# Tesserae refresh wrapper design
+
+### Tesserae Refresh Wrapper Implementation Plan
+_sources/tesserae-refresh-wrapper-implementation-plan.html_
+
+# Tesserae Refresh Wrapper Implementation Plan
 
 ## Entities
 
@@ -142,11 +210,16 @@ _entities/map.html_
 
 ## Incoming relations
 
+- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_
 - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_
+- **uses_metric** → Minerva MVP route map design _(SourceDocument)_
+- **uses_metric** → Minerva progress _(SourceDocument)_
 
 ## Connected node types
 
-- SourceDocument: 1
+- SourceDocument: 4
+- CommunitySummary: 1
 
 ## Syntheses
 
@@ -159,8 +232,9 @@ Snapshot of the wiki at the most recent compile.
 
 ## Counts
 - CodeProject: 1
+- CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 18
+- SourceDocument: 22
 
 ## Recently added
 - (none)

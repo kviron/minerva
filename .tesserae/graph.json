@@ -1,12 +1,38 @@
 {
   "nodes": [
     {
+      "id": "CommunitySummary:7eb26794a6d944fd",
+      "name": "Minerva MVP Planning",
+      "type": "CommunitySummary",
+      "aliases": [],
+      "description": "Documents and a metric centered on Minerva MVP route design, UX/UI prototyping, implementation planning, progress tracking, and evaluation context.",
+      "source_path": null,
+      "metadata": {
+        "member_ids": [
+          "Metric:map:592bcbe13f80",
+          "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+          "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+          "SourceDocument:minerva-progress:c476087b907f",
+          "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72"
+        ],
+        "member_count": 5,
+        "tags": [
+          "minerva",
+          "mvp",
+          "route-design",
+          "ux-ui",
+          "implementation-plan"
+        ],
+        "extractor": "community_summaries.compile_community_summaries"
+      }
+    },
+    {
       "id": "Metric:map:592bcbe13f80",
       "name": "mAP",
       "type": "Metric",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-ui-prototype-design.md",
+      "source_path": "D:\\develop\\minerva\\docs\\progress.md",
       "metadata": {}
     },
     {
@@ -624,6 +650,69 @@
       }
     },
     {
+      "id": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+      "name": "Minerva MVP route map design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-minerva-mvp-route-map-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Minerva MVP route map design",
+            "anchor": "minerva-mvp-route-map-design"
+          },
+          {
+            "level": 2,
+            "text": "Scope",
+            "anchor": "scope"
+          },
+          {
+            "level": 2,
+            "text": "Chosen approach",
+            "anchor": "chosen-approach"
+          },
+          {
+            "level": 2,
+            "text": "Route map",
+            "anchor": "route-map"
+          },
+          {
+            "level": 2,
+            "text": "Route responsibilities",
+            "anchor": "route-responsibilities"
+          },
+          {
+            "level": 2,
+            "text": "Document hierarchy and URLs",
+            "anchor": "document-hierarchy-and-urls"
+          },
+          {
+            "level": 2,
+            "text": "Flows without separate pages",
+            "anchor": "flows-without-separate-pages"
+          },
+          {
+            "level": 2,
+            "text": "Layout boundaries",
+            "anchor": "layout-boundaries"
+          },
+          {
+            "level": 2,
+            "text": "Current skeleton impact",
+            "anchor": "current-skeleton-impact"
+          },
+          {
+            "level": 2,
+            "text": "Later implementation checks",
+            "anchor": "later-implementation-checks"
+          }
+        ]
+      }
+    },
+    {
       "id": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
       "name": "Minerva MVP UX/UI prototype design",
       "type": "SourceDocument",
@@ -951,6 +1040,54 @@
       }
     },
     {
+      "id": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
+      "name": "MVP Route Skeleton Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-mvp-route-skeleton.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "MVP Route Skeleton Implementation Plan",
+            "anchor": "mvp-route-skeleton-implementation-plan"
+          },
+          {
+            "level": 3,
+            "text": "Task 1: Establish the route manifest check",
+            "anchor": "task-1-establish-the-route-manifest-check"
+          },
+          {
+            "level": 3,
+            "text": "Task 2: Create valid empty page components",
+            "anchor": "task-2-create-valid-empty-page-components"
+          },
+          {
+            "level": 3,
+            "text": "Task 3: Verify the Nuxt scaffold",
+            "anchor": "task-3-verify-the-nuxt-scaffold"
+          },
+          {
+            "level": 3,
+            "text": "Task 4: Record completion",
+            "anchor": "task-4-record-completion"
+          },
+          {
+            "level": 3,
+            "text": "Task 5: Add public legal route stubs",
+            "anchor": "task-5-add-public-legal-route-stubs"
+          },
+          {
+            "level": 3,
+            "text": "Task 6: Add password recovery route stubs",
+            "anchor": "task-6-add-password-recovery-route-stubs"
+          }
+        ]
+      }
+    },
+    {
       "id": "SourceDocument:tesserae-development-memory:4143790d0cae",
       "name": "Tesserae development memory",
       "type": "SourceDocument",
@@ -994,6 +1131,77 @@
       }
     },
     {
+      "id": "SourceDocument:tesserae-refresh-wrapper-design:b05d0219a17b",
+      "name": "Tesserae refresh wrapper design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-tesserae-refresh-wrapper-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Tesserae refresh wrapper design",
+            "anchor": "tesserae-refresh-wrapper-design"
+          },
+          {
+            "level": 2,
+            "text": "Problem",
+            "anchor": "problem"
+          },
+          {
+            "level": 2,
+            "text": "Decision",
+            "anchor": "decision"
+          },
+          {
+            "level": 2,
+            "text": "Boundaries",
+            "anchor": "boundaries"
+          },
+          {
+            "level": 2,
+            "text": "Verification",
+            "anchor": "verification"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:tesserae-refresh-wrapper-implementation-plan:0fcadea655b1",
+      "name": "Tesserae Refresh Wrapper Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-tesserae-refresh-wrapper.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Tesserae Refresh Wrapper Implementation Plan",
+            "anchor": "tesserae-refresh-wrapper-implementation-plan"
+          },
+          {
+            "level": 3,
+            "text": "Task 1: Add the safe refresh wrapper",
+            "anchor": "task-1-add-the-safe-refresh-wrapper"
+          },
+          {
+            "level": 3,
+            "text": "Task 2: Make the wrapper the documented command",
+            "anchor": "task-2-make-the-wrapper-the-documented-command"
+          },
+          {
+            "level": 3,
+            "text": "Task 3: Verify and commit",
+            "anchor": "task-3-verify-and-commit"
+          }
+        ]
+      }
+    },
+    {
       "id": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "name": "Project Pulse",
       "type": "Synthesis",
@@ -1002,14 +1210,80 @@
       "source_path": null,
       "metadata": {
         "synthesis_kind": "pulse",
-        "content_hash": "sha256-6db8cdb45f11bbd5d8713266a83ee4ae49794a316b03aa4e60e13d8866623e63",
+        "content_hash": "sha256-4c460fe1ff68f85795018f77bd10d189326c6d8862eacc81e495780a52cfa110",
         "input_ids": []
       }
     }
   ],
   "edges": [
     {
+      "source": "CommunitySummary:7eb26794a6d944fd",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:7eb26794a6d944fd"
+      }
+    },
+    {
+      "source": "CommunitySummary:7eb26794a6d944fd",
+      "target": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:7eb26794a6d944fd"
+      }
+    },
+    {
+      "source": "CommunitySummary:7eb26794a6d944fd",
+      "target": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:7eb26794a6d944fd"
+      }
+    },
+    {
+      "source": "CommunitySummary:7eb26794a6d944fd",
+      "target": "SourceDocument:minerva-progress:c476087b907f",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:7eb26794a6d944fd"
+      }
+    },
+    {
+      "source": "CommunitySummary:7eb26794a6d944fd",
+      "target": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:7eb26794a6d944fd"
+      }
+    },
+    {
+      "source": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
       "source": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "SourceDocument:minerva-progress:c476087b907f",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
       "target": "Metric:map:592bcbe13f80",
       "type": "uses_metric",
       "evidence": null,
@@ -1108,6 +1382,13 @@
     },
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
       "type": "summarizes",
       "evidence": null,
@@ -1136,7 +1417,28 @@
     },
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:tesserae-development-memory:4143790d0cae",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:tesserae-refresh-wrapper-design:b05d0219a17b",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:tesserae-refresh-wrapper-implementation-plan:0fcadea655b1",
       "type": "summarizes",
       "evidence": null,
       "metadata": {}

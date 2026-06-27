@@ -1,0 +1,22 @@
+{
+  "community_id": "CommunitySummary:7eb26794a6d944fd",
+  "member_ids": [
+    "Metric:map:592bcbe13f80",
+    "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+    "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+    "SourceDocument:minerva-progress:c476087b907f",
+    "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72"
+  ],
+  "schema_version": 1,
+  "summary": {
+    "description": "Documents and a metric centered on Minerva MVP route design, UX/UI prototyping, implementation planning, progress tracking, and evaluation context.",
+    "tags": [
+      "minerva",
+      "mvp",
+      "route-design",
+      "ux-ui",
+      "implementation-plan"
+    ],
+    "title": "Minerva MVP Planning"
+  }
+}

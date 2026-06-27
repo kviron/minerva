@@ -24,12 +24,13 @@ Expected MCP tools: `schema`, `graph_summary`, `search_nodes`, `node_context`, `
 
 ## Graph summary
 
-- Nodes: 20
-- Edges: 19
+- Nodes: 25
+- Edges: 31
 
 ## Representative nodes
 
-- **mAP** (`Metric`) — D:\develop\minerva\docs\superpowers\specs\2026-06-24-minerva-ui-prototype-design.md
+- **Minerva MVP Planning** (`CommunitySummary`) — Documents and a metric centered on Minerva MVP route design, UX/UI prototyping, implementation planning, progress tracking, and evaluation context.
+- **mAP** (`Metric`) — D:\develop\minerva\docs\progress.md
 - **ADR 0001: Use a modular Nuxt/Nitro monolith** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0001-modular-monolith.md
 - **ADR 0002: Use global super administration and project-scoped RBAC** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0002-project-rbac.md
 - **ADR 0003: Separate mutable drafts from immutable published versions** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0003-document-versioning.md
@@ -40,7 +41,6 @@ Expected MCP tools: `schema`, `graph_summary`, `search_nodes`, `node_context`, `
 - **Minerva architecture** (`SourceDocument`) — D:\develop\minerva\docs\architecture.md
 - **Minerva backlog** (`SourceDocument`) — D:\develop\minerva\docs\backlog.md
 - **Minerva Executable Foundation Implementation Plan** (`SourceDocument`) — D:\develop\minerva\docs\superpowers\plans\2026-06-24-foundation.md
-- **Minerva Figma Prototype Implementation Plan** (`SourceDocument`) — D:\develop\minerva\docs\superpowers\plans\2026-06-24-minerva-figma-prototype.md
 
 ## Agent instructions
 

@@ -1,7 +1,7 @@
 {
   "files": {
     "D:\\develop\\minerva\\AGENTS.md": {
-      "sha256": "4646506ca354e24faadd53980f79ab6a7ae94970a3a9b8a9ec5bf83d7583578f",
+      "sha256": "28bc1bd0b6c998b0b575f1a34d9a25ac1166f33dec72098d42c365412212ef44",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\architecture.md": {
@@ -37,19 +37,19 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\operations\\tesserae.md": {
-      "sha256": "6d37ca0ad744a9a979e25edc409280df150d067c968ab5210fa4866f8b2d8294",
+      "sha256": "5e559e1ce185d68c412255a72d741c09abae46956646d0178a6aa3e5d9599ae8",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\product-spec.md": {
-      "sha256": "138321864c691e04535509faef0e8c29645dc9e9b0ae20a156db686a7d14f73e",
+      "sha256": "bcfec798c130cb7342d1fea1b8e518f632bbe350497f153b38a6928e35f1d222",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\progress.md": {
-      "sha256": "1331b7cfa028f91a127816864710a7a91e87752cade1a3cc7dc59769a9619b84",
+      "sha256": "6648e9b87ccf69d08acb16547355ed58479786b75e7ca3d70dbb155acab324cf",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\roadmap.md": {
-      "sha256": "6962e91023875b463782590e33a7078ad83b1712eb840677a2e3ca57dd77e889",
+      "sha256": "859d8df424f1bcb8253ee887826ae87be28f253a2b4f39166a4836ef51d8f513",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-foundation.md": {
@@ -64,12 +64,28 @@
       "sha256": "9869d57be193faf8000017a057c47003473c4b4a088c39e2d903219abda99e1f",
       "source_kind": "SourceDocument"
     },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-mvp-route-skeleton.md": {
+      "sha256": "9d884f2671b14fe934a1f8b2ed3deafada5cafefe8ab51c9f4e7b08305a02620",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-tesserae-refresh-wrapper.md": {
+      "sha256": "65be26323bbf4180b1e013811b60c7317e424ee2188d50e553d3dad3751fecb1",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-mvp-design.md": {
       "sha256": "68951988868ab0b552312d71c3b4dc0a03a9be2c3a1eb6582f4a3dcd292e85e4",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-ui-prototype-design.md": {
-      "sha256": "d15a2a23f2a237708971d692ee98f195c9e78aa4f89d03db6215f67f65753383",
+      "sha256": "a55b985ff87b08c517cfb97d867238ed945a9b580cade68234b57f6cf0bba820",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-minerva-mvp-route-map-design.md": {
+      "sha256": "6857bd2000f1d66db4690a48a462f8716e8d1e59c254f1645b875b05bd538187",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-tesserae-refresh-wrapper-design.md": {
+      "sha256": "604c0f018a376ff2ba7d1f199425871c26023997f04d6401687a2a559c7d1c44",
       "source_kind": "SourceDocument"
     }
   }

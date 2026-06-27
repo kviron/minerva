@@ -6,7 +6,7 @@ source_path: D:\develop\minerva\docs\superpowers\specs\2026-06-24-minerva-ui-pro
 edges_out:
   uses_metric: [map]
 edges_in:
-  summarizes: [project-pulse]
+  summarizes: [minerva-mvp-planning, project-pulse]
 source_kind: SourceDocument
 ---
 
@@ -20,6 +20,7 @@ source_kind: SourceDocument
 
 ## Incoming
 
+- [[minerva-mvp-planning]] → summarizes
 - [[project-pulse]] → summarizes
 
 ## Related (dataview)

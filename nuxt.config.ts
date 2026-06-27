@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  ssr: false,
   modules: ['shadcn-nuxt'],
   shadcn: {
     /**

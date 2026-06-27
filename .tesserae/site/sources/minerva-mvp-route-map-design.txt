@@ -1,0 +1,17 @@
+Minerva MVP route map design
+============================
+
+# Minerva MVP route map design
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Incoming relations
+
+- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+
+## Connected node types
+
+- CommunitySummary: 1
+- Metric: 1
