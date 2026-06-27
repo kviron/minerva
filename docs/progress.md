@@ -27,6 +27,7 @@ Stage 0 and stage 0.5 are in progress. Application implementation remains blocke
 - Added public empty route stubs for Terms of Service and Privacy Policy under `/legal`.
 - Added secure password recovery to the MVP design while preserving invitation-only registration.
 - Added a safe Tesserae refresh wrapper that prevents the recurring Windows `WinError 183` workflow failure.
+- Added public empty route stubs for password recovery under `/auth`.
 
 ## Remaining before application implementation
 

@@ -231,3 +231,78 @@ git commit -m "core: scaffold legal routes"
 ```
 
 Do not stage `.tesserae`, build output, or unrelated working-tree files.
+
+### Task 6: Add password recovery route stubs
+
+**Files:**
+- Create: `app/pages/auth/forgot-password.vue`
+- Create: `app/pages/auth/reset-password/[token].vue`
+- Modify: `docs/progress.md`
+
+- [ ] **Step 1: Run the password-recovery route assertion before scaffolding**
+
+```powershell
+$required = @(
+  'app/pages/auth/forgot-password.vue',
+  'app/pages/auth/reset-password/[token].vue'
+)
+$missing = $required | Where-Object { -not (Test-Path -LiteralPath $_) }
+if ($missing) { throw "Missing password-recovery route files: $($missing -join ', ')" }
+```
+
+Expected: FAIL and list both missing route files.
+
+- [ ] **Step 2: Create the forgot-password route stub**
+
+```vue
+<template>
+  <div />
+</template>
+```
+
+- [ ] **Step 3: Create the tokenized reset-password route stub**
+
+```vue
+<template>
+  <div />
+</template>
+```
+
+- [ ] **Step 4: Re-run the route assertion**
+
+Run the PowerShell assertion from Step 1.
+
+Expected: PASS with exit code 0 and no missing paths.
+
+- [ ] **Step 5: Build the Nuxt application**
+
+```powershell
+bun run build
+```
+
+Expected: Nuxt build exits with code 0 and reports no route conflicts.
+
+- [ ] **Step 6: Record the route extension**
+
+Add this bullet to `docs/progress.md`:
+
+```markdown
+- Added public empty route stubs for password recovery under `/auth`.
+```
+
+- [ ] **Step 7: Refresh Tesserae through the project wrapper**
+
+```powershell
+./scripts/refresh-tesserae.ps1
+```
+
+Expected: `sessions-import`, `compile`, and `obsidian-sync` report `ok`.
+
+- [ ] **Step 8: Commit only the password-recovery route extension**
+
+```powershell
+git add -- app/pages/auth/forgot-password.vue app/pages/auth/reset-password docs/progress.md docs/superpowers/plans/2026-06-27-mvp-route-skeleton.md
+git commit -m "core: scaffold password recovery routes"
+```
+
+Do not stage `.tesserae`, build output, or unrelated working-tree files.
