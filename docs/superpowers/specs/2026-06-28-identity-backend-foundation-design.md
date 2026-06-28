@@ -1,6 +1,6 @@
 # Identity backend foundation design
 
-Status: approved for implementation planning
+Status: implemented and verified
 Date: 2026-06-28
 
 ## Goal

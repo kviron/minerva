@@ -4,7 +4,7 @@ Last updated: 2026-06-29
 
 ## Current state
 
-The user approved the audited Identity backend design and implementation plan, so its application implementation gate is open. Work is proceeding in the isolated `feature/identity-backend-foundation` branch; page layout remains unchanged while the PostgreSQL and authentication foundation is built in tested vertical slices.
+The approved Identity backend foundation is implemented and verified in the isolated `feature/identity-backend-foundation` branch. PostgreSQL, Better Auth, sessions, bootstrap, password recovery, and the existing authentication forms now work together without a page-layout redesign; the branch is ready for integration review.
 
 ## Completed
 
@@ -40,9 +40,10 @@ The user approved the audited Identity backend design and implementation plan, s
 - Added normalized email-or-username sign-in, generic credential failures, database-backed HMAC rate limiting, durable sessions, active-account enforcement, and a server-side session guard for protected Nitro handlers.
 - Added enumeration-safe password recovery through SMTP/Mailpit with a 30-minute single-use token, reset throttling, sanitized delivery failures, and automatic session revocation after reset.
 - Connected the existing shadcn-vue authentication forms without redesign, added client session middleware, guest/auth redirects, logout verification, pending/error states, and complete browser journeys for sign-in and recovery.
+- Verified the completed Identity foundation with a frozen dependency install, two idempotent migration runs, 9 unit tests, 21 PostgreSQL integration tests, 7 browser journeys, Nuxt typecheck, and a production build.
+- Used the pinned native Mailpit 1.30.0 binary for final SMTP verification because the current Docker Desktop port proxy accepted the local SMTP connection but did not relay the server greeting; Docker Compose remains the canonical development configuration.
 
 ## Remaining
 
 - Build and review the eight-screen prototype in the supplied Figma file.
-- Complete and verify the approved Identity backend slices: first-super-admin bootstrap, identifier sign-in, session guards, password recovery, and existing-form wiring.
 - Create detailed plans for later product slices only when the preceding slice has established their real interfaces.

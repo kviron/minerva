@@ -1,6 +1,6 @@
 # Identity Backend Foundation Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Deliver PostgreSQL-backed Better Auth login by email or username, persistent sessions, logout, Mailpit password recovery, and safe first-`super_admin` bootstrap without redesigning the existing pages.
 
@@ -78,7 +78,7 @@ After every task commit, run `./scripts/refresh-tesserae.ps1` and verify that no
 - Create: `shared/config/env.ts`
 - Create: `tests/unit/config/env.spec.ts`
 
-- [ ] **Step 1: Install exact dependencies**
+- [x] **Step 1: Install exact dependencies**
 
 Run:
 
@@ -89,7 +89,7 @@ bun add --dev --exact drizzle-kit@0.31.10 @types/nodemailer@8.0.1 vitest@4.1.9 @
 
 Expected: `package.json` and `bun.lock` change; no application files change.
 
-- [ ] **Step 2: Add the failing environment tests**
+- [x] **Step 2: Add the failing environment tests**
 
 Create `tests/unit/config/env.spec.ts`:
 
@@ -121,7 +121,7 @@ describe('parseServerEnv', () => {
 })
 ```
 
-- [ ] **Step 3: Configure Vitest and verify RED**
+- [x] **Step 3: Configure Vitest and verify RED**
 
 Create `vitest.config.ts`:
 
@@ -146,7 +146,7 @@ bunx vitest run tests/unit/config/env.spec.ts
 
 Expected: FAIL because `shared/config/env.ts` does not exist.
 
-- [ ] **Step 4: Implement environment parsing**
+- [x] **Step 4: Implement environment parsing**
 
 Create `shared/config/env.ts`:
 
@@ -174,7 +174,7 @@ export const getServerEnv = () => cached ??= parseServerEnv(process.env)
 
 Document non-secret local values in `.env.example`; add `.env`, `.output`, `coverage`, `playwright-report`, and `test-results` to `.gitignore`. Do not read or copy the existing `.env`.
 
-- [ ] **Step 5: Add scripts and browser config**
+- [x] **Step 5: Add scripts and browser config**
 
 Add these `package.json` scripts:
 
@@ -217,7 +217,7 @@ export default defineConfig({
 })
 ```
 
-- [ ] **Step 6: Verify GREEN and commit**
+- [x] **Step 6: Verify GREEN and commit**
 
 Run `bun run test:unit` and `bun run typecheck`. Expected: both exit 0.
 
@@ -237,7 +237,7 @@ git commit -m "chore: add identity backend test foundation"
 - Create: `tests/helpers/database.ts`
 - Create: `tests/integration/database/health.spec.ts`
 
-- [ ] **Step 1: Extend Compose**
+- [x] **Step 1: Extend Compose**
 
 Keep the existing `postgres` service and add:
 
@@ -264,7 +264,7 @@ Keep the existing `postgres` service and add:
       - "127.0.0.1:8025:8025"
 ```
 
-- [ ] **Step 2: Write the failing database readiness test**
+- [x] **Step 2: Write the failing database readiness test**
 
 Create `tests/integration/database/health.spec.ts`:
 
@@ -287,7 +287,7 @@ bunx vitest run tests/integration/database/health.spec.ts
 
 Expected: FAIL because `health.ts` does not exist.
 
-- [ ] **Step 3: Implement the database boundary**
+- [x] **Step 3: Implement the database boundary**
 
 `client.ts` exports `createDatabase(url)` using `postgres(url, { max: 10 })` and `drizzle(queryClient)`, plus lazy `getDatabase()` and `closeDatabase()`. Implement `health.ts` as:
 
@@ -320,7 +320,7 @@ export default defineConfig({
 })
 ```
 
-- [ ] **Step 4: Verify and commit**
+- [x] **Step 4: Verify and commit**
 
 Run the focused integration test and `bun run typecheck`. Expected: PASS.
 
@@ -343,13 +343,13 @@ git commit -m "feat: add database and mail development services"
 - Create: `drizzle/meta/_journal.json`
 - Create: `tests/integration/identity/schema.spec.ts`
 
-- [ ] **Step 1: Write the failing schema test**
+- [x] **Step 1: Write the failing schema test**
 
 Reset the test database `public` schema in `tests/helpers/database.ts`, run Drizzle migrations, then query `information_schema.tables`. Expect `user`, `account`, `session`, `verification`, and `rateLimit`.
 
 Run the test. Expected: FAIL because no migration exists.
 
-- [ ] **Step 2: Create the auth factory used for schema generation**
+- [x] **Step 2: Create the auth factory used for schema generation**
 
 Define `PasswordResetMailer` in `contracts.ts`. Implement `createMinervaAuth` with:
 
@@ -391,7 +391,7 @@ The runtime configuration must make public sign-up unavailable; bootstrap and te
 
 Create the SMTP mailer in this task so runtime `auth.ts` has no temporary dependency. It constructs a Nodemailer transport from validated SMTP host/port and implements `PasswordResetMailer`; sending behavior is exercised in Task 6.
 
-- [ ] **Step 3: Generate and review the schema**
+- [x] **Step 3: Generate and review the schema**
 
 Run:
 
@@ -402,11 +402,11 @@ bun run db:generate -- --name identity_backend_foundation
 
 Expected: the five tables and username/user fields are present; primary keys use UUID-compatible string values; email, username, session token, and rate-limit key have unique indexes. Export every table through `schema/index.ts` and pass the schema object to `drizzleAdapter`.
 
-- [ ] **Step 4: Add session lifecycle hooks**
+- [x] **Step 4: Add session lifecycle hooks**
 
 Add `databaseHooks.session.create.before` to reject any user whose status is not `active` with generic `INVALID_CREDENTIALS`. Add `session.create.after` to update only `lastLoginAt`. Do not log the identifier, password, hash, session token, or reset token.
 
-- [ ] **Step 5: Verify migration and commit**
+- [x] **Step 5: Verify migration and commit**
 
 Run the schema integration test twice from a reset test database, then `bun run typecheck`. Expected: both migration runs and typecheck pass.
 
@@ -423,7 +423,7 @@ git commit -m "feat: add Better Auth database schema"
 - Create: `scripts/bootstrap-super-admin.ts`
 - Create: `tests/integration/identity/bootstrap-super-admin.spec.ts`
 
-- [ ] **Step 1: Write RED bootstrap cases**
+- [x] **Step 1: Write RED bootstrap cases**
 
 Create four named tests: `creates the first active super admin`, `is idempotent for the same normalized identity`, `refuses a second bootstrap identity`, and `never elevates an existing ordinary account`. Run:
 
@@ -433,15 +433,15 @@ bunx vitest run tests/integration/identity/bootstrap-super-admin.spec.ts
 
 Expected: FAIL because `bootstrapSuperAdmin` does not exist.
 
-- [ ] **Step 2: Implement bootstrap service**
+- [x] **Step 2: Implement bootstrap service**
 
 Use a dedicated one-connection PostgreSQL client, acquire `pg_advisory_lock(hashtext('minerva-bootstrap-super-admin'))`, perform all checks, call a `bootstrap`-mode Better Auth `auth.api.signUpEmail` with username/displayUsername, and release the lock in `finally`. Return only `{ outcome: 'created' | 'existing', userId }`.
 
-- [ ] **Step 3: Implement protected CLI input**
+- [x] **Step 3: Implement protected CLI input**
 
 `read-hidden-value.ts` reads a TTY password with raw-mode keypress handling and restores terminal mode in `finally`. The command accepts no password argument, prints neither password nor email, and emits only `Bootstrap super administrator is ready.` on success.
 
-- [ ] **Step 4: Verify and commit**
+- [x] **Step 4: Verify and commit**
 
 Run focused tests twice and confirm no password appears in captured stdout/stderr.
 
@@ -464,29 +464,29 @@ git commit -m "feat: add super admin bootstrap command"
 - Create: `tests/unit/identity/identifier.spec.ts`
 - Create: `tests/integration/identity/sign-in.spec.ts`
 
-- [ ] **Step 1: Write RED identifier tests**
+- [x] **Step 1: Write RED identifier tests**
 
-Create `identifier.spec.ts` with exact cases ` User@Example.com ` → `{ kind: 'email', normalized: 'user@example.com' }`, ` Test.User ` → `{ kind: 'username', normalized: 'test.user' }`, and empty or 256-character input → `INVALID_CREDENTIALS`. Run the file and expect module-not-found RED.
+Create `identifier.spec.ts` with exact cases ` User@Example.com ` в†’ `{ kind: 'email', normalized: 'user@example.com' }`, ` Test.User ` в†’ `{ kind: 'username', normalized: 'test.user' }`, and empty or 256-character input в†’ `INVALID_CREDENTIALS`. Run the file and expect module-not-found RED.
 
-- [ ] **Step 2: Implement identifier and stable errors**
+- [x] **Step 2: Implement identifier and stable errors**
 
 `identifier.ts` returns `{ kind: 'email' | 'username', normalized: string }`. `errors.ts` defines only `INVALID_CREDENTIALS`, `AUTH_REQUIRED`, `ACCOUNT_DISABLED`, `RESET_REQUEST_ACCEPTED`, `RESET_TOKEN_INVALID`, `RATE_LIMITED`, and `SERVICE_UNAVAILABLE`, each with an HTTP status mapping.
 
-- [ ] **Step 3: Write RED throttling/sign-in integration tests**
+- [x] **Step 3: Write RED throttling/sign-in integration tests**
 
 Seed one user through `test-seed` mode. Add named tests for email cookie, username cookie, shared invalid-credential response, sixth-attempt `429`, and absence of plaintext identifier in `rateLimit`. Run `bunx vitest run tests/integration/identity/sign-in.spec.ts`; expected: RED because `sign-in.ts` is missing.
 
-- [ ] **Step 4: Implement durable rate limiting and sign-in**
+- [x] **Step 4: Implement durable rate limiting and sign-in**
 
 Hash `${scope}:${ip}:${normalizedIdentifier}` with HMAC-SHA-256 and `RATE_LIMIT_HMAC_SECRET`. Atomically insert/update `rateLimit`; reset count outside the window; reject when count exceeds five. `sign-in.ts` branches to `auth.api.signInEmail` or `auth.api.signInUsername` with `returnHeaders: true`, catches Better Auth `APIError`, and always maps credential failure to `INVALID_CREDENTIALS`.
 
 The Nitro handler obtains the connecting IP with `getRequestIP(event, { xForwardedFor: env.TRUST_PROXY })`, forwards every `Set-Cookie` value, and returns `{ ok: true }` only.
 
-- [ ] **Step 5: Mount Better Auth and protect a server API**
+- [x] **Step 5: Mount Better Auth and protect a server API**
 
 The catch-all handler delegates to `auth.handler(toWebRequest(event))` but returns `404` for direct sign-up, username-availability, email/username sign-in, request-reset, and reset paths owned by Minerva adapters. `require-session.ts` calls `auth.api.getSession({ headers: event.headers })` and throws `AUTH_REQUIRED`. Replace role-name logic in `mainMenu.get.ts` with this server session guard.
 
-- [ ] **Step 6: Verify and commit**
+- [x] **Step 6: Verify and commit**
 
 Run unit/integration tests and typecheck.
 
@@ -504,19 +504,19 @@ git commit -m "feat: add secure identifier sign in"
 - Create: `server/api/identity/reset-password.post.ts`
 - Create: `tests/integration/identity/password-recovery.spec.ts`
 
-- [ ] **Step 1: Write RED recovery tests**
+- [x] **Step 1: Write RED recovery tests**
 
 Add named tests for the shared request response, known-account Mailpit delivery, no unknown-account mail, 30-minute expiry, single use, and session revocation. Fetch mail text from `${MAILPIT_API_URL}/view/latest.txt?query=to:<encoded-email>`. Run the file; expected: RED because `password-recovery.ts` is missing.
 
-- [ ] **Step 2: Implement SMTP adapter**
+- [x] **Step 2: Implement SMTP adapter**
 
-Use Nodemailer transport `{ host, port, secure: false }`. Send Russian subject `Восстановление пароля Minerva` and plain-text link. Catch asynchronous send failure with a sanitized server error that excludes recipient and URL.
+Use Nodemailer transport `{ host, port, secure: false }`. Send Russian subject `Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РїР°СЂРѕР»СЏ Minerva` and plain-text link. Catch asynchronous send failure with a sanitized server error that excludes recipient and URL.
 
-- [ ] **Step 3: Implement recovery services and handlers**
+- [x] **Step 3: Implement recovery services and handlers**
 
 Request endpoint uses a three-per-hour HMAC key of IP plus normalized email, calls `auth.api.requestPasswordReset`, and always returns `{ code: 'RESET_REQUEST_ACCEPTED' }`. Reset endpoint limits five attempts per 15 minutes per IP, calls `auth.api.resetPassword`, and maps invalid/expired/used tokens to `RESET_TOKEN_INVALID`.
 
-- [ ] **Step 4: Verify and commit**
+- [x] **Step 4: Verify and commit**
 
 Run Mailpit integration tests, sign-in regression tests, and typecheck.
 
@@ -538,13 +538,13 @@ git commit -m "feat: add password recovery through Mailpit"
 - Create: `tests/e2e/global.setup.ts`
 - Create: `tests/e2e/identity.spec.ts`
 
-- [ ] **Step 1: Add RED browser journeys**
+- [x] **Step 1: Add RED browser journeys**
 
 Create seven Playwright tests named `redirects a guest`, `signs in by email`, `signs in by username`, `hides credential enumeration`, `revokes logout session`, `returns one recovery response`, and `resets once through Mailpit`. Run them before UI wiring; expected: failures at missing identity endpoints or absent form state.
 
 `global.setup.ts` resets the test schema, applies `drizzle/`, clears Mailpit with its API, and creates one ordinary user through `test-seed` mode. Register it as `globalSetup` in `playwright.config.ts`; never call the interactive bootstrap command from tests.
 
-- [ ] **Step 2: Add auth client and page middleware**
+- [x] **Step 2: Add auth client and page middleware**
 
 Create:
 
@@ -556,19 +556,19 @@ export const authClient = createAuthClient({ baseURL: '/api/auth' })
 
 The global middleware allows `/auth/**`, `/legal/**`, and `/invitations/**`; all other routes require `authClient.getSession()`. Authenticated visits to `/auth` redirect to `/`.
 
-- [ ] **Step 3: Wire the login form**
+- [x] **Step 3: Wire the login form**
 
-Keep all existing classes and structure. Add `v-model` identifier/password refs, `autocomplete="username"` and `autocomplete="current-password"`, submit through `$fetch('/api/identity/sign-in')`, disable the button while pending, display `Неверный логин или пароль` for `INVALID_CREDENTIALS`, then navigate to `/`.
+Keep all existing classes and structure. Add `v-model` identifier/password refs, `autocomplete="username"` and `autocomplete="current-password"`, submit through `$fetch('/api/identity/sign-in')`, disable the button while pending, display `РќРµРІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ` for `INVALID_CREDENTIALS`, then navigate to `/`.
 
-- [ ] **Step 4: Wire recovery forms**
+- [x] **Step 4: Wire recovery forms**
 
-Forgot form posts email and always displays `Если аккаунт существует, ссылка отправлена на почту`. Reset form validates matching 12–256-character passwords, reads the path token from `route.params.token`, posts `{ token, newPassword }`, and returns to `/auth` after success. Replace the incorrect `<ResetPasswordForm />` usage with `<AuthResetPasswordForm />`.
+Forgot form posts email and always displays `Р•СЃР»Рё Р°РєРєР°СѓРЅС‚ СЃСѓС‰РµСЃС‚РІСѓРµС‚, СЃСЃС‹Р»РєР° РѕС‚РїСЂР°РІР»РµРЅР° РЅР° РїРѕС‡С‚Сѓ`. Reset form validates matching 12вЂ“256-character passwords, reads the path token from `route.params.token`, posts `{ token, newPassword }`, and returns to `/auth` after success. Replace the incorrect `<ResetPasswordForm />` usage with `<AuthResetPasswordForm />`.
 
-- [ ] **Step 5: Verify logout without adding layout UI**
+- [x] **Step 5: Verify logout without adding layout UI**
 
 Use Better Auth `POST /api/auth/sign-out` in the browser test, then reload `/` and expect redirect to `/auth`. This proves the server behavior while avoiding conflicts with the separately edited header/sidebar; a visible logout control belongs to the later approved UI slice.
 
-- [ ] **Step 6: Verify and commit**
+- [x] **Step 6: Verify and commit**
 
 Run `bun run test:e2e`, unit/integration tests, typecheck, and build.
 
@@ -584,7 +584,7 @@ git commit -m "feat: connect authentication forms"
 - Modify: `docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md`
 - Modify: `docs/superpowers/plans/2026-06-29-identity-backend-foundation.md`
 
-- [ ] **Step 1: Verify from clean infrastructure**
+- [x] **Step 1: Verify from clean infrastructure**
 
 Run:
 
@@ -603,15 +603,15 @@ git diff --check
 
 Expected: every command exits 0; a repeated `bun run db:migrate` makes no schema change.
 
-- [ ] **Step 2: Record the completed slice**
+- [x] **Step 2: Record the completed slice**
 
 Set the design status to `implemented and verified`, check completed plan boxes, and add one concise `docs/progress.md` entry covering PostgreSQL/Drizzle, Better Auth identifier login, sessions/logout, Mailpit recovery, bootstrap, and verification evidence.
 
-- [ ] **Step 3: Refresh Tesserae safely**
+- [x] **Step 3: Refresh Tesserae safely**
 
 Run `./scripts/refresh-tesserae.ps1`. Verify success, then confirm `.tesserae`, `.env`, `.output`, Mailpit data, and database files are not staged.
 
-- [ ] **Step 4: Final documentation commit**
+- [x] **Step 4: Final documentation commit**
 
 ```powershell
 git add docs/progress.md docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md docs/superpowers/plans/2026-06-29-identity-backend-foundation.md
