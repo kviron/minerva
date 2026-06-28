@@ -116,6 +116,14 @@ describe('password recovery', () => {
       .rejects.toMatchObject({ code: 'RESET_TOKEN_INVALID' })
   })
 
+  it('rejects a mutated reset token', async () => {
+    await requestPasswordReset({ email, ip: '127.0.0.28' })
+    const token = await getResetToken()
+
+    await expect(resetPassword({ token: `${token}x`, newPassword, ip: '127.0.0.28' }))
+      .rejects.toMatchObject({ code: 'RESET_TOKEN_INVALID' })
+  })
+
   it('revokes existing sessions after password reset', async () => {
     const signedIn = await signInWithIdentifier({
       identifier: email, password: oldPassword, ip: '127.0.0.26', requestHeaders: new Headers(),

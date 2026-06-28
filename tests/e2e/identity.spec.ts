@@ -15,6 +15,25 @@ test('redirects a guest', async ({ page }) => {
   await expect(page).toHaveURL(/\/auth$/)
 })
 
+test('blocks public authentication bypasses', async ({ request }) => {
+  const headers = { origin: 'http://127.0.0.1:3000' }
+  const signUp = await request.post('/api/auth/sign-up/email', {
+    headers,
+    data: {
+      name: 'Public user',
+      email: 'public@example.com',
+      password: oldPassword,
+    },
+  })
+  const availability = await request.post('/api/auth/is-username-available', {
+    headers,
+    data: { username: 'public.user' },
+  })
+
+  expect(signUp.status()).toBe(404)
+  expect(availability.status()).toBe(404)
+})
+
 test('signs in by email', async ({ page }) => {
   await submitLogin(page, 'user@example.com')
   await expect(page).toHaveURL(/\/$/)
