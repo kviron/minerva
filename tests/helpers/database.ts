@@ -18,6 +18,7 @@ export async function resetTestDatabase() {
 
   try {
     await sql`drop schema if exists public cascade`
+    await sql`drop schema if exists drizzle cascade`
     await sql`create schema public`
   } finally {
     await sql.end()

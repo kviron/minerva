@@ -1,10 +1,10 @@
 # Minerva progress
 
-Last updated: 2026-06-28
+Last updated: 2026-06-29
 
 ## Current state
 
-Stage 0 and stage 0.5 are in progress. Application implementation remains blocked pending user approval of the audited specification and plans. The user explicitly approved the empty MVP route skeleton and the isolated browser-autofill styling fix for shared inputs.
+The user approved the audited Identity backend design and implementation plan, so its application implementation gate is open. Work is proceeding in the isolated `feature/identity-backend-foundation` branch; page layout remains unchanged while the PostgreSQL and authentication foundation is built in tested vertical slices.
 
 ## Completed
 
@@ -33,9 +33,12 @@ Stage 0 and stage 0.5 are in progress. Application implementation remains blocke
 - Preserved shared input styling when Chromium autofills credentials by overriding its text fill and covering its protected autofill background with a theme-aware inset surface.
 - Added the approved static password-recovery request screen, matching sign-in styling and linked bidirectionally with `/auth`.
 - Added the approved static new-password form on the tokenized reset route without exposing or processing the token.
+- Added validated server environment configuration and unit/integration/browser test foundations for the Identity backend.
+- Added isolated PostgreSQL test infrastructure, local Mailpit, and a database readiness endpoint.
+- Added the Better Auth factory with PostgreSQL/Drizzle, email-password and username support, persistent sessions, database rate-limit storage, account status fields, password-reset settings, and the first reviewed migration.
 
-## Remaining before application implementation
+## Remaining
 
 - Build and review the eight-screen prototype in the supplied Figma file.
-- Obtain final user approval of the updated canonical documents, UX/UI prototype, and plans.
-- After approval, create detailed plans for later slices only when the preceding slice has established their real interfaces.
+- Complete and verify the approved Identity backend slices: first-super-admin bootstrap, identifier sign-in, session guards, password recovery, and existing-form wiring.
+- Create detailed plans for later product slices only when the preceding slice has established their real interfaces.
