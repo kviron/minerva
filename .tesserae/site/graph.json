@@ -119,6 +119,27 @@
       "evidence": null,
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0007-separate-authentication-identity-user-p:83396c0e3f00",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:forgot-password-ui-design:4253f2296159",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:forgot-password-ui-implementation-plan:011eede9a65c",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:minerva-agent-instructions:7b4afaaff5ff",
       "type": "summarizes"
     },
@@ -239,6 +260,13 @@
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:tesserae-refresh-wrapper-implementation-plan:0fcadea655b1",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:user-identity-and-profile-design:4c26d4b8aa62",
       "type": "summarizes"
     }
   ],
@@ -479,6 +507,125 @@
     {
       "aliases": [],
       "description": "",
+      "id": "SourceDocument:adr-0007-separate-authentication-identity-user-p:83396c0e3f00",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-rol",
+            "level": 1,
+            "text": "ADR 0007: Separate authentication identity, user profiles, contacts, and project roles"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "security-rules",
+            "level": 2,
+            "text": "Security rules"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0007: Separate authentication identity, user profiles, contacts, and project roles",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0007-separate-authentication-profiles-and-project-roles.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:forgot-password-ui-design:4253f2296159",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "forgot-password-ui-design",
+            "level": 1,
+            "text": "Forgot-password UI design"
+          },
+          {
+            "anchor": "goal",
+            "level": 2,
+            "text": "Goal"
+          },
+          {
+            "anchor": "components-and-routes",
+            "level": 2,
+            "text": "Components and routes"
+          },
+          {
+            "anchor": "form-composition",
+            "level": 2,
+            "text": "Form composition"
+          },
+          {
+            "anchor": "accessibility-and-localization",
+            "level": 2,
+            "text": "Accessibility and localization"
+          },
+          {
+            "anchor": "verification",
+            "level": 2,
+            "text": "Verification"
+          },
+          {
+            "anchor": "deferred-behavior",
+            "level": 2,
+            "text": "Deferred behavior"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Forgot-password UI design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-28-forgot-password-ui-design.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:forgot-password-ui-implementation-plan:011eede9a65c",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "forgot-password-ui-implementation-plan",
+            "level": 1,
+            "text": "Forgot-Password UI Implementation Plan"
+          },
+          {
+            "anchor": "file-structure",
+            "level": 2,
+            "text": "File structure"
+          },
+          {
+            "anchor": "task-1-add-the-forgot-password-form-component",
+            "level": 3,
+            "text": "Task 1: Add the forgot-password form component"
+          },
+          {
+            "anchor": "task-2-wire-the-route-and-navigation",
+            "level": 3,
+            "text": "Task 2: Wire the route and navigation"
+          },
+          {
+            "anchor": "task-3-record-and-verify-the-completed-slice",
+            "level": 3,
+            "text": "Task 3: Record and verify the completed slice"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Forgot-Password UI Implementation Plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-28-forgot-password-ui.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
       "id": "SourceDocument:minerva-agent-instructions:7b4afaaff5ff",
       "metadata": {
         "sections": [
@@ -539,6 +686,11 @@
             "anchor": "identity",
             "level": 3,
             "text": "Identity"
+          },
+          {
+            "anchor": "profiles",
+            "level": 3,
+            "text": "Profiles"
           },
           {
             "anchor": "authorization",
@@ -1140,6 +1292,11 @@
             "text": "Global administration"
           },
           {
+            "anchor": "user-profiles-and-contacts",
+            "level": 3,
+            "text": "User profiles and contacts"
+          },
+          {
             "anchor": "project-authorization",
             "level": 3,
             "text": "Project authorization"
@@ -1522,10 +1679,88 @@
     },
     {
       "aliases": [],
+      "description": "",
+      "id": "SourceDocument:user-identity-and-profile-design:4c26d4b8aa62",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "user-identity-and-profile-design",
+            "level": 1,
+            "text": "User identity and profile design"
+          },
+          {
+            "anchor": "goal-and-scope",
+            "level": 2,
+            "text": "Goal and scope"
+          },
+          {
+            "anchor": "authentication-boundary",
+            "level": 2,
+            "text": "Authentication boundary"
+          },
+          {
+            "anchor": "data-model",
+            "level": 2,
+            "text": "Data model"
+          },
+          {
+            "anchor": "better-auth-user-and-credential-records",
+            "level": 3,
+            "text": "Better Auth user and credential records"
+          },
+          {
+            "anchor": "user-profile",
+            "level": 3,
+            "text": "User profile"
+          },
+          {
+            "anchor": "dynamic-contacts",
+            "level": 3,
+            "text": "Dynamic contacts"
+          },
+          {
+            "anchor": "roles-and-memberships",
+            "level": 3,
+            "text": "Roles and memberships"
+          },
+          {
+            "anchor": "sign-in-and-account-lifecycle",
+            "level": 2,
+            "text": "Sign-in and account lifecycle"
+          },
+          {
+            "anchor": "privacy-and-avatar-access",
+            "level": 2,
+            "text": "Privacy and avatar access"
+          },
+          {
+            "anchor": "error-contract",
+            "level": 2,
+            "text": "Error contract"
+          },
+          {
+            "anchor": "testing",
+            "level": 2,
+            "text": "Testing"
+          },
+          {
+            "anchor": "deferred-scope",
+            "level": 2,
+            "text": "Deferred scope"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "User identity and profile design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-28-user-identity-profile-design.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
       "description": "Top-level snapshot of the wiki at compile time.",
       "id": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "metadata": {
-        "content_hash": "sha256-353c01b65112283c50577d8ae3d7a9f1f6b3f43b5c81c7a9e37fbc6b3c79d89a",
+        "content_hash": "sha256-8d29f031e564793030df835660af8eab3dfe69985809dd6f01e3c2b747941f83",
         "input_ids": [],
         "synthesis_kind": "pulse"
       },

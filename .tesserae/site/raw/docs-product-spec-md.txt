@@ -4,7 +4,7 @@ product-spec.md
 # Minerva product specification
 
 Status: awaiting user approval after Superpowers audit  
-Last updated: 2026-06-24
+Last updated: 2026-06-28
 
 ## Product goal
 
@@ -32,6 +32,18 @@ The first usable release must let a small internal team:
 - Accepting a project invitation creates or activates the user account and its project membership atomically. It grants no global administrative privilege.
 - An active password-authenticated user may request a password reset without the response revealing whether an account exists for the submitted email.
 - Password-reset tokens are short-lived and single-use. A successful reset invalidates the token and revokes the user's existing sessions.
+- Invitation activation requires a unique email, unique username, and password. Accepting an invitation delivered to its fixed email address verifies that email. Better Auth stores credential hashes outside the user profile.
+- Sign-in accepts email or username plus password. An optional unique phone number is stored for future verified phone authentication, but phone sign-in remains disabled until an SMS provider and OTP verification are approved.
+- Accounts have active or disabled status. Disabling an account revokes its sessions and records an administrator-only reason without violating the last-active-`super_admin` invariant.
+
+### User profiles and contacts
+
+- Family name, given name, middle name, biography, date of birth, job title, avatar, locale, and time zone are optional profile fields.
+- Users may add ordered Telegram, WhatsApp, VK, GitHub, website, and custom contacts.
+- Each contact is private or visible to users sharing an active project. Phone number and date of birth are private by default.
+- The user and `super_admin` may view the complete profile. Unauthenticated users receive no profile data.
+- Avatars use private object storage and authorized reads; storage credentials, raw object keys, and filesystem paths never leave the server.
+- Account creation and successful authentication record UTC timestamps, including the last successful login time.
 
 ### Project authorization
 

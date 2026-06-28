@@ -1,0 +1,4 @@
+ADR 0007: Separate authentication identity, user profiles, contacts, and project roles
+================================================================================
+
+# ADR 0007: Separate authentication identity, user profiles, contacts, and project roles

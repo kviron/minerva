@@ -4,7 +4,7 @@ Last updated: 2026-06-28
 
 ## Current state
 
-Stage 0 and stage 0.5 are in progress. Application implementation remains blocked pending user approval of the audited specification and plans. The user explicitly approved the empty MVP route skeleton; it contains no UI or business behavior.
+Stage 0 and stage 0.5 are in progress. Application implementation remains blocked pending user approval of the audited specification and plans. The user explicitly approved the empty MVP route skeleton and the isolated browser-autofill styling fix for shared inputs.
 
 ## Completed
 
@@ -30,6 +30,8 @@ Stage 0 and stage 0.5 are in progress. Application implementation remains blocke
 - Added public empty route stubs for password recovery under `/auth`.
 - Added a local PostgreSQL 17 Docker Compose service with loopback-only access, persistent storage, and a readiness health check.
 - Approved the Better Auth identity, optional profile, dynamic contact, privacy, and project-role data model, with phone authentication deferred until an SMS provider is selected.
+- Preserved shared input styling when Chromium autofills credentials by overriding its text fill and covering its protected autofill background with a theme-aware inset surface.
+- Added the approved static password-recovery request screen, matching sign-in styling and linked bidirectionally with `/auth`.
 
 ## Remaining before application implementation
 

@@ -1,0 +1,55 @@
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="owl-a" viewBox="0 0 100 100">
+      <rect x="3" y="3" width="94" height="94" rx="20" fill="#071b33"/>
+      <path d="M20 25 43 39l7-14 7 14 23-14-8 48-22 14-22-14z" fill="none" stroke="#d8b879" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M23 31 42 51 28 48m49-17L58 51l14-3M42 51h16L50 63zM31 70h38" fill="none" stroke="#d8b879" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="37" cy="48" r="5" fill="#d8b879"/><circle cx="63" cy="48" r="5" fill="#d8b879"/>
+    </symbol>
+    <symbol id="owl-b" viewBox="0 0 100 100">
+      <rect x="3" y="3" width="94" height="94" rx="20" fill="#071b33"/>
+      <path d="M18 29 36 39a25 25 0 0 1 28 0l18-10-8 39-24 19-24-19z" fill="none" stroke="#d8b879" stroke-width="4" stroke-linejoin="round"/>
+      <circle cx="35" cy="51" r="13" fill="none" stroke="#d8b879" stroke-width="3.5"/><circle cx="65" cy="51" r="13" fill="none" stroke="#d8b879" stroke-width="3.5"/>
+      <circle cx="35" cy="51" r="4" fill="#d8b879"/><circle cx="65" cy="51" r="4" fill="#d8b879"/>
+      <path d="m50 54 7 9-7 8-7-8zM31 76l19 11 19-11" fill="none" stroke="#d8b879" stroke-width="3.5" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="owl-c" viewBox="0 0 100 100">
+      <rect x="3" y="3" width="94" height="94" rx="20" fill="#071b33"/>
+      <path d="M18 25v52l16 10V48l16 16 16-16v39l16-10V25L61 38 50 25 39 38z" fill="none" stroke="#d8b879" stroke-width="4" stroke-linejoin="round"/>
+      <path d="m23 33 18 16-7 14m43-30L59 49l7 14M42 48h16L50 61z" fill="none" stroke="#d8b879" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="35" cy="47" r="4" fill="#d8b879"/><circle cx="65" cy="47" r="4" fill="#d8b879"/>
+    </symbol>
+  </defs>
+</svg>
+
+<h2>Микро-логотип Minerva</h2>
+<p class="subtitle">Три строгих квадратных знака по мотивам астрономической гравюры. В каждой карточке один и тот же SVG показан в 96, 48 и 24 px.</p>
+
+<div class="cards">
+  <div class="card" data-choice="a-compass" onclick="toggleSelect(this)">
+    <div class="card-image" style="min-height:240px;display:flex;align-items:center;justify-content:center;gap:22px;background:#edf2f1">
+      <svg width="96" height="96"><use href="#owl-a"/></svg>
+      <svg width="48" height="48"><use href="#owl-a"/></svg>
+      <svg width="24" height="24"><use href="#owl-a"/></svg>
+    </div>
+    <div class="card-body"><h3>A · Компас</h3><p>Острее и строже остальных. Лучший баланс между образом совы и техническим знаком.</p></div>
+  </div>
+
+  <div class="card" data-choice="b-orbits" onclick="toggleSelect(this)">
+    <div class="card-image" style="min-height:240px;display:flex;align-items:center;justify-content:center;gap:22px;background:#edf2f1">
+      <svg width="96" height="96"><use href="#owl-b"/></svg>
+      <svg width="48" height="48"><use href="#owl-b"/></svg>
+      <svg width="24" height="24"><use href="#owl-b"/></svg>
+    </div>
+    <div class="card-body"><h3>B · Орбиты</h3><p>Круги сохраняют астрономический мотив референса. Более узнаваемая сова, но чуть менее суровая.</p></div>
+  </div>
+
+  <div class="card" data-choice="c-minerva-m" onclick="toggleSelect(this)">
+    <div class="card-image" style="min-height:240px;display:flex;align-items:center;justify-content:center;gap:22px;background:#edf2f1">
+      <svg width="96" height="96"><use href="#owl-c"/></svg>
+      <svg width="48" height="48"><use href="#owl-c"/></svg>
+      <svg width="24" height="24"><use href="#owl-c"/></svg>
+    </div>
+    <div class="card-body"><h3>C · Монограмма M</h3><p>Силуэт одновременно читается как сова и буква M. Самый фирменный, но наиболее абстрактный.</p></div>
+  </div>
+</div>

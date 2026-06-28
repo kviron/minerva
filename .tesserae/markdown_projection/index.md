@@ -10,6 +10,9 @@
 - [[adr-0004-limit-the-first-mcp-release-to-documentation-workflows]] — SourceDocument
 - [[adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation]] — SourceDocument
 - [[adr-0006-use-bun-as-the-package-manager]] — SourceDocument
+- [[adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles]] — SourceDocument
+- [[forgot-password-ui-design]] — SourceDocument
+- [[forgot-password-ui-implementation-plan]] — SourceDocument
 - [[minerva-agent-instructions]] — SourceDocument
 - [[minerva-architecture]] — SourceDocument
 - [[minerva-backlog]] — SourceDocument
@@ -28,6 +31,7 @@
 - [[tesserae-development-memory]] — SourceDocument
 - [[tesserae-refresh-wrapper-design]] — SourceDocument
 - [[tesserae-refresh-wrapper-implementation-plan]] — SourceDocument
+- [[user-identity-and-profile-design]] — SourceDocument
 
 ## Concepts
 

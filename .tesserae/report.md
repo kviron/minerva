@@ -1,19 +1,19 @@
 # Research Graph Report
 
-node_count: 28
-edge_count: 33
+node_count: 32
+edge_count: 37
 
 ## Node Types
 
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 24
+- SourceDocument: 28
 - Synthesis: 1
 
 ## Edge Types
 
-- summarizes: 29
+- summarizes: 33
 - uses_metric: 4
 
 ## Papers by Analysis Date
@@ -28,7 +28,7 @@ _None._
 
 ## Top Degree Nodes
 
-- Project Pulse (Synthesis): 24
+- Project Pulse (Synthesis): 28
 - Minerva MVP Planning (CommunitySummary): 5
 - mAP (Metric): 5
 - MVP Route Skeleton Implementation Plan (SourceDocument): 3
@@ -41,13 +41,13 @@ _None._
 - ADR 0004: Limit the first MCP release to documentation workflows (SourceDocument): 1
 - ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation (SourceDocument): 1
 - ADR 0006: Use Bun as the package manager (SourceDocument): 1
+- ADR 0007: Separate authentication identity, user profiles, contacts, and project roles (SourceDocument): 1
+- Forgot-Password UI Implementation Plan (SourceDocument): 1
+- Forgot-password UI design (SourceDocument): 1
 - Minerva Executable Foundation Implementation Plan (SourceDocument): 1
 - Minerva Figma Prototype Implementation Plan (SourceDocument): 1
 - Minerva MVP Delivery Plan (SourceDocument): 1
 - Minerva MVP design (SourceDocument): 1
-- Minerva agent instructions (SourceDocument): 1
-- Minerva architecture (SourceDocument): 1
-- Minerva backlog (SourceDocument): 1
 
 ## Trends
 

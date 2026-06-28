@@ -4,7 +4,7 @@ architecture.md
 # Minerva architecture
 
 Status: proposed  
-Last updated: 2026-06-24
+Last updated: 2026-06-28
 
 ## Architectural style
 
@@ -16,7 +16,11 @@ This keeps the first release operable on one VPS while preserving boundaries tha
 
 ### Identity
 
-Owns Better Auth configuration, sessions, global and project-bound invitations, TOTP, account status, global `super_admin`, OAuth grants, token lifecycle, and OAuth 2.1 provider behavior. Accepting a project-bound invitation creates or activates the account and membership in one transaction.
+Owns Better Auth configuration, credential accounts, sessions, email and username identity, future verified phone identity, global and project-bound invitations, TOTP, account status, global `super_admin`, OAuth grants, token lifecycle, and OAuth 2.1 provider behavior. Accepting a project-bound invitation creates or activates the account, profile, and membership in one transaction.
+
+### Profiles
+
+Owns optional personal names, biography, date of birth, job title, avatar association, locale, time zone, ordered messenger and social contacts, and profile visibility. It depends on Identity for the user lifecycle, Files for authorized avatar access, and Authorization for shared-project visibility decisions.
 
 ### Authorization
 

@@ -10,7 +10,7 @@ import { GalleryVerticalEnd } from "@lucide/vue"
           <div class="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
             <GalleryVerticalEnd class="size-4" />
           </div>
-          Minerva
+          Минерва
         </a>
       </div>
       <div class="flex flex-1 items-center justify-center">
@@ -21,9 +21,9 @@ import { GalleryVerticalEnd } from "@lucide/vue"
     </div>
     <div class="bg-muted relative hidden lg:block">
       <img
-        src="/placeholder.svg"
+        src="/images/auth/minerva-auth-visual.png"
         alt="Image"
-        class="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+        class="absolute inset-0 h-full w-full object-cover"
       >
     </div>
   </div>

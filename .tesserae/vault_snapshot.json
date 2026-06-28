@@ -63,6 +63,30 @@
       },
       "name": "ADR 0006: Use Bun as the package manager"
     },
+    "SourceDocument:adr-0007-separate-authentication-identity-user-p:83396c0e3f00": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0007: Separate authentication identity, user profiles, contacts, and project roles"
+    },
+    "SourceDocument:forgot-password-ui-design:4253f2296159": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Forgot-password UI design"
+    },
+    "SourceDocument:forgot-password-ui-implementation-plan:011eede9a65c": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Forgot-Password UI Implementation Plan"
+    },
     "SourceDocument:minerva-agent-instructions:7b4afaaff5ff": {
       "aliases": [],
       "description": "",
@@ -207,11 +231,19 @@
       },
       "name": "Tesserae Refresh Wrapper Implementation Plan"
     },
+    "SourceDocument:user-identity-and-profile-design:4c26d4b8aa62": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "User identity and profile design"
+    },
     "Synthesis:synthesis-project-pulse:edf62281b49c": {
       "aliases": [],
       "description": "Top-level snapshot of the wiki at compile time.",
       "metadata": {
-        "content_hash": "sha256-353c01b65112283c50577d8ae3d7a9f1f6b3f43b5c81c7a9e37fbc6b3c79d89a",
+        "content_hash": "sha256-8d29f031e564793030df835660af8eab3dfe69985809dd6f01e3c2b747941f83",
         "synthesis_kind": "pulse"
       },
       "name": "Project Pulse"

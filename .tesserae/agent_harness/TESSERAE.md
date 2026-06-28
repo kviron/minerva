@@ -24,8 +24,8 @@ Expected MCP tools: `schema`, `graph_summary`, `search_nodes`, `node_context`, `
 
 ## Graph summary
 
-- Nodes: 27
-- Edges: 33
+- Nodes: 31
+- Edges: 37
 
 ## Representative nodes
 
@@ -37,10 +37,10 @@ Expected MCP tools: `schema`, `graph_summary`, `search_nodes`, `node_context`, `
 - **ADR 0004: Limit the first MCP release to documentation workflows** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0004-mcp-first-release-boundary.md
 - **ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0005-mcp-oauth-resource-and-revocation.md
 - **ADR 0006: Use Bun as the package manager** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0006-use-bun-package-manager.md
+- **ADR 0007: Separate authentication identity, user profiles, contacts, and project roles** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0007-separate-authentication-profiles-and-project-roles.md
+- **Forgot-password UI design** (`SourceDocument`) — D:\develop\minerva\docs\superpowers\specs\2026-06-28-forgot-password-ui-design.md
+- **Forgot-Password UI Implementation Plan** (`SourceDocument`) — D:\develop\minerva\docs\superpowers\plans\2026-06-28-forgot-password-ui.md
 - **Minerva agent instructions** (`SourceDocument`) — D:\develop\minerva\AGENTS.md
-- **Minerva architecture** (`SourceDocument`) — D:\develop\minerva\docs\architecture.md
-- **Minerva backlog** (`SourceDocument`) — D:\develop\minerva\docs\backlog.md
-- **Minerva Executable Foundation Implementation Plan** (`SourceDocument`) — D:\develop\minerva\docs\superpowers\plans\2026-06-24-foundation.md
 
 ## Agent instructions
 

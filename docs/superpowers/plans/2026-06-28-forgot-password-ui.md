@@ -30,7 +30,7 @@ if (-not (Test-Path -LiteralPath $path)) {
   throw "Missing forgot-password form: $path"
 }
 
-$source = Get-Content -Raw -LiteralPath $path
+$source = Get-Content -Raw -Encoding UTF8 -LiteralPath $path
 $required = @(
   'Восстановление пароля',
   'Отправить ссылку',
@@ -137,8 +137,8 @@ Expected: no whitespace errors; the diff contains only the new static form.
 - [ ] **Step 1: Run the route-navigation assertion and verify it fails**
 
 ```powershell
-$forgotPage = Get-Content -Raw -LiteralPath 'app/pages/auth/forgot-password.vue'
-$loginForm = Get-Content -Raw -LiteralPath 'app/components/LoginForm/index.vue'
+$forgotPage = Get-Content -Raw -Encoding UTF8 -LiteralPath 'app/pages/auth/forgot-password.vue'
+$loginForm = Get-Content -Raw -Encoding UTF8 -LiteralPath 'app/components/LoginForm/index.vue'
 
 if (-not $forgotPage.Contains('<ForgotPasswordForm />')) {
   throw 'Forgot-password route does not render ForgotPasswordForm'
@@ -168,7 +168,7 @@ import { GalleryVerticalEnd } from "@lucide/vue"
       <div class="flex justify-center gap-2 md:justify-start">
         <NuxtLink to="/auth" class="flex items-center gap-2 font-medium">
           <div class="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-            <GalleryVerticalEnd />
+            <GalleryVerticalEnd class="size-4" />
           </div>
           Минерва
         </NuxtLink>
@@ -256,9 +256,9 @@ Expected: sessions import, compile, and Obsidian sync all report `ok`.
 - [ ] **Step 3: Run final scoped verification**
 
 ```powershell
-$component = Get-Content -Raw -LiteralPath 'app/components/ForgotPasswordForm/index.vue'
-$forgotPage = Get-Content -Raw -LiteralPath 'app/pages/auth/forgot-password.vue'
-$loginForm = Get-Content -Raw -LiteralPath 'app/components/LoginForm/index.vue'
+$component = Get-Content -Raw -Encoding UTF8 -LiteralPath 'app/components/ForgotPasswordForm/index.vue'
+$forgotPage = Get-Content -Raw -Encoding UTF8 -LiteralPath 'app/pages/auth/forgot-password.vue'
+$loginForm = Get-Content -Raw -Encoding UTF8 -LiteralPath 'app/components/LoginForm/index.vue'
 
 if (-not $component.Contains('autocomplete="email"')) { throw 'Email autocomplete is missing' }
 if (-not $component.Contains('to="/auth"')) { throw 'Return-to-login link is missing' }

@@ -10,6 +10,9 @@
 - [ADR 0004: Limit the first MCP release to documentation workflows](sources/adr-0004-limit-the-first-mcp-release-to-documentation-workflows.html)
 - [ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation](sources/adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation.html)
 - [ADR 0006: Use Bun as the package manager](sources/adr-0006-use-bun-as-the-package-manager.html)
+- [ADR 0007: Separate authentication identity, user profiles, contacts, and project roles](sources/adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles.html)
+- [Forgot-password UI design](sources/forgot-password-ui-design.html)
+- [Forgot-Password UI Implementation Plan](sources/forgot-password-ui-implementation-plan.html)
 - [Minerva agent instructions](sources/minerva-agent-instructions.html)
 - [Minerva architecture](sources/minerva-architecture.html)
 - [Minerva backlog](sources/minerva-backlog.html)
@@ -28,6 +31,7 @@
 - [Tesserae development memory](sources/tesserae-development-memory.html)
 - [Tesserae refresh wrapper design](sources/tesserae-refresh-wrapper-design.html)
 - [Tesserae Refresh Wrapper Implementation Plan](sources/tesserae-refresh-wrapper-implementation-plan.html)
+- [User identity and profile design](sources/user-identity-and-profile-design.html)
 
 ## Entities
 

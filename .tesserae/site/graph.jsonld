@@ -58,6 +58,27 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:adr-0007-separate-authentication-identity-user-p:83396c0e3f00",
+      "@type": "CreativeWork",
+      "name": "ADR 0007: Separate authentication identity, user profiles, contacts, and project roles",
+      "url": "sources/adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:forgot-password-ui-design:4253f2296159",
+      "@type": "CreativeWork",
+      "name": "Forgot-password UI design",
+      "url": "sources/forgot-password-ui-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:forgot-password-ui-implementation-plan:011eede9a65c",
+      "@type": "CreativeWork",
+      "name": "Forgot-Password UI Implementation Plan",
+      "url": "sources/forgot-password-ui-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:minerva-agent-instructions:7b4afaaff5ff",
       "@type": "CreativeWork",
       "name": "Minerva agent instructions",
@@ -181,6 +202,13 @@
       "@type": "CreativeWork",
       "name": "Tesserae Refresh Wrapper Implementation Plan",
       "url": "sources/tesserae-refresh-wrapper-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:user-identity-and-profile-design:4c26d4b8aa62",
+      "@type": "CreativeWork",
+      "name": "User identity and profile design",
+      "url": "sources/user-identity-and-profile-design.html",
       "additionalType": "SourceDocument"
     },
     {

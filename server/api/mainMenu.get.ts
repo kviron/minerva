@@ -10,15 +10,15 @@ export default defineEventHandler(async (event) => {
 
   // 2. База данных всех возможных пунктов меню (или запрос к БД)
   const allMenuItems = [
-    { label: 'Главная', to: '/', roles: ['guest', 'user', 'admin'] },
-    { label: 'Каталог', to: '/catalog', roles: ['guest', 'user', 'admin'] },
-    { label: 'Мои заказы', to: '/orders', roles: ['user', 'admin'] },
-    { label: 'Панель управления', to: '/admin', roles: ['admin'] },
+    { title: 'Главная', url: '/', roles: ['guest', 'user', 'admin'] },
+    { title: 'Каталог', url: '/catalog', roles: ['guest', 'user', 'admin'] },
+    { title: 'Мои заказы', url: '/orders', roles: ['user', 'admin'] },
+    { title: 'Панель управления', url: '/admin', roles: ['admin'] },
   ]
 
   // 3. Фильтруем пункты: оставляем только те, которые подходят под роль пользователя
   const allowedMenu = allMenuItems.filter(item => item.roles.includes(userRole))
 
   // 4. Возвращаем только безопасные данные (роли фронтенду знать не обязательно)
-  return allowedMenu.map(({ label, to }) => ({ label, to }))
+  return allowedMenu.map(({ title, url }) => ({ title, url }))
 })
