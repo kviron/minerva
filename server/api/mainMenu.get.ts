@@ -11,9 +11,7 @@ export default defineEventHandler(async (event) => {
   // 2. База данных всех возможных пунктов меню (или запрос к БД)
   const allMenuItems = [
     { title: 'Главная', url: '/', roles: ['guest', 'user', 'admin'] },
-    { title: 'Каталог', url: '/catalog', roles: ['guest', 'user', 'admin'] },
-    { title: 'Мои заказы', url: '/orders', roles: ['user', 'admin'] },
-    { title: 'Панель управления', url: '/admin', roles: ['admin'] },
+    { title: 'Проекты', url: '/catalog', roles: ['guest', 'user', 'admin'] },
   ]
 
   // 3. Фильтруем пункты: оставляем только те, которые подходят под роль пользователя

@@ -1,20 +1,5 @@
-<script setup lang="ts">
-import {
-  IconCamera,
-  IconChartBar,
-  IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFolder,
-  IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
-  IconSearch,
-  IconSettings,
-  IconUsers,
-} from "@tabler/icons-vue"
+<!-- <script setup lang="ts">
+
 import NavDocuments from "@/components/NavDocuments.vue"
 import NavMain from "@/components/NavMain.vue"
 import NavSecondary from "@/components/NavSecondary.vue"
@@ -171,4 +156,8 @@ const data = {
       <NavUser :user="data.user" />
     </SidebarFooter>
   </Sidebar>
+</template> -->
+
+<template>
+  <div/>
 </template>

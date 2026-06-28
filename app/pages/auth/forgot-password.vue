@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { GalleryVerticalEnd } from "@lucide/vue"
+definePageMeta({
+  layout: "empty",
+  title: "Забыли пароль",
+})
 </script>
 
 <template>
@@ -15,7 +19,7 @@ import { GalleryVerticalEnd } from "@lucide/vue"
       </div>
       <div class="flex flex-1 items-center justify-center">
         <div class="w-full max-w-xs">
-          <ForgotPasswordForm />
+          <AuthForgotPasswordForm />
         </div>
       </div>
     </div>
