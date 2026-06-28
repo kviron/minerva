@@ -1,6 +1,6 @@
 # Identity backend foundation design
 
-Status: approved in interactive design review; awaiting written review
+Status: approved for implementation planning
 Date: 2026-06-28
 
 ## Goal
