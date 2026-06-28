@@ -17,30 +17,30 @@ Use the local MCP server to query the graph:
 
 ```text
 command: python3
-args: ["-m", "tesserae.mcp_server", "--graph", "D:\\develop\\minerva\\.tesserae\\graph.json"]
+args: ["-m", "tesserae.mcp_server", "--graph", "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\.tesserae\\graph.json"]
 ```
 
 Expected MCP tools: `schema`, `graph_summary`, `search_nodes`, `node_context`, `search_facts`, `timeline`.
 
 ## Graph summary
 
-- Nodes: 33
-- Edges: 39
+- Nodes: 35
+- Edges: 45
 
 ## Representative nodes
 
-- **Minerva MVP Planning** (`CommunitySummary`) — Documents and a metric centered on Minerva MVP route design, UX/UI prototyping, implementation planning, progress tracking, and evaluation context.
-- **mAP** (`Metric`) — D:\develop\minerva\docs\progress.md
-- **ADR 0001: Use a modular Nuxt/Nitro monolith** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0001-modular-monolith.md
-- **ADR 0002: Use global super administration and project-scoped RBAC** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0002-project-rbac.md
-- **ADR 0003: Separate mutable drafts from immutable published versions** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0003-document-versioning.md
-- **ADR 0004: Limit the first MCP release to documentation workflows** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0004-mcp-first-release-boundary.md
-- **ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0005-mcp-oauth-resource-and-revocation.md
-- **ADR 0006: Use Bun as the package manager** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0006-use-bun-package-manager.md
-- **ADR 0007: Separate authentication identity, user profiles, contacts, and project roles** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0007-separate-authentication-profiles-and-project-roles.md
-- **Forgot-password UI design** (`SourceDocument`) — D:\develop\minerva\docs\superpowers\specs\2026-06-28-forgot-password-ui-design.md
-- **Forgot-Password UI Implementation Plan** (`SourceDocument`) — D:\develop\minerva\docs\superpowers\plans\2026-06-28-forgot-password-ui.md
-- **Minerva agent instructions** (`SourceDocument`) — D:\develop\minerva\AGENTS.md
+- **Minerva Identity MVP** (`CommunitySummary`) — Planning, design, routing, implementation, progress, and evaluation artifacts for the Minerva identity backend foundation MVP, including route skeletons and shared success metrics.
+- **mAP** (`Metric`) — C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\progress.md
+- **ADR 0001: Use a modular Nuxt/Nitro monolith** (`SourceDocument`) — C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\decisions\0001-modular-monolith.md
+- **ADR 0002: Use global super administration and project-scoped RBAC** (`SourceDocument`) — C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\decisions\0002-project-rbac.md
+- **ADR 0003: Separate mutable drafts from immutable published versions** (`SourceDocument`) — C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\decisions\0003-document-versioning.md
+- **ADR 0004: Limit the first MCP release to documentation workflows** (`SourceDocument`) — C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\decisions\0004-mcp-first-release-boundary.md
+- **ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation** (`SourceDocument`) — C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\decisions\0005-mcp-oauth-resource-and-revocation.md
+- **ADR 0006: Use Bun as the package manager** (`SourceDocument`) — C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\decisions\0006-use-bun-package-manager.md
+- **ADR 0007: Separate authentication identity, user profiles, contacts, and project roles** (`SourceDocument`) — C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\decisions\0007-separate-authentication-profiles-and-project-roles.md
+- **Forgot-password UI design** (`SourceDocument`) — C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\superpowers\specs\2026-06-28-forgot-password-ui-design.md
+- **Forgot-Password UI Implementation Plan** (`SourceDocument`) — C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\superpowers\plans\2026-06-28-forgot-password-ui.md
+- **Identity backend foundation design** (`SourceDocument`) — C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\superpowers\specs\2026-06-28-identity-backend-foundation-design.md
 
 ## Agent instructions
 

@@ -2,7 +2,7 @@
 kind: sources
 node_id: "SourceDocument:minerva-progress:c476087b907f"
 node_type: SourceDocument
-source_path: "D:\\develop\\minerva\\docs\\progress.md"
+source_path: "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\progress.md"
 title: Minerva progress
 ---
 # Minerva progress
@@ -13,7 +13,7 @@ title: Minerva progress
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
 
 ## Connected node types
 

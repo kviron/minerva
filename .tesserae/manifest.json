@@ -1,5 +1,133 @@
 {
   "files": {
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\AGENTS.md": {
+      "sha256": "28bc1bd0b6c998b0b575f1a34d9a25ac1166f33dec72098d42c365412212ef44",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\architecture.md": {
+      "sha256": "8720c03972ff7e94e942a279d70693b1f54993a6b3d6a966801ccc4607ee4be3",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\backlog.md": {
+      "sha256": "d8f01db3791d77c1f479a1835a78a7b4bda138fdcb0ce764eb169f2d2ed8fc70",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0001-modular-monolith.md": {
+      "sha256": "88d6ee3bdbe4a873f9b83ff216708496ea344f27cdd5069813065a78032586ed",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0002-project-rbac.md": {
+      "sha256": "db2a180d645fe7081119c801875ffb5da177c3f4610229f868b2a16fff30f1a0",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0003-document-versioning.md": {
+      "sha256": "7ec9c71cf85b91d545ef089d1a5ce8a7ed0dd3203bb0f5b5f246ff75c11af5d0",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0004-mcp-first-release-boundary.md": {
+      "sha256": "e71ad88565e4616b478d5309691439b6fa974c55c8ab38a87c549f8d505c1440",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0005-mcp-oauth-resource-and-revocation.md": {
+      "sha256": "9384aa5ffb6e764c305eeffd2c7b8f049385d95575f7dcbff2690a8ffc992c1c",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0006-use-bun-package-manager.md": {
+      "sha256": "8fee41800930f0b720792226e585f2e773160b0a72be914a8f0edc31c3aacdfd",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0007-separate-authentication-profiles-and-project-roles.md": {
+      "sha256": "44d102a43ddc34ebb79eb36380e18f3b3cbfb21325f20c30031e4613596fc3bd",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\operations\\tesserae.md": {
+      "sha256": "5e559e1ce185d68c412255a72d741c09abae46956646d0178a6aa3e5d9599ae8",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\product-spec.md": {
+      "sha256": "7a4fcaf07d1b4b02ed5166753d9c33e9e711908b11e1e8ce29d2070242359eed",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\progress.md": {
+      "sha256": "6642e00da31c69c789d671c98a2016f7253d643fb16146a0142a9bd3b07f4182",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\roadmap.md": {
+      "sha256": "c6d242b7967cf0676cc44f62f9e0be023afc28500a85dffbc153c7bb613eed2f",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-24-foundation.md": {
+      "sha256": "a8971512dc695dab132e9cefcea0753ed3ec84fe12ab5921cec22cdc4a55ccc0",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-24-minerva-figma-prototype.md": {
+      "sha256": "d439955b866c6550b9803ef3ce76da653810fa319db9495f5fd53b7c38356bab",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-24-minerva-mvp-roadmap.md": {
+      "sha256": "9869d57be193faf8000017a057c47003473c4b4a088c39e2d903219abda99e1f",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-27-mvp-route-skeleton.md": {
+      "sha256": "9d884f2671b14fe934a1f8b2ed3deafada5cafefe8ab51c9f4e7b08305a02620",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-27-postgresql-compose.md": {
+      "sha256": "235317bdf13c9d33364609291ec1b7c3bc67b3cd161e4829a56d3b6e5b5204b0",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-27-tesserae-refresh-wrapper.md": {
+      "sha256": "65be26323bbf4180b1e013811b60c7317e424ee2188d50e553d3dad3751fecb1",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-28-forgot-password-ui.md": {
+      "sha256": "667e122f627677e2f7187a4c71a161a6703f865365571e62d0b8302fb6ff5817",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-28-reset-password-ui.md": {
+      "sha256": "d6906b1d947385afc919bb3ea430755e11ac4c3d51110436acc8c719bd025411",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-29-identity-backend-foundation.md": {
+      "sha256": "5b70fed4658e6a1bc81d4cfa553d918e47852f3d4bf8758ea6f90f1404b911f9",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-24-minerva-mvp-design.md": {
+      "sha256": "68951988868ab0b552312d71c3b4dc0a03a9be2c3a1eb6582f4a3dcd292e85e4",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-24-minerva-ui-prototype-design.md": {
+      "sha256": "a55b985ff87b08c517cfb97d867238ed945a9b580cade68234b57f6cf0bba820",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-27-minerva-mvp-route-map-design.md": {
+      "sha256": "6857bd2000f1d66db4690a48a462f8716e8d1e59c254f1645b875b05bd538187",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-27-postgresql-compose-design.md": {
+      "sha256": "26703bd00226c530fe30a1db0dbbb6d2e93d767b5998ecd13216b875801b22f4",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-27-tesserae-refresh-wrapper-design.md": {
+      "sha256": "604c0f018a376ff2ba7d1f199425871c26023997f04d6401687a2a559c7d1c44",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-28-forgot-password-ui-design.md": {
+      "sha256": "0b2a2afc8225b3c90945d9df1593a5aa676859a842545a64ccc82bd47d99ea02",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-28-identity-backend-foundation-design.md": {
+      "sha256": "58643b7cbf831d1d63db813d565667da934c367c4161513b3d89825bb972f6a2",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-28-reset-password-ui-design.md": {
+      "sha256": "a6f0b3dcaa8e8c763792e4c830a74b3710b53c6183893e2d6c3406fdf3b2f0ce",
+      "source_kind": "SourceDocument"
+    },
+    "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-28-user-identity-profile-design.md": {
+      "sha256": "0dddc9a92a79d771c863062b83f5f9eaebe6e7ba833d634e0b872202fc61b8b6",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\AGENTS.md": {
       "sha256": "28bc1bd0b6c998b0b575f1a34d9a25ac1166f33dec72098d42c365412212ef44",
       "source_kind": "SourceDocument"

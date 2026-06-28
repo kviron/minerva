@@ -2,14 +2,14 @@
   "title": "ADR 0003: Separate mutable drafts from immutable published versions",
   "kind": "sources",
   "body_text": "# ADR 0003: Separate mutable drafts from immutable published versions",
-  "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0003-document-versioning.md",
+  "source_path": "C:\\\\Users\\\\roma\\\\.config\\\\superpowers\\\\worktrees\\\\minerva\\\\identity-backend-foundation\\\\docs\\\\decisions\\\\0003-document-versioning.md",
   "links": [],
   "body": "# ADR 0003: Separate mutable drafts from immutable published versions",
   "frontmatter": {
     "kind": "sources",
     "node_id": "SourceDocument:adr-0003-separate-mutable-drafts-from-immutable-:27a2a19ac4f3",
     "node_type": "SourceDocument",
-    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0003-document-versioning.md",
+    "source_path": "C:\\\\Users\\\\roma\\\\.config\\\\superpowers\\\\worktrees\\\\minerva\\\\identity-backend-foundation\\\\docs\\\\decisions\\\\0003-document-versioning.md",
     "title": "ADR 0003: Separate mutable drafts from immutable published versions"
   }
 }

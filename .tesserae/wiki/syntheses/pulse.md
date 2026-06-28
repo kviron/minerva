@@ -1,11 +1,11 @@
 ---
-content_hash: sha256-52c62de6700912eba60c13568623b1c26c7d86609ad52883dea5021b024536d9
+content_hash: sha256-3ab74996870d508d148e47448a13ec0a13bc1b92353fa420d545ad24e16ffd05
 generator: heuristic-v1
 inputs: []
 slug: pulse
 sources:
   - AGENTS.md
-  - "D:/develop/minerva"
+  - "C:/Users/roma/.config/superpowers/worktrees/minerva/identity-backend-foundation"
   - docs/architecture.md
   - docs/backlog.md
   - docs/decisions/0001-modular-monolith.md
@@ -27,12 +27,14 @@ sources:
   - docs/superpowers/plans/2026-06-27-tesserae-refresh-wrapper.md
   - docs/superpowers/plans/2026-06-28-forgot-password-ui.md
   - docs/superpowers/plans/2026-06-28-reset-password-ui.md
+  - docs/superpowers/plans/2026-06-29-identity-backend-foundation.md
   - docs/superpowers/specs/2026-06-24-minerva-mvp-design.md
   - docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md
   - docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md
   - docs/superpowers/specs/2026-06-27-postgresql-compose-design.md
   - docs/superpowers/specs/2026-06-27-tesserae-refresh-wrapper-design.md
   - docs/superpowers/specs/2026-06-28-forgot-password-ui-design.md
+  - docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md
   - docs/superpowers/specs/2026-06-28-reset-password-ui-design.md
   - docs/superpowers/specs/2026-06-28-user-identity-profile-design.md
 synthesis_kind: pulse
@@ -46,7 +48,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 30
+- SourceDocument: 32
 
 ## Recently added
 - (none)

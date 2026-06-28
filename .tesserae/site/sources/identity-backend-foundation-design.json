@@ -1,0 +1,15 @@
+{
+  "title": "Identity backend foundation design",
+  "kind": "sources",
+  "body_text": "# Identity backend foundation design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva Identity MVP _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "source_path": "C:\\\\Users\\\\roma\\\\.config\\\\superpowers\\\\worktrees\\\\minerva\\\\identity-backend-foundation\\\\docs\\\\superpowers\\\\specs\\\\2026-06-28-identity-backend-foundation-design.md",
+  "links": [],
+  "body": "# Identity backend foundation design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva Identity MVP _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "frontmatter": {
+    "kind": "sources",
+    "node_id": "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+    "node_type": "SourceDocument",
+    "source_path": "C:\\\\Users\\\\roma\\\\.config\\\\superpowers\\\\worktrees\\\\minerva\\\\identity-backend-foundation\\\\docs\\\\superpowers\\\\specs\\\\2026-06-28-identity-backend-foundation-design.md",
+    "title": "Identity backend foundation design"
+  }
+}

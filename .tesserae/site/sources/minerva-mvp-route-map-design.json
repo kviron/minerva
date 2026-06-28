@@ -1,15 +1,15 @@
 {
   "title": "Minerva MVP route map design",
   "kind": "sources",
-  "body_text": "# Minerva MVP route map design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
-  "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-27-minerva-mvp-route-map-design.md",
+  "body_text": "# Minerva MVP route map design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva Identity MVP _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "source_path": "C:\\\\Users\\\\roma\\\\.config\\\\superpowers\\\\worktrees\\\\minerva\\\\identity-backend-foundation\\\\docs\\\\superpowers\\\\specs\\\\2026-06-27-minerva-mvp-route-map-design.md",
   "links": [],
-  "body": "# Minerva MVP route map design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "body": "# Minerva MVP route map design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva Identity MVP _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
   "frontmatter": {
     "kind": "sources",
     "node_id": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
     "node_type": "SourceDocument",
-    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-27-minerva-mvp-route-map-design.md",
+    "source_path": "C:\\\\Users\\\\roma\\\\.config\\\\superpowers\\\\worktrees\\\\minerva\\\\identity-backend-foundation\\\\docs\\\\superpowers\\\\specs\\\\2026-06-27-minerva-mvp-route-map-design.md",
     "title": "Minerva MVP route map design"
   }
 }

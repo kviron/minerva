@@ -2,7 +2,7 @@
 node_id: SourceDocument:adr-0003-separate-mutable-drafts-from-immutable-:27a2a19ac4f3
 title: ADR 0003: Separate mutable drafts from immutable published versions
 type: SourceDocument
-source_path: D:\develop\minerva\docs\decisions\0003-document-versioning.md
+source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\decisions\0003-document-versioning.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

@@ -2,7 +2,7 @@
 node_id: SourceDocument:adr-0005-bind-mcp-tokens-to-one-resource-and-enf:af1463e26f9f
 title: ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation
 type: SourceDocument
-source_path: D:\develop\minerva\docs\decisions\0005-mcp-oauth-resource-and-revocation.md
+source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\decisions\0005-mcp-oauth-resource-and-revocation.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

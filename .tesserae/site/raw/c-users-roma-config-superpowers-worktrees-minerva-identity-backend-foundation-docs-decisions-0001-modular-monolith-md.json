@@ -1,0 +1,8 @@
+{
+  "title": "0001-modular-monolith.md",
+  "kind": "raw",
+  "body_text": "# ADR 0001: Use a modular Nuxt/Nitro monolith\n\nDate: 2026-06-24  \nStatus: proposed\n\n## Decision\n\nBuild the first release as one Nuxt 4/Nitro deployment with explicit domain modules and shared application services.\n\n## Rationale\n\nThe team needs one deployable system on a VPS. Separate frontend, API, auth, search, and MCP services would increase deployment and transactional complexity before there is evidence they need independent scaling.\n\n## Consequences\n\n- UI, API, and MCP share types and business rules.\n- Module imports must follow documented boundaries.\n- Transport handlers stay thin.\n- A future extraction remains possible because modules communicate through application-service interfaces.",
+  "source_path": "C://Users//roma//.config//superpowers//worktrees//minerva//identity-backend-foundation//docs//decisions//0001-modular-monolith.md",
+  "links": [],
+  "body": "# ADR 0001: Use a modular Nuxt/Nitro monolith\n\nDate: 2026-06-24  \nStatus: proposed\n\n## Decision\n\nBuild the first release as one Nuxt 4/Nitro deployment with explicit domain modules and shared application services.\n\n## Rationale\n\nThe team needs one deployable system on a VPS. Separate frontend, API, auth, search, and MCP services would increase deployment and transactional complexity before there is evidence they need independent scaling.\n\n## Consequences\n\n- UI, API, and MCP share types and business rules.\n- Module imports must follow documented boundaries.\n- Transport handlers stay thin.\n- A future extraction remains possible because modules communicate through application-service interfaces.\n\n"
+}

@@ -6,7 +6,7 @@
         "-m",
         "tesserae.mcp_server",
         "--graph",
-        "D:\\develop\\minerva\\.tesserae\\graph.json"
+        "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\.tesserae\\graph.json"
       ]
     }
   }

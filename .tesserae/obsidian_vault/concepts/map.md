@@ -2,10 +2,10 @@
 node_id: Metric:map:592bcbe13f80
 title: mAP
 type: Metric
-source_path: D:\develop\minerva\docs\progress.md
+source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\progress.md
 edges_in:
-  summarizes: [minerva-mvp-planning]
-  uses_metric: [minerva-mvp-route-map-design, minerva-mvp-ux-ui-prototype-design, minerva-progress, mvp-route-skeleton-implementation-plan]
+  summarizes: [minerva-identity-mvp]
+  uses_metric: [identity-backend-foundation-design, identity-backend-foundation-implementation-plan, minerva-mvp-route-map-design, minerva-mvp-ux-ui-prototype-design, minerva-progress, mvp-route-skeleton-implementation-plan]
 ---
 
 # mAP
@@ -16,7 +16,9 @@ _None._
 
 ## Incoming
 
-- [[minerva-mvp-planning]] → summarizes
+- [[minerva-identity-mvp]] → summarizes
+- [[identity-backend-foundation-design]] → uses_metric
+- [[identity-backend-foundation-implementation-plan]] → uses_metric
 - [[minerva-mvp-route-map-design]] → uses_metric
 - [[minerva-mvp-ux-ui-prototype-design]] → uses_metric
 - [[minerva-progress]] → uses_metric

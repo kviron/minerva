@@ -1,27 +1,29 @@
 {
   "nodes": [
     {
-      "id": "CommunitySummary:7eb26794a6d944fd",
-      "name": "Minerva MVP Planning",
+      "id": "CommunitySummary:56fa58b054481eee",
+      "name": "Minerva Identity MVP",
       "type": "CommunitySummary",
       "aliases": [],
-      "description": "Documents and a metric centered on Minerva MVP route design, UX/UI prototyping, implementation planning, progress tracking, and evaluation context.",
+      "description": "Planning, design, routing, implementation, progress, and evaluation artifacts for the Minerva identity backend foundation MVP, including route skeletons and shared success metrics.",
       "source_path": null,
       "metadata": {
         "member_ids": [
           "Metric:map:592bcbe13f80",
+          "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+          "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
           "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
           "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
           "SourceDocument:minerva-progress:c476087b907f",
           "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72"
         ],
-        "member_count": 5,
+        "member_count": 7,
         "tags": [
-          "minerva",
-          "mvp",
-          "route-design",
+          "identity-backend",
+          "minerva-mvp",
+          "implementation-plan",
           "ux-ui",
-          "implementation-plan"
+          "metrics"
         ],
         "extractor": "community_summaries.compile_community_summaries"
       }
@@ -32,7 +34,7 @@
       "type": "Metric",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\progress.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\progress.md",
       "metadata": {}
     },
     {
@@ -41,7 +43,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0001-modular-monolith.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0001-modular-monolith.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -74,7 +76,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0002-project-rbac.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0002-project-rbac.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -107,7 +109,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0003-document-versioning.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0003-document-versioning.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -140,7 +142,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0004-mcp-first-release-boundary.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0004-mcp-first-release-boundary.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -173,7 +175,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0005-mcp-oauth-resource-and-revocation.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0005-mcp-oauth-resource-and-revocation.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -206,7 +208,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0006-use-bun-package-manager.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0006-use-bun-package-manager.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -239,7 +241,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0007-separate-authentication-profiles-and-project-roles.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\decisions\\0007-separate-authentication-profiles-and-project-roles.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -272,7 +274,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-28-forgot-password-ui-design.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-28-forgot-password-ui-design.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -320,7 +322,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-28-forgot-password-ui.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-28-forgot-password-ui.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -353,12 +355,198 @@
       }
     },
     {
+      "id": "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+      "name": "Identity backend foundation design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-28-identity-backend-foundation-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Identity backend foundation design",
+            "anchor": "identity-backend-foundation-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Scope boundary",
+            "anchor": "scope-boundary"
+          },
+          {
+            "level": 2,
+            "text": "Architecture",
+            "anchor": "architecture"
+          },
+          {
+            "level": 2,
+            "text": "Component boundaries",
+            "anchor": "component-boundaries"
+          },
+          {
+            "level": 3,
+            "text": "Runtime configuration",
+            "anchor": "runtime-configuration"
+          },
+          {
+            "level": 3,
+            "text": "Database infrastructure",
+            "anchor": "database-infrastructure"
+          },
+          {
+            "level": 3,
+            "text": "Identity module",
+            "anchor": "identity-module"
+          },
+          {
+            "level": 3,
+            "text": "HTTP adapters",
+            "anchor": "http-adapters"
+          },
+          {
+            "level": 3,
+            "text": "Mail adapter",
+            "anchor": "mail-adapter"
+          },
+          {
+            "level": 3,
+            "text": "Client integration",
+            "anchor": "client-integration"
+          },
+          {
+            "level": 2,
+            "text": "Data model",
+            "anchor": "data-model"
+          },
+          {
+            "level": 2,
+            "text": "Authentication flows",
+            "anchor": "authentication-flows"
+          },
+          {
+            "level": 3,
+            "text": "Bootstrap",
+            "anchor": "bootstrap"
+          },
+          {
+            "level": 3,
+            "text": "Sign-in",
+            "anchor": "sign-in"
+          },
+          {
+            "level": 3,
+            "text": "Session and logout",
+            "anchor": "session-and-logout"
+          },
+          {
+            "level": 3,
+            "text": "Password recovery",
+            "anchor": "password-recovery"
+          },
+          {
+            "level": 2,
+            "text": "Security controls",
+            "anchor": "security-controls"
+          },
+          {
+            "level": 2,
+            "text": "Error contract",
+            "anchor": "error-contract"
+          },
+          {
+            "level": 2,
+            "text": "Testing strategy",
+            "anchor": "testing-strategy"
+          },
+          {
+            "level": 2,
+            "text": "Delivery workflow",
+            "anchor": "delivery-workflow"
+          },
+          {
+            "level": 2,
+            "text": "Deferred follow-up",
+            "anchor": "deferred-follow-up"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
+      "name": "Identity Backend Foundation Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-29-identity-backend-foundation.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Identity Backend Foundation Implementation Plan",
+            "anchor": "identity-backend-foundation-implementation-plan"
+          },
+          {
+            "level": 2,
+            "text": "File map",
+            "anchor": "file-map"
+          },
+          {
+            "level": 3,
+            "text": "Task 1: Add exact dependencies, checks, and validated environment",
+            "anchor": "task-1-add-exact-dependencies-checks-and-validated-environment"
+          },
+          {
+            "level": 3,
+            "text": "Task 2: Add Mailpit, isolated test PostgreSQL, and database readiness",
+            "anchor": "task-2-add-mailpit-isolated-test-postgresql-and-database-readiness"
+          },
+          {
+            "level": 3,
+            "text": "Task 3: Configure Better Auth and generate the first migration",
+            "anchor": "task-3-configure-better-auth-and-generate-the-first-migration"
+          },
+          {
+            "level": 3,
+            "text": "Task 4: Add safe first-super-admin bootstrap",
+            "anchor": "task-4-add-safe-first-super-admin-bootstrap"
+          },
+          {
+            "level": 3,
+            "text": "Task 5: Add identifier login, durable throttling, and session guard",
+            "anchor": "task-5-add-identifier-login-durable-throttling-and-session-guard"
+          },
+          {
+            "level": 3,
+            "text": "Task 6: Add Mailpit password recovery and reset",
+            "anchor": "task-6-add-mailpit-password-recovery-and-reset"
+          },
+          {
+            "level": 3,
+            "text": "Task 7: Wire existing forms and protect pages without redesign",
+            "anchor": "task-7-wire-existing-forms-and-protect-pages-without-redesign"
+          },
+          {
+            "level": 3,
+            "text": "Task 8: Complete documentation and final verification",
+            "anchor": "task-8-complete-documentation-and-final-verification"
+          }
+        ]
+      }
+    },
+    {
       "id": "SourceDocument:minerva-agent-instructions:7b4afaaff5ff",
       "name": "Minerva agent instructions",
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\AGENTS.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\AGENTS.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -396,7 +584,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\architecture.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\architecture.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -489,7 +677,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\backlog.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\backlog.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -532,7 +720,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-foundation.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-24-foundation.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -580,7 +768,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-minerva-figma-prototype.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-24-minerva-figma-prototype.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -643,7 +831,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-minerva-mvp-roadmap.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-24-minerva-mvp-roadmap.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -711,7 +899,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-mvp-design.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-24-minerva-mvp-design.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -779,7 +967,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-minerva-mvp-route-map-design.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-27-minerva-mvp-route-map-design.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -842,7 +1030,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-ui-prototype-design.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-24-minerva-ui-prototype-design.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1000,7 +1188,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\product-spec.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\product-spec.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1083,7 +1271,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\progress.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\progress.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1104,8 +1292,8 @@
           },
           {
             "level": 2,
-            "text": "Remaining before application implementation",
-            "anchor": "remaining-before-application-implementation"
+            "text": "Remaining",
+            "anchor": "remaining"
           }
         ]
       }
@@ -1116,7 +1304,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\roadmap.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\roadmap.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1174,7 +1362,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-mvp-route-skeleton.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-27-mvp-route-skeleton.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1222,7 +1410,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-postgresql-compose-design.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-27-postgresql-compose-design.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1265,7 +1453,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-postgresql-compose.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-27-postgresql-compose.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1298,7 +1486,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-28-reset-password-ui-design.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-28-reset-password-ui-design.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1346,7 +1534,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-28-reset-password-ui.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-28-reset-password-ui.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1384,7 +1572,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\operations\\tesserae.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\operations\\tesserae.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1427,7 +1615,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-tesserae-refresh-wrapper-design.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-27-tesserae-refresh-wrapper-design.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1465,7 +1653,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-tesserae-refresh-wrapper.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-27-tesserae-refresh-wrapper.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1498,7 +1686,7 @@
       "type": "SourceDocument",
       "aliases": [],
       "description": "",
-      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-28-user-identity-profile-design.md",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-28-user-identity-profile-design.md",
       "metadata": {
         "source_kind": "SourceDocument",
         "sections": [
@@ -1579,56 +1767,88 @@
       "source_path": null,
       "metadata": {
         "synthesis_kind": "pulse",
-        "content_hash": "sha256-52c62de6700912eba60c13568623b1c26c7d86609ad52883dea5021b024536d9",
+        "content_hash": "sha256-3ab74996870d508d148e47448a13ec0a13bc1b92353fa420d545ad24e16ffd05",
         "input_ids": []
       }
     }
   ],
   "edges": [
     {
-      "source": "CommunitySummary:7eb26794a6d944fd",
+      "source": "CommunitySummary:56fa58b054481eee",
       "target": "Metric:map:592bcbe13f80",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:7eb26794a6d944fd"
+        "community_id": "CommunitySummary:56fa58b054481eee"
       }
     },
     {
-      "source": "CommunitySummary:7eb26794a6d944fd",
+      "source": "CommunitySummary:56fa58b054481eee",
+      "target": "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:56fa58b054481eee"
+      }
+    },
+    {
+      "source": "CommunitySummary:56fa58b054481eee",
+      "target": "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:56fa58b054481eee"
+      }
+    },
+    {
+      "source": "CommunitySummary:56fa58b054481eee",
       "target": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:7eb26794a6d944fd"
+        "community_id": "CommunitySummary:56fa58b054481eee"
       }
     },
     {
-      "source": "CommunitySummary:7eb26794a6d944fd",
+      "source": "CommunitySummary:56fa58b054481eee",
       "target": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:7eb26794a6d944fd"
+        "community_id": "CommunitySummary:56fa58b054481eee"
       }
     },
     {
-      "source": "CommunitySummary:7eb26794a6d944fd",
+      "source": "CommunitySummary:56fa58b054481eee",
       "target": "SourceDocument:minerva-progress:c476087b907f",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:7eb26794a6d944fd"
+        "community_id": "CommunitySummary:56fa58b054481eee"
       }
     },
     {
-      "source": "CommunitySummary:7eb26794a6d944fd",
+      "source": "CommunitySummary:56fa58b054481eee",
       "target": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:7eb26794a6d944fd"
+        "community_id": "CommunitySummary:56fa58b054481eee"
       }
+    },
+    {
+      "source": "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
     },
     {
       "source": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
@@ -1717,6 +1937,20 @@
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:forgot-password-ui-implementation-plan:011eede9a65c",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
       "type": "summarizes",
       "evidence": null,
       "metadata": {}

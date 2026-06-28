@@ -13,6 +13,8 @@
 - [ADR 0007: Separate authentication identity, user profiles, contacts, and project roles](sources/adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles.html)
 - [Forgot-password UI design](sources/forgot-password-ui-design.html)
 - [Forgot-Password UI Implementation Plan](sources/forgot-password-ui-implementation-plan.html)
+- [Identity backend foundation design](sources/identity-backend-foundation-design.html): - **uses_metric** → mAP _(Metric)_
+- [Identity Backend Foundation Implementation Plan](sources/identity-backend-foundation-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva agent instructions](sources/minerva-agent-instructions.html)
 - [Minerva architecture](sources/minerva-architecture.html)
 - [Minerva backlog](sources/minerva-backlog.html)
@@ -37,7 +39,7 @@
 
 ## Entities
 
-- [mAP](entities/map.html): - **summarizes** → Minerva MVP Planning _(CommunitySummary)_ - **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_ - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_ - **uses_metric** → Minerv…
+- [mAP](entities/map.html): - **summarizes** → Minerva Identity MVP _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity backend foundation design _(SourceDocument)_ - **uses_metric**…
 
 ## Syntheses
 

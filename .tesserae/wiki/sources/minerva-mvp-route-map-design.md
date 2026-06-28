@@ -2,7 +2,7 @@
 kind: sources
 node_id: "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9"
 node_type: SourceDocument
-source_path: "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-minerva-mvp-route-map-design.md"
+source_path: "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\specs\\2026-06-27-minerva-mvp-route-map-design.md"
 title: Minerva MVP route map design
 ---
 # Minerva MVP route map design
@@ -13,7 +13,7 @@ title: Minerva MVP route map design
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
 
 ## Connected node types
 
