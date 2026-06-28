@@ -1,6 +1,6 @@
 # Reset-password UI design
 
-Status: approved in conversation, awaiting written-spec review
+Status: approved
 Date: 2026-06-28
 
 ## Goal
