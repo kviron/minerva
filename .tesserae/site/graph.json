@@ -245,6 +245,20 @@
       "evidence": null,
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:reset-password-ui-design:ae063bdcc1cf",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:reset-password-ui-implementation-plan:170bb8c1c5fb",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:tesserae-development-memory:4143790d0cae",
       "type": "summarizes"
     },
@@ -1566,6 +1580,92 @@
     {
       "aliases": [],
       "description": "",
+      "id": "SourceDocument:reset-password-ui-design:ae063bdcc1cf",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "reset-password-ui-design",
+            "level": 1,
+            "text": "Reset-password UI design"
+          },
+          {
+            "anchor": "goal",
+            "level": 2,
+            "text": "Goal"
+          },
+          {
+            "anchor": "components-and-route",
+            "level": 2,
+            "text": "Components and route"
+          },
+          {
+            "anchor": "form-composition",
+            "level": 2,
+            "text": "Form composition"
+          },
+          {
+            "anchor": "accessibility-and-localization",
+            "level": 2,
+            "text": "Accessibility and localization"
+          },
+          {
+            "anchor": "verification",
+            "level": 2,
+            "text": "Verification"
+          },
+          {
+            "anchor": "deferred-behavior",
+            "level": 2,
+            "text": "Deferred behavior"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Reset-password UI design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-28-reset-password-ui-design.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:reset-password-ui-implementation-plan:170bb8c1c5fb",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "reset-password-ui-implementation-plan",
+            "level": 1,
+            "text": "Reset-Password UI Implementation Plan"
+          },
+          {
+            "anchor": "file-structure",
+            "level": 2,
+            "text": "File structure"
+          },
+          {
+            "anchor": "task-1-add-the-reset-password-form-component",
+            "level": 3,
+            "text": "Task 1: Add the reset-password form component"
+          },
+          {
+            "anchor": "task-2-render-the-form-on-the-tokenized-route",
+            "level": 3,
+            "text": "Task 2: Render the form on the tokenized route"
+          },
+          {
+            "anchor": "task-3-record-and-verify-the-completed-slice",
+            "level": 3,
+            "text": "Task 3: Record and verify the completed slice"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Reset-Password UI Implementation Plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-28-reset-password-ui.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
       "id": "SourceDocument:tesserae-development-memory:4143790d0cae",
       "metadata": {
         "sections": [
@@ -1760,7 +1860,7 @@
       "description": "Top-level snapshot of the wiki at compile time.",
       "id": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "metadata": {
-        "content_hash": "sha256-8d29f031e564793030df835660af8eab3dfe69985809dd6f01e3c2b747941f83",
+        "content_hash": "sha256-52c62de6700912eba60c13568623b1c26c7d86609ad52883dea5021b024536d9",
         "input_ids": [],
         "synthesis_kind": "pulse"
       },

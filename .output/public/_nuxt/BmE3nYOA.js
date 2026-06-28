@@ -1,0 +1,1 @@
+import{_ as s,o as t,c,a,r as o}from"./zLjdVesQ.js";const r={},n={class:"bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10"},l={class:"w-full max-w-sm md:max-w-4xl"};function d(e,m){return t(),c("div",n,[a("div",l,[o(e.$slots,"default")])])}const f=s(r,[["render",d]]);export{f as default};

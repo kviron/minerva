@@ -184,6 +184,20 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:reset-password-ui-design:ae063bdcc1cf",
+      "@type": "CreativeWork",
+      "name": "Reset-password UI design",
+      "url": "sources/reset-password-ui-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:reset-password-ui-implementation-plan:170bb8c1c5fb",
+      "@type": "CreativeWork",
+      "name": "Reset-Password UI Implementation Plan",
+      "url": "sources/reset-password-ui-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:tesserae-development-memory:4143790d0cae",
       "@type": "CreativeWork",
       "name": "Tesserae development memory",

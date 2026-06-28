@@ -24,8 +24,8 @@ Expected MCP tools: `schema`, `graph_summary`, `search_nodes`, `node_context`, `
 
 ## Graph summary
 
-- Nodes: 31
-- Edges: 37
+- Nodes: 33
+- Edges: 39
 
 ## Representative nodes
 

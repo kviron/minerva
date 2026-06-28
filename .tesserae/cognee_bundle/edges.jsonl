@@ -31,6 +31,8 @@
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:postgresql-docker-compose-design:1d13eb67950d"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:postgresql-docker-compose-implementation-plan:9887e9a9c654"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:reset-password-ui-design:ae063bdcc1cf"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:reset-password-ui-implementation-plan:170bb8c1c5fb"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:tesserae-development-memory:4143790d0cae"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:tesserae-refresh-wrapper-design:b05d0219a17b"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:tesserae-refresh-wrapper-implementation-plan:0fcadea655b1"}

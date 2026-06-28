@@ -3,8 +3,8 @@ node_id: Synthesis:synthesis-project-pulse:edf62281b49c
 title: Project Pulse
 type: Synthesis
 edges_out:
-  summarizes: [adr-0001-use-a-modular-nuxt-nitro-monolith, adr-0002-use-global-super-administration-and-project-scoped-rbac, adr-0003-separate-mutable-drafts-from-immutable-published-versions, adr-0004-limit-the-first-mcp-release-to-documentation-workflows, adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation, adr-0006-use-bun-as-the-package-manager, adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles, forgot-password-ui-design, forgot-password-ui-implementation-plan, minerva-agent-instructions, minerva-architecture, minerva-backlog, minerva-executable-foundation-implementation-plan, minerva-figma-prototype-implementation-plan, minerva-mvp-delivery-plan, minerva-mvp-design, minerva-mvp-route-map-design, minerva-mvp-ux-ui-prototype-design, minerva-product-specification, minerva-progress, minerva-roadmap, mvp-route-skeleton-implementation-plan, postgresql-docker-compose-design, postgresql-docker-compose-implementation-plan, tesserae-development-memory, tesserae-refresh-wrapper-design, tesserae-refresh-wrapper-implementation-plan, user-identity-and-profile-design]
-content_hash: sha256-8d29f031e564793030df835660af8eab3dfe69985809dd6f01e3c2b747941f83
+  summarizes: [adr-0001-use-a-modular-nuxt-nitro-monolith, adr-0002-use-global-super-administration-and-project-scoped-rbac, adr-0003-separate-mutable-drafts-from-immutable-published-versions, adr-0004-limit-the-first-mcp-release-to-documentation-workflows, adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation, adr-0006-use-bun-as-the-package-manager, adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles, forgot-password-ui-design, forgot-password-ui-implementation-plan, minerva-agent-instructions, minerva-architecture, minerva-backlog, minerva-executable-foundation-implementation-plan, minerva-figma-prototype-implementation-plan, minerva-mvp-delivery-plan, minerva-mvp-design, minerva-mvp-route-map-design, minerva-mvp-ux-ui-prototype-design, minerva-product-specification, minerva-progress, minerva-roadmap, mvp-route-skeleton-implementation-plan, postgresql-docker-compose-design, postgresql-docker-compose-implementation-plan, reset-password-ui-design, reset-password-ui-implementation-plan, tesserae-development-memory, tesserae-refresh-wrapper-design, tesserae-refresh-wrapper-implementation-plan, user-identity-and-profile-design]
+content_hash: sha256-52c62de6700912eba60c13568623b1c26c7d86609ad52883dea5021b024536d9
 synthesis_kind: pulse
 ---
 
@@ -38,6 +38,8 @@ Top-level snapshot of the wiki at compile time.
 - summarizes → [[mvp-route-skeleton-implementation-plan]]
 - summarizes → [[postgresql-docker-compose-design]]
 - summarizes → [[postgresql-docker-compose-implementation-plan]]
+- summarizes → [[reset-password-ui-design]]
+- summarizes → [[reset-password-ui-implementation-plan]]
 - summarizes → [[tesserae-development-memory]]
 - summarizes → [[tesserae-refresh-wrapper-design]]
 - summarizes → [[tesserae-refresh-wrapper-implementation-plan]]

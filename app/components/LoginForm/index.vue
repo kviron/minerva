@@ -31,7 +31,7 @@ const props = defineProps<{
           </UiFieldLabel>
           <NuxtLink
             to="/auth/forgot-password"
-            class="ml-auto text-sm underline-offset-4 hover:underline"
+            class="ml-auto text-xs/relaxed underline-offset-4 hover:underline"
           >
             Забыли пароль?
           </NuxtLink>

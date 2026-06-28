@@ -1,19 +1,19 @@
 # Research Graph Report
 
-node_count: 32
-edge_count: 37
+node_count: 34
+edge_count: 39
 
 ## Node Types
 
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 28
+- SourceDocument: 30
 - Synthesis: 1
 
 ## Edge Types
 
-- summarizes: 33
+- summarizes: 35
 - uses_metric: 4
 
 ## Papers by Analysis Date
@@ -28,7 +28,7 @@ _None._
 
 ## Top Degree Nodes
 
-- Project Pulse (Synthesis): 28
+- Project Pulse (Synthesis): 30
 - Minerva MVP Planning (CommunitySummary): 5
 - mAP (Metric): 5
 - MVP Route Skeleton Implementation Plan (SourceDocument): 3

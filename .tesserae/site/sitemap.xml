@@ -199,6 +199,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>sources/reset-password-ui-design.html</loc>
+    <lastmod>2024-02-11T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/reset-password-ui-implementation-plan.html</loc>
+    <lastmod>2024-07-21T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>sources/tesserae-development-memory.html</loc>
     <lastmod>2024-02-24T00:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -409,6 +421,12 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-plans-2026-06-28-reset-password-ui-md.html</loc>
+    <lastmod>2024-03-18T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html</loc>
     <lastmod>2024-10-30T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -441,6 +459,12 @@
   <url>
     <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.html</loc>
     <lastmod>2024-11-02T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.html</loc>
+    <lastmod>2024-01-04T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -571,6 +595,12 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>raw/docs-superpowers-plans-2026-06-28-reset-password-ui-md.html</loc>
+    <lastmod>2024-11-15T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html</loc>
     <lastmod>2024-07-19T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -603,6 +633,12 @@
   <url>
     <loc>raw/docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.html</loc>
     <lastmod>2024-07-18T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.html</loc>
+    <lastmod>2024-11-03T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

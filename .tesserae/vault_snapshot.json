@@ -207,6 +207,22 @@
       },
       "name": "PostgreSQL Docker Compose Implementation Plan"
     },
+    "SourceDocument:reset-password-ui-design:ae063bdcc1cf": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Reset-password UI design"
+    },
+    "SourceDocument:reset-password-ui-implementation-plan:170bb8c1c5fb": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Reset-Password UI Implementation Plan"
+    },
     "SourceDocument:tesserae-development-memory:4143790d0cae": {
       "aliases": [],
       "description": "",
@@ -243,7 +259,7 @@
       "aliases": [],
       "description": "Top-level snapshot of the wiki at compile time.",
       "metadata": {
-        "content_hash": "sha256-8d29f031e564793030df835660af8eab3dfe69985809dd6f01e3c2b747941f83",
+        "content_hash": "sha256-52c62de6700912eba60c13568623b1c26c7d86609ad52883dea5021b024536d9",
         "synthesis_kind": "pulse"
       },
       "name": "Project Pulse"

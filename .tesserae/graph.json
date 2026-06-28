@@ -1293,6 +1293,92 @@
       }
     },
     {
+      "id": "SourceDocument:reset-password-ui-design:ae063bdcc1cf",
+      "name": "Reset-password UI design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-28-reset-password-ui-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Reset-password UI design",
+            "anchor": "reset-password-ui-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Components and route",
+            "anchor": "components-and-route"
+          },
+          {
+            "level": 2,
+            "text": "Form composition",
+            "anchor": "form-composition"
+          },
+          {
+            "level": 2,
+            "text": "Accessibility and localization",
+            "anchor": "accessibility-and-localization"
+          },
+          {
+            "level": 2,
+            "text": "Verification",
+            "anchor": "verification"
+          },
+          {
+            "level": 2,
+            "text": "Deferred behavior",
+            "anchor": "deferred-behavior"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:reset-password-ui-implementation-plan:170bb8c1c5fb",
+      "name": "Reset-Password UI Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-28-reset-password-ui.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Reset-Password UI Implementation Plan",
+            "anchor": "reset-password-ui-implementation-plan"
+          },
+          {
+            "level": 2,
+            "text": "File structure",
+            "anchor": "file-structure"
+          },
+          {
+            "level": 3,
+            "text": "Task 1: Add the reset-password form component",
+            "anchor": "task-1-add-the-reset-password-form-component"
+          },
+          {
+            "level": 3,
+            "text": "Task 2: Render the form on the tokenized route",
+            "anchor": "task-2-render-the-form-on-the-tokenized-route"
+          },
+          {
+            "level": 3,
+            "text": "Task 3: Record and verify the completed slice",
+            "anchor": "task-3-record-and-verify-the-completed-slice"
+          }
+        ]
+      }
+    },
+    {
       "id": "SourceDocument:tesserae-development-memory:4143790d0cae",
       "name": "Tesserae development memory",
       "type": "SourceDocument",
@@ -1493,7 +1579,7 @@
       "source_path": null,
       "metadata": {
         "synthesis_kind": "pulse",
-        "content_hash": "sha256-8d29f031e564793030df835660af8eab3dfe69985809dd6f01e3c2b747941f83",
+        "content_hash": "sha256-52c62de6700912eba60c13568623b1c26c7d86609ad52883dea5021b024536d9",
         "input_ids": []
       }
     }
@@ -1736,6 +1822,20 @@
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:postgresql-docker-compose-implementation-plan:9887e9a9c654",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:reset-password-ui-design:ae063bdcc1cf",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:reset-password-ui-implementation-plan:170bb8c1c5fb",
       "type": "summarizes",
       "evidence": null,
       "metadata": {}

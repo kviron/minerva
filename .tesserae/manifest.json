@@ -49,7 +49,7 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\progress.md": {
-      "sha256": "5b3f673fcb086dcb2cad84b0b6cdd0e6013abde347455053b91b1dbf8b0e3e69",
+      "sha256": "4f2aad7687e853f757408d674f73956d9de6022796ce9aefc1d5462e6616e403",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\roadmap.md": {
@@ -84,6 +84,10 @@
       "sha256": "667e122f627677e2f7187a4c71a161a6703f865365571e62d0b8302fb6ff5817",
       "source_kind": "SourceDocument"
     },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-28-reset-password-ui.md": {
+      "sha256": "d6906b1d947385afc919bb3ea430755e11ac4c3d51110436acc8c719bd025411",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-mvp-design.md": {
       "sha256": "68951988868ab0b552312d71c3b4dc0a03a9be2c3a1eb6582f4a3dcd292e85e4",
       "source_kind": "SourceDocument"
@@ -106,6 +110,10 @@
     },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-28-forgot-password-ui-design.md": {
       "sha256": "0b2a2afc8225b3c90945d9df1593a5aa676859a842545a64ccc82bd47d99ea02",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-28-reset-password-ui-design.md": {
+      "sha256": "a6f0b3dcaa8e8c763792e4c830a74b3710b53c6183893e2d6c3406fdf3b2f0ce",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-28-user-identity-profile-design.md": {

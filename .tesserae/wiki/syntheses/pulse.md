@@ -1,5 +1,5 @@
 ---
-content_hash: sha256-8d29f031e564793030df835660af8eab3dfe69985809dd6f01e3c2b747941f83
+content_hash: sha256-52c62de6700912eba60c13568623b1c26c7d86609ad52883dea5021b024536d9
 generator: heuristic-v1
 inputs: []
 slug: pulse
@@ -26,12 +26,14 @@ sources:
   - docs/superpowers/plans/2026-06-27-postgresql-compose.md
   - docs/superpowers/plans/2026-06-27-tesserae-refresh-wrapper.md
   - docs/superpowers/plans/2026-06-28-forgot-password-ui.md
+  - docs/superpowers/plans/2026-06-28-reset-password-ui.md
   - docs/superpowers/specs/2026-06-24-minerva-mvp-design.md
   - docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md
   - docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md
   - docs/superpowers/specs/2026-06-27-postgresql-compose-design.md
   - docs/superpowers/specs/2026-06-27-tesserae-refresh-wrapper-design.md
   - docs/superpowers/specs/2026-06-28-forgot-password-ui-design.md
+  - docs/superpowers/specs/2026-06-28-reset-password-ui-design.md
   - docs/superpowers/specs/2026-06-28-user-identity-profile-design.md
 synthesis_kind: pulse
 title: Project Pulse
@@ -44,7 +46,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 28
+- SourceDocument: 30
 
 ## Recently added
 - (none)

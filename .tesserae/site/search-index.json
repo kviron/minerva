@@ -481,6 +481,41 @@
     "created_ts": null
   },
   {
+    "id": "sources:reset-password-ui-design",
+    "title": "Reset-password UI design",
+    "kind": "sources",
+    "href": "sources/reset-password-ui-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-28-reset-password-ui-design.md",
+    "tokens": [
+      "reset",
+      "password",
+      "ui",
+      "design",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:reset-password-ui-implementation-plan",
+    "title": "Reset-Password UI Implementation Plan",
+    "kind": "sources",
+    "href": "sources/reset-password-ui-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-06-28-reset-password-ui.md",
+    "tokens": [
+      "reset",
+      "password",
+      "ui",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
     "id": "sources:tesserae-development-memory",
     "title": "Tesserae development memory",
     "kind": "sources",
@@ -579,7 +614,7 @@
       "metric",
       "1",
       "sourcedocument",
-      "28",
+      "30",
       "recently",
       "added",
       "none",

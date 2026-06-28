@@ -37,7 +37,7 @@ const props = defineProps<{
         </UiButton>
       </UiField>
       <UiField>
-        <p class="text-center text-sm">
+        <p class="text-center text-xs/relaxed">
           <NuxtLink to="/auth" class="underline-offset-4 hover:underline">
             Вернуться ко входу
           </NuxtLink>

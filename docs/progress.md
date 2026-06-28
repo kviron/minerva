@@ -32,6 +32,7 @@ Stage 0 and stage 0.5 are in progress. Application implementation remains blocke
 - Approved the Better Auth identity, optional profile, dynamic contact, privacy, and project-role data model, with phone authentication deferred until an SMS provider is selected.
 - Preserved shared input styling when Chromium autofills credentials by overriding its text fill and covering its protected autofill background with a theme-aware inset surface.
 - Added the approved static password-recovery request screen, matching sign-in styling and linked bidirectionally with `/auth`.
+- Added the approved static new-password form on the tokenized reset route without exposing or processing the token.
 
 ## Remaining before application implementation
 
