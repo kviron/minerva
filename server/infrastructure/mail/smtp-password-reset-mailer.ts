@@ -18,12 +18,16 @@ export function createSmtpPasswordResetMailer(
 
   return {
     async sendPasswordReset({ to, resetUrl }) {
-      await transport.sendMail({
-        from: options.from,
-        to,
-        subject: 'Восстановление пароля Minerva',
-        text: `Для смены пароля перейдите по ссылке: ${resetUrl}`,
-      })
+      try {
+        await transport.sendMail({
+          from: options.from,
+          to,
+          subject: 'Восстановление пароля Minerva',
+          text: `Для смены пароля перейдите по ссылке: ${resetUrl}`,
+        })
+      } catch {
+        throw new Error('Password reset email delivery failed.')
+      }
     },
   }
 }

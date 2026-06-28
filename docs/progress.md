@@ -38,6 +38,7 @@ The user approved the audited Identity backend design and implementation plan, s
 - Added the Better Auth factory with PostgreSQL/Drizzle, email-password and username support, persistent sessions, database rate-limit storage, account status fields, password-reset settings, and the first reviewed migration.
 - Added an advisory-lock-protected, idempotent first-`super_admin` bootstrap service and an interactive CLI that never accepts or prints the password as an argument.
 - Added normalized email-or-username sign-in, generic credential failures, database-backed HMAC rate limiting, durable sessions, active-account enforcement, and a server-side session guard for protected Nitro handlers.
+- Added enumeration-safe password recovery through SMTP/Mailpit with a 30-minute single-use token, reset throttling, sanitized delivery failures, and automatic session revocation after reset.
 
 ## Remaining
 
