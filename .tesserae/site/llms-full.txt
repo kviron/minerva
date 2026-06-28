@@ -13,6 +13,8 @@
 - [ADR 0007: Separate authentication identity, user profiles, contacts, and project roles](sources/adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles.html)
 - [Forgot-password UI design](sources/forgot-password-ui-design.html)
 - [Forgot-Password UI Implementation Plan](sources/forgot-password-ui-implementation-plan.html)
+- [Identity backend foundation design](sources/identity-backend-foundation-design.html): - **uses_metric** → mAP _(Metric)_
+- [Identity Backend Foundation Implementation Plan](sources/identity-backend-foundation-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva agent instructions](sources/minerva-agent-instructions.html)
 - [Minerva architecture](sources/minerva-architecture.html)
 - [Minerva backlog](sources/minerva-backlog.html)
@@ -37,7 +39,7 @@
 
 ## Entities
 
-- [mAP](entities/map.html): - **summarizes** → Minerva MVP Planning _(CommunitySummary)_ - **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_ - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_ - **uses_metric** → Minerv…
+- [mAP](entities/map.html): - **summarizes** → Minerva Identity MVP _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity backend foundation design _(SourceDocument)_ - **uses_metric**…
 
 ## Syntheses
 
@@ -92,6 +94,42 @@ _sources/forgot-password-ui-implementation-plan.html_
 
 # Forgot-Password UI Implementation Plan
 
+### Identity backend foundation design
+_sources/identity-backend-foundation-design.html_
+
+# Identity backend foundation design
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Incoming relations
+
+- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+
+## Connected node types
+
+- CommunitySummary: 1
+- Metric: 1
+
+### Identity Backend Foundation Implementation Plan
+_sources/identity-backend-foundation-implementation-plan.html_
+
+# Identity Backend Foundation Implementation Plan
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Incoming relations
+
+- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+
+## Connected node types
+
+- CommunitySummary: 1
+- Metric: 1
+
 ### Minerva agent instructions
 _sources/minerva-agent-instructions.html_
 
@@ -138,7 +176,7 @@ _sources/minerva-mvp-route-map-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
 
 ## Connected node types
 
@@ -156,7 +194,7 @@ _sources/minerva-mvp-ux-ui-prototype-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
 
 ## Connected node types
 
@@ -179,7 +217,7 @@ _sources/minerva-progress.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
 
 ## Connected node types
 
@@ -202,7 +240,7 @@ _sources/mvp-route-skeleton-implementation-plan.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
 
 ## Connected node types
 
@@ -258,7 +296,9 @@ _entities/map.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+- **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_
+- **uses_metric** → Identity backend foundation design _(SourceDocument)_
 - **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_
 - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_
 - **uses_metric** → Minerva MVP route map design _(SourceDocument)_
@@ -266,7 +306,7 @@ _entities/map.html_
 
 ## Connected node types
 
-- SourceDocument: 4
+- SourceDocument: 6
 - CommunitySummary: 1
 
 ## Syntheses
@@ -282,7 +322,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 30
+- SourceDocument: 32
 
 ## Recently added
 - (none)

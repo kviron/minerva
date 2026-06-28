@@ -16,15 +16,15 @@
     "cursor",
     "opencode"
   ],
-  "node_count": 33,
-  "edge_count": 39,
+  "node_count": 35,
+  "edge_count": 45,
   "mcp": {
     "command": "python3",
     "args": [
       "-m",
       "tesserae.mcp_server",
       "--graph",
-      "D:\\develop\\minerva\\.tesserae\\graph.json"
+      "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\.tesserae\\graph.json"
     ]
   },
   "notes": "Copy or symlink the target-specific files into the project root for the corresponding agent."

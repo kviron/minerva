@@ -79,6 +79,20 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+      "@type": "CreativeWork",
+      "name": "Identity backend foundation design",
+      "url": "sources/identity-backend-foundation-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
+      "@type": "CreativeWork",
+      "name": "Identity Backend Foundation Implementation Plan",
+      "url": "sources/identity-backend-foundation-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:minerva-agent-instructions:7b4afaaff5ff",
       "@type": "CreativeWork",
       "name": "Minerva agent instructions",

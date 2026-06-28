@@ -1,10 +1,10 @@
 # Minerva progress
 
-Last updated: 2026-06-28
+Last updated: 2026-06-29
 
 ## Current state
 
-Stage 0 and stage 0.5 are in progress. Application implementation remains blocked pending user approval of the audited specification and plans. The user explicitly approved the empty MVP route skeleton and the isolated browser-autofill styling fix for shared inputs.
+The approved Identity backend foundation is implemented and verified in the isolated `feature/identity-backend-foundation` branch. PostgreSQL, Better Auth, sessions, bootstrap, password recovery, and the existing authentication forms now work together without a page-layout redesign; the branch is ready for integration review.
 
 ## Completed
 
@@ -33,9 +33,17 @@ Stage 0 and stage 0.5 are in progress. Application implementation remains blocke
 - Preserved shared input styling when Chromium autofills credentials by overriding its text fill and covering its protected autofill background with a theme-aware inset surface.
 - Added the approved static password-recovery request screen, matching sign-in styling and linked bidirectionally with `/auth`.
 - Added the approved static new-password form on the tokenized reset route without exposing or processing the token.
+- Added validated server environment configuration and unit/integration/browser test foundations for the Identity backend.
+- Added isolated PostgreSQL test infrastructure, local Mailpit, and a database readiness endpoint.
+- Added the Better Auth factory with PostgreSQL/Drizzle, email-password and username support, persistent sessions, database rate-limit storage, account status fields, password-reset settings, and the first reviewed migration.
+- Added an advisory-lock-protected, idempotent first-`super_admin` bootstrap service and an interactive CLI that never accepts or prints the password as an argument.
+- Added normalized email-or-username sign-in, generic credential failures, database-backed HMAC rate limiting, durable sessions, active-account enforcement, and a server-side session guard for protected Nitro handlers.
+- Added enumeration-safe password recovery through SMTP/Mailpit with a 30-minute single-use token, reset throttling, sanitized delivery failures, and automatic session revocation after reset.
+- Connected the existing shadcn-vue authentication forms without redesign, added client session middleware, guest/auth redirects, logout verification, pending/error states, and complete browser journeys for sign-in and recovery.
+- Verified the completed Identity foundation with a frozen dependency install, two idempotent migration runs, 9 unit tests, 22 PostgreSQL integration tests, 8 browser journeys, Nuxt typecheck, and a production build.
+- Used the pinned native Mailpit 1.30.0 binary for final SMTP verification because the current Docker Desktop port proxy accepted the local SMTP connection but did not relay the server greeting; Docker Compose remains the canonical development configuration.
 
-## Remaining before application implementation
+## Remaining
 
 - Build and review the eight-screen prototype in the supplied Figma file.
-- Obtain final user approval of the updated canonical documents, UX/UI prototype, and plans.
-- After approval, create detailed plans for later slices only when the preceding slice has established their real interfaces.
+- Create detailed plans for later product slices only when the preceding slice has established their real interfaces.

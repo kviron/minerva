@@ -1,20 +1,20 @@
 # Research Graph Report
 
-node_count: 34
-edge_count: 39
+node_count: 36
+edge_count: 45
 
 ## Node Types
 
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 30
+- SourceDocument: 32
 - Synthesis: 1
 
 ## Edge Types
 
-- summarizes: 35
-- uses_metric: 4
+- summarizes: 39
+- uses_metric: 6
 
 ## Papers by Analysis Date
 
@@ -28,9 +28,11 @@ _None._
 
 ## Top Degree Nodes
 
-- Project Pulse (Synthesis): 30
-- Minerva MVP Planning (CommunitySummary): 5
-- mAP (Metric): 5
+- Project Pulse (Synthesis): 32
+- Minerva Identity MVP (CommunitySummary): 7
+- mAP (Metric): 7
+- Identity Backend Foundation Implementation Plan (SourceDocument): 3
+- Identity backend foundation design (SourceDocument): 3
 - MVP Route Skeleton Implementation Plan (SourceDocument): 3
 - Minerva MVP UX/UI prototype design (SourceDocument): 3
 - Minerva MVP route map design (SourceDocument): 3
@@ -46,8 +48,6 @@ _None._
 - Forgot-password UI design (SourceDocument): 1
 - Minerva Executable Foundation Implementation Plan (SourceDocument): 1
 - Minerva Figma Prototype Implementation Plan (SourceDocument): 1
-- Minerva MVP Delivery Plan (SourceDocument): 1
-- Minerva MVP design (SourceDocument): 1
 
 ## Trends
 
@@ -55,4 +55,4 @@ _None._
 
 ## Orphan Nodes
 
-- minerva (CodeProject) — `CodeProject:minerva:a939ffff79a4`
+- identity-backend-foundation (CodeProject) — `CodeProject:identity-backend-foundation:f64a689d8f0e`

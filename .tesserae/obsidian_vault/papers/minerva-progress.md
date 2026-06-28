@@ -2,11 +2,11 @@
 node_id: SourceDocument:minerva-progress:c476087b907f
 title: Minerva progress
 type: SourceDocument
-source_path: D:\develop\minerva\docs\progress.md
+source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\progress.md
 edges_out:
   uses_metric: [map]
 edges_in:
-  summarizes: [minerva-mvp-planning, project-pulse]
+  summarizes: [minerva-identity-mvp, project-pulse]
 source_kind: SourceDocument
 ---
 
@@ -20,7 +20,7 @@ source_kind: SourceDocument
 
 ## Incoming
 
-- [[minerva-mvp-planning]] → summarizes
+- [[minerva-identity-mvp]] → summarizes
 - [[project-pulse]] → summarizes
 
 ## Related (dataview)

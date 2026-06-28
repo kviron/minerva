@@ -1,13 +1,13 @@
 {
   "nodes": {
-    "CommunitySummary:7eb26794a6d944fd": {
+    "CommunitySummary:56fa58b054481eee": {
       "aliases": [],
-      "description": "Documents and a metric centered on Minerva MVP route design, UX/UI prototyping, implementation planning, progress tracking, and evaluation context.",
+      "description": "Planning, design, routing, implementation, progress, and evaluation artifacts for the Minerva identity backend foundation MVP, including route skeletons and shared success metrics.",
       "metadata": {
         "extractor": "community_summaries.compile_community_summaries",
-        "member_count": 5
+        "member_count": 7
       },
-      "name": "Minerva MVP Planning"
+      "name": "Minerva Identity MVP"
     },
     "Metric:map:592bcbe13f80": {
       "aliases": [],
@@ -86,6 +86,22 @@
         "source_kind": "SourceDocument"
       },
       "name": "Forgot-Password UI Implementation Plan"
+    },
+    "SourceDocument:identity-backend-foundation-design:9f706c9220cd": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Identity backend foundation design"
+    },
+    "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Identity Backend Foundation Implementation Plan"
     },
     "SourceDocument:minerva-agent-instructions:7b4afaaff5ff": {
       "aliases": [],
@@ -259,7 +275,7 @@
       "aliases": [],
       "description": "Top-level snapshot of the wiki at compile time.",
       "metadata": {
-        "content_hash": "sha256-52c62de6700912eba60c13568623b1c26c7d86609ad52883dea5021b024536d9",
+        "content_hash": "sha256-3ab74996870d508d148e47448a13ec0a13bc1b92353fa420d545ad24e16ffd05",
         "synthesis_kind": "pulse"
       },
       "name": "Project Pulse"

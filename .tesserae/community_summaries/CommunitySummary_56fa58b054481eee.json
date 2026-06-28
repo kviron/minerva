@@ -1,0 +1,24 @@
+{
+  "community_id": "CommunitySummary:56fa58b054481eee",
+  "member_ids": [
+    "Metric:map:592bcbe13f80",
+    "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+    "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
+    "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+    "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+    "SourceDocument:minerva-progress:c476087b907f",
+    "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72"
+  ],
+  "schema_version": 1,
+  "summary": {
+    "description": "Planning, design, routing, implementation, progress, and evaluation artifacts for the Minerva identity backend foundation MVP, including route skeletons and shared success metrics.",
+    "tags": [
+      "identity-backend",
+      "minerva-mvp",
+      "implementation-plan",
+      "ux-ui",
+      "metrics"
+    ],
+    "title": "Minerva Identity MVP"
+  }
+}

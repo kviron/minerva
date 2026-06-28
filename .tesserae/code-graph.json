@@ -1,12 +1,12 @@
 {
   "nodes": [
     {
-      "id": "CodeProject:minerva:a939ffff79a4",
-      "name": "minerva",
+      "id": "CodeProject:identity-backend-foundation:f64a689d8f0e",
+      "name": "identity-backend-foundation",
       "type": "CodeProject",
       "aliases": [],
-      "description": "Development code project at D:\\develop\\minerva",
-      "source_path": "D:\\develop\\minerva",
+      "description": "Development code project at C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation",
+      "source_path": "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation",
       "metadata": {
         "layer": "project",
         "source_kind": "CodeProject"

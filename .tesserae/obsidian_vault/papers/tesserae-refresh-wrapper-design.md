@@ -2,7 +2,7 @@
 node_id: SourceDocument:tesserae-refresh-wrapper-design:b05d0219a17b
 title: Tesserae refresh wrapper design
 type: SourceDocument
-source_path: D:\develop\minerva\docs\superpowers\specs\2026-06-27-tesserae-refresh-wrapper-design.md
+source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\superpowers\specs\2026-06-27-tesserae-refresh-wrapper-design.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

@@ -1,4 +1,8 @@
 node_modules
 .nuxt
 .superpowers/
-.tesserae
+.env
+.output
+coverage
+playwright-report
+test-results

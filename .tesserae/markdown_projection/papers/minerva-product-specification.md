@@ -2,7 +2,7 @@
 node_id: SourceDocument:minerva-product-specification:d29f24b551b5
 title: Minerva product specification
 type: SourceDocument
-source_path: D:\develop\minerva\docs\product-spec.md
+source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\product-spec.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

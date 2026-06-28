@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026-06-29-identity-backend-foundation.md · Tesserae</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script defer src="../assets/app.js"></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar" role="banner">
+<a class="brand" href="../index.html">Tesserae</a>
+<nav role="navigation" aria-label="Primary"><a class="" href="../index.html"><span>Home</span></a><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="topnav-count">[32]</span></a><a class="" href="../concepts/index.html"><span>Concepts</span></a><a class="" href="../entities/index.html"><span>Entities</span> <span class="topnav-count">[1]</span></a><a class="" href="../papers/index.html"><span>Papers</span></a><a class="" href="../repos/index.html"><span>Repos</span></a><a class="" href="../topics/index.html"><span>Topics</span></a><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="topnav-count">[1]</span></a><a class="" href="../questions/index.html"><span>Questions</span></a><a class="" href="../sessions/index.html"><span>Sessions</span></a><a class="" href="../graph/index.html"><span>Graph</span></a><a class="" href="../about.html"><span>About</span></a></nav>
+<button class="search-button" data-open-search type="button" aria-label="Open search"><svg class="icon" viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="search-button-label">Search</span><kbd class="search-button-kbd" aria-hidden="true">/</kbd></button>
+<button class="theme-toggle" data-toggle-theme type="button" aria-label="Toggle color theme"><svg class="icon icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5.2" y1="5.2" x2="6.9" y2="6.9"/><line x1="17.1" y1="17.1" x2="18.8" y2="18.8"/><line x1="5.2" y1="18.8" x2="6.9" y2="17.1"/><line x1="17.1" y1="6.9" x2="18.8" y2="5.2"/></g></svg><svg class="icon icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.5 14.6a8 8 0 0 1-10.9-10.5.6.6 0 0 0-.8-.8 9.5 9.5 0 1 0 12.5 12.1.6.6 0 0 0-.8-.8z"/></svg></button>
+<button class="rail-toggle" aria-controls="rail" aria-expanded="false" aria-label="Toggle navigation drawer" data-toggle-rail type="button"><svg class="icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="rail-toggle-label">Menu</span></button>
+</header>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="Document tree"><nav class="rail-drawer-nav" aria-label="Primary (mobile)"><h2 class="rail-section-label">Browse</h2><ul class="rail-drawer-nav-list"><li><a class="" href="../index.html"><span>Home</span></a></li><li><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="rail-nav-count">[32]</span></a></li><li><a class="" href="../concepts/index.html"><span>Concepts</span></a></li><li><a class="" href="../entities/index.html"><span>Entities</span> <span class="rail-nav-count">[1]</span></a></li><li><a class="" href="../papers/index.html"><span>Papers</span></a></li><li><a class="" href="../repos/index.html"><span>Repos</span></a></li><li><a class="" href="../topics/index.html"><span>Topics</span></a></li><li><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="rail-nav-count">[1]</span></a></li><li><a class="" href="../questions/index.html"><span>Questions</span></a></li><li><a class="" href="../sessions/index.html"><span>Sessions</span></a></li><li><a class="" href="../graph/index.html"><span>Graph</span></a></li><li><a class="" href="../about.html"><span>About</span></a></li></ul></nav><div class="doc-tree-search-row"><label class="visually-hidden" for="doc-tree-filter">Filter source files</label><input class="doc-tree-search" id="doc-tree-filter" type="search" placeholder="Filter files…" aria-label="Filter source files" data-doc-tree-search></div><h2 class="rail-section-label">Files</h2><nav class="doc-tree" aria-label="Source explorer"><li class="doc-tree-leaf" data-doc-path="AGENTS.md"><a href="../raw/agents-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">AGENTS.md</span></a></li><details class="doc-tree-folder doc-tree-root"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">docs</span> <span class="doc-tree-count">[31]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/architecture.md"><a href="../raw/docs-architecture-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">architecture.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/backlog.md"><a href="../raw/docs-backlog-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">backlog.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">decisions</span> <span class="doc-tree-count">[7]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/decisions/0001-modular-monolith.md"><a href="../raw/docs-decisions-0001-modular-monolith-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0001-modular-monolith.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0002-project-rbac.md"><a href="../raw/docs-decisions-0002-project-rbac-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0002-project-rbac.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0003-document-versioning.md"><a href="../raw/docs-decisions-0003-document-versioning-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0003-document-versioning.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0004-mcp-first-release-boundary.md"><a href="../raw/docs-decisions-0004-mcp-first-release-boundary-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0004-mcp-first-release-boundary.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0005-mcp-oauth-resource-and-revocation.md"><a href="../raw/docs-decisions-0005-mcp-oauth-resource-and-revocation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0005-mcp-oauth-resource-and-revocation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0006-use-bun-package-manager.md"><a href="../raw/docs-decisions-0006-use-bun-package-manager-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0006-use-bun-package-manager.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0007-separate-authentication-profiles-and-project-roles.md"><a href="../raw/docs-decisions-0007-separate-authentication-profiles-and-project-roles-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0007-separate-authentication-profiles-and-project-roles.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">operations</span> <span class="doc-tree-count">[1]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/operations/tesserae.md"><a href="../raw/docs-operations-tesserae-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">tesserae.md</span></a></li></ul></details></li><li class="doc-tree-leaf" data-doc-path="docs/product-spec.md"><a href="../raw/docs-product-spec-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">product-spec.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/progress.md"><a href="../raw/docs-progress-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">progress.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/roadmap.md"><a href="../raw/docs-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">roadmap.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">superpowers</span> <span class="doc-tree-count">[18]</span></summary><ul class="doc-tree-list"><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">plans</span> <span class="doc-tree-count">[9]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-24-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-figma-prototype.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-figma-prototype.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-mvp-roadmap.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-roadmap.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-mvp-route-skeleton.md"><a href="../raw/docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-mvp-route-skeleton.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-postgresql-compose.md"><a href="../raw/docs-superpowers-plans-2026-06-27-postgresql-compose-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-tesserae-refresh-wrapper.md"><a href="../raw/docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-forgot-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-forgot-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-reset-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-reset-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-identity-backend-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-29-identity-backend-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-backend-foundation.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">specs</span> <span class="doc-tree-count">[9]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-mvp-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-ui-prototype-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-minerva-mvp-route-map-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-postgresql-compose-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-tesserae-refresh-wrapper-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-forgot-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-identity-backend-foundation-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-identity-backend-foundation-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-reset-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-user-identity-profile-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-user-identity-profile-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-user-identity-profile-design.md</span></a></li></ul></details></li></ul></details></li></ul></details></nav></aside>
+<main class="main" id="main" aria-label="Main content">
+<button class="toc-toggle" aria-controls="toc" aria-expanded="false" data-toggle-toc type="button">On this page</button>
+<article class="article">
+<header class="article-header">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a class="crumb" href="../index.html">Home</a><span class="sep" aria-hidden="true">/</span><span class="crumb">Raw</span><span class="sep" aria-hidden="true">/</span><span class="crumb crumb-current">2026-06-29-identity-backend-f...</span></nav>
+</header>
+<div class="article-body"><p class="eyebrow raw-meta">26.9 KB · updated 2026-06-28 · md</p>
+<h1 class="raw-title" title="C://Users//roma//.config//superpowers//worktrees//minerva//identity-backend-foundation//docs//superpowers//plans//2026-06-29-identity-backend-foundation.md">2026-06-29-identity-backend-foundation.md</h1>
+<p class="raw-path"><code>C://Users//roma//.config//superpowers//worktrees//minerva//identity-backend-foundation//docs//superpowers//plans//2026-06-29-identity-backend-foundation.md</code></p>
+<article class="raw-page"><section class="markdown-body raw-markdown"><h1 id="identity-backend-foundation-implementation-plan">Identity Backend Foundation Implementation Plan</h1>
+<blockquote><p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (<code>- [x]</code>) syntax for tracking.</p></blockquote>
+<p><strong>Goal:</strong> Deliver PostgreSQL-backed Better Auth login by email or username, persistent sessions, logout, Mailpit password recovery, and safe first-<code>super_admin</code> bootstrap without redesigning the existing pages.</p>
+<p><strong>Architecture:</strong> Keep Identity inside the Nuxt/Nitro modular monolith. Drizzle owns one PostgreSQL schema and migration history; Better Auth uses the official Drizzle adapter; thin Nitro handlers call focused Identity services and server-side session guards. Existing Vue forms receive behavior only.</p>
+<p>The existing authentication forms keep their approved structure and styling; this plan changes only validation, submission state, errors, and navigation behavior.</p>
+<p><strong>Tech Stack:</strong> Nuxt 4.4.8, Nitro/H3, Vue 3.5, Bun 1.3, PostgreSQL 17, Drizzle ORM 0.45.2, Better Auth 1.6.22, Mailpit 1.30.0, Vitest 4.1.9, Playwright 1.61.1</p>
+<hr>
+<h2 id="file-map">File map</h2>
+<ul><li><code>shared/config/env.ts</code>: parse and validate server-only configuration.</li><li><code>server/infrastructure/database/{client,health}.ts</code>: lazy PostgreSQL/Drizzle access and readiness.</li><li><code>server/infrastructure/database/schema/auth.ts</code>: Better Auth-generated schema plus reviewed indexes.</li><li><code>server/infrastructure/mail/smtp-password-reset-mailer.ts</code>: SMTP implementation of the reset-mail contract.</li><li><code>server/modules/identity/</code>: Better Auth factory, runtime instance, domain errors, identifier classification, rate limiting, sign-in, recovery, bootstrap, and session guard.</li><li><code>server/api/auth/[...all].ts</code>: Better Auth transport, with Minerva-owned flows blocked from direct bypass.</li><li><code>server/api/identity/*.post.ts</code>: stable Minerva identity HTTP contract.</li><li><code>app/lib/auth-client.ts</code>, <code>app/middleware/auth.global.ts</code>: session client and page protection.</li><li>Existing <code>app/components/auth/*</code>: state and submission wiring only; no layout redesign.</li><li><code>tests/unit</code>, <code>tests/integration</code>, <code>tests/e2e</code>: fast rules, real PostgreSQL/auth behavior, and browser journeys.</li></ul>
+<p>The following signatures are fixed for every task:</p>
+<pre><code class="language-ts">export type AuthMode = &#x27;runtime&#x27; | &#x27;bootstrap&#x27; | &#x27;test-seed&#x27;
+export type IdentityCode = &#x27;INVALID_CREDENTIALS&#x27; | &#x27;AUTH_REQUIRED&#x27; | &#x27;ACCOUNT_DISABLED&#x27;
+  | &#x27;RESET_REQUEST_ACCEPTED&#x27; | &#x27;RESET_TOKEN_INVALID&#x27; | &#x27;RATE_LIMITED&#x27; | &#x27;SERVICE_UNAVAILABLE&#x27;
+  | &#x27;BOOTSTRAP_ALREADY_COMPLETE&#x27; | &#x27;BOOTSTRAP_IDENTITY_CONFLICT&#x27;
+export type LoginIdentifier = { kind: &#x27;email&#x27; | &#x27;username&#x27;, normalized: string }
+export interface PasswordResetMailer {
+  sendPasswordReset(input: { to: string, resetUrl: string }): Promise&lt;void&gt;
+}
+export interface CreateMinervaAuthInput {
+  mode: AuthMode
+  db: import(&#x27;drizzle-orm/postgres-js&#x27;).PostgresJsDatabase
+  baseURL: string
+  trustedOrigins: string[]
+  mailer: PasswordResetMailer
+}
+export interface RateLimitInput {
+  scope: &#x27;sign-in&#x27; | &#x27;recovery-request&#x27; | &#x27;password-reset&#x27;
+  ip: string
+  identity?: string
+  max: number
+  windowSeconds: number
+}
+export interface SignInInput { identifier: string, password: string, ip: string, requestHeaders: Headers }
+export interface BootstrapInput { email: string, username: string, password: string }
+export interface RecoveryRequest { email: string, ip: string }
+export interface ResetRequest { token: string, newPassword: string, ip: string }
+export function classifyLoginIdentifier(value: string): LoginIdentifier
+export function createMinervaAuth(input: CreateMinervaAuthInput): ReturnType&lt;typeof betterAuth&gt;
+export function consumeIdentityRateLimit(input: RateLimitInput): Promise&lt;void&gt;
+export function signInWithIdentifier(input: SignInInput): Promise&lt;{ headers: Headers }&gt;
+export function bootstrapSuperAdmin(input: BootstrapInput): Promise&lt;{ outcome: &#x27;created&#x27; | &#x27;existing&#x27;, userId: string }&gt;
+export function requestPasswordReset(input: RecoveryRequest): Promise&lt;&#x27;RESET_REQUEST_ACCEPTED&#x27;&gt;
+export function resetPassword(input: ResetRequest): Promise&lt;void&gt;
+export function requireSession(event: H3Event): Promise&lt;NonNullable&lt;Awaited&lt;ReturnType&lt;typeof auth.api.getSession&gt;&gt;&gt;&gt;</code></pre>
+<p>After every task commit, run <code>./scripts/refresh-tesserae.ps1</code> and verify that no <code>.tesserae</code> path is staged. Generated Tesserae state remains local and is never included in a feature commit.</p>
+<h3 id="task-1-add-exact-dependencies-checks-and-validated-environment">Task 1: Add exact dependencies, checks, and validated environment</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>package.json</code></li><li>Modify: <code>bun.lock</code></li><li>Modify: <code>.gitignore</code></li><li>Create: <code>.env.example</code></li><li>Create: <code>vitest.config.ts</code></li><li>Create: <code>playwright.config.ts</code></li><li>Create: <code>shared/config/env.ts</code></li><li>Create: <code>tests/unit/config/env.spec.ts</code></li><li>[x] <strong>Step 1: Install exact dependencies</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bun add --exact better-auth@1.6.22 @better-auth/drizzle-adapter@1.6.22 drizzle-orm@0.45.2 postgres@3.4.9 nodemailer@8.0.11
+bun add --dev --exact drizzle-kit@0.31.10 @types/nodemailer@8.0.1 vitest@4.1.9 @vitest/coverage-v8@4.1.9 @nuxt/test-utils@4.0.3 @playwright/test@1.61.1 vue-tsc@3.3.5</code></pre>
+<p>Expected: <code>package.json</code> and <code>bun.lock</code> change; no application files change.</p>
+<ul><li>[x] <strong>Step 2: Add the failing environment tests</strong></li></ul>
+<p>Create <code>tests/unit/config/env.spec.ts</code>:</p>
+<pre><code class="language-ts">import { describe, expect, it } from &#x27;vitest&#x27;
+import { parseServerEnv } from &#x27;../../../shared/config/env&#x27;
+
+const valid = {
+  DATABASE_URL: &#x27;postgresql://minerva:minerva@127.0.0.1:5432/minerva&#x27;,
+  BETTER_AUTH_SECRET: &#x27;01234567890123456789012345678901&#x27;,
+  BETTER_AUTH_URL: &#x27;http://127.0.0.1:3000&#x27;,
+  TRUSTED_ORIGINS: &#x27;http://127.0.0.1:3000,http://localhost:3000&#x27;,
+  RATE_LIMIT_HMAC_SECRET: &#x27;abcdefghijklmnopqrstuvwxyz123456&#x27;,
+  SMTP_HOST: &#x27;127.0.0.1&#x27;, SMTP_PORT: &#x27;1025&#x27;,
+  MAIL_FROM: &#x27;Minerva &lt;no-reply@minerva.local&gt;&#x27;,
+  MAILPIT_API_URL: &#x27;http://127.0.0.1:8025&#x27;,
+}
+
+describe(&#x27;parseServerEnv&#x27;, () =&gt; {
+  it(&#x27;parses trusted origins and numeric SMTP port&#x27;, () =&gt; {
+    const env = parseServerEnv(valid)
+    expect(env.TRUSTED_ORIGINS).toEqual([&#x27;http://127.0.0.1:3000&#x27;, &#x27;http://localhost:3000&#x27;])
+    expect(env.SMTP_PORT).toBe(1025)
+  })
+
+  it(&#x27;rejects short secrets&#x27;, () =&gt; {
+    expect(() =&gt; parseServerEnv({ ...valid, BETTER_AUTH_SECRET: &#x27;short&#x27; })).toThrow()
+  })
+})</code></pre>
+<ul><li>[x] <strong>Step 3: Configure Vitest and verify RED</strong></li></ul>
+<p>Create <code>vitest.config.ts</code>:</p>
+<pre><code class="language-ts">import { defineConfig } from &#x27;vitest/config&#x27;
+
+export default defineConfig({
+  test: {
+    environment: &#x27;node&#x27;,
+    include: [&#x27;tests/unit/**/*.spec.ts&#x27;, &#x27;tests/integration/**/*.spec.ts&#x27;],
+    fileParallelism: false,
+    coverage: { provider: &#x27;v8&#x27;, reporter: [&#x27;text&#x27;, &#x27;json&#x27;] },
+  },
+})</code></pre>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/config/env.spec.ts</code></pre>
+<p>Expected: FAIL because <code>shared/config/env.ts</code> does not exist.</p>
+<ul><li>[x] <strong>Step 4: Implement environment parsing</strong></li></ul>
+<p>Create <code>shared/config/env.ts</code>:</p>
+<pre><code class="language-ts">import { z } from &#x27;zod&#x27;
+
+const schema = z.object({
+  DATABASE_URL: z.string().url(),
+  BETTER_AUTH_SECRET: z.string().min(32),
+  BETTER_AUTH_URL: z.string().url(),
+  TRUSTED_ORIGINS: z.string().transform(value =&gt; value.split(&#x27;,&#x27;).map(v =&gt; v.trim()).filter(Boolean)),
+  RATE_LIMIT_HMAC_SECRET: z.string().min(32),
+  TRUST_PROXY: z.enum([&#x27;true&#x27;, &#x27;false&#x27;]).default(&#x27;false&#x27;).transform(v =&gt; v === &#x27;true&#x27;),
+  SMTP_HOST: z.string().min(1),
+  SMTP_PORT: z.coerce.number().int().min(1).max(65535),
+  MAIL_FROM: z.string().min(3),
+  MAILPIT_API_URL: z.string().url(),
+})
+
+export type ServerEnv = z.infer&lt;typeof schema&gt;
+export const parseServerEnv = (input: Record&lt;string, string | undefined&gt;) =&gt; schema.parse(input)
+let cached: ServerEnv | undefined
+export const getServerEnv = () =&gt; cached ??= parseServerEnv(process.env)</code></pre>
+<p>Document non-secret local values in <code>.env.example</code>; add <code>.env</code>, <code>.output</code>, <code>coverage</code>, <code>playwright-report</code>, and <code>test-results</code> to <code>.gitignore</code>. Do not read or copy the existing <code>.env</code>.</p>
+<ul><li>[x] <strong>Step 5: Add scripts and browser config</strong></li></ul>
+<p>Add these <code>package.json</code> scripts:</p>
+<pre><code class="language-json">{
+  &quot;typecheck&quot;: &quot;nuxt typecheck&quot;,
+  &quot;test:unit&quot;: &quot;vitest run tests/unit&quot;,
+  &quot;test:integration&quot;: &quot;vitest run tests/integration&quot;,
+  &quot;test:e2e&quot;: &quot;playwright test&quot;,
+  &quot;db:generate&quot;: &quot;drizzle-kit generate&quot;,
+  &quot;db:migrate&quot;: &quot;drizzle-kit migrate&quot;,
+  &quot;auth:bootstrap&quot;: &quot;bun scripts/bootstrap-super-admin.ts&quot;
+}</code></pre>
+<p>Create <code>playwright.config.ts</code>:</p>
+<pre><code class="language-ts">import { defineConfig } from &#x27;@playwright/test&#x27;
+
+export default defineConfig({
+  testDir: &#x27;./tests/e2e&#x27;,
+  use: { baseURL: &#x27;http://127.0.0.1:3000&#x27;, trace: &#x27;retain-on-failure&#x27; },
+  webServer: {
+    command: &#x27;bun run dev --host 127.0.0.1&#x27;,
+    url: &#x27;http://127.0.0.1:3000/api/health/database&#x27;,
+    reuseExistingServer: false,
+    env: {
+      ...process.env,
+      DATABASE_URL: &#x27;postgresql://minerva:minerva@127.0.0.1:5433/minerva_test&#x27;,
+      BETTER_AUTH_SECRET: &#x27;test-secret-012345678901234567890&#x27;,
+      BETTER_AUTH_URL: &#x27;http://127.0.0.1:3000&#x27;,
+      TRUSTED_ORIGINS: &#x27;http://127.0.0.1:3000&#x27;,
+      RATE_LIMIT_HMAC_SECRET: &#x27;test-rate-limit-secret-01234567890&#x27;,
+      SMTP_HOST: &#x27;127.0.0.1&#x27;, SMTP_PORT: &#x27;1025&#x27;,
+      MAIL_FROM: &#x27;Minerva &lt;no-reply@minerva.local&gt;&#x27;,
+      MAILPIT_API_URL: &#x27;http://127.0.0.1:8025&#x27;,
+    },
+  },
+})</code></pre>
+<ul><li>[x] <strong>Step 6: Verify GREEN and commit</strong></li></ul>
+<p>Run <code>bun run test:unit</code> and <code>bun run typecheck</code>. Expected: both exit 0.</p>
+<pre><code class="language-powershell">git add package.json bun.lock .gitignore .env.example vitest.config.ts playwright.config.ts shared/config tests/unit/config
+git commit -m &quot;chore: add identity backend test foundation&quot;</code></pre>
+<h3 id="task-2-add-mailpit-isolated-test-postgresql-and-database-readiness">Task 2: Add Mailpit, isolated test PostgreSQL, and database readiness</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>docker-compose.yml</code></li><li>Create: <code>drizzle.config.ts</code></li><li>Create: <code>server/infrastructure/database/client.ts</code></li><li>Create: <code>server/infrastructure/database/health.ts</code></li><li>Create: <code>server/api/health/database.get.ts</code></li><li>Create: <code>tests/helpers/database.ts</code></li><li>Create: <code>tests/integration/database/health.spec.ts</code></li><li>[x] <strong>Step 1: Extend Compose</strong></li></ul>
+<p>Keep the existing <code>postgres</code> service and add:</p>
+<pre><code class="language-yaml">  postgres-test:
+    image: postgres:17-alpine
+    profiles: [test]
+    environment:
+      POSTGRES_DB: minerva_test
+      POSTGRES_USER: minerva
+      POSTGRES_PASSWORD: minerva
+    ports: [&quot;127.0.0.1:5433:5432&quot;]
+    tmpfs: [/var/lib/postgresql/data]
+    healthcheck:
+      test: [&quot;CMD-SHELL&quot;, &quot;pg_isready -U minerva -d minerva_test&quot;]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  mailpit:
+    image: axllent/mailpit:v1.30.0
+    ports:
+      - &quot;127.0.0.1:1025:1025&quot;
+      - &quot;127.0.0.1:8025:8025&quot;</code></pre>
+<ul><li>[x] <strong>Step 2: Write the failing database readiness test</strong></li></ul>
+<p>Create <code>tests/integration/database/health.spec.ts</code>:</p>
+<pre><code class="language-ts">import { expect, it } from &#x27;vitest&#x27;
+import { checkDatabase } from &#x27;../../../server/infrastructure/database/health&#x27;
+
+it(&#x27;reports a real PostgreSQL connection as ready&#x27;, async () =&gt; {
+  await expect(checkDatabase(&#x27;postgresql://minerva:minerva@127.0.0.1:5433/minerva_test&#x27;))
+    .resolves.toEqual({ database: &#x27;ok&#x27; })
+})</code></pre>
+<p>Run:</p>
+<pre><code class="language-powershell">docker compose --profile test up -d --wait postgres-test mailpit
+bunx vitest run tests/integration/database/health.spec.ts</code></pre>
+<p>Expected: FAIL because <code>health.ts</code> does not exist.</p>
+<ul><li>[x] <strong>Step 3: Implement the database boundary</strong></li></ul>
+<p><code>client.ts</code> exports <code>createDatabase(url)</code> using <code>postgres(url, { max: 10 })</code> and <code>drizzle(queryClient)</code>, plus lazy <code>getDatabase()</code> and <code>closeDatabase()</code>. Implement <code>health.ts</code> as:</p>
+<pre><code class="language-ts">import postgres from &#x27;postgres&#x27;
+
+export async function checkDatabase(url: string) {
+  const sql = postgres(url, { max: 1 })
+  try {
+    await sql`select 1`
+    return { database: &#x27;ok&#x27; as const }
+  } finally {
+    await sql.end()
+  }
+}</code></pre>
+<p>The Nitro endpoint maps connection failure to <code>503 SERVICE_UNAVAILABLE</code> without returning the connection error.</p>
+<p>Create <code>drizzle.config.ts</code>:</p>
+<pre><code class="language-ts">import { defineConfig } from &#x27;drizzle-kit&#x27;
+
+export default defineConfig({
+  dialect: &#x27;postgresql&#x27;,
+  schema: &#x27;./server/infrastructure/database/schema/auth.ts&#x27;,
+  out: &#x27;./drizzle&#x27;,
+  dbCredentials: { url: process.env.DATABASE_URL! },
+})</code></pre>
+<ul><li>[x] <strong>Step 4: Verify and commit</strong></li></ul>
+<p>Run the focused integration test and <code>bun run typecheck</code>. Expected: PASS.</p>
+<pre><code class="language-powershell">git add docker-compose.yml drizzle.config.ts server/infrastructure/database server/api/health tests/helpers tests/integration/database
+git commit -m &quot;feat: add database and mail development services&quot;</code></pre>
+<h3 id="task-3-configure-better-auth-and-generate-the-first-migration">Task 3: Configure Better Auth and generate the first migration</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>server/modules/identity/contracts.ts</code></li><li>Create: <code>server/modules/identity/create-auth.ts</code></li><li>Create: <code>server/modules/identity/auth.ts</code></li><li>Create: <code>server/infrastructure/mail/smtp-password-reset-mailer.ts</code></li><li>Create: <code>server/infrastructure/database/schema/auth.ts</code></li><li>Create: <code>server/infrastructure/database/schema/index.ts</code></li><li>Create: <code>drizzle/0000_identity_backend_foundation.sql</code></li><li>Create: <code>drizzle/meta/0000_snapshot.json</code></li><li>Create: <code>drizzle/meta/_journal.json</code></li><li>Create: <code>tests/integration/identity/schema.spec.ts</code></li><li>[x] <strong>Step 1: Write the failing schema test</strong></li></ul>
+<p>Reset the test database <code>public</code> schema in <code>tests/helpers/database.ts</code>, run Drizzle migrations, then query <code>information_schema.tables</code>. Expect <code>user</code>, <code>account</code>, <code>session</code>, <code>verification</code>, and <code>rateLimit</code>.</p>
+<p>Run the test. Expected: FAIL because no migration exists.</p>
+<ul><li>[x] <strong>Step 2: Create the auth factory used for schema generation</strong></li></ul>
+<p>Define <code>PasswordResetMailer</code> in <code>contracts.ts</code>. Implement <code>createMinervaAuth</code> with:</p>
+<pre><code class="language-ts">betterAuth({
+  baseURL, trustedOrigins,
+  database: drizzleAdapter(db, { provider: &#x27;pg&#x27; }),
+  advanced: { database: { generateId: &#x27;uuid&#x27; } },
+  emailAndPassword: {
+    enabled: true,
+    disableSignUp: mode === &#x27;runtime&#x27;,
+    autoSignIn: false,
+    minPasswordLength: 12,
+    maxPasswordLength: 256,
+    resetPasswordTokenExpiresIn: 1800,
+    revokeSessionsOnPasswordReset: true,
+    sendResetPassword: ({ user, token }) =&gt; void mailer.sendPasswordReset({
+      to: user.email,
+      resetUrl: `${baseURL}/auth/reset-password/${encodeURIComponent(token)}`,
+    }),
+  },
+  verification: { storeIdentifier: &#x27;hashed&#x27; },
+  session: { expiresIn: 604800, updateAge: 86400 },
+  user: { additionalFields: {
+    superAdmin: { type: &#x27;boolean&#x27;, defaultValue: false, input: false },
+    status: { type: [&#x27;active&#x27;, &#x27;disabled&#x27;], defaultValue: &#x27;active&#x27;, input: false },
+    disabledAt: { type: &#x27;date&#x27;, required: false, input: false },
+    disabledReason: { type: &#x27;string&#x27;, required: false, input: false },
+    lastLoginAt: { type: &#x27;date&#x27;, required: false, input: false },
+  } },
+  disabledPaths: [&#x27;/is-username-available&#x27;],
+  rateLimit: { enabled: true, storage: &#x27;database&#x27; },
+  plugins: [username()],
+})</code></pre>
+<p>Modes are exactly <code>&#x27;runtime&#x27; | &#x27;bootstrap&#x27; | &#x27;test-seed&#x27;</code>; only runtime disables signup and only bootstrap sets <code>superAdmin</code> in a <code>databaseHooks.user.create.before</code> hook. The runtime configuration must make public sign-up unavailable; bootstrap and test seeding are server-only processes and are never mounted as public transports.</p>
+<p>Create the SMTP mailer in this task so runtime <code>auth.ts</code> has no temporary dependency. It constructs a Nodemailer transport from validated SMTP host/port and implements <code>PasswordResetMailer</code>; sending behavior is exercised in Task 6.</p>
+<ul><li>[x] <strong>Step 3: Generate and review the schema</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx auth@1.6.22 generate --config server/modules/identity/auth.ts --output server/infrastructure/database/schema/auth.ts --yes
+bun run db:generate -- --name identity_backend_foundation</code></pre>
+<p>Expected: the five tables and username/user fields are present; primary keys use UUID-compatible string values; email, username, session token, and rate-limit key have unique indexes. Export every table through <code>schema/index.ts</code> and pass the schema object to <code>drizzleAdapter</code>.</p>
+<ul><li>[x] <strong>Step 4: Add session lifecycle hooks</strong></li></ul>
+<p>Add <code>databaseHooks.session.create.before</code> to reject any user whose status is not <code>active</code> with generic <code>INVALID_CREDENTIALS</code>. Add <code>session.create.after</code> to update only <code>lastLoginAt</code>. Do not log the identifier, password, hash, session token, or reset token.</p>
+<ul><li>[x] <strong>Step 5: Verify migration and commit</strong></li></ul>
+<p>Run the schema integration test twice from a reset test database, then <code>bun run typecheck</code>. Expected: both migration runs and typecheck pass.</p>
+<pre><code class="language-powershell">git add server/modules/identity server/infrastructure/database/schema drizzle tests/integration/identity/schema.spec.ts
+git commit -m &quot;feat: add Better Auth database schema&quot;</code></pre>
+<h3 id="task-4-add-safe-first-super-admin-bootstrap">Task 4: Add safe first-super-admin bootstrap</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>server/modules/identity/bootstrap-super-admin.ts</code></li><li>Create: <code>scripts/read-hidden-value.ts</code></li><li>Create: <code>scripts/bootstrap-super-admin.ts</code></li><li>Create: <code>tests/integration/identity/bootstrap-super-admin.spec.ts</code></li><li>[x] <strong>Step 1: Write RED bootstrap cases</strong></li></ul>
+<p>Create four named tests: <code>creates the first active super admin</code>, <code>is idempotent for the same normalized identity</code>, <code>refuses a second bootstrap identity</code>, and <code>never elevates an existing ordinary account</code>. Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/integration/identity/bootstrap-super-admin.spec.ts</code></pre>
+<p>Expected: FAIL because <code>bootstrapSuperAdmin</code> does not exist.</p>
+<ul><li>[x] <strong>Step 2: Implement bootstrap service</strong></li></ul>
+<p>Use a dedicated one-connection PostgreSQL client, acquire <code>pg_advisory_lock(hashtext(&#x27;minerva-bootstrap-super-admin&#x27;))</code>, perform all checks, call a <code>bootstrap</code>-mode Better Auth <code>auth.api.signUpEmail</code> with username/displayUsername, and release the lock in <code>finally</code>. Return only <code>{ outcome: &#x27;created&#x27; | &#x27;existing&#x27;, userId }</code>.</p>
+<ul><li>[x] <strong>Step 3: Implement protected CLI input</strong></li></ul>
+<p><code>read-hidden-value.ts</code> reads a TTY password with raw-mode keypress handling and restores terminal mode in <code>finally</code>. The command accepts no password argument, prints neither password nor email, and emits only <code>Bootstrap super administrator is ready.</code> on success.</p>
+<ul><li>[x] <strong>Step 4: Verify and commit</strong></li></ul>
+<p>Run focused tests twice and confirm no password appears in captured stdout/stderr.</p>
+<pre><code class="language-powershell">git add server/modules/identity/bootstrap-super-admin.ts scripts tests/integration/identity/bootstrap-super-admin.spec.ts package.json
+git commit -m &quot;feat: add super admin bootstrap command&quot;</code></pre>
+<h3 id="task-5-add-identifier-login-durable-throttling-and-session-guard">Task 5: Add identifier login, durable throttling, and session guard</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>server/modules/identity/errors.ts</code></li><li>Create: <code>server/modules/identity/identifier.ts</code></li><li>Create: <code>server/modules/identity/rate-limit.ts</code></li><li>Create: <code>server/modules/identity/sign-in.ts</code></li><li>Create: <code>server/modules/identity/require-session.ts</code></li><li>Create: <code>server/api/auth/[...all].ts</code></li><li>Create: <code>server/api/identity/sign-in.post.ts</code></li><li>Modify: <code>server/api/mainMenu.get.ts</code></li><li>Create: <code>tests/unit/identity/identifier.spec.ts</code></li><li>Create: <code>tests/integration/identity/sign-in.spec.ts</code></li><li>[x] <strong>Step 1: Write RED identifier tests</strong></li></ul>
+<p>Create <code>identifier.spec.ts</code> with exact cases <code> User@Example.com </code> в†’ <code>{ kind: &#x27;email&#x27;, normalized: &#x27;user@example.com&#x27; }</code>, <code> Test.User </code> в†’ <code>{ kind: &#x27;username&#x27;, normalized: &#x27;test.user&#x27; }</code>, and empty or 256-character input в†’ <code>INVALID_CREDENTIALS</code>. Run the file and expect module-not-found RED.</p>
+<ul><li>[x] <strong>Step 2: Implement identifier and stable errors</strong></li></ul>
+<p><code>identifier.ts</code> returns <code>{ kind: &#x27;email&#x27; | &#x27;username&#x27;, normalized: string }</code>. <code>errors.ts</code> defines only <code>INVALID_CREDENTIALS</code>, <code>AUTH_REQUIRED</code>, <code>ACCOUNT_DISABLED</code>, <code>RESET_REQUEST_ACCEPTED</code>, <code>RESET_TOKEN_INVALID</code>, <code>RATE_LIMITED</code>, and <code>SERVICE_UNAVAILABLE</code>, each with an HTTP status mapping.</p>
+<ul><li>[x] <strong>Step 3: Write RED throttling/sign-in integration tests</strong></li></ul>
+<p>Seed one user through <code>test-seed</code> mode. Add named tests for email cookie, username cookie, shared invalid-credential response, sixth-attempt <code>429</code>, and absence of plaintext identifier in <code>rateLimit</code>. Run <code>bunx vitest run tests/integration/identity/sign-in.spec.ts</code>; expected: RED because <code>sign-in.ts</code> is missing.</p>
+<ul><li>[x] <strong>Step 4: Implement durable rate limiting and sign-in</strong></li></ul>
+<p>Hash <code>${scope}:${ip}:${normalizedIdentifier}</code> with HMAC-SHA-256 and <code>RATE_LIMIT_HMAC_SECRET</code>. Atomically insert/update <code>rateLimit</code>; reset count outside the window; reject when count exceeds five. <code>sign-in.ts</code> branches to <code>auth.api.signInEmail</code> or <code>auth.api.signInUsername</code> with <code>returnHeaders: true</code>, catches Better Auth <code>APIError</code>, and always maps credential failure to <code>INVALID_CREDENTIALS</code>.</p>
+<p>The Nitro handler obtains the connecting IP with <code>getRequestIP(event, { xForwardedFor: env.TRUST_PROXY })</code>, forwards every <code>Set-Cookie</code> value, and returns <code>{ ok: true }</code> only.</p>
+<ul><li>[x] <strong>Step 5: Mount Better Auth and protect a server API</strong></li></ul>
+<p>The catch-all handler delegates to <code>auth.handler(toWebRequest(event))</code> but returns <code>404</code> for direct sign-up, username-availability, email/username sign-in, request-reset, and reset paths owned by Minerva adapters. <code>require-session.ts</code> calls <code>auth.api.getSession({ headers: event.headers })</code> and throws <code>AUTH_REQUIRED</code>. Replace role-name logic in <code>mainMenu.get.ts</code> with this server session guard.</p>
+<ul><li>[x] <strong>Step 6: Verify and commit</strong></li></ul>
+<p>Run unit/integration tests and typecheck.</p>
+<pre><code class="language-powershell">git add server/modules/identity server/api tests/unit/identity tests/integration/identity/sign-in.spec.ts
+git commit -m &quot;feat: add secure identifier sign in&quot;</code></pre>
+<h3 id="task-6-add-mailpit-password-recovery-and-reset">Task 6: Add Mailpit password recovery and reset</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>server/infrastructure/mail/smtp-password-reset-mailer.ts</code></li><li>Create: <code>server/modules/identity/password-recovery.ts</code></li><li>Create: <code>server/api/identity/request-password-reset.post.ts</code></li><li>Create: <code>server/api/identity/reset-password.post.ts</code></li><li>Create: <code>tests/integration/identity/password-recovery.spec.ts</code></li><li>[x] <strong>Step 1: Write RED recovery tests</strong></li></ul>
+<p>Add named tests for the shared request response, known-account Mailpit delivery, no unknown-account mail, 30-minute expiry, single use, and session revocation. Fetch mail text from <code>${MAILPIT_API_URL}/view/latest.txt?query=to:&lt;encoded-email&gt;</code>. Run the file; expected: RED because <code>password-recovery.ts</code> is missing.</p>
+<ul><li>[x] <strong>Step 2: Implement SMTP adapter</strong></li></ul>
+<p>Use Nodemailer transport <code>{ host, port, secure: false }</code>. Send Russian subject <code>Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РїР°СЂРѕР»СЏ Minerva</code> and plain-text link. Catch asynchronous send failure with a sanitized server error that excludes recipient and URL.</p>
+<ul><li>[x] <strong>Step 3: Implement recovery services and handlers</strong></li></ul>
+<p>Request endpoint uses a three-per-hour HMAC key of IP plus normalized email, calls <code>auth.api.requestPasswordReset</code>, and always returns <code>{ code: &#x27;RESET_REQUEST_ACCEPTED&#x27; }</code>. Reset endpoint limits five attempts per 15 minutes per IP, calls <code>auth.api.resetPassword</code>, and maps invalid/expired/used tokens to <code>RESET_TOKEN_INVALID</code>.</p>
+<ul><li>[x] <strong>Step 4: Verify and commit</strong></li></ul>
+<p>Run Mailpit integration tests, sign-in regression tests, and typecheck.</p>
+<pre><code class="language-powershell">git add server/infrastructure/mail server/modules/identity/password-recovery.ts server/api/identity tests/integration/identity/password-recovery.spec.ts
+git commit -m &quot;feat: add password recovery through Mailpit&quot;</code></pre>
+<h3 id="task-7-wire-existing-forms-and-protect-pages-without-redesign">Task 7: Wire existing forms and protect pages without redesign</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>app/lib/auth-client.ts</code></li><li>Create: <code>app/middleware/auth.global.ts</code></li><li>Modify: <code>app/components/auth/loginForm/index.vue</code></li><li>Modify: <code>app/components/auth/forgotPasswordForm/index.vue</code></li><li>Modify: <code>app/components/auth/resetPasswordForm/index.vue</code></li><li>Modify: <code>app/pages/auth/reset-password/[token].vue</code></li><li>Modify: <code>playwright.config.ts</code></li><li>Create: <code>tests/e2e/global.setup.ts</code></li><li>Create: <code>tests/e2e/identity.spec.ts</code></li><li>[x] <strong>Step 1: Add RED browser journeys</strong></li></ul>
+<p>Create seven Playwright tests named <code>redirects a guest</code>, <code>signs in by email</code>, <code>signs in by username</code>, <code>hides credential enumeration</code>, <code>revokes logout session</code>, <code>returns one recovery response</code>, and <code>resets once through Mailpit</code>. Run them before UI wiring; expected: failures at missing identity endpoints or absent form state.</p>
+<p><code>global.setup.ts</code> resets the test schema, applies <code>drizzle/</code>, clears Mailpit with its API, and creates one ordinary user through <code>test-seed</code> mode. Register it as <code>globalSetup</code> in <code>playwright.config.ts</code>; never call the interactive bootstrap command from tests.</p>
+<ul><li>[x] <strong>Step 2: Add auth client and page middleware</strong></li></ul>
+<p>Create:</p>
+<pre><code class="language-ts">// app/lib/auth-client.ts
+import { createAuthClient } from &#x27;better-auth/vue&#x27;
+export const authClient = createAuthClient({ baseURL: &#x27;/api/auth&#x27; })</code></pre>
+<p>The global middleware allows <code>/auth/**</code>, <code>/legal/**</code>, and <code>/invitations/**</code>; all other routes require <code>authClient.getSession()</code>. Authenticated visits to <code>/auth</code> redirect to <code>/</code>.</p>
+<ul><li>[x] <strong>Step 3: Wire the login form</strong></li></ul>
+<p>Keep all existing classes and structure. Add <code>v-model</code> identifier/password refs, <code>autocomplete=&quot;username&quot;</code> and <code>autocomplete=&quot;current-password&quot;</code>, submit through <code>$fetch(&#x27;/api/identity/sign-in&#x27;)</code>, disable the button while pending, display <code>РќРµРІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ</code> for <code>INVALID_CREDENTIALS</code>, then navigate to <code>/</code>.</p>
+<ul><li>[x] <strong>Step 4: Wire recovery forms</strong></li></ul>
+<p>Forgot form posts email and always displays <code>Р•СЃР»Рё Р°РєРєР°СѓРЅС‚ СЃСѓС‰РµСЃС‚РІСѓРµС‚, СЃСЃС‹Р»РєР° РѕС‚РїСЂР°РІР»РµРЅР° РЅР° РїРѕС‡С‚Сѓ</code>. Reset form validates matching 12вЂ“256-character passwords, reads the path token from <code>route.params.token</code>, posts <code>{ token, newPassword }</code>, and returns to <code>/auth</code> after success. Replace the incorrect <code>&lt;ResetPasswordForm /&gt;</code> usage with <code>&lt;AuthResetPasswordForm /&gt;</code>.</p>
+<ul><li>[x] <strong>Step 5: Verify logout without adding layout UI</strong></li></ul>
+<p>Use Better Auth <code>POST /api/auth/sign-out</code> in the browser test, then reload <code>/</code> and expect redirect to <code>/auth</code>. This proves the server behavior while avoiding conflicts with the separately edited header/sidebar; a visible logout control belongs to the later approved UI slice.</p>
+<ul><li>[x] <strong>Step 6: Verify and commit</strong></li></ul>
+<p>Run <code>bun run test:e2e</code>, unit/integration tests, typecheck, and build.</p>
+<pre><code class="language-powershell">git add app/lib app/middleware app/components/auth app/pages/auth tests/e2e playwright.config.ts
+git commit -m &quot;feat: connect authentication forms&quot;</code></pre>
+<h3 id="task-8-complete-documentation-and-final-verification">Task 8: Complete documentation and final verification</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>docs/progress.md</code></li><li>Modify: <code>docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md</code></li><li>Modify: <code>docs/superpowers/plans/2026-06-29-identity-backend-foundation.md</code></li><li>[x] <strong>Step 1: Verify from clean infrastructure</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">docker compose down
+docker compose --profile test up -d --wait postgres postgres-test mailpit
+bun install --frozen-lockfile
+bun run db:migrate
+bun run test:unit
+bun run test:integration
+bun run test:e2e
+bun run typecheck
+bun run build
+git diff --check</code></pre>
+<p>Expected: every command exits 0; a repeated <code>bun run db:migrate</code> makes no schema change.</p>
+<ul><li>[x] <strong>Step 2: Record the completed slice</strong></li></ul>
+<p>Set the design status to <code>implemented and verified</code>, check completed plan boxes, and add one concise <code>docs/progress.md</code> entry covering PostgreSQL/Drizzle, Better Auth identifier login, sessions/logout, Mailpit recovery, bootstrap, and verification evidence.</p>
+<ul><li>[x] <strong>Step 3: Refresh Tesserae safely</strong></li></ul>
+<p>Run <code>./scripts/refresh-tesserae.ps1</code>. Verify success, then confirm <code>.tesserae</code>, <code>.env</code>, <code>.output</code>, Mailpit data, and database files are not staged.</p>
+<ul><li>[x] <strong>Step 4: Final documentation commit</strong></li></ul>
+<pre><code class="language-powershell">git add docs/progress.md docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md docs/superpowers/plans/2026-06-29-identity-backend-foundation.md
+git commit -m &quot;docs: complete identity backend foundation&quot;
+git status --short</code></pre>
+<p>Expected: no source/document changes remain unstaged; <code>.tesserae</code> may contain local generated refresh state but no Tesserae path, secret, environment file, or build output is committed.</p></section></article></div>
+<footer class="article-footer">
+
+</footer>
+</article>
+</main>
+<aside class="toc-rail" id="toc"><aside class="toc" role="doc-toc" aria-label="On this page"><h2>On this page</h2><ol><li data-toc-target="file-map"><a class="toc-l-2" href="#file-map">File map</a></li><li data-toc-target="task-1-add-exact-dependencies-checks-and-validated-environment"><a class="toc-l-3" href="#task-1-add-exact-dependencies-checks-and-validated-environment">Task 1: Add exact dependencies, checks, and validated environment</a></li><li data-toc-target="task-2-add-mailpit-isolated-test-postgresql-and-database-readiness"><a class="toc-l-3" href="#task-2-add-mailpit-isolated-test-postgresql-and-database-readiness">Task 2: Add Mailpit, isolated test PostgreSQL, and database readiness</a></li><li data-toc-target="task-3-configure-better-auth-and-generate-the-first-migration"><a class="toc-l-3" href="#task-3-configure-better-auth-and-generate-the-first-migration">Task 3: Configure Better Auth and generate the first migration</a></li><li data-toc-target="task-4-add-safe-first-super-admin-bootstrap"><a class="toc-l-3" href="#task-4-add-safe-first-super-admin-bootstrap">Task 4: Add safe first-super-admin bootstrap</a></li><li data-toc-target="task-5-add-identifier-login-durable-throttling-and-session-guard"><a class="toc-l-3" href="#task-5-add-identifier-login-durable-throttling-and-session-guard">Task 5: Add identifier login, durable throttling, and session guard</a></li><li data-toc-target="task-6-add-mailpit-password-recovery-and-reset"><a class="toc-l-3" href="#task-6-add-mailpit-password-recovery-and-reset">Task 6: Add Mailpit password recovery and reset</a></li><li data-toc-target="task-7-wire-existing-forms-and-protect-pages-without-redesign"><a class="toc-l-3" href="#task-7-wire-existing-forms-and-protect-pages-without-redesign">Task 7: Wire existing forms and protect pages without redesign</a></li><li data-toc-target="task-8-complete-documentation-and-final-verification"><a class="toc-l-3" href="#task-8-complete-documentation-and-final-verification">Task 8: Complete documentation and final verification</a></li></ol></aside></aside>
+</div>
+<nav class="mobile-bottom-nav" aria-label="Quick"><ul><li><a class="" href="../index.html" aria-label="Home"><span class="icon" aria-hidden="true">⌂</span><span class="label">Home</span></a></li><li><a class="" href="../concepts/index.html" aria-label="Concepts"><span class="icon" aria-hidden="true">◆</span><span class="label">Concepts</span></a></li><li><a class="" href="../papers/index.html" aria-label="Papers"><span class="icon" aria-hidden="true">¶</span><span class="label">Papers</span></a></li><li><a class="" href="../syntheses/index.html" aria-label="Syntheses"><span class="icon" aria-hidden="true">✱</span><span class="label">Syntheses</span></a></li><li><a class="" href="../sessions/index.html" aria-label="Sessions"><span class="icon" aria-hidden="true">◷</span><span class="label">Sessions</span></a></li><li><a class="" href="../graph/index.html" aria-label="Graph"><span class="icon" aria-hidden="true">⁂</span><span class="label">Graph</span></a></li></ul></nav>
+<div class="palette" id="palette" hidden role="dialog" aria-modal="true" aria-label="Search palette">
+<div class="palette-box"><div class="palette-input-row"><svg class="palette-input-icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><label class="visually-hidden" for="search">Search the wiki</label><input id="search" type="search" placeholder="Search the wiki…" aria-label="Search the wiki" autocomplete="off" spellcheck="false"><button class="palette-close" type="button" aria-label="Close search" data-close-search><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><line x1="5" y1="5" x2="15" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="15" y1="5" x2="5" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div><div class="visually-hidden" id="palette-live" aria-live="polite" aria-atomic="true"></div><footer class="palette-hint" aria-hidden="true"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>tab</kbd> filter type</span><span><kbd>esc</kbd> close</span></footer></div>
+</div>
+</body>
+</html>

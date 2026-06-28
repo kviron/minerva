@@ -6,5 +6,5 @@ Auto-generated table of contents over the wiki layer. Each row links to the inde
 |---|---:|---|
 | communities | 1 | `<site>/communities/index.html` |
 | entities | 1 | `<site>/entities/index.html` |
-| sources | 30 | `<site>/sources/index.html` |
+| sources | 32 | `<site>/sources/index.html` |
 | syntheses | 1 | `<site>/syntheses/index.html` |

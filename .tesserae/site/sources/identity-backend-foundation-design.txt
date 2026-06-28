@@ -1,0 +1,17 @@
+Identity backend foundation design
+==================================
+
+# Identity backend foundation design
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Incoming relations
+
+- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+
+## Connected node types
+
+- CommunitySummary: 1
+- Metric: 1
