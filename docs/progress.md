@@ -36,6 +36,7 @@ The user approved the audited Identity backend design and implementation plan, s
 - Added validated server environment configuration and unit/integration/browser test foundations for the Identity backend.
 - Added isolated PostgreSQL test infrastructure, local Mailpit, and a database readiness endpoint.
 - Added the Better Auth factory with PostgreSQL/Drizzle, email-password and username support, persistent sessions, database rate-limit storage, account status fields, password-reset settings, and the first reviewed migration.
+- Added an advisory-lock-protected, idempotent first-`super_admin` bootstrap service and an interactive CLI that never accepts or prints the password as an argument.
 
 ## Remaining
 
