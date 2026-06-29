@@ -1,15 +1,15 @@
 {
   "title": "mAP",
   "kind": "entities",
-  "body_text": "# mAP\n\n## Incoming relations\n\n- **summarizes** → Minerva Identity MVP _(CommunitySummary)_\n- **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_\n- **uses_metric** → Identity backend foundation design _(SourceDocument)_\n- **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_\n- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_\n- **uses_metric** → Minerva MVP route map design _(SourceDocument)_\n- **uses_metric** → Minerva progress _(SourceDocument)_\n\n## Connected node types\n\n- SourceDocument: 6\n- CommunitySummary: 1",
-  "source_path": "C:\\\\Users\\\\roma\\\\.config\\\\superpowers\\\\worktrees\\\\minerva\\\\identity-backend-foundation\\\\docs\\\\progress.md",
+  "body_text": "# mAP\n\n## Incoming relations\n\n- **summarizes** → Minerva Identity MVP _(CommunitySummary)_\n- **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_\n- **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocument)_\n- **uses_metric** → Identity backend foundation design _(SourceDocument)_\n- **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_\n- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_\n- **uses_metric** → Minerva MVP route map design _(SourceDocument)_\n- **uses_metric** → Minerva progress _(SourceDocument)_\n\n## Connected node types\n\n- SourceDocument: 7\n- CommunitySummary: 1",
+  "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
   "links": [],
-  "body": "# mAP\n\n## Incoming relations\n\n- **summarizes** → Minerva Identity MVP _(CommunitySummary)_\n- **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_\n- **uses_metric** → Identity backend foundation design _(SourceDocument)_\n- **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_\n- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_\n- **uses_metric** → Minerva MVP route map design _(SourceDocument)_\n- **uses_metric** → Minerva progress _(SourceDocument)_\n\n## Connected node types\n\n- SourceDocument: 6\n- CommunitySummary: 1",
+  "body": "# mAP\n\n## Incoming relations\n\n- **summarizes** → Minerva Identity MVP _(CommunitySummary)_\n- **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_\n- **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocument)_\n- **uses_metric** → Identity backend foundation design _(SourceDocument)_\n- **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_\n- **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_\n- **uses_metric** → Minerva MVP route map design _(SourceDocument)_\n- **uses_metric** → Minerva progress _(SourceDocument)_\n\n## Connected node types\n\n- SourceDocument: 7\n- CommunitySummary: 1",
   "frontmatter": {
     "kind": "entities",
     "node_id": "Metric:map:592bcbe13f80",
     "node_type": "Metric",
-    "source_path": "C:\\\\Users\\\\roma\\\\.config\\\\superpowers\\\\worktrees\\\\minerva\\\\identity-backend-foundation\\\\docs\\\\progress.md",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
     "title": "mAP"
   }
 }

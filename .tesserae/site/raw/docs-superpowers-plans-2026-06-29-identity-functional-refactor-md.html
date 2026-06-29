@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026-06-29-identity-functional-refactor.md · Tesserae</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script defer src="../assets/app.js"></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar" role="banner">
+<a class="brand" href="../index.html">Tesserae</a>
+<nav role="navigation" aria-label="Primary"><a class="" href="../index.html"><span>Home</span></a><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="topnav-count">[34]</span></a><a class="" href="../concepts/index.html"><span>Concepts</span></a><a class="" href="../entities/index.html"><span>Entities</span> <span class="topnav-count">[2]</span></a><a class="" href="../papers/index.html"><span>Papers</span></a><a class="" href="../repos/index.html"><span>Repos</span></a><a class="" href="../topics/index.html"><span>Topics</span></a><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="topnav-count">[1]</span></a><a class="" href="../questions/index.html"><span>Questions</span></a><a class="" href="../sessions/index.html"><span>Sessions</span></a><a class="" href="../graph/index.html"><span>Graph</span></a><a class="" href="../about.html"><span>About</span></a></nav>
+<button class="search-button" data-open-search type="button" aria-label="Open search"><svg class="icon" viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="search-button-label">Search</span><kbd class="search-button-kbd" aria-hidden="true">/</kbd></button>
+<button class="theme-toggle" data-toggle-theme type="button" aria-label="Toggle color theme"><svg class="icon icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5.2" y1="5.2" x2="6.9" y2="6.9"/><line x1="17.1" y1="17.1" x2="18.8" y2="18.8"/><line x1="5.2" y1="18.8" x2="6.9" y2="17.1"/><line x1="17.1" y1="6.9" x2="18.8" y2="5.2"/></g></svg><svg class="icon icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.5 14.6a8 8 0 0 1-10.9-10.5.6.6 0 0 0-.8-.8 9.5 9.5 0 1 0 12.5 12.1.6.6 0 0 0-.8-.8z"/></svg></button>
+<button class="rail-toggle" aria-controls="rail" aria-expanded="false" aria-label="Toggle navigation drawer" data-toggle-rail type="button"><svg class="icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="rail-toggle-label">Menu</span></button>
+</header>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="Document tree"><nav class="rail-drawer-nav" aria-label="Primary (mobile)"><h2 class="rail-section-label">Browse</h2><ul class="rail-drawer-nav-list"><li><a class="" href="../index.html"><span>Home</span></a></li><li><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="rail-nav-count">[34]</span></a></li><li><a class="" href="../concepts/index.html"><span>Concepts</span></a></li><li><a class="" href="../entities/index.html"><span>Entities</span> <span class="rail-nav-count">[2]</span></a></li><li><a class="" href="../papers/index.html"><span>Papers</span></a></li><li><a class="" href="../repos/index.html"><span>Repos</span></a></li><li><a class="" href="../topics/index.html"><span>Topics</span></a></li><li><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="rail-nav-count">[1]</span></a></li><li><a class="" href="../questions/index.html"><span>Questions</span></a></li><li><a class="" href="../sessions/index.html"><span>Sessions</span></a></li><li><a class="" href="../graph/index.html"><span>Graph</span></a></li><li><a class="" href="../about.html"><span>About</span></a></li></ul></nav><div class="doc-tree-search-row"><label class="visually-hidden" for="doc-tree-filter">Filter source files</label><input class="doc-tree-search" id="doc-tree-filter" type="search" placeholder="Filter files…" aria-label="Filter source files" data-doc-tree-search></div><h2 class="rail-section-label">Files</h2><nav class="doc-tree" aria-label="Source explorer"><li class="doc-tree-leaf" data-doc-path="AGENTS.md"><a href="../raw/agents-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">AGENTS.md</span></a></li><details class="doc-tree-folder doc-tree-root"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">docs</span> <span class="doc-tree-count">[33]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/architecture.md"><a href="../raw/docs-architecture-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">architecture.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/backlog.md"><a href="../raw/docs-backlog-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">backlog.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">decisions</span> <span class="doc-tree-count">[7]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/decisions/0001-modular-monolith.md"><a href="../raw/docs-decisions-0001-modular-monolith-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0001-modular-monolith.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0002-project-rbac.md"><a href="../raw/docs-decisions-0002-project-rbac-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0002-project-rbac.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0003-document-versioning.md"><a href="../raw/docs-decisions-0003-document-versioning-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0003-document-versioning.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0004-mcp-first-release-boundary.md"><a href="../raw/docs-decisions-0004-mcp-first-release-boundary-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0004-mcp-first-release-boundary.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0005-mcp-oauth-resource-and-revocation.md"><a href="../raw/docs-decisions-0005-mcp-oauth-resource-and-revocation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0005-mcp-oauth-resource-and-revocation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0006-use-bun-package-manager.md"><a href="../raw/docs-decisions-0006-use-bun-package-manager-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0006-use-bun-package-manager.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0007-separate-authentication-profiles-and-project-roles.md"><a href="../raw/docs-decisions-0007-separate-authentication-profiles-and-project-roles-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0007-separate-authentication-profiles-and-project-roles.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">operations</span> <span class="doc-tree-count">[1]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/operations/tesserae.md"><a href="../raw/docs-operations-tesserae-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">tesserae.md</span></a></li></ul></details></li><li class="doc-tree-leaf" data-doc-path="docs/product-spec.md"><a href="../raw/docs-product-spec-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">product-spec.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/progress.md"><a href="../raw/docs-progress-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">progress.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/roadmap.md"><a href="../raw/docs-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">roadmap.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">superpowers</span> <span class="doc-tree-count">[20]</span></summary><ul class="doc-tree-list"><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">plans</span> <span class="doc-tree-count">[10]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-24-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-figma-prototype.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-figma-prototype.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-mvp-roadmap.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-roadmap.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-mvp-route-skeleton.md"><a href="../raw/docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-mvp-route-skeleton.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-postgresql-compose.md"><a href="../raw/docs-superpowers-plans-2026-06-27-postgresql-compose-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-tesserae-refresh-wrapper.md"><a href="../raw/docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-forgot-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-forgot-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-reset-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-reset-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-identity-backend-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-29-identity-backend-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-backend-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-identity-functional-refactor.md"><a href="../raw/docs-superpowers-plans-2026-06-29-identity-functional-refactor-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-functional-refactor.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">specs</span> <span class="doc-tree-count">[10]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-mvp-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-ui-prototype-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-minerva-mvp-route-map-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-postgresql-compose-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-tesserae-refresh-wrapper-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-forgot-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-identity-backend-foundation-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-identity-backend-foundation-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-reset-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-user-identity-profile-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-user-identity-profile-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-user-identity-profile-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-29-identity-functional-refactor-design.md"><a href="../raw/docs-superpowers-specs-2026-06-29-identity-functional-refactor-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-functional-refactor-design.md</span></a></li></ul></details></li></ul></details></li></ul></details></nav></aside>
+<main class="main" id="main" aria-label="Main content">
+<button class="toc-toggle" aria-controls="toc" aria-expanded="false" data-toggle-toc type="button">On this page</button>
+<article class="article">
+<header class="article-header">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a class="crumb" href="../index.html">Home</a><span class="sep" aria-hidden="true">/</span><span class="crumb">Raw</span><span class="sep" aria-hidden="true">/</span><span class="crumb crumb-current">2026-06-29-identity-functiona...</span></nav>
+</header>
+<div class="article-body"><p class="eyebrow raw-meta">31.8 KB · updated 2026-06-29 · md</p>
+<h1 class="raw-title" title="docs/superpowers/plans/2026-06-29-identity-functional-refactor.md">2026-06-29-identity-functional-refactor.md</h1>
+<p class="raw-path"><code>docs/superpowers/plans/2026-06-29-identity-functional-refactor.md</code></p>
+<article class="raw-page"><section class="markdown-body raw-markdown"><h1 id="identity-functional-refactor-implementation-plan">Identity Functional Refactor Implementation Plan</h1>
+<blockquote><p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (<code>- [ ]</code>) syntax for tracking.</p></blockquote>
+<p><strong>Goal:</strong> Reorganize the existing Identity backend around vertical scenarios, introduce shared object constants and pragmatic functional boundaries, and configure the local functional-TypeScript skill and Nuxt MCP without changing authentication behavior.</p>
+<p><strong>Architecture:</strong> Keep public-safe Identity vocabulary in <code>shared/identity</code>, keep all security decisions and effects server-side, and refactor existing services into pure transformations plus dependency-injected effectful factories. Perform behavior refactors at current paths first, then move the verified files into scenario folders and update every consumer in one mechanical step.</p>
+<p><strong>Tech Stack:</strong> Nuxt 4, Nitro/H3, TypeScript, Better Auth, Drizzle ORM, PostgreSQL, Vitest, Playwright, Bun, Codex skills, Nuxt MCP.</p>
+<hr>
+<h2 id="target-file-map">Target file map</h2>
+<pre><code class="language-text">.agents/skills/functional-typescript/
+  SKILL.md                         # Pragmatic functional TypeScript workflow
+  agents/openai.yaml               # Skill UI metadata
+.codex/config.toml                 # Repository-scoped Nuxt MCP
+shared/identity/
+  constants.ts                     # Runtime object constants
+  types.ts                         # Types derived from the constants
+server/modules/identity/
+  auth/
+    contracts.ts                   # Better Auth factory ports
+    create-auth.ts                 # Configured Better Auth factory
+    get-auth.ts                    # Runtime composition and cache
+  bootstrap/bootstrap-super-admin.ts
+  recovery/password-recovery.ts
+  session/require-session.ts
+  sign-in/
+    identifier.ts                  # Pure identifier classification
+    sign-in.ts                     # Injected sign-in service and runtime adapter
+  identity-error.ts                # Stable server error-to-status mapping
+  rate-limit.ts                    # Pure key builder and injected persistence shell</code></pre>
+<h2 id="task-1-add-the-functional-typescript-skill-and-nuxt-mcp">Task 1: Add the functional TypeScript skill and Nuxt MCP</h2>
+<p><strong>Required skills:</strong> <code>skill-creator</code>, <code>superpowers:writing-skills</code>, and <code>superpowers:test-driven-development</code>.</p>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>.agents/skills/functional-typescript/SKILL.md</code></li><li>Create: <code>.agents/skills/functional-typescript/agents/openai.yaml</code></li><li>Create: <code>.codex/config.toml</code></li><li>[ ] <strong>Step 1: Initialize the project-local skill</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">python &quot;$env:USERPROFILE\.codex\skills\.system\skill-creator\scripts\init_skill.py&quot; functional-typescript `
+  --path .agents/skills `
+  --interface &quot;display_name=Functional TypeScript&quot; `
+  --interface &quot;short_description=Pragmatic functional refactoring for TypeScript&quot; `
+  --interface &#x27;default_prompt=Use $functional-typescript to refactor this TypeScript module with explicit effects.&#x27;</code></pre>
+<p>Expected: <code>.agents/skills/functional-typescript</code> is created with <code>SKILL.md</code> and <code>agents/openai.yaml</code>.</p>
+<ul><li>[ ] <strong>Step 2: Replace the generated skill body with the minimal real guidance</strong></li></ul>
+<p>Write <code>.agents/skills/functional-typescript/SKILL.md</code>:</p>
+<pre><code class="language-markdown">---
+name: functional-typescript
+description: Use when designing or refactoring TypeScript code with hidden dependencies, mixed pure logic and side effects, repeated closed-set literals, mutation, or exception-heavy domain branching.
+---
+
+# Functional TypeScript
+
+## Overview
+
+Build a small functional core with an explicit effectful shell. Prefer native TypeScript and clear interfaces; add an FP library only when the project already uses one or its abstractions remove demonstrated complexity.
+
+## Workflow
+
+1. Identify observable behavior and lock it with tests.
+2. Separate deterministic transformations from database, network, clock, environment, and framework calls.
+3. Represent closed vocabulary with `as const` objects and derive union types from their values.
+4. Pass effects into factory functions as narrow capabilities.
+5. Compose real dependencies at the runtime boundary.
+6. Refactor in small steps and keep tests green.
+
+## Core patterns
+</code></pre>
+<p>export const ACCOUNT_STATUS = { ACTIVE: &#x27;active&#x27;, DISABLED: &#x27;disabled&#x27;, } as const</p>
+<p>export type AccountStatus = typeof ACCOUNT_STATUS[keyof typeof ACCOUNT_STATUS]</p>
+<p>interface Dependencies { readonly now: () =&gt; number readonly save: (value: Record&lt;string, unknown&gt;) =&gt; Promise&lt;void&gt; }</p>
+<p>export const createService = ({ now, save }: Dependencies) =&gt; async (input: Readonly&lt;{ name: string }&gt;) =&gt; { const value = { name: input.name.trim(), createdAt: now() } await save(value) return value }</p>
+<pre><code>
+Use a discriminated result for expected domain alternatives in pure code. Keep exceptions at framework or library boundaries that already use exceptions.
+
+## Quick reference
+
+| Situation | Prefer |
+| --- | --- |
+| Closed values | `as const` object plus derived union |
+| Deterministic rule | Pure function |
+| Database, network, clock | Injected capability |
+| Runtime wiring | Small composition function |
+| Expected pure failure | Discriminated result |
+| Better Auth or Nitro failure | Mapped `Error` at the boundary |
+
+## Common mistakes
+
+- Do not move secrets, database handles, or authorization decisions into shared client-importable modules.
+- Do not wrap every value in `Option`, `Either`, or `Result`.
+- Do not replace a useful framework-compatible `Error` class merely to remove classes.
+- Do not create generic repositories before two consumers require the abstraction.
+- Do not hide effects behind module globals inside application logic.</code></pre>
+<ul><li>[ ] <strong>Step 3: Add the repository-scoped Nuxt MCP configuration</strong></li></ul>
+<p>Write <code>.codex/config.toml</code>:</p>
+<pre><code class="language-toml">[mcp_servers.nuxt]
+url = &quot;https://nuxt.com/mcp&quot;</code></pre>
+<p>Do not remove or edit the user-global <code>http / nuxt-remote</code> entry.</p>
+<ul><li>[ ] <strong>Step 4: Validate the skill and MCP registration</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">python &quot;$env:USERPROFILE\.codex\skills\.system\skill-creator\scripts\quick_validate.py&quot; .agents/skills/functional-typescript
+codex mcp list</code></pre>
+<p>Expected: validator prints <code>Skill is valid!</code>; MCP list contains a project entry named <code>nuxt</code> with URL <code>https://nuxt.com/mcp</code>. If the IDE tool list does not refresh, restart Codex after finishing this task.</p>
+<ul><li>[ ] <strong>Step 5: Commit the tooling slice</strong></li></ul>
+<pre><code class="language-powershell">git add -- .agents/skills/functional-typescript .codex/config.toml
+git commit -m &quot;chore: add functional TypeScript skill and Nuxt MCP&quot;</code></pre>
+<h2 id="task-2-introduce-shared-identity-object-constants">Task 2: Introduce shared Identity object constants</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>shared/identity/constants.ts</code></li><li>Create: <code>shared/identity/types.ts</code></li><li>Create: <code>tests/unit/identity/constants.spec.ts</code></li><li>Modify: <code>server/modules/identity/contracts.ts</code></li><li>Modify: <code>server/modules/identity/errors.ts</code></li><li>Modify: <code>server/modules/identity/create-auth.ts</code></li><li>Modify: <code>server/modules/identity/identifier.ts</code></li><li>Modify: <code>server/modules/identity/bootstrap-super-admin.ts</code></li><li>Modify: <code>scripts/auth-schema.ts</code></li><li>Modify: <code>tests/unit/identity/identifier.spec.ts</code></li><li>[ ] <strong>Step 1: Write the failing constants test</strong></li></ul>
+<p>Create <code>tests/unit/identity/constants.spec.ts</code>:</p>
+<pre><code class="language-ts">import { describe, expect, it } from &#x27;vitest&#x27;
+import {
+  ACCOUNT_STATUS,
+  AUTH_MODE,
+  IDENTITY_CODE,
+  LOGIN_IDENTIFIER_KIND,
+} from &#x27;../../../shared/identity/constants&#x27;
+import type {
+  AccountStatus,
+  AuthMode,
+  IdentityCode,
+  LoginIdentifierKind,
+} from &#x27;../../../shared/identity/types&#x27;
+
+describe(&#x27;shared Identity vocabulary&#x27;, () =&gt; {
+  it(&#x27;exposes stable runtime values with derived types&#x27;, () =&gt; {
+    const status: AccountStatus = ACCOUNT_STATUS.ACTIVE
+    const mode: AuthMode = AUTH_MODE.RUNTIME
+    const code: IdentityCode = IDENTITY_CODE.AUTH_REQUIRED
+    const kind: LoginIdentifierKind = LOGIN_IDENTIFIER_KIND.EMAIL
+
+    expect({ status, mode, code, kind }).toEqual({
+      status: &#x27;active&#x27;,
+      mode: &#x27;runtime&#x27;,
+      code: &#x27;AUTH_REQUIRED&#x27;,
+      kind: &#x27;email&#x27;,
+    })
+    expect(Object.values(ACCOUNT_STATUS)).toEqual([&#x27;active&#x27;, &#x27;disabled&#x27;])
+  })
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the test and verify RED</strong></li></ul>
+<p>Run: <code>bunx vitest run tests/unit/identity/constants.spec.ts</code></p>
+<p>Expected: FAIL because <code>shared/identity/constants</code> does not exist.</p>
+<ul><li>[ ] <strong>Step 3: Add constants and derived types</strong></li></ul>
+<p>Create <code>shared/identity/constants.ts</code>:</p>
+<pre><code class="language-ts">export const ACCOUNT_STATUS = {
+  ACTIVE: &#x27;active&#x27;,
+  DISABLED: &#x27;disabled&#x27;,
+} as const
+
+export const AUTH_MODE = {
+  RUNTIME: &#x27;runtime&#x27;,
+  BOOTSTRAP: &#x27;bootstrap&#x27;,
+  TEST_SEED: &#x27;test-seed&#x27;,
+} as const
+
+export const IDENTITY_CODE = {
+  INVALID_CREDENTIALS: &#x27;INVALID_CREDENTIALS&#x27;,
+  AUTH_REQUIRED: &#x27;AUTH_REQUIRED&#x27;,
+  ACCOUNT_DISABLED: &#x27;ACCOUNT_DISABLED&#x27;,
+  RESET_REQUEST_ACCEPTED: &#x27;RESET_REQUEST_ACCEPTED&#x27;,
+  RESET_TOKEN_INVALID: &#x27;RESET_TOKEN_INVALID&#x27;,
+  RATE_LIMITED: &#x27;RATE_LIMITED&#x27;,
+  SERVICE_UNAVAILABLE: &#x27;SERVICE_UNAVAILABLE&#x27;,
+} as const
+
+export const LOGIN_IDENTIFIER_KIND = {
+  EMAIL: &#x27;email&#x27;,
+  USERNAME: &#x27;username&#x27;,
+} as const</code></pre>
+<p>Create <code>shared/identity/types.ts</code>:</p>
+<pre><code class="language-ts">type ValueOf&lt;T&gt; = T[keyof T]
+
+export type AccountStatus = ValueOf&lt;typeof import(&#x27;./constants&#x27;).ACCOUNT_STATUS&gt;
+export type AuthMode = ValueOf&lt;typeof import(&#x27;./constants&#x27;).AUTH_MODE&gt;
+export type IdentityCode = ValueOf&lt;typeof import(&#x27;./constants&#x27;).IDENTITY_CODE&gt;
+export type LoginIdentifierKind = ValueOf&lt;typeof import(&#x27;./constants&#x27;).LOGIN_IDENTIFIER_KIND&gt;</code></pre>
+<ul><li>[ ] <strong>Step 4: Replace application literals with the shared vocabulary</strong></li></ul>
+<p>Use the constants in existing files while keeping their current paths:</p>
+<ul><li><code>contracts.ts</code>: remove the local <code>AuthMode</code> union and import <code>AuthMode</code> from <code>shared/identity/types</code>.</li><li><code>errors.ts</code>: import <code>IDENTITY_CODE</code> and <code>IdentityCode</code>; define the status map with computed keys and <code>satisfies Record&lt;IdentityCode, number&gt;</code>.</li><li><code>create-auth.ts</code>: compare modes with <code>AUTH_MODE</code>, configure account status with <code>[ACCOUNT_STATUS.ACTIVE, ACCOUNT_STATUS.DISABLED]</code>, and type queried statuses as <code>AccountStatus</code>.</li><li><code>identifier.ts</code>: return kinds from <code>LOGIN_IDENTIFIER_KIND</code> and use <code>IDENTITY_CODE.INVALID_CREDENTIALS</code>.</li><li><code>bootstrap-super-admin.ts</code> and <code>scripts/auth-schema.ts</code>: pass <code>AUTH_MODE.BOOTSTRAP</code> or <code>AUTH_MODE.RUNTIME</code>.</li><li>Update affected tests and seed setup to pass <code>AUTH_MODE.TEST_SEED</code> and assert shared constants where the value is an application contract.</li></ul>
+<p>The server status mapping must have this shape:</p>
+<pre><code class="language-ts">const statuses = {
+  [IDENTITY_CODE.INVALID_CREDENTIALS]: 401,
+  [IDENTITY_CODE.AUTH_REQUIRED]: 401,
+  [IDENTITY_CODE.ACCOUNT_DISABLED]: 403,
+  [IDENTITY_CODE.RESET_REQUEST_ACCEPTED]: 200,
+  [IDENTITY_CODE.RESET_TOKEN_INVALID]: 400,
+  [IDENTITY_CODE.RATE_LIMITED]: 429,
+  [IDENTITY_CODE.SERVICE_UNAVAILABLE]: 503,
+} satisfies Record&lt;IdentityCode, number&gt;</code></pre>
+<ul><li>[ ] <strong>Step 5: Run unit tests and type checking</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bun run test:unit
+bun run typecheck</code></pre>
+<p>Expected: all unit tests pass and Nuxt type checking exits 0.</p>
+<ul><li>[ ] <strong>Step 6: Commit the shared vocabulary slice</strong></li></ul>
+<pre><code class="language-powershell">git add -- shared/identity tests/unit/identity server/modules/identity scripts/auth-schema.ts tests/integration/identity tests/e2e/global.setup.ts
+git commit -m &quot;refactor: share identity object constants&quot;</code></pre>
+<h2 id="task-3-isolate-rate-limit-key-construction-and-effects">Task 3: Isolate rate-limit key construction and effects</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>tests/unit/identity/rate-limit.spec.ts</code></li><li>Modify: <code>server/modules/identity/rate-limit.ts</code></li><li>[ ] <strong>Step 1: Write the failing pure-function test</strong></li></ul>
+<p>Create <code>tests/unit/identity/rate-limit.spec.ts</code>:</p>
+<pre><code class="language-ts">import { describe, expect, it } from &#x27;vitest&#x27;
+import { createRateLimitKey } from &#x27;../../../server/modules/identity/rate-limit&#x27;
+
+describe(&#x27;createRateLimitKey&#x27;, () =&gt; {
+  it(&#x27;returns a stable digest without plaintext identity data&#x27;, () =&gt; {
+    const input = { scope: &#x27;sign-in&#x27; as const, ip: &#x27;127.0.0.1&#x27;, identity: &#x27;user@example.com&#x27; }
+    const first = createRateLimitKey(&#x27;test-secret&#x27;, input)
+    const second = createRateLimitKey(&#x27;test-secret&#x27;, input)
+
+    expect(first).toBe(second)
+    expect(first).toMatch(/^[a-f0-9]{64}$/)
+    expect(first).not.toContain(input.identity)
+  })
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the test and verify RED</strong></li></ul>
+<p>Run: <code>bunx vitest run tests/unit/identity/rate-limit.spec.ts</code></p>
+<p>Expected: FAIL because <code>createRateLimitKey</code> is not exported.</p>
+<ul><li>[ ] <strong>Step 3: Extract the pure function and inject runtime capabilities</strong></li></ul>
+<p>In <code>server/modules/identity/rate-limit.ts</code>, keep <code>RateLimitInput</code> and add:</p>
+<pre><code class="language-ts">type RateLimitKeyInput = Pick&lt;RateLimitInput, &#x27;scope&#x27; | &#x27;ip&#x27; | &#x27;identity&#x27;&gt;
+
+export function createRateLimitKey(secret: string, input: RateLimitKeyInput): string {
+  return createHmac(&#x27;sha256&#x27;, secret)
+    .update(`${input.scope}:${input.ip}:${input.identity ?? &#x27;&#x27;}`)
+    .digest(&#x27;hex&#x27;)
+}
+
+interface RateLimitDependencies {
+  readonly getSecret: () =&gt; string
+  readonly getDatabase: typeof getDatabase
+  readonly now: () =&gt; number
+}
+
+export function createIdentityRateLimiter(dependencies: RateLimitDependencies) {
+  return async function consume(input: RateLimitInput): Promise&lt;void&gt; {
+    const key = createRateLimitKey(dependencies.getSecret(), input)
+    const now = dependencies.now()
+    const database = dependencies.getDatabase()
+    const rows = await database.queryClient&lt;{ count: number }[]&gt;`
+      insert into rate_limit (key, count, last_request)
+      values (${key}, 1, ${now})
+      on conflict (key) do update set
+        count = case
+          when ${now} - rate_limit.last_request &gt;= ${input.windowSeconds} then 1
+          else rate_limit.count + 1
+        end,
+        last_request = case
+          when ${now} - rate_limit.last_request &gt;= ${input.windowSeconds} then ${now}
+          else rate_limit.last_request
+        end
+      returning count
+    `
+
+    if ((rows[0]?.count ?? input.max + 1) &gt; input.max) {
+      throw new IdentityError(IDENTITY_CODE.RATE_LIMITED)
+    }
+  }
+}
+
+export const consumeIdentityRateLimit = createIdentityRateLimiter({
+  getSecret: () =&gt; getServerEnv().RATE_LIMIT_HMAC_SECRET,
+  getDatabase,
+  now: () =&gt; Math.floor(Date.now() / 1000),
+})</code></pre>
+<p>Import <code>IDENTITY_CODE</code> from the shared constants module. The query above intentionally retains the existing reset-window semantics.</p>
+<ul><li>[ ] <strong>Step 4: Run focused and integration tests</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/identity/rate-limit.spec.ts
+bunx vitest run tests/integration/identity/sign-in.spec.ts tests/integration/identity/password-recovery.spec.ts</code></pre>
+<p>Expected: all tests pass; integration assertions still prove HMAC storage and throttling.</p>
+<ul><li>[ ] <strong>Step 5: Commit the rate-limit slice</strong></li></ul>
+<pre><code class="language-powershell">git add -- server/modules/identity/rate-limit.ts tests/unit/identity/rate-limit.spec.ts
+git commit -m &quot;refactor: isolate identity rate limit effects&quot;</code></pre>
+<h2 id="task-4-refactor-sign-in-into-a-functional-service-factory">Task 4: Refactor sign-in into a functional service factory</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>server/modules/identity/identifier.ts</code></li><li>Modify: <code>server/modules/identity/sign-in.ts</code></li><li>Modify: <code>tests/unit/identity/identifier.spec.ts</code></li><li>Create: <code>tests/unit/identity/sign-in.spec.ts</code></li><li>[ ] <strong>Step 1: Write failing tests for the pure result and injected service</strong></li></ul>
+<p>Update <code>identifier.spec.ts</code> to expect a discriminated result:</p>
+<pre><code class="language-ts">expect(classifyLoginIdentifier(&#x27; User@Example.com &#x27;)).toEqual({
+  ok: true,
+  value: { kind: LOGIN_IDENTIFIER_KIND.EMAIL, normalized: &#x27;user@example.com&#x27; },
+})
+expect(classifyLoginIdentifier(&#x27;&#x27;)).toEqual({
+  ok: false,
+  code: IDENTITY_CODE.INVALID_CREDENTIALS,
+})</code></pre>
+<p>Create <code>tests/unit/identity/sign-in.spec.ts</code>:</p>
+<pre><code class="language-ts">import { expect, it, vi } from &#x27;vitest&#x27;
+import { IDENTITY_CODE } from &#x27;../../../shared/identity/constants&#x27;
+import { createSignInWithIdentifier } from &#x27;../../../server/modules/identity/sign-in&#x27;
+
+it(&#x27;selects the email capability after normalization&#x27;, async () =&gt; {
+  const headers = new Headers({ &#x27;set-cookie&#x27;: &#x27;session=value&#x27; })
+  const consumeRateLimit = vi.fn().mockResolvedValue(undefined)
+  const signInEmail = vi.fn().mockResolvedValue({ headers })
+  const signIn = createSignInWithIdentifier({
+    consumeRateLimit,
+    signInEmail,
+    signInUsername: vi.fn(),
+    isProviderError: () =&gt; false,
+  })
+
+  await expect(signIn({
+    identifier: &#x27; User@Example.com &#x27;,
+    password: &#x27;secret&#x27;,
+    ip: &#x27;127.0.0.1&#x27;,
+    requestHeaders: new Headers(),
+  })).resolves.toEqual({ headers })
+  expect(signInEmail).toHaveBeenCalledWith(expect.objectContaining({
+    identifier: &#x27;user@example.com&#x27;,
+  }))
+  expect(consumeRateLimit).toHaveBeenCalledOnce()
+})
+
+it(&#x27;maps provider credential failures to the stable Identity code&#x27;, async () =&gt; {
+  const providerError = new Error(&#x27;provider&#x27;)
+  const signIn = createSignInWithIdentifier({
+    consumeRateLimit: vi.fn().mockResolvedValue(undefined),
+    signInEmail: vi.fn().mockRejectedValue(providerError),
+    signInUsername: vi.fn(),
+    isProviderError: error =&gt; error === providerError,
+  })
+
+  await expect(signIn({
+    identifier: &#x27;user@example.com&#x27;, password: &#x27;wrong&#x27;, ip: &#x27;127.0.0.1&#x27;,
+    requestHeaders: new Headers(),
+  })).rejects.toMatchObject({ code: IDENTITY_CODE.INVALID_CREDENTIALS })
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the tests and verify RED</strong></li></ul>
+<p>Run: <code>bunx vitest run tests/unit/identity/identifier.spec.ts tests/unit/identity/sign-in.spec.ts</code></p>
+<p>Expected: FAIL because the classifier still throws and the factory is not exported.</p>
+<ul><li>[ ] <strong>Step 3: Return a discriminated result from identifier classification</strong></li></ul>
+<p>Use these public shapes in <code>identifier.ts</code>:</p>
+<pre><code class="language-ts">export interface LoginIdentifier {
+  readonly kind: LoginIdentifierKind
+  readonly normalized: string
+}
+
+export type LoginIdentifierResult =
+  | { readonly ok: true, readonly value: LoginIdentifier }
+  | { readonly ok: false, readonly code: typeof IDENTITY_CODE.INVALID_CREDENTIALS }</code></pre>
+<p>Normalize once; return <code>{ ok: false, code }</code> for empty or over-255 values, otherwise return <code>{ ok: true, value }</code> with the shared identifier-kind constant.</p>
+<ul><li>[ ] <strong>Step 4: Add the injected sign-in factory and runtime composition</strong></li></ul>
+<p>Define narrow dependencies in <code>sign-in.ts</code>:</p>
+<pre><code class="language-ts">interface ProviderSignInInput {
+  readonly identifier: string
+  readonly password: string
+  readonly requestHeaders: Headers
+}
+
+interface SignInDependencies {
+  readonly consumeRateLimit: typeof consumeIdentityRateLimit
+  readonly signInEmail: (input: ProviderSignInInput) =&gt; Promise&lt;{ headers: Headers }&gt;
+  readonly signInUsername: (input: ProviderSignInInput) =&gt; Promise&lt;{ headers: Headers }&gt;
+  readonly isProviderError: (error: unknown) =&gt; boolean
+}
+
+export function createSignInWithIdentifier(dependencies: SignInDependencies) {
+  return async function signIn(input: SignInInput): Promise&lt;{ headers: Headers }&gt; {
+    const classified = classifyLoginIdentifier(input.identifier)
+    if (!classified.ok) throw new IdentityError(classified.code)
+
+    const identifier = classified.value
+    await dependencies.consumeRateLimit({
+      scope: &#x27;sign-in&#x27;, ip: input.ip, identity: identifier.normalized,
+      max: 5, windowSeconds: 15 * 60,
+    })
+
+    try {
+      const capability = identifier.kind === LOGIN_IDENTIFIER_KIND.EMAIL
+        ? dependencies.signInEmail
+        : dependencies.signInUsername
+      return await capability({
+        identifier: identifier.normalized,
+        password: input.password,
+        requestHeaders: input.requestHeaders,
+      })
+    } catch (error) {
+      if (dependencies.isProviderError(error)) {
+        throw new IdentityError(IDENTITY_CODE.INVALID_CREDENTIALS)
+      }
+      throw error
+    }
+  }
+}</code></pre>
+<p>Compose the runtime function in the same file:</p>
+<pre><code class="language-ts">export const signInWithIdentifier = createSignInWithIdentifier({
+  consumeRateLimit: consumeIdentityRateLimit,
+  async signInEmail(input) {
+    const result = await getAuth().api.signInEmail({
+      body: { email: input.identifier, password: input.password },
+      headers: input.requestHeaders,
+      returnHeaders: true,
+    })
+    return { headers: result.headers }
+  },
+  async signInUsername(input) {
+    const result = await getAuth().api.signInUsername({
+      body: { username: input.identifier, password: input.password },
+      headers: input.requestHeaders,
+      returnHeaders: true,
+    })
+    return { headers: result.headers }
+  },
+  isProviderError: error =&gt; error instanceof APIError,
+})</code></pre>
+<ul><li>[ ] <strong>Step 5: Verify the sign-in slice</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/identity/identifier.spec.ts tests/unit/identity/sign-in.spec.ts
+bunx vitest run tests/integration/identity/sign-in.spec.ts
+bun run typecheck</code></pre>
+<p>Expected: all commands pass.</p>
+<ul><li>[ ] <strong>Step 6: Commit the sign-in slice</strong></li></ul>
+<pre><code class="language-powershell">git add -- server/modules/identity/identifier.ts server/modules/identity/sign-in.ts tests/unit/identity
+git commit -m &quot;refactor: inject identity sign in effects&quot;</code></pre>
+<h2 id="task-5-refactor-recovery-and-session-guards-into-factories">Task 5: Refactor recovery and session guards into factories</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>server/modules/identity/password-recovery.ts</code></li><li>Modify: <code>server/modules/identity/require-session.ts</code></li><li>Create: <code>tests/unit/identity/password-recovery.spec.ts</code></li><li>Create: <code>tests/unit/identity/require-session.spec.ts</code></li><li>[ ] <strong>Step 1: Write failing dependency-injection tests</strong></li></ul>
+<p>Create <code>tests/unit/identity/password-recovery.spec.ts</code>:</p>
+<pre><code class="language-ts">import { expect, it, vi } from &#x27;vitest&#x27;
+import { IDENTITY_CODE } from &#x27;../../../shared/identity/constants&#x27;
+import { createPasswordRecovery } from &#x27;../../../server/modules/identity/password-recovery&#x27;
+
+const createDependencies = () =&gt; ({
+  consumeRateLimit: vi.fn().mockResolvedValue(undefined),
+  requestReset: vi.fn().mockResolvedValue(undefined),
+  performReset: vi.fn().mockResolvedValue(undefined),
+  isProviderError: vi.fn((_error: unknown) =&gt; false),
+})
+
+it(&#x27;normalizes email and returns one public recovery code&#x27;, async () =&gt; {
+  const dependencies = createDependencies()
+  const recovery = createPasswordRecovery(dependencies)
+
+  await expect(recovery.requestPasswordReset({
+    email: &#x27; User@Example.com &#x27;, ip: &#x27;127.0.0.1&#x27;,
+  })).resolves.toBe(IDENTITY_CODE.RESET_REQUEST_ACCEPTED)
+  await expect(recovery.requestPasswordReset({
+    email: &#x27;missing@example.com&#x27;, ip: &#x27;127.0.0.2&#x27;,
+  })).resolves.toBe(IDENTITY_CODE.RESET_REQUEST_ACCEPTED)
+  expect(dependencies.requestReset).toHaveBeenNthCalledWith(1, &#x27;user@example.com&#x27;)
+  expect(dependencies.requestReset).toHaveBeenNthCalledWith(2, &#x27;missing@example.com&#x27;)
+})
+
+it(&#x27;maps a recognized provider reset failure&#x27;, async () =&gt; {
+  const providerError = new Error(&#x27;provider&#x27;)
+  const dependencies = createDependencies()
+  dependencies.performReset.mockRejectedValue(providerError)
+  dependencies.isProviderError.mockImplementation(error =&gt; error === providerError)
+  const recovery = createPasswordRecovery(dependencies)
+
+  await expect(recovery.resetPassword({
+    token: &#x27;token&#x27;, newPassword: &#x27;Correct-Horse-Battery-1&#x27;, ip: &#x27;127.0.0.1&#x27;,
+  })).rejects.toMatchObject({ code: IDENTITY_CODE.RESET_TOKEN_INVALID })
+})</code></pre>
+<p>Create <code>require-session.spec.ts</code>:</p>
+<pre><code class="language-ts">import type { H3Event } from &#x27;h3&#x27;
+import { expect, it, vi } from &#x27;vitest&#x27;
+import { IDENTITY_CODE } from &#x27;../../../shared/identity/constants&#x27;
+import { createRequireSession } from &#x27;../../../server/modules/identity/require-session&#x27;
+
+it(&#x27;returns the session supplied by the injected capability&#x27;, async () =&gt; {
+  const session = { user: { id: &#x27;user-id&#x27; } }
+  const getSession = vi.fn().mockResolvedValue(session)
+  const requireSession = createRequireSession(getSession)
+  const event = { headers: new Headers() } as H3Event
+
+  await expect(requireSession(event)).resolves.toBe(session)
+  expect(getSession).toHaveBeenCalledWith(event.headers)
+})
+
+it(&#x27;rejects a missing session with the stable code&#x27;, async () =&gt; {
+  const requireSession = createRequireSession(vi.fn().mockResolvedValue(null))
+  await expect(requireSession({ headers: new Headers() } as H3Event))
+    .rejects.toMatchObject({ code: IDENTITY_CODE.AUTH_REQUIRED })
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the tests and verify RED</strong></li></ul>
+<p>Run: <code>bunx vitest run tests/unit/identity/password-recovery.spec.ts tests/unit/identity/require-session.spec.ts</code></p>
+<p>Expected: FAIL because both factories are missing.</p>
+<ul><li>[ ] <strong>Step 3: Implement the recovery factory</strong></li></ul>
+<p>Export <code>createPasswordRecovery(dependencies)</code> returning <code>{ requestPasswordReset, resetPassword }</code>. Its dependencies must be narrow functions, not a Better Auth object:</p>
+<pre><code class="language-ts">interface PasswordRecoveryDependencies {
+  readonly consumeRateLimit: typeof consumeIdentityRateLimit
+  readonly requestReset: (email: string) =&gt; Promise&lt;void&gt;
+  readonly performReset: (input: Readonly&lt;{ token: string, newPassword: string }&gt;) =&gt; Promise&lt;void&gt;
+  readonly isProviderError: (error: unknown) =&gt; boolean
+}</code></pre>
+<p>Implement and compose it as follows:</p>
+<pre><code class="language-ts">export function createPasswordRecovery(dependencies: PasswordRecoveryDependencies) {
+  return {
+    async requestPasswordReset(input: RecoveryRequest) {
+      const email = input.email.trim().toLowerCase()
+      await dependencies.consumeRateLimit({
+        scope: &#x27;recovery-request&#x27;, ip: input.ip, identity: email,
+        max: 3, windowSeconds: 60 * 60,
+      })
+      await dependencies.requestReset(email)
+      return IDENTITY_CODE.RESET_REQUEST_ACCEPTED
+    },
+    async resetPassword(input: ResetRequest): Promise&lt;void&gt; {
+      await dependencies.consumeRateLimit({
+        scope: &#x27;password-reset&#x27;, ip: input.ip, max: 5, windowSeconds: 15 * 60,
+      })
+      try {
+        await dependencies.performReset({
+          token: input.token,
+          newPassword: input.newPassword,
+        })
+      } catch (error) {
+        if (dependencies.isProviderError(error)) {
+          throw new IdentityError(IDENTITY_CODE.RESET_TOKEN_INVALID)
+        }
+        throw error
+      }
+    },
+  }
+}
+
+const recovery = createPasswordRecovery({
+  consumeRateLimit: consumeIdentityRateLimit,
+  requestReset: async email =&gt; {
+    await getAuth().api.requestPasswordReset({ body: { email } })
+  },
+  performReset: async input =&gt; {
+    await getAuth().api.resetPassword({ body: input })
+  },
+  isProviderError: error =&gt; error instanceof APIError,
+})
+
+export const requestPasswordReset = recovery.requestPasswordReset
+export const resetPassword = recovery.resetPassword</code></pre>
+<ul><li>[ ] <strong>Step 4: Implement the generic session factory</strong></li></ul>
+<p>In <code>require-session.ts</code>:</p>
+<pre><code class="language-ts">export function createRequireSession&lt;Session&gt;(
+  getSession: (headers: Headers) =&gt; Promise&lt;Session | null&gt;,
+) {
+  return async function requireExistingSession(event: H3Event): Promise&lt;Session&gt; {
+    const session = await getSession(event.headers)
+    if (!session) throw new IdentityError(IDENTITY_CODE.AUTH_REQUIRED)
+    return session
+  }
+}
+
+export const requireSession = createRequireSession(
+  (headers: Headers) =&gt; getAuth().api.getSession({ headers }),
+)</code></pre>
+<ul><li>[ ] <strong>Step 5: Verify recovery and session behavior</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/identity/password-recovery.spec.ts tests/unit/identity/require-session.spec.ts
+bunx vitest run tests/integration/identity/password-recovery.spec.ts tests/integration/identity/session.spec.ts
+bun run typecheck</code></pre>
+<p>Expected: all commands pass.</p>
+<ul><li>[ ] <strong>Step 6: Commit the recovery/session slice</strong></li></ul>
+<pre><code class="language-powershell">git add -- server/modules/identity/password-recovery.ts server/modules/identity/require-session.ts tests/unit/identity
+git commit -m &quot;refactor: inject recovery and session effects&quot;</code></pre>
+<h2 id="task-6-move-verified-identity-files-into-vertical-scenario-folders">Task 6: Move verified Identity files into vertical scenario folders</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Move: <code>server/modules/identity/contracts.ts</code> → <code>server/modules/identity/auth/contracts.ts</code></li><li>Move: <code>server/modules/identity/create-auth.ts</code> → <code>server/modules/identity/auth/create-auth.ts</code></li><li>Move: <code>server/modules/identity/auth.ts</code> → <code>server/modules/identity/auth/get-auth.ts</code></li><li>Move: <code>server/modules/identity/bootstrap-super-admin.ts</code> → <code>server/modules/identity/bootstrap/bootstrap-super-admin.ts</code></li><li>Move: <code>server/modules/identity/password-recovery.ts</code> → <code>server/modules/identity/recovery/password-recovery.ts</code></li><li>Move: <code>server/modules/identity/require-session.ts</code> → <code>server/modules/identity/session/require-session.ts</code></li><li>Move: <code>server/modules/identity/identifier.ts</code> → <code>server/modules/identity/sign-in/identifier.ts</code></li><li>Move: <code>server/modules/identity/sign-in.ts</code> → <code>server/modules/identity/sign-in/sign-in.ts</code></li><li>Move: <code>server/modules/identity/errors.ts</code> → <code>server/modules/identity/identity-error.ts</code></li><li>Modify: all consumers listed by the import audit below</li><li>[ ] <strong>Step 1: Capture a green baseline before mechanical moves</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bun run test:unit
+bun run typecheck</code></pre>
+<p>Expected: both commands pass. Stop and debug if the baseline is not green.</p>
+<ul><li>[ ] <strong>Step 2: Move files with history and fix their internal relative imports</strong></li></ul>
+<p>Use patch-based file moves. After nesting, shared imports gain one <code>../</code>; infrastructure imports from <code>auth/create-auth.ts</code> use <code>../../../infrastructure/...</code>; sibling scenario imports go through explicit paths such as <code>../identity-error</code>, <code>../rate-limit</code>, and <code>../auth/get-auth</code>.</p>
+<p>Do not add barrel <code>index.ts</code> files.</p>
+<ul><li>[ ] <strong>Step 3: Update every external consumer</strong></li></ul>
+<p>Apply these path replacements:</p>
+<pre><code class="language-text">modules/identity/auth                         -&gt; modules/identity/auth/get-auth
+modules/identity/create-auth                  -&gt; modules/identity/auth/create-auth
+modules/identity/contracts                    -&gt; modules/identity/auth/contracts
+modules/identity/errors                       -&gt; modules/identity/identity-error
+modules/identity/bootstrap-super-admin        -&gt; modules/identity/bootstrap/bootstrap-super-admin
+modules/identity/password-recovery            -&gt; modules/identity/recovery/password-recovery
+modules/identity/require-session              -&gt; modules/identity/session/require-session
+modules/identity/identifier                   -&gt; modules/identity/sign-in/identifier
+modules/identity/sign-in                      -&gt; modules/identity/sign-in/sign-in</code></pre>
+<p>Update imports in <code>server/api</code>, <code>server/infrastructure/mail</code>, <code>scripts</code>, <code>tests/unit</code>, <code>tests/integration</code>, and <code>tests/e2e/global.setup.ts</code>.</p>
+<ul><li>[ ] <strong>Step 4: Prove there are no stale Identity imports</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">rg -n &quot;modules/identity/(auth|create-auth|contracts|errors|bootstrap-super-admin|password-recovery|require-session|identifier|sign-in)&#x27;&quot; app server scripts tests</code></pre>
+<p>Expected: no matches for obsolete paths. Imports containing the new longer paths are allowed.</p>
+<ul><li>[ ] <strong>Step 5: Run all unit and integration tests plus type checking</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bun run test:unit
+bun run test:integration
+bun run typecheck</code></pre>
+<p>Expected: 0 failures and type checking exits 0.</p>
+<ul><li>[ ] <strong>Step 6: Commit the structural move</strong></li></ul>
+<pre><code class="language-powershell">git add -- server/modules/identity server/api server/infrastructure/mail scripts tests
+git commit -m &quot;refactor: group identity module by scenario&quot;</code></pre>
+<h2 id="task-7-final-verification-and-project-documentation">Task 7: Final verification and project documentation</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>docs/progress.md</code></li><li>Generated but never staged: <code>.tesserae/**</code></li><li>[ ] <strong>Step 1: Start required local services</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">docker compose --profile test up -d postgres-test mailpit
+docker compose ps</code></pre>
+<p>Expected: <code>postgres-test</code> and <code>mailpit</code> are running; PostgreSQL becomes healthy.</p>
+<ul><li>[ ] <strong>Step 2: Run the complete verification suite</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bun install --frozen-lockfile
+bun run test:unit
+bun run test:integration
+bun run test:e2e
+bun run typecheck
+bun run build
+git diff --exit-code -- drizzle</code></pre>
+<p>Expected: all test suites, type checking, and production build pass; Drizzle has no changes. Do not stage <code>.output</code> changes produced by the build.</p>
+<ul><li>[ ] <strong>Step 3: Update progress</strong></li></ul>
+<p>In <code>docs/progress.md</code>, update <code>Last updated</code> if needed and add a completed entry stating that Identity now uses shared object constants, scenario grouping, dependency-injected functional services, the project functional-TypeScript skill, and repository-scoped Nuxt MCP configuration. Record exact verification counts from Step 2 rather than estimates.</p>
+<ul><li>[ ] <strong>Step 4: Refresh Tesserae through the Windows wrapper</strong></li></ul>
+<p>Run: <code>./scripts/refresh-tesserae.ps1</code></p>
+<p>Expected: sessions import, compile, and Obsidian sync report <code>ok</code>. Never stage <code>.tesserae</code>.</p>
+<ul><li>[ ] <strong>Step 5: Verify the intended diff and commit documentation</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">git status --short
+git diff --check
+git add -- docs/progress.md
+git commit -m &quot;docs: record identity functional refactor&quot;</code></pre>
+<p>Expected: the commit contains only <code>docs/progress.md</code>; the user&#x27;s pre-existing <code>.env</code>, <code>.output</code>, <code>package.json</code>, <code>bun.lock</code>, and <code>nuxt.config.ts</code> changes remain untouched.</p>
+<ul><li>[ ] <strong>Step 6: Review branch completion</strong></li></ul>
+<p>Use <code>superpowers:requesting-code-review</code>, then <code>superpowers:verification-before-completion</code>, and finally <code>superpowers:finishing-a-development-branch</code>. Report any unavailable external service separately; do not claim the corresponding integration or browser check passed without its successful command output.</p></section></article></div>
+<footer class="article-footer">
+
+</footer>
+</article>
+</main>
+<aside class="toc-rail" id="toc"><aside class="toc" role="doc-toc" aria-label="On this page"><h2>On this page</h2><ol><li data-toc-target="target-file-map"><a class="toc-l-2" href="#target-file-map">Target file map</a></li><li data-toc-target="task-1-add-the-functional-typescript-skill-and-nuxt-mcp"><a class="toc-l-2" href="#task-1-add-the-functional-typescript-skill-and-nuxt-mcp">Task 1: Add the functional TypeScript skill and Nuxt MCP</a></li><li data-toc-target="task-2-introduce-shared-identity-object-constants"><a class="toc-l-2" href="#task-2-introduce-shared-identity-object-constants">Task 2: Introduce shared Identity object constants</a></li><li data-toc-target="task-3-isolate-rate-limit-key-construction-and-effects"><a class="toc-l-2" href="#task-3-isolate-rate-limit-key-construction-and-effects">Task 3: Isolate rate-limit key construction and effects</a></li><li data-toc-target="task-4-refactor-sign-in-into-a-functional-service-factory"><a class="toc-l-2" href="#task-4-refactor-sign-in-into-a-functional-service-factory">Task 4: Refactor sign-in into a functional service factory</a></li><li data-toc-target="task-5-refactor-recovery-and-session-guards-into-factories"><a class="toc-l-2" href="#task-5-refactor-recovery-and-session-guards-into-factories">Task 5: Refactor recovery and session guards into factories</a></li><li data-toc-target="task-6-move-verified-identity-files-into-vertical-scenario-folders"><a class="toc-l-2" href="#task-6-move-verified-identity-files-into-vertical-scenario-folders">Task 6: Move verified Identity files into vertical scenario folders</a></li><li data-toc-target="task-7-final-verification-and-project-documentation"><a class="toc-l-2" href="#task-7-final-verification-and-project-documentation">Task 7: Final verification and project documentation</a></li></ol></aside></aside>
+</div>
+<nav class="mobile-bottom-nav" aria-label="Quick"><ul><li><a class="" href="../index.html" aria-label="Home"><span class="icon" aria-hidden="true">⌂</span><span class="label">Home</span></a></li><li><a class="" href="../concepts/index.html" aria-label="Concepts"><span class="icon" aria-hidden="true">◆</span><span class="label">Concepts</span></a></li><li><a class="" href="../papers/index.html" aria-label="Papers"><span class="icon" aria-hidden="true">¶</span><span class="label">Papers</span></a></li><li><a class="" href="../syntheses/index.html" aria-label="Syntheses"><span class="icon" aria-hidden="true">✱</span><span class="label">Syntheses</span></a></li><li><a class="" href="../sessions/index.html" aria-label="Sessions"><span class="icon" aria-hidden="true">◷</span><span class="label">Sessions</span></a></li><li><a class="" href="../graph/index.html" aria-label="Graph"><span class="icon" aria-hidden="true">⁂</span><span class="label">Graph</span></a></li></ul></nav>
+<div class="palette" id="palette" hidden role="dialog" aria-modal="true" aria-label="Search palette">
+<div class="palette-box"><div class="palette-input-row"><svg class="palette-input-icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><label class="visually-hidden" for="search">Search the wiki</label><input id="search" type="search" placeholder="Search the wiki…" aria-label="Search the wiki" autocomplete="off" spellcheck="false"><button class="palette-close" type="button" aria-label="Close search" data-close-search><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><line x1="5" y1="5" x2="15" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="15" y1="5" x2="5" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div><div class="visually-hidden" id="palette-live" aria-live="polite" aria-atomic="true"></div><footer class="palette-hint" aria-hidden="true"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>tab</kbd> filter type</span><span><kbd>esc</kbd> close</span></footer></div>
+</div>
+</body>
+</html>

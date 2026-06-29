@@ -1,0 +1,14 @@
+Identity Functional Refactor Implementation Plan
+================================================
+
+# Identity Functional Refactor Implementation Plan
+
+## Outgoing relations
+
+- **evaluated_on** → MATH _(Benchmark)_
+- **uses_metric** → mAP _(Metric)_
+
+## Connected node types
+
+- Benchmark: 1
+- Metric: 1

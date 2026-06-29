@@ -2,7 +2,7 @@
 node_id: SourceDocument:minerva-figma-prototype-implementation-plan:bd4f720816db
 title: Minerva Figma Prototype Implementation Plan
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\superpowers\plans\2026-06-24-minerva-figma-prototype.md
+source_path: D:\develop\minerva\docs\superpowers\plans\2026-06-24-minerva-figma-prototype.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

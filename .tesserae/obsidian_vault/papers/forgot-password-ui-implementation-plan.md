@@ -2,7 +2,7 @@
 node_id: SourceDocument:forgot-password-ui-implementation-plan:011eede9a65c
 title: Forgot-Password UI Implementation Plan
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\superpowers\plans\2026-06-28-forgot-password-ui.md
+source_path: D:\develop\minerva\docs\superpowers\plans\2026-06-28-forgot-password-ui.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

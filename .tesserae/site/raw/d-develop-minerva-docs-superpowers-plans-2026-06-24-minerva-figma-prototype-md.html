@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026-06-24-minerva-figma-prototype.md · Tesserae</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script defer src="../assets/app.js"></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar" role="banner">
+<a class="brand" href="../index.html">Tesserae</a>
+<nav role="navigation" aria-label="Primary"><a class="" href="../index.html"><span>Home</span></a><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="topnav-count">[34]</span></a><a class="" href="../concepts/index.html"><span>Concepts</span></a><a class="" href="../entities/index.html"><span>Entities</span> <span class="topnav-count">[2]</span></a><a class="" href="../papers/index.html"><span>Papers</span></a><a class="" href="../repos/index.html"><span>Repos</span></a><a class="" href="../topics/index.html"><span>Topics</span></a><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="topnav-count">[1]</span></a><a class="" href="../questions/index.html"><span>Questions</span></a><a class="" href="../sessions/index.html"><span>Sessions</span></a><a class="" href="../graph/index.html"><span>Graph</span></a><a class="" href="../about.html"><span>About</span></a></nav>
+<button class="search-button" data-open-search type="button" aria-label="Open search"><svg class="icon" viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="search-button-label">Search</span><kbd class="search-button-kbd" aria-hidden="true">/</kbd></button>
+<button class="theme-toggle" data-toggle-theme type="button" aria-label="Toggle color theme"><svg class="icon icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5.2" y1="5.2" x2="6.9" y2="6.9"/><line x1="17.1" y1="17.1" x2="18.8" y2="18.8"/><line x1="5.2" y1="18.8" x2="6.9" y2="17.1"/><line x1="17.1" y1="6.9" x2="18.8" y2="5.2"/></g></svg><svg class="icon icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.5 14.6a8 8 0 0 1-10.9-10.5.6.6 0 0 0-.8-.8 9.5 9.5 0 1 0 12.5 12.1.6.6 0 0 0-.8-.8z"/></svg></button>
+<button class="rail-toggle" aria-controls="rail" aria-expanded="false" aria-label="Toggle navigation drawer" data-toggle-rail type="button"><svg class="icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="rail-toggle-label">Menu</span></button>
+</header>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="Document tree"><nav class="rail-drawer-nav" aria-label="Primary (mobile)"><h2 class="rail-section-label">Browse</h2><ul class="rail-drawer-nav-list"><li><a class="" href="../index.html"><span>Home</span></a></li><li><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="rail-nav-count">[34]</span></a></li><li><a class="" href="../concepts/index.html"><span>Concepts</span></a></li><li><a class="" href="../entities/index.html"><span>Entities</span> <span class="rail-nav-count">[2]</span></a></li><li><a class="" href="../papers/index.html"><span>Papers</span></a></li><li><a class="" href="../repos/index.html"><span>Repos</span></a></li><li><a class="" href="../topics/index.html"><span>Topics</span></a></li><li><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="rail-nav-count">[1]</span></a></li><li><a class="" href="../questions/index.html"><span>Questions</span></a></li><li><a class="" href="../sessions/index.html"><span>Sessions</span></a></li><li><a class="" href="../graph/index.html"><span>Graph</span></a></li><li><a class="" href="../about.html"><span>About</span></a></li></ul></nav><div class="doc-tree-search-row"><label class="visually-hidden" for="doc-tree-filter">Filter source files</label><input class="doc-tree-search" id="doc-tree-filter" type="search" placeholder="Filter files…" aria-label="Filter source files" data-doc-tree-search></div><h2 class="rail-section-label">Files</h2><nav class="doc-tree" aria-label="Source explorer"><li class="doc-tree-leaf" data-doc-path="AGENTS.md"><a href="../raw/agents-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">AGENTS.md</span></a></li><details class="doc-tree-folder doc-tree-root"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">docs</span> <span class="doc-tree-count">[33]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/architecture.md"><a href="../raw/docs-architecture-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">architecture.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/backlog.md"><a href="../raw/docs-backlog-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">backlog.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">decisions</span> <span class="doc-tree-count">[7]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/decisions/0001-modular-monolith.md"><a href="../raw/docs-decisions-0001-modular-monolith-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0001-modular-monolith.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0002-project-rbac.md"><a href="../raw/docs-decisions-0002-project-rbac-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0002-project-rbac.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0003-document-versioning.md"><a href="../raw/docs-decisions-0003-document-versioning-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0003-document-versioning.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0004-mcp-first-release-boundary.md"><a href="../raw/docs-decisions-0004-mcp-first-release-boundary-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0004-mcp-first-release-boundary.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0005-mcp-oauth-resource-and-revocation.md"><a href="../raw/docs-decisions-0005-mcp-oauth-resource-and-revocation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0005-mcp-oauth-resource-and-revocation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0006-use-bun-package-manager.md"><a href="../raw/docs-decisions-0006-use-bun-package-manager-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0006-use-bun-package-manager.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0007-separate-authentication-profiles-and-project-roles.md"><a href="../raw/docs-decisions-0007-separate-authentication-profiles-and-project-roles-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0007-separate-authentication-profiles-and-project-roles.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">operations</span> <span class="doc-tree-count">[1]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/operations/tesserae.md"><a href="../raw/docs-operations-tesserae-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">tesserae.md</span></a></li></ul></details></li><li class="doc-tree-leaf" data-doc-path="docs/product-spec.md"><a href="../raw/docs-product-spec-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">product-spec.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/progress.md"><a href="../raw/docs-progress-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">progress.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/roadmap.md"><a href="../raw/docs-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">roadmap.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">superpowers</span> <span class="doc-tree-count">[20]</span></summary><ul class="doc-tree-list"><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">plans</span> <span class="doc-tree-count">[10]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-24-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-figma-prototype.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-figma-prototype.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-mvp-roadmap.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-roadmap.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-mvp-route-skeleton.md"><a href="../raw/docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-mvp-route-skeleton.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-postgresql-compose.md"><a href="../raw/docs-superpowers-plans-2026-06-27-postgresql-compose-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-tesserae-refresh-wrapper.md"><a href="../raw/docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-forgot-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-forgot-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-reset-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-reset-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-identity-backend-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-29-identity-backend-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-backend-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-identity-functional-refactor.md"><a href="../raw/docs-superpowers-plans-2026-06-29-identity-functional-refactor-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-functional-refactor.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">specs</span> <span class="doc-tree-count">[10]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-mvp-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-ui-prototype-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-minerva-mvp-route-map-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-postgresql-compose-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-tesserae-refresh-wrapper-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-forgot-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-identity-backend-foundation-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-identity-backend-foundation-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-reset-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-user-identity-profile-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-user-identity-profile-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-user-identity-profile-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-29-identity-functional-refactor-design.md"><a href="../raw/docs-superpowers-specs-2026-06-29-identity-functional-refactor-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-functional-refactor-design.md</span></a></li></ul></details></li></ul></details></li></ul></details></nav></aside>
+<main class="main" id="main" aria-label="Main content">
+<button class="toc-toggle" aria-controls="toc" aria-expanded="false" data-toggle-toc type="button">On this page</button>
+<article class="article">
+<header class="article-header">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a class="crumb" href="../index.html">Home</a><span class="sep" aria-hidden="true">/</span><span class="crumb">Raw</span><span class="sep" aria-hidden="true">/</span><span class="crumb crumb-current">2026-06-24-minerva-figma-prot...</span></nav>
+</header>
+<div class="article-body"><p class="eyebrow raw-meta">15.0 KB · updated 2026-06-24 · md</p>
+<h1 class="raw-title" title="D://develop//minerva//docs//superpowers//plans//2026-06-24-minerva-figma-prototype.md">2026-06-24-minerva-figma-prototype.md</h1>
+<p class="raw-path"><code>D://develop//minerva//docs//superpowers//plans//2026-06-24-minerva-figma-prototype.md</code></p>
+<article class="raw-page"><section class="markdown-body raw-markdown"><h1 id="minerva-figma-prototype-implementation-plan">Minerva Figma Prototype Implementation Plan</h1>
+<blockquote><p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (<code>- [ ]</code>) syntax for tracking.</p></blockquote>
+<p><strong>Goal:</strong> Build and validate an eight-screen clickable desktop prototype for Minerva in the supplied Figma file.</p>
+<p><strong>Architecture:</strong> Create three Figma pages: <code>Foundations</code>, <code>Components</code>, and <code>MVP Flow</code>. Reproduce only the shadcn-vue <code>new-york</code> primitives required by the approved screens, then compose every screen from shared local components and one consistent application shell. Use Russian visible copy, English layer names, auto layout, Slate semantic colors, a restrained violet primary, and Lucide-style icons.</p>
+<p><strong>Tech Stack:</strong> Figma Design, Figma Plugin API through <code>use_figma</code>, shadcn-vue <code>new-york</code> visual conventions, Slate/Violet semantic tokens, Lucide icons.</p>
+<p><strong>Target file:</strong> <code>zRIOKJjqh8RiQt20IhZWZP</code> <strong>Approved specification:</strong> <code>docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md</code></p>
+<hr>
+<h2 id="execution-rules">Execution rules</h2>
+<ul><li>Load <code>figma:figma-use</code> before every <code>use_figma</code> call.</li><li>Load <code>figma:figma-generate-design</code> for composed screen work.</li><li>Load <code>figma:figma-generate-library</code> before creating local reusable components.</li><li>Inspect before writing; do not overwrite unrelated nodes.</li><li>Work incrementally and return every created or mutated node ID.</li><li>Use one Figma page switch at most per <code>use_figma</code> call.</li><li>Validate every major section with a screenshot before continuing.</li><li>Stop and inspect after any Figma tool error; do not retry blindly.</li><li>Do not create application source code during this plan.</li></ul>
+<h3 id="task-1-audit-the-target-file-and-establish-page-structure">Task 1: Audit the target file and establish page structure</h3>
+<p><strong>Figma changes:</strong></p>
+<ul><li>Inspect: <code>Page 1</code>, node <code>1:30</code></li><li>Create page: <code>Foundations</code></li><li>Create page: <code>Components</code></li><li>Create page: <code>MVP Flow</code></li><li>Preserve page: <code>Page 1</code></li><li>[ ] <strong>Step 1: Load required Figma guidance</strong></li></ul>
+<p>Read:</p>
+<pre><code class="language-text">figma:figma-use
+figma:figma-generate-design
+figma:figma-generate-library
+figma-use/references/plugin-api-standalone.index.md
+figma-use/references/working-with-design-systems/wwds.md
+figma-use/references/gotchas.md</code></pre>
+<p>Expected: all mandatory Plugin API, design-system, font, auto-layout, and error-recovery rules are available before the first write.</p>
+<ul><li>[ ] <strong>Step 2: Inspect the existing file</strong></li></ul>
+<p>Use <code>get_metadata</code>, <code>get_design_context</code>, and <code>get_screenshot</code> for page <code>0:1</code> and node <code>1:30</code>.</p>
+<p>Expected:</p>
+<pre><code class="language-text">Page 1 contains one blank 647 × 692 frame named Frame 1.
+No existing Minerva components, variables, or finished screens need preservation.</code></pre>
+<ul><li>[ ] <strong>Step 3: Check component sources in the required order</strong></li><li>Search the repository for <code>*.figma.ts</code>, <code>*.figma.tsx</code>, and <code>*.figma.js</code>.</li><li>Inspect existing target-file screens for component instances.</li><li>Record both results as unavailable.</li><li>Call <code>get_libraries</code>.</li><li>Search the available libraries for <code>button</code>, <code>input</code>, <code>sidebar</code>, <code>table</code>, <code>dialog</code>, <code>tabs</code>, <code>badge</code>, <code>avatar</code>, <code>breadcrumb</code>, and <code>command</code>.</li></ul>
+<p>Expected: no compatible shadcn-vue library is linked; local prototype components are required. Do not substitute Material components.</p>
+<ul><li>[ ] <strong>Step 4: Create the three working pages</strong></li></ul>
+<p>Use one <code>use_figma</code> call to create:</p>
+<pre><code class="language-text">Foundations
+Components
+MVP Flow</code></pre>
+<p>Keep <code>Page 1</code> unchanged as the supplied source page. Return all page IDs.</p>
+<ul><li>[ ] <strong>Step 5: Verify page structure</strong></li></ul>
+<p>Use <code>get_metadata</code> without a node ID.</p>
+<p>Expected: exactly four top-level pages are visible: <code>Page 1</code>, <code>Foundations</code>, <code>Components</code>, and <code>MVP Flow</code>.</p>
+<h3 id="task-2-build-semantic-foundations">Task 2: Build semantic foundations</h3>
+<p><strong>Figma changes:</strong></p>
+<ul><li>Modify page: <code>Foundations</code></li><li>Create collection: <code>Minerva Semantic</code></li><li>Create frames: <code>Color tokens</code>, <code>Typography</code>, <code>Spacing and radius</code></li><li>[ ] <strong>Step 1: Create semantic color variables</strong></li></ul>
+<p>Create a local collection named <code>Minerva Semantic</code> with modes <code>Light</code> and <code>Dark</code>.</p>
+<p>Create and scope these variables:</p>
+<pre><code class="language-text">background
+foreground
+card
+card-foreground
+popover
+popover-foreground
+primary
+primary-foreground
+secondary
+secondary-foreground
+muted
+muted-foreground
+accent
+accent-foreground
+destructive
+destructive-foreground
+border
+input
+ring
+sidebar
+sidebar-foreground
+sidebar-accent
+sidebar-accent-foreground
+sidebar-border</code></pre>
+<p>Use Slate semantic values and Violet primary values compatible with the shadcn <code>new-york</code> presentation. Set explicit variable scopes for fills, strokes, or text.</p>
+<ul><li>[ ] <strong>Step 2: Create spacing and radius variables</strong></li></ul>
+<p>Create number variables:</p>
+<pre><code class="language-text">space-1 = 4
+space-2 = 8
+space-3 = 12
+space-4 = 16
+space-5 = 20
+space-6 = 24
+space-8 = 32
+radius-sm = 6
+radius-md = 8
+radius-lg = 10</code></pre>
+<p>Use <code>GAP</code>, padding, and corner-radius scopes as appropriate.</p>
+<ul><li>[ ] <strong>Step 3: Create typography styles</strong></li></ul>
+<p>Verify available Inter font names, then create:</p>
+<pre><code class="language-text">Display / 30 / Semi Bold
+Heading / 24 / Semi Bold
+Heading / 20 / Semi Bold
+Body / 16 / Regular
+Body / 14 / Regular
+Label / 14 / Medium
+Caption / 12 / Regular
+Mono / 13 / Regular</code></pre>
+<p>Use the verified Figma style name <code>Semi Bold</code>, not <code>SemiBold</code>.</p>
+<ul><li>[ ] <strong>Step 4: Build the foundations reference frames</strong></li></ul>
+<p>On <code>Foundations</code>, create three auto-layout frames showing:</p>
+<ul><li>light and dark semantic color swatches;</li><li>the complete type ramp with Russian sample copy;</li><li>spacing and radius examples.</li></ul>
+<p>Return every created node ID.</p>
+<ul><li>[ ] <strong>Step 5: Validate foundations</strong></li></ul>
+<p>Take screenshots of each reference frame.</p>
+<p>Expected:</p>
+<ul><li>no clipped Russian text;</li><li>Violet primary remains restrained against Slate surfaces;</li><li>light and dark tokens are distinguishable;</li><li>token and style names are visible.</li></ul>
+<h3 id="task-3-create-the-minimal-local-component-set">Task 3: Create the minimal local component set</h3>
+<p><strong>Figma changes:</strong></p>
+<ul><li>Modify page: <code>Components</code></li><li>Create reusable component sets required by the approved screens</li><li>[ ] <strong>Step 1: Create action components</strong></li></ul>
+<p>Build local variants matching shadcn-vue <code>new-york</code> dimensions:</p>
+<pre><code class="language-text">Button: default, secondary, outline, ghost, destructive
+Button size: default, sm, icon
+Badge: default, secondary, outline, destructive
+Icon Button: default, ghost</code></pre>
+<p>Expose label text properties and icon visibility where useful.</p>
+<ul><li>[ ] <strong>Step 2: Create field and navigation components</strong></li></ul>
+<p>Build:</p>
+<pre><code class="language-text">Input: default, focused, disabled
+Search field: global, local-tree
+Breadcrumb item
+Navigation rail item: default, active
+Project sidebar item: default, active
+Tree item: level 0, level 1, level 2; collapsed and expanded</code></pre>
+<p>All text properties must accept Russian labels without detaching instances.</p>
+<ul><li>[ ] <strong>Step 3: Create data and feedback components</strong></li></ul>
+<p>Build:</p>
+<pre><code class="language-text">Table header cell
+Table body cell
+Avatar: initials
+Document status badge
+Autosave status
+Version row
+Settings tab</code></pre>
+<ul><li>[ ] <strong>Step 4: Create container components</strong></li></ul>
+<p>Build:</p>
+<pre><code class="language-text">Global navigation rail
+Project sidebar
+Content header
+Dialog shell
+Card shell
+Sticky editor toolbar</code></pre>
+<p>The global authorized documentation search belongs in <code>Content header</code> and represents full-text results already filtered to accessible projects. The project sidebar contains only a compact local field that filters page titles in the current tree.</p>
+<ul><li>[ ] <strong>Step 5: Validate the component page</strong></li></ul>
+<p>Arrange components in labeled sections and screenshot each section.</p>
+<p>Expected:</p>
+<ul><li>all instances remain editable through properties;</li><li>components use variables rather than unrelated hardcoded colors;</li><li>no Material visual language appears;</li><li>geometry resembles current shadcn-vue <code>new-york</code> examples.</li></ul>
+<h3 id="task-4-build-the-shared-desktop-shells">Task 4: Build the shared desktop shells</h3>
+<p><strong>Figma changes:</strong></p>
+<ul><li>Modify page: <code>MVP Flow</code></li><li>Create frame: <code>00 Shell / Global</code></li><li>Create frame: <code>00 Shell / Project</code></li><li>[ ] <strong>Step 1: Create the global shell</strong></li></ul>
+<p>Create a <code>1440 × 1024</code> frame containing:</p>
+<pre><code class="language-text">Global rail: 64 px
+Content header: 56 px
+Content region: remaining area</code></pre>
+<p>Use the global authorized documentation search in the center of the content header. Do not include a project sidebar.</p>
+<ul><li>[ ] <strong>Step 2: Create the project shell</strong></li></ul>
+<p>Create a <code>1440 × 1024</code> frame containing:</p>
+<pre><code class="language-text">Global rail: 64 px
+Project sidebar: 280 px
+Content header: 56 px
+Content region: remaining area</code></pre>
+<p>Populate the sidebar with:</p>
+<pre><code class="language-text">Проект «Альфа»
+Обзор
+Страницы
+Создать страницу
+Фильтр страниц
+realistic three-level page tree
+Настройки</code></pre>
+<ul><li>[ ] <strong>Step 3: Validate both shells</strong></li></ul>
+<p>Screenshot both frames at a dimension sufficient to inspect text.</p>
+<p>Expected:</p>
+<ul><li>the two navigation contexts are visually distinct;</li><li>global authorized documentation search is not duplicated in either sidebar;</li><li>the compact local field that filters page titles is clearly tied to the current tree;</li><li>the content region remains usable.</li></ul>
+<h3 id="task-5-build-authentication-and-project-entry-screens">Task 5: Build authentication and project-entry screens</h3>
+<p><strong>Figma changes:</strong></p>
+<ul><li>Create frame: <code>01 Sign in</code></li><li>Create frame: <code>02 Projects</code></li><li>Create frame: <code>03 Project overview</code></li><li>[ ] <strong>Step 1: Build <code>01 Sign in</code></strong></li></ul>
+<p>Create a <code>1440 × 1024</code> screen with a centered card containing:</p>
+<pre><code class="language-text">Войти в Minerva
+Рабочая почта
+Пароль
+Войти
+Русский
+Системная тема</code></pre>
+<p>Do not show public registration or password recovery.</p>
+<ul><li>[ ] <strong>Step 2: Build <code>02 Projects</code></strong></li></ul>
+<p>Use the global shell and create:</p>
+<ul><li>heading <code>Проекты</code>;</li><li>description;</li><li>project search;</li><li>status filter;</li><li><code>Создать проект</code> button;</li><li>compact table with five realistic project rows;</li><li>columns for name, description, role, status, and update date.</li><li>[ ] <strong>Step 3: Build <code>03 Project overview</code></strong></li></ul>
+<p>Use the project shell and create:</p>
+<ul><li>project title and description;</li><li>participant avatar summary;</li><li>root-page table/list;</li><li>quick action to create a page;</li><li>short project metadata section.</li><li>[ ] <strong>Step 4: Validate entry screens</strong></li></ul>
+<p>Screenshot all three screens individually.</p>
+<p>Expected:</p>
+<ul><li>Russian copy fits;</li><li>the projects table scans quickly;</li><li>the overview is visibly a system page, not an editable document;</li><li>actions are prominent without excessive cards.</li></ul>
+<h3 id="task-6-build-the-document-lifecycle-screens">Task 6: Build the document lifecycle screens</h3>
+<p><strong>Figma changes:</strong></p>
+<ul><li>Create frame: <code>04 Document reading</code></li><li>Create frame: <code>05 Document editor</code></li><li>Create frame: <code>06 Publish dialog</code></li><li>Create frame: <code>07 Version history</code></li><li>[ ] <strong>Step 1: Build <code>04 Document reading</code></strong></li></ul>
+<p>Use the project shell and add:</p>
+<ul><li>breadcrumbs;</li><li><code>Опубликован</code> badge and version <code>v3</code>;</li><li><code>Редактировать</code>, history, and overflow actions;</li><li>centered <code>800 px</code> article column;</li><li>Russian technical-document sample with headings, lists, code, table, and one image placeholder;</li><li>collapsible right-side table of contents shown open.</li><li>[ ] <strong>Step 2: Build <code>05 Document editor</code></strong></li></ul>
+<p>Duplicate the spatial composition of reading mode and replace the document body with editing affordances:</p>
+<ul><li>sticky formatting toolbar;</li><li><code>Есть неопубликованные изменения</code> status;</li><li><code>Сохранено</code> autosave status;</li><li>violet <code>Опубликовать</code> action;</li><li>visible editable title and body boundaries without turning the page into a form.</li><li>[ ] <strong>Step 3: Build <code>06 Publish dialog</code></strong></li></ul>
+<p>Present a modal state over the editor:</p>
+<pre><code class="language-text">Опубликовать версию
+Описание изменений
+Cancel: Отмена
+Primary: Опубликовать</code></pre>
+<p>The change summary field is visibly required.</p>
+<ul><li>[ ] <strong>Step 4: Build <code>07 Version history</code></strong></li></ul>
+<p>Use the project shell and create a main-area history list with at least four versions. Each row includes:</p>
+<ul><li>version number;</li><li>author avatar and name;</li><li>timestamp;</li><li>change summary;</li><li><code>Просмотреть</code>;</li><li>restore action.</li><li>[ ] <strong>Step 5: Validate document screens</strong></li></ul>
+<p>Screenshot the article column, editor toolbar, publish dialog, and history list separately as well as full screens.</p>
+<p>Expected:</p>
+<ul><li>reading and editing preserve the same document position;</li><li>status and save state are unambiguous;</li><li>no toolbar labels are clipped;</li><li>dialog hierarchy is clear;</li><li>history fits in the main area without needing a narrow side panel.</li></ul>
+<h3 id="task-7-build-project-settings">Task 7: Build project settings</h3>
+<p><strong>Figma changes:</strong></p>
+<ul><li>Create frame: <code>08 Project settings</code></li><li>[ ] <strong>Step 1: Build the settings shell</strong></li></ul>
+<p>Use the project shell with <code>Настройки</code> active. Add:</p>
+<pre><code class="language-text">Настройки проекта
+Общие
+Участники
+Роли и разрешения
+Аудит</code></pre>
+<ul><li>[ ] <strong>Step 2: Populate the Members tab</strong></li></ul>
+<p>Show the <code>Участники</code> tab as the active prototype state:</p>
+<ul><li>member search;</li><li><code>Пригласить участника</code>;</li><li>table with user, email, project role, status, and actions;</li><li>a subtle note that project invitations grant no global privileges.</li><li>[ ] <strong>Step 3: Validate project settings</strong></li></ul>
+<p>Screenshot the tabs and member table.</p>
+<p>Expected:</p>
+<ul><li>administration remains in one screen;</li><li>the sidebar contains one settings destination;</li><li>tab labels fit in Russian;</li><li>the table uses the same density as Projects.</li></ul>
+<h3 id="task-8-arrange-connect-and-audit-the-full-prototype">Task 8: Arrange, connect, and audit the full prototype</h3>
+<p><strong>Figma changes:</strong></p>
+<ul><li>Modify page: <code>MVP Flow</code></li><li>Connect the eight screens</li><li>Add review annotations</li><li>[ ] <strong>Step 1: Arrange screens</strong></li></ul>
+<p>Place the eight numbered frames left to right with <code>200 px</code> gaps:</p>
+<pre><code class="language-text">01 Sign in
+02 Projects
+03 Project overview
+04 Document reading
+05 Document editor
+06 Publish dialog
+07 Version history
+08 Project settings</code></pre>
+<p>Place shell references above the flow, not between numbered screens.</p>
+<ul><li>[ ] <strong>Step 2: Add prototype interactions</strong></li></ul>
+<p>Connect:</p>
+<pre><code class="language-text">Войти → 02 Projects
+project row → 03 Project overview
+root page/tree item → 04 Document reading
+Редактировать → 05 Document editor
+Опубликовать → 06 Publish dialog
+dialog primary action → 04 Document reading
+История → 07 Version history
+Настройки → 08 Project settings</code></pre>
+<ul><li>[ ] <strong>Step 3: Run structural validation</strong></li></ul>
+<p>Use metadata inspection to verify:</p>
+<ul><li>all eight numbered frames exist;</li><li>each is exactly <code>1440 × 1024</code>;</li><li>shared elements are component instances where expected;</li><li>no finished node retains <code>placeholder = true</code>;</li><li>layer names are English and visible copy is Russian.</li><li>[ ] <strong>Step 4: Run visual validation</strong></li></ul>
+<p>Capture:</p>
+<ul><li>one screenshot of the full flow;</li><li>one screenshot of each numbered screen;</li><li>close screenshots of the project tree, article, editor toolbar, dialog, history, and settings tabs.</li></ul>
+<p>Reject the result if any screenshot contains clipped text, overlapping nodes, blank required content, duplicated global search, inconsistent sidebar widths, or accidental Material styling.</p>
+<ul><li>[ ] <strong>Step 5: Update project documentation</strong></li></ul>
+<p>Modify:</p>
+<pre><code class="language-text">docs/progress.md
+docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md</code></pre>
+<p>Record the Figma page names, principal frame node IDs, review status, and any intentionally deferred states.</p>
+<ul><li>[ ] <strong>Step 6: Refresh Tesserae</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">$env:PYTHONUTF8=&#x27;1&#x27;
+$env:PYTHONIOENCODING=&#x27;utf-8&#x27;
+tesserae refresh</code></pre>
+<p>If the documented Windows <code>WinError 183</code> occurs, remove only generated <code>.tesserae/graph.json</code> and <code>.tesserae/code-graph.json</code>, then rerun.</p>
+<ul><li>[ ] <strong>Step 7: Commit documentation</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">git add docs/progress.md docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md
+git commit -m &quot;docs: record Minerva Figma prototype&quot;</code></pre>
+<p>Expected: Figma contains the reviewed prototype, repository changes contain documentation only, and application implementation remains blocked pending final user approval.</p></section></article></div>
+<footer class="article-footer">
+
+</footer>
+</article>
+</main>
+<aside class="toc-rail" id="toc"><aside class="toc" role="doc-toc" aria-label="On this page"><h2>On this page</h2><ol><li data-toc-target="execution-rules"><a class="toc-l-2" href="#execution-rules">Execution rules</a></li><li data-toc-target="task-1-audit-the-target-file-and-establish-page-structure"><a class="toc-l-3" href="#task-1-audit-the-target-file-and-establish-page-structure">Task 1: Audit the target file and establish page structure</a></li><li data-toc-target="task-2-build-semantic-foundations"><a class="toc-l-3" href="#task-2-build-semantic-foundations">Task 2: Build semantic foundations</a></li><li data-toc-target="task-3-create-the-minimal-local-component-set"><a class="toc-l-3" href="#task-3-create-the-minimal-local-component-set">Task 3: Create the minimal local component set</a></li><li data-toc-target="task-4-build-the-shared-desktop-shells"><a class="toc-l-3" href="#task-4-build-the-shared-desktop-shells">Task 4: Build the shared desktop shells</a></li><li data-toc-target="task-5-build-authentication-and-project-entry-screens"><a class="toc-l-3" href="#task-5-build-authentication-and-project-entry-screens">Task 5: Build authentication and project-entry screens</a></li><li data-toc-target="task-6-build-the-document-lifecycle-screens"><a class="toc-l-3" href="#task-6-build-the-document-lifecycle-screens">Task 6: Build the document lifecycle screens</a></li><li data-toc-target="task-7-build-project-settings"><a class="toc-l-3" href="#task-7-build-project-settings">Task 7: Build project settings</a></li><li data-toc-target="task-8-arrange-connect-and-audit-the-full-prototype"><a class="toc-l-3" href="#task-8-arrange-connect-and-audit-the-full-prototype">Task 8: Arrange, connect, and audit the full prototype</a></li></ol></aside></aside>
+</div>
+<nav class="mobile-bottom-nav" aria-label="Quick"><ul><li><a class="" href="../index.html" aria-label="Home"><span class="icon" aria-hidden="true">⌂</span><span class="label">Home</span></a></li><li><a class="" href="../concepts/index.html" aria-label="Concepts"><span class="icon" aria-hidden="true">◆</span><span class="label">Concepts</span></a></li><li><a class="" href="../papers/index.html" aria-label="Papers"><span class="icon" aria-hidden="true">¶</span><span class="label">Papers</span></a></li><li><a class="" href="../syntheses/index.html" aria-label="Syntheses"><span class="icon" aria-hidden="true">✱</span><span class="label">Syntheses</span></a></li><li><a class="" href="../sessions/index.html" aria-label="Sessions"><span class="icon" aria-hidden="true">◷</span><span class="label">Sessions</span></a></li><li><a class="" href="../graph/index.html" aria-label="Graph"><span class="icon" aria-hidden="true">⁂</span><span class="label">Graph</span></a></li></ul></nav>
+<div class="palette" id="palette" hidden role="dialog" aria-modal="true" aria-label="Search palette">
+<div class="palette-box"><div class="palette-input-row"><svg class="palette-input-icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><label class="visually-hidden" for="search">Search the wiki</label><input id="search" type="search" placeholder="Search the wiki…" aria-label="Search the wiki" autocomplete="off" spellcheck="false"><button class="palette-close" type="button" aria-label="Close search" data-close-search><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><line x1="5" y1="5" x2="15" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="15" y1="5" x2="5" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div><div class="visually-hidden" id="palette-live" aria-live="polite" aria-atomic="true"></div><footer class="palette-hint" aria-hidden="true"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>tab</kbd> filter type</span><span><kbd>esc</kbd> close</span></footer></div>
+</div>
+</body>
+</html>

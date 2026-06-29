@@ -2,7 +2,7 @@
 node_id: SourceDocument:forgot-password-ui-design:4253f2296159
 title: Forgot-password UI design
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\superpowers\specs\2026-06-28-forgot-password-ui-design.md
+source_path: D:\develop\minerva\docs\superpowers\specs\2026-06-28-forgot-password-ui-design.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

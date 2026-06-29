@@ -27,7 +27,7 @@
     "clsx": "^2.1.1",
     "drizzle-orm": "0.45.2",
     "nodemailer": "8.0.11",
-    "nuxt": "^4.0.0",
+    "nuxt": "^4.4.8",
     "postgres": "3.4.9",
     "reka-ui": "^2.10.1",
     "tailwind-merge": "^3.6.0",

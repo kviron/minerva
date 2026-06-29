@@ -1,0 +1,12 @@
+MATH
+====
+
+# MATH
+
+## Incoming relations
+
+- **evaluated_on** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
+
+## Connected node types
+
+- SourceDocument: 1

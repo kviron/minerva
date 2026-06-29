@@ -2,7 +2,7 @@
 node_id: SourceDocument:identity-backend-foundation-design:9f706c9220cd
 title: Identity backend foundation design
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\superpowers\specs\2026-06-28-identity-backend-foundation-design.md
+source_path: D:\develop\minerva\docs\superpowers\specs\2026-06-28-identity-backend-foundation-design.md
 edges_out:
   uses_metric: [map]
 edges_in:

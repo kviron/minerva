@@ -1,15 +1,17 @@
 {
   "title": "2026-06-29",
   "kind": "timeline_day",
-  "body_text": "Activity for 2026-06-29: 1 item(s) indexed.",
+  "body_text": "Activity for 2026-06-29: 4 item(s) indexed.",
   "source_path": "",
   "links": [],
   "body": "Activity for 2026-06-29",
   "frontmatter": {
     "date": "2026-06-29",
-    "activity": 1,
+    "activity": 4,
     "sources": [
-      "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-29-identity-backend-foundation.md"
+      "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-29-identity-backend-foundation.md",
+      "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-29-identity-functional-refactor.md",
+      "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-29-identity-functional-refactor-design.md"
     ]
   }
 }

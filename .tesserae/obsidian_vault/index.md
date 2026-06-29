@@ -15,6 +15,8 @@
 - [[forgot-password-ui-implementation-plan]] — SourceDocument
 - [[identity-backend-foundation-design]] — SourceDocument
 - [[identity-backend-foundation-implementation-plan]] — SourceDocument
+- [[identity-functional-refactor-design]] — SourceDocument
+- [[identity-functional-refactor-implementation-plan]] — SourceDocument
 - [[minerva-agent-instructions]] — SourceDocument
 - [[minerva-architecture]] — SourceDocument
 - [[minerva-backlog]] — SourceDocument
@@ -39,6 +41,7 @@
 
 ## Concepts
 
+- [[math]] — Benchmark
 - [[map]] — Metric
 - [[project-pulse]] — Synthesis
 

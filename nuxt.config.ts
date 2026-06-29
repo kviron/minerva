@@ -3,6 +3,9 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   css: ['~/assets/css/tailwind.css'],
   compatibilityDate: '2025-01-01',
+  nitro: {
+    preset: 'bun'
+  },
   vite: {
     plugins: [tailwindcss()],
   },

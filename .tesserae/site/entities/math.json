@@ -1,0 +1,15 @@
+{
+  "title": "MATH",
+  "kind": "entities",
+  "body_text": "# MATH\n\n## Incoming relations\n\n- **evaluated_on** → Identity Functional Refactor Implementation Plan _(SourceDocument)_\n\n## Connected node types\n\n- SourceDocument: 1",
+  "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-06-29-identity-functional-refactor.md",
+  "links": [],
+  "body": "# MATH\n\n## Incoming relations\n\n- **evaluated_on** → Identity Functional Refactor Implementation Plan _(SourceDocument)_\n\n## Connected node types\n\n- SourceDocument: 1",
+  "frontmatter": {
+    "kind": "entities",
+    "node_id": "Benchmark:math:fd91e205596b",
+    "node_type": "Benchmark",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-06-29-identity-functional-refactor.md",
+    "title": "MATH"
+  }
+}

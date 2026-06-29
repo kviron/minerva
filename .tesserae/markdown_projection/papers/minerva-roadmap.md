@@ -2,7 +2,7 @@
 node_id: SourceDocument:minerva-roadmap:973bcf26cc8a
 title: Minerva roadmap
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\roadmap.md
+source_path: D:\develop\minerva\docs\roadmap.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

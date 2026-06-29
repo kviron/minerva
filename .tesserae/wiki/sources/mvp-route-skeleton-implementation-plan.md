@@ -2,7 +2,7 @@
 kind: sources
 node_id: "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72"
 node_type: SourceDocument
-source_path: "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\docs\\superpowers\\plans\\2026-06-27-mvp-route-skeleton.md"
+source_path: "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-mvp-route-skeleton.md"
 title: MVP Route Skeleton Implementation Plan
 ---
 # MVP Route Skeleton Implementation Plan

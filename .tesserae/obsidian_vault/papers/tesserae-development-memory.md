@@ -2,7 +2,7 @@
 node_id: SourceDocument:tesserae-development-memory:4143790d0cae
 title: Tesserae development memory
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\operations\tesserae.md
+source_path: D:\develop\minerva\docs\operations\tesserae.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

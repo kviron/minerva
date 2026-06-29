@@ -6,10 +6,11 @@ Project Pulse
 Snapshot of the wiki at the most recent compile.
 
 ## Counts
+- Benchmark: 1
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 32
+- SourceDocument: 34
 
 ## Recently added
 - (none)

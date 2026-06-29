@@ -1,11 +1,11 @@
 ---
-content_hash: sha256-3ab74996870d508d148e47448a13ec0a13bc1b92353fa420d545ad24e16ffd05
+content_hash: sha256-6b0404e81529875e2992e6ace307906033b8d0060a0bea06e75ea81e115222fb
 generator: heuristic-v1
 inputs: []
 slug: pulse
 sources:
   - AGENTS.md
-  - "C:/Users/roma/.config/superpowers/worktrees/minerva/identity-backend-foundation"
+  - "D:/develop/minerva"
   - docs/architecture.md
   - docs/backlog.md
   - docs/decisions/0001-modular-monolith.md
@@ -28,6 +28,7 @@ sources:
   - docs/superpowers/plans/2026-06-28-forgot-password-ui.md
   - docs/superpowers/plans/2026-06-28-reset-password-ui.md
   - docs/superpowers/plans/2026-06-29-identity-backend-foundation.md
+  - docs/superpowers/plans/2026-06-29-identity-functional-refactor.md
   - docs/superpowers/specs/2026-06-24-minerva-mvp-design.md
   - docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md
   - docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md
@@ -37,6 +38,7 @@ sources:
   - docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md
   - docs/superpowers/specs/2026-06-28-reset-password-ui-design.md
   - docs/superpowers/specs/2026-06-28-user-identity-profile-design.md
+  - docs/superpowers/specs/2026-06-29-identity-functional-refactor-design.md
 synthesis_kind: pulse
 title: Project Pulse
 ---
@@ -45,10 +47,11 @@ title: Project Pulse
 Snapshot of the wiki at the most recent compile.
 
 ## Counts
+- Benchmark: 1
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 32
+- SourceDocument: 34
 
 ## Recently added
 - (none)

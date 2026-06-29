@@ -2,7 +2,7 @@
 node_id: SourceDocument:tesserae-refresh-wrapper-implementation-plan:0fcadea655b1
 title: Tesserae Refresh Wrapper Implementation Plan
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\superpowers\plans\2026-06-27-tesserae-refresh-wrapper.md
+source_path: D:\develop\minerva\docs\superpowers\plans\2026-06-27-tesserae-refresh-wrapper.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

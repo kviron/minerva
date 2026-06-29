@@ -2,7 +2,7 @@
 node_id: SourceDocument:minerva-executable-foundation-implementation-pla:1198f8e0bcc8
 title: Minerva Executable Foundation Implementation Plan
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\superpowers\plans\2026-06-24-foundation.md
+source_path: D:\develop\minerva\docs\superpowers\plans\2026-06-24-foundation.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

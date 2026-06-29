@@ -2,7 +2,7 @@
 node_id: SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b
 title: Identity Backend Foundation Implementation Plan
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\superpowers\plans\2026-06-29-identity-backend-foundation.md
+source_path: D:\develop\minerva\docs\superpowers\plans\2026-06-29-identity-backend-foundation.md
 edges_out:
   uses_metric: [map]
 edges_in:

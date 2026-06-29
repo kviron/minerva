@@ -5,6 +5,6 @@ Auto-generated table of contents over the wiki layer. Each row links to the inde
 | Kind | Count | Route |
 |---|---:|---|
 | communities | 1 | `<site>/communities/index.html` |
-| entities | 1 | `<site>/entities/index.html` |
-| sources | 32 | `<site>/sources/index.html` |
+| entities | 2 | `<site>/entities/index.html` |
+| sources | 34 | `<site>/sources/index.html` |
 | syntheses | 1 | `<site>/syntheses/index.html` |

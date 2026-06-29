@@ -2,7 +2,7 @@
 node_id: SourceDocument:minerva-progress:c476087b907f
 title: Minerva progress
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\progress.md
+source_path: D:\develop\minerva\docs\progress.md
 edges_out:
   uses_metric: [map]
 edges_in:

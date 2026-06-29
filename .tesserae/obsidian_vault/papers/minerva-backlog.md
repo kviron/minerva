@@ -2,7 +2,7 @@
 node_id: SourceDocument:minerva-backlog:b1487ed798f6
 title: Minerva backlog
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\docs\backlog.md
+source_path: D:\develop\minerva\docs\backlog.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

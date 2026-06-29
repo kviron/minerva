@@ -2,7 +2,7 @@
 node_id: SourceDocument:minerva-agent-instructions:7b4afaaff5ff
 title: Minerva agent instructions
 type: SourceDocument
-source_path: C:\Users\roma\.config\superpowers\worktrees\minerva\identity-backend-foundation\AGENTS.md
+source_path: D:\develop\minerva\AGENTS.md
 edges_in:
   summarizes: [project-pulse]
 source_kind: SourceDocument

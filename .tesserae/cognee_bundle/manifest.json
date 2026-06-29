@@ -1,10 +1,10 @@
 {
-  "edges": 45,
+  "edges": 49,
   "files": {
     "edges": "edges.jsonl",
     "nodes": "nodes.jsonl"
   },
   "format": "tesserae-cognee-jsonl-v1",
-  "nodes": 36,
+  "nodes": 39,
   "notes": "Import these JSONL files into Cognee while preserving research_node_type and controlled relationship labels."
 }

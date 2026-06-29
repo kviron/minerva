@@ -15,6 +15,8 @@
 - [Forgot-Password UI Implementation Plan](sources/forgot-password-ui-implementation-plan.html)
 - [Identity backend foundation design](sources/identity-backend-foundation-design.html): - **uses_metric** → mAP _(Metric)_
 - [Identity Backend Foundation Implementation Plan](sources/identity-backend-foundation-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
+- [Identity functional refactor design](sources/identity-functional-refactor-design.html)
+- [Identity Functional Refactor Implementation Plan](sources/identity-functional-refactor-implementation-plan.html): - **evaluated_on** → MATH _(Benchmark)_ - **uses_metric** → mAP _(Metric)_
 - [Minerva agent instructions](sources/minerva-agent-instructions.html)
 - [Minerva architecture](sources/minerva-architecture.html)
 - [Minerva backlog](sources/minerva-backlog.html)
@@ -39,7 +41,8 @@
 
 ## Entities
 
-- [mAP](entities/map.html): - **summarizes** → Minerva Identity MVP _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity backend foundation design _(SourceDocument)_ - **uses_metric**…
+- [mAP](entities/map.html): - **summarizes** → Minerva Identity MVP _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocument)_ - *…
+- [MATH](entities/math.html): - **evaluated_on** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
 
 ## Syntheses
 

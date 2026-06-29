@@ -15,6 +15,8 @@
 - [Forgot-Password UI Implementation Plan](sources/forgot-password-ui-implementation-plan.html)
 - [Identity backend foundation design](sources/identity-backend-foundation-design.html): - **uses_metric** → mAP _(Metric)_
 - [Identity Backend Foundation Implementation Plan](sources/identity-backend-foundation-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
+- [Identity functional refactor design](sources/identity-functional-refactor-design.html)
+- [Identity Functional Refactor Implementation Plan](sources/identity-functional-refactor-implementation-plan.html): - **evaluated_on** → MATH _(Benchmark)_ - **uses_metric** → mAP _(Metric)_
 - [Minerva agent instructions](sources/minerva-agent-instructions.html)
 - [Minerva architecture](sources/minerva-architecture.html)
 - [Minerva backlog](sources/minerva-backlog.html)
@@ -39,7 +41,8 @@
 
 ## Entities
 
-- [mAP](entities/map.html): - **summarizes** → Minerva Identity MVP _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity backend foundation design _(SourceDocument)_ - **uses_metric**…
+- [mAP](entities/map.html): - **summarizes** → Minerva Identity MVP _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocument)_ - *…
+- [MATH](entities/math.html): - **evaluated_on** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
 
 ## Syntheses
 
@@ -128,6 +131,26 @@ _sources/identity-backend-foundation-implementation-plan.html_
 ## Connected node types
 
 - CommunitySummary: 1
+- Metric: 1
+
+### Identity functional refactor design
+_sources/identity-functional-refactor-design.html_
+
+# Identity functional refactor design
+
+### Identity Functional Refactor Implementation Plan
+_sources/identity-functional-refactor-implementation-plan.html_
+
+# Identity Functional Refactor Implementation Plan
+
+## Outgoing relations
+
+- **evaluated_on** → MATH _(Benchmark)_
+- **uses_metric** → mAP _(Metric)_
+
+## Connected node types
+
+- Benchmark: 1
 - Metric: 1
 
 ### Minerva agent instructions
@@ -298,6 +321,7 @@ _entities/map.html_
 
 - **summarizes** → Minerva Identity MVP _(CommunitySummary)_
 - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_
+- **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
 - **uses_metric** → Identity backend foundation design _(SourceDocument)_
 - **uses_metric** → MVP Route Skeleton Implementation Plan _(SourceDocument)_
 - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_
@@ -306,8 +330,21 @@ _entities/map.html_
 
 ## Connected node types
 
-- SourceDocument: 6
+- SourceDocument: 7
 - CommunitySummary: 1
+
+### MATH
+_entities/math.html_
+
+# MATH
+
+## Incoming relations
+
+- **evaluated_on** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
+
+## Connected node types
+
+- SourceDocument: 1
 
 ## Syntheses
 
@@ -319,10 +356,11 @@ _syntheses/pulse.html_
 Snapshot of the wiki at the most recent compile.
 
 ## Counts
+- Benchmark: 1
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 32
+- SourceDocument: 34
 
 ## Recently added
 - (none)

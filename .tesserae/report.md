@@ -1,20 +1,22 @@
 # Research Graph Report
 
-node_count: 36
-edge_count: 45
+node_count: 39
+edge_count: 49
 
 ## Node Types
 
+- Benchmark: 1
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 32
+- SourceDocument: 34
 - Synthesis: 1
 
 ## Edge Types
 
-- summarizes: 39
-- uses_metric: 6
+- evaluated_on: 1
+- summarizes: 41
+- uses_metric: 7
 
 ## Papers by Analysis Date
 
@@ -28,10 +30,11 @@ _None._
 
 ## Top Degree Nodes
 
-- Project Pulse (Synthesis): 32
+- Project Pulse (Synthesis): 34
+- mAP (Metric): 8
 - Minerva Identity MVP (CommunitySummary): 7
-- mAP (Metric): 7
 - Identity Backend Foundation Implementation Plan (SourceDocument): 3
+- Identity Functional Refactor Implementation Plan (SourceDocument): 3
 - Identity backend foundation design (SourceDocument): 3
 - MVP Route Skeleton Implementation Plan (SourceDocument): 3
 - Minerva MVP UX/UI prototype design (SourceDocument): 3
@@ -46,8 +49,7 @@ _None._
 - ADR 0007: Separate authentication identity, user profiles, contacts, and project roles (SourceDocument): 1
 - Forgot-Password UI Implementation Plan (SourceDocument): 1
 - Forgot-password UI design (SourceDocument): 1
-- Minerva Executable Foundation Implementation Plan (SourceDocument): 1
-- Minerva Figma Prototype Implementation Plan (SourceDocument): 1
+- Identity functional refactor design (SourceDocument): 1
 
 ## Trends
 
@@ -55,4 +57,4 @@ _None._
 
 ## Orphan Nodes
 
-- identity-backend-foundation (CodeProject) — `CodeProject:identity-backend-foundation:f64a689d8f0e`
+- minerva (CodeProject) — `CodeProject:minerva:a939ffff79a4`

@@ -9,6 +9,13 @@
   },
   "@graph": [
     {
+      "@id": "#Benchmark:math:fd91e205596b",
+      "@type": "Dataset",
+      "name": "MATH",
+      "url": "entities/math.html",
+      "additionalType": "Benchmark"
+    },
+    {
       "@id": "#Metric:map:592bcbe13f80",
       "@type": "PropertyValue",
       "name": "mAP",
@@ -90,6 +97,20 @@
       "@type": "CreativeWork",
       "name": "Identity Backend Foundation Implementation Plan",
       "url": "sources/identity-backend-foundation-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:identity-functional-refactor-design:6b235d81cea6",
+      "@type": "CreativeWork",
+      "name": "Identity functional refactor design",
+      "url": "sources/identity-functional-refactor-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:identity-functional-refactor-implementation-plan:5b715b2b772d",
+      "@type": "CreativeWork",
+      "name": "Identity Functional Refactor Implementation Plan",
+      "url": "sources/identity-functional-refactor-implementation-plan.html",
       "additionalType": "SourceDocument"
     },
     {

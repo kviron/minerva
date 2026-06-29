@@ -1,6 +1,6 @@
 {
-  "date": "2026-06-28T01:20:55.383Z",
-  "preset": "node-server",
+  "date": "2026-06-29T00:37:11.381Z",
+  "preset": "bun",
   "framework": {
     "name": "nuxt",
     "version": "4.4.8"
@@ -9,7 +9,7 @@
     "nitro": "2.13.4"
   },
   "commands": {
-    "preview": "node server/index.mjs"
+    "preview": "bun run server/index.mjs"
   },
   "config": {}
 }

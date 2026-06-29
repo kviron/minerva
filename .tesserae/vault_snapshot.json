@@ -1,5 +1,11 @@
 {
   "nodes": {
+    "Benchmark:math:fd91e205596b": {
+      "aliases": [],
+      "description": "",
+      "metadata": {},
+      "name": "MATH"
+    },
     "CommunitySummary:56fa58b054481eee": {
       "aliases": [],
       "description": "Planning, design, routing, implementation, progress, and evaluation artifacts for the Minerva identity backend foundation MVP, including route skeletons and shared success metrics.",
@@ -102,6 +108,22 @@
         "source_kind": "SourceDocument"
       },
       "name": "Identity Backend Foundation Implementation Plan"
+    },
+    "SourceDocument:identity-functional-refactor-design:6b235d81cea6": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Identity functional refactor design"
+    },
+    "SourceDocument:identity-functional-refactor-implementation-plan:5b715b2b772d": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Identity Functional Refactor Implementation Plan"
     },
     "SourceDocument:minerva-agent-instructions:7b4afaaff5ff": {
       "aliases": [],
@@ -275,7 +297,7 @@
       "aliases": [],
       "description": "Top-level snapshot of the wiki at compile time.",
       "metadata": {
-        "content_hash": "sha256-3ab74996870d508d148e47448a13ec0a13bc1b92353fa420d545ad24e16ffd05",
+        "content_hash": "sha256-6b0404e81529875e2992e6ace307906033b8d0060a0bea06e75ea81e115222fb",
         "synthesis_kind": "pulse"
       },
       "name": "Project Pulse"

@@ -2,14 +2,14 @@
   "title": "Minerva progress",
   "kind": "sources",
   "body_text": "# Minerva progress\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva Identity MVP _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
-  "source_path": "C:\\\\Users\\\\roma\\\\.config\\\\superpowers\\\\worktrees\\\\minerva\\\\identity-backend-foundation\\\\docs\\\\progress.md",
+  "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
   "links": [],
   "body": "# Minerva progress\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva Identity MVP _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
   "frontmatter": {
     "kind": "sources",
     "node_id": "SourceDocument:minerva-progress:c476087b907f",
     "node_type": "SourceDocument",
-    "source_path": "C:\\\\Users\\\\roma\\\\.config\\\\superpowers\\\\worktrees\\\\minerva\\\\identity-backend-foundation\\\\docs\\\\progress.md",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
     "title": "Minerva progress"
   }
 }

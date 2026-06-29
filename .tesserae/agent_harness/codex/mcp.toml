@@ -1,4 +1,4 @@
 # Add to ~/.codex/config.toml or project Codex config if supported.
 [mcp_servers.minerva]
 command = "python3"
-args = ["-m", "tesserae.mcp_server", "--graph", "C:\\Users\\roma\\.config\\superpowers\\worktrees\\minerva\\identity-backend-foundation\\.tesserae\\graph.json"]
+args = ["-m", "tesserae.mcp_server", "--graph", "D:\\develop\\minerva\\.tesserae\\graph.json"]
