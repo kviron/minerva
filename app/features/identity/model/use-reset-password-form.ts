@@ -54,12 +54,8 @@ export function useResetPasswordForm(
   const [confirmation, confirmationAttrs] = defineField('confirmation')
   const passwordError = computed(() => errors.value.password || '')
   const confirmationError = computed(() => errors.value.confirmation || '')
-  const passwordInvalid = computed(() =>
-    Boolean(submitError.value || passwordError.value),
-  )
-  const confirmationInvalid = computed(() =>
-    Boolean(submitError.value || confirmationError.value),
-  )
+  const passwordInvalid = computed(() => Boolean(passwordError.value))
+  const confirmationInvalid = computed(() => Boolean(confirmationError.value))
   const clearSubmitError = () => {
     submitError.value = ''
   }

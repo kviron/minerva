@@ -136,7 +136,7 @@ it('exposes each client validation error separately from submit feedback', async
   expect(form.submitError.value).toBe('')
 })
 
-it('marks both fields when reset fails', async () => {
+it('keeps both fields valid when reset fails at form level', async () => {
   const form = await createForm('token', {
     resetPassword: vi.fn().mockRejectedValue(new Error('invalid')),
     navigate: vi.fn(),
@@ -147,8 +147,8 @@ it('marks both fields when reset fails', async () => {
   await form.submit()
 
   expect(form.submitError.value).toBe(RESET_TOKEN_ERROR)
-  expect(form.passwordInvalid.value).toBe(true)
-  expect(form.confirmationInvalid.value).toBe(true)
+  expect(form.passwordInvalid.value).toBe(false)
+  expect(form.confirmationInvalid.value).toBe(false)
 })
 
 it('keeps reset failure feedback separate from field validation errors', async () => {
