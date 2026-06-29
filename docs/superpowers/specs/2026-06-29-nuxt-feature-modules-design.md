@@ -1,0 +1,147 @@
+# Nuxt feature modules design
+
+Status: approved design, awaiting implementation plan
+Date: 2026-06-29
+
+## Goal
+
+Establish a repeatable client architecture for Minerva and apply it first to Identity forms. Preserve Nuxt's routing conventions and the existing visual design while moving validation, submission, HTTP, and business state out of Vue presentation files.
+
+## Decision summary
+
+Use Nuxt-native vertical feature modules rather than strict Feature-Sliced Design or per-domain Nuxt Layers. The application remains one Nuxt product and one deployable modular monolith.
+
+Strict FSD is not selected because its application, page, widget, entity, and feature layers overlap with Nuxt terminology and introduce more indirection than the current product needs. Nuxt Layers are not selected as ordinary feature folders because they are build-time partial applications with auto-scanned pages, components, composables, server handlers, configuration inheritance, and override precedence. They remain available for future cross-application reuse or a genuine platform layer.
+
+## Client structure
+
+Keep Nuxt entry points and shared UI in their conventional locations. Add `app/features` for business capabilities:
+
+```text
+app/
+  pages/
+  layouts/
+  middleware/
+  features/
+    identity/
+      api/
+      model/
+      ui/
+      index.ts
+    projects/
+    documents/
+  components/
+    ui/
+    app/
+  lib/
+```
+
+The root `shared/` directory remains the universal client/server boundary. It may contain immutable domain vocabulary and types that are safe to bundle for the browser. It must never contain secrets, database handles, raw storage paths, or authorization decisions.
+
+## Feature definition
+
+A feature represents a coherent user capability or bounded client domain, not each component or field. Identity, Projects, and Documents qualify. A button, dialog, table, or individual form control does not.
+
+Each feature may contain:
+
+- `api/`: framework-light HTTP and external-client adapters;
+- `model/`: schemas, form models, interaction state, and use-case orchestration;
+- `ui/`: feature-specific Vue presentation;
+- `index.ts`: the intentionally small public API.
+
+Do not add empty directories to future features. Create each part only when the feature needs it.
+
+## Dependency rules
+
+The default dependency direction is:
+
+```text
+pages/layouts
+      -> feature index.ts
+      -> ui -> model -> api
+              -> components/ui, app/lib, root shared
+```
+
+Rules:
+
+- Pages own routing metadata, route parameters, layout selection, and screen composition.
+- Pages and layouts import a feature only through its `index.ts`.
+- Feature UI may import its own model and shared UI primitives.
+- A model may import its own API adapters, root shared contracts, and client utilities.
+- API adapters do not import Vue UI or feature models.
+- `app/components/ui` has no business-feature dependencies.
+- Internal feature files are not imported from outside the feature.
+- Pages should coordinate multiple features. Direct feature-to-feature imports are exceptional and may use only public APIs.
+- A stable contract needed by client and server belongs in root `shared/`; client-only generic utilities belong in `app/lib`.
+
+Do not configure Nuxt to auto-scan `app/features`. Explicit imports make dependencies and feature ownership visible.
+
+## Identity pilot
+
+Refactor the existing authentication client into:
+
+```text
+app/features/identity/
+  api/
+    auth-client.ts
+    identity-api.ts
+  model/
+    schemas.ts
+    use-sign-in-form.ts
+    use-password-recovery-form.ts
+    use-reset-password-form.ts
+  ui/
+    LoginForm.vue
+    PasswordRecoveryForm.vue
+    ResetPasswordForm.vue
+  index.ts
+```
+
+Responsibilities:
+
+- `auth-client.ts` owns Better Auth's Vue client construction.
+- `identity-api.ts` exposes typed sign-in, recovery-request, password-reset, and session capabilities without Vue templates or route access.
+- `schemas.ts` owns Zod schemas for form values.
+- Form composables use `vee-validate`, call injected or imported feature API capabilities, expose pending and semantic error state, and coordinate successful navigation.
+- UI files contain props, field bindings, accessible status/error rendering, and the existing markup and classes.
+- `index.ts` exports only the three forms and the session capability required by Nuxt middleware.
+
+The reset-password page reads `route.params.token` and passes a string token to `ResetPasswordForm`. Neither the UI component nor its form model reads the current route.
+
+The global authentication middleware remains a Nuxt entry point but obtains the current session through the Identity feature public API. It must not import the internal Better Auth client directly.
+
+## Form conventions
+
+Use `vee-validate` with Zod for business forms. Schemas describe field shape and deterministic client validation. Form models own submission state and prevent duplicate requests.
+
+Keep purely visual state local to Vue UI. Examples include whether a password is visible or an optional panel is expanded. Move state to a feature model when it participates in validation, API input, business branching, submission, or cross-component coordination.
+
+Server validation and authorization remain authoritative. Client schemas improve feedback but never replace Nitro validation, account-state enforcement, session checks, or future permission-code checks.
+
+## Data and error flow
+
+```text
+Nuxt page -> feature UI -> form model -> feature API -> Nitro Identity endpoint
+```
+
+Feature API adapters return typed success or throw/map transport failures into stable semantic outcomes. Models map those outcomes to form-level state. UI localizes and renders the state in Russian by default. Do not expose raw server messages, stack traces, or Better Auth internals.
+
+The refactor preserves current endpoints, payloads, redirects, generic credential failures, enumeration-safe recovery response, reset-token handling, and session behavior.
+
+## Testing
+
+Implement the Identity migration in vertical TDD steps:
+
+1. Characterize the current forms and route behavior.
+2. Add unit tests for Zod schemas and transport-independent API/model behavior.
+3. Move one form at a time while keeping its page and browser journey green.
+4. Test middleware through the Identity public session capability.
+5. Run unit, integration, browser, Nuxt typecheck, and production build verification.
+
+Do not change visual markup, CSS classes, Russian copy, endpoint contracts, server behavior, or database schema as part of this client architecture refactor.
+
+## Adoption
+
+Identity is the reference implementation. New Projects and Documents client work must start with the same feature boundary and dependency rules. Existing unrelated components are not moved preemptively. Migrate code only while implementing or directly refactoring its user capability.
+
+Record the durable rules in ADR 0008 and `docs/architecture.md`. Reconsider Nuxt Layers only when Minerva has a second Nuxt application, an independently distributed partial application, or a substantial platform/theme layer requiring Nuxt-level configuration and override behavior.
