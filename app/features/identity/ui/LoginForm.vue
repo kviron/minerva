@@ -9,7 +9,7 @@ const props = defineProps<{
 
 const {
   identifier, identifierAttrs, password, passwordAttrs,
-  errorMessage, isSubmitting, submit,
+  identifierInvalid, passwordInvalid, errorMessage, isSubmitting, submit,
 } = useSignInForm()
 </script>
 
@@ -24,7 +24,7 @@ const {
           Введите логин или email, чтобы войти в свою учётную запись
         </p>
       </div>
-      <UiField :data-invalid="errorMessage ? true : undefined">
+      <UiField :data-invalid="identifierInvalid ? true : undefined">
         <UiFieldLabel for="email">
           Email или логин
         </UiFieldLabel>
@@ -36,11 +36,11 @@ const {
           size="lg"
           autocomplete="username"
           placeholder="m@example.com"
-          :aria-invalid="Boolean(errorMessage)"
+          :aria-invalid="identifierInvalid"
           required
         />
       </UiField>
-      <UiField :data-invalid="errorMessage ? true : undefined">
+      <UiField :data-invalid="passwordInvalid ? true : undefined">
         <div class="flex items-center">
           <UiFieldLabel for="password">
             Пароль
@@ -59,7 +59,7 @@ const {
           type="password"
           size="lg"
           autocomplete="current-password"
-          :aria-invalid="Boolean(errorMessage)"
+          :aria-invalid="passwordInvalid"
           required
         />
         <UiFieldError v-if="errorMessage" :errors="[errorMessage]" />

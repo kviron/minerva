@@ -13,12 +13,13 @@ export function createSignInAction(dependencies: SignInDependencies) {
   return async (values: SignInValues): Promise<string | null> => {
     try {
       await dependencies.signIn(values)
-      await dependencies.navigate('/')
-      return null
     }
     catch {
       return SIGN_IN_ERROR
     }
+
+    await dependencies.navigate('/')
+    return null
   }
 }
 
@@ -34,10 +35,17 @@ export function useSignInForm(dependencies?: SignInDependencies) {
   })
   const [identifier, identifierAttrs] = defineField('identifier')
   const [password, passwordAttrs] = defineField('password')
+  const identifierInvalid = computed(() =>
+    Boolean(submitError.value || errors.value.identifier),
+  )
+  const passwordInvalid = computed(() =>
+    Boolean(submitError.value || errors.value.password),
+  )
   const errorMessage = computed(() =>
     submitError.value || errors.value.identifier || errors.value.password || '',
   )
   const submit = handleSubmit(async (values) => {
+    submitError.value = ''
     submitError.value = await action(values) ?? ''
   })
 
@@ -46,6 +54,8 @@ export function useSignInForm(dependencies?: SignInDependencies) {
     identifierAttrs,
     password,
     passwordAttrs,
+    identifierInvalid,
+    passwordInvalid,
     errorMessage,
     isSubmitting,
     submit,
