@@ -1,8 +1,13 @@
-import { expect, it, vi } from 'vitest'
+import { afterEach, expect, it, vi } from 'vitest'
 import {
   createIdentityApi,
+  identityApi,
   type IdentityRequest,
 } from '../../../../app/features/identity/api/identity-api'
+
+afterEach(() => {
+  vi.unstubAllGlobals()
+})
 
 it('posts identity operations to their exact endpoints with their input bodies', async () => {
   const request = vi.fn<IdentityRequest>(async () => undefined)
@@ -35,4 +40,19 @@ it('posts identity operations to their exact endpoints with their input bodies',
       },
     ],
   ])
+})
+
+it('resolves the runtime fetch lazily when an identity operation runs', async () => {
+  const fetch = vi.fn(async () => undefined)
+  vi.stubGlobal('$fetch', fetch)
+
+  await identityApi.signIn({ identifier: 'minerva', password: 'password' })
+
+  expect(fetch).toHaveBeenCalledExactlyOnceWith(
+    '/api/identity/sign-in',
+    {
+      method: 'POST',
+      body: { identifier: 'minerva', password: 'password' },
+    },
+  )
 })

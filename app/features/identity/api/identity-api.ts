@@ -14,7 +14,7 @@ export interface ResetPasswordInput {
 
 export interface RequestOptions {
   readonly method: 'POST'
-  readonly body: Record<string, string>
+  readonly body: Readonly<Record<string, string>>
 }
 
 export type IdentityRequest = (
@@ -43,6 +43,8 @@ export const createIdentityApi = (request: IdentityRequest) => ({
   },
 })
 
-export const identityApi = createIdentityApi(
-  (path, options) => ($fetch as IdentityRequest)(path, options),
-)
+const runtimeIdentityRequest: IdentityRequest = async (path, options) => {
+  await $fetch(path, options)
+}
+
+export const identityApi = createIdentityApi(runtimeIdentityRequest)
