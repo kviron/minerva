@@ -1,0 +1,911 @@
+# Identity Functional Refactor Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Reorganize the existing Identity backend around vertical scenarios, introduce shared object constants and pragmatic functional boundaries, and configure the local functional-TypeScript skill and Nuxt MCP without changing authentication behavior.
+
+**Architecture:** Keep public-safe Identity vocabulary in `shared/identity`, keep all security decisions and effects server-side, and refactor existing services into pure transformations plus dependency-injected effectful factories. Perform behavior refactors at current paths first, then move the verified files into scenario folders and update every consumer in one mechanical step.
+
+**Tech Stack:** Nuxt 4, Nitro/H3, TypeScript, Better Auth, Drizzle ORM, PostgreSQL, Vitest, Playwright, Bun, Codex skills, Nuxt MCP.
+
+---
+
+## Target file map
+
+```text
+.agents/skills/functional-typescript/
+  SKILL.md                         # Pragmatic functional TypeScript workflow
+  agents/openai.yaml               # Skill UI metadata
+.codex/config.toml                 # Repository-scoped Nuxt MCP
+shared/identity/
+  constants.ts                     # Runtime object constants
+  types.ts                         # Types derived from the constants
+server/modules/identity/
+  auth/
+    contracts.ts                   # Better Auth factory ports
+    create-auth.ts                 # Configured Better Auth factory
+    get-auth.ts                    # Runtime composition and cache
+  bootstrap/bootstrap-super-admin.ts
+  recovery/password-recovery.ts
+  session/require-session.ts
+  sign-in/
+    identifier.ts                  # Pure identifier classification
+    sign-in.ts                     # Injected sign-in service and runtime adapter
+  identity-error.ts                # Stable server error-to-status mapping
+  rate-limit.ts                    # Pure key builder and injected persistence shell
+```
+
+## Task 1: Add the functional TypeScript skill and Nuxt MCP
+
+**Required skills:** `skill-creator`, `superpowers:writing-skills`, and `superpowers:test-driven-development`.
+
+**Files:**
+- Create: `.agents/skills/functional-typescript/SKILL.md`
+- Create: `.agents/skills/functional-typescript/agents/openai.yaml`
+- Create: `.codex/config.toml`
+
+- [ ] **Step 1: Initialize the project-local skill**
+
+Run:
+
+```powershell
+python "$env:USERPROFILE\.codex\skills\.system\skill-creator\scripts\init_skill.py" functional-typescript `
+  --path .agents/skills `
+  --interface "display_name=Functional TypeScript" `
+  --interface "short_description=Pragmatic functional refactoring for TypeScript" `
+  --interface 'default_prompt=Use $functional-typescript to refactor this TypeScript module with explicit effects.'
+```
+
+Expected: `.agents/skills/functional-typescript` is created with `SKILL.md` and `agents/openai.yaml`.
+
+- [ ] **Step 2: Replace the generated skill body with the minimal real guidance**
+
+Write `.agents/skills/functional-typescript/SKILL.md`:
+
+```markdown
+---
+name: functional-typescript
+description: Use when designing or refactoring TypeScript code with hidden dependencies, mixed pure logic and side effects, repeated closed-set literals, mutation, or exception-heavy domain branching.
+---
+
+# Functional TypeScript
+
+## Overview
+
+Build a small functional core with an explicit effectful shell. Prefer native TypeScript and clear interfaces; add an FP library only when the project already uses one or its abstractions remove demonstrated complexity.
+
+## Workflow
+
+1. Identify observable behavior and lock it with tests.
+2. Separate deterministic transformations from database, network, clock, environment, and framework calls.
+3. Represent closed vocabulary with `as const` objects and derive union types from their values.
+4. Pass effects into factory functions as narrow capabilities.
+5. Compose real dependencies at the runtime boundary.
+6. Refactor in small steps and keep tests green.
+
+## Core patterns
+
+```ts
+export const ACCOUNT_STATUS = {
+  ACTIVE: 'active',
+  DISABLED: 'disabled',
+} as const
+
+export type AccountStatus =
+  typeof ACCOUNT_STATUS[keyof typeof ACCOUNT_STATUS]
+
+interface Dependencies {
+  readonly now: () => number
+  readonly save: (value: Record<string, unknown>) => Promise<void>
+}
+
+export const createService = ({ now, save }: Dependencies) =>
+  async (input: Readonly<{ name: string }>) => {
+    const value = { name: input.name.trim(), createdAt: now() }
+    await save(value)
+    return value
+  }
+```
+
+Use a discriminated result for expected domain alternatives in pure code. Keep exceptions at framework or library boundaries that already use exceptions.
+
+## Quick reference
+
+| Situation | Prefer |
+| --- | --- |
+| Closed values | `as const` object plus derived union |
+| Deterministic rule | Pure function |
+| Database, network, clock | Injected capability |
+| Runtime wiring | Small composition function |
+| Expected pure failure | Discriminated result |
+| Better Auth or Nitro failure | Mapped `Error` at the boundary |
+
+## Common mistakes
+
+- Do not move secrets, database handles, or authorization decisions into shared client-importable modules.
+- Do not wrap every value in `Option`, `Either`, or `Result`.
+- Do not replace a useful framework-compatible `Error` class merely to remove classes.
+- Do not create generic repositories before two consumers require the abstraction.
+- Do not hide effects behind module globals inside application logic.
+```
+
+- [ ] **Step 3: Add the repository-scoped Nuxt MCP configuration**
+
+Write `.codex/config.toml`:
+
+```toml
+[mcp_servers.nuxt]
+url = "https://nuxt.com/mcp"
+```
+
+Do not remove or edit the user-global `http / nuxt-remote` entry.
+
+- [ ] **Step 4: Validate the skill and MCP registration**
+
+Run:
+
+```powershell
+python "$env:USERPROFILE\.codex\skills\.system\skill-creator\scripts\quick_validate.py" .agents/skills/functional-typescript
+codex mcp list
+```
+
+Expected: validator prints `Skill is valid!`; MCP list contains a project entry named `nuxt` with URL `https://nuxt.com/mcp`. If the IDE tool list does not refresh, restart Codex after finishing this task.
+
+- [ ] **Step 5: Commit the tooling slice**
+
+```powershell
+git add -- .agents/skills/functional-typescript .codex/config.toml
+git commit -m "chore: add functional TypeScript skill and Nuxt MCP"
+```
+
+## Task 2: Introduce shared Identity object constants
+
+**Files:**
+- Create: `shared/identity/constants.ts`
+- Create: `shared/identity/types.ts`
+- Create: `tests/unit/identity/constants.spec.ts`
+- Modify: `server/modules/identity/contracts.ts`
+- Modify: `server/modules/identity/errors.ts`
+- Modify: `server/modules/identity/create-auth.ts`
+- Modify: `server/modules/identity/identifier.ts`
+- Modify: `server/modules/identity/bootstrap-super-admin.ts`
+- Modify: `scripts/auth-schema.ts`
+- Modify: `tests/unit/identity/identifier.spec.ts`
+
+- [ ] **Step 1: Write the failing constants test**
+
+Create `tests/unit/identity/constants.spec.ts`:
+
+```ts
+import { describe, expect, it } from 'vitest'
+import {
+  ACCOUNT_STATUS,
+  AUTH_MODE,
+  IDENTITY_CODE,
+  LOGIN_IDENTIFIER_KIND,
+} from '../../../shared/identity/constants'
+import type {
+  AccountStatus,
+  AuthMode,
+  IdentityCode,
+  LoginIdentifierKind,
+} from '../../../shared/identity/types'
+
+describe('shared Identity vocabulary', () => {
+  it('exposes stable runtime values with derived types', () => {
+    const status: AccountStatus = ACCOUNT_STATUS.ACTIVE
+    const mode: AuthMode = AUTH_MODE.RUNTIME
+    const code: IdentityCode = IDENTITY_CODE.AUTH_REQUIRED
+    const kind: LoginIdentifierKind = LOGIN_IDENTIFIER_KIND.EMAIL
+
+    expect({ status, mode, code, kind }).toEqual({
+      status: 'active',
+      mode: 'runtime',
+      code: 'AUTH_REQUIRED',
+      kind: 'email',
+    })
+    expect(Object.values(ACCOUNT_STATUS)).toEqual(['active', 'disabled'])
+  })
+})
+```
+
+- [ ] **Step 2: Run the test and verify RED**
+
+Run: `bunx vitest run tests/unit/identity/constants.spec.ts`
+
+Expected: FAIL because `shared/identity/constants` does not exist.
+
+- [ ] **Step 3: Add constants and derived types**
+
+Create `shared/identity/constants.ts`:
+
+```ts
+export const ACCOUNT_STATUS = {
+  ACTIVE: 'active',
+  DISABLED: 'disabled',
+} as const
+
+export const AUTH_MODE = {
+  RUNTIME: 'runtime',
+  BOOTSTRAP: 'bootstrap',
+  TEST_SEED: 'test-seed',
+} as const
+
+export const IDENTITY_CODE = {
+  INVALID_CREDENTIALS: 'INVALID_CREDENTIALS',
+  AUTH_REQUIRED: 'AUTH_REQUIRED',
+  ACCOUNT_DISABLED: 'ACCOUNT_DISABLED',
+  RESET_REQUEST_ACCEPTED: 'RESET_REQUEST_ACCEPTED',
+  RESET_TOKEN_INVALID: 'RESET_TOKEN_INVALID',
+  RATE_LIMITED: 'RATE_LIMITED',
+  SERVICE_UNAVAILABLE: 'SERVICE_UNAVAILABLE',
+} as const
+
+export const LOGIN_IDENTIFIER_KIND = {
+  EMAIL: 'email',
+  USERNAME: 'username',
+} as const
+```
+
+Create `shared/identity/types.ts`:
+
+```ts
+type ValueOf<T> = T[keyof T]
+
+export type AccountStatus = ValueOf<typeof import('./constants').ACCOUNT_STATUS>
+export type AuthMode = ValueOf<typeof import('./constants').AUTH_MODE>
+export type IdentityCode = ValueOf<typeof import('./constants').IDENTITY_CODE>
+export type LoginIdentifierKind = ValueOf<typeof import('./constants').LOGIN_IDENTIFIER_KIND>
+```
+
+- [ ] **Step 4: Replace application literals with the shared vocabulary**
+
+Use the constants in existing files while keeping their current paths:
+
+- `contracts.ts`: remove the local `AuthMode` union and import `AuthMode` from `shared/identity/types`.
+- `errors.ts`: import `IDENTITY_CODE` and `IdentityCode`; define the status map with computed keys and `satisfies Record<IdentityCode, number>`.
+- `create-auth.ts`: compare modes with `AUTH_MODE`, configure account status with `[ACCOUNT_STATUS.ACTIVE, ACCOUNT_STATUS.DISABLED]`, and type queried statuses as `AccountStatus`.
+- `identifier.ts`: return kinds from `LOGIN_IDENTIFIER_KIND` and use `IDENTITY_CODE.INVALID_CREDENTIALS`.
+- `bootstrap-super-admin.ts` and `scripts/auth-schema.ts`: pass `AUTH_MODE.BOOTSTRAP` or `AUTH_MODE.RUNTIME`.
+- Update affected tests and seed setup to pass `AUTH_MODE.TEST_SEED` and assert shared constants where the value is an application contract.
+
+The server status mapping must have this shape:
+
+```ts
+const statuses = {
+  [IDENTITY_CODE.INVALID_CREDENTIALS]: 401,
+  [IDENTITY_CODE.AUTH_REQUIRED]: 401,
+  [IDENTITY_CODE.ACCOUNT_DISABLED]: 403,
+  [IDENTITY_CODE.RESET_REQUEST_ACCEPTED]: 200,
+  [IDENTITY_CODE.RESET_TOKEN_INVALID]: 400,
+  [IDENTITY_CODE.RATE_LIMITED]: 429,
+  [IDENTITY_CODE.SERVICE_UNAVAILABLE]: 503,
+} satisfies Record<IdentityCode, number>
+```
+
+- [ ] **Step 5: Run unit tests and type checking**
+
+Run:
+
+```powershell
+bun run test:unit
+bun run typecheck
+```
+
+Expected: all unit tests pass and Nuxt type checking exits 0.
+
+- [ ] **Step 6: Commit the shared vocabulary slice**
+
+```powershell
+git add -- shared/identity tests/unit/identity server/modules/identity scripts/auth-schema.ts tests/integration/identity tests/e2e/global.setup.ts
+git commit -m "refactor: share identity object constants"
+```
+
+## Task 3: Isolate rate-limit key construction and effects
+
+**Files:**
+- Create: `tests/unit/identity/rate-limit.spec.ts`
+- Modify: `server/modules/identity/rate-limit.ts`
+
+- [ ] **Step 1: Write the failing pure-function test**
+
+Create `tests/unit/identity/rate-limit.spec.ts`:
+
+```ts
+import { describe, expect, it } from 'vitest'
+import { createRateLimitKey } from '../../../server/modules/identity/rate-limit'
+
+describe('createRateLimitKey', () => {
+  it('returns a stable digest without plaintext identity data', () => {
+    const input = { scope: 'sign-in' as const, ip: '127.0.0.1', identity: 'user@example.com' }
+    const first = createRateLimitKey('test-secret', input)
+    const second = createRateLimitKey('test-secret', input)
+
+    expect(first).toBe(second)
+    expect(first).toMatch(/^[a-f0-9]{64}$/)
+    expect(first).not.toContain(input.identity)
+  })
+})
+```
+
+- [ ] **Step 2: Run the test and verify RED**
+
+Run: `bunx vitest run tests/unit/identity/rate-limit.spec.ts`
+
+Expected: FAIL because `createRateLimitKey` is not exported.
+
+- [ ] **Step 3: Extract the pure function and inject runtime capabilities**
+
+In `server/modules/identity/rate-limit.ts`, keep `RateLimitInput` and add:
+
+```ts
+type RateLimitKeyInput = Pick<RateLimitInput, 'scope' | 'ip' | 'identity'>
+
+export function createRateLimitKey(secret: string, input: RateLimitKeyInput): string {
+  return createHmac('sha256', secret)
+    .update(`${input.scope}:${input.ip}:${input.identity ?? ''}`)
+    .digest('hex')
+}
+
+interface RateLimitDependencies {
+  readonly getSecret: () => string
+  readonly getDatabase: typeof getDatabase
+  readonly now: () => number
+}
+
+export function createIdentityRateLimiter(dependencies: RateLimitDependencies) {
+  return async function consume(input: RateLimitInput): Promise<void> {
+    const key = createRateLimitKey(dependencies.getSecret(), input)
+    const now = dependencies.now()
+    const database = dependencies.getDatabase()
+    const rows = await database.queryClient<{ count: number }[]>`
+      insert into rate_limit (key, count, last_request)
+      values (${key}, 1, ${now})
+      on conflict (key) do update set
+        count = case
+          when ${now} - rate_limit.last_request >= ${input.windowSeconds} then 1
+          else rate_limit.count + 1
+        end,
+        last_request = case
+          when ${now} - rate_limit.last_request >= ${input.windowSeconds} then ${now}
+          else rate_limit.last_request
+        end
+      returning count
+    `
+
+    if ((rows[0]?.count ?? input.max + 1) > input.max) {
+      throw new IdentityError(IDENTITY_CODE.RATE_LIMITED)
+    }
+  }
+}
+
+export const consumeIdentityRateLimit = createIdentityRateLimiter({
+  getSecret: () => getServerEnv().RATE_LIMIT_HMAC_SECRET,
+  getDatabase,
+  now: () => Math.floor(Date.now() / 1000),
+})
+```
+
+Import `IDENTITY_CODE` from the shared constants module. The query above intentionally retains the existing reset-window semantics.
+
+- [ ] **Step 4: Run focused and integration tests**
+
+Run:
+
+```powershell
+bunx vitest run tests/unit/identity/rate-limit.spec.ts
+bunx vitest run tests/integration/identity/sign-in.spec.ts tests/integration/identity/password-recovery.spec.ts
+```
+
+Expected: all tests pass; integration assertions still prove HMAC storage and throttling.
+
+- [ ] **Step 5: Commit the rate-limit slice**
+
+```powershell
+git add -- server/modules/identity/rate-limit.ts tests/unit/identity/rate-limit.spec.ts
+git commit -m "refactor: isolate identity rate limit effects"
+```
+
+## Task 4: Refactor sign-in into a functional service factory
+
+**Files:**
+- Modify: `server/modules/identity/identifier.ts`
+- Modify: `server/modules/identity/sign-in.ts`
+- Modify: `tests/unit/identity/identifier.spec.ts`
+- Create: `tests/unit/identity/sign-in.spec.ts`
+
+- [ ] **Step 1: Write failing tests for the pure result and injected service**
+
+Update `identifier.spec.ts` to expect a discriminated result:
+
+```ts
+expect(classifyLoginIdentifier(' User@Example.com ')).toEqual({
+  ok: true,
+  value: { kind: LOGIN_IDENTIFIER_KIND.EMAIL, normalized: 'user@example.com' },
+})
+expect(classifyLoginIdentifier('')).toEqual({
+  ok: false,
+  code: IDENTITY_CODE.INVALID_CREDENTIALS,
+})
+```
+
+Create `tests/unit/identity/sign-in.spec.ts`:
+
+```ts
+import { expect, it, vi } from 'vitest'
+import { IDENTITY_CODE } from '../../../shared/identity/constants'
+import { createSignInWithIdentifier } from '../../../server/modules/identity/sign-in'
+
+it('selects the email capability after normalization', async () => {
+  const headers = new Headers({ 'set-cookie': 'session=value' })
+  const consumeRateLimit = vi.fn().mockResolvedValue(undefined)
+  const signInEmail = vi.fn().mockResolvedValue({ headers })
+  const signIn = createSignInWithIdentifier({
+    consumeRateLimit,
+    signInEmail,
+    signInUsername: vi.fn(),
+    isProviderError: () => false,
+  })
+
+  await expect(signIn({
+    identifier: ' User@Example.com ',
+    password: 'secret',
+    ip: '127.0.0.1',
+    requestHeaders: new Headers(),
+  })).resolves.toEqual({ headers })
+  expect(signInEmail).toHaveBeenCalledWith(expect.objectContaining({
+    identifier: 'user@example.com',
+  }))
+  expect(consumeRateLimit).toHaveBeenCalledOnce()
+})
+
+it('maps provider credential failures to the stable Identity code', async () => {
+  const providerError = new Error('provider')
+  const signIn = createSignInWithIdentifier({
+    consumeRateLimit: vi.fn().mockResolvedValue(undefined),
+    signInEmail: vi.fn().mockRejectedValue(providerError),
+    signInUsername: vi.fn(),
+    isProviderError: error => error === providerError,
+  })
+
+  await expect(signIn({
+    identifier: 'user@example.com', password: 'wrong', ip: '127.0.0.1',
+    requestHeaders: new Headers(),
+  })).rejects.toMatchObject({ code: IDENTITY_CODE.INVALID_CREDENTIALS })
+})
+```
+
+- [ ] **Step 2: Run the tests and verify RED**
+
+Run: `bunx vitest run tests/unit/identity/identifier.spec.ts tests/unit/identity/sign-in.spec.ts`
+
+Expected: FAIL because the classifier still throws and the factory is not exported.
+
+- [ ] **Step 3: Return a discriminated result from identifier classification**
+
+Use these public shapes in `identifier.ts`:
+
+```ts
+export interface LoginIdentifier {
+  readonly kind: LoginIdentifierKind
+  readonly normalized: string
+}
+
+export type LoginIdentifierResult =
+  | { readonly ok: true, readonly value: LoginIdentifier }
+  | { readonly ok: false, readonly code: typeof IDENTITY_CODE.INVALID_CREDENTIALS }
+```
+
+Normalize once; return `{ ok: false, code }` for empty or over-255 values, otherwise return `{ ok: true, value }` with the shared identifier-kind constant.
+
+- [ ] **Step 4: Add the injected sign-in factory and runtime composition**
+
+Define narrow dependencies in `sign-in.ts`:
+
+```ts
+interface ProviderSignInInput {
+  readonly identifier: string
+  readonly password: string
+  readonly requestHeaders: Headers
+}
+
+interface SignInDependencies {
+  readonly consumeRateLimit: typeof consumeIdentityRateLimit
+  readonly signInEmail: (input: ProviderSignInInput) => Promise<{ headers: Headers }>
+  readonly signInUsername: (input: ProviderSignInInput) => Promise<{ headers: Headers }>
+  readonly isProviderError: (error: unknown) => boolean
+}
+
+export function createSignInWithIdentifier(dependencies: SignInDependencies) {
+  return async function signIn(input: SignInInput): Promise<{ headers: Headers }> {
+    const classified = classifyLoginIdentifier(input.identifier)
+    if (!classified.ok) throw new IdentityError(classified.code)
+
+    const identifier = classified.value
+    await dependencies.consumeRateLimit({
+      scope: 'sign-in', ip: input.ip, identity: identifier.normalized,
+      max: 5, windowSeconds: 15 * 60,
+    })
+
+    try {
+      const capability = identifier.kind === LOGIN_IDENTIFIER_KIND.EMAIL
+        ? dependencies.signInEmail
+        : dependencies.signInUsername
+      return await capability({
+        identifier: identifier.normalized,
+        password: input.password,
+        requestHeaders: input.requestHeaders,
+      })
+    } catch (error) {
+      if (dependencies.isProviderError(error)) {
+        throw new IdentityError(IDENTITY_CODE.INVALID_CREDENTIALS)
+      }
+      throw error
+    }
+  }
+}
+```
+
+Compose the runtime function in the same file:
+
+```ts
+export const signInWithIdentifier = createSignInWithIdentifier({
+  consumeRateLimit: consumeIdentityRateLimit,
+  async signInEmail(input) {
+    const result = await getAuth().api.signInEmail({
+      body: { email: input.identifier, password: input.password },
+      headers: input.requestHeaders,
+      returnHeaders: true,
+    })
+    return { headers: result.headers }
+  },
+  async signInUsername(input) {
+    const result = await getAuth().api.signInUsername({
+      body: { username: input.identifier, password: input.password },
+      headers: input.requestHeaders,
+      returnHeaders: true,
+    })
+    return { headers: result.headers }
+  },
+  isProviderError: error => error instanceof APIError,
+})
+```
+
+- [ ] **Step 5: Verify the sign-in slice**
+
+Run:
+
+```powershell
+bunx vitest run tests/unit/identity/identifier.spec.ts tests/unit/identity/sign-in.spec.ts
+bunx vitest run tests/integration/identity/sign-in.spec.ts
+bun run typecheck
+```
+
+Expected: all commands pass.
+
+- [ ] **Step 6: Commit the sign-in slice**
+
+```powershell
+git add -- server/modules/identity/identifier.ts server/modules/identity/sign-in.ts tests/unit/identity
+git commit -m "refactor: inject identity sign in effects"
+```
+
+## Task 5: Refactor recovery and session guards into factories
+
+**Files:**
+- Modify: `server/modules/identity/password-recovery.ts`
+- Modify: `server/modules/identity/require-session.ts`
+- Create: `tests/unit/identity/password-recovery.spec.ts`
+- Create: `tests/unit/identity/require-session.spec.ts`
+
+- [ ] **Step 1: Write failing dependency-injection tests**
+
+Create `tests/unit/identity/password-recovery.spec.ts`:
+
+```ts
+import { expect, it, vi } from 'vitest'
+import { IDENTITY_CODE } from '../../../shared/identity/constants'
+import { createPasswordRecovery } from '../../../server/modules/identity/password-recovery'
+
+const createDependencies = () => ({
+  consumeRateLimit: vi.fn().mockResolvedValue(undefined),
+  requestReset: vi.fn().mockResolvedValue(undefined),
+  performReset: vi.fn().mockResolvedValue(undefined),
+  isProviderError: vi.fn((_error: unknown) => false),
+})
+
+it('normalizes email and returns one public recovery code', async () => {
+  const dependencies = createDependencies()
+  const recovery = createPasswordRecovery(dependencies)
+
+  await expect(recovery.requestPasswordReset({
+    email: ' User@Example.com ', ip: '127.0.0.1',
+  })).resolves.toBe(IDENTITY_CODE.RESET_REQUEST_ACCEPTED)
+  await expect(recovery.requestPasswordReset({
+    email: 'missing@example.com', ip: '127.0.0.2',
+  })).resolves.toBe(IDENTITY_CODE.RESET_REQUEST_ACCEPTED)
+  expect(dependencies.requestReset).toHaveBeenNthCalledWith(1, 'user@example.com')
+  expect(dependencies.requestReset).toHaveBeenNthCalledWith(2, 'missing@example.com')
+})
+
+it('maps a recognized provider reset failure', async () => {
+  const providerError = new Error('provider')
+  const dependencies = createDependencies()
+  dependencies.performReset.mockRejectedValue(providerError)
+  dependencies.isProviderError.mockImplementation(error => error === providerError)
+  const recovery = createPasswordRecovery(dependencies)
+
+  await expect(recovery.resetPassword({
+    token: 'token', newPassword: 'Correct-Horse-Battery-1', ip: '127.0.0.1',
+  })).rejects.toMatchObject({ code: IDENTITY_CODE.RESET_TOKEN_INVALID })
+})
+```
+
+Create `require-session.spec.ts`:
+
+```ts
+import type { H3Event } from 'h3'
+import { expect, it, vi } from 'vitest'
+import { IDENTITY_CODE } from '../../../shared/identity/constants'
+import { createRequireSession } from '../../../server/modules/identity/require-session'
+
+it('returns the session supplied by the injected capability', async () => {
+  const session = { user: { id: 'user-id' } }
+  const getSession = vi.fn().mockResolvedValue(session)
+  const requireSession = createRequireSession(getSession)
+  const event = { headers: new Headers() } as H3Event
+
+  await expect(requireSession(event)).resolves.toBe(session)
+  expect(getSession).toHaveBeenCalledWith(event.headers)
+})
+
+it('rejects a missing session with the stable code', async () => {
+  const requireSession = createRequireSession(vi.fn().mockResolvedValue(null))
+  await expect(requireSession({ headers: new Headers() } as H3Event))
+    .rejects.toMatchObject({ code: IDENTITY_CODE.AUTH_REQUIRED })
+})
+```
+
+- [ ] **Step 2: Run the tests and verify RED**
+
+Run: `bunx vitest run tests/unit/identity/password-recovery.spec.ts tests/unit/identity/require-session.spec.ts`
+
+Expected: FAIL because both factories are missing.
+
+- [ ] **Step 3: Implement the recovery factory**
+
+Export `createPasswordRecovery(dependencies)` returning `{ requestPasswordReset, resetPassword }`. Its dependencies must be narrow functions, not a Better Auth object:
+
+```ts
+interface PasswordRecoveryDependencies {
+  readonly consumeRateLimit: typeof consumeIdentityRateLimit
+  readonly requestReset: (email: string) => Promise<void>
+  readonly performReset: (input: Readonly<{ token: string, newPassword: string }>) => Promise<void>
+  readonly isProviderError: (error: unknown) => boolean
+}
+```
+
+Implement and compose it as follows:
+
+```ts
+export function createPasswordRecovery(dependencies: PasswordRecoveryDependencies) {
+  return {
+    async requestPasswordReset(input: RecoveryRequest) {
+      const email = input.email.trim().toLowerCase()
+      await dependencies.consumeRateLimit({
+        scope: 'recovery-request', ip: input.ip, identity: email,
+        max: 3, windowSeconds: 60 * 60,
+      })
+      await dependencies.requestReset(email)
+      return IDENTITY_CODE.RESET_REQUEST_ACCEPTED
+    },
+    async resetPassword(input: ResetRequest): Promise<void> {
+      await dependencies.consumeRateLimit({
+        scope: 'password-reset', ip: input.ip, max: 5, windowSeconds: 15 * 60,
+      })
+      try {
+        await dependencies.performReset({
+          token: input.token,
+          newPassword: input.newPassword,
+        })
+      } catch (error) {
+        if (dependencies.isProviderError(error)) {
+          throw new IdentityError(IDENTITY_CODE.RESET_TOKEN_INVALID)
+        }
+        throw error
+      }
+    },
+  }
+}
+
+const recovery = createPasswordRecovery({
+  consumeRateLimit: consumeIdentityRateLimit,
+  requestReset: async email => {
+    await getAuth().api.requestPasswordReset({ body: { email } })
+  },
+  performReset: async input => {
+    await getAuth().api.resetPassword({ body: input })
+  },
+  isProviderError: error => error instanceof APIError,
+})
+
+export const requestPasswordReset = recovery.requestPasswordReset
+export const resetPassword = recovery.resetPassword
+```
+
+- [ ] **Step 4: Implement the generic session factory**
+
+In `require-session.ts`:
+
+```ts
+export function createRequireSession<Session>(
+  getSession: (headers: Headers) => Promise<Session | null>,
+) {
+  return async function requireExistingSession(event: H3Event): Promise<Session> {
+    const session = await getSession(event.headers)
+    if (!session) throw new IdentityError(IDENTITY_CODE.AUTH_REQUIRED)
+    return session
+  }
+}
+
+export const requireSession = createRequireSession(
+  (headers: Headers) => getAuth().api.getSession({ headers }),
+)
+```
+
+- [ ] **Step 5: Verify recovery and session behavior**
+
+Run:
+
+```powershell
+bunx vitest run tests/unit/identity/password-recovery.spec.ts tests/unit/identity/require-session.spec.ts
+bunx vitest run tests/integration/identity/password-recovery.spec.ts tests/integration/identity/session.spec.ts
+bun run typecheck
+```
+
+Expected: all commands pass.
+
+- [ ] **Step 6: Commit the recovery/session slice**
+
+```powershell
+git add -- server/modules/identity/password-recovery.ts server/modules/identity/require-session.ts tests/unit/identity
+git commit -m "refactor: inject recovery and session effects"
+```
+
+## Task 6: Move verified Identity files into vertical scenario folders
+
+**Files:**
+- Move: `server/modules/identity/contracts.ts` → `server/modules/identity/auth/contracts.ts`
+- Move: `server/modules/identity/create-auth.ts` → `server/modules/identity/auth/create-auth.ts`
+- Move: `server/modules/identity/auth.ts` → `server/modules/identity/auth/get-auth.ts`
+- Move: `server/modules/identity/bootstrap-super-admin.ts` → `server/modules/identity/bootstrap/bootstrap-super-admin.ts`
+- Move: `server/modules/identity/password-recovery.ts` → `server/modules/identity/recovery/password-recovery.ts`
+- Move: `server/modules/identity/require-session.ts` → `server/modules/identity/session/require-session.ts`
+- Move: `server/modules/identity/identifier.ts` → `server/modules/identity/sign-in/identifier.ts`
+- Move: `server/modules/identity/sign-in.ts` → `server/modules/identity/sign-in/sign-in.ts`
+- Move: `server/modules/identity/errors.ts` → `server/modules/identity/identity-error.ts`
+- Modify: all consumers listed by the import audit below
+
+- [ ] **Step 1: Capture a green baseline before mechanical moves**
+
+Run:
+
+```powershell
+bun run test:unit
+bun run typecheck
+```
+
+Expected: both commands pass. Stop and debug if the baseline is not green.
+
+- [ ] **Step 2: Move files with history and fix their internal relative imports**
+
+Use patch-based file moves. After nesting, shared imports gain one `../`; infrastructure imports from `auth/create-auth.ts` use `../../../infrastructure/...`; sibling scenario imports go through explicit paths such as `../identity-error`, `../rate-limit`, and `../auth/get-auth`.
+
+Do not add barrel `index.ts` files.
+
+- [ ] **Step 3: Update every external consumer**
+
+Apply these path replacements:
+
+```text
+modules/identity/auth                         -> modules/identity/auth/get-auth
+modules/identity/create-auth                  -> modules/identity/auth/create-auth
+modules/identity/contracts                    -> modules/identity/auth/contracts
+modules/identity/errors                       -> modules/identity/identity-error
+modules/identity/bootstrap-super-admin        -> modules/identity/bootstrap/bootstrap-super-admin
+modules/identity/password-recovery            -> modules/identity/recovery/password-recovery
+modules/identity/require-session              -> modules/identity/session/require-session
+modules/identity/identifier                   -> modules/identity/sign-in/identifier
+modules/identity/sign-in                      -> modules/identity/sign-in/sign-in
+```
+
+Update imports in `server/api`, `server/infrastructure/mail`, `scripts`, `tests/unit`, `tests/integration`, and `tests/e2e/global.setup.ts`.
+
+- [ ] **Step 4: Prove there are no stale Identity imports**
+
+Run:
+
+```powershell
+rg -n "modules/identity/(auth|create-auth|contracts|errors|bootstrap-super-admin|password-recovery|require-session|identifier|sign-in)'" app server scripts tests
+```
+
+Expected: no matches for obsolete paths. Imports containing the new longer paths are allowed.
+
+- [ ] **Step 5: Run all unit and integration tests plus type checking**
+
+Run:
+
+```powershell
+bun run test:unit
+bun run test:integration
+bun run typecheck
+```
+
+Expected: 0 failures and type checking exits 0.
+
+- [ ] **Step 6: Commit the structural move**
+
+```powershell
+git add -- server/modules/identity server/api server/infrastructure/mail scripts tests
+git commit -m "refactor: group identity module by scenario"
+```
+
+## Task 7: Final verification and project documentation
+
+**Files:**
+- Modify: `docs/progress.md`
+- Generated but never staged: `.tesserae/**`
+
+- [ ] **Step 1: Start required local services**
+
+Run:
+
+```powershell
+docker compose --profile test up -d postgres-test mailpit
+docker compose ps
+```
+
+Expected: `postgres-test` and `mailpit` are running; PostgreSQL becomes healthy.
+
+- [ ] **Step 2: Run the complete verification suite**
+
+Run:
+
+```powershell
+bun install --frozen-lockfile
+bun run test:unit
+bun run test:integration
+bun run test:e2e
+bun run typecheck
+bun run build
+git diff --exit-code -- drizzle
+```
+
+Expected: all test suites, type checking, and production build pass; Drizzle has no changes. Do not stage `.output` changes produced by the build.
+
+- [ ] **Step 3: Update progress**
+
+In `docs/progress.md`, update `Last updated` if needed and add a completed entry stating that Identity now uses shared object constants, scenario grouping, dependency-injected functional services, the project functional-TypeScript skill, and repository-scoped Nuxt MCP configuration. Record exact verification counts from Step 2 rather than estimates.
+
+- [ ] **Step 4: Refresh Tesserae through the Windows wrapper**
+
+Run: `./scripts/refresh-tesserae.ps1`
+
+Expected: sessions import, compile, and Obsidian sync report `ok`. Never stage `.tesserae`.
+
+- [ ] **Step 5: Verify the intended diff and commit documentation**
+
+Run:
+
+```powershell
+git status --short
+git diff --check
+git add -- docs/progress.md
+git commit -m "docs: record identity functional refactor"
+```
+
+Expected: the commit contains only `docs/progress.md`; the user's pre-existing `.env`, `.output`, `package.json`, `bun.lock`, and `nuxt.config.ts` changes remain untouched.
+
+- [ ] **Step 6: Review branch completion**
+
+Use `superpowers:requesting-code-review`, then `superpowers:verification-before-completion`, and finally `superpowers:finishing-a-development-branch`. Report any unavailable external service separately; do not claim the corresponding integration or browser check passed without its successful command output.
