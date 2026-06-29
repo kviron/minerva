@@ -1,0 +1,840 @@
+# Nuxt Feature Modules Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Establish the approved Nuxt-native feature-module architecture by moving Identity client API, form state, validation, and UI into `app/features/identity` without changing routes, server contracts, Russian copy, or visual layout.
+
+**Architecture:** Nuxt pages and middleware remain framework entry points and import Identity only through its public `index.ts`. The Identity feature owns framework-light API adapters, Zod/vee-validate form models, and feature UI; shadcn-vue primitives remain business-agnostic below `app/components/ui`.
+
+**Tech Stack:** Nuxt 4, Vue 3 Composition API, TypeScript, vee-validate 4, Zod 3, @vee-validate/zod, Better Auth Vue client, Vitest, Playwright, Bun.
+
+---
+
+## Target file map
+
+```text
+app/features/identity/
+  api/
+    auth-client.ts
+    identity-api.ts
+  model/
+    schemas.ts
+    use-sign-in-form.ts
+    use-password-recovery-form.ts
+    use-reset-password-form.ts
+  ui/
+    LoginForm.vue
+    PasswordRecoveryForm.vue
+    ResetPasswordForm.vue
+  index.ts
+tests/unit/client/identity/
+  identity-api.spec.ts
+  schemas.spec.ts
+  sign-in-model.spec.ts
+  password-recovery-model.spec.ts
+  reset-password-model.spec.ts
+```
+
+Delete after their replacement is active:
+
+```text
+app/lib/auth-client.ts
+app/components/auth/loginForm/index.vue
+app/components/auth/forgotPasswordForm/index.vue
+app/components/auth/resetPasswordForm/index.vue
+```
+
+## Task 1: Create the Identity API and session boundary
+
+**Files:**
+- Create: `app/features/identity/api/identity-api.ts`
+- Move: `app/lib/auth-client.ts` → `app/features/identity/api/auth-client.ts`
+- Create: `app/features/identity/index.ts`
+- Modify: `app/middleware/auth.global.ts`
+- Create: `tests/unit/client/identity/identity-api.spec.ts`
+
+- [ ] **Step 1: Write the failing API contract test**
+
+Create `tests/unit/client/identity/identity-api.spec.ts`:
+
+```ts
+import { describe, expect, it, vi } from 'vitest'
+import { createIdentityApi } from '../../../../app/features/identity/api/identity-api'
+
+describe('Identity API', () => {
+  it('sends each command to its stable Nitro endpoint', async () => {
+    const request = vi.fn().mockResolvedValue(undefined)
+    const api = createIdentityApi(request)
+
+    await api.signIn({ identifier: 'user@example.com', password: 'secret' })
+    await api.requestPasswordReset({ email: 'user@example.com' })
+    await api.resetPassword({ token: 'token', newPassword: 'new-password' })
+
+    expect(request.mock.calls).toEqual([
+      ['/api/identity/sign-in', {
+        method: 'POST', body: { identifier: 'user@example.com', password: 'secret' },
+      }],
+      ['/api/identity/request-password-reset', {
+        method: 'POST', body: { email: 'user@example.com' },
+      }],
+      ['/api/identity/reset-password', {
+        method: 'POST', body: { token: 'token', newPassword: 'new-password' },
+      }],
+    ])
+  })
+})
+```
+
+- [ ] **Step 2: Run the test and verify RED**
+
+Run: `bunx vitest run tests/unit/client/identity/identity-api.spec.ts`
+
+Expected: FAIL because the Identity API module does not exist.
+
+- [ ] **Step 3: Implement the framework-light Identity API**
+
+Create `app/features/identity/api/identity-api.ts`:
+
+```ts
+export interface SignInInput {
+  readonly identifier: string
+  readonly password: string
+}
+
+export interface PasswordRecoveryInput {
+  readonly email: string
+}
+
+export interface ResetPasswordInput {
+  readonly token: string
+  readonly newPassword: string
+}
+
+interface RequestOptions {
+  readonly method: 'POST'
+  readonly body: Record<string, string>
+}
+
+export type IdentityRequest = (
+  path: string,
+  options: RequestOptions,
+) => Promise<unknown>
+
+export function createIdentityApi(request: IdentityRequest) {
+  return {
+    async signIn(input: SignInInput): Promise<void> {
+      await request('/api/identity/sign-in', { method: 'POST', body: { ...input } })
+    },
+    async requestPasswordReset(input: PasswordRecoveryInput): Promise<void> {
+      await request('/api/identity/request-password-reset', {
+        method: 'POST', body: { ...input },
+      })
+    },
+    async resetPassword(input: ResetPasswordInput): Promise<void> {
+      await request('/api/identity/reset-password', { method: 'POST', body: { ...input } })
+    },
+  }
+}
+
+export const identityApi = createIdentityApi(
+  (path, options) => $fetch(path, options),
+)
+```
+
+- [ ] **Step 4: Move the Better Auth client and expose only session lookup**
+
+Move `app/lib/auth-client.ts` to `app/features/identity/api/auth-client.ts` and use:
+
+```ts
+import { createAuthClient } from 'better-auth/vue'
+
+const authClient = createAuthClient({ basePath: '/api/auth' })
+
+export const getIdentitySession = () => authClient.getSession()
+```
+
+Create `app/features/identity/index.ts`:
+
+```ts
+export { getIdentitySession } from './api/auth-client'
+```
+
+Update `app/middleware/auth.global.ts` to import `getIdentitySession` from `@/features/identity` and replace `authClient.getSession()` with `getIdentitySession()`. Keep the public prefixes and redirects unchanged.
+
+- [ ] **Step 5: Verify the API boundary**
+
+Run:
+
+```powershell
+bunx vitest run tests/unit/client/identity/identity-api.spec.ts
+bun run test:unit
+bun run typecheck
+```
+
+Expected: focused test, all unit tests, and typecheck pass.
+
+- [ ] **Step 6: Commit the API/session slice**
+
+```powershell
+git add -- app/features/identity/api app/features/identity/index.ts app/lib/auth-client.ts app/middleware/auth.global.ts tests/unit/client/identity/identity-api.spec.ts
+git commit -m "refactor: create identity client boundary"
+```
+
+## Task 2: Add typed Identity form schemas
+
+**Files:**
+- Create: `app/features/identity/model/schemas.ts`
+- Create: `tests/unit/client/identity/schemas.spec.ts`
+
+- [ ] **Step 1: Write failing schema behavior tests**
+
+Create `tests/unit/client/identity/schemas.spec.ts`:
+
+```ts
+import { describe, expect, it } from 'vitest'
+import {
+  passwordRecoverySchema,
+  resetPasswordSchema,
+  signInSchema,
+} from '../../../../app/features/identity/model/schemas'
+
+describe('Identity form schemas', () => {
+  it('accepts the existing sign-in values', () => {
+    expect(signInSchema.safeParse({
+      identifier: 'user@example.com', password: 'Correct-Horse-Battery-1',
+    }).success).toBe(true)
+  })
+
+  it('requires a valid recovery email', () => {
+    expect(passwordRecoverySchema.safeParse({ email: 'not-an-email' }).success).toBe(false)
+  })
+
+  it('enforces password length and confirmation', () => {
+    expect(resetPasswordSchema.safeParse({
+      password: 'short', confirmation: 'short',
+    }).success).toBe(false)
+    expect(resetPasswordSchema.safeParse({
+      password: 'Correct-Horse-Battery-1', confirmation: 'Different-Horse-Battery-2',
+    }).success).toBe(false)
+    expect(resetPasswordSchema.safeParse({
+      password: 'Correct-Horse-Battery-1', confirmation: 'Correct-Horse-Battery-1',
+    }).success).toBe(true)
+  })
+})
+```
+
+- [ ] **Step 2: Run the test and verify RED**
+
+Run: `bunx vitest run tests/unit/client/identity/schemas.spec.ts`
+
+Expected: FAIL because `model/schemas.ts` does not exist.
+
+- [ ] **Step 3: Implement Zod schemas and exported value types**
+
+Create `app/features/identity/model/schemas.ts`:
+
+```ts
+import { z } from 'zod'
+
+export const SIGN_IN_ERROR = 'Неверный логин или пароль'
+export const RECOVERY_EMAIL_ERROR = 'Введите корректный email'
+export const PASSWORD_LENGTH_ERROR = 'Пароль должен содержать от 12 до 256 символов'
+export const PASSWORD_CONFIRMATION_ERROR = 'Пароли не совпадают'
+
+export const signInSchema = z.object({
+  identifier: z.string().min(1, SIGN_IN_ERROR).max(255, SIGN_IN_ERROR),
+  password: z.string().min(1, SIGN_IN_ERROR).max(256, SIGN_IN_ERROR),
+})
+
+export const passwordRecoverySchema = z.object({
+  email: z.string().email(RECOVERY_EMAIL_ERROR).max(255, RECOVERY_EMAIL_ERROR),
+})
+
+export const resetPasswordSchema = z.object({
+  password: z.string().min(12, PASSWORD_LENGTH_ERROR).max(256, PASSWORD_LENGTH_ERROR),
+  confirmation: z.string().min(1, PASSWORD_CONFIRMATION_ERROR),
+}).refine(values => values.password === values.confirmation, {
+  path: ['confirmation'],
+  message: PASSWORD_CONFIRMATION_ERROR,
+})
+
+export type SignInValues = z.infer<typeof signInSchema>
+export type PasswordRecoveryValues = z.infer<typeof passwordRecoverySchema>
+export type ResetPasswordValues = z.infer<typeof resetPasswordSchema>
+```
+
+- [ ] **Step 4: Run schema tests and typecheck**
+
+Run:
+
+```powershell
+bunx vitest run tests/unit/client/identity/schemas.spec.ts
+bun run typecheck
+```
+
+Expected: tests and typecheck pass.
+
+- [ ] **Step 5: Commit the schema slice**
+
+```powershell
+git add -- app/features/identity/model/schemas.ts tests/unit/client/identity/schemas.spec.ts
+git commit -m "refactor: add identity form schemas"
+```
+
+## Task 3: Move the sign-in form into Identity
+
+**Files:**
+- Create: `app/features/identity/model/use-sign-in-form.ts`
+- Move: `app/components/auth/loginForm/index.vue` → `app/features/identity/ui/LoginForm.vue`
+- Modify: `app/features/identity/index.ts`
+- Modify: `app/pages/auth/index.vue`
+- Create: `tests/unit/client/identity/sign-in-model.spec.ts`
+
+- [ ] **Step 1: Write failing sign-in action tests**
+
+Create `tests/unit/client/identity/sign-in-model.spec.ts`:
+
+```ts
+import { expect, it, vi } from 'vitest'
+import { createSignInAction } from '../../../../app/features/identity/model/use-sign-in-form'
+import { SIGN_IN_ERROR } from '../../../../app/features/identity/model/schemas'
+
+it('signs in and navigates home', async () => {
+  const signIn = vi.fn().mockResolvedValue(undefined)
+  const navigate = vi.fn().mockResolvedValue(undefined)
+  const action = createSignInAction({ signIn, navigate })
+
+  await expect(action({ identifier: 'user@example.com', password: 'secret' }))
+    .resolves.toBeNull()
+  expect(signIn).toHaveBeenCalledWith({ identifier: 'user@example.com', password: 'secret' })
+  expect(navigate).toHaveBeenCalledWith('/')
+})
+
+it('returns the existing generic error and does not navigate', async () => {
+  const navigate = vi.fn()
+  const action = createSignInAction({
+    signIn: vi.fn().mockRejectedValue(new Error('provider')),
+    navigate,
+  })
+
+  await expect(action({ identifier: 'user@example.com', password: 'wrong' }))
+    .resolves.toBe(SIGN_IN_ERROR)
+  expect(navigate).not.toHaveBeenCalled()
+})
+```
+
+- [ ] **Step 2: Run the test and verify RED**
+
+Run: `bunx vitest run tests/unit/client/identity/sign-in-model.spec.ts`
+
+Expected: FAIL because the sign-in model does not exist.
+
+- [ ] **Step 3: Implement the sign-in action and vee-validate model**
+
+Create `app/features/identity/model/use-sign-in-form.ts`:
+
+```ts
+import { toTypedSchema } from '@vee-validate/zod'
+import { useForm } from 'vee-validate'
+import { computed, ref } from 'vue'
+import { identityApi } from '../api/identity-api'
+import { SIGN_IN_ERROR, signInSchema, type SignInValues } from './schemas'
+
+interface SignInDependencies {
+  readonly signIn: (values: SignInValues) => Promise<void>
+  readonly navigate: (path: string) => Promise<unknown> | unknown
+}
+
+export function createSignInAction(dependencies: SignInDependencies) {
+  return async (values: SignInValues): Promise<string | null> => {
+    try {
+      await dependencies.signIn(values)
+      await dependencies.navigate('/')
+      return null
+    } catch {
+      return SIGN_IN_ERROR
+    }
+  }
+}
+
+export function useSignInForm(dependencies?: SignInDependencies) {
+  const action = createSignInAction(dependencies ?? {
+    signIn: identityApi.signIn,
+    navigate: path => navigateTo(path),
+  })
+  const submitError = ref('')
+  const { defineField, errors, handleSubmit, isSubmitting } = useForm({
+    validationSchema: toTypedSchema(signInSchema),
+    initialValues: { identifier: '', password: '' },
+  })
+  const [identifier, identifierAttrs] = defineField('identifier')
+  const [password, passwordAttrs] = defineField('password')
+  const errorMessage = computed(() =>
+    submitError.value || errors.value.identifier || errors.value.password || '',
+  )
+  const submit = handleSubmit(async values => {
+    submitError.value = await action(values) ?? ''
+  })
+
+  return {
+    identifier, identifierAttrs, password, passwordAttrs,
+    errorMessage, isSubmitting, submit,
+  }
+}
+```
+
+- [ ] **Step 4: Move the sign-in UI and make its script presentation-only**
+
+Move the existing component to `app/features/identity/ui/LoginForm.vue`. Preserve its template, Russian copy, IDs, autocomplete values, classes, and links. Replace its state and submit logic with:
+
+```ts
+<script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
+import { cn } from '@/lib/utils'
+import { useSignInForm } from '../model/use-sign-in-form'
+
+const props = defineProps<{ class?: HTMLAttributes['class'] }>()
+const {
+  identifier, identifierAttrs, password, passwordAttrs,
+  errorMessage, isSubmitting, submit,
+} = useSignInForm()
+</script>
+```
+
+Bind `identifierAttrs` and `passwordAttrs` with `v-bind` on their inputs. Replace `pending` with `isSubmitting`. Keep the existing `errorMessage` rendering.
+
+Export the component from `app/features/identity/index.ts`:
+
+```ts
+export { getIdentitySession } from './api/auth-client'
+export { default as LoginForm } from './ui/LoginForm.vue'
+```
+
+In `app/pages/auth/index.vue`, explicitly import `LoginForm` from `@/features/identity` and replace `<AuthLoginForm />` with `<LoginForm />`. Keep all other page content unchanged.
+
+- [ ] **Step 5: Verify sign-in behavior**
+
+Run:
+
+```powershell
+bunx vitest run tests/unit/client/identity/sign-in-model.spec.ts
+bun run test:unit
+bun run typecheck
+bunx playwright test tests/e2e/identity.spec.ts -g "signs in|hides credential"
+```
+
+Expected: unit/typecheck pass and the three sign-in browser journeys pass.
+
+- [ ] **Step 6: Commit the sign-in slice**
+
+```powershell
+git add -- app/components/auth/loginForm app/features/identity app/pages/auth/index.vue tests/unit/client/identity/sign-in-model.spec.ts
+git commit -m "refactor: move sign in into identity feature"
+```
+
+## Task 4: Move password recovery into Identity
+
+**Files:**
+- Create: `app/features/identity/model/use-password-recovery-form.ts`
+- Move: `app/components/auth/forgotPasswordForm/index.vue` → `app/features/identity/ui/PasswordRecoveryForm.vue`
+- Modify: `app/features/identity/index.ts`
+- Modify: `app/pages/auth/forgot-password.vue`
+- Create: `tests/unit/client/identity/password-recovery-model.spec.ts`
+
+- [ ] **Step 1: Write failing recovery action tests**
+
+Create `tests/unit/client/identity/password-recovery-model.spec.ts`:
+
+```ts
+import { expect, it, vi } from 'vitest'
+import {
+  createPasswordRecoveryAction,
+  RECOVERY_ERROR_MESSAGE,
+  RECOVERY_SUCCESS_MESSAGE,
+} from '../../../../app/features/identity/model/use-password-recovery-form'
+
+it('returns the enumeration-safe success message', async () => {
+  const requestPasswordReset = vi.fn().mockResolvedValue(undefined)
+  const action = createPasswordRecoveryAction({ requestPasswordReset })
+  await expect(action({ email: 'user@example.com' })).resolves.toEqual({
+    status: RECOVERY_SUCCESS_MESSAGE, error: '',
+  })
+})
+
+it('returns the existing delivery failure message', async () => {
+  const action = createPasswordRecoveryAction({
+    requestPasswordReset: vi.fn().mockRejectedValue(new Error('network')),
+  })
+  await expect(action({ email: 'user@example.com' })).resolves.toEqual({
+    status: '', error: RECOVERY_ERROR_MESSAGE,
+  })
+})
+```
+
+- [ ] **Step 2: Run the test and verify RED**
+
+Run: `bunx vitest run tests/unit/client/identity/password-recovery-model.spec.ts`
+
+Expected: FAIL because the recovery model does not exist.
+
+- [ ] **Step 3: Implement the recovery action and form model**
+
+Create `app/features/identity/model/use-password-recovery-form.ts`:
+
+```ts
+import { toTypedSchema } from '@vee-validate/zod'
+import { useForm } from 'vee-validate'
+import { computed, ref } from 'vue'
+import { identityApi } from '../api/identity-api'
+import {
+  passwordRecoverySchema,
+  type PasswordRecoveryValues,
+} from './schemas'
+
+export const RECOVERY_SUCCESS_MESSAGE =
+  'Если аккаунт существует, ссылка отправлена на почту'
+export const RECOVERY_ERROR_MESSAGE =
+  'Не удалось отправить запрос. Попробуйте позже.'
+
+interface PasswordRecoveryDependencies {
+  readonly requestPasswordReset: (values: PasswordRecoveryValues) => Promise<void>
+}
+
+interface RecoveryOutcome {
+  readonly status: string
+  readonly error: string
+}
+
+export function createPasswordRecoveryAction(
+  dependencies: PasswordRecoveryDependencies,
+) {
+  return async (values: PasswordRecoveryValues): Promise<RecoveryOutcome> => {
+    try {
+      await dependencies.requestPasswordReset(values)
+      return { status: RECOVERY_SUCCESS_MESSAGE, error: '' }
+    } catch {
+      return { status: '', error: RECOVERY_ERROR_MESSAGE }
+    }
+  }
+}
+
+export function usePasswordRecoveryForm(
+  dependencies?: PasswordRecoveryDependencies,
+) {
+  const action = createPasswordRecoveryAction(dependencies ?? {
+    requestPasswordReset: identityApi.requestPasswordReset,
+  })
+  const submitError = ref('')
+  const statusMessage = ref('')
+  const { defineField, errors, handleSubmit, isSubmitting } = useForm({
+    validationSchema: toTypedSchema(passwordRecoverySchema),
+    initialValues: { email: '' },
+  })
+  const [email, emailAttrs] = defineField('email')
+  const errorMessage = computed(() =>
+    submitError.value || errors.value.email || '',
+  )
+  const submit = handleSubmit(async values => {
+    submitError.value = ''
+    statusMessage.value = ''
+    const outcome = await action(values)
+    submitError.value = outcome.error
+    statusMessage.value = outcome.status
+  })
+
+  return {
+    email, emailAttrs, errorMessage, statusMessage, isSubmitting, submit,
+  }
+}
+```
+
+- [ ] **Step 4: Move and connect the recovery UI**
+
+Move the current template verbatim to `app/features/identity/ui/PasswordRecoveryForm.vue`. Replace its state/API script with:
+
+```ts
+<script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
+import { cn } from '@/lib/utils'
+import { usePasswordRecoveryForm } from '../model/use-password-recovery-form'
+
+const props = defineProps<{ class?: HTMLAttributes['class'] }>()
+const {
+  email, emailAttrs, errorMessage, statusMessage, isSubmitting, submit,
+} = usePasswordRecoveryForm()
+</script>
+```
+
+Bind `emailAttrs` on the input and replace `pending` with `isSubmitting`.
+
+Add to `app/features/identity/index.ts`:
+
+```ts
+export { default as PasswordRecoveryForm } from './ui/PasswordRecoveryForm.vue'
+```
+
+In `app/pages/auth/forgot-password.vue`, import `PasswordRecoveryForm` from the feature public API and replace `<AuthForgotPasswordForm />`. Preserve the rest of the page.
+
+- [ ] **Step 5: Verify recovery behavior**
+
+Run:
+
+```powershell
+bunx vitest run tests/unit/client/identity/password-recovery-model.spec.ts
+bun run test:unit
+bun run typecheck
+bunx playwright test tests/e2e/identity.spec.ts -g "returns one recovery response"
+```
+
+Expected: all commands pass.
+
+- [ ] **Step 6: Commit the recovery slice**
+
+```powershell
+git add -- app/components/auth/forgotPasswordForm app/features/identity app/pages/auth/forgot-password.vue tests/unit/client/identity/password-recovery-model.spec.ts
+git commit -m "refactor: move password recovery into identity feature"
+```
+
+## Task 5: Move reset password into Identity
+
+**Files:**
+- Create: `app/features/identity/model/use-reset-password-form.ts`
+- Move: `app/components/auth/resetPasswordForm/index.vue` → `app/features/identity/ui/ResetPasswordForm.vue`
+- Modify: `app/features/identity/index.ts`
+- Modify: `app/pages/auth/reset-password/[token].vue`
+- Create: `tests/unit/client/identity/reset-password-model.spec.ts`
+
+- [ ] **Step 1: Write failing reset action tests**
+
+Create `tests/unit/client/identity/reset-password-model.spec.ts`:
+
+```ts
+import { expect, it, vi } from 'vitest'
+import {
+  createResetPasswordAction,
+  RESET_TOKEN_ERROR,
+} from '../../../../app/features/identity/model/use-reset-password-form'
+
+it('submits the page-owned token and navigates to sign in', async () => {
+  const resetPassword = vi.fn().mockResolvedValue(undefined)
+  const navigate = vi.fn().mockResolvedValue(undefined)
+  const action = createResetPasswordAction({ resetPassword, navigate })
+  await expect(action('token', {
+    password: 'Correct-Horse-Battery-1', confirmation: 'Correct-Horse-Battery-1',
+  })).resolves.toBeNull()
+  expect(resetPassword).toHaveBeenCalledWith({
+    token: 'token', newPassword: 'Correct-Horse-Battery-1',
+  })
+  expect(navigate).toHaveBeenCalledWith('/auth')
+})
+
+it('returns the existing invalid-token message', async () => {
+  const action = createResetPasswordAction({
+    resetPassword: vi.fn().mockRejectedValue(new Error('invalid')),
+    navigate: vi.fn(),
+  })
+  await expect(action('token', {
+    password: 'Correct-Horse-Battery-1', confirmation: 'Correct-Horse-Battery-1',
+  })).resolves.toBe(RESET_TOKEN_ERROR)
+})
+```
+
+- [ ] **Step 2: Run the test and verify RED**
+
+Run: `bunx vitest run tests/unit/client/identity/reset-password-model.spec.ts`
+
+Expected: FAIL because the reset model does not exist.
+
+- [ ] **Step 3: Implement the reset action and form model**
+
+Create `app/features/identity/model/use-reset-password-form.ts`:
+
+```ts
+import { toTypedSchema } from '@vee-validate/zod'
+import { useForm } from 'vee-validate'
+import { computed, ref } from 'vue'
+import { identityApi } from '../api/identity-api'
+import { resetPasswordSchema, type ResetPasswordValues } from './schemas'
+
+export const RESET_TOKEN_ERROR =
+  'Ссылка недействительна или уже использована'
+
+interface ResetPasswordDependencies {
+  readonly resetPassword: (input: {
+    readonly token: string
+    readonly newPassword: string
+  }) => Promise<void>
+  readonly navigate: (path: string) => Promise<unknown> | unknown
+}
+
+export function createResetPasswordAction(
+  dependencies: ResetPasswordDependencies,
+) {
+  return async (
+    token: string,
+    values: ResetPasswordValues,
+  ): Promise<string | null> => {
+    try {
+      await dependencies.resetPassword({
+        token,
+        newPassword: values.password,
+      })
+      await dependencies.navigate('/auth')
+      return null
+    } catch {
+      return RESET_TOKEN_ERROR
+    }
+  }
+}
+
+export function useResetPasswordForm(
+  token: string,
+  dependencies?: ResetPasswordDependencies,
+) {
+  const action = createResetPasswordAction(dependencies ?? {
+    resetPassword: identityApi.resetPassword,
+    navigate: path => navigateTo(path),
+  })
+  const submitError = ref('')
+  const { defineField, errors, handleSubmit, isSubmitting } = useForm({
+    validationSchema: toTypedSchema(resetPasswordSchema),
+    initialValues: { password: '', confirmation: '' },
+  })
+  const [password, passwordAttrs] = defineField('password')
+  const [confirmation, confirmationAttrs] = defineField('confirmation')
+  const errorMessage = computed(() =>
+    submitError.value
+    || errors.value.password
+    || errors.value.confirmation
+    || '',
+  )
+  const submit = handleSubmit(async values => {
+    submitError.value = await action(token, values) ?? ''
+  })
+
+  return {
+    password, passwordAttrs, confirmation, confirmationAttrs,
+    errorMessage, isSubmitting, submit,
+  }
+}
+```
+
+- [ ] **Step 4: Move UI and make the page own the token**
+
+Move the existing template to `app/features/identity/ui/ResetPasswordForm.vue`. Replace its state/API script with:
+
+```ts
+<script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
+import { cn } from '@/lib/utils'
+import { useResetPasswordForm } from '../model/use-reset-password-form'
+
+const props = defineProps<{
+  class?: HTMLAttributes['class']
+  token: string
+}>()
+const {
+  password, passwordAttrs, confirmation, confirmationAttrs,
+  errorMessage, isSubmitting, submit,
+} = useResetPasswordForm(props.token)
+</script>
+```
+
+Bind both vee-validate attr objects and replace `pending` with `isSubmitting`. Preserve all markup, classes, IDs, autocomplete, links, and copy.
+
+Add to `app/features/identity/index.ts`:
+
+```ts
+export { default as ResetPasswordForm } from './ui/ResetPasswordForm.vue'
+```
+
+In `app/pages/auth/reset-password/[token].vue`:
+
+```ts
+import { ResetPasswordForm } from '@/features/identity'
+
+const route = useRoute()
+const token = computed(() => String(route.params.token ?? ''))
+```
+
+Replace `<AuthResetPasswordForm />` with `<ResetPasswordForm :token="token" />`. Keep page metadata and visual shell unchanged.
+
+- [ ] **Step 5: Verify reset behavior**
+
+Run:
+
+```powershell
+bunx vitest run tests/unit/client/identity/reset-password-model.spec.ts
+bun run test:unit
+bun run typecheck
+bunx playwright test tests/e2e/identity.spec.ts -g "resets once through Mailpit"
+```
+
+Expected: all commands pass.
+
+- [ ] **Step 6: Commit the reset slice**
+
+```powershell
+git add -- app/components/auth/resetPasswordForm app/features/identity app/pages/auth/reset-password tests/unit/client/identity/reset-password-model.spec.ts
+git commit -m "refactor: move password reset into identity feature"
+```
+
+## Task 6: Enforce boundaries and complete verification
+
+**Files:**
+- Modify: `docs/progress.md`
+- Generated but never staged: `.output/**`, `.nuxt/**`, `.tesserae/**`
+
+- [ ] **Step 1: Audit architecture boundaries**
+
+Run:
+
+```powershell
+rg -n "@/features/identity/(api|model|ui)" app --glob "*.ts" --glob "*.vue"
+rg -n "@/lib/auth-client|components/auth/(loginForm|forgotPasswordForm|resetPasswordForm)" app tests
+rg --files app/features/identity
+```
+
+Expected: no deep feature imports outside `app/features/identity`, no old auth-client/component paths, and only the approved Identity feature files exist.
+
+- [ ] **Step 2: Start test services and run full verification**
+
+Run:
+
+```powershell
+docker compose --profile test up -d postgres-test mailpit
+bun install --frozen-lockfile
+bun run test:unit
+bun run test:integration
+bun run test:e2e
+bun run typecheck
+bun run build
+git diff --exit-code -- drizzle
+git diff --check
+```
+
+Expected: all suites and commands pass, with no Drizzle change. If Docker Desktop's SMTP proxy accepts the connection without relaying the greeting, use the pinned native Mailpit 1.30.0 verification procedure already recorded in `docs/progress.md`; do not change application code or test timeouts to mask the environment issue.
+
+- [ ] **Step 3: Update project progress**
+
+Add a completed entry to `docs/progress.md` stating that the Nuxt-native feature-module convention is established and Identity is its reference implementation, with API/model/UI separation, vee-validate/Zod forms, explicit public API imports, page-owned route token, and unchanged visual/server behavior. Record exact test counts from Step 2.
+
+- [ ] **Step 4: Refresh Tesserae**
+
+Run: `./scripts/refresh-tesserae.ps1`
+
+Expected: sessions import, compile, and Obsidian sync report `ok`. Never stage `.tesserae`.
+
+- [ ] **Step 5: Commit documentation only**
+
+```powershell
+git add -- docs/progress.md
+git diff --cached --check
+git commit -m "docs: record identity client feature refactor"
+```
+
+Expected: commit contains only `docs/progress.md`; generated output and Tesserae files are absent from the commit.
+
+- [ ] **Step 6: Review branch completion**
+
+Use `superpowers:requesting-code-review`, `superpowers:verification-before-completion`, and `superpowers:finishing-a-development-branch`. Do not claim success for a command that did not exit successfully.
