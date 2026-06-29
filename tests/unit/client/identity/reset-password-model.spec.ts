@@ -6,17 +6,21 @@ import {
   RESET_TOKEN_ERROR,
   useResetPasswordForm,
 } from '../../../../app/features/identity/model/use-reset-password-form'
-import { PASSWORD_LENGTH_ERROR } from '../../../../app/features/identity/model/schemas'
+import {
+  PASSWORD_CONFIRMATION_ERROR,
+  PASSWORD_LENGTH_ERROR,
+} from '../../../../app/features/identity/model/schemas'
 
 type ResetPasswordDependencies = Parameters<typeof useResetPasswordForm>[1]
 type ResetPasswordForm = ReturnType<typeof useResetPasswordForm>
+type ResetPasswordToken = Parameters<typeof useResetPasswordForm>[0]
 
 it('preserves the existing invalid-token message', () => {
   expect(RESET_TOKEN_ERROR).toBe('Ссылка недействительна или уже использована')
 })
 
 async function createForm(
-  token: string,
+  token: ResetPasswordToken,
   dependencies: ResetPasswordDependencies,
 ): Promise<ResetPasswordForm> {
   let form: ResetPasswordForm | undefined
@@ -49,6 +53,25 @@ it('submits the page-owned token and navigates to sign in', async () => {
     newPassword: 'Correct-Horse-Battery-1',
   })
   expect(navigate).toHaveBeenCalledWith('/auth')
+})
+
+it('reads the current token when the form is submitted', async () => {
+  let token = 'initial-token'
+  const resetPassword = vi.fn().mockResolvedValue(undefined)
+  const form = await createForm(() => token, {
+    resetPassword,
+    navigate: vi.fn(),
+  })
+  token = 'updated-token'
+  form.password.value = 'Correct-Horse-Battery-1'
+  form.confirmation.value = 'Correct-Horse-Battery-1'
+
+  await form.submit()
+
+  expect(resetPassword).toHaveBeenCalledWith({
+    token: 'updated-token',
+    newPassword: 'Correct-Horse-Battery-1',
+  })
 })
 
 it('returns the existing invalid-token message and does not navigate', async () => {
@@ -92,6 +115,27 @@ it('marks only the field that fails client validation', async () => {
   expect(form.confirmationInvalid.value).toBe(false)
 })
 
+it('exposes each client validation error separately from submit feedback', async () => {
+  const form = await createForm('token', {
+    resetPassword: vi.fn().mockResolvedValue(undefined),
+    navigate: vi.fn(),
+  })
+
+  form.password.value = 'short'
+  form.confirmation.value = 'short'
+  await form.submit()
+  expect(form.passwordError.value).toBe(PASSWORD_LENGTH_ERROR)
+  expect(form.confirmationError.value).toBe('')
+  expect(form.submitError.value).toBe('')
+
+  form.password.value = 'Correct-Horse-Battery-1'
+  form.confirmation.value = 'Different-Horse-Battery-2'
+  await form.submit()
+  expect(form.passwordError.value).toBe('')
+  expect(form.confirmationError.value).toBe(PASSWORD_CONFIRMATION_ERROR)
+  expect(form.submitError.value).toBe('')
+})
+
 it('marks both fields when reset fails', async () => {
   const form = await createForm('token', {
     resetPassword: vi.fn().mockRejectedValue(new Error('invalid')),
@@ -102,9 +146,25 @@ it('marks both fields when reset fails', async () => {
 
   await form.submit()
 
-  expect(form.errorMessage.value).toBe(RESET_TOKEN_ERROR)
+  expect(form.submitError.value).toBe(RESET_TOKEN_ERROR)
   expect(form.passwordInvalid.value).toBe(true)
   expect(form.confirmationInvalid.value).toBe(true)
+})
+
+it('keeps reset failure feedback separate from field validation errors', async () => {
+  const form = await createForm('token', {
+    resetPassword: vi.fn().mockRejectedValue(new Error('invalid')),
+    navigate: vi.fn(),
+  })
+  form.password.value = 'Correct-Horse-Battery-1'
+  form.confirmation.value = 'Correct-Horse-Battery-1'
+
+  await form.submit()
+
+  expect(form.submitError.value).toBe(RESET_TOKEN_ERROR)
+  expect(form.passwordError.value).toBe('')
+  expect(form.confirmationError.value).toBe('')
+  expect(form).not.toHaveProperty('errorMessage')
 })
 
 it('clears a previous reset error when an invalid retry is submitted', async () => {
@@ -113,13 +173,14 @@ it('clears a previous reset error when an invalid retry is submitted', async () 
   form.password.value = 'Correct-Horse-Battery-1'
   form.confirmation.value = 'Correct-Horse-Battery-1'
   await form.submit()
-  expect(form.errorMessage.value).toBe(RESET_TOKEN_ERROR)
+  expect(form.submitError.value).toBe(RESET_TOKEN_ERROR)
 
   form.password.value = 'short'
   form.confirmation.value = 'short'
   await form.submit()
 
-  expect(form.errorMessage.value).toBe(PASSWORD_LENGTH_ERROR)
+  expect(form.submitError.value).toBe('')
+  expect(form.passwordError.value).toBe(PASSWORD_LENGTH_ERROR)
   expect(form.passwordInvalid.value).toBe(true)
   expect(form.confirmationInvalid.value).toBe(false)
   expect(resetPassword).toHaveBeenCalledTimes(1)

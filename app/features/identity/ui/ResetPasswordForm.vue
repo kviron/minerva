@@ -11,14 +11,16 @@ const props = defineProps<{
 const {
   password,
   passwordAttrs,
+  passwordError,
   confirmation,
   confirmationAttrs,
+  confirmationError,
+  submitError,
   passwordInvalid,
   confirmationInvalid,
-  errorMessage,
   isSubmitting,
   submit,
-} = useResetPasswordForm(props.token)
+} = useResetPasswordForm(() => props.token)
 </script>
 
 <template>
@@ -46,6 +48,7 @@ const {
           :aria-invalid="passwordInvalid"
           required
         />
+        <UiFieldError v-if="passwordError" :errors="[passwordError]" />
       </UiField>
       <UiField :data-invalid="confirmationInvalid ? true : undefined">
         <UiFieldLabel for="confirm-password">
@@ -61,7 +64,10 @@ const {
           :aria-invalid="confirmationInvalid"
           required
         />
-        <UiFieldError v-if="errorMessage" :errors="[errorMessage]" />
+        <UiFieldError v-if="confirmationError" :errors="[confirmationError]" />
+      </UiField>
+      <UiField v-if="submitError" data-invalid>
+        <UiFieldError :errors="[submitError]" />
       </UiField>
       <UiField>
         <UiButton type="submit" class="w-full" :disabled="isSubmitting">

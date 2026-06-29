@@ -1,6 +1,6 @@
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
-import { computed, ref } from 'vue'
+import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 import { identityApi } from '../api/identity-api'
 import { resetPasswordSchema, type ResetPasswordValues } from './schemas'
 
@@ -38,7 +38,7 @@ export function createResetPasswordAction(
 }
 
 export function useResetPasswordForm(
-  token: string,
+  token: MaybeRefOrGetter<string>,
   dependencies?: ResetPasswordDependencies,
 ) {
   const action = createResetPasswordAction(dependencies ?? {
@@ -52,21 +52,20 @@ export function useResetPasswordForm(
   })
   const [password, passwordAttrs] = defineField('password')
   const [confirmation, confirmationAttrs] = defineField('confirmation')
+  const passwordError = computed(() => errors.value.password || '')
+  const confirmationError = computed(() => errors.value.confirmation || '')
   const passwordInvalid = computed(() =>
-    Boolean(submitError.value || errors.value.password),
+    Boolean(submitError.value || passwordError.value),
   )
   const confirmationInvalid = computed(() =>
-    Boolean(submitError.value || errors.value.confirmation),
-  )
-  const errorMessage = computed(() =>
-    submitError.value || errors.value.password || errors.value.confirmation || '',
+    Boolean(submitError.value || confirmationError.value),
   )
   const clearSubmitError = () => {
     submitError.value = ''
   }
   const submit = handleSubmit(async (values) => {
     clearSubmitError()
-    submitError.value = await action(token, values) ?? ''
+    submitError.value = await action(toValue(token), values) ?? ''
   }, () => {
     clearSubmitError()
   })
@@ -76,9 +75,11 @@ export function useResetPasswordForm(
     passwordAttrs,
     confirmation,
     confirmationAttrs,
+    passwordError,
+    confirmationError,
+    submitError,
     passwordInvalid,
     confirmationInvalid,
-    errorMessage,
     isSubmitting,
     submit,
   }
