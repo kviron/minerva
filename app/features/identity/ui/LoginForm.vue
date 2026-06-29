@@ -1,34 +1,16 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
 import { cn } from "@/lib/utils"
+import { useSignInForm } from '../model/use-sign-in-form'
 
 const props = defineProps<{
   class?: HTMLAttributes["class"]
 }>()
 
-const identifier = ref("")
-const password = ref("")
-const pending = ref(false)
-const errorMessage = ref("")
-
-async function submit() {
-  pending.value = true
-  errorMessage.value = ""
-
-  try {
-    await $fetch("/api/identity/sign-in", {
-      method: "POST",
-      body: { identifier: identifier.value, password: password.value },
-    })
-    await navigateTo("/")
-  }
-  catch {
-    errorMessage.value = "Неверный логин или пароль"
-  }
-  finally {
-    pending.value = false
-  }
-}
+const {
+  identifier, identifierAttrs, password, passwordAttrs,
+  errorMessage, isSubmitting, submit,
+} = useSignInForm()
 </script>
 
 <template>
@@ -49,6 +31,7 @@ async function submit() {
         <UiInput
           id="email"
           v-model="identifier"
+          v-bind="identifierAttrs"
           type="text"
           size="lg"
           autocomplete="username"
@@ -72,6 +55,7 @@ async function submit() {
         <UiInput
           id="password"
           v-model="password"
+          v-bind="passwordAttrs"
           type="password"
           size="lg"
           autocomplete="current-password"
@@ -81,8 +65,8 @@ async function submit() {
         <UiFieldError v-if="errorMessage" :errors="[errorMessage]" />
       </UiField>
       <UiField>
-        <UiButton type="submit" class="w-full" :disabled="pending">
-          <UiSpinner v-if="pending" data-icon="inline-start" />
+        <UiButton type="submit" class="w-full" :disabled="isSubmitting">
+          <UiSpinner v-if="isSubmitting" data-icon="inline-start" />
           Войти
         </UiButton>
       </UiField>

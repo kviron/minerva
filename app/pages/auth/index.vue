@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { GalleryVerticalEnd } from "@lucide/vue"
+import { LoginForm } from '@/features/identity'
 definePageMeta({
   layout: "empty",
   title: "Авторизация",
@@ -19,7 +20,7 @@ definePageMeta({
       </div>
       <div class="flex flex-1 items-center justify-center">
         <div class="w-full max-w-xs">
-          <AuthLoginForm />
+          <LoginForm />
         </div>
       </div>
     </div>
