@@ -1,35 +1,15 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
 import { cn } from "@/lib/utils"
+import { usePasswordRecoveryForm } from "../model/use-password-recovery-form"
 
 const props = defineProps<{
   class?: HTMLAttributes["class"]
 }>()
 
-const email = ref("")
-const pending = ref(false)
-const statusMessage = ref("")
-const errorMessage = ref("")
-
-async function submit() {
-  pending.value = true
-  statusMessage.value = ""
-  errorMessage.value = ""
-
-  try {
-    await $fetch("/api/identity/request-password-reset", {
-      method: "POST",
-      body: { email: email.value },
-    })
-    statusMessage.value = "Если аккаунт существует, ссылка отправлена на почту"
-  }
-  catch {
-    errorMessage.value = "Не удалось отправить запрос. Попробуйте позже."
-  }
-  finally {
-    pending.value = false
-  }
-}
+const {
+  email, emailAttrs, errorMessage, statusMessage, isSubmitting, submit,
+} = usePasswordRecoveryForm()
 </script>
 
 <template>
@@ -50,6 +30,7 @@ async function submit() {
         <UiInput
           id="email"
           v-model="email"
+          v-bind="emailAttrs"
           type="email"
           size="lg"
           autocomplete="email"
@@ -63,8 +44,8 @@ async function submit() {
         </UiFieldDescription>
       </UiField>
       <UiField>
-        <UiButton type="submit" class="w-full" :disabled="pending">
-          <UiSpinner v-if="pending" data-icon="inline-start" />
+        <UiButton type="submit" class="w-full" :disabled="isSubmitting">
+          <UiSpinner v-if="isSubmitting" data-icon="inline-start" />
           Отправить ссылку
         </UiButton>
       </UiField>
