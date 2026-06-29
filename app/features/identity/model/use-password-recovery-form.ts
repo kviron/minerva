@@ -51,12 +51,17 @@ export function usePasswordRecoveryForm(
   const errorMessage = computed(() =>
     submitError.value || errors.value.email || '',
   )
-  const submit = handleSubmit(async (values) => {
+  const clearFeedback = () => {
     submitError.value = ''
     statusMessage.value = ''
+  }
+  const submit = handleSubmit(async (values) => {
+    clearFeedback()
     const outcome = await action(values)
     submitError.value = outcome.error
     statusMessage.value = outcome.status
+  }, () => {
+    clearFeedback()
   })
 
   return {
