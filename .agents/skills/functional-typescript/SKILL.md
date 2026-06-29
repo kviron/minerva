@@ -1,6 +1,6 @@
 ---
 name: functional-typescript
-description: Use when TypeScript has hidden dependencies, mixed pure logic and effects, repeated closed-set literals, mutation, or exception-heavy domain branching.
+description: Use when designing or refactoring TypeScript code with hidden dependencies, mixed pure logic and effects, repeated closed-set literals, mutation, or exception-heavy domain branching.
 ---
 
 # Functional TypeScript
@@ -29,21 +29,21 @@ const InviteFailure = {
 
 type InviteFailure = typeof InviteFailure[keyof typeof InviteFailure]
 type Result<T, E> = { ok: true; value: T } | { ok: false; error: E }
-type Invite = Readonly<{ email: string; createdAt: Date }>
+type Invite = Readonly<{ email: string; createdAtEpochMs: number }>
 
 const normalizeEmail = (value: string) => value.trim().toLowerCase()
 
-const createInvite = (email: string, createdAt: Date): Result<Invite, InviteFailure> => {
+const createInvite = (email: string, createdAtEpochMs: number): Result<Invite, InviteFailure> => {
   const normalized = normalizeEmail(email)
   return normalized.includes('@')
-    ? { ok: true, value: { email: normalized, createdAt } }
+    ? { ok: true, value: { email: normalized, createdAtEpochMs } }
     : { ok: false, error: InviteFailure.InvalidEmail }
 }
 
 type InviteCapabilities = {
   exists(email: string): Promise<boolean>
   save(invite: Invite): Promise<void>
-  now(): Date
+  now: () => number
 }
 
 export const inviteUser = (deps: InviteCapabilities) => async (email: string) => {
