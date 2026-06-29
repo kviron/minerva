@@ -3,12 +3,20 @@ import { IDENTITY_CODE } from '../../../shared/identity/constants'
 import { getAuth } from './auth'
 import { IdentityError } from './errors'
 
-export async function requireSession(event: H3Event) {
-  const session = await getAuth().api.getSession({ headers: event.headers })
+export function createRequireSession<Session>(
+  getSession: (headers: Headers) => Promise<Session | null>,
+) {
+  return async function requireSession(event: H3Event): Promise<Session> {
+    const session = await getSession(event.headers)
 
-  if (!session) {
-    throw new IdentityError(IDENTITY_CODE.AUTH_REQUIRED)
+    if (!session) {
+      throw new IdentityError(IDENTITY_CODE.AUTH_REQUIRED)
+    }
+
+    return session
   }
-
-  return session
 }
+
+export const requireSession = createRequireSession(async headers =>
+  await getAuth().api.getSession({ headers }) ?? null,
+)
