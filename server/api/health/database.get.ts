@@ -1,4 +1,5 @@
 import { getServerEnv } from '../../../shared/config/env'
+import { IDENTITY_CODE } from '../../../shared/identity/constants'
 import { checkDatabase } from '../../infrastructure/database/health'
 
 export default defineEventHandler(async () => {
@@ -8,7 +9,7 @@ export default defineEventHandler(async () => {
     throw createError({
       statusCode: 503,
       statusMessage: 'Service Unavailable',
-      data: { code: 'SERVICE_UNAVAILABLE' },
+      data: { code: IDENTITY_CODE.SERVICE_UNAVAILABLE },
     })
   }
 })

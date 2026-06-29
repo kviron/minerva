@@ -1,6 +1,7 @@
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
 import { getServerEnv } from '../../../shared/config/env'
+import { AUTH_MODE } from '../../../shared/identity/constants'
 import { createMinervaAuth } from './create-auth'
 import type { PasswordResetMailer } from './contracts'
 
@@ -70,7 +71,7 @@ export async function bootstrapSuperAdmin(input: BootstrapInput) {
     }
 
     const auth = createMinervaAuth({
-      mode: 'bootstrap',
+      mode: AUTH_MODE.BOOTSTRAP,
       db,
       baseURL: env.BETTER_AUTH_URL,
       trustedOrigins: env.TRUSTED_ORIGINS,

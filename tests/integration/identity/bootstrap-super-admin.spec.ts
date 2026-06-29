@@ -1,5 +1,7 @@
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { ACCOUNT_STATUS } from '../../../shared/identity/constants'
+import type { AccountStatus } from '../../../shared/identity/types'
 import { bootstrapSuperAdmin } from '../../../server/modules/identity/bootstrap-super-admin'
 import { createTestDatabase, resetTestDatabase, TEST_DATABASE_URL } from '../../helpers/database'
 
@@ -41,7 +43,7 @@ describe('bootstrapSuperAdmin', () => {
         email: string
         username: string
         super_admin: boolean
-        status: string
+        status: AccountStatus
       }[]>`select id, email, username, super_admin, status from "user"`
 
       expect(result).toEqual({ outcome: 'created', userId: users[0]?.id })
@@ -49,7 +51,7 @@ describe('bootstrapSuperAdmin', () => {
         email: 'admin@example.com',
         username: 'root.admin',
         super_admin: true,
-        status: 'active',
+        status: ACCOUNT_STATUS.ACTIVE,
       })])
     } finally {
       await database.close()

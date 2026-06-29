@@ -3,6 +3,8 @@ import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { username } from 'better-auth/plugins/username'
 import { sql } from 'drizzle-orm'
+import { ACCOUNT_STATUS, AUTH_MODE, IDENTITY_CODE } from '../../../shared/identity/constants'
+import type { AccountStatus } from '../../../shared/identity/types'
 import * as authSchema from '../../infrastructure/database/schema'
 import type { CreateMinervaAuthInput } from './contracts'
 
@@ -14,7 +16,7 @@ export function createMinervaAuth({ mode, db, baseURL, trustedOrigins, mailer }:
     advanced: { database: { generateId: 'uuid' } },
     emailAndPassword: {
       enabled: true,
-      disableSignUp: mode === 'runtime',
+      disableSignUp: mode === AUTH_MODE.RUNTIME,
       autoSignIn: false,
       minPasswordLength: 12,
       maxPasswordLength: 256,
@@ -32,7 +34,11 @@ export function createMinervaAuth({ mode, db, baseURL, trustedOrigins, mailer }:
     user: {
       additionalFields: {
         superAdmin: { type: 'boolean', defaultValue: false, input: false },
-        status: { type: ['active', 'disabled'], defaultValue: 'active', input: false },
+        status: {
+          type: [ACCOUNT_STATUS.ACTIVE, ACCOUNT_STATUS.DISABLED],
+          defaultValue: ACCOUNT_STATUS.ACTIVE,
+          input: false,
+        },
         disabledAt: { type: 'date', required: false, input: false },
         disabledReason: { type: 'string', required: false, input: false },
         lastLoginAt: { type: 'date', required: false, input: false },
@@ -45,22 +51,22 @@ export function createMinervaAuth({ mode, db, baseURL, trustedOrigins, mailer }:
       user: {
         create: {
           async before(user) {
-            if (mode !== 'bootstrap') return
+            if (mode !== AUTH_MODE.BOOTSTRAP) return
 
-            return { data: { ...user, superAdmin: true, status: 'active' } }
+            return { data: { ...user, superAdmin: true, status: ACCOUNT_STATUS.ACTIVE } }
           },
         },
       },
       session: {
         create: {
           async before(session) {
-            const users = await db.execute<{ status: 'active' | 'disabled' }>(sql`
+            const users = await db.execute<{ status: AccountStatus }>(sql`
               select status from "user" where id = ${session.userId} limit 1
             `)
 
-            if (users[0]?.status !== 'active') {
+            if (users[0]?.status !== ACCOUNT_STATUS.ACTIVE) {
               throw new APIError('UNAUTHORIZED', {
-                code: 'INVALID_CREDENTIALS',
+                code: IDENTITY_CODE.INVALID_CREDENTIALS,
                 message: 'Invalid credentials',
               })
             }

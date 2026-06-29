@@ -1,6 +1,7 @@
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import type { H3Event } from 'h3'
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
+import { AUTH_MODE, IDENTITY_CODE } from '../../../shared/identity/constants'
 import { closeDatabase } from '../../../server/infrastructure/database/client'
 import { createMinervaAuth } from '../../../server/modules/identity/create-auth'
 import { requestPasswordReset, resetPassword } from '../../../server/modules/identity/password-recovery'
@@ -31,7 +32,7 @@ beforeEach(async () => {
   try {
     await migrate(database.db, { migrationsFolder: 'drizzle' })
     const auth = createMinervaAuth({
-      mode: 'test-seed',
+      mode: AUTH_MODE.TEST_SEED,
       db: database.db,
       baseURL: 'http://127.0.0.1:3000',
       trustedOrigins: ['http://127.0.0.1:3000'],
@@ -67,9 +68,9 @@ async function getResetToken() {
 describe('password recovery', () => {
   it('returns the shared request response for known and unknown accounts', async () => {
     await expect(requestPasswordReset({ email, ip: '127.0.0.20' }))
-      .resolves.toBe('RESET_REQUEST_ACCEPTED')
+      .resolves.toBe(IDENTITY_CODE.RESET_REQUEST_ACCEPTED)
     await expect(requestPasswordReset({ email: 'missing@example.com', ip: '127.0.0.21' }))
-      .resolves.toBe('RESET_REQUEST_ACCEPTED')
+      .resolves.toBe(IDENTITY_CODE.RESET_REQUEST_ACCEPTED)
   })
 
   it('delivers a reset link for a known account through Mailpit', async () => {
@@ -104,7 +105,7 @@ describe('password recovery', () => {
     }
 
     await expect(resetPassword({ token, newPassword, ip: '127.0.0.24' }))
-      .rejects.toMatchObject({ code: 'RESET_TOKEN_INVALID' })
+      .rejects.toMatchObject({ code: IDENTITY_CODE.RESET_TOKEN_INVALID })
   })
 
   it('consumes a reset token only once', async () => {
@@ -113,7 +114,7 @@ describe('password recovery', () => {
 
     await expect(resetPassword({ token, newPassword, ip: '127.0.0.25' })).resolves.toBeUndefined()
     await expect(resetPassword({ token, newPassword, ip: '127.0.0.25' }))
-      .rejects.toMatchObject({ code: 'RESET_TOKEN_INVALID' })
+      .rejects.toMatchObject({ code: IDENTITY_CODE.RESET_TOKEN_INVALID })
   })
 
   it('rejects a mutated reset token', async () => {
@@ -121,7 +122,7 @@ describe('password recovery', () => {
     const token = await getResetToken()
 
     await expect(resetPassword({ token: `${token}x`, newPassword, ip: '127.0.0.28' }))
-      .rejects.toMatchObject({ code: 'RESET_TOKEN_INVALID' })
+      .rejects.toMatchObject({ code: IDENTITY_CODE.RESET_TOKEN_INVALID })
   })
 
   it('revokes existing sessions after password reset', async () => {
@@ -134,7 +135,7 @@ describe('password recovery', () => {
     await resetPassword({ token, newPassword, ip: '127.0.0.26' })
 
     await expect(requireSession({ headers: new Headers({ cookie }) } as H3Event))
-      .rejects.toMatchObject({ code: 'AUTH_REQUIRED' })
+      .rejects.toMatchObject({ code: IDENTITY_CODE.AUTH_REQUIRED })
     await expect(signInWithIdentifier({
       identifier: email, password: newPassword, ip: '127.0.0.27', requestHeaders: new Headers(),
     })).resolves.toHaveProperty('headers')

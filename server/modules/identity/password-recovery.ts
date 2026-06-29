@@ -1,4 +1,5 @@
 import { APIError } from '@better-auth/core/error'
+import { IDENTITY_CODE } from '../../../shared/identity/constants'
 import { getAuth } from './auth'
 import { IdentityError } from './errors'
 import { consumeIdentityRateLimit } from './rate-limit'
@@ -26,7 +27,7 @@ export async function requestPasswordReset(input: RecoveryRequest) {
   })
 
   await getAuth().api.requestPasswordReset({ body: { email } })
-  return 'RESET_REQUEST_ACCEPTED' as const
+  return IDENTITY_CODE.RESET_REQUEST_ACCEPTED
 }
 
 export async function resetPassword(input: ResetRequest): Promise<void> {
@@ -43,7 +44,7 @@ export async function resetPassword(input: ResetRequest): Promise<void> {
     })
   } catch (error) {
     if (error instanceof APIError) {
-      throw new IdentityError('RESET_TOKEN_INVALID')
+      throw new IdentityError(IDENTITY_CODE.RESET_TOKEN_INVALID)
     }
     throw error
   }

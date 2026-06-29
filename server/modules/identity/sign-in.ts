@@ -1,4 +1,5 @@
 import { APIError } from '@better-auth/core/error'
+import { IDENTITY_CODE, LOGIN_IDENTIFIER_KIND } from '../../../shared/identity/constants'
 import { getAuth } from './auth'
 import { IdentityError } from './errors'
 import { classifyLoginIdentifier } from './identifier'
@@ -24,7 +25,7 @@ export async function signInWithIdentifier(input: SignInInput): Promise<{ header
 
   try {
     const auth = getAuth()
-    const result = identifier.kind === 'email'
+    const result = identifier.kind === LOGIN_IDENTIFIER_KIND.EMAIL
       ? await auth.api.signInEmail({
           body: { email: identifier.normalized, password: input.password },
           headers: input.requestHeaders,
@@ -39,7 +40,7 @@ export async function signInWithIdentifier(input: SignInInput): Promise<{ header
     return { headers: result.headers }
   } catch (error) {
     if (error instanceof APIError) {
-      throw new IdentityError('INVALID_CREDENTIALS')
+      throw new IdentityError(IDENTITY_CODE.INVALID_CREDENTIALS)
     }
     throw error
   }

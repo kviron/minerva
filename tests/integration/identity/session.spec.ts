@@ -1,6 +1,7 @@
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import type { H3Event } from 'h3'
 import { afterAll, beforeEach, expect, it, vi } from 'vitest'
+import { AUTH_MODE, IDENTITY_CODE } from '../../../shared/identity/constants'
 import { closeDatabase } from '../../../server/infrastructure/database/client'
 import { createMinervaAuth } from '../../../server/modules/identity/create-auth'
 import { requireSession } from '../../../server/modules/identity/require-session'
@@ -23,7 +24,7 @@ beforeEach(async () => {
   try {
     await migrate(database.db, { migrationsFolder: 'drizzle' })
     const auth = createMinervaAuth({
-      mode: 'test-seed',
+      mode: AUTH_MODE.TEST_SEED,
       db: database.db,
       baseURL: 'http://127.0.0.1:3000',
       trustedOrigins: ['http://127.0.0.1:3000'],
@@ -44,7 +45,7 @@ afterAll(closeDatabase)
 
 it('rejects a request without a session', async () => {
   const event = { headers: new Headers() } as H3Event
-  await expect(requireSession(event)).rejects.toMatchObject({ code: 'AUTH_REQUIRED' })
+  await expect(requireSession(event)).rejects.toMatchObject({ code: IDENTITY_CODE.AUTH_REQUIRED })
 })
 
 it('returns the authenticated database session', async () => {

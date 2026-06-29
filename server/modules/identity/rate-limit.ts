@@ -1,5 +1,6 @@
 import { createHmac } from 'node:crypto'
 import { getServerEnv } from '../../../shared/config/env'
+import { IDENTITY_CODE } from '../../../shared/identity/constants'
 import { getDatabase } from '../../infrastructure/database/client'
 import { IdentityError } from './errors'
 
@@ -34,6 +35,6 @@ export async function consumeIdentityRateLimit(input: RateLimitInput): Promise<v
   `
 
   if ((rows[0]?.count ?? input.max + 1) > input.max) {
-    throw new IdentityError('RATE_LIMITED')
+    throw new IdentityError(IDENTITY_CODE.RATE_LIMITED)
   }
 }
