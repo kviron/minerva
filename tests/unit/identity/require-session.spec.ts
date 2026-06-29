@@ -17,6 +17,12 @@ describe('createRequireSession', () => {
     expect(getSession).toHaveBeenCalledWith(headers)
   })
 
+  it('returns a falsy non-null generic session', async () => {
+    const requireSession = createRequireSession(async () => false)
+
+    await expect(requireSession({ headers: new Headers() } as H3Event)).resolves.toBe(false)
+  })
+
   it('maps a missing session to the shared authentication-required code', async () => {
     const requireSession = createRequireSession(async () => null)
 

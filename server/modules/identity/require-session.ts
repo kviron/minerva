@@ -9,7 +9,7 @@ export function createRequireSession<Session>(
   return async function requireSession(event: H3Event): Promise<Session> {
     const session = await getSession(event.headers)
 
-    if (!session) {
+    if (session === null) {
       throw new IdentityError(IDENTITY_CODE.AUTH_REQUIRED)
     }
 
