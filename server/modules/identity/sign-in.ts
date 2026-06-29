@@ -6,42 +6,76 @@ import { classifyLoginIdentifier } from './identifier'
 import { consumeIdentityRateLimit } from './rate-limit'
 
 export interface SignInInput {
-  identifier: string
-  password: string
-  ip: string
-  requestHeaders: Headers
+  readonly identifier: string
+  readonly password: string
+  readonly ip: string
+  readonly requestHeaders: Headers
 }
 
-export async function signInWithIdentifier(input: SignInInput): Promise<{ headers: Headers }> {
-  const identifier = classifyLoginIdentifier(input.identifier)
+export interface ProviderSignInInput {
+  readonly identifier: string
+  readonly password: string
+  readonly requestHeaders: Headers
+}
 
-  await consumeIdentityRateLimit({
-    scope: 'sign-in',
-    ip: input.ip,
-    identity: identifier.normalized,
-    max: 5,
-    windowSeconds: 15 * 60,
-  })
+export interface SignInDependencies {
+  readonly consumeRateLimit: typeof consumeIdentityRateLimit
+  readonly signInEmail: (input: ProviderSignInInput) => Promise<{ headers: Headers }>
+  readonly signInUsername: (input: ProviderSignInInput) => Promise<{ headers: Headers }>
+  readonly isProviderError: (error: unknown) => boolean
+}
 
-  try {
-    const auth = getAuth()
-    const result = identifier.kind === LOGIN_IDENTIFIER_KIND.EMAIL
-      ? await auth.api.signInEmail({
-          body: { email: identifier.normalized, password: input.password },
-          headers: input.requestHeaders,
-          returnHeaders: true,
-        })
-      : await auth.api.signInUsername({
-          body: { username: identifier.normalized, password: input.password },
-          headers: input.requestHeaders,
-          returnHeaders: true,
-        })
+export function createSignInWithIdentifier(dependencies: SignInDependencies) {
+  return async function signIn(input: SignInInput): Promise<{ headers: Headers }> {
+    const classified = classifyLoginIdentifier(input.identifier)
+    if (!classified.ok) throw new IdentityError(classified.code)
 
-    return { headers: result.headers }
-  } catch (error) {
-    if (error instanceof APIError) {
-      throw new IdentityError(IDENTITY_CODE.INVALID_CREDENTIALS)
+    const identifier = classified.value
+
+    await dependencies.consumeRateLimit({
+      scope: 'sign-in',
+      ip: input.ip,
+      identity: identifier.normalized,
+      max: 5,
+      windowSeconds: 15 * 60,
+    })
+
+    try {
+      const capability = identifier.kind === LOGIN_IDENTIFIER_KIND.EMAIL
+        ? dependencies.signInEmail
+        : dependencies.signInUsername
+
+      return await capability({
+        identifier: identifier.normalized,
+        password: input.password,
+        requestHeaders: input.requestHeaders,
+      })
+    } catch (error) {
+      if (dependencies.isProviderError(error)) {
+        throw new IdentityError(IDENTITY_CODE.INVALID_CREDENTIALS)
+      }
+      throw error
     }
-    throw error
   }
 }
+
+export const signInWithIdentifier = createSignInWithIdentifier({
+  consumeRateLimit: consumeIdentityRateLimit,
+  async signInEmail(input) {
+    const result = await getAuth().api.signInEmail({
+      body: { email: input.identifier, password: input.password },
+      headers: input.requestHeaders,
+      returnHeaders: true,
+    })
+    return { headers: result.headers }
+  },
+  async signInUsername(input) {
+    const result = await getAuth().api.signInUsername({
+      body: { username: input.identifier, password: input.password },
+      headers: input.requestHeaders,
+      returnHeaders: true,
+    })
+    return { headers: result.headers }
+  },
+  isProviderError: error => error instanceof APIError,
+})

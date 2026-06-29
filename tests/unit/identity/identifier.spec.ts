@@ -5,21 +5,28 @@ import { classifyLoginIdentifier } from '../../../server/modules/identity/identi
 describe('classifyLoginIdentifier', () => {
   it('normalizes an email identifier', () => {
     expect(classifyLoginIdentifier(' User@Example.com ')).toEqual({
-      kind: LOGIN_IDENTIFIER_KIND.EMAIL,
-      normalized: 'user@example.com',
+      ok: true,
+      value: {
+        kind: LOGIN_IDENTIFIER_KIND.EMAIL,
+        normalized: 'user@example.com',
+      },
     })
   })
 
   it('normalizes a username identifier', () => {
     expect(classifyLoginIdentifier(' Test.User ')).toEqual({
-      kind: LOGIN_IDENTIFIER_KIND.USERNAME,
-      normalized: 'test.user',
+      ok: true,
+      value: {
+        kind: LOGIN_IDENTIFIER_KIND.USERNAME,
+        normalized: 'test.user',
+      },
     })
   })
 
   it.each(['', 'x'.repeat(256)])('rejects an unsupported identifier', (identifier) => {
-    expect(() => classifyLoginIdentifier(identifier)).toThrowError(
-      expect.objectContaining({ code: IDENTITY_CODE.INVALID_CREDENTIALS }),
-    )
+    expect(classifyLoginIdentifier(identifier)).toEqual({
+      ok: false,
+      code: IDENTITY_CODE.INVALID_CREDENTIALS,
+    })
   })
 })
