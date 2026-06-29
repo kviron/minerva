@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { GalleryVerticalEnd } from "@lucide/vue"
+import { ResetPasswordForm } from "@/features/identity"
+
+const route = useRoute()
+const token = computed(() => String(route.params.token ?? ""))
 
 definePageMeta({
   layout: "empty",
@@ -20,7 +24,7 @@ definePageMeta({
       </div>
       <div class="flex flex-1 items-center justify-center">
         <div class="w-full max-w-xs">
-          <AuthResetPasswordForm />
+          <ResetPasswordForm :token="token" />
         </div>
       </div>
     </div>

@@ -1,43 +1,24 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
 import { cn } from "@/lib/utils"
+import { useResetPasswordForm } from "../model/use-reset-password-form"
 
 const props = defineProps<{
   class?: HTMLAttributes["class"]
+  token: string
 }>()
 
-const route = useRoute()
-const password = ref("")
-const confirmation = ref("")
-const pending = ref(false)
-const errorMessage = ref("")
-
-async function submit() {
-  errorMessage.value = ""
-  if (password.value.length < 12 || password.value.length > 256) {
-    errorMessage.value = "Пароль должен содержать от 12 до 256 символов"
-    return
-  }
-  if (password.value !== confirmation.value) {
-    errorMessage.value = "Пароли не совпадают"
-    return
-  }
-
-  pending.value = true
-  try {
-    await $fetch("/api/identity/reset-password", {
-      method: "POST",
-      body: { token: String(route.params.token ?? ""), newPassword: password.value },
-    })
-    await navigateTo("/auth")
-  }
-  catch {
-    errorMessage.value = "Ссылка недействительна или уже использована"
-  }
-  finally {
-    pending.value = false
-  }
-}
+const {
+  password,
+  passwordAttrs,
+  confirmation,
+  confirmationAttrs,
+  passwordInvalid,
+  confirmationInvalid,
+  errorMessage,
+  isSubmitting,
+  submit,
+} = useResetPasswordForm(props.token)
 </script>
 
 <template>
@@ -51,38 +32,40 @@ async function submit() {
           Введите новый пароль дважды, чтобы подтвердить его
         </p>
       </div>
-      <UiField :data-invalid="errorMessage ? true : undefined">
+      <UiField :data-invalid="passwordInvalid ? true : undefined">
         <UiFieldLabel for="new-password">
           Новый пароль
         </UiFieldLabel>
         <UiInput
           id="new-password"
           v-model="password"
+          v-bind="passwordAttrs"
           type="password"
           size="lg"
           autocomplete="new-password"
-          :aria-invalid="Boolean(errorMessage)"
+          :aria-invalid="passwordInvalid"
           required
         />
       </UiField>
-      <UiField :data-invalid="errorMessage ? true : undefined">
+      <UiField :data-invalid="confirmationInvalid ? true : undefined">
         <UiFieldLabel for="confirm-password">
           Подтвердите пароль
         </UiFieldLabel>
         <UiInput
           id="confirm-password"
           v-model="confirmation"
+          v-bind="confirmationAttrs"
           type="password"
           size="lg"
           autocomplete="new-password"
-          :aria-invalid="Boolean(errorMessage)"
+          :aria-invalid="confirmationInvalid"
           required
         />
         <UiFieldError v-if="errorMessage" :errors="[errorMessage]" />
       </UiField>
       <UiField>
-        <UiButton type="submit" class="w-full" :disabled="pending">
-          <UiSpinner v-if="pending" data-icon="inline-start" />
+        <UiButton type="submit" class="w-full" :disabled="isSubmitting">
+          <UiSpinner v-if="isSubmitting" data-icon="inline-start" />
           Сохранить новый пароль
         </UiButton>
       </UiField>
