@@ -1,8 +1,9 @@
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
+import { AUTH_MODE, IDENTITY_CODE } from '../../../shared/identity/constants'
 import { closeDatabase } from '../../../server/infrastructure/database/client'
-import { createMinervaAuth } from '../../../server/modules/identity/create-auth'
-import { signInWithIdentifier } from '../../../server/modules/identity/sign-in'
+import { createMinervaAuth } from '../../../server/modules/identity/auth/create-auth'
+import { signInWithIdentifier } from '../../../server/modules/identity/sign-in/sign-in'
 import { createTestDatabase, resetTestDatabase, TEST_DATABASE_URL } from '../../helpers/database'
 
 const password = 'Correct-Horse-Battery-1'
@@ -24,7 +25,7 @@ beforeEach(async () => {
   try {
     await migrate(database.db, { migrationsFolder: 'drizzle' })
     const seedAuth = createMinervaAuth({
-      mode: 'test-seed',
+      mode: AUTH_MODE.TEST_SEED,
       db: database.db,
       baseURL: 'http://127.0.0.1:3000',
       trustedOrigins: ['http://127.0.0.1:3000'],
@@ -90,7 +91,7 @@ describe('signInWithIdentifier', () => {
     }
 
     await expect(signIn('user@example.com')).rejects.toMatchObject({
-      code: 'INVALID_CREDENTIALS',
+      code: IDENTITY_CODE.INVALID_CREDENTIALS,
       statusCode: 401,
     })
   })
@@ -99,23 +100,29 @@ describe('signInWithIdentifier', () => {
     const unknown = signIn('missing@example.com', password, '127.0.0.2')
     const wrongPassword = signIn('user@example.com', 'Wrong-password-123', '127.0.0.3')
 
-    await expect(unknown).rejects.toMatchObject({ code: 'INVALID_CREDENTIALS', statusCode: 401 })
-    await expect(wrongPassword).rejects.toMatchObject({ code: 'INVALID_CREDENTIALS', statusCode: 401 })
+    await expect(unknown).rejects.toMatchObject({
+      code: IDENTITY_CODE.INVALID_CREDENTIALS,
+      statusCode: 401,
+    })
+    await expect(wrongPassword).rejects.toMatchObject({
+      code: IDENTITY_CODE.INVALID_CREDENTIALS,
+      statusCode: 401,
+    })
   })
 
   it('rejects the sixth attempt for one IP and identity', async () => {
     for (let attempt = 1; attempt <= 5; attempt += 1) {
       await expect(signIn('user@example.com', 'Wrong-password-123', '127.0.0.4'))
-        .rejects.toMatchObject({ code: 'INVALID_CREDENTIALS' })
+        .rejects.toMatchObject({ code: IDENTITY_CODE.INVALID_CREDENTIALS })
     }
 
     await expect(signIn('user@example.com', 'Wrong-password-123', '127.0.0.4'))
-      .rejects.toMatchObject({ code: 'RATE_LIMITED', statusCode: 429 })
+      .rejects.toMatchObject({ code: IDENTITY_CODE.RATE_LIMITED, statusCode: 429 })
   })
 
   it('stores no plaintext identity in rate-limit keys', async () => {
     await expect(signIn('user@example.com', 'Wrong-password-123', '127.0.0.5'))
-      .rejects.toMatchObject({ code: 'INVALID_CREDENTIALS' })
+      .rejects.toMatchObject({ code: IDENTITY_CODE.INVALID_CREDENTIALS })
     const database = createTestDatabase()
 
     try {

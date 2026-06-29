@@ -1,6 +1,5 @@
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js'
-
-export type AuthMode = 'runtime' | 'bootstrap' | 'test-seed'
+import type { AuthMode } from '../../../../shared/identity/types'
 
 export interface PasswordResetMailer {
   sendPasswordReset(input: { to: string, resetUrl: string }): Promise<void>

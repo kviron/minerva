@@ -1,0 +1,25 @@
+export const ACCOUNT_STATUS = {
+  ACTIVE: 'active',
+  DISABLED: 'disabled',
+} as const
+
+export const AUTH_MODE = {
+  RUNTIME: 'runtime',
+  BOOTSTRAP: 'bootstrap',
+  TEST_SEED: 'test-seed',
+} as const
+
+export const IDENTITY_CODE = {
+  INVALID_CREDENTIALS: 'INVALID_CREDENTIALS',
+  AUTH_REQUIRED: 'AUTH_REQUIRED',
+  ACCOUNT_DISABLED: 'ACCOUNT_DISABLED',
+  RESET_REQUEST_ACCEPTED: 'RESET_REQUEST_ACCEPTED',
+  RESET_TOKEN_INVALID: 'RESET_TOKEN_INVALID',
+  RATE_LIMITED: 'RATE_LIMITED',
+  SERVICE_UNAVAILABLE: 'SERVICE_UNAVAILABLE',
+} as const
+
+export const LOGIN_IDENTIFIER_KIND = {
+  EMAIL: 'email',
+  USERNAME: 'username',
+} as const

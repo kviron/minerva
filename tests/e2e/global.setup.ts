@@ -1,5 +1,6 @@
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
-import { createMinervaAuth } from '../../server/modules/identity/create-auth'
+import { AUTH_MODE } from '../../shared/identity/constants'
+import { createMinervaAuth } from '../../server/modules/identity/auth/create-auth'
 import { createTestDatabase, resetTestDatabase, TEST_DATABASE_URL } from '../helpers/database'
 
 export default async function globalSetup() {
@@ -14,7 +15,7 @@ export default async function globalSetup() {
   try {
     await migrate(database.db, { migrationsFolder: 'drizzle' })
     const auth = createMinervaAuth({
-      mode: 'test-seed',
+      mode: AUTH_MODE.TEST_SEED,
       db: database.db,
       baseURL: 'http://127.0.0.1:3000',
       trustedOrigins: ['http://127.0.0.1:3000'],

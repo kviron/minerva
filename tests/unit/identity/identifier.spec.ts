@@ -1,24 +1,32 @@
 import { describe, expect, it } from 'vitest'
-import { classifyLoginIdentifier } from '../../../server/modules/identity/identifier'
+import { IDENTITY_CODE, LOGIN_IDENTIFIER_KIND } from '../../../shared/identity/constants'
+import { classifyLoginIdentifier } from '../../../server/modules/identity/sign-in/identifier'
 
 describe('classifyLoginIdentifier', () => {
   it('normalizes an email identifier', () => {
     expect(classifyLoginIdentifier(' User@Example.com ')).toEqual({
-      kind: 'email',
-      normalized: 'user@example.com',
+      ok: true,
+      value: {
+        kind: LOGIN_IDENTIFIER_KIND.EMAIL,
+        normalized: 'user@example.com',
+      },
     })
   })
 
   it('normalizes a username identifier', () => {
     expect(classifyLoginIdentifier(' Test.User ')).toEqual({
-      kind: 'username',
-      normalized: 'test.user',
+      ok: true,
+      value: {
+        kind: LOGIN_IDENTIFIER_KIND.USERNAME,
+        normalized: 'test.user',
+      },
     })
   })
 
   it.each(['', 'x'.repeat(256)])('rejects an unsupported identifier', (identifier) => {
-    expect(() => classifyLoginIdentifier(identifier)).toThrowError(
-      expect.objectContaining({ code: 'INVALID_CREDENTIALS' }),
-    )
+    expect(classifyLoginIdentifier(identifier)).toEqual({
+      ok: false,
+      code: IDENTITY_CODE.INVALID_CREDENTIALS,
+    })
   })
 })

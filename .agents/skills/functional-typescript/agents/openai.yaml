@@ -1,0 +1,4 @@
+interface:
+  display_name: "Functional TypeScript"
+  short_description: "Pragmatic functional refactoring for TypeScript"
+  default_prompt: "Use $functional-typescript to refactor this TypeScript module with explicit effects."

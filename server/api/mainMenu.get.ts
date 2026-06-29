@@ -1,5 +1,5 @@
 import { defineEventHandler } from 'h3'
-import { requireSession } from '../modules/identity/require-session'
+import { requireSession } from '../modules/identity/session/require-session'
 
 export default defineEventHandler(async (event) => {
   await requireSession(event)
