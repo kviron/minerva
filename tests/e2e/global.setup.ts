@@ -1,6 +1,6 @@
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import { AUTH_MODE } from '../../shared/identity/constants'
-import { createMinervaAuth } from '../../server/modules/identity/create-auth'
+import { createMinervaAuth } from '../../server/modules/identity/auth/create-auth'
 import { createTestDatabase, resetTestDatabase, TEST_DATABASE_URL } from '../helpers/database'
 
 export default async function globalSetup() {

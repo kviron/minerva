@@ -1,5 +1,5 @@
 import { createError, defineEventHandler, getRequestURL, toWebRequest } from 'h3'
-import { getAuth } from '../../modules/identity/auth'
+import { getAuth } from '../../modules/identity/auth/get-auth'
 
 const minervaOwnedPaths = new Set([
   '/api/auth/sign-up/email',

@@ -1,7 +1,7 @@
 import type { H3Event } from 'h3'
 import { describe, expect, it, vi } from 'vitest'
 import { IDENTITY_CODE } from '../../../shared/identity/constants'
-import { createRequireSession } from '../../../server/modules/identity/require-session'
+import { createRequireSession } from '../../../server/modules/identity/session/require-session'
 
 describe('createRequireSession', () => {
   it('passes the exact event headers and returns the injected session', async () => {

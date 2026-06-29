@@ -3,9 +3,9 @@ import type { H3Event } from 'h3'
 import { afterAll, beforeEach, expect, it, vi } from 'vitest'
 import { AUTH_MODE, IDENTITY_CODE } from '../../../shared/identity/constants'
 import { closeDatabase } from '../../../server/infrastructure/database/client'
-import { createMinervaAuth } from '../../../server/modules/identity/create-auth'
-import { requireSession } from '../../../server/modules/identity/require-session'
-import { signInWithIdentifier } from '../../../server/modules/identity/sign-in'
+import { createMinervaAuth } from '../../../server/modules/identity/auth/create-auth'
+import { requireSession } from '../../../server/modules/identity/session/require-session'
+import { signInWithIdentifier } from '../../../server/modules/identity/sign-in/sign-in'
 import { createTestDatabase, resetTestDatabase, TEST_DATABASE_URL } from '../../helpers/database'
 
 vi.stubEnv('DATABASE_URL', TEST_DATABASE_URL)

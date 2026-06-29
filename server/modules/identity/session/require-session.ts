@@ -1,7 +1,7 @@
 import type { H3Event } from 'h3'
-import { IDENTITY_CODE } from '../../../shared/identity/constants'
-import { getAuth } from './auth'
-import { IdentityError } from './errors'
+import { IDENTITY_CODE } from '../../../../shared/identity/constants'
+import { getAuth } from '../auth/get-auth'
+import { IdentityError } from '../identity-error'
 
 export function createRequireSession<Session>(
   getSession: (headers: Headers) => Promise<Session | null>,

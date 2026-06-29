@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { IDENTITY_CODE, LOGIN_IDENTIFIER_KIND } from '../../../shared/identity/constants'
-import type { LoginIdentifierKind } from '../../../shared/identity/types'
+import { IDENTITY_CODE, LOGIN_IDENTIFIER_KIND } from '../../../../shared/identity/constants'
+import type { LoginIdentifierKind } from '../../../../shared/identity/types'
 
 export interface LoginIdentifier {
   readonly kind: LoginIdentifierKind

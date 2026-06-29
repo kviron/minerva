@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { IDENTITY_CODE } from '../../../shared/identity/constants'
-import { createSignInWithIdentifier } from '../../../server/modules/identity/sign-in'
+import { createSignInWithIdentifier } from '../../../server/modules/identity/sign-in/sign-in'
 
 const input = (identifier: string) => ({
   identifier,

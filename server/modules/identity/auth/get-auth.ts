@@ -1,7 +1,7 @@
-import { getServerEnv } from '../../../shared/config/env'
-import { AUTH_MODE } from '../../../shared/identity/constants'
-import { getDatabase } from '../../infrastructure/database/client'
-import { createSmtpPasswordResetMailer } from '../../infrastructure/mail/smtp-password-reset-mailer'
+import { getServerEnv } from '../../../../shared/config/env'
+import { AUTH_MODE } from '../../../../shared/identity/constants'
+import { getDatabase } from '../../../infrastructure/database/client'
+import { createSmtpPasswordResetMailer } from '../../../infrastructure/mail/smtp-password-reset-mailer'
 import { createMinervaAuth } from './create-auth'
 
 let runtimeAuth: ReturnType<typeof createMinervaAuth> | undefined

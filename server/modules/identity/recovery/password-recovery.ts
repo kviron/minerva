@@ -1,8 +1,8 @@
 import { APIError } from '@better-auth/core/error'
-import { IDENTITY_CODE } from '../../../shared/identity/constants'
-import { getAuth } from './auth'
-import { IdentityError } from './errors'
-import { consumeIdentityRateLimit, type RateLimitInput } from './rate-limit'
+import { IDENTITY_CODE } from '../../../../shared/identity/constants'
+import { getAuth } from '../auth/get-auth'
+import { IdentityError } from '../identity-error'
+import { consumeIdentityRateLimit, type RateLimitInput } from '../rate-limit'
 
 export interface RecoveryRequest {
   readonly email: string

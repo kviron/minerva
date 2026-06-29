@@ -3,9 +3,9 @@ import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { username } from 'better-auth/plugins/username'
 import { sql } from 'drizzle-orm'
-import { ACCOUNT_STATUS, AUTH_MODE, IDENTITY_CODE } from '../../../shared/identity/constants'
-import type { AccountStatus } from '../../../shared/identity/types'
-import * as authSchema from '../../infrastructure/database/schema'
+import { ACCOUNT_STATUS, AUTH_MODE, IDENTITY_CODE } from '../../../../shared/identity/constants'
+import type { AccountStatus } from '../../../../shared/identity/types'
+import * as authSchema from '../../../infrastructure/database/schema'
 import type { CreateMinervaAuthInput } from './contracts'
 
 export function createMinervaAuth({ mode, db, baseURL, trustedOrigins, mailer }: CreateMinervaAuthInput) {

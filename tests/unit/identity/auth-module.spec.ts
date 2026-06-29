@@ -16,7 +16,7 @@ it('can be imported during a build without runtime secrets', async () => {
   vi.stubEnv('MAIL_FROM', '')
   vi.stubEnv('MAILPIT_API_URL', '')
 
-  await expect(import('../../../server/modules/identity/auth')).resolves.toMatchObject({
+  await expect(import('../../../server/modules/identity/auth/get-auth')).resolves.toMatchObject({
     getAuth: expect.any(Function),
   })
 })

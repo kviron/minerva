@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { IDENTITY_CODE } from '../../../shared/identity/constants'
-import { createPasswordRecovery } from '../../../server/modules/identity/password-recovery'
+import { createPasswordRecovery } from '../../../server/modules/identity/recovery/password-recovery'
 
 const recoveryInput = (email: string) => ({ email, ip: '127.0.0.1' })
 const resetInput = { token: 'private-reset-token', newPassword: 'new-secret', ip: '127.0.0.2' }

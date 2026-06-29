@@ -2,7 +2,7 @@ import { createHmac } from 'node:crypto'
 import { getServerEnv } from '../../../shared/config/env'
 import { IDENTITY_CODE } from '../../../shared/identity/constants'
 import { getDatabase } from '../../infrastructure/database/client'
-import { IdentityError } from './errors'
+import { IdentityError } from './identity-error'
 
 export interface RateLimitInput {
   scope: 'sign-in' | 'recovery-request' | 'password-reset'

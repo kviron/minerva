@@ -1,7 +1,7 @@
 import { resolve } from 'node:path'
 import { createInterface } from 'node:readline/promises'
 import { pathToFileURL } from 'node:url'
-import { bootstrapSuperAdmin } from '../server/modules/identity/bootstrap-super-admin'
+import { bootstrapSuperAdmin } from '../server/modules/identity/bootstrap/bootstrap-super-admin'
 import { readHiddenValue } from './read-hidden-value'
 
 interface BootstrapCommandDependencies {

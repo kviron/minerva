@@ -1,8 +1,8 @@
 import { createError, defineEventHandler, getRequestIP, readBody } from 'h3'
 import { z } from 'zod'
 import { getServerEnv } from '../../../shared/config/env'
-import { IdentityError } from '../../modules/identity/errors'
-import { requestPasswordReset } from '../../modules/identity/password-recovery'
+import { IdentityError } from '../../modules/identity/identity-error'
+import { requestPasswordReset } from '../../modules/identity/recovery/password-recovery'
 
 const bodySchema = z.object({ email: z.string().email().max(255) })
 

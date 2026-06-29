@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { IDENTITY_CODE, LOGIN_IDENTIFIER_KIND } from '../../../shared/identity/constants'
-import { classifyLoginIdentifier } from '../../../server/modules/identity/identifier'
+import { classifyLoginIdentifier } from '../../../server/modules/identity/sign-in/identifier'
 
 describe('classifyLoginIdentifier', () => {
   it('normalizes an email identifier', () => {

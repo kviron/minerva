@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import type { PasswordResetMailer } from '../../modules/identity/contracts'
+import type { PasswordResetMailer } from '../../modules/identity/auth/contracts'
 
 export interface SmtpPasswordResetMailerOptions {
   host: string

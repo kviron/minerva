@@ -1,9 +1,9 @@
 import { APIError } from '@better-auth/core/error'
-import { IDENTITY_CODE, LOGIN_IDENTIFIER_KIND } from '../../../shared/identity/constants'
-import { getAuth } from './auth'
-import { IdentityError } from './errors'
+import { IDENTITY_CODE, LOGIN_IDENTIFIER_KIND } from '../../../../shared/identity/constants'
+import { getAuth } from '../auth/get-auth'
+import { IdentityError } from '../identity-error'
 import { classifyLoginIdentifier } from './identifier'
-import { consumeIdentityRateLimit } from './rate-limit'
+import { consumeIdentityRateLimit } from '../rate-limit'
 
 export interface SignInInput {
   readonly identifier: string

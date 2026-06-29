@@ -1,7 +1,7 @@
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
 import { AUTH_MODE } from '../shared/identity/constants'
-import { createMinervaAuth } from '../server/modules/identity/create-auth'
+import { createMinervaAuth } from '../server/modules/identity/auth/create-auth'
 
 const queryClient = postgres(
   process.env.DATABASE_URL ?? 'postgresql://minerva:minerva@127.0.0.1:5433/minerva_test',

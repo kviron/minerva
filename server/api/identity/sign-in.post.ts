@@ -7,8 +7,8 @@ import {
 } from 'h3'
 import { z } from 'zod'
 import { getServerEnv } from '../../../shared/config/env'
-import { IdentityError } from '../../modules/identity/errors'
-import { signInWithIdentifier } from '../../modules/identity/sign-in'
+import { IdentityError } from '../../modules/identity/identity-error'
+import { signInWithIdentifier } from '../../modules/identity/sign-in/sign-in'
 
 const bodySchema = z.object({
   identifier: z.string().min(1).max(255),

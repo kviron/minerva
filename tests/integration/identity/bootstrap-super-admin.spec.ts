@@ -2,7 +2,7 @@ import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { ACCOUNT_STATUS } from '../../../shared/identity/constants'
 import type { AccountStatus } from '../../../shared/identity/types'
-import { bootstrapSuperAdmin } from '../../../server/modules/identity/bootstrap-super-admin'
+import { bootstrapSuperAdmin } from '../../../server/modules/identity/bootstrap/bootstrap-super-admin'
 import { createTestDatabase, resetTestDatabase, TEST_DATABASE_URL } from '../../helpers/database'
 
 const password = 'Correct-Horse-Battery-1'
