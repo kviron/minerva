@@ -18,7 +18,7 @@ export function createSignInAction(dependencies: SignInDependencies) {
       return SIGN_IN_ERROR
     }
 
-    await dependencies.navigate('/')
+    await dependencies.navigate('/projects')
     return null
   }
 }

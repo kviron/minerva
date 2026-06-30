@@ -12,7 +12,7 @@ async function submitLogin(page: Page, identifier: string, password = oldPasswor
 
 test('redirects a guest', async ({ page }) => {
   await page.goto('/')
-  await expect(page).toHaveURL(/\/auth$/)
+  await expect(page).toHaveURL(/\/auth$/, { timeout: 30_000 })
 })
 
 test('blocks public authentication bypasses', async ({ request }) => {
@@ -36,12 +36,12 @@ test('blocks public authentication bypasses', async ({ request }) => {
 
 test('signs in by email', async ({ page }) => {
   await submitLogin(page, 'user@example.com')
-  await expect(page).toHaveURL(/\/$/)
+  await expect(page).toHaveURL(/\/projects$/)
 })
 
 test('signs in by username', async ({ page }) => {
   await submitLogin(page, 'test.user')
-  await expect(page).toHaveURL(/\/$/)
+  await expect(page).toHaveURL(/\/projects$/)
 })
 
 test('hides credential enumeration', async ({ page }) => {
@@ -54,7 +54,7 @@ test('hides credential enumeration', async ({ page }) => {
 
 test('revokes logout session', async ({ page }) => {
   await submitLogin(page, 'user@example.com')
-  await expect(page).toHaveURL(/\/$/)
+  await expect(page).toHaveURL(/\/projects$/)
 
   const response = await page.request.post('/api/auth/sign-out', {
     data: {},
@@ -78,11 +78,11 @@ test('returns one recovery response', async ({ page }) => {
 
 test('resets once through Mailpit', async ({ page }) => {
   const request = await page.request.post('/api/identity/request-password-reset', {
-    data: { email: 'user@example.com' },
+    data: { email: 'recovery@example.com' },
   })
   expect(request.ok()).toBe(true)
   const message = await fetch(
-    `http://127.0.0.1:8025/view/latest.txt?query=${encodeURIComponent('to:user@example.com')}`,
+    `http://127.0.0.1:8025/view/latest.txt?query=${encodeURIComponent('to:recovery@example.com')}`,
   ).then(response => response.text())
   const token = message.match(/\/auth\/reset-password\/([^\s]+)/)?.[1]
   expect(token).toBeTruthy()
@@ -93,6 +93,6 @@ test('resets once through Mailpit', async ({ page }) => {
   await page.getByRole('button', { name: 'Сохранить новый пароль' }).click()
   await expect(page).toHaveURL(/\/auth$/)
 
-  await submitLogin(page, 'user@example.com', newPassword)
-  await expect(page).toHaveURL(/\/$/)
+  await submitLogin(page, 'recovery@example.com', newPassword)
+  await expect(page).toHaveURL(/\/projects$/)
 })

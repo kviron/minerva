@@ -1,6 +1,15 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
+  $env: {
+    test: {
+      // E2E-only terminal handler proving successful administration guard passage.
+      serverHandlers: [{
+        route: '/api/administration/probe',
+        handler: './tests/e2e/fixtures/administration-probe',
+      }],
+    },
+  },
   css: ['~/assets/css/tailwind.css'],
   compatibilityDate: '2025-01-01',
   nitro: {

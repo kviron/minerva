@@ -1,13 +1,16 @@
-import { getIdentitySession } from '@/features/identity'
-
-const publicPrefixes = ['/auth', '/legal', '/invitations']
+import { decideRouteAccess, getIdentitySession, type RouteSession } from '@/features/identity'
 
 export default defineNuxtRouteMiddleware(async (to) => {
-  const isPublic = publicPrefixes.some(prefix =>
-    to.path === prefix || to.path.startsWith(`${prefix}/`),
-  )
-  const { data: session } = await getIdentitySession()
+  const { data: session, error } = await getIdentitySession()
+  const decision = decideRouteAccess({
+    path: to.path,
+    session: session as RouteSession | null,
+    sessionError: Boolean(error),
+  })
 
-  if (!session && !isPublic) return navigateTo('/auth')
-  if (session && to.path === '/auth') return navigateTo('/')
+  if (decision.type === 'redirect')
+    return navigateTo(decision.to)
+
+  if (decision.type === 'error')
+    return abortNavigation(createError({ statusCode: 503, statusMessage: 'Service Unavailable' }))
 })
