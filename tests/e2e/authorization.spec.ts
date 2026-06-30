@@ -70,7 +70,8 @@ test('rejects an ordinary user from an administration API', async ({ page }) => 
 test('allows a super administrator through the administration guard', async ({ page }) => {
   await signIn(page, 'admin@example.com')
   const response = await page.request.post('/api/administration/probe')
-  expect(response.status()).toBe(404)
+  expect(response.status()).toBe(200)
+  await expect(response.json()).resolves.toEqual({ probe: 'administration-authorized' })
 })
 
 test('keeps sign-in and recovery endpoints callable', async ({ request }) => {
