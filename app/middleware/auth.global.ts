@@ -1,10 +1,10 @@
-import { decideRouteAccess, getIdentitySession } from '@/features/identity'
+import { decideRouteAccess, getIdentitySession, type RouteSession } from '@/features/identity'
 
 export default defineNuxtRouteMiddleware(async (to) => {
   const { data: session, error } = await getIdentitySession()
   const decision = decideRouteAccess({
     path: to.path,
-    session,
+    session: session as RouteSession | null,
     sessionError: Boolean(error),
   })
 

@@ -3,13 +3,15 @@ export type RouteAccessDecision =
   | { readonly type: 'error' }
   | { readonly type: 'redirect', readonly to: '/auth' | '/projects' }
 
-interface IdentitySession {
-  readonly user: object
+export interface RouteSession {
+  readonly user: {
+    readonly superAdmin?: boolean
+  }
 }
 
 interface RouteAccessInput {
   readonly path: string
-  readonly session: IdentitySession | null
+  readonly session: RouteSession | null
   readonly sessionError: boolean
 }
 
@@ -38,10 +40,6 @@ function isAdministrationPath(path: string): boolean {
   return path === '/administration' || path.startsWith('/administration/')
 }
 
-function isSuperAdmin(session: IdentitySession): boolean {
-  return 'superAdmin' in session.user && session.user.superAdmin === true
-}
-
 export function decideRouteAccess(input: RouteAccessInput): RouteAccessDecision {
   if (input.sessionError)
     return { type: 'error' }
@@ -52,7 +50,7 @@ export function decideRouteAccess(input: RouteAccessInput): RouteAccessDecision 
   if (input.path === '/auth')
     return { type: 'redirect', to: '/projects' }
 
-  if (isAdministrationPath(input.path) && !isSuperAdmin(input.session))
+  if (isAdministrationPath(input.path) && input.session.user.superAdmin !== true)
     return { type: 'redirect', to: '/projects' }
 
   return { type: 'allow' }
