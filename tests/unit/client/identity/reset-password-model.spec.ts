@@ -185,3 +185,46 @@ it('clears a previous reset error when an invalid retry is submitted', async () 
   expect(form.confirmationInvalid.value).toBe(false)
   expect(resetPassword).toHaveBeenCalledTimes(1)
 })
+
+it('reuses an in-flight reset submission and allows a later submission', async () => {
+  let resolveFirst: (() => void) | undefined
+  const firstPending = new Promise<void>((resolve) => {
+    resolveFirst = resolve
+  })
+  const resetPassword = vi.fn()
+    .mockImplementationOnce(() => firstPending)
+    .mockResolvedValueOnce(undefined)
+  const navigate = vi.fn().mockResolvedValue(undefined)
+  const form = await createForm('token', { resetPassword, navigate })
+  form.password.value = 'Correct-Horse-Battery-1'
+  form.confirmation.value = 'Correct-Horse-Battery-1'
+
+  const first = form.submit()
+  const duplicate = form.submit()
+
+  expect(duplicate).toBe(first)
+  await vi.waitFor(() => expect(resetPassword).toHaveBeenCalledTimes(1))
+  resolveFirst?.()
+  await expect(Promise.all([first, duplicate])).resolves.toEqual([undefined, undefined])
+  expect(form.submitError.value).toBe('')
+  expect(navigate).toHaveBeenCalledTimes(1)
+
+  await form.submit()
+  expect(resetPassword).toHaveBeenCalledTimes(2)
+  expect(navigate).toHaveBeenCalledTimes(2)
+})
+
+it('allows another reset submission after navigation rejects', async () => {
+  const navigationError = new Error('navigation')
+  const resetPassword = vi.fn().mockResolvedValue(undefined)
+  const navigate = vi.fn()
+    .mockRejectedValueOnce(navigationError)
+    .mockResolvedValueOnce(undefined)
+  const form = await createForm('token', { resetPassword, navigate })
+  form.password.value = 'Correct-Horse-Battery-1'
+  form.confirmation.value = 'Correct-Horse-Battery-1'
+
+  await expect(form.submit()).rejects.toBe(navigationError)
+  await expect(form.submit()).resolves.toBeUndefined()
+  expect(resetPassword).toHaveBeenCalledTimes(2)
+})

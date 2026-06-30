@@ -67,3 +67,28 @@ it('clears a successful status when an invalid retry is submitted', async () => 
   expect(form.errorMessage.value).toBe(RECOVERY_EMAIL_ERROR)
   expect(requestPasswordReset).toHaveBeenCalledTimes(1)
 })
+
+it('reuses an in-flight recovery submission and allows a later submission', async () => {
+  let resolveFirst: (() => void) | undefined
+  const firstPending = new Promise<void>((resolve) => {
+    resolveFirst = resolve
+  })
+  const requestPasswordReset = vi.fn()
+    .mockImplementationOnce(() => firstPending)
+    .mockResolvedValueOnce(undefined)
+  const form = await createForm({ requestPasswordReset })
+  form.email.value = 'user@example.com'
+
+  const first = form.submit()
+  const duplicate = form.submit()
+
+  expect(duplicate).toBe(first)
+  await vi.waitFor(() => expect(requestPasswordReset).toHaveBeenCalledTimes(1))
+  resolveFirst?.()
+  await expect(Promise.all([first, duplicate])).resolves.toEqual([undefined, undefined])
+  expect(form.statusMessage.value).toBe(RECOVERY_SUCCESS_MESSAGE)
+  expect(form.errorMessage.value).toBe('')
+
+  await form.submit()
+  expect(requestPasswordReset).toHaveBeenCalledTimes(2)
+})

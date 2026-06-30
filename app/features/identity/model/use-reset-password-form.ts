@@ -59,12 +59,25 @@ export function useResetPasswordForm(
   const clearSubmitError = () => {
     submitError.value = ''
   }
-  const submit = handleSubmit(async (values) => {
+  const validatedSubmit = handleSubmit(async (values) => {
     clearSubmitError()
     submitError.value = await action(toValue(token), values) ?? ''
   }, () => {
     clearSubmitError()
   })
+  let activeSubmit: ReturnType<typeof validatedSubmit> | undefined
+  const submit: typeof validatedSubmit = (...args) => {
+    if (activeSubmit)
+      return activeSubmit
+
+    const pending = validatedSubmit(...args)
+    const guarded = pending.finally(() => {
+      if (activeSubmit === guarded)
+        activeSubmit = undefined
+    })
+    activeSubmit = guarded
+    return guarded
+  }
 
   return {
     password,

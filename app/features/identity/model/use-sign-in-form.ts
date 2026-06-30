@@ -44,10 +44,23 @@ export function useSignInForm(dependencies?: SignInDependencies) {
   const errorMessage = computed(() =>
     submitError.value || errors.value.identifier || errors.value.password || '',
   )
-  const submit = handleSubmit(async (values) => {
+  const validatedSubmit = handleSubmit(async (values) => {
     submitError.value = ''
     submitError.value = await action(values) ?? ''
   })
+  let activeSubmit: ReturnType<typeof validatedSubmit> | undefined
+  const submit: typeof validatedSubmit = (...args) => {
+    if (activeSubmit)
+      return activeSubmit
+
+    const pending = validatedSubmit(...args)
+    const guarded = pending.finally(() => {
+      if (activeSubmit === guarded)
+        activeSubmit = undefined
+    })
+    activeSubmit = guarded
+    return guarded
+  }
 
   return {
     identifier,

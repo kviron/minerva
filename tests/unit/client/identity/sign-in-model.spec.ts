@@ -118,3 +118,45 @@ it('clears a previous submit error while a valid retry is pending', async () => 
   resolveRetry?.()
   await retry
 })
+
+it('reuses an in-flight sign-in submission and allows a later submission', async () => {
+  let resolveFirst: (() => void) | undefined
+  const firstPending = new Promise<void>((resolve) => {
+    resolveFirst = resolve
+  })
+  const signIn = vi.fn()
+    .mockImplementationOnce(() => firstPending)
+    .mockResolvedValueOnce(undefined)
+  const navigate = vi.fn().mockResolvedValue(undefined)
+  const form = await createForm({ signIn, navigate })
+  form.identifier.value = 'user@example.com'
+  form.password.value = 'secret'
+
+  const first = form.submit()
+  const duplicate = form.submit()
+
+  expect(duplicate).toBe(first)
+  await vi.waitFor(() => expect(signIn).toHaveBeenCalledTimes(1))
+  resolveFirst?.()
+  await expect(Promise.all([first, duplicate])).resolves.toEqual([undefined, undefined])
+  expect(navigate).toHaveBeenCalledTimes(1)
+
+  await form.submit()
+  expect(signIn).toHaveBeenCalledTimes(2)
+  expect(navigate).toHaveBeenCalledTimes(2)
+})
+
+it('allows another sign-in submission after navigation rejects', async () => {
+  const navigationError = new Error('navigation')
+  const signIn = vi.fn().mockResolvedValue(undefined)
+  const navigate = vi.fn()
+    .mockRejectedValueOnce(navigationError)
+    .mockResolvedValueOnce(undefined)
+  const form = await createForm({ signIn, navigate })
+  form.identifier.value = 'user@example.com'
+  form.password.value = 'secret'
+
+  await expect(form.submit()).rejects.toBe(navigationError)
+  await expect(form.submit()).resolves.toBeUndefined()
+  expect(signIn).toHaveBeenCalledTimes(2)
+})

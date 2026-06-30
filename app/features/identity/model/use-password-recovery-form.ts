@@ -55,7 +55,7 @@ export function usePasswordRecoveryForm(
     submitError.value = ''
     statusMessage.value = ''
   }
-  const submit = handleSubmit(async (values) => {
+  const validatedSubmit = handleSubmit(async (values) => {
     clearFeedback()
     const outcome = await action(values)
     submitError.value = outcome.error
@@ -63,6 +63,19 @@ export function usePasswordRecoveryForm(
   }, () => {
     clearFeedback()
   })
+  let activeSubmit: ReturnType<typeof validatedSubmit> | undefined
+  const submit: typeof validatedSubmit = (...args) => {
+    if (activeSubmit)
+      return activeSubmit
+
+    const pending = validatedSubmit(...args)
+    const guarded = pending.finally(() => {
+      if (activeSubmit === guarded)
+        activeSubmit = undefined
+    })
+    activeSubmit = guarded
+    return guarded
+  }
 
   return {
     email,
