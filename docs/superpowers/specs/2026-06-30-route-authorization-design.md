@@ -41,6 +41,7 @@ Public matching is explicit. A broad prefix must not accidentally make a future 
 The following HTTP surfaces remain callable without an existing application session:
 
 - the Better Auth handler under `/api/auth/**`, whose individual operations apply Better Auth's own session requirements;
+- `POST /api/identity/sign-in`;
 - `POST /api/identity/request-password-reset`;
 - `POST /api/identity/reset-password`;
 - `GET /api/health/database`.
