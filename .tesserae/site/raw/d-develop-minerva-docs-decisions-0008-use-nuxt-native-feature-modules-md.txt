@@ -1,0 +1,32 @@
+0008-use-nuxt-native-feature-modules.md
+=======================================
+
+# ADR 0008: Use Nuxt-native client feature modules
+
+Date: 2026-06-29
+Status: accepted
+
+## Decision
+
+Keep Nuxt's standard `app/pages`, `app/layouts`, and `app/middleware` entry points, and organize scalable client business functionality as vertical modules below `app/features/<feature>`. Each feature owns its API adapters, form and interaction models, feature UI, and a deliberate public `index.ts`.
+
+Use `vee-validate` with Zod schemas for business forms. Keep route knowledge in pages: pages read route parameters and pass them to feature UI as props. Keep shadcn-vue primitives below `app/components/ui` free of business rules.
+
+The default dependency direction is:
+
+```text
+pages/layouts -> feature public API -> ui -> model -> api
+                                      \-> components/ui, app/lib, root shared
+```
+
+Pages may compose multiple features. Feature internals are private. Cross-feature imports are exceptional and may target only another feature's public API; prefer page-level orchestration or promotion of a stable universal contract to the root `shared/` boundary.
+
+## Nuxt Layers
+
+Do not use Nuxt Layers as the default business-feature boundary. Layers are reserved for a substantial partial Nuxt application that must be reused by another application, distributed independently, or overridden as a platform/theme layer. A second application or a proven reusable platform core triggers reconsideration.
+
+## Consequences
+
+Nuxt retains file-based routing and lifecycle conventions while business logic gains explicit vertical ownership. Vue templates become thinner, form behavior becomes independently testable, and future Identity, Projects, and Documents functionality follows one repeatable structure.
+
+The application gains explicit imports and small feature public APIs. This adds some files and conventions, but avoids the naming conflicts and ceremony of strict FSD and the implicit auto-registration and override ordering of per-domain Nuxt Layers.

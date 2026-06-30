@@ -1,5 +1,5 @@
 ---
-content_hash: sha256-6b0404e81529875e2992e6ace307906033b8d0060a0bea06e75ea81e115222fb
+content_hash: sha256-d458cb53901ad56b3d75be7e62e97fc06628471416b1744994d7c84964fca317
 generator: heuristic-v1
 inputs: []
 slug: pulse
@@ -15,6 +15,7 @@ sources:
   - docs/decisions/0005-mcp-oauth-resource-and-revocation.md
   - docs/decisions/0006-use-bun-package-manager.md
   - docs/decisions/0007-separate-authentication-profiles-and-project-roles.md
+  - docs/decisions/0008-use-nuxt-native-feature-modules.md
   - docs/operations/tesserae.md
   - docs/product-spec.md
   - docs/progress.md
@@ -29,6 +30,8 @@ sources:
   - docs/superpowers/plans/2026-06-28-reset-password-ui.md
   - docs/superpowers/plans/2026-06-29-identity-backend-foundation.md
   - docs/superpowers/plans/2026-06-29-identity-functional-refactor.md
+  - docs/superpowers/plans/2026-06-29-nuxt-feature-modules.md
+  - docs/superpowers/plans/2026-06-30-route-authorization.md
   - docs/superpowers/specs/2026-06-24-minerva-mvp-design.md
   - docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md
   - docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md
@@ -39,6 +42,8 @@ sources:
   - docs/superpowers/specs/2026-06-28-reset-password-ui-design.md
   - docs/superpowers/specs/2026-06-28-user-identity-profile-design.md
   - docs/superpowers/specs/2026-06-29-identity-functional-refactor-design.md
+  - docs/superpowers/specs/2026-06-29-nuxt-feature-modules-design.md
+  - docs/superpowers/specs/2026-06-30-route-authorization-design.md
 synthesis_kind: pulse
 title: Project Pulse
 ---
@@ -51,7 +56,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 34
+- SourceDocument: 39
 
 ## Recently added
 - (none)

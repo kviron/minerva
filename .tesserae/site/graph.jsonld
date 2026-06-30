@@ -72,6 +72,13 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:adr-0008-use-nuxt-native-client-feature-modules:68a6bb962563",
+      "@type": "CreativeWork",
+      "name": "ADR 0008: Use Nuxt-native client feature modules",
+      "url": "sources/adr-0008-use-nuxt-native-client-feature-modules.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:forgot-password-ui-design:4253f2296159",
       "@type": "CreativeWork",
       "name": "Forgot-password UI design",
@@ -205,6 +212,20 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
+      "@type": "CreativeWork",
+      "name": "Nuxt feature modules design",
+      "url": "sources/nuxt-feature-modules-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
+      "@type": "CreativeWork",
+      "name": "Nuxt Feature Modules Implementation Plan",
+      "url": "sources/nuxt-feature-modules-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:postgresql-docker-compose-design:1d13eb67950d",
       "@type": "CreativeWork",
       "name": "PostgreSQL Docker Compose design",
@@ -230,6 +251,20 @@
       "@type": "CreativeWork",
       "name": "Reset-Password UI Implementation Plan",
       "url": "sources/reset-password-ui-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:route-authorization-design:2fc8906097c7",
+      "@type": "CreativeWork",
+      "name": "Route Authorization Design",
+      "url": "sources/route-authorization-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:route-authorization-implementation-plan:116547e5ed3c",
+      "@type": "CreativeWork",
+      "name": "Route Authorization Implementation Plan",
+      "url": "sources/route-authorization-implementation-plan.html",
       "additionalType": "SourceDocument"
     },
     {

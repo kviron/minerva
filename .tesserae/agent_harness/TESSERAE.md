@@ -24,13 +24,13 @@ Expected MCP tools: `schema`, `graph_summary`, `search_nodes`, `node_context`, `
 
 ## Graph summary
 
-- Nodes: 38
-- Edges: 49
+- Nodes: 43
+- Edges: 58
 
 ## Representative nodes
 
 - **MATH** (`Benchmark`) — D:\develop\minerva\docs\superpowers\plans\2026-06-29-identity-functional-refactor.md
-- **Minerva Identity MVP** (`CommunitySummary`) — Planning, design, routing, implementation, progress, and evaluation artifacts for the Minerva identity backend foundation MVP, including route skeletons and shared success metrics.
+- **Minerva MVP Identity Planning** (`CommunitySummary`) — Design and implementation-plan documents for Minerva's MVP identity backend, Nuxt feature modules, routing, UX prototypes, and progress tracking, with mAP included as a related metric node.
 - **mAP** (`Metric`) — D:\develop\minerva\docs\progress.md
 - **ADR 0001: Use a modular Nuxt/Nitro monolith** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0001-modular-monolith.md
 - **ADR 0002: Use global super administration and project-scoped RBAC** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0002-project-rbac.md
@@ -39,8 +39,8 @@ Expected MCP tools: `schema`, `graph_summary`, `search_nodes`, `node_context`, `
 - **ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0005-mcp-oauth-resource-and-revocation.md
 - **ADR 0006: Use Bun as the package manager** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0006-use-bun-package-manager.md
 - **ADR 0007: Separate authentication identity, user profiles, contacts, and project roles** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0007-separate-authentication-profiles-and-project-roles.md
+- **ADR 0008: Use Nuxt-native client feature modules** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0008-use-nuxt-native-feature-modules.md
 - **Forgot-password UI design** (`SourceDocument`) — D:\develop\minerva\docs\superpowers\specs\2026-06-28-forgot-password-ui-design.md
-- **Forgot-Password UI Implementation Plan** (`SourceDocument`) — D:\develop\minerva\docs\superpowers\plans\2026-06-28-forgot-password-ui.md
 
 ## Agent instructions
 

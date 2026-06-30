@@ -13,7 +13,7 @@ title: Minerva progress
 
 ## Incoming relations
 
-- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
 
 ## Connected node types
 

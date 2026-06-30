@@ -7,7 +7,7 @@ Last updated: 2026-06-29
 
 ## Current state
 
-The approved Identity backend foundation is implemented and verified in the isolated `feature/identity-backend-foundation` branch. PostgreSQL, Better Auth, sessions, bootstrap, password recovery, and the existing authentication forms now work together without a page-layout redesign; the branch is ready for integration review.
+The approved Identity backend foundation and its functional TypeScript refactor are implemented and verified. PostgreSQL, Better Auth, sessions, bootstrap, password recovery, and the existing authentication forms work together without a page-layout redesign, while shared identity rules and dependency-injected effects keep the application services independently testable.
 
 ## Completed
 
@@ -45,6 +45,10 @@ The approved Identity backend foundation is implemented and verified in the isol
 - Connected the existing shadcn-vue authentication forms without redesign, added client session middleware, guest/auth redirects, logout verification, pending/error states, and complete browser journeys for sign-in and recovery.
 - Verified the completed Identity foundation with a frozen dependency install, two idempotent migration runs, 9 unit tests, 22 PostgreSQL integration tests, 8 browser journeys, Nuxt typecheck, and a production build.
 - Used the pinned native Mailpit 1.30.0 binary for final SMTP verification because the current Docker Desktop port proxy accepted the local SMTP connection but did not relay the server greeting; Docker Compose remains the canonical development configuration.
+- Completed the Identity functional refactor with shared `ObjectConst` values and derived types, scenario-based module grouping, pure `Result` classification, and dependency-injected rate-limit, sign-in, recovery, and session effects.
+- Added the repository-local `functional-typescript` skill and the repository Nuxt MCP configuration.
+- Verified the Identity refactor on 2026-06-29 with a frozen dependency install, 24/24 unit tests across 9 files, 22/22 PostgreSQL integration tests across 6 files, Nuxt typecheck, a production build, an unchanged Drizzle tree, a valid repository skill, the enabled repository Nuxt MCP, and a clean diff check. After removing a stale worktree-local Nuxt prepare process, a cold-start browser run passed 7/8 because the unchanged guest redirect exceeded its timeout; that guest case then passed twice in isolation, and the final full browser run passed 8/8.
+- Established the Nuxt-native feature-module convention with Identity as the reference implementation: API, model, and UI separation; vee-validate/Zod forms; explicit imports through the feature public API; and page-owned reset-route token handling, with visual and server behavior unchanged. Verification completed with a frozen install (1,013 installs across 1,174 packages, no changes), 58/58 unit tests across 14 files, 22/22 PostgreSQL integration tests across 6 files, 8/8 browser journeys, Nuxt typecheck, a production build, an unchanged Drizzle tree, and a clean diff check. The requested Docker Compose start exited 1 because another healthy Minerva PostgreSQL test container already owned port 5433; verification used that healthy PostgreSQL service and its healthy pinned Mailpit 1.30.0 companion on ports 1025/8025.
 
 ## Remaining
 

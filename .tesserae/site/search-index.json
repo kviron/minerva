@@ -4,14 +4,15 @@
     "title": "mAP",
     "kind": "entities",
     "href": "entities/map.html",
-    "summary": "- **summarizes** → Minerva Identity MVP _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity Functional Refactor Im…",
+    "summary": "- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity Functional Re…",
     "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
     "tokens": [
       "map",
       "summarizes",
       "minerva",
-      "identity",
       "mvp",
+      "identity",
+      "planning",
       "communitysummary",
       "uses_metric",
       "identity",
@@ -23,8 +24,7 @@
       "uses_metric",
       "identity",
       "functional",
-      "refactor",
-      "im",
+      "re",
       "entities"
     ],
     "len": 19,
@@ -198,6 +198,27 @@
       "sources"
     ],
     "len": 11,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0008-use-nuxt-native-client-feature-modules",
+    "title": "ADR 0008: Use Nuxt-native client feature modules",
+    "kind": "sources",
+    "href": "sources/adr-0008-use-nuxt-native-client-feature-modules.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0008-use-nuxt-native-feature-modules.md",
+    "tokens": [
+      "adr",
+      "0008",
+      "use",
+      "nuxt",
+      "native",
+      "client",
+      "feature",
+      "modules",
+      "sources"
+    ],
+    "len": 9,
     "created_ts": null
   },
   {
@@ -546,6 +567,47 @@
     "created_ts": null
   },
   {
+    "id": "sources:nuxt-feature-modules-design",
+    "title": "Nuxt feature modules design",
+    "kind": "sources",
+    "href": "sources/nuxt-feature-modules-design.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-29-nuxt-feature-modules-design.md",
+    "tokens": [
+      "nuxt",
+      "feature",
+      "modules",
+      "design",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 8,
+    "created_ts": null
+  },
+  {
+    "id": "sources:nuxt-feature-modules-implementation-plan",
+    "title": "Nuxt Feature Modules Implementation Plan",
+    "kind": "sources",
+    "href": "sources/nuxt-feature-modules-implementation-plan.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-06-29-nuxt-feature-modules.md",
+    "tokens": [
+      "nuxt",
+      "feature",
+      "modules",
+      "implementation",
+      "plan",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
     "id": "sources:postgresql-docker-compose-design",
     "title": "PostgreSQL Docker Compose design",
     "kind": "sources",
@@ -613,6 +675,39 @@
       "sources"
     ],
     "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:route-authorization-design",
+    "title": "Route Authorization Design",
+    "kind": "sources",
+    "href": "sources/route-authorization-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-30-route-authorization-design.md",
+    "tokens": [
+      "route",
+      "authorization",
+      "design",
+      "sources"
+    ],
+    "len": 4,
+    "created_ts": null
+  },
+  {
+    "id": "sources:route-authorization-implementation-plan",
+    "title": "Route Authorization Implementation Plan",
+    "kind": "sources",
+    "href": "sources/route-authorization-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-06-30-route-authorization.md",
+    "tokens": [
+      "route",
+      "authorization",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 5,
     "created_ts": null
   },
   {
@@ -716,7 +811,7 @@
       "metric",
       "1",
       "sourcedocument",
-      "34",
+      "39",
       "recently",
       "added",
       "none",

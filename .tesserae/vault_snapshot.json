@@ -6,14 +6,14 @@
       "metadata": {},
       "name": "MATH"
     },
-    "CommunitySummary:56fa58b054481eee": {
+    "CommunitySummary:c0b1277fc51d578a": {
       "aliases": [],
-      "description": "Planning, design, routing, implementation, progress, and evaluation artifacts for the Minerva identity backend foundation MVP, including route skeletons and shared success metrics.",
+      "description": "Design and implementation-plan documents for Minerva's MVP identity backend, Nuxt feature modules, routing, UX prototypes, and progress tracking, with mAP included as a related metric node.",
       "metadata": {
         "extractor": "community_summaries.compile_community_summaries",
-        "member_count": 7
+        "member_count": 9
       },
-      "name": "Minerva Identity MVP"
+      "name": "Minerva MVP Identity Planning"
     },
     "Metric:map:592bcbe13f80": {
       "aliases": [],
@@ -76,6 +76,14 @@
         "source_kind": "SourceDocument"
       },
       "name": "ADR 0007: Separate authentication identity, user profiles, contacts, and project roles"
+    },
+    "SourceDocument:adr-0008-use-nuxt-native-client-feature-modules:68a6bb962563": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0008: Use Nuxt-native client feature modules"
     },
     "SourceDocument:forgot-password-ui-design:4253f2296159": {
       "aliases": [],
@@ -229,6 +237,22 @@
       },
       "name": "MVP Route Skeleton Implementation Plan"
     },
+    "SourceDocument:nuxt-feature-modules-design:1dc66fa31506": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Nuxt feature modules design"
+    },
+    "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Nuxt Feature Modules Implementation Plan"
+    },
     "SourceDocument:postgresql-docker-compose-design:1d13eb67950d": {
       "aliases": [],
       "description": "",
@@ -260,6 +284,22 @@
         "source_kind": "SourceDocument"
       },
       "name": "Reset-Password UI Implementation Plan"
+    },
+    "SourceDocument:route-authorization-design:2fc8906097c7": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Route Authorization Design"
+    },
+    "SourceDocument:route-authorization-implementation-plan:116547e5ed3c": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Route Authorization Implementation Plan"
     },
     "SourceDocument:tesserae-development-memory:4143790d0cae": {
       "aliases": [],
@@ -297,7 +337,7 @@
       "aliases": [],
       "description": "Top-level snapshot of the wiki at compile time.",
       "metadata": {
-        "content_hash": "sha256-6b0404e81529875e2992e6ace307906033b8d0060a0bea06e75ea81e115222fb",
+        "content_hash": "sha256-d458cb53901ad56b3d75be7e62e97fc06628471416b1744994d7c84964fca317",
         "synthesis_kind": "pulse"
       },
       "name": "Project Pulse"

@@ -1,13 +1,13 @@
-import { d as defineEventHandler } from '../../_/nitro.mjs';
-import { g as getAuth } from '../../_/auth.mjs';
-import { I as IdentityError } from '../../_/errors.mjs';
+globalThis.__timing__.logStart('Load chunks/routes/api/mainMenu.get');import { d as defineEventHandler } from '../../_/nitro.mjs';
+import { I as IDENTITY_CODE } from '../../_/constants.mjs';
+import { g as getAuth } from '../../_/get-auth.mjs';
+import { I as IdentityError } from '../../_/identity-error.mjs';
 import 'node:events';
 import 'node:buffer';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
-import '../../_/env.mjs';
 import 'zod';
 import 'drizzle-orm/postgres-js';
 import 'postgres';
@@ -19,13 +19,21 @@ import 'better-auth/plugins/username';
 import 'drizzle-orm';
 import 'drizzle-orm/pg-core';
 
-async function requireSession(event) {
-  const session = await getAuth().api.getSession({ headers: event.headers });
-  if (!session) {
-    throw new IdentityError("AUTH_REQUIRED");
-  }
-  return session;
+function createRequireSession(getSession2) {
+  return async function requireSession2(event) {
+    const session = await getSession2(event.headers);
+    if (session === null) {
+      throw new IdentityError(IDENTITY_CODE.AUTH_REQUIRED);
+    }
+    return session;
+  };
 }
+const requireSession = createRequireSession(
+  async (headers) => {
+    var _a;
+    return (_a = await getAuth().api.getSession({ headers })) != null ? _a : null;
+  }
+);
 
 const mainMenu_get = defineEventHandler(async (event) => {
   await requireSession(event);
@@ -35,5 +43,5 @@ const mainMenu_get = defineEventHandler(async (event) => {
   ];
 });
 
-export { mainMenu_get as default };
+export { mainMenu_get as default };;globalThis.__timing__.logEnd('Load chunks/routes/api/mainMenu.get');
 //# sourceMappingURL=mainMenu.get.mjs.map

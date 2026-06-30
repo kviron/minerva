@@ -4,13 +4,23 @@ architecture.md
 # Minerva architecture
 
 Status: proposed  
-Last updated: 2026-06-28
+Last updated: 2026-06-29
 
 ## Architectural style
 
 Minerva is a modular monolith deployed as one Nuxt/Nitro application with PostgreSQL and S3-compatible object storage. Web pages, Nitro API handlers, background jobs, and MCP transport adapters call the same application services. Transport code never owns business rules.
 
 This keeps the first release operable on one VPS while preserving boundaries that can later be separated if load or security demands it.
+
+## Client application structure
+
+The client keeps Nuxt's standard `app/pages`, `app/layouts`, and `app/middleware` entry points. Business capabilities live as vertical modules below `app/features/<feature>` with optional `api`, `model`, and `ui` directories and a deliberate public `index.ts`.
+
+Pages own routes, layouts, route parameters, and composition. Feature UI owns feature-specific presentation, models own schemas and interaction state, and API adapters own HTTP or external-client calls. Business forms use `vee-validate` with Zod while Nitro validation and server-side authorization remain authoritative.
+
+The dependency direction is `pages/layouts -> feature public API -> ui -> model -> api`. Features may also use `app/components/ui`, `app/lib`, and browser-safe root `shared` contracts. Feature internals are private, shared UI primitives do not depend on features, and cross-feature orchestration belongs in pages by default.
+
+Do not auto-scan `app/features`; explicit imports preserve visible boundaries. Do not use Nuxt Layers for ordinary business features. Reconsider Layers when a substantial partial Nuxt application must be reused across applications, distributed independently, or overridden as platform configuration. See ADR 0008.
 
 ## Module boundaries
 

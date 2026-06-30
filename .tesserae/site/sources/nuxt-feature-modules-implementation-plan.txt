@@ -1,0 +1,17 @@
+Nuxt Feature Modules Implementation Plan
+========================================
+
+# Nuxt Feature Modules Implementation Plan
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Incoming relations
+
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
+
+## Connected node types
+
+- CommunitySummary: 1
+- Metric: 1

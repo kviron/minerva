@@ -1,9 +1,4 @@
-<!-- <script setup lang="ts">
-
-import NavDocuments from "@/components/NavDocuments.vue"
-import NavMain from "@/components/NavMain.vue"
-import NavSecondary from "@/components/NavSecondary.vue"
-import NavUser from "@/components/NavUser.vue"
+<script setup lang="ts">
 import {
   Sidebar,
   SidebarContent,
@@ -23,33 +18,27 @@ const data = {
     {
       title: "Dashboard",
       url: "#",
-      icon: IconDashboard,
     },
     {
       title: "Lifecycle",
       url: "#",
-      icon: IconListDetails,
     },
     {
       title: "Analytics",
       url: "#",
-      icon: IconChartBar,
     },
     {
       title: "Projects",
       url: "#",
-      icon: IconFolder,
     },
     {
       title: "Team",
       url: "#",
-      icon: IconUsers,
     },
   ],
   navClouds: [
     {
       title: "Capture",
-      icon: IconCamera,
       isActive: true,
       url: "#",
       items: [
@@ -65,7 +54,6 @@ const data = {
     },
     {
       title: "Proposal",
-      icon: IconFileDescription,
       url: "#",
       items: [
         {
@@ -80,7 +68,6 @@ const data = {
     },
     {
       title: "Prompts",
-      icon: IconFileAi,
       url: "#",
       items: [
         {
@@ -98,34 +85,28 @@ const data = {
     {
       title: "Settings",
       url: "#",
-      icon: IconSettings,
     },
     {
       title: "Get Help",
-      url: "#",
-      icon: IconHelp,
+      url: "#"
     },
     {
       title: "Search",
-      url: "#",
-      icon: IconSearch,
+      url: "#"
     },
   ],
   documents: [
     {
       name: "Data Library",
-      url: "#",
-      icon: IconDatabase,
+      url: "#"
     },
     {
       name: "Reports",
-      url: "#",
-      icon: IconReport,
+      url: "#"
     },
     {
       name: "Word Assistant",
-      url: "#",
-      icon: IconFileDescription,
+      url: "#"
     },
   ],
 }
@@ -148,16 +129,10 @@ const data = {
       </SidebarMenu>
     </SidebarHeader>
     <SidebarContent>
-      <NavMain :items="data.navMain" />
-      <NavDocuments :items="data.documents" />
-      <NavSecondary :items="data.navSecondary" class="mt-auto" />
+
     </SidebarContent>
     <SidebarFooter>
       <NavUser :user="data.user" />
     </SidebarFooter>
   </Sidebar>
-</template> -->
-
-<template>
-  <div/>
 </template>

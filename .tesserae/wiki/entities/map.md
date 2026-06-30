@@ -9,7 +9,7 @@ title: mAP
 
 ## Incoming relations
 
-- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
 - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_
 - **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
 - **uses_metric** → Identity backend foundation design _(SourceDocument)_
@@ -17,8 +17,10 @@ title: mAP
 - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_
 - **uses_metric** → Minerva MVP route map design _(SourceDocument)_
 - **uses_metric** → Minerva progress _(SourceDocument)_
+- **uses_metric** → Nuxt Feature Modules Implementation Plan _(SourceDocument)_
+- **uses_metric** → Nuxt feature modules design _(SourceDocument)_
 
 ## Connected node types
 
-- SourceDocument: 7
+- SourceDocument: 9
 - CommunitySummary: 1

@@ -1,13 +1,13 @@
 ---
 kind: communities
-node_id: "CommunitySummary:56fa58b054481eee"
+node_id: "CommunitySummary:c0b1277fc51d578a"
 node_type: CommunitySummary
 source_path: ""
-title: Minerva Identity MVP
+title: Minerva MVP Identity Planning
 ---
-# Minerva Identity MVP
+# Minerva MVP Identity Planning
 
-Planning, design, routing, implementation, progress, and evaluation artifacts for the Minerva identity backend foundation MVP, including route skeletons and shared success metrics.
+Design and implementation-plan documents for Minerva's MVP identity backend, Nuxt feature modules, routing, UX prototypes, and progress tracking, with mAP included as a related metric node.
 
 ## Outgoing relations
 
@@ -17,9 +17,11 @@ Planning, design, routing, implementation, progress, and evaluation artifacts fo
 - **summarizes** → Minerva MVP UX/UI prototype design _(SourceDocument)_
 - **summarizes** → Minerva MVP route map design _(SourceDocument)_
 - **summarizes** → Minerva progress _(SourceDocument)_
+- **summarizes** → Nuxt Feature Modules Implementation Plan _(SourceDocument)_
+- **summarizes** → Nuxt feature modules design _(SourceDocument)_
 - **summarizes** → mAP _(Metric)_
 
 ## Connected node types
 
-- SourceDocument: 6
+- SourceDocument: 8
 - Metric: 1

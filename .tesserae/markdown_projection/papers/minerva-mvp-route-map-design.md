@@ -6,7 +6,7 @@ source_path: D:\develop\minerva\docs\superpowers\specs\2026-06-27-minerva-mvp-ro
 edges_out:
   uses_metric: [map]
 edges_in:
-  summarizes: [minerva-identity-mvp, project-pulse]
+  summarizes: [minerva-mvp-identity-planning, project-pulse]
 source_kind: SourceDocument
 ---
 
@@ -20,7 +20,7 @@ source_kind: SourceDocument
 
 ## Incoming
 
-- [[minerva-identity-mvp]] → summarizes
+- [[minerva-mvp-identity-planning]] → summarizes
 - [[project-pulse]] → summarizes
 
 ## Related (dataview)

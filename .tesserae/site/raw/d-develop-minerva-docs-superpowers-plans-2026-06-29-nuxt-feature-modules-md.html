@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026-06-29-nuxt-feature-modules.md · Tesserae</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script defer src="../assets/app.js"></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar" role="banner">
+<a class="brand" href="../index.html">Tesserae</a>
+<nav role="navigation" aria-label="Primary"><a class="" href="../index.html"><span>Home</span></a><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="topnav-count">[39]</span></a><a class="" href="../concepts/index.html"><span>Concepts</span></a><a class="" href="../entities/index.html"><span>Entities</span> <span class="topnav-count">[2]</span></a><a class="" href="../papers/index.html"><span>Papers</span></a><a class="" href="../repos/index.html"><span>Repos</span></a><a class="" href="../topics/index.html"><span>Topics</span></a><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="topnav-count">[1]</span></a><a class="" href="../questions/index.html"><span>Questions</span></a><a class="" href="../sessions/index.html"><span>Sessions</span></a><a class="" href="../graph/index.html"><span>Graph</span></a><a class="" href="../about.html"><span>About</span></a></nav>
+<button class="search-button" data-open-search type="button" aria-label="Open search"><svg class="icon" viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="search-button-label">Search</span><kbd class="search-button-kbd" aria-hidden="true">/</kbd></button>
+<button class="theme-toggle" data-toggle-theme type="button" aria-label="Toggle color theme"><svg class="icon icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5.2" y1="5.2" x2="6.9" y2="6.9"/><line x1="17.1" y1="17.1" x2="18.8" y2="18.8"/><line x1="5.2" y1="18.8" x2="6.9" y2="17.1"/><line x1="17.1" y1="6.9" x2="18.8" y2="5.2"/></g></svg><svg class="icon icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.5 14.6a8 8 0 0 1-10.9-10.5.6.6 0 0 0-.8-.8 9.5 9.5 0 1 0 12.5 12.1.6.6 0 0 0-.8-.8z"/></svg></button>
+<button class="rail-toggle" aria-controls="rail" aria-expanded="false" aria-label="Toggle navigation drawer" data-toggle-rail type="button"><svg class="icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="rail-toggle-label">Menu</span></button>
+</header>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="Document tree"><nav class="rail-drawer-nav" aria-label="Primary (mobile)"><h2 class="rail-section-label">Browse</h2><ul class="rail-drawer-nav-list"><li><a class="" href="../index.html"><span>Home</span></a></li><li><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="rail-nav-count">[39]</span></a></li><li><a class="" href="../concepts/index.html"><span>Concepts</span></a></li><li><a class="" href="../entities/index.html"><span>Entities</span> <span class="rail-nav-count">[2]</span></a></li><li><a class="" href="../papers/index.html"><span>Papers</span></a></li><li><a class="" href="../repos/index.html"><span>Repos</span></a></li><li><a class="" href="../topics/index.html"><span>Topics</span></a></li><li><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="rail-nav-count">[1]</span></a></li><li><a class="" href="../questions/index.html"><span>Questions</span></a></li><li><a class="" href="../sessions/index.html"><span>Sessions</span></a></li><li><a class="" href="../graph/index.html"><span>Graph</span></a></li><li><a class="" href="../about.html"><span>About</span></a></li></ul></nav><div class="doc-tree-search-row"><label class="visually-hidden" for="doc-tree-filter">Filter source files</label><input class="doc-tree-search" id="doc-tree-filter" type="search" placeholder="Filter files…" aria-label="Filter source files" data-doc-tree-search></div><h2 class="rail-section-label">Files</h2><nav class="doc-tree" aria-label="Source explorer"><li class="doc-tree-leaf" data-doc-path="AGENTS.md"><a href="../raw/agents-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">AGENTS.md</span></a></li><details class="doc-tree-folder doc-tree-root"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">docs</span> <span class="doc-tree-count">[38]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/architecture.md"><a href="../raw/docs-architecture-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">architecture.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/backlog.md"><a href="../raw/docs-backlog-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">backlog.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">decisions</span> <span class="doc-tree-count">[8]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/decisions/0001-modular-monolith.md"><a href="../raw/docs-decisions-0001-modular-monolith-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0001-modular-monolith.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0002-project-rbac.md"><a href="../raw/docs-decisions-0002-project-rbac-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0002-project-rbac.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0003-document-versioning.md"><a href="../raw/docs-decisions-0003-document-versioning-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0003-document-versioning.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0004-mcp-first-release-boundary.md"><a href="../raw/docs-decisions-0004-mcp-first-release-boundary-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0004-mcp-first-release-boundary.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0005-mcp-oauth-resource-and-revocation.md"><a href="../raw/docs-decisions-0005-mcp-oauth-resource-and-revocation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0005-mcp-oauth-resource-and-revocation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0006-use-bun-package-manager.md"><a href="../raw/docs-decisions-0006-use-bun-package-manager-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0006-use-bun-package-manager.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0007-separate-authentication-profiles-and-project-roles.md"><a href="../raw/docs-decisions-0007-separate-authentication-profiles-and-project-roles-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0007-separate-authentication-profiles-and-project-roles.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0008-use-nuxt-native-feature-modules.md"><a href="../raw/docs-decisions-0008-use-nuxt-native-feature-modules-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0008-use-nuxt-native-feature-modules.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">operations</span> <span class="doc-tree-count">[1]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/operations/tesserae.md"><a href="../raw/docs-operations-tesserae-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">tesserae.md</span></a></li></ul></details></li><li class="doc-tree-leaf" data-doc-path="docs/product-spec.md"><a href="../raw/docs-product-spec-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">product-spec.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/progress.md"><a href="../raw/docs-progress-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">progress.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/roadmap.md"><a href="../raw/docs-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">roadmap.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">superpowers</span> <span class="doc-tree-count">[24]</span></summary><ul class="doc-tree-list"><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">plans</span> <span class="doc-tree-count">[12]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-24-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-figma-prototype.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-figma-prototype.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-mvp-roadmap.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-roadmap.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-mvp-route-skeleton.md"><a href="../raw/docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-mvp-route-skeleton.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-postgresql-compose.md"><a href="../raw/docs-superpowers-plans-2026-06-27-postgresql-compose-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-tesserae-refresh-wrapper.md"><a href="../raw/docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-forgot-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-forgot-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-reset-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-reset-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-identity-backend-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-29-identity-backend-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-backend-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-identity-functional-refactor.md"><a href="../raw/docs-superpowers-plans-2026-06-29-identity-functional-refactor-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-functional-refactor.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-nuxt-feature-modules.md"><a href="../raw/docs-superpowers-plans-2026-06-29-nuxt-feature-modules-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-nuxt-feature-modules.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-30-route-authorization.md"><a href="../raw/docs-superpowers-plans-2026-06-30-route-authorization-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-30-route-authorization.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">specs</span> <span class="doc-tree-count">[12]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-mvp-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-ui-prototype-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-minerva-mvp-route-map-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-postgresql-compose-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-tesserae-refresh-wrapper-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-forgot-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-identity-backend-foundation-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-identity-backend-foundation-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-reset-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-user-identity-profile-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-user-identity-profile-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-user-identity-profile-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-29-identity-functional-refactor-design.md"><a href="../raw/docs-superpowers-specs-2026-06-29-identity-functional-refactor-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-functional-refactor-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-29-nuxt-feature-modules-design.md"><a href="../raw/docs-superpowers-specs-2026-06-29-nuxt-feature-modules-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-nuxt-feature-modules-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-30-route-authorization-design.md"><a href="../raw/docs-superpowers-specs-2026-06-30-route-authorization-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-30-route-authorization-design.md</span></a></li></ul></details></li></ul></details></li></ul></details></nav></aside>
+<main class="main" id="main" aria-label="Main content">
+<button class="toc-toggle" aria-controls="toc" aria-expanded="false" data-toggle-toc type="button">On this page</button>
+<article class="article">
+<header class="article-header">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a class="crumb" href="../index.html">Home</a><span class="sep" aria-hidden="true">/</span><span class="crumb">Raw</span><span class="sep" aria-hidden="true">/</span><span class="crumb crumb-current">2026-06-29-nuxt-feature-modul...</span></nav>
+</header>
+<div class="article-body"><p class="eyebrow raw-meta">27.0 KB · updated 2026-06-29 · md</p>
+<h1 class="raw-title" title="D://develop//minerva//docs//superpowers//plans//2026-06-29-nuxt-feature-modules.md">2026-06-29-nuxt-feature-modules.md</h1>
+<p class="raw-path"><code>D://develop//minerva//docs//superpowers//plans//2026-06-29-nuxt-feature-modules.md</code></p>
+<article class="raw-page"><section class="markdown-body raw-markdown"><h1 id="nuxt-feature-modules-implementation-plan">Nuxt Feature Modules Implementation Plan</h1>
+<blockquote><p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (<code>- [ ]</code>) syntax for tracking.</p></blockquote>
+<p><strong>Goal:</strong> Establish the approved Nuxt-native feature-module architecture by moving Identity client API, form state, validation, and UI into <code>app/features/identity</code> without changing routes, server contracts, Russian copy, or visual layout.</p>
+<p><strong>Architecture:</strong> Nuxt pages and middleware remain framework entry points and import Identity only through its public <code>index.ts</code>. The Identity feature owns framework-light API adapters, Zod/vee-validate form models, and feature UI; shadcn-vue primitives remain business-agnostic below <code>app/components/ui</code>.</p>
+<p><strong>Tech Stack:</strong> Nuxt 4, Vue 3 Composition API, TypeScript, vee-validate 4, Zod 3, @vee-validate/zod, Better Auth Vue client, Vitest, Playwright, Bun.</p>
+<hr>
+<h2 id="target-file-map">Target file map</h2>
+<pre><code class="language-text">app/features/identity/
+  api/
+    auth-client.ts
+    identity-api.ts
+  model/
+    schemas.ts
+    use-sign-in-form.ts
+    use-password-recovery-form.ts
+    use-reset-password-form.ts
+  ui/
+    LoginForm.vue
+    PasswordRecoveryForm.vue
+    ResetPasswordForm.vue
+  index.ts
+tests/unit/client/identity/
+  identity-api.spec.ts
+  schemas.spec.ts
+  sign-in-model.spec.ts
+  password-recovery-model.spec.ts
+  reset-password-model.spec.ts</code></pre>
+<p>Delete after their replacement is active:</p>
+<pre><code class="language-text">app/lib/auth-client.ts
+app/components/auth/loginForm/index.vue
+app/components/auth/forgotPasswordForm/index.vue
+app/components/auth/resetPasswordForm/index.vue</code></pre>
+<h2 id="task-1-create-the-identity-api-and-session-boundary">Task 1: Create the Identity API and session boundary</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>app/features/identity/api/identity-api.ts</code></li><li>Move: <code>app/lib/auth-client.ts</code> → <code>app/features/identity/api/auth-client.ts</code></li><li>Create: <code>app/features/identity/index.ts</code></li><li>Modify: <code>app/middleware/auth.global.ts</code></li><li>Create: <code>tests/unit/client/identity/identity-api.spec.ts</code></li><li>[ ] <strong>Step 1: Write the failing API contract test</strong></li></ul>
+<p>Create <code>tests/unit/client/identity/identity-api.spec.ts</code>:</p>
+<pre><code class="language-ts">import { describe, expect, it, vi } from &#x27;vitest&#x27;
+import { createIdentityApi } from &#x27;../../../../app/features/identity/api/identity-api&#x27;
+
+describe(&#x27;Identity API&#x27;, () =&gt; {
+  it(&#x27;sends each command to its stable Nitro endpoint&#x27;, async () =&gt; {
+    const request = vi.fn().mockResolvedValue(undefined)
+    const api = createIdentityApi(request)
+
+    await api.signIn({ identifier: &#x27;user@example.com&#x27;, password: &#x27;secret&#x27; })
+    await api.requestPasswordReset({ email: &#x27;user@example.com&#x27; })
+    await api.resetPassword({ token: &#x27;token&#x27;, newPassword: &#x27;new-password&#x27; })
+
+    expect(request.mock.calls).toEqual([
+      [&#x27;/api/identity/sign-in&#x27;, {
+        method: &#x27;POST&#x27;, body: { identifier: &#x27;user@example.com&#x27;, password: &#x27;secret&#x27; },
+      }],
+      [&#x27;/api/identity/request-password-reset&#x27;, {
+        method: &#x27;POST&#x27;, body: { email: &#x27;user@example.com&#x27; },
+      }],
+      [&#x27;/api/identity/reset-password&#x27;, {
+        method: &#x27;POST&#x27;, body: { token: &#x27;token&#x27;, newPassword: &#x27;new-password&#x27; },
+      }],
+    ])
+  })
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the test and verify RED</strong></li></ul>
+<p>Run: <code>bunx vitest run tests/unit/client/identity/identity-api.spec.ts</code></p>
+<p>Expected: FAIL because the Identity API module does not exist.</p>
+<ul><li>[ ] <strong>Step 3: Implement the framework-light Identity API</strong></li></ul>
+<p>Create <code>app/features/identity/api/identity-api.ts</code>:</p>
+<pre><code class="language-ts">export interface SignInInput {
+  readonly identifier: string
+  readonly password: string
+}
+
+export interface PasswordRecoveryInput {
+  readonly email: string
+}
+
+export interface ResetPasswordInput {
+  readonly token: string
+  readonly newPassword: string
+}
+
+interface RequestOptions {
+  readonly method: &#x27;POST&#x27;
+  readonly body: Record&lt;string, string&gt;
+}
+
+export type IdentityRequest = (
+  path: string,
+  options: RequestOptions,
+) =&gt; Promise&lt;unknown&gt;
+
+export function createIdentityApi(request: IdentityRequest) {
+  return {
+    async signIn(input: SignInInput): Promise&lt;void&gt; {
+      await request(&#x27;/api/identity/sign-in&#x27;, { method: &#x27;POST&#x27;, body: { ...input } })
+    },
+    async requestPasswordReset(input: PasswordRecoveryInput): Promise&lt;void&gt; {
+      await request(&#x27;/api/identity/request-password-reset&#x27;, {
+        method: &#x27;POST&#x27;, body: { ...input },
+      })
+    },
+    async resetPassword(input: ResetPasswordInput): Promise&lt;void&gt; {
+      await request(&#x27;/api/identity/reset-password&#x27;, { method: &#x27;POST&#x27;, body: { ...input } })
+    },
+  }
+}
+
+export const identityApi = createIdentityApi(
+  (path, options) =&gt; $fetch(path, options),
+)</code></pre>
+<ul><li>[ ] <strong>Step 4: Move the Better Auth client and expose only session lookup</strong></li></ul>
+<p>Move <code>app/lib/auth-client.ts</code> to <code>app/features/identity/api/auth-client.ts</code> and use:</p>
+<pre><code class="language-ts">import { createAuthClient } from &#x27;better-auth/vue&#x27;
+
+const authClient = createAuthClient({ basePath: &#x27;/api/auth&#x27; })
+
+export const getIdentitySession = () =&gt; authClient.getSession()</code></pre>
+<p>Create <code>app/features/identity/index.ts</code>:</p>
+<pre><code class="language-ts">export { getIdentitySession } from &#x27;./api/auth-client&#x27;</code></pre>
+<p>Update <code>app/middleware/auth.global.ts</code> to import <code>getIdentitySession</code> from <code>@/features/identity</code> and replace <code>authClient.getSession()</code> with <code>getIdentitySession()</code>. Keep the public prefixes and redirects unchanged.</p>
+<ul><li>[ ] <strong>Step 5: Verify the API boundary</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/client/identity/identity-api.spec.ts
+bun run test:unit
+bun run typecheck</code></pre>
+<p>Expected: focused test, all unit tests, and typecheck pass.</p>
+<ul><li>[ ] <strong>Step 6: Commit the API/session slice</strong></li></ul>
+<pre><code class="language-powershell">git add -- app/features/identity/api app/features/identity/index.ts app/lib/auth-client.ts app/middleware/auth.global.ts tests/unit/client/identity/identity-api.spec.ts
+git commit -m &quot;refactor: create identity client boundary&quot;</code></pre>
+<h2 id="task-2-add-typed-identity-form-schemas">Task 2: Add typed Identity form schemas</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>app/features/identity/model/schemas.ts</code></li><li>Create: <code>tests/unit/client/identity/schemas.spec.ts</code></li><li>[ ] <strong>Step 1: Write failing schema behavior tests</strong></li></ul>
+<p>Create <code>tests/unit/client/identity/schemas.spec.ts</code>:</p>
+<pre><code class="language-ts">import { describe, expect, it } from &#x27;vitest&#x27;
+import {
+  passwordRecoverySchema,
+  resetPasswordSchema,
+  signInSchema,
+} from &#x27;../../../../app/features/identity/model/schemas&#x27;
+
+describe(&#x27;Identity form schemas&#x27;, () =&gt; {
+  it(&#x27;accepts the existing sign-in values&#x27;, () =&gt; {
+    expect(signInSchema.safeParse({
+      identifier: &#x27;user@example.com&#x27;, password: &#x27;Correct-Horse-Battery-1&#x27;,
+    }).success).toBe(true)
+  })
+
+  it(&#x27;requires a valid recovery email&#x27;, () =&gt; {
+    expect(passwordRecoverySchema.safeParse({ email: &#x27;not-an-email&#x27; }).success).toBe(false)
+  })
+
+  it(&#x27;enforces password length and confirmation&#x27;, () =&gt; {
+    expect(resetPasswordSchema.safeParse({
+      password: &#x27;short&#x27;, confirmation: &#x27;short&#x27;,
+    }).success).toBe(false)
+    expect(resetPasswordSchema.safeParse({
+      password: &#x27;Correct-Horse-Battery-1&#x27;, confirmation: &#x27;Different-Horse-Battery-2&#x27;,
+    }).success).toBe(false)
+    expect(resetPasswordSchema.safeParse({
+      password: &#x27;Correct-Horse-Battery-1&#x27;, confirmation: &#x27;Correct-Horse-Battery-1&#x27;,
+    }).success).toBe(true)
+  })
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the test and verify RED</strong></li></ul>
+<p>Run: <code>bunx vitest run tests/unit/client/identity/schemas.spec.ts</code></p>
+<p>Expected: FAIL because <code>model/schemas.ts</code> does not exist.</p>
+<ul><li>[ ] <strong>Step 3: Implement Zod schemas and exported value types</strong></li></ul>
+<p>Create <code>app/features/identity/model/schemas.ts</code>:</p>
+<pre><code class="language-ts">import { z } from &#x27;zod&#x27;
+
+export const SIGN_IN_ERROR = &#x27;Неверный логин или пароль&#x27;
+export const RECOVERY_EMAIL_ERROR = &#x27;Введите корректный email&#x27;
+export const PASSWORD_LENGTH_ERROR = &#x27;Пароль должен содержать от 12 до 256 символов&#x27;
+export const PASSWORD_CONFIRMATION_ERROR = &#x27;Пароли не совпадают&#x27;
+
+export const signInSchema = z.object({
+  identifier: z.string().min(1, SIGN_IN_ERROR).max(255, SIGN_IN_ERROR),
+  password: z.string().min(1, SIGN_IN_ERROR).max(256, SIGN_IN_ERROR),
+})
+
+export const passwordRecoverySchema = z.object({
+  email: z.string().email(RECOVERY_EMAIL_ERROR).max(255, RECOVERY_EMAIL_ERROR),
+})
+
+export const resetPasswordSchema = z.object({
+  password: z.string().min(12, PASSWORD_LENGTH_ERROR).max(256, PASSWORD_LENGTH_ERROR),
+  confirmation: z.string().min(1, PASSWORD_CONFIRMATION_ERROR),
+}).refine(values =&gt; values.password === values.confirmation, {
+  path: [&#x27;confirmation&#x27;],
+  message: PASSWORD_CONFIRMATION_ERROR,
+})
+
+export type SignInValues = z.infer&lt;typeof signInSchema&gt;
+export type PasswordRecoveryValues = z.infer&lt;typeof passwordRecoverySchema&gt;
+export type ResetPasswordValues = z.infer&lt;typeof resetPasswordSchema&gt;</code></pre>
+<ul><li>[ ] <strong>Step 4: Run schema tests and typecheck</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/client/identity/schemas.spec.ts
+bun run typecheck</code></pre>
+<p>Expected: tests and typecheck pass.</p>
+<ul><li>[ ] <strong>Step 5: Commit the schema slice</strong></li></ul>
+<pre><code class="language-powershell">git add -- app/features/identity/model/schemas.ts tests/unit/client/identity/schemas.spec.ts
+git commit -m &quot;refactor: add identity form schemas&quot;</code></pre>
+<h2 id="task-3-move-the-sign-in-form-into-identity">Task 3: Move the sign-in form into Identity</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>app/features/identity/model/use-sign-in-form.ts</code></li><li>Move: <code>app/components/auth/loginForm/index.vue</code> → <code>app/features/identity/ui/LoginForm.vue</code></li><li>Modify: <code>app/features/identity/index.ts</code></li><li>Modify: <code>app/pages/auth/index.vue</code></li><li>Create: <code>tests/unit/client/identity/sign-in-model.spec.ts</code></li><li>[ ] <strong>Step 1: Write failing sign-in action tests</strong></li></ul>
+<p>Create <code>tests/unit/client/identity/sign-in-model.spec.ts</code>:</p>
+<pre><code class="language-ts">import { expect, it, vi } from &#x27;vitest&#x27;
+import { createSignInAction } from &#x27;../../../../app/features/identity/model/use-sign-in-form&#x27;
+import { SIGN_IN_ERROR } from &#x27;../../../../app/features/identity/model/schemas&#x27;
+
+it(&#x27;signs in and navigates home&#x27;, async () =&gt; {
+  const signIn = vi.fn().mockResolvedValue(undefined)
+  const navigate = vi.fn().mockResolvedValue(undefined)
+  const action = createSignInAction({ signIn, navigate })
+
+  await expect(action({ identifier: &#x27;user@example.com&#x27;, password: &#x27;secret&#x27; }))
+    .resolves.toBeNull()
+  expect(signIn).toHaveBeenCalledWith({ identifier: &#x27;user@example.com&#x27;, password: &#x27;secret&#x27; })
+  expect(navigate).toHaveBeenCalledWith(&#x27;/&#x27;)
+})
+
+it(&#x27;returns the existing generic error and does not navigate&#x27;, async () =&gt; {
+  const navigate = vi.fn()
+  const action = createSignInAction({
+    signIn: vi.fn().mockRejectedValue(new Error(&#x27;provider&#x27;)),
+    navigate,
+  })
+
+  await expect(action({ identifier: &#x27;user@example.com&#x27;, password: &#x27;wrong&#x27; }))
+    .resolves.toBe(SIGN_IN_ERROR)
+  expect(navigate).not.toHaveBeenCalled()
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the test and verify RED</strong></li></ul>
+<p>Run: <code>bunx vitest run tests/unit/client/identity/sign-in-model.spec.ts</code></p>
+<p>Expected: FAIL because the sign-in model does not exist.</p>
+<ul><li>[ ] <strong>Step 3: Implement the sign-in action and vee-validate model</strong></li></ul>
+<p>Create <code>app/features/identity/model/use-sign-in-form.ts</code>:</p>
+<pre><code class="language-ts">import { toTypedSchema } from &#x27;@vee-validate/zod&#x27;
+import { useForm } from &#x27;vee-validate&#x27;
+import { computed, ref } from &#x27;vue&#x27;
+import { identityApi } from &#x27;../api/identity-api&#x27;
+import { SIGN_IN_ERROR, signInSchema, type SignInValues } from &#x27;./schemas&#x27;
+
+interface SignInDependencies {
+  readonly signIn: (values: SignInValues) =&gt; Promise&lt;void&gt;
+  readonly navigate: (path: string) =&gt; Promise&lt;unknown&gt; | unknown
+}
+
+export function createSignInAction(dependencies: SignInDependencies) {
+  return async (values: SignInValues): Promise&lt;string | null&gt; =&gt; {
+    try {
+      await dependencies.signIn(values)
+      await dependencies.navigate(&#x27;/&#x27;)
+      return null
+    } catch {
+      return SIGN_IN_ERROR
+    }
+  }
+}
+
+export function useSignInForm(dependencies?: SignInDependencies) {
+  const action = createSignInAction(dependencies ?? {
+    signIn: identityApi.signIn,
+    navigate: path =&gt; navigateTo(path),
+  })
+  const submitError = ref(&#x27;&#x27;)
+  const { defineField, errors, handleSubmit, isSubmitting } = useForm({
+    validationSchema: toTypedSchema(signInSchema),
+    initialValues: { identifier: &#x27;&#x27;, password: &#x27;&#x27; },
+  })
+  const [identifier, identifierAttrs] = defineField(&#x27;identifier&#x27;)
+  const [password, passwordAttrs] = defineField(&#x27;password&#x27;)
+  const errorMessage = computed(() =&gt;
+    submitError.value || errors.value.identifier || errors.value.password || &#x27;&#x27;,
+  )
+  const submit = handleSubmit(async values =&gt; {
+    submitError.value = await action(values) ?? &#x27;&#x27;
+  })
+
+  return {
+    identifier, identifierAttrs, password, passwordAttrs,
+    errorMessage, isSubmitting, submit,
+  }
+}</code></pre>
+<ul><li>[ ] <strong>Step 4: Move the sign-in UI and make its script presentation-only</strong></li></ul>
+<p>Move the existing component to <code>app/features/identity/ui/LoginForm.vue</code>. Preserve its template, Russian copy, IDs, autocomplete values, classes, and links. Replace its state and submit logic with:</p>
+<pre><code class="language-ts">&lt;script setup lang=&quot;ts&quot;&gt;
+import type { HTMLAttributes } from &#x27;vue&#x27;
+import { cn } from &#x27;@/lib/utils&#x27;
+import { useSignInForm } from &#x27;../model/use-sign-in-form&#x27;
+
+const props = defineProps&lt;{ class?: HTMLAttributes[&#x27;class&#x27;] }&gt;()
+const {
+  identifier, identifierAttrs, password, passwordAttrs,
+  errorMessage, isSubmitting, submit,
+} = useSignInForm()
+&lt;/script&gt;</code></pre>
+<p>Bind <code>identifierAttrs</code> and <code>passwordAttrs</code> with <code>v-bind</code> on their inputs. Replace <code>pending</code> with <code>isSubmitting</code>. Keep the existing <code>errorMessage</code> rendering.</p>
+<p>Export the component from <code>app/features/identity/index.ts</code>:</p>
+<pre><code class="language-ts">export { getIdentitySession } from &#x27;./api/auth-client&#x27;
+export { default as LoginForm } from &#x27;./ui/LoginForm.vue&#x27;</code></pre>
+<p>In <code>app/pages/auth/index.vue</code>, explicitly import <code>LoginForm</code> from <code>@/features/identity</code> and replace <code>&lt;AuthLoginForm /&gt;</code> with <code>&lt;LoginForm /&gt;</code>. Keep all other page content unchanged.</p>
+<ul><li>[ ] <strong>Step 5: Verify sign-in behavior</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/client/identity/sign-in-model.spec.ts
+bun run test:unit
+bun run typecheck
+bunx playwright test tests/e2e/identity.spec.ts -g &quot;signs in|hides credential&quot;</code></pre>
+<p>Expected: unit/typecheck pass and the three sign-in browser journeys pass.</p>
+<ul><li>[ ] <strong>Step 6: Commit the sign-in slice</strong></li></ul>
+<pre><code class="language-powershell">git add -- app/components/auth/loginForm app/features/identity app/pages/auth/index.vue tests/unit/client/identity/sign-in-model.spec.ts
+git commit -m &quot;refactor: move sign in into identity feature&quot;</code></pre>
+<h2 id="task-4-move-password-recovery-into-identity">Task 4: Move password recovery into Identity</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>app/features/identity/model/use-password-recovery-form.ts</code></li><li>Move: <code>app/components/auth/forgotPasswordForm/index.vue</code> → <code>app/features/identity/ui/PasswordRecoveryForm.vue</code></li><li>Modify: <code>app/features/identity/index.ts</code></li><li>Modify: <code>app/pages/auth/forgot-password.vue</code></li><li>Create: <code>tests/unit/client/identity/password-recovery-model.spec.ts</code></li><li>[ ] <strong>Step 1: Write failing recovery action tests</strong></li></ul>
+<p>Create <code>tests/unit/client/identity/password-recovery-model.spec.ts</code>:</p>
+<pre><code class="language-ts">import { expect, it, vi } from &#x27;vitest&#x27;
+import {
+  createPasswordRecoveryAction,
+  RECOVERY_ERROR_MESSAGE,
+  RECOVERY_SUCCESS_MESSAGE,
+} from &#x27;../../../../app/features/identity/model/use-password-recovery-form&#x27;
+
+it(&#x27;returns the enumeration-safe success message&#x27;, async () =&gt; {
+  const requestPasswordReset = vi.fn().mockResolvedValue(undefined)
+  const action = createPasswordRecoveryAction({ requestPasswordReset })
+  await expect(action({ email: &#x27;user@example.com&#x27; })).resolves.toEqual({
+    status: RECOVERY_SUCCESS_MESSAGE, error: &#x27;&#x27;,
+  })
+})
+
+it(&#x27;returns the existing delivery failure message&#x27;, async () =&gt; {
+  const action = createPasswordRecoveryAction({
+    requestPasswordReset: vi.fn().mockRejectedValue(new Error(&#x27;network&#x27;)),
+  })
+  await expect(action({ email: &#x27;user@example.com&#x27; })).resolves.toEqual({
+    status: &#x27;&#x27;, error: RECOVERY_ERROR_MESSAGE,
+  })
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the test and verify RED</strong></li></ul>
+<p>Run: <code>bunx vitest run tests/unit/client/identity/password-recovery-model.spec.ts</code></p>
+<p>Expected: FAIL because the recovery model does not exist.</p>
+<ul><li>[ ] <strong>Step 3: Implement the recovery action and form model</strong></li></ul>
+<p>Create <code>app/features/identity/model/use-password-recovery-form.ts</code>:</p>
+<pre><code class="language-ts">import { toTypedSchema } from &#x27;@vee-validate/zod&#x27;
+import { useForm } from &#x27;vee-validate&#x27;
+import { computed, ref } from &#x27;vue&#x27;
+import { identityApi } from &#x27;../api/identity-api&#x27;
+import {
+  passwordRecoverySchema,
+  type PasswordRecoveryValues,
+} from &#x27;./schemas&#x27;
+
+export const RECOVERY_SUCCESS_MESSAGE =
+  &#x27;Если аккаунт существует, ссылка отправлена на почту&#x27;
+export const RECOVERY_ERROR_MESSAGE =
+  &#x27;Не удалось отправить запрос. Попробуйте позже.&#x27;
+
+interface PasswordRecoveryDependencies {
+  readonly requestPasswordReset: (values: PasswordRecoveryValues) =&gt; Promise&lt;void&gt;
+}
+
+interface RecoveryOutcome {
+  readonly status: string
+  readonly error: string
+}
+
+export function createPasswordRecoveryAction(
+  dependencies: PasswordRecoveryDependencies,
+) {
+  return async (values: PasswordRecoveryValues): Promise&lt;RecoveryOutcome&gt; =&gt; {
+    try {
+      await dependencies.requestPasswordReset(values)
+      return { status: RECOVERY_SUCCESS_MESSAGE, error: &#x27;&#x27; }
+    } catch {
+      return { status: &#x27;&#x27;, error: RECOVERY_ERROR_MESSAGE }
+    }
+  }
+}
+
+export function usePasswordRecoveryForm(
+  dependencies?: PasswordRecoveryDependencies,
+) {
+  const action = createPasswordRecoveryAction(dependencies ?? {
+    requestPasswordReset: identityApi.requestPasswordReset,
+  })
+  const submitError = ref(&#x27;&#x27;)
+  const statusMessage = ref(&#x27;&#x27;)
+  const { defineField, errors, handleSubmit, isSubmitting } = useForm({
+    validationSchema: toTypedSchema(passwordRecoverySchema),
+    initialValues: { email: &#x27;&#x27; },
+  })
+  const [email, emailAttrs] = defineField(&#x27;email&#x27;)
+  const errorMessage = computed(() =&gt;
+    submitError.value || errors.value.email || &#x27;&#x27;,
+  )
+  const submit = handleSubmit(async values =&gt; {
+    submitError.value = &#x27;&#x27;
+    statusMessage.value = &#x27;&#x27;
+    const outcome = await action(values)
+    submitError.value = outcome.error
+    statusMessage.value = outcome.status
+  })
+
+  return {
+    email, emailAttrs, errorMessage, statusMessage, isSubmitting, submit,
+  }
+}</code></pre>
+<ul><li>[ ] <strong>Step 4: Move and connect the recovery UI</strong></li></ul>
+<p>Move the current template verbatim to <code>app/features/identity/ui/PasswordRecoveryForm.vue</code>. Replace its state/API script with:</p>
+<pre><code class="language-ts">&lt;script setup lang=&quot;ts&quot;&gt;
+import type { HTMLAttributes } from &#x27;vue&#x27;
+import { cn } from &#x27;@/lib/utils&#x27;
+import { usePasswordRecoveryForm } from &#x27;../model/use-password-recovery-form&#x27;
+
+const props = defineProps&lt;{ class?: HTMLAttributes[&#x27;class&#x27;] }&gt;()
+const {
+  email, emailAttrs, errorMessage, statusMessage, isSubmitting, submit,
+} = usePasswordRecoveryForm()
+&lt;/script&gt;</code></pre>
+<p>Bind <code>emailAttrs</code> on the input and replace <code>pending</code> with <code>isSubmitting</code>.</p>
+<p>Add to <code>app/features/identity/index.ts</code>:</p>
+<pre><code class="language-ts">export { default as PasswordRecoveryForm } from &#x27;./ui/PasswordRecoveryForm.vue&#x27;</code></pre>
+<p>In <code>app/pages/auth/forgot-password.vue</code>, import <code>PasswordRecoveryForm</code> from the feature public API and replace <code>&lt;AuthForgotPasswordForm /&gt;</code>. Preserve the rest of the page.</p>
+<ul><li>[ ] <strong>Step 5: Verify recovery behavior</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/client/identity/password-recovery-model.spec.ts
+bun run test:unit
+bun run typecheck
+bunx playwright test tests/e2e/identity.spec.ts -g &quot;returns one recovery response&quot;</code></pre>
+<p>Expected: all commands pass.</p>
+<ul><li>[ ] <strong>Step 6: Commit the recovery slice</strong></li></ul>
+<pre><code class="language-powershell">git add -- app/components/auth/forgotPasswordForm app/features/identity app/pages/auth/forgot-password.vue tests/unit/client/identity/password-recovery-model.spec.ts
+git commit -m &quot;refactor: move password recovery into identity feature&quot;</code></pre>
+<h2 id="task-5-move-reset-password-into-identity">Task 5: Move reset password into Identity</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>app/features/identity/model/use-reset-password-form.ts</code></li><li>Move: <code>app/components/auth/resetPasswordForm/index.vue</code> → <code>app/features/identity/ui/ResetPasswordForm.vue</code></li><li>Modify: <code>app/features/identity/index.ts</code></li><li>Modify: <code>app/pages/auth/reset-password/[token].vue</code></li><li>Create: <code>tests/unit/client/identity/reset-password-model.spec.ts</code></li><li>[ ] <strong>Step 1: Write failing reset action tests</strong></li></ul>
+<p>Create <code>tests/unit/client/identity/reset-password-model.spec.ts</code>:</p>
+<pre><code class="language-ts">import { expect, it, vi } from &#x27;vitest&#x27;
+import {
+  createResetPasswordAction,
+  RESET_TOKEN_ERROR,
+} from &#x27;../../../../app/features/identity/model/use-reset-password-form&#x27;
+
+it(&#x27;submits the page-owned token and navigates to sign in&#x27;, async () =&gt; {
+  const resetPassword = vi.fn().mockResolvedValue(undefined)
+  const navigate = vi.fn().mockResolvedValue(undefined)
+  const action = createResetPasswordAction({ resetPassword, navigate })
+  await expect(action(&#x27;token&#x27;, {
+    password: &#x27;Correct-Horse-Battery-1&#x27;, confirmation: &#x27;Correct-Horse-Battery-1&#x27;,
+  })).resolves.toBeNull()
+  expect(resetPassword).toHaveBeenCalledWith({
+    token: &#x27;token&#x27;, newPassword: &#x27;Correct-Horse-Battery-1&#x27;,
+  })
+  expect(navigate).toHaveBeenCalledWith(&#x27;/auth&#x27;)
+})
+
+it(&#x27;returns the existing invalid-token message&#x27;, async () =&gt; {
+  const action = createResetPasswordAction({
+    resetPassword: vi.fn().mockRejectedValue(new Error(&#x27;invalid&#x27;)),
+    navigate: vi.fn(),
+  })
+  await expect(action(&#x27;token&#x27;, {
+    password: &#x27;Correct-Horse-Battery-1&#x27;, confirmation: &#x27;Correct-Horse-Battery-1&#x27;,
+  })).resolves.toBe(RESET_TOKEN_ERROR)
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the test and verify RED</strong></li></ul>
+<p>Run: <code>bunx vitest run tests/unit/client/identity/reset-password-model.spec.ts</code></p>
+<p>Expected: FAIL because the reset model does not exist.</p>
+<ul><li>[ ] <strong>Step 3: Implement the reset action and form model</strong></li></ul>
+<p>Create <code>app/features/identity/model/use-reset-password-form.ts</code>:</p>
+<pre><code class="language-ts">import { toTypedSchema } from &#x27;@vee-validate/zod&#x27;
+import { useForm } from &#x27;vee-validate&#x27;
+import { computed, ref } from &#x27;vue&#x27;
+import { identityApi } from &#x27;../api/identity-api&#x27;
+import { resetPasswordSchema, type ResetPasswordValues } from &#x27;./schemas&#x27;
+
+export const RESET_TOKEN_ERROR =
+  &#x27;Ссылка недействительна или уже использована&#x27;
+
+interface ResetPasswordDependencies {
+  readonly resetPassword: (input: {
+    readonly token: string
+    readonly newPassword: string
+  }) =&gt; Promise&lt;void&gt;
+  readonly navigate: (path: string) =&gt; Promise&lt;unknown&gt; | unknown
+}
+
+export function createResetPasswordAction(
+  dependencies: ResetPasswordDependencies,
+) {
+  return async (
+    token: string,
+    values: ResetPasswordValues,
+  ): Promise&lt;string | null&gt; =&gt; {
+    try {
+      await dependencies.resetPassword({
+        token,
+        newPassword: values.password,
+      })
+      await dependencies.navigate(&#x27;/auth&#x27;)
+      return null
+    } catch {
+      return RESET_TOKEN_ERROR
+    }
+  }
+}
+
+export function useResetPasswordForm(
+  token: string,
+  dependencies?: ResetPasswordDependencies,
+) {
+  const action = createResetPasswordAction(dependencies ?? {
+    resetPassword: identityApi.resetPassword,
+    navigate: path =&gt; navigateTo(path),
+  })
+  const submitError = ref(&#x27;&#x27;)
+  const { defineField, errors, handleSubmit, isSubmitting } = useForm({
+    validationSchema: toTypedSchema(resetPasswordSchema),
+    initialValues: { password: &#x27;&#x27;, confirmation: &#x27;&#x27; },
+  })
+  const [password, passwordAttrs] = defineField(&#x27;password&#x27;)
+  const [confirmation, confirmationAttrs] = defineField(&#x27;confirmation&#x27;)
+  const errorMessage = computed(() =&gt;
+    submitError.value
+    || errors.value.password
+    || errors.value.confirmation
+    || &#x27;&#x27;,
+  )
+  const submit = handleSubmit(async values =&gt; {
+    submitError.value = await action(token, values) ?? &#x27;&#x27;
+  })
+
+  return {
+    password, passwordAttrs, confirmation, confirmationAttrs,
+    errorMessage, isSubmitting, submit,
+  }
+}</code></pre>
+<ul><li>[ ] <strong>Step 4: Move UI and make the page own the token</strong></li></ul>
+<p>Move the existing template to <code>app/features/identity/ui/ResetPasswordForm.vue</code>. Replace its state/API script with:</p>
+<pre><code class="language-ts">&lt;script setup lang=&quot;ts&quot;&gt;
+import type { HTMLAttributes } from &#x27;vue&#x27;
+import { cn } from &#x27;@/lib/utils&#x27;
+import { useResetPasswordForm } from &#x27;../model/use-reset-password-form&#x27;
+
+const props = defineProps&lt;{
+  class?: HTMLAttributes[&#x27;class&#x27;]
+  token: string
+}&gt;()
+const {
+  password, passwordAttrs, confirmation, confirmationAttrs,
+  errorMessage, isSubmitting, submit,
+} = useResetPasswordForm(props.token)
+&lt;/script&gt;</code></pre>
+<p>Bind both vee-validate attr objects and replace <code>pending</code> with <code>isSubmitting</code>. Preserve all markup, classes, IDs, autocomplete, links, and copy.</p>
+<p>Add to <code>app/features/identity/index.ts</code>:</p>
+<pre><code class="language-ts">export { default as ResetPasswordForm } from &#x27;./ui/ResetPasswordForm.vue&#x27;</code></pre>
+<p>In <code>app/pages/auth/reset-password/[token].vue</code>:</p>
+<pre><code class="language-ts">import { ResetPasswordForm } from &#x27;@/features/identity&#x27;
+
+const route = useRoute()
+const token = computed(() =&gt; String(route.params.token ?? &#x27;&#x27;))</code></pre>
+<p>Replace <code>&lt;AuthResetPasswordForm /&gt;</code> with <code>&lt;ResetPasswordForm :token=&quot;token&quot; /&gt;</code>. Keep page metadata and visual shell unchanged.</p>
+<ul><li>[ ] <strong>Step 5: Verify reset behavior</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/client/identity/reset-password-model.spec.ts
+bun run test:unit
+bun run typecheck
+bunx playwright test tests/e2e/identity.spec.ts -g &quot;resets once through Mailpit&quot;</code></pre>
+<p>Expected: all commands pass.</p>
+<ul><li>[ ] <strong>Step 6: Commit the reset slice</strong></li></ul>
+<pre><code class="language-powershell">git add -- app/components/auth/resetPasswordForm app/features/identity app/pages/auth/reset-password tests/unit/client/identity/reset-password-model.spec.ts
+git commit -m &quot;refactor: move password reset into identity feature&quot;</code></pre>
+<h2 id="task-6-enforce-boundaries-and-complete-verification">Task 6: Enforce boundaries and complete verification</h2>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>docs/progress.md</code></li><li>Generated but never staged: <code>.output/**</code>, <code>.nuxt/**</code>, <code>.tesserae/**</code></li><li>[ ] <strong>Step 1: Audit architecture boundaries</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">rg -n &quot;@/features/identity/(api|model|ui)&quot; app --glob &quot;*.ts&quot; --glob &quot;*.vue&quot;
+rg -n &quot;@/lib/auth-client|components/auth/(loginForm|forgotPasswordForm|resetPasswordForm)&quot; app tests
+rg --files app/features/identity</code></pre>
+<p>Expected: no deep feature imports outside <code>app/features/identity</code>, no old auth-client/component paths, and only the approved Identity feature files exist.</p>
+<ul><li>[ ] <strong>Step 2: Start test services and run full verification</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">docker compose --profile test up -d postgres-test mailpit
+bun install --frozen-lockfile
+bun run test:unit
+bun run test:integration
+bun run test:e2e
+bun run typecheck
+bun run build
+git diff --exit-code -- drizzle
+git diff --check</code></pre>
+<p>Expected: all suites and commands pass, with no Drizzle change. If Docker Desktop&#x27;s SMTP proxy accepts the connection without relaying the greeting, use the pinned native Mailpit 1.30.0 verification procedure already recorded in <code>docs/progress.md</code>; do not change application code or test timeouts to mask the environment issue.</p>
+<ul><li>[ ] <strong>Step 3: Update project progress</strong></li></ul>
+<p>Add a completed entry to <code>docs/progress.md</code> stating that the Nuxt-native feature-module convention is established and Identity is its reference implementation, with API/model/UI separation, vee-validate/Zod forms, explicit public API imports, page-owned route token, and unchanged visual/server behavior. Record exact test counts from Step 2.</p>
+<ul><li>[ ] <strong>Step 4: Refresh Tesserae</strong></li></ul>
+<p>Run: <code>./scripts/refresh-tesserae.ps1</code></p>
+<p>Expected: sessions import, compile, and Obsidian sync report <code>ok</code>. Never stage <code>.tesserae</code>.</p>
+<ul><li>[ ] <strong>Step 5: Commit documentation only</strong></li></ul>
+<pre><code class="language-powershell">git add -- docs/progress.md
+git diff --cached --check
+git commit -m &quot;docs: record identity client feature refactor&quot;</code></pre>
+<p>Expected: commit contains only <code>docs/progress.md</code>; generated output and Tesserae files are absent from the commit.</p>
+<ul><li>[ ] <strong>Step 6: Review branch completion</strong></li></ul>
+<p>Use <code>superpowers:requesting-code-review</code>, <code>superpowers:verification-before-completion</code>, and <code>superpowers:finishing-a-development-branch</code>. Do not claim success for a command that did not exit successfully.</p></section></article></div>
+<footer class="article-footer">
+
+</footer>
+</article>
+</main>
+<aside class="toc-rail" id="toc"><aside class="toc" role="doc-toc" aria-label="On this page"><h2>On this page</h2><ol><li data-toc-target="target-file-map"><a class="toc-l-2" href="#target-file-map">Target file map</a></li><li data-toc-target="task-1-create-the-identity-api-and-session-boundary"><a class="toc-l-2" href="#task-1-create-the-identity-api-and-session-boundary">Task 1: Create the Identity API and session boundary</a></li><li data-toc-target="task-2-add-typed-identity-form-schemas"><a class="toc-l-2" href="#task-2-add-typed-identity-form-schemas">Task 2: Add typed Identity form schemas</a></li><li data-toc-target="task-3-move-the-sign-in-form-into-identity"><a class="toc-l-2" href="#task-3-move-the-sign-in-form-into-identity">Task 3: Move the sign-in form into Identity</a></li><li data-toc-target="task-4-move-password-recovery-into-identity"><a class="toc-l-2" href="#task-4-move-password-recovery-into-identity">Task 4: Move password recovery into Identity</a></li><li data-toc-target="task-5-move-reset-password-into-identity"><a class="toc-l-2" href="#task-5-move-reset-password-into-identity">Task 5: Move reset password into Identity</a></li><li data-toc-target="task-6-enforce-boundaries-and-complete-verification"><a class="toc-l-2" href="#task-6-enforce-boundaries-and-complete-verification">Task 6: Enforce boundaries and complete verification</a></li></ol></aside></aside>
+</div>
+<nav class="mobile-bottom-nav" aria-label="Quick"><ul><li><a class="" href="../index.html" aria-label="Home"><span class="icon" aria-hidden="true">⌂</span><span class="label">Home</span></a></li><li><a class="" href="../concepts/index.html" aria-label="Concepts"><span class="icon" aria-hidden="true">◆</span><span class="label">Concepts</span></a></li><li><a class="" href="../papers/index.html" aria-label="Papers"><span class="icon" aria-hidden="true">¶</span><span class="label">Papers</span></a></li><li><a class="" href="../syntheses/index.html" aria-label="Syntheses"><span class="icon" aria-hidden="true">✱</span><span class="label">Syntheses</span></a></li><li><a class="" href="../sessions/index.html" aria-label="Sessions"><span class="icon" aria-hidden="true">◷</span><span class="label">Sessions</span></a></li><li><a class="" href="../graph/index.html" aria-label="Graph"><span class="icon" aria-hidden="true">⁂</span><span class="label">Graph</span></a></li></ul></nav>
+<div class="palette" id="palette" hidden role="dialog" aria-modal="true" aria-label="Search palette">
+<div class="palette-box"><div class="palette-input-row"><svg class="palette-input-icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><label class="visually-hidden" for="search">Search the wiki</label><input id="search" type="search" placeholder="Search the wiki…" aria-label="Search the wiki" autocomplete="off" spellcheck="false"><button class="palette-close" type="button" aria-label="Close search" data-close-search><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><line x1="5" y1="5" x2="15" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="15" y1="5" x2="5" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div><div class="visually-hidden" id="palette-live" aria-live="polite" aria-atomic="true"></div><footer class="palette-hint" aria-hidden="true"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>tab</kbd> filter type</span><span><kbd>esc</kbd> close</span></footer></div>
+</div>
+</body>
+</html>

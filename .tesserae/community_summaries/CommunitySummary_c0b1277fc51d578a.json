@@ -1,0 +1,26 @@
+{
+  "community_id": "CommunitySummary:c0b1277fc51d578a",
+  "member_ids": [
+    "Metric:map:592bcbe13f80",
+    "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+    "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
+    "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+    "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+    "SourceDocument:minerva-progress:c476087b907f",
+    "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
+    "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
+    "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387"
+  ],
+  "schema_version": 1,
+  "summary": {
+    "description": "Design and implementation-plan documents for Minerva's MVP identity backend, Nuxt feature modules, routing, UX prototypes, and progress tracking, with mAP included as a related metric node.",
+    "tags": [
+      "minerva",
+      "mvp",
+      "identity",
+      "nuxt",
+      "planning"
+    ],
+    "title": "Minerva MVP Identity Planning"
+  }
+}

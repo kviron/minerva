@@ -362,7 +362,7 @@
     "esquery": "1.7.0",
     "esrecurse": "4.3.0",
     "estraverse": "5.3.0",
-    "estree-walker": "2.0.2",
+    "estree-walker": "3.0.3",
     "esutils": "2.0.3",
     "etag": "1.8.1",
     "event-target-shim": "5.0.1",

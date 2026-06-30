@@ -3,10 +3,6 @@
 useHead({
   title: "Главная страница",
 })
-
-definePageMeta({
-  layout: "empty",
-})
 </script>
 
 <template>

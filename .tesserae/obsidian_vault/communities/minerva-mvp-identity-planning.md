@@ -1,17 +1,17 @@
 ---
-node_id: CommunitySummary:56fa58b054481eee
-title: Minerva Identity MVP
+node_id: CommunitySummary:c0b1277fc51d578a
+title: Minerva MVP Identity Planning
 type: CommunitySummary
 edges_out:
-  summarizes: [identity-backend-foundation-design, identity-backend-foundation-implementation-plan, map, minerva-mvp-route-map-design, minerva-mvp-ux-ui-prototype-design, minerva-progress, mvp-route-skeleton-implementation-plan]
+  summarizes: [identity-backend-foundation-design, identity-backend-foundation-implementation-plan, map, minerva-mvp-route-map-design, minerva-mvp-ux-ui-prototype-design, minerva-progress, mvp-route-skeleton-implementation-plan, nuxt-feature-modules-design, nuxt-feature-modules-implementation-plan]
 extractor: community_summaries.compile_community_summaries
-member_count: 7
+member_count: 9
 ---
 
-# Minerva Identity MVP
+# Minerva MVP Identity Planning
 
 > [!abstract] Community
-> Planning, design, routing, implementation, progress, and evaluation artifacts for the Minerva identity backend foundation MVP, including route skeletons and shared success metrics.
+> Design and implementation-plan documents for Minerva's MVP identity backend, Nuxt feature modules, routing, UX prototypes, and progress tracking, with mAP included as a related metric node.
 
 ## Outgoing
 
@@ -22,6 +22,8 @@ member_count: 7
 - summarizes → [[minerva-mvp-ux-ui-prototype-design]]
 - summarizes → [[minerva-progress]]
 - summarizes → [[mvp-route-skeleton-implementation-plan]]
+- summarizes → [[nuxt-feature-modules-design]]
+- summarizes → [[nuxt-feature-modules-implementation-plan]]
 
 ## Incoming
 

@@ -1,4 +1,4 @@
-import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { u as useNitroApp } from './chunks/_/nitro.mjs';
+import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import './timing.js';globalThis.__timing__.logStart('Nitro Start');import { u as useNitroApp } from './chunks/_/nitro.mjs';
 import 'node:events';
 import 'node:buffer';
 import 'node:fs';
@@ -28,5 +28,5 @@ const server = Bun.serve({
     });
   }
 });
-console.log(`Listening on ${server.url}...`);
+console.log(`Listening on ${server.url}...`);;globalThis.__timing__.logEnd('Nitro Start');
 //# sourceMappingURL=index.mjs.map

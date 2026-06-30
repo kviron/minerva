@@ -13,7 +13,7 @@ title: Identity Backend Foundation Implementation Plan
 
 ## Incoming relations
 
-- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
 
 ## Connected node types
 

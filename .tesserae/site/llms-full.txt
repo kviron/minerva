@@ -11,6 +11,7 @@
 - [ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation](sources/adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation.html)
 - [ADR 0006: Use Bun as the package manager](sources/adr-0006-use-bun-as-the-package-manager.html)
 - [ADR 0007: Separate authentication identity, user profiles, contacts, and project roles](sources/adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles.html)
+- [ADR 0008: Use Nuxt-native client feature modules](sources/adr-0008-use-nuxt-native-client-feature-modules.html)
 - [Forgot-password UI design](sources/forgot-password-ui-design.html)
 - [Forgot-Password UI Implementation Plan](sources/forgot-password-ui-implementation-plan.html)
 - [Identity backend foundation design](sources/identity-backend-foundation-design.html): - **uses_metric** → mAP _(Metric)_
@@ -30,10 +31,14 @@
 - [Minerva progress](sources/minerva-progress.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva roadmap](sources/minerva-roadmap.html)
 - [MVP Route Skeleton Implementation Plan](sources/mvp-route-skeleton-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
+- [Nuxt feature modules design](sources/nuxt-feature-modules-design.html): - **uses_metric** → mAP _(Metric)_
+- [Nuxt Feature Modules Implementation Plan](sources/nuxt-feature-modules-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [PostgreSQL Docker Compose design](sources/postgresql-docker-compose-design.html)
 - [PostgreSQL Docker Compose Implementation Plan](sources/postgresql-docker-compose-implementation-plan.html)
 - [Reset-password UI design](sources/reset-password-ui-design.html)
 - [Reset-Password UI Implementation Plan](sources/reset-password-ui-implementation-plan.html)
+- [Route Authorization Design](sources/route-authorization-design.html)
+- [Route Authorization Implementation Plan](sources/route-authorization-implementation-plan.html)
 - [Tesserae development memory](sources/tesserae-development-memory.html)
 - [Tesserae refresh wrapper design](sources/tesserae-refresh-wrapper-design.html)
 - [Tesserae Refresh Wrapper Implementation Plan](sources/tesserae-refresh-wrapper-implementation-plan.html)
@@ -41,7 +46,7 @@
 
 ## Entities
 
-- [mAP](entities/map.html): - **summarizes** → Minerva Identity MVP _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocument)_ - *…
+- [mAP](entities/map.html): - **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocum…
 - [MATH](entities/math.html): - **evaluated_on** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
 
 ## Syntheses
@@ -87,6 +92,11 @@ _sources/adr-0007-separate-authentication-identity-user-profiles-contacts-and-pr
 
 # ADR 0007: Separate authentication identity, user profiles, contacts, and project roles
 
+### ADR 0008: Use Nuxt-native client feature modules
+_sources/adr-0008-use-nuxt-native-client-feature-modules.html_
+
+# ADR 0008: Use Nuxt-native client feature modules
+
 ### Forgot-password UI design
 _sources/forgot-password-ui-design.html_
 
@@ -108,7 +118,7 @@ _sources/identity-backend-foundation-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
 
 ## Connected node types
 
@@ -126,7 +136,7 @@ _sources/identity-backend-foundation-implementation-plan.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
 
 ## Connected node types
 
@@ -199,7 +209,7 @@ _sources/minerva-mvp-route-map-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
 
 ## Connected node types
 
@@ -217,7 +227,7 @@ _sources/minerva-mvp-ux-ui-prototype-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
 
 ## Connected node types
 
@@ -240,7 +250,7 @@ _sources/minerva-progress.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
 
 ## Connected node types
 
@@ -263,7 +273,43 @@ _sources/mvp-route-skeleton-implementation-plan.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
+
+## Connected node types
+
+- CommunitySummary: 1
+- Metric: 1
+
+### Nuxt feature modules design
+_sources/nuxt-feature-modules-design.html_
+
+# Nuxt feature modules design
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Incoming relations
+
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
+
+## Connected node types
+
+- CommunitySummary: 1
+- Metric: 1
+
+### Nuxt Feature Modules Implementation Plan
+_sources/nuxt-feature-modules-implementation-plan.html_
+
+# Nuxt Feature Modules Implementation Plan
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Incoming relations
+
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
 
 ## Connected node types
 
@@ -289,6 +335,16 @@ _sources/reset-password-ui-design.html_
 _sources/reset-password-ui-implementation-plan.html_
 
 # Reset-Password UI Implementation Plan
+
+### Route Authorization Design
+_sources/route-authorization-design.html_
+
+# Route Authorization Design
+
+### Route Authorization Implementation Plan
+_sources/route-authorization-implementation-plan.html_
+
+# Route Authorization Implementation Plan
 
 ### Tesserae development memory
 _sources/tesserae-development-memory.html_
@@ -319,7 +375,7 @@ _entities/map.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva Identity MVP _(CommunitySummary)_
+- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
 - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_
 - **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
 - **uses_metric** → Identity backend foundation design _(SourceDocument)_
@@ -327,10 +383,12 @@ _entities/map.html_
 - **uses_metric** → Minerva MVP UX/UI prototype design _(SourceDocument)_
 - **uses_metric** → Minerva MVP route map design _(SourceDocument)_
 - **uses_metric** → Minerva progress _(SourceDocument)_
+- **uses_metric** → Nuxt Feature Modules Implementation Plan _(SourceDocument)_
+- **uses_metric** → Nuxt feature modules design _(SourceDocument)_
 
 ## Connected node types
 
-- SourceDocument: 7
+- SourceDocument: 9
 - CommunitySummary: 1
 
 ### MATH
@@ -360,7 +418,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 34
+- SourceDocument: 39
 
 ## Recently added
 - (none)

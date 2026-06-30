@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026-06-30-route-authorization.md · Tesserae</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script defer src="../assets/app.js"></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar" role="banner">
+<a class="brand" href="../index.html">Tesserae</a>
+<nav role="navigation" aria-label="Primary"><a class="" href="../index.html"><span>Home</span></a><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="topnav-count">[39]</span></a><a class="" href="../concepts/index.html"><span>Concepts</span></a><a class="" href="../entities/index.html"><span>Entities</span> <span class="topnav-count">[2]</span></a><a class="" href="../papers/index.html"><span>Papers</span></a><a class="" href="../repos/index.html"><span>Repos</span></a><a class="" href="../topics/index.html"><span>Topics</span></a><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="topnav-count">[1]</span></a><a class="" href="../questions/index.html"><span>Questions</span></a><a class="" href="../sessions/index.html"><span>Sessions</span></a><a class="" href="../graph/index.html"><span>Graph</span></a><a class="" href="../about.html"><span>About</span></a></nav>
+<button class="search-button" data-open-search type="button" aria-label="Open search"><svg class="icon" viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="search-button-label">Search</span><kbd class="search-button-kbd" aria-hidden="true">/</kbd></button>
+<button class="theme-toggle" data-toggle-theme type="button" aria-label="Toggle color theme"><svg class="icon icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5.2" y1="5.2" x2="6.9" y2="6.9"/><line x1="17.1" y1="17.1" x2="18.8" y2="18.8"/><line x1="5.2" y1="18.8" x2="6.9" y2="17.1"/><line x1="17.1" y1="6.9" x2="18.8" y2="5.2"/></g></svg><svg class="icon icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.5 14.6a8 8 0 0 1-10.9-10.5.6.6 0 0 0-.8-.8 9.5 9.5 0 1 0 12.5 12.1.6.6 0 0 0-.8-.8z"/></svg></button>
+<button class="rail-toggle" aria-controls="rail" aria-expanded="false" aria-label="Toggle navigation drawer" data-toggle-rail type="button"><svg class="icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="rail-toggle-label">Menu</span></button>
+</header>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="Document tree"><nav class="rail-drawer-nav" aria-label="Primary (mobile)"><h2 class="rail-section-label">Browse</h2><ul class="rail-drawer-nav-list"><li><a class="" href="../index.html"><span>Home</span></a></li><li><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="rail-nav-count">[39]</span></a></li><li><a class="" href="../concepts/index.html"><span>Concepts</span></a></li><li><a class="" href="../entities/index.html"><span>Entities</span> <span class="rail-nav-count">[2]</span></a></li><li><a class="" href="../papers/index.html"><span>Papers</span></a></li><li><a class="" href="../repos/index.html"><span>Repos</span></a></li><li><a class="" href="../topics/index.html"><span>Topics</span></a></li><li><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="rail-nav-count">[1]</span></a></li><li><a class="" href="../questions/index.html"><span>Questions</span></a></li><li><a class="" href="../sessions/index.html"><span>Sessions</span></a></li><li><a class="" href="../graph/index.html"><span>Graph</span></a></li><li><a class="" href="../about.html"><span>About</span></a></li></ul></nav><div class="doc-tree-search-row"><label class="visually-hidden" for="doc-tree-filter">Filter source files</label><input class="doc-tree-search" id="doc-tree-filter" type="search" placeholder="Filter files…" aria-label="Filter source files" data-doc-tree-search></div><h2 class="rail-section-label">Files</h2><nav class="doc-tree" aria-label="Source explorer"><li class="doc-tree-leaf" data-doc-path="AGENTS.md"><a href="../raw/agents-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">AGENTS.md</span></a></li><details class="doc-tree-folder doc-tree-root"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">docs</span> <span class="doc-tree-count">[38]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/architecture.md"><a href="../raw/docs-architecture-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">architecture.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/backlog.md"><a href="../raw/docs-backlog-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">backlog.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">decisions</span> <span class="doc-tree-count">[8]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/decisions/0001-modular-monolith.md"><a href="../raw/docs-decisions-0001-modular-monolith-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0001-modular-monolith.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0002-project-rbac.md"><a href="../raw/docs-decisions-0002-project-rbac-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0002-project-rbac.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0003-document-versioning.md"><a href="../raw/docs-decisions-0003-document-versioning-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0003-document-versioning.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0004-mcp-first-release-boundary.md"><a href="../raw/docs-decisions-0004-mcp-first-release-boundary-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0004-mcp-first-release-boundary.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0005-mcp-oauth-resource-and-revocation.md"><a href="../raw/docs-decisions-0005-mcp-oauth-resource-and-revocation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0005-mcp-oauth-resource-and-revocation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0006-use-bun-package-manager.md"><a href="../raw/docs-decisions-0006-use-bun-package-manager-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0006-use-bun-package-manager.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0007-separate-authentication-profiles-and-project-roles.md"><a href="../raw/docs-decisions-0007-separate-authentication-profiles-and-project-roles-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0007-separate-authentication-profiles-and-project-roles.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0008-use-nuxt-native-feature-modules.md"><a href="../raw/docs-decisions-0008-use-nuxt-native-feature-modules-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0008-use-nuxt-native-feature-modules.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">operations</span> <span class="doc-tree-count">[1]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/operations/tesserae.md"><a href="../raw/docs-operations-tesserae-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">tesserae.md</span></a></li></ul></details></li><li class="doc-tree-leaf" data-doc-path="docs/product-spec.md"><a href="../raw/docs-product-spec-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">product-spec.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/progress.md"><a href="../raw/docs-progress-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">progress.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/roadmap.md"><a href="../raw/docs-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">roadmap.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">superpowers</span> <span class="doc-tree-count">[24]</span></summary><ul class="doc-tree-list"><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">plans</span> <span class="doc-tree-count">[12]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-24-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-figma-prototype.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-figma-prototype.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-mvp-roadmap.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-roadmap.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-mvp-route-skeleton.md"><a href="../raw/docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-mvp-route-skeleton.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-postgresql-compose.md"><a href="../raw/docs-superpowers-plans-2026-06-27-postgresql-compose-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-tesserae-refresh-wrapper.md"><a href="../raw/docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-forgot-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-forgot-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-reset-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-reset-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-identity-backend-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-29-identity-backend-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-backend-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-identity-functional-refactor.md"><a href="../raw/docs-superpowers-plans-2026-06-29-identity-functional-refactor-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-functional-refactor.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-nuxt-feature-modules.md"><a href="../raw/docs-superpowers-plans-2026-06-29-nuxt-feature-modules-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-nuxt-feature-modules.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-30-route-authorization.md"><a href="../raw/docs-superpowers-plans-2026-06-30-route-authorization-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-30-route-authorization.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">specs</span> <span class="doc-tree-count">[12]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-mvp-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-ui-prototype-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-minerva-mvp-route-map-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-postgresql-compose-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-tesserae-refresh-wrapper-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-forgot-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-identity-backend-foundation-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-identity-backend-foundation-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-reset-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-user-identity-profile-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-user-identity-profile-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-user-identity-profile-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-29-identity-functional-refactor-design.md"><a href="../raw/docs-superpowers-specs-2026-06-29-identity-functional-refactor-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-functional-refactor-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-29-nuxt-feature-modules-design.md"><a href="../raw/docs-superpowers-specs-2026-06-29-nuxt-feature-modules-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-nuxt-feature-modules-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-30-route-authorization-design.md"><a href="../raw/docs-superpowers-specs-2026-06-30-route-authorization-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-30-route-authorization-design.md</span></a></li></ul></details></li></ul></details></li></ul></details></nav></aside>
+<main class="main" id="main" aria-label="Main content">
+<button class="toc-toggle" aria-controls="toc" aria-expanded="false" data-toggle-toc type="button">On this page</button>
+<article class="article">
+<header class="article-header">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a class="crumb" href="../index.html">Home</a><span class="sep" aria-hidden="true">/</span><span class="crumb">Raw</span><span class="sep" aria-hidden="true">/</span><span class="crumb crumb-current">2026-06-30-route-authorizatio...</span></nav>
+</header>
+<div class="article-body"><p class="eyebrow raw-meta">22.3 KB · updated 2026-06-30 · md</p>
+<h1 class="raw-title" title="D://develop//minerva//docs//superpowers//plans//2026-06-30-route-authorization.md">2026-06-30-route-authorization.md</h1>
+<p class="raw-path"><code>D://develop//minerva//docs//superpowers//plans//2026-06-30-route-authorization.md</code></p>
+<article class="raw-page"><section class="markdown-body raw-markdown"><h1 id="route-authorization-implementation-plan">Route Authorization Implementation Plan</h1>
+<blockquote><p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (<code>- [ ]</code>) syntax for tracking.</p></blockquote>
+<p><strong>Goal:</strong> Protect every non-public Nuxt page and application Nitro endpoint with Better Auth sessions, and restrict global administration to the existing <code>superAdmin</code> flag.</p>
+<p><strong>Architecture:</strong> Keep client navigation policy as a pure Identity feature model consumed by Nuxt global middleware. Add a pure server HTTP access classifier and one global Nitro middleware that defaults application APIs to authenticated, delegates administration paths to a server-side super-administrator guard, and explicitly permits only approved public endpoints. Project-scoped roles and permission evaluation remain outside this slice.</p>
+<p><strong>Tech Stack:</strong> Nuxt 4 route middleware, Nitro/H3 middleware, Better Auth 1.6, TypeScript, Vitest, Playwright, Bun.</p>
+<hr>
+<h2 id="file-structure">File structure</h2>
+<ul><li><code>app/features/identity/model/route-access.ts</code>: pure page classification and navigation decisions.</li><li><code>app/features/identity/index.ts</code>: exposes only the route decision needed by Nuxt middleware.</li><li><code>app/middleware/auth.global.ts</code>: resolves the current session and applies the pure navigation decision.</li><li><code>app/features/identity/model/use-sign-in-form.ts</code>: sends successful sign-in to <code>/projects</code>.</li><li><code>shared/authorization/constants.ts</code> and <code>shared/authorization/types.ts</code>: stable transport-safe authorization error vocabulary, not project permission codes.</li><li><code>server/modules/authorization/authorization-error.ts</code>: framework-independent forbidden error.</li><li><code>server/modules/authorization/require-super-admin.ts</code>: checks the server-resolved Better Auth user.</li><li><code>server/modules/authorization/api-access.ts</code>: pure method/path classification for Nitro APIs.</li><li><code>server/middleware/authorize-api.ts</code>: default-deny API enforcement entry point.</li><li>Unit, integration, and browser tests mirror those boundaries.</li></ul>
+<h3 id="task-1-make-page-access-explicit-and-testable">Task 1: Make page access explicit and testable</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>app/features/identity/model/route-access.ts</code></li><li>Modify: <code>app/features/identity/index.ts</code></li><li>Modify: <code>app/middleware/auth.global.ts</code></li><li>Modify: <code>app/features/identity/model/use-sign-in-form.ts</code></li><li>Create: <code>tests/unit/client/identity/route-access.spec.ts</code></li><li>Modify: <code>tests/unit/client/identity/sign-in-model.spec.ts</code></li><li>[ ] <strong>Step 1: Write failing page-policy tests</strong></li></ul>
+<p>Create <code>tests/unit/client/identity/route-access.spec.ts</code>:</p>
+<pre><code class="language-ts">import { describe, expect, it } from &#x27;vitest&#x27;
+import { decideRouteAccess } from &#x27;../../../../app/features/identity/model/route-access&#x27;
+
+const guest = { session: null, sessionError: false }
+const user = { session: { user: { superAdmin: false } }, sessionError: false }
+const superAdmin = { session: { user: { superAdmin: true } }, sessionError: false }
+
+describe(&#x27;decideRouteAccess&#x27;, () =&gt; {
+  it.each([
+    &#x27;/auth&#x27;,
+    &#x27;/auth/forgot-password&#x27;,
+    &#x27;/auth/reset-password/token&#x27;,
+    &#x27;/invitations/token&#x27;,
+    &#x27;/legal/terms&#x27;,
+    &#x27;/legal/privacy&#x27;,
+  ])(&#x27;allows the approved public page %s for a guest&#x27;, (path) =&gt; {
+    expect(decideRouteAccess({ path, ...guest })).toEqual({ kind: &#x27;allow&#x27; })
+  })
+
+  it.each([&#x27;/auth/extra&#x27;, &#x27;/legal/extra&#x27;, &#x27;/invitations&#x27;, &#x27;/projects&#x27;])
+    (&#x27;does not broaden the public allowlist to %s&#x27;, (path) =&gt; {
+      expect(decideRouteAccess({ path, ...guest })).toEqual({
+        kind: &#x27;redirect&#x27;, to: &#x27;/auth&#x27;,
+      })
+    })
+
+  it(&#x27;sends an authenticated user away from sign-in&#x27;, () =&gt; {
+    expect(decideRouteAccess({ path: &#x27;/auth&#x27;, ...user })).toEqual({
+      kind: &#x27;redirect&#x27;, to: &#x27;/projects&#x27;,
+    })
+  })
+
+  it(&#x27;keeps public recovery pages reachable while authenticated&#x27;, () =&gt; {
+    expect(decideRouteAccess({ path: &#x27;/auth/forgot-password&#x27;, ...user }))
+      .toEqual({ kind: &#x27;allow&#x27; })
+  })
+
+  it(&#x27;redirects an ordinary user away from administration&#x27;, () =&gt; {
+    expect(decideRouteAccess({ path: &#x27;/administration/users&#x27;, ...user })).toEqual({
+      kind: &#x27;redirect&#x27;, to: &#x27;/projects&#x27;,
+    })
+  })
+
+  it(&#x27;allows a super administrator into administration&#x27;, () =&gt; {
+    expect(decideRouteAccess({ path: &#x27;/administration/users&#x27;, ...superAdmin }))
+      .toEqual({ kind: &#x27;allow&#x27; })
+  })
+
+  it(&#x27;does not turn a session lookup failure into a sign-out redirect&#x27;, () =&gt; {
+    expect(decideRouteAccess({ path: &#x27;/projects&#x27;, session: null, sessionError: true }))
+      .toEqual({ kind: &#x27;error&#x27; })
+  })
+})</code></pre>
+<p>In <code>tests/unit/client/identity/sign-in-model.spec.ts</code>, change the successful navigation expectation from <code>/</code> to <code>/projects</code>.</p>
+<ul><li>[ ] <strong>Step 2: Run the focused tests and observe the intended failures</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/client/identity/route-access.spec.ts tests/unit/client/identity/sign-in-model.spec.ts</code></pre>
+<p>Expected: FAIL because <code>route-access.ts</code> does not exist and the sign-in action still navigates to <code>/</code>.</p>
+<ul><li>[ ] <strong>Step 3: Implement the pure page policy</strong></li></ul>
+<p>Create <code>app/features/identity/model/route-access.ts</code>:</p>
+<pre><code class="language-ts">interface RouteSession {
+  readonly user: { readonly superAdmin?: boolean }
+}
+
+interface RouteAccessInput {
+  readonly path: string
+  readonly session: RouteSession | null
+  readonly sessionError: boolean
+}
+
+export type RouteAccessDecision =
+  | { readonly kind: &#x27;allow&#x27; }
+  | { readonly kind: &#x27;error&#x27; }
+  | { readonly kind: &#x27;redirect&#x27;, readonly to: &#x27;/auth&#x27; | &#x27;/projects&#x27; }
+
+const publicStaticPaths = new Set([
+  &#x27;/auth&#x27;,
+  &#x27;/auth/forgot-password&#x27;,
+  &#x27;/legal/terms&#x27;,
+  &#x27;/legal/privacy&#x27;,
+])
+
+function isPublicPage(path: string) {
+  return publicStaticPaths.has(path)
+    || /^\/auth\/reset-password\/[^/]+$/.test(path)
+    || /^\/invitations\/[^/]+$/.test(path)
+}
+
+export function decideRouteAccess(input: RouteAccessInput): RouteAccessDecision {
+  if (input.sessionError) return { kind: &#x27;error&#x27; }
+  if (!input.session)
+    return isPublicPage(input.path) ? { kind: &#x27;allow&#x27; } : { kind: &#x27;redirect&#x27;, to: &#x27;/auth&#x27; }
+  if (input.path === &#x27;/auth&#x27;) return { kind: &#x27;redirect&#x27;, to: &#x27;/projects&#x27; }
+  if (
+    (input.path === &#x27;/administration&#x27; || input.path.startsWith(&#x27;/administration/&#x27;))
+    &amp;&amp; !input.session.user.superAdmin
+  ) return { kind: &#x27;redirect&#x27;, to: &#x27;/projects&#x27; }
+  return { kind: &#x27;allow&#x27; }
+}</code></pre>
+<p>Export <code>decideRouteAccess</code> from <code>app/features/identity/index.ts</code>. Update <code>app/middleware/auth.global.ts</code> to call <code>getIdentitySession()</code>, pass both <code>data</code> and <code>error</code> into the policy, return <code>navigateTo(decision.to)</code> for redirects, and return <code>abortNavigation(createError({ statusCode: 503, statusMessage: &#x27;Service Unavailable&#x27; }))</code> for <code>kind === &#x27;error&#x27;</code>.</p>
+<p>Use this complete middleware body:</p>
+<pre><code class="language-ts">import { decideRouteAccess, getIdentitySession } from &#x27;@/features/identity&#x27;
+
+export default defineNuxtRouteMiddleware(async (to) =&gt; {
+  const { data: session, error } = await getIdentitySession()
+  const decision = decideRouteAccess({
+    path: to.path,
+    session,
+    sessionError: Boolean(error),
+  })
+
+  if (decision.kind === &#x27;redirect&#x27;) return navigateTo(decision.to)
+  if (decision.kind === &#x27;error&#x27;) {
+    return abortNavigation(createError({
+      statusCode: 503,
+      statusMessage: &#x27;Service Unavailable&#x27;,
+    }))
+  }
+})</code></pre>
+<p>Change <code>createSignInAction</code> in <code>app/features/identity/model/use-sign-in-form.ts</code> to call <code>navigate(&#x27;/projects&#x27;)</code>.</p>
+<ul><li>[ ] <strong>Step 4: Run client unit tests</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/client/identity</code></pre>
+<p>Expected: all client Identity tests PASS.</p>
+<ul><li>[ ] <strong>Step 5: Commit the client page gate</strong></li></ul>
+<pre><code class="language-powershell">git add -- app/features/identity app/middleware/auth.global.ts tests/unit/client/identity
+git commit -m &quot;feat: enforce authenticated page access&quot;</code></pre>
+<h3 id="task-2-add-the-server-authorization-vocabulary-and-super-administrator-guard">Task 2: Add the server authorization vocabulary and super-administrator guard</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>shared/authorization/constants.ts</code></li><li>Create: <code>shared/authorization/types.ts</code></li><li>Create: <code>server/modules/authorization/authorization-error.ts</code></li><li>Create: <code>server/modules/authorization/require-super-admin.ts</code></li><li>Create: <code>tests/unit/authorization/require-super-admin.spec.ts</code></li><li>Modify: <code>tests/unit/identity/constants.spec.ts</code></li><li>[ ] <strong>Step 1: Write the failing guard tests</strong></li></ul>
+<p>Create <code>tests/unit/authorization/require-super-admin.spec.ts</code>:</p>
+<pre><code class="language-ts">import { describe, expect, it, vi } from &#x27;vitest&#x27;
+import { AUTHORIZATION_CODE } from &#x27;../../../shared/authorization/constants&#x27;
+import { createRequireSuperAdmin } from &#x27;../../../server/modules/authorization/require-super-admin&#x27;
+
+describe(&#x27;createRequireSuperAdmin&#x27;, () =&gt; {
+  it(&#x27;returns the server-resolved super administrator session&#x27;, async () =&gt; {
+    const session = { user: { id: &#x27;admin-id&#x27;, superAdmin: true } }
+    const requireSession = vi.fn().mockResolvedValue(session)
+    const guard = createRequireSuperAdmin(requireSession)
+    const event = {} as never
+
+    await expect(guard(event)).resolves.toBe(session)
+    expect(requireSession).toHaveBeenCalledWith(event)
+  })
+
+  it(&#x27;rejects an ordinary authenticated user with the stable forbidden code&#x27;, async () =&gt; {
+    const guard = createRequireSuperAdmin(async () =&gt; ({
+      user: { id: &#x27;user-id&#x27;, superAdmin: false },
+    }))
+
+    await expect(guard({} as never)).rejects.toMatchObject({
+      code: AUTHORIZATION_CODE.FORBIDDEN,
+      statusCode: 403,
+    })
+  })
+})</code></pre>
+<p>Extend <code>tests/unit/identity/constants.spec.ts</code> to assert that <code>AUTHORIZATION_CODE.FORBIDDEN</code> is exactly <code>&#x27;FORBIDDEN&#x27;</code> and assignable to <code>AuthorizationCode</code>.</p>
+<ul><li>[ ] <strong>Step 2: Run the guard tests and observe the missing modules</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/authorization/require-super-admin.spec.ts tests/unit/identity/constants.spec.ts</code></pre>
+<p>Expected: FAIL because the authorization modules do not exist.</p>
+<ul><li>[ ] <strong>Step 3: Implement the minimal server guard</strong></li></ul>
+<p>Create <code>shared/authorization/constants.ts</code>:</p>
+<pre><code class="language-ts">export const AUTHORIZATION_CODE = {
+  FORBIDDEN: &#x27;FORBIDDEN&#x27;,
+} as const</code></pre>
+<p>Create <code>shared/authorization/types.ts</code>:</p>
+<pre><code class="language-ts">type ValueOf&lt;T&gt; = T[keyof T]
+
+export type AuthorizationCode = ValueOf&lt;
+  typeof import(&#x27;./constants&#x27;).AUTHORIZATION_CODE
+&gt;</code></pre>
+<p>Create <code>server/modules/authorization/authorization-error.ts</code>:</p>
+<pre><code class="language-ts">import type { AuthorizationCode } from &#x27;../../../shared/authorization/types&#x27;
+
+export class AuthorizationError extends Error {
+  readonly statusCode = 403
+
+  constructor(public readonly code: AuthorizationCode) {
+    super(code)
+    this.name = &#x27;AuthorizationError&#x27;
+  }
+}</code></pre>
+<p>Create <code>server/modules/authorization/require-super-admin.ts</code>:</p>
+<pre><code class="language-ts">import type { H3Event } from &#x27;h3&#x27;
+import { AUTHORIZATION_CODE } from &#x27;../../../shared/authorization/constants&#x27;
+import { requireSession } from &#x27;../identity/session/require-session&#x27;
+import { AuthorizationError } from &#x27;./authorization-error&#x27;
+
+interface AdministratorSession {
+  readonly user: { readonly superAdmin?: boolean }
+}
+
+export function createRequireSuperAdmin&lt;Session extends AdministratorSession&gt;(
+  requireAuthenticatedSession: (event: H3Event) =&gt; Promise&lt;Session&gt;,
+) {
+  return async (event: H3Event): Promise&lt;Session&gt; =&gt; {
+    const session = await requireAuthenticatedSession(event)
+    if (!session.user.superAdmin)
+      throw new AuthorizationError(AUTHORIZATION_CODE.FORBIDDEN)
+    return session
+  }
+}
+
+export const requireSuperAdmin = createRequireSuperAdmin(requireSession)</code></pre>
+<ul><li>[ ] <strong>Step 4: Run authorization and existing Identity guard tests</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/authorization tests/unit/identity/require-session.spec.ts tests/unit/identity/constants.spec.ts</code></pre>
+<p>Expected: all selected tests PASS.</p>
+<ul><li>[ ] <strong>Step 5: Commit the super-administrator guard</strong></li></ul>
+<pre><code class="language-powershell">git add -- shared/authorization server/modules/authorization tests/unit/authorization tests/unit/identity/constants.spec.ts
+git commit -m &quot;feat: add super administrator guard&quot;</code></pre>
+<h3 id="task-3-default-application-apis-to-authenticated">Task 3: Default application APIs to authenticated</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>server/modules/authorization/api-access.ts</code></li><li>Create: <code>server/middleware/authorize-api.ts</code></li><li>Create: <code>tests/unit/authorization/api-access.spec.ts</code></li><li>Create: <code>tests/unit/authorization/authorize-api-middleware.spec.ts</code></li><li>[ ] <strong>Step 1: Write failing API classification tests</strong></li></ul>
+<p>Create <code>tests/unit/authorization/api-access.spec.ts</code> with a table asserting:</p>
+<pre><code class="language-ts">import { describe, expect, it } from &#x27;vitest&#x27;
+import { classifyApiAccess } from &#x27;../../../server/modules/authorization/api-access&#x27;
+
+describe(&#x27;classifyApiAccess&#x27;, () =&gt; {
+  it.each([
+    [&#x27;GET&#x27;, &#x27;/api/auth/get-session&#x27;],
+    [&#x27;POST&#x27;, &#x27;/api/auth/sign-out&#x27;],
+    [&#x27;POST&#x27;, &#x27;/api/identity/sign-in&#x27;],
+    [&#x27;POST&#x27;, &#x27;/api/identity/request-password-reset&#x27;],
+    [&#x27;POST&#x27;, &#x27;/api/identity/reset-password&#x27;],
+    [&#x27;GET&#x27;, &#x27;/api/health/database&#x27;],
+  ])(&#x27;keeps %s %s public&#x27;, (method, path) =&gt; {
+    expect(classifyApiAccess(method, path)).toBe(&#x27;public&#x27;)
+  })
+
+  it.each([
+    [&#x27;GET&#x27;, &#x27;/api/mainMenu&#x27;],
+    [&#x27;GET&#x27;, &#x27;/api/identity/sign-in&#x27;],
+    [&#x27;POST&#x27;, &#x27;/api/health/database&#x27;],
+    [&#x27;GET&#x27;, &#x27;/api/future&#x27;],
+  ])(&#x27;requires authentication for %s %s&#x27;, (method, path) =&gt; {
+    expect(classifyApiAccess(method, path)).toBe(&#x27;authenticated&#x27;)
+  })
+
+  it.each([
+    &#x27;/api/administration&#x27;,
+    &#x27;/api/administration/users&#x27;,
+  ])(&#x27;requires a super administrator for GET %s&#x27;, (path) =&gt; {
+    expect(classifyApiAccess(&#x27;GET&#x27;, path)).toBe(&#x27;super-admin&#x27;)
+  })
+
+  it(&#x27;ignores non-API requests&#x27;, () =&gt; {
+    expect(classifyApiAccess(&#x27;GET&#x27;, &#x27;/projects&#x27;)).toBe(&#x27;not-api&#x27;)
+  })
+})</code></pre>
+<p>Create <code>tests/unit/authorization/authorize-api-middleware.spec.ts</code>:</p>
+<pre><code class="language-ts">import type { H3Event } from &#x27;h3&#x27;
+import { describe, expect, it, vi } from &#x27;vitest&#x27;
+import { createAuthorizeApi } from &#x27;../../../server/middleware/authorize-api&#x27;
+
+function event(method: string, path: string) {
+  return {
+    method,
+    path,
+    headers: new Headers({ host: &#x27;127.0.0.1:3000&#x27; }),
+    node: { req: { method, url: path, headers: { host: &#x27;127.0.0.1:3000&#x27; } } },
+  } as unknown as H3Event
+}
+
+describe(&#x27;createAuthorizeApi&#x27;, () =&gt; {
+  it(&#x27;skips public and non-API requests&#x27;, async () =&gt; {
+    const requireSession = vi.fn()
+    const requireSuperAdmin = vi.fn()
+    const authorize = createAuthorizeApi({ requireSession, requireSuperAdmin })
+
+    await authorize(event(&#x27;POST&#x27;, &#x27;/api/identity/sign-in&#x27;))
+    await authorize(event(&#x27;GET&#x27;, &#x27;/projects&#x27;))
+
+    expect(requireSession).not.toHaveBeenCalled()
+    expect(requireSuperAdmin).not.toHaveBeenCalled()
+  })
+
+  it(&#x27;requires a session for an application API&#x27;, async () =&gt; {
+    const requireSession = vi.fn()
+    const authorize = createAuthorizeApi({ requireSession, requireSuperAdmin: vi.fn() })
+    const request = event(&#x27;GET&#x27;, &#x27;/api/mainMenu&#x27;)
+
+    await authorize(request)
+
+    expect(requireSession).toHaveBeenCalledWith(request)
+  })
+
+  it(&#x27;requires a super administrator for administration APIs&#x27;, async () =&gt; {
+    const requireSuperAdmin = vi.fn()
+    const authorize = createAuthorizeApi({ requireSession: vi.fn(), requireSuperAdmin })
+    const request = event(&#x27;GET&#x27;, &#x27;/api/administration/users&#x27;)
+
+    await authorize(request)
+
+    expect(requireSuperAdmin).toHaveBeenCalledWith(request)
+  })
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the API authorization unit tests and observe failure</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/authorization/api-access.spec.ts tests/unit/authorization/authorize-api-middleware.spec.ts</code></pre>
+<p>Expected: FAIL because the classifier and middleware factory do not exist.</p>
+<ul><li>[ ] <strong>Step 3: Implement the exact allowlist and middleware factory</strong></li></ul>
+<p>Create <code>server/modules/authorization/api-access.ts</code>:</p>
+<pre><code class="language-ts">export type ApiAccess = &#x27;not-api&#x27; | &#x27;public&#x27; | &#x27;authenticated&#x27; | &#x27;super-admin&#x27;
+
+const publicEndpoints = new Set([
+  &#x27;POST /api/identity/sign-in&#x27;,
+  &#x27;POST /api/identity/request-password-reset&#x27;,
+  &#x27;POST /api/identity/reset-password&#x27;,
+  &#x27;GET /api/health/database&#x27;,
+])
+
+export function classifyApiAccess(method: string, path: string): ApiAccess {
+  if (path !== &#x27;/api&#x27; &amp;&amp; !path.startsWith(&#x27;/api/&#x27;)) return &#x27;not-api&#x27;
+  if (path === &#x27;/api/auth&#x27; || path.startsWith(&#x27;/api/auth/&#x27;)) return &#x27;public&#x27;
+  if (publicEndpoints.has(`${method.toUpperCase()} ${path}`)) return &#x27;public&#x27;
+  if (path === &#x27;/api/administration&#x27; || path.startsWith(&#x27;/api/administration/&#x27;))
+    return &#x27;super-admin&#x27;
+  return &#x27;authenticated&#x27;
+}</code></pre>
+<p>Create <code>server/middleware/authorize-api.ts</code> with an exported factory:</p>
+<pre><code class="language-ts">import type { H3Event } from &#x27;h3&#x27;
+import { defineEventHandler, getMethod, getRequestURL } from &#x27;h3&#x27;
+import { requireSuperAdmin } from &#x27;../modules/authorization/require-super-admin&#x27;
+import { classifyApiAccess } from &#x27;../modules/authorization/api-access&#x27;
+import { requireSession } from &#x27;../modules/identity/session/require-session&#x27;
+
+interface Dependencies {
+  readonly requireSession: (event: H3Event) =&gt; Promise&lt;unknown&gt;
+  readonly requireSuperAdmin: (event: H3Event) =&gt; Promise&lt;unknown&gt;
+}
+
+export function createAuthorizeApi(dependencies: Dependencies) {
+  return async (event: H3Event) =&gt; {
+    const access = classifyApiAccess(getMethod(event), getRequestURL(event).pathname)
+    if (access === &#x27;authenticated&#x27;) await dependencies.requireSession(event)
+    if (access === &#x27;super-admin&#x27;) await dependencies.requireSuperAdmin(event)
+  }
+}
+
+export default defineEventHandler(createAuthorizeApi({ requireSession, requireSuperAdmin }))</code></pre>
+<p>Keep the explicit guard in <code>server/api/mainMenu.get.ts</code> as defense in depth. Do not add temporary project-role checks.</p>
+<ul><li>[ ] <strong>Step 4: Run all authorization unit tests</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx vitest run tests/unit/authorization tests/unit/identity/require-session.spec.ts</code></pre>
+<p>Expected: all selected tests PASS.</p>
+<ul><li>[ ] <strong>Step 5: Commit default-deny API authentication</strong></li></ul>
+<pre><code class="language-powershell">git add -- server/modules/authorization/api-access.ts server/middleware/authorize-api.ts tests/unit/authorization
+git commit -m &quot;feat: protect application APIs by default&quot;</code></pre>
+<h3 id="task-4-prove-route-protection-through-the-running-application">Task 4: Prove route protection through the running application</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>tests/e2e/global.setup.ts</code></li><li>Modify: <code>tests/e2e/identity.spec.ts</code></li><li>Create: <code>tests/e2e/authorization.spec.ts</code></li><li>[ ] <strong>Step 1: Add failing browser and direct-API scenarios</strong></li></ul>
+<p>In <code>tests/e2e/global.setup.ts</code>, seed a second account with <code>createMinervaAuth({ mode: AUTH_MODE.BOOTSTRAP, ... })</code> using <code>admin@example.com</code>, username <code>super.admin</code>, and password <code>Correct-Horse-Battery-1</code>. This reuses the existing bootstrap database hook and proves the real <code>super_admin</code> field.</p>
+<p>Immediately after the existing ordinary-user <code>signUpEmail</code> call, add:</p>
+<pre><code class="language-ts">const adminAuth = createMinervaAuth({
+  mode: AUTH_MODE.BOOTSTRAP,
+  db: database.db,
+  baseURL: &#x27;http://127.0.0.1:3000&#x27;,
+  trustedOrigins: [&#x27;http://127.0.0.1:3000&#x27;],
+  mailer: { sendPasswordReset: async () =&gt; {} },
+})
+await adminAuth.api.signUpEmail({
+  body: {
+    email: &#x27;admin@example.com&#x27;,
+    username: &#x27;super.admin&#x27;,
+    displayUsername: &#x27;Super.Admin&#x27;,
+    name: &#x27;Super.Admin&#x27;,
+    password: &#x27;Correct-Horse-Battery-1&#x27;,
+  },
+})</code></pre>
+<p>Create <code>tests/e2e/authorization.spec.ts</code> covering these exact outcomes:</p>
+<pre><code class="language-ts">import { expect, test, type Page } from &#x27;@playwright/test&#x27;
+
+const password = &#x27;Correct-Horse-Battery-1&#x27;
+
+async function signIn(page: Page, identifier: string) {
+  await page.goto(&#x27;/auth&#x27;)
+  await page.locator(&#x27;#email&#x27;).fill(identifier)
+  await page.locator(&#x27;#password&#x27;).fill(password)
+  await page.getByRole(&#x27;button&#x27;, { name: &#x27;Войти&#x27; }).click()
+  await expect(page).toHaveURL(/\/projects$/)
+}
+
+test(&#x27;keeps approved pages and readiness public&#x27;, async ({ page, request }) =&gt; {
+  for (const path of [&#x27;/auth&#x27;, &#x27;/auth/forgot-password&#x27;, &#x27;/legal/terms&#x27;, &#x27;/legal/privacy&#x27;]) {
+    await page.goto(path)
+    await expect(page).toHaveURL(new RegExp(`${path.replaceAll(&#x27;/&#x27;, &#x27;\\/&#x27;)}$`))
+  }
+  expect((await request.get(&#x27;/api/health/database&#x27;)).status()).toBe(200)
+})
+
+test(&#x27;rejects a direct unauthenticated application API call&#x27;, async ({ request }) =&gt; {
+  expect((await request.get(&#x27;/api/mainMenu&#x27;)).status()).toBe(401)
+})
+
+test(&#x27;redirects an ordinary user away from administration&#x27;, async ({ page }) =&gt; {
+  await signIn(page, &#x27;user@example.com&#x27;)
+  await page.goto(&#x27;/administration/users&#x27;)
+  await expect(page).toHaveURL(/\/projects$/)
+})
+
+test(&#x27;allows the bootstrapped super administrator into administration&#x27;, async ({ page }) =&gt; {
+  await signIn(page, &#x27;admin@example.com&#x27;)
+  await page.goto(&#x27;/administration/users&#x27;)
+  await expect(page).toHaveURL(/\/administration\/users$/)
+})</code></pre>
+<p>Update existing successful sign-in expectations in <code>tests/e2e/identity.spec.ts</code> from <code>/</code> to <code>/projects</code>.</p>
+<ul><li>[ ] <strong>Step 2: Start test infrastructure and run the new scenarios to observe failure</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">docker compose --profile test up -d --wait postgres-test mailpit
+bunx playwright test tests/e2e/authorization.spec.ts tests/e2e/identity.spec.ts</code></pre>
+<p>Expected before the implementation is complete: at least the <code>/projects</code> and administration expectations FAIL.</p>
+<ul><li>[ ] <strong>Step 3: Run the complete browser file set</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bunx playwright test</code></pre>
+<p>Expected: all Playwright tests PASS, including recovery, reset, guest redirect, ordinary-user denial, and super-administrator access.</p>
+<ul><li>[ ] <strong>Step 4: Commit browser coverage</strong></li></ul>
+<pre><code class="language-powershell">git add -- tests/e2e app server shared
+git commit -m &quot;test: cover route authorization boundaries&quot;</code></pre>
+<h3 id="task-5-complete-verification-and-project-records">Task 5: Complete verification and project records</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>docs/progress.md</code></li><li>[ ] <strong>Step 1: Run the complete automated verification</strong></li></ul>
+<pre><code class="language-powershell">docker compose --profile test up -d --wait postgres-test mailpit
+bun run typecheck
+bun run test:unit
+bun run test:integration
+bun run test:e2e
+bun run build</code></pre>
+<p>Expected: every command exits <code>0</code>. Existing third-party build warnings may be reported, but no failed test, type error, or build error is acceptable.</p>
+<ul><li>[ ] <strong>Step 2: Record the completed slice</strong></li></ul>
+<p>Append one concise bullet to <code>docs/progress.md</code> stating that Nuxt pages and application Nitro APIs now default to authenticated, approved public recovery/legal/readiness surfaces remain public, and global administration uses the server-resolved <code>superAdmin</code> flag.</p>
+<ul><li>[ ] <strong>Step 3: Refresh Tesserae through the Windows wrapper</strong></li></ul>
+<pre><code class="language-powershell">./scripts/refresh-tesserae.ps1</code></pre>
+<p>Expected: sessions import, compile, and Obsidian sync report success. Do not stage <code>.tesserae</code> output.</p>
+<ul><li>[ ] <strong>Step 4: Verify the final diff and exclusions</strong></li></ul>
+<pre><code class="language-powershell">git diff --check
+git status --short</code></pre>
+<p>Expected: no whitespace errors; <code>.env</code>, <code>.output</code>, <code>.tesserae</code>, uploads, backups, secrets, and generated indexes are not staged. Preserve unrelated user changes.</p>
+<ul><li>[ ] <strong>Step 5: Commit progress documentation</strong></li></ul>
+<pre><code class="language-powershell">git add -- docs/progress.md
+git commit -m &quot;docs: record route authorization slice&quot;</code></pre>
+<ul><li>[ ] <strong>Step 6: Request review and finish the branch</strong></li></ul>
+<p>Use <code>superpowers:requesting-code-review</code>, then <code>superpowers:verification-before-completion</code>, and finally <code>superpowers:finishing-a-development-branch</code>. Report any unavailable Docker, Mailpit, or browser dependency separately and never claim its check passed without successful output.</p></section></article></div>
+<footer class="article-footer">
+
+</footer>
+</article>
+</main>
+<aside class="toc-rail" id="toc"><aside class="toc" role="doc-toc" aria-label="On this page"><h2>On this page</h2><ol><li data-toc-target="file-structure"><a class="toc-l-2" href="#file-structure">File structure</a></li><li data-toc-target="task-1-make-page-access-explicit-and-testable"><a class="toc-l-3" href="#task-1-make-page-access-explicit-and-testable">Task 1: Make page access explicit and testable</a></li><li data-toc-target="task-2-add-the-server-authorization-vocabulary-and-super-administrator-guard"><a class="toc-l-3" href="#task-2-add-the-server-authorization-vocabulary-and-super-administrator-guard">Task 2: Add the server authorization vocabulary and super-administrator guard</a></li><li data-toc-target="task-3-default-application-apis-to-authenticated"><a class="toc-l-3" href="#task-3-default-application-apis-to-authenticated">Task 3: Default application APIs to authenticated</a></li><li data-toc-target="task-4-prove-route-protection-through-the-running-application"><a class="toc-l-3" href="#task-4-prove-route-protection-through-the-running-application">Task 4: Prove route protection through the running application</a></li><li data-toc-target="task-5-complete-verification-and-project-records"><a class="toc-l-3" href="#task-5-complete-verification-and-project-records">Task 5: Complete verification and project records</a></li></ol></aside></aside>
+</div>
+<nav class="mobile-bottom-nav" aria-label="Quick"><ul><li><a class="" href="../index.html" aria-label="Home"><span class="icon" aria-hidden="true">⌂</span><span class="label">Home</span></a></li><li><a class="" href="../concepts/index.html" aria-label="Concepts"><span class="icon" aria-hidden="true">◆</span><span class="label">Concepts</span></a></li><li><a class="" href="../papers/index.html" aria-label="Papers"><span class="icon" aria-hidden="true">¶</span><span class="label">Papers</span></a></li><li><a class="" href="../syntheses/index.html" aria-label="Syntheses"><span class="icon" aria-hidden="true">✱</span><span class="label">Syntheses</span></a></li><li><a class="" href="../sessions/index.html" aria-label="Sessions"><span class="icon" aria-hidden="true">◷</span><span class="label">Sessions</span></a></li><li><a class="" href="../graph/index.html" aria-label="Graph"><span class="icon" aria-hidden="true">⁂</span><span class="label">Graph</span></a></li></ul></nav>
+<div class="palette" id="palette" hidden role="dialog" aria-modal="true" aria-label="Search palette">
+<div class="palette-box"><div class="palette-input-row"><svg class="palette-input-icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><label class="visually-hidden" for="search">Search the wiki</label><input id="search" type="search" placeholder="Search the wiki…" aria-label="Search the wiki" autocomplete="off" spellcheck="false"><button class="palette-close" type="button" aria-label="Close search" data-close-search><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><line x1="5" y1="5" x2="15" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="15" y1="5" x2="5" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div><div class="visually-hidden" id="palette-live" aria-live="polite" aria-atomic="true"></div><footer class="palette-hint" aria-hidden="true"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>tab</kbd> filter type</span><span><kbd>esc</kbd> close</span></footer></div>
+</div>
+</body>
+</html>

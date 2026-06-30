@@ -133,7 +133,7 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\architecture.md": {
-      "sha256": "8720c03972ff7e94e942a279d70693b1f54993a6b3d6a966801ccc4607ee4be3",
+      "sha256": "620c358eec28b81732b1e7131dbef8b46601865c8031a51a89b046c75ad0e95f",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\backlog.md": {
@@ -168,6 +168,10 @@
       "sha256": "44d102a43ddc34ebb79eb36380e18f3b3cbfb21325f20c30031e4613596fc3bd",
       "source_kind": "SourceDocument"
     },
+    "D:\\develop\\minerva\\docs\\decisions\\0008-use-nuxt-native-feature-modules.md": {
+      "sha256": "444217eb458211470b0372181ed6c08d3c55087f9f9987fbc7738ec896642ef7",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\docs\\operations\\tesserae.md": {
       "sha256": "5e559e1ce185d68c412255a72d741c09abae46956646d0178a6aa3e5d9599ae8",
       "source_kind": "SourceDocument"
@@ -177,7 +181,7 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\progress.md": {
-      "sha256": "6642e00da31c69c789d671c98a2016f7253d643fb16146a0142a9bd3b07f4182",
+      "sha256": "8db050d7a7391e5717621d09631bc5d3367c0f7d17de4d9f5fcbb9f47dbfb46c",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\roadmap.md": {
@@ -224,6 +228,14 @@
       "sha256": "7d368d054d79f8a97c6c5043fb785b8db2f54ba1a2c5f76b7851ef607a256fa0",
       "source_kind": "SourceDocument"
     },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-29-nuxt-feature-modules.md": {
+      "sha256": "f95fbf061cf5c52f5d3bd1d5199907b262c9cd2733e079969c5a40fee838311b",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-30-route-authorization.md": {
+      "sha256": "737da68baffc7ea3f041c5166dac4c1b9116b8b83a87db0a9ec5a0a907ca11b2",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-mvp-design.md": {
       "sha256": "68951988868ab0b552312d71c3b4dc0a03a9be2c3a1eb6582f4a3dcd292e85e4",
       "source_kind": "SourceDocument"
@@ -262,6 +274,14 @@
     },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-29-identity-functional-refactor-design.md": {
       "sha256": "76aa8a947340748a6fccdafa5eb61f25c1ce8a79e65e2c66ffd1ac9d0d20fe23",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-29-nuxt-feature-modules-design.md": {
+      "sha256": "7f981330fd0fab234558a2bbe6375ca1f36d7f0a945e248590eee7be520ec2e9",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-30-route-authorization-design.md": {
+      "sha256": "add8e51700e34aad6fe805a0d5af84f787635ece09ea17b99a9d054e06737179",
       "source_kind": "SourceDocument"
     }
   }

@@ -10,11 +10,11 @@
       "metadata": {}
     },
     {
-      "id": "CommunitySummary:56fa58b054481eee",
-      "name": "Minerva Identity MVP",
+      "id": "CommunitySummary:c0b1277fc51d578a",
+      "name": "Minerva MVP Identity Planning",
       "type": "CommunitySummary",
       "aliases": [],
-      "description": "Planning, design, routing, implementation, progress, and evaluation artifacts for the Minerva identity backend foundation MVP, including route skeletons and shared success metrics.",
+      "description": "Design and implementation-plan documents for Minerva's MVP identity backend, Nuxt feature modules, routing, UX prototypes, and progress tracking, with mAP included as a related metric node.",
       "source_path": null,
       "metadata": {
         "member_ids": [
@@ -24,15 +24,17 @@
           "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
           "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
           "SourceDocument:minerva-progress:c476087b907f",
-          "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72"
+          "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
+          "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
+          "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387"
         ],
-        "member_count": 7,
+        "member_count": 9,
         "tags": [
-          "identity-backend",
-          "minerva-mvp",
-          "implementation-plan",
-          "ux-ui",
-          "metrics"
+          "minerva",
+          "mvp",
+          "identity",
+          "nuxt",
+          "planning"
         ],
         "extractor": "community_summaries.compile_community_summaries"
       }
@@ -268,6 +270,39 @@
             "level": 2,
             "text": "Security rules",
             "anchor": "security-rules"
+          },
+          {
+            "level": 2,
+            "text": "Consequences",
+            "anchor": "consequences"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:adr-0008-use-nuxt-native-client-feature-modules:68a6bb962563",
+      "name": "ADR 0008: Use Nuxt-native client feature modules",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0008-use-nuxt-native-feature-modules.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "ADR 0008: Use Nuxt-native client feature modules",
+            "anchor": "adr-0008-use-nuxt-native-client-feature-modules"
+          },
+          {
+            "level": 2,
+            "text": "Decision",
+            "anchor": "decision"
+          },
+          {
+            "level": 2,
+            "text": "Nuxt Layers",
+            "anchor": "nuxt-layers"
           },
           {
             "level": 2,
@@ -757,6 +792,11 @@
             "level": 2,
             "text": "Architectural style",
             "anchor": "architectural-style"
+          },
+          {
+            "level": 2,
+            "text": "Client application structure",
+            "anchor": "client-application-structure"
           },
           {
             "level": 2,
@@ -1565,6 +1605,127 @@
       }
     },
     {
+      "id": "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
+      "name": "Nuxt feature modules design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-29-nuxt-feature-modules-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Nuxt feature modules design",
+            "anchor": "nuxt-feature-modules-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Decision summary",
+            "anchor": "decision-summary"
+          },
+          {
+            "level": 2,
+            "text": "Client structure",
+            "anchor": "client-structure"
+          },
+          {
+            "level": 2,
+            "text": "Feature definition",
+            "anchor": "feature-definition"
+          },
+          {
+            "level": 2,
+            "text": "Dependency rules",
+            "anchor": "dependency-rules"
+          },
+          {
+            "level": 2,
+            "text": "Identity pilot",
+            "anchor": "identity-pilot"
+          },
+          {
+            "level": 2,
+            "text": "Form conventions",
+            "anchor": "form-conventions"
+          },
+          {
+            "level": 2,
+            "text": "Data and error flow",
+            "anchor": "data-and-error-flow"
+          },
+          {
+            "level": 2,
+            "text": "Testing",
+            "anchor": "testing"
+          },
+          {
+            "level": 2,
+            "text": "Adoption",
+            "anchor": "adoption"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
+      "name": "Nuxt Feature Modules Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-29-nuxt-feature-modules.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Nuxt Feature Modules Implementation Plan",
+            "anchor": "nuxt-feature-modules-implementation-plan"
+          },
+          {
+            "level": 2,
+            "text": "Target file map",
+            "anchor": "target-file-map"
+          },
+          {
+            "level": 2,
+            "text": "Task 1: Create the Identity API and session boundary",
+            "anchor": "task-1-create-the-identity-api-and-session-boundary"
+          },
+          {
+            "level": 2,
+            "text": "Task 2: Add typed Identity form schemas",
+            "anchor": "task-2-add-typed-identity-form-schemas"
+          },
+          {
+            "level": 2,
+            "text": "Task 3: Move the sign-in form into Identity",
+            "anchor": "task-3-move-the-sign-in-form-into-identity"
+          },
+          {
+            "level": 2,
+            "text": "Task 4: Move password recovery into Identity",
+            "anchor": "task-4-move-password-recovery-into-identity"
+          },
+          {
+            "level": 2,
+            "text": "Task 5: Move reset password into Identity",
+            "anchor": "task-5-move-reset-password-into-identity"
+          },
+          {
+            "level": 2,
+            "text": "Task 6: Enforce boundaries and complete verification",
+            "anchor": "task-6-enforce-boundaries-and-complete-verification"
+          }
+        ]
+      }
+    },
+    {
       "id": "SourceDocument:postgresql-docker-compose-design:1d13eb67950d",
       "name": "PostgreSQL Docker Compose design",
       "type": "SourceDocument",
@@ -1722,6 +1883,132 @@
             "level": 3,
             "text": "Task 3: Record and verify the completed slice",
             "anchor": "task-3-record-and-verify-the-completed-slice"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:route-authorization-design:2fc8906097c7",
+      "name": "Route Authorization Design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-30-route-authorization-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Route Authorization Design",
+            "anchor": "route-authorization-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Scope",
+            "anchor": "scope"
+          },
+          {
+            "level": 2,
+            "text": "Authorization boundaries",
+            "anchor": "authorization-boundaries"
+          },
+          {
+            "level": 2,
+            "text": "Public Nuxt pages",
+            "anchor": "public-nuxt-pages"
+          },
+          {
+            "level": 2,
+            "text": "Public HTTP endpoints",
+            "anchor": "public-http-endpoints"
+          },
+          {
+            "level": 2,
+            "text": "Session resolution",
+            "anchor": "session-resolution"
+          },
+          {
+            "level": 2,
+            "text": "Global administration",
+            "anchor": "global-administration"
+          },
+          {
+            "level": 2,
+            "text": "Project authorization boundary",
+            "anchor": "project-authorization-boundary"
+          },
+          {
+            "level": 2,
+            "text": "Error and navigation behavior",
+            "anchor": "error-and-navigation-behavior"
+          },
+          {
+            "level": 2,
+            "text": "Testing",
+            "anchor": "testing"
+          },
+          {
+            "level": 2,
+            "text": "Security constraints",
+            "anchor": "security-constraints"
+          },
+          {
+            "level": 2,
+            "text": "Acceptance criteria",
+            "anchor": "acceptance-criteria"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:route-authorization-implementation-plan:116547e5ed3c",
+      "name": "Route Authorization Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-30-route-authorization.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Route Authorization Implementation Plan",
+            "anchor": "route-authorization-implementation-plan"
+          },
+          {
+            "level": 2,
+            "text": "File structure",
+            "anchor": "file-structure"
+          },
+          {
+            "level": 3,
+            "text": "Task 1: Make page access explicit and testable",
+            "anchor": "task-1-make-page-access-explicit-and-testable"
+          },
+          {
+            "level": 3,
+            "text": "Task 2: Add the server authorization vocabulary and super-administrator guard",
+            "anchor": "task-2-add-the-server-authorization-vocabulary-and-super-administrator-guard"
+          },
+          {
+            "level": 3,
+            "text": "Task 3: Default application APIs to authenticated",
+            "anchor": "task-3-default-application-apis-to-authenticated"
+          },
+          {
+            "level": 3,
+            "text": "Task 4: Prove route protection through the running application",
+            "anchor": "task-4-prove-route-protection-through-the-running-application"
+          },
+          {
+            "level": 3,
+            "text": "Task 5: Complete verification and project records",
+            "anchor": "task-5-complete-verification-and-project-records"
           }
         ]
       }
@@ -1927,73 +2214,91 @@
       "source_path": null,
       "metadata": {
         "synthesis_kind": "pulse",
-        "content_hash": "sha256-6b0404e81529875e2992e6ace307906033b8d0060a0bea06e75ea81e115222fb",
+        "content_hash": "sha256-d458cb53901ad56b3d75be7e62e97fc06628471416b1744994d7c84964fca317",
         "input_ids": []
       }
     }
   ],
   "edges": [
     {
-      "source": "CommunitySummary:56fa58b054481eee",
+      "source": "CommunitySummary:c0b1277fc51d578a",
       "target": "Metric:map:592bcbe13f80",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:56fa58b054481eee"
+        "community_id": "CommunitySummary:c0b1277fc51d578a"
       }
     },
     {
-      "source": "CommunitySummary:56fa58b054481eee",
+      "source": "CommunitySummary:c0b1277fc51d578a",
       "target": "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:56fa58b054481eee"
+        "community_id": "CommunitySummary:c0b1277fc51d578a"
       }
     },
     {
-      "source": "CommunitySummary:56fa58b054481eee",
+      "source": "CommunitySummary:c0b1277fc51d578a",
       "target": "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:56fa58b054481eee"
+        "community_id": "CommunitySummary:c0b1277fc51d578a"
       }
     },
     {
-      "source": "CommunitySummary:56fa58b054481eee",
+      "source": "CommunitySummary:c0b1277fc51d578a",
       "target": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:56fa58b054481eee"
+        "community_id": "CommunitySummary:c0b1277fc51d578a"
       }
     },
     {
-      "source": "CommunitySummary:56fa58b054481eee",
+      "source": "CommunitySummary:c0b1277fc51d578a",
       "target": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:56fa58b054481eee"
+        "community_id": "CommunitySummary:c0b1277fc51d578a"
       }
     },
     {
-      "source": "CommunitySummary:56fa58b054481eee",
+      "source": "CommunitySummary:c0b1277fc51d578a",
       "target": "SourceDocument:minerva-progress:c476087b907f",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:56fa58b054481eee"
+        "community_id": "CommunitySummary:c0b1277fc51d578a"
       }
     },
     {
-      "source": "CommunitySummary:56fa58b054481eee",
+      "source": "CommunitySummary:c0b1277fc51d578a",
       "target": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:56fa58b054481eee"
+        "community_id": "CommunitySummary:c0b1277fc51d578a"
+      }
+    },
+    {
+      "source": "CommunitySummary:c0b1277fc51d578a",
+      "target": "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:c0b1277fc51d578a"
+      }
+    },
+    {
+      "source": "CommunitySummary:c0b1277fc51d578a",
+      "target": "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:c0b1277fc51d578a"
       }
     },
     {
@@ -2053,6 +2358,20 @@
       "metadata": {}
     },
     {
+      "source": "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:adr-0001-use-a-modular-nuxt-nitro-monolith:36bf23e62f88",
       "type": "summarizes",
@@ -2097,6 +2416,13 @@
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:adr-0007-separate-authentication-identity-user-p:83396c0e3f00",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0008-use-nuxt-native-client-feature-modules:68a6bb962563",
       "type": "summarizes",
       "evidence": null,
       "metadata": {}
@@ -2236,6 +2562,20 @@
     },
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:postgresql-docker-compose-design:1d13eb67950d",
       "type": "summarizes",
       "evidence": null,
@@ -2258,6 +2598,20 @@
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:reset-password-ui-implementation-plan:170bb8c1c5fb",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:route-authorization-design:2fc8906097c7",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:route-authorization-implementation-plan:116547e5ed3c",
       "type": "summarizes",
       "evidence": null,
       "metadata": {}

@@ -11,6 +11,7 @@
 - [ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation](sources/adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation.html)
 - [ADR 0006: Use Bun as the package manager](sources/adr-0006-use-bun-as-the-package-manager.html)
 - [ADR 0007: Separate authentication identity, user profiles, contacts, and project roles](sources/adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles.html)
+- [ADR 0008: Use Nuxt-native client feature modules](sources/adr-0008-use-nuxt-native-client-feature-modules.html)
 - [Forgot-password UI design](sources/forgot-password-ui-design.html)
 - [Forgot-Password UI Implementation Plan](sources/forgot-password-ui-implementation-plan.html)
 - [Identity backend foundation design](sources/identity-backend-foundation-design.html): - **uses_metric** → mAP _(Metric)_
@@ -30,10 +31,14 @@
 - [Minerva progress](sources/minerva-progress.html): - **uses_metric** → mAP _(Metric)_
 - [Minerva roadmap](sources/minerva-roadmap.html)
 - [MVP Route Skeleton Implementation Plan](sources/mvp-route-skeleton-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
+- [Nuxt feature modules design](sources/nuxt-feature-modules-design.html): - **uses_metric** → mAP _(Metric)_
+- [Nuxt Feature Modules Implementation Plan](sources/nuxt-feature-modules-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [PostgreSQL Docker Compose design](sources/postgresql-docker-compose-design.html)
 - [PostgreSQL Docker Compose Implementation Plan](sources/postgresql-docker-compose-implementation-plan.html)
 - [Reset-password UI design](sources/reset-password-ui-design.html)
 - [Reset-Password UI Implementation Plan](sources/reset-password-ui-implementation-plan.html)
+- [Route Authorization Design](sources/route-authorization-design.html)
+- [Route Authorization Implementation Plan](sources/route-authorization-implementation-plan.html)
 - [Tesserae development memory](sources/tesserae-development-memory.html)
 - [Tesserae refresh wrapper design](sources/tesserae-refresh-wrapper-design.html)
 - [Tesserae Refresh Wrapper Implementation Plan](sources/tesserae-refresh-wrapper-implementation-plan.html)
@@ -41,7 +46,7 @@
 
 ## Entities
 
-- [mAP](entities/map.html): - **summarizes** → Minerva Identity MVP _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocument)_ - *…
+- [mAP](entities/map.html): - **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocum…
 - [MATH](entities/math.html): - **evaluated_on** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
 
 ## Syntheses
