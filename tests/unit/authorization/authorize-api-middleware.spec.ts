@@ -1,7 +1,9 @@
 import type { H3Event } from 'h3'
 import { createEvent } from 'h3'
 import { describe, expect, it, vi } from 'vitest'
-import { createAuthorizeApi } from '../../../server/middleware/authorize-api'
+import { IDENTITY_CODE } from '../../../shared/identity/constants'
+import { createAuthorizeApi, createAuthorizeApiHandler } from '../../../server/middleware/authorize-api'
+import { IdentityError } from '../../../server/modules/identity/identity-error'
 
 function event(method: string, url: string): H3Event {
   return createEvent({ method, url, headers: {} } as never, {} as never)
@@ -56,5 +58,18 @@ describe('createAuthorizeApi', () => {
     const apiEvent = event('GET', access === 'authenticated' ? '/api/future' : '/api/administration')
 
     await expect(authorizeApi(apiEvent)).rejects.toBe(error)
+  })
+})
+
+describe('createAuthorizeApiHandler', () => {
+  it('maps an authentication guard error to a safe response body', async () => {
+    const apiEvent = event('GET', '/api/mainMenu')
+    const authorizeApi = vi.fn().mockRejectedValue(new IdentityError(IDENTITY_CODE.AUTH_REQUIRED))
+    const handler = createAuthorizeApiHandler(authorizeApi)
+
+    await expect(handler(apiEvent)).resolves.toEqual({
+      data: { code: IDENTITY_CODE.AUTH_REQUIRED },
+    })
+    expect(apiEvent.node.res.statusCode).toBe(401)
   })
 })

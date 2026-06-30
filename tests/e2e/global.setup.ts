@@ -30,6 +30,31 @@ export default async function globalSetup() {
         password: 'Correct-Horse-Battery-1',
       },
     })
+    await auth.api.signUpEmail({
+      body: {
+        email: 'recovery@example.com',
+        username: 'recovery.user',
+        displayUsername: 'Recovery.User',
+        name: 'Recovery.User',
+        password: 'Correct-Horse-Battery-1',
+      },
+    })
+    const adminAuth = createMinervaAuth({
+      mode: AUTH_MODE.BOOTSTRAP,
+      db: database.db,
+      baseURL: 'http://127.0.0.1:3000',
+      trustedOrigins: ['http://127.0.0.1:3000'],
+      mailer: { sendPasswordReset: async () => {} },
+    })
+    await adminAuth.api.signUpEmail({
+      body: {
+        email: 'admin@example.com',
+        username: 'super.admin',
+        displayUsername: 'Super.Admin',
+        name: 'Super.Admin',
+        password: 'Correct-Horse-Battery-1',
+      },
+    })
   } finally {
     await database.close()
   }
