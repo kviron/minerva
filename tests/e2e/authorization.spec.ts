@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test'
+import { expect, test, type APIResponse, type Page } from '@playwright/test'
 
 const password = 'Correct-Horse-Battery-1'
 const publicOriginHeaders = { origin: 'http://127.0.0.1:3000' }
@@ -11,19 +11,36 @@ async function signIn(page: Page, identifier: string) {
   await expect(page).toHaveURL(/\/projects$/)
 }
 
+async function expectSafeAuthorizationError(
+  response: APIResponse,
+  status: 401 | 403,
+  code: 'AUTH_REQUIRED' | 'FORBIDDEN',
+  rawPath: string,
+) {
+  const body = await response.text()
+
+  expect(response.status()).toBe(status)
+  expect(JSON.parse(body)).toEqual({ data: { code } })
+  expect(body).not.toContain('stack')
+  expect(body).not.toContain(rawPath)
+}
+
 test('keeps approved pages and readiness public', async ({ page, request }) => {
-  const paths = [
-    '/auth',
-    '/auth/forgot-password',
-    '/auth/reset-password/token-shaped-value',
-    '/invitations/token-shaped-value',
-    '/legal/terms',
-    '/legal/privacy',
+  const pages = [
+    { path: '/auth', landmark: '#email' },
+    { path: '/auth/forgot-password', landmark: '#email' },
+    { path: '/auth/reset-password/token-shaped-value', landmark: '#new-password' },
+    { path: '/invitations/token-shaped-value' },
+    { path: '/legal/terms' },
+    { path: '/legal/privacy' },
   ]
 
-  for (const path of paths) {
-    await page.goto(path)
+  for (const { path, landmark } of pages) {
+    const response = await page.goto(path)
+    expect(response, `${path} must return a document response`).not.toBeNull()
+    expect(response?.ok(), `${path} returned ${response?.status()}`).toBe(true)
     await expect(page).toHaveURL(new RegExp(`${path.replaceAll('/', '\\/')}$`))
+    if (landmark) await expect(page.locator(landmark)).toBeVisible({ timeout: 30_000 })
   }
 
   expect((await request.get('/api/health/database')).status()).toBe(200)
@@ -36,12 +53,24 @@ test('redirects a guest from a protected page', async ({ page }) => {
 
 test('rejects a direct unauthenticated application API call without sensitive detail', async ({ request }) => {
   const response = await request.get('/api/mainMenu')
-  const body = await response.text()
+  await expectSafeAuthorizationError(response, 401, 'AUTH_REQUIRED', '/api/mainMenu')
+})
 
-  expect(response.status()).toBe(401)
-  expect(body).not.toContain('mainMenu')
-  expect(body).not.toContain('database')
-  expect(body).not.toContain('stack')
+test('requires authentication before administration authorization', async ({ request }) => {
+  const response = await request.post('/api/administration/probe')
+  await expectSafeAuthorizationError(response, 401, 'AUTH_REQUIRED', '/api/administration/probe')
+})
+
+test('rejects an ordinary user from an administration API', async ({ page }) => {
+  await signIn(page, 'user@example.com')
+  const response = await page.request.post('/api/administration/probe')
+  await expectSafeAuthorizationError(response, 403, 'FORBIDDEN', '/api/administration/probe')
+})
+
+test('allows a super administrator through the administration guard', async ({ page }) => {
+  await signIn(page, 'admin@example.com')
+  const response = await page.request.post('/api/administration/probe')
+  expect(response.status()).toBe(404)
 })
 
 test('keeps sign-in and recovery endpoints callable', async ({ request }) => {

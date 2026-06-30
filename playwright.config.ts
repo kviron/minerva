@@ -9,7 +9,7 @@ export default defineConfig({
     trace: 'retain-on-failure',
   },
   webServer: {
-    command: 'bun run dev --host 127.0.0.1',
+    command: 'bun run dev --envName test --host 127.0.0.1',
     url: 'http://127.0.0.1:3000/api/health/database',
     reuseExistingServer: false,
     env: {
