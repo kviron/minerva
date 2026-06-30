@@ -1,0 +1,112 @@
+# Route Authorization Design
+
+## Goal
+
+Protect Minerva's Nuxt pages and Nitro APIs by default while preserving the approved public authentication, password-recovery, invitation, legal, and readiness surfaces. Add global super-administrator protection now and leave project-scoped RBAC for its dedicated roadmap slice.
+
+## Scope
+
+This slice adds authentication enforcement and the existing global `super_admin` authorization check. It does not add project memberships, project roles, permission tables, permission codes, organization plugins, or new database fields.
+
+The current Better Auth session model, account-state enforcement, invitation-only policy, and password-recovery behavior remain unchanged.
+
+## Authorization boundaries
+
+Minerva uses layered enforcement:
+
+1. Nuxt route middleware provides navigation behavior and prevents unauthenticated users from rendering authenticated pages.
+2. Nitro handlers enforce sessions independently because client middleware is not a security boundary.
+3. Server-side authorization helpers enforce global super-administrator access.
+4. Future application services enforce project-scoped permission codes for both HTTP and MCP adapters.
+
+UI visibility may reflect server-provided authorization state, but it never grants access. Role display names are never used as authorization evidence.
+
+## Public Nuxt pages
+
+Only these page families are public:
+
+- `/auth`
+- `/auth/forgot-password`
+- `/auth/reset-password/:token`
+- `/invitations/:token`
+- `/legal/terms`
+- `/legal/privacy`
+
+All other Nuxt pages require an active Better Auth session. An authenticated user who opens `/auth` is redirected to `/projects`. Password-recovery, invitation, and legal pages remain reachable while authenticated because they have valid standalone flows.
+
+Public matching is explicit. A broad prefix must not accidentally make a future page public without review.
+
+## Public HTTP endpoints
+
+The following HTTP surfaces remain callable without an existing application session:
+
+- the Better Auth handler under `/api/auth/**`, whose individual operations apply Better Auth's own session requirements;
+- `POST /api/identity/request-password-reset`;
+- `POST /api/identity/reset-password`;
+- `GET /api/health/database`.
+
+The readiness response remains limited to its current non-sensitive status contract. It must not expose connection strings, database errors, schema details, or storage paths.
+
+All present and future application Nitro endpoints outside this allowlist require an active session. Authentication failures use the existing stable `AUTH_REQUIRED` identity error and HTTP mapping.
+
+## Session resolution
+
+Session resolution remains server-side through Better Auth using request headers. A successful resolution produces the authenticated actor for the request. Missing, expired, revoked, or inactive-account sessions are rejected before protected work executes.
+
+The existing `requireSession` capability remains the shared session boundary. The implementation may cache the resolved actor on the H3 event context to avoid duplicate session lookups within one request, but cached data must never cross requests.
+
+## Global administration
+
+Pages under `/administration/**` are visible only to an authenticated user whose current server-resolved user has `superAdmin === true`.
+
+Every administration API independently enforces the same server-side requirement. A client redirect or hidden navigation item is only a usability feature.
+
+The server helper checks the global boolean field rather than a role name. A signed-in non-super-administrator receives a stable forbidden response. No administration response reveals whether inaccessible resources exist.
+
+## Project authorization boundary
+
+Authenticated users may enter the general project shell only as far as the currently implemented endpoints allow. This slice does not invent temporary `Admin`, `Editor`, or `Viewer` checks.
+
+The later RBAC slice will implement the accepted model from ADR 0002 and ADR 0007:
+
+- one project membership references one project-scoped role;
+- roles contain stable permission codes;
+- HTTP and MCP adapters call the same application services and permission evaluator;
+- inaccessible project and document resources use the approved non-disclosure error behavior;
+- role names and client-side visibility never authorize an operation.
+
+## Error and navigation behavior
+
+- Unauthenticated page navigation redirects to `/auth`.
+- Authentication success returns the user to the authenticated application, with `/projects` as the default destination.
+- An authenticated non-super-administrator who opens `/administration/**` is redirected to `/projects` without rendering administration content.
+- A protected API without a valid session returns the existing `AUTH_REQUIRED` response.
+- An administration API called by a signed-in non-super-administrator returns a stable forbidden response without internal details.
+- Network or session-resolution failures are not treated as proof that the user is signed out; the UI uses a stable error path rather than creating redirect loops.
+
+## Testing
+
+The slice requires focused tests at every boundary:
+
+- Nuxt middleware tests for every public family, a protected route, authenticated `/auth`, and administration routing;
+- server unit tests for missing, valid, expired or rejected sessions and the global super-administrator guard;
+- Nitro integration tests proving that public endpoints remain public and protected endpoints reject direct unauthenticated calls;
+- browser tests for direct protected URLs, sign-in redirect behavior, and administration access for super-administrator and ordinary accounts;
+- regression checks for password recovery, invitation, database readiness, and the existing protected `mainMenu` endpoint.
+
+## Security constraints
+
+- Never authorize from UI state, route visibility, localized role names, cookies parsed by application code, or user-supplied identifiers.
+- Never expose session tokens, credential hashes, reset tokens, database failures, private files, or raw storage paths.
+- Do not add high-risk MCP administration tools as part of route protection.
+- Keep Russian as the default locale and ensure future localized routes preserve the same public and protected classification.
+
+## Acceptance criteria
+
+- Every Nuxt page is protected unless explicitly listed as public.
+- Every application Nitro endpoint is protected unless explicitly listed as public.
+- Client navigation and direct HTTP calls produce consistent authentication outcomes.
+- `/administration/**` and its APIs require the server-resolved `superAdmin` flag.
+- Password recovery, invitation enrollment, legal pages, Better Auth, and database readiness continue to work without an existing session.
+- No project role name is introduced as an authorization check.
+- Type checking, unit tests, integration tests, focused browser tests, and production build pass.
