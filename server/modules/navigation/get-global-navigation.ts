@@ -7,16 +7,16 @@ type NavigationSession = Readonly<{
   }>
 }>
 
-const BASE_NAVIGATION = [
-  GLOBAL_NAVIGATION.DASHBOARD,
-  GLOBAL_NAVIGATION.PROJECTS,
-  GLOBAL_NAVIGATION.SETTINGS,
-] satisfies readonly GlobalNavigationItem[]
-
 export function getGlobalNavigation(
   session: NavigationSession,
 ): readonly GlobalNavigationItem[] {
+  const baseNavigation = [
+    GLOBAL_NAVIGATION.DASHBOARD,
+    GLOBAL_NAVIGATION.PROJECTS,
+    GLOBAL_NAVIGATION.SETTINGS,
+  ] satisfies readonly GlobalNavigationItem[]
+
   return session.user.superAdmin === true
-    ? [...BASE_NAVIGATION, GLOBAL_NAVIGATION.ADMINISTRATION]
-    : BASE_NAVIGATION
+    ? [...baseNavigation, GLOBAL_NAVIGATION.ADMINISTRATION]
+    : baseNavigation
 }

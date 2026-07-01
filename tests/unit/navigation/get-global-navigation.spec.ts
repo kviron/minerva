@@ -16,6 +16,14 @@ describe('getGlobalNavigation', () => {
     expect(navigation.map(item => item.id)).toEqual(['dashboard', 'projects', 'settings'])
   })
 
+  it('returns a fresh ordinary navigation array for every call', () => {
+    const firstNavigation = getGlobalNavigation({ user: { superAdmin: false } })
+
+    ;(firstNavigation as unknown as Array<(typeof firstNavigation)[number]>).pop()
+
+    expect(getGlobalNavigation({ user: { superAdmin: false } })).toEqual(baseNavigation)
+  })
+
   it('appends administration navigation for a strict true superAdmin flag', () => {
     const navigation = getGlobalNavigation({ user: { superAdmin: true } })
 
