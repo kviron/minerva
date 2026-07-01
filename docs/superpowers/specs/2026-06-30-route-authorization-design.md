@@ -32,7 +32,7 @@ Only these page families are public:
 - `/legal/terms`
 - `/legal/privacy`
 
-All other Nuxt pages require an active Better Auth session. An authenticated user who opens `/auth` is redirected to `/projects`. Password-recovery, invitation, and legal pages remain reachable while authenticated because they have valid standalone flows.
+All other Nuxt pages require an active Better Auth session. An authenticated user who opens `/auth` is redirected to `/dashboard`. Password-recovery, invitation, and legal pages remain reachable while authenticated because they have valid standalone flows.
 
 Public matching is explicit. A broad prefix must not accidentally make a future page public without review.
 
@@ -79,8 +79,8 @@ The later RBAC slice will implement the accepted model from ADR 0002 and ADR 000
 ## Error and navigation behavior
 
 - Unauthenticated page navigation redirects to `/auth`.
-- Authentication success returns the user to the authenticated application, with `/projects` as the default destination.
-- An authenticated non-super-administrator who opens `/administration/**` is redirected to `/projects` without rendering administration content.
+- Authentication success returns the user to the authenticated application, with `/dashboard` as the default destination.
+- An authenticated non-super-administrator who opens `/administration/**` is redirected to `/dashboard` without rendering administration content.
 - A protected API without a valid session returns the existing `AUTH_REQUIRED` response.
 - An administration API called by a signed-in non-super-administrator returns a stable forbidden response without internal details.
 - Network or session-resolution failures are not treated as proof that the user is signed out; the UI uses a stable error path rather than creating redirect loops.

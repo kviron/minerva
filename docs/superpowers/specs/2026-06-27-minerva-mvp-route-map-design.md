@@ -27,6 +27,7 @@ The alternatives were rejected for the following reasons:
 |-- legal/
 |   |-- terms
 |   `-- privacy
+|-- dashboard/
 |-- projects/
 |-- projects/[id]/
 |   |-- documents/[documentId]/
@@ -45,13 +46,14 @@ The alternatives were rejected for the following reasons:
 
 ## Route responsibilities
 
-- `/` redirects authenticated users to `/projects` and unauthenticated users to `/auth`.
+- `/` redirects authenticated users to `/dashboard` and unauthenticated users to `/auth`.
 - `/auth` contains sign-in. Public registration is absent.
 - `/auth/forgot-password` accepts password-reset requests without exposing whether an account exists.
 - `/auth/reset-password/[token]` accepts a new password for a valid short-lived, single-use reset token.
 - `/invitations/[token]` handles global and project-bound invitation enrollment.
 - `/legal/terms` contains the public Terms of Service.
 - `/legal/privacy` contains the public Privacy Policy.
+- `/dashboard` is the initially empty authenticated landing page and a future home for global summaries.
 - `/projects` lists accessible projects and contains project creation as a permission-aware dialog.
 - `/projects/[id]` is the project overview and owns the contextual document-tree sidebar.
 - `/projects/[id]/documents/[documentId]` opens a document in reading mode.
@@ -86,7 +88,7 @@ The alternatives were rejected for the following reasons:
 
 ## Current skeleton impact
 
-- The existing `/dashboard` route is not part of the approved MVP map.
+- `/dashboard` is part of the approved MVP map but remains empty until its contents receive a separate approved design.
 - The existing `app/pages/projects/[id].vue` will need to become `app/pages/projects/[id]/index.vue` before nested project routes are added.
 - The existing global `settings` route remains distinct from project settings.
 
