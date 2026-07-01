@@ -32,7 +32,12 @@ describe('route access policy', () => {
 
   it('redirects an authenticated user from the sign-in page', () => {
     expect(decideRouteAccess({ path: '/auth', ...user }))
-      .toEqual({ type: 'redirect', to: '/projects' })
+      .toEqual({ type: 'redirect', to: '/dashboard' })
+  })
+
+  it('redirects an authenticated user from the root page', () => {
+    expect(decideRouteAccess({ path: '/', ...user }))
+      .toEqual({ type: 'redirect', to: '/dashboard' })
   })
 
   it.each([
@@ -48,7 +53,7 @@ describe('route access policy', () => {
   it.each(['/administration', '/administration/users'])
     ('redirects an ordinary user from administration path %s', (path) => {
       expect(decideRouteAccess({ path, ...user }))
-        .toEqual({ type: 'redirect', to: '/projects' })
+        .toEqual({ type: 'redirect', to: '/dashboard' })
     })
 
   it.each(['/administration', '/administration/users'])

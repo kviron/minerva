@@ -27,7 +27,7 @@ async function createForm(dependencies: SignInDependencies): Promise<SignInForm>
   return form
 }
 
-it('signs in and navigates to projects', async () => {
+it('signs in and navigates to the dashboard', async () => {
   const signIn = vi.fn().mockResolvedValue(undefined)
   const navigate = vi.fn().mockResolvedValue(undefined)
   const action = createSignInAction({ signIn, navigate })
@@ -35,7 +35,7 @@ it('signs in and navigates to projects', async () => {
   await expect(action({ identifier: 'user@example.com', password: 'secret' }))
     .resolves.toBeNull()
   expect(signIn).toHaveBeenCalledWith({ identifier: 'user@example.com', password: 'secret' })
-  expect(navigate).toHaveBeenCalledWith('/projects')
+  expect(navigate).toHaveBeenCalledWith('/dashboard')
 })
 
 it('returns the existing generic error and does not navigate', async () => {

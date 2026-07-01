@@ -8,7 +8,15 @@ async function signIn(page: Page, identifier: string) {
   await page.locator('#email').fill(identifier)
   await page.locator('#password').fill(password)
   await page.getByRole('button', { name: 'Войти' }).click()
-  await expect(page).toHaveURL(/\/projects$/)
+  await expect(page).toHaveURL(/\/dashboard$/)
+}
+
+async function expectMainMenu(page: Page, expectedIds: string[]) {
+  const response = await page.request.get('/api/mainMenu')
+  expect(response.status()).toBe(200)
+  const menu = await response.json() as Array<{ id: string }>
+  expect(menu.map(item => item.id)).toEqual(expectedIds)
+  expect(menu.some(item => item.id === 'credentials')).toBe(false)
 }
 
 async function expectSafeAuthorizationError(
@@ -63,12 +71,15 @@ test('requires authentication before administration authorization', async ({ req
 
 test('rejects an ordinary user from an administration API', async ({ page }) => {
   await signIn(page, 'user@example.com')
+  await expectMainMenu(page, ['dashboard', 'projects', 'settings'])
   const response = await page.request.post('/api/administration/probe')
   await expectSafeAuthorizationError(response, 403, 'FORBIDDEN', '/api/administration/probe')
 })
 
 test('allows a super administrator through the administration guard', async ({ page }) => {
   await signIn(page, 'admin@example.com')
+  await expectMainMenu(page, ['dashboard', 'projects', 'settings', 'administration'])
+  await expect(page.getByRole('link', { name: 'Администрирование' })).toBeVisible()
   const response = await page.request.post('/api/administration/probe')
   expect(response.status()).toBe(200)
   await expect(response.json()).resolves.toEqual({ probe: 'administration-authorized' })
@@ -94,7 +105,7 @@ test('keeps sign-in and recovery endpoints callable', async ({ request }) => {
 test('redirects an ordinary user away from administration', async ({ page }) => {
   await signIn(page, 'user@example.com')
   await page.goto('/administration/users')
-  await expect(page).toHaveURL(/\/projects$/)
+  await expect(page).toHaveURL(/\/dashboard$/)
 })
 
 test('allows the bootstrapped super administrator into administration', async ({ page }) => {

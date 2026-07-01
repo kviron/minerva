@@ -3,7 +3,7 @@ import type { IdentitySessionView } from '../../../../shared/identity/session'
 export type RouteAccessDecision =
   | { readonly type: 'allow' }
   | { readonly type: 'error' }
-  | { readonly type: 'redirect', readonly to: '/auth' | '/projects' }
+  | { readonly type: 'redirect', readonly to: '/auth' | '/dashboard' }
 
 interface RouteAccessInput {
   readonly path: string
@@ -43,11 +43,11 @@ export function decideRouteAccess(input: RouteAccessInput): RouteAccessDecision 
   if (!input.session)
     return isPublicPath(input.path) ? { type: 'allow' } : { type: 'redirect', to: '/auth' }
 
-  if (input.path === '/auth')
-    return { type: 'redirect', to: '/projects' }
+  if (input.path === '/' || input.path === '/auth')
+    return { type: 'redirect', to: '/dashboard' }
 
   if (isAdministrationPath(input.path) && input.session.user.superAdmin !== true)
-    return { type: 'redirect', to: '/projects' }
+    return { type: 'redirect', to: '/dashboard' }
 
   return { type: 'allow' }
 }

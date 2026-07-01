@@ -36,12 +36,25 @@ test('blocks public authentication bypasses', async ({ request }) => {
 
 test('signs in by email', async ({ page }) => {
   await submitLogin(page, 'user@example.com')
-  await expect(page).toHaveURL(/\/projects$/)
+  await expect(page).toHaveURL(/\/dashboard$/)
+  await expect(page.getByRole('heading', { name: 'Страница в разработке' })).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Главная' })).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Проекты' })).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Настройки' })).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Администрирование' })).toHaveCount(0)
+
+  await page.goto('/')
+  await expect(page).toHaveURL(/\/dashboard$/)
+
+  await page.goto('/projects/test-project/credentials')
+  await expect(page).toHaveURL(/\/projects\/test-project\/credentials$/)
+  await expect(page.getByRole('heading', { name: 'Страница в разработке' })).toBeVisible()
+  await expect(page.locator('input')).toHaveCount(0)
 })
 
 test('signs in by username', async ({ page }) => {
   await submitLogin(page, 'test.user')
-  await expect(page).toHaveURL(/\/projects$/)
+  await expect(page).toHaveURL(/\/dashboard$/)
 })
 
 test('hides credential enumeration', async ({ page }) => {
@@ -54,7 +67,7 @@ test('hides credential enumeration', async ({ page }) => {
 
 test('revokes logout session', async ({ page }) => {
   await submitLogin(page, 'user@example.com')
-  await expect(page).toHaveURL(/\/projects$/)
+  await expect(page).toHaveURL(/\/dashboard$/)
 
   const response = await page.request.post('/api/auth/sign-out', {
     data: {},
@@ -94,5 +107,5 @@ test('resets once through Mailpit', async ({ page }) => {
   await expect(page).toHaveURL(/\/auth$/)
 
   await submitLogin(page, 'recovery@example.com', newPassword)
-  await expect(page).toHaveURL(/\/projects$/)
+  await expect(page).toHaveURL(/\/dashboard$/)
 })
