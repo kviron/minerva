@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { GlobalNavigation } from '@/features/navigation'
 import {
   Sidebar,
   SidebarContent,
@@ -7,110 +8,17 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from '@/components/ui/sidebar'
+
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: 'shadcn',
+    email: 'm@example.com',
+    avatar: '/avatars/shadcn.jpg',
   },
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "#",
-    },
-    {
-      title: "Lifecycle",
-      url: "#",
-    },
-    {
-      title: "Analytics",
-      url: "#",
-    },
-    {
-      title: "Projects",
-      url: "#",
-    },
-    {
-      title: "Team",
-      url: "#",
-    },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Settings",
-      url: "#",
-    },
-    {
-      title: "Get Help",
-      url: "#"
-    },
-    {
-      title: "Search",
-      url: "#"
-    },
-  ],
-  documents: [
-    {
-      name: "Data Library",
-      url: "#"
-    },
-    {
-      name: "Reports",
-      url: "#"
-    },
-    {
-      name: "Word Assistant",
-      url: "#"
-    },
-  ],
 }
 </script>
+
 <template>
   <Sidebar collapsible="offcanvas">
     <SidebarHeader>
@@ -129,7 +37,7 @@ const data = {
       </SidebarMenu>
     </SidebarHeader>
     <SidebarContent>
-
+      <GlobalNavigation />
     </SidebarContent>
     <SidebarFooter>
       <NavUser :user="data.user" />
