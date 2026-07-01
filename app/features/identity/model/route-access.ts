@@ -1,17 +1,13 @@
+import type { IdentitySessionView } from '../../../../shared/identity/session'
+
 export type RouteAccessDecision =
   | { readonly type: 'allow' }
   | { readonly type: 'error' }
   | { readonly type: 'redirect', readonly to: '/auth' | '/projects' }
 
-export interface RouteSession {
-  readonly user: {
-    readonly superAdmin?: boolean
-  }
-}
-
 interface RouteAccessInput {
   readonly path: string
-  readonly session: RouteSession | null
+  readonly session: IdentitySessionView | null
   readonly sessionError: boolean
 }
 

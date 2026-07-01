@@ -1,3 +1,4 @@
+import { readFile } from 'node:fs/promises'
 import { beforeEach, expect, it, vi } from 'vitest'
 
 const { getIdentitySession, navigateTo, createError, abortNavigation } = vi.hoisted(() => ({
@@ -21,6 +22,16 @@ const { default: authMiddleware } = await import('../../../../app/middleware/aut
 
 beforeEach(() => {
   vi.clearAllMocks()
+})
+
+it('passes the adapter session to route access without asserting its type', async () => {
+  const source = await readFile(
+    new URL('../../../../app/middleware/auth.global.ts', import.meta.url),
+    'utf8',
+  )
+
+  expect(source).not.toMatch(/session\s+as\s+/)
+  expect(source).not.toContain('RouteSession')
 })
 
 it('allows navigation when the resolved session may access the route', async () => {
