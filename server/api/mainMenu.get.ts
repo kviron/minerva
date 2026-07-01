@@ -1,11 +1,9 @@
 import { defineEventHandler } from 'h3'
 import { requireSession } from '../modules/identity/session/require-session'
+import { getGlobalNavigation } from '../modules/navigation/get-global-navigation'
 
 export default defineEventHandler(async (event) => {
-  await requireSession(event)
+  const session = await requireSession(event)
 
-  return [
-    { title: 'Главная', url: '/' },
-    { title: 'Проекты', url: '/catalog' },
-  ]
+  return getGlobalNavigation(session)
 })
