@@ -29,6 +29,7 @@ describe('AppPagePlaceholder', () => {
     expect(source).toContain("import { Construction } from '@lucide/vue'")
     expect(source).toMatch(/<Construction\b/)
     expect(source).toContain('aria-hidden="true"')
+    expect(source).toMatch(/<Construction\b[^>]*class="[^"]*\btext-muted-foreground\b[^"]*"/s)
     expect(source).toMatch(/<section[^>]*class="[^"]*items-center[^"]*justify-center[^"]*text-center/)
     expect(source).toMatch(/class="[^"]*max-w-md[^"]*"/)
     expect(source).toMatch(/class="[^"]*px-4[^"]*"/)
