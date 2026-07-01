@@ -44,7 +44,7 @@ beforeEach(async () => {
 afterAll(closeDatabase)
 
 it('rejects a request without a session', async () => {
-  const event = { headers: new Headers() } as H3Event
+  const event = { headers: new Headers(), context: {} } as H3Event
   await expect(requireSession(event)).rejects.toMatchObject({ code: IDENTITY_CODE.AUTH_REQUIRED })
 })
 
@@ -58,8 +58,11 @@ it('returns the authenticated database session', async () => {
   const setCookie = signedIn.headers.get('set-cookie')
   const event = {
     headers: new Headers({ cookie: setCookie?.split(';', 1)[0] ?? '' }),
+    context: {},
   } as H3Event
 
-  const session = await requireSession(event)
-  expect(session.user.email).toBe('user@example.com')
+  const firstSession = await requireSession(event)
+  const secondSession = await requireSession(event)
+  expect(firstSession.user.email).toBe('user@example.com')
+  expect(secondSession).toBe(firstSession)
 })

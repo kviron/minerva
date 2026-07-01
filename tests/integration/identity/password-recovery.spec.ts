@@ -134,7 +134,7 @@ describe('password recovery', () => {
     const token = await getResetToken()
     await resetPassword({ token, newPassword, ip: '127.0.0.26' })
 
-    await expect(requireSession({ headers: new Headers({ cookie }) } as H3Event))
+    await expect(requireSession({ headers: new Headers({ cookie }), context: {} } as H3Event))
       .rejects.toMatchObject({ code: IDENTITY_CODE.AUTH_REQUIRED })
     await expect(signInWithIdentifier({
       identifier: email, password: newPassword, ip: '127.0.0.27', requestHeaders: new Headers(),
