@@ -10,7 +10,7 @@ const icons = {
 } satisfies Record<GlobalNavigationIcon, Component>
 
 export function resolveNavigationIcon(icon: string): Component {
-  if (icon in icons)
+  if (Object.hasOwn(icons, icon))
     return icons[icon as GlobalNavigationIcon]
 
   if (import.meta.env.DEV)

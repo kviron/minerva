@@ -109,4 +109,16 @@ describe('global navigation presentation helpers', () => {
     )
     diagnostic.mockRestore()
   })
+
+  it('treats Object prototype keys as unknown icons', () => {
+    const diagnostic = vi.spyOn(console, 'error').mockImplementation(() => undefined)
+
+    expect(resolveNavigationIcon('toString')).toBe(CircleHelp)
+    expect(diagnostic).toHaveBeenCalledWith(
+      'Unknown global navigation icon received:',
+      'toString',
+    )
+
+    diagnostic.mockRestore()
+  })
 })
