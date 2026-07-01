@@ -11,12 +11,12 @@ export function getGlobalNavigation(
   session: NavigationSession,
 ): readonly GlobalNavigationItem[] {
   const baseNavigation = [
-    GLOBAL_NAVIGATION.DASHBOARD,
-    GLOBAL_NAVIGATION.PROJECTS,
-    GLOBAL_NAVIGATION.SETTINGS,
+    { ...GLOBAL_NAVIGATION.DASHBOARD },
+    { ...GLOBAL_NAVIGATION.PROJECTS },
+    { ...GLOBAL_NAVIGATION.SETTINGS },
   ] satisfies readonly GlobalNavigationItem[]
 
   return session.user.superAdmin === true
-    ? [...baseNavigation, GLOBAL_NAVIGATION.ADMINISTRATION]
+    ? [...baseNavigation, { ...GLOBAL_NAVIGATION.ADMINISTRATION }]
     : baseNavigation
 }

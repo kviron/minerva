@@ -24,6 +24,15 @@ describe('getGlobalNavigation', () => {
     expect(getGlobalNavigation({ user: { superAdmin: false } })).toEqual(baseNavigation)
   })
 
+  it('returns fresh navigation items for every call', () => {
+    const expectedNavigation = baseNavigation.map(item => ({ ...item }))
+    const firstNavigation = getGlobalNavigation({ user: { superAdmin: false } })
+
+    ;(firstNavigation[0] as { id: string }).id = 'poisoned'
+
+    expect(getGlobalNavigation({ user: { superAdmin: false } })).toEqual(expectedNavigation)
+  })
+
   it('appends administration navigation for a strict true superAdmin flag', () => {
     const navigation = getGlobalNavigation({ user: { superAdmin: true } })
 
