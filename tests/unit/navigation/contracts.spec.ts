@@ -1,7 +1,11 @@
 import { describe, expect, expectTypeOf, it } from 'vitest'
 import { GLOBAL_NAVIGATION } from '../../../shared/navigation/constants'
 import type {
+  GlobalNavigationIcon,
   GlobalNavigationItem,
+  GlobalNavigationItemId,
+  GlobalNavigationLabelKey,
+  GlobalNavigationPath,
   NavigationDefinition,
 } from '../../../shared/navigation/types'
 
@@ -37,20 +41,28 @@ describe('global navigation contracts', () => {
 
   it('keeps navigation item fields closed over the global definitions', () => {
     expectTypeOf(GLOBAL_NAVIGATION.DASHBOARD).toMatchTypeOf<NavigationDefinition>()
-    expectTypeOf<GlobalNavigationItem['id']>().toEqualTypeOf<
+    expectTypeOf<GlobalNavigationItemId>().toEqualTypeOf<
       'dashboard' | 'projects' | 'settings' | 'administration'
     >()
-    expectTypeOf<GlobalNavigationItem['labelKey']>().toEqualTypeOf<
+    expectTypeOf<GlobalNavigationLabelKey>().toEqualTypeOf<
       | 'navigation.dashboard'
       | 'navigation.projects'
       | 'navigation.settings'
       | 'navigation.administration'
     >()
-    expectTypeOf<GlobalNavigationItem['to']>().toEqualTypeOf<
+    expectTypeOf<GlobalNavigationPath>().toEqualTypeOf<
       '/dashboard' | '/projects' | '/settings' | '/administration'
     >()
-    expectTypeOf<GlobalNavigationItem['icon']>().toEqualTypeOf<
+    expectTypeOf<GlobalNavigationIcon>().toEqualTypeOf<
       'layout-dashboard' | 'folder-kanban' | 'settings' | 'shield-check'
+    >()
+    expectTypeOf<GlobalNavigationItem>().toEqualTypeOf<
+      Readonly<{
+        id: GlobalNavigationItemId
+        labelKey: GlobalNavigationLabelKey
+        to: GlobalNavigationPath
+        icon: GlobalNavigationIcon
+      }>
     >()
   })
 })
