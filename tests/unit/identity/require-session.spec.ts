@@ -23,6 +23,51 @@ describe('createRequireSession', () => {
     await expect(requireSession({ headers: new Headers(), context: {} } as H3Event)).resolves.toBe(false)
   })
 
+  it('caches undefined as a valid non-null generic session', async () => {
+    const getSession = vi.fn().mockResolvedValue(undefined)
+    const requireSession = createRequireSession<undefined>(getSession)
+    const event = { headers: new Headers(), context: {} } as H3Event
+
+    await expect(requireSession(event)).resolves.toBeUndefined()
+    await expect(requireSession(event)).resolves.toBeUndefined()
+    expect(getSession).toHaveBeenCalledOnce()
+  })
+
+  it('isolates cached sessions between require-session factories on the same event', async () => {
+    const event = { headers: new Headers(), context: {} } as H3Event
+    const getFlagSession = vi.fn().mockResolvedValue(false)
+    const objectSession = { user: { id: 'user-id' } }
+    const getObjectSession = vi.fn().mockResolvedValue(objectSession)
+    const requireFlagSession = createRequireSession<boolean>(getFlagSession)
+    const requireObjectSession = createRequireSession(getObjectSession)
+
+    await expect(requireFlagSession(event)).resolves.toBe(false)
+    await expect(requireObjectSession(event)).resolves.toBe(objectSession)
+    await expect(requireFlagSession(event)).resolves.toBe(false)
+    await expect(requireObjectSession(event)).resolves.toBe(objectSession)
+    expect(getFlagSession).toHaveBeenCalledOnce()
+    expect(getObjectSession).toHaveBeenCalledOnce()
+  })
+
+  it('does not reuse a session inherited through the event context prototype', async () => {
+    const inheritedSession = { user: { id: 'inherited' } }
+    const ownSession = { user: { id: 'own' } }
+    const getSession = vi.fn()
+      .mockResolvedValueOnce(inheritedSession)
+      .mockResolvedValueOnce(ownSession)
+    const requireSession = createRequireSession(getSession)
+    const parentContext = {}
+
+    await expect(requireSession({ headers: new Headers(), context: parentContext } as H3Event))
+      .resolves.toBe(inheritedSession)
+
+    const childContext = Object.create(parentContext) as Record<string, unknown>
+    const childEvent = { headers: new Headers(), context: childContext } as H3Event
+    await expect(requireSession(childEvent)).resolves.toBe(ownSession)
+    await expect(requireSession(childEvent)).resolves.toBe(ownSession)
+    expect(getSession).toHaveBeenCalledTimes(2)
+  })
+
   it('reuses the exact resolved session on repeated calls for one event', async () => {
     const event = { headers: new Headers(), context: {} } as H3Event
     const session = { user: { id: 'user-id' } }
