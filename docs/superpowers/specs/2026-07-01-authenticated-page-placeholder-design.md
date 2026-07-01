@@ -1,6 +1,6 @@
 # Authenticated Page Placeholder Design
 
-Status: approved in conversation, awaiting written-spec review  
+Status: approved
 Date: 2026-07-01
 
 ## Goal
