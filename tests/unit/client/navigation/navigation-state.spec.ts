@@ -41,6 +41,17 @@ describe('global navigation state', () => {
     expect(load).toHaveBeenCalledTimes(2)
   })
 
+  it('maps a synchronous loader throw to the safe error and clears pending', async () => {
+    const load = vi.fn(() => {
+      throw new Error('synchronous private detail')
+    })
+    const state = createGlobalNavigationState(load)
+
+    await expect(state.load()).resolves.toBeUndefined()
+    expect(state.error.value).toBe('Не удалось загрузить меню')
+    expect(state.pending.value).toBe(false)
+  })
+
   it('coalesces duplicate loads while a request is pending', async () => {
     let resolve!: (items: readonly GlobalNavigationItem[]) => void
     const request = new Promise<readonly GlobalNavigationItem[]>((done) => { resolve = done })
@@ -49,10 +60,10 @@ describe('global navigation state', () => {
 
     const first = state.load()
     const duplicate = state.load()
-    expect(load).toHaveBeenCalledTimes(1)
 
     resolve([GLOBAL_NAVIGATION.PROJECTS])
     await Promise.all([first, duplicate])
+    expect(load).toHaveBeenCalledTimes(1)
     expect(state.items.value).toEqual([GLOBAL_NAVIGATION.PROJECTS])
     expect(state.pending.value).toBe(false)
   })
@@ -90,6 +101,12 @@ describe('global navigation presentation helpers', () => {
       Settings,
       ShieldCheck,
     ])
+    const diagnostic = vi.spyOn(console, 'error').mockImplementation(() => undefined)
     expect(resolveNavigationIcon('unknown-from-server')).toBe(CircleHelp)
+    expect(diagnostic).toHaveBeenCalledWith(
+      'Unknown global navigation icon received:',
+      'unknown-from-server',
+    )
+    diagnostic.mockRestore()
   })
 })

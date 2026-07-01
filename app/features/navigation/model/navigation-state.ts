@@ -18,7 +18,8 @@ export function createGlobalNavigationState(
     pending.value = true
     error.value = null
 
-    inFlight = loadItems()
+    inFlight = Promise.resolve()
+      .then(loadItems)
       .then((loadedItems) => {
         items.value = loadedItems
       })

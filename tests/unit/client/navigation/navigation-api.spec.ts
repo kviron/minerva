@@ -12,4 +12,16 @@ describe('global navigation API', () => {
     expect(request).toHaveBeenCalledTimes(1)
     expect(request).toHaveBeenCalledWith()
   })
+
+  it.each([
+    null,
+    {},
+    [{ ...GLOBAL_NAVIGATION.DASHBOARD, icon: 'unknown-icon' }],
+    [{ ...GLOBAL_NAVIGATION.DASHBOARD, to: '/administration' }],
+    [{ id: 'unknown', labelKey: 'navigation.dashboard', to: '/dashboard', icon: 'layout-dashboard' }],
+  ])('rejects malformed or unknown transport data %#', async (response) => {
+    const api = createGlobalNavigationApi(vi.fn().mockResolvedValue(response))
+
+    await expect(api.load()).rejects.toThrow('Invalid global navigation response')
+  })
 })
