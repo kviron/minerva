@@ -5,20 +5,20 @@ Date: 2026-07-01
 
 ## Goal
 
-Add a permission-aware global navigation endpoint and connect it to the authenticated application sidebar. Introduce an initially empty Dashboard as the default authenticated destination while keeping project navigation separate for the later project-RBAC slice.
+Add a permission-aware global navigation endpoint and connect it to the authenticated application sidebar. Introduce a placeholder-only Dashboard as the default authenticated destination while keeping project navigation separate for the later project-RBAC slice.
 
 ## Scope
 
 This slice includes:
 
-- an empty protected `/dashboard` page;
+- a protected `/dashboard` page using the approved shared development placeholder;
 - `/dashboard` as the destination after sign-in and from the authenticated root route;
 - the protected global-navigation HTTP endpoint;
 - server-side filtering of the Administration item from the current session's `superAdmin` flag;
 - a typed client Navigation feature and its sidebar presentation;
 - Russian and English translation keys and a closed Lucide icon registry.
 
-It does not add project navigation, project memberships, project roles, permission tables, project settings visibility, Dashboard widgets, or new global roles. Project navigation will use a separate permission-aware contract after project RBAC exists.
+It does not add project navigation, project memberships, project roles, permission tables, project settings visibility, Dashboard widgets, project credentials, or new global roles. Project navigation will use a separate permission-aware contract after project RBAC exists.
 
 ## Selected approach
 

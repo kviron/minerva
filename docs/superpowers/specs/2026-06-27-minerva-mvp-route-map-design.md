@@ -30,6 +30,7 @@ The alternatives were rejected for the following reasons:
 |-- dashboard/
 |-- projects/
 |-- projects/[id]/
+|   |-- credentials/
 |   |-- documents/[documentId]/
 |   |   |-- edit
 |   |   `-- history
@@ -56,6 +57,7 @@ The alternatives were rejected for the following reasons:
 - `/dashboard` is the initially empty authenticated landing page and a future home for global summaries.
 - `/projects` lists accessible projects and contains project creation as a permission-aware dialog.
 - `/projects/[id]` is the project overview and owns the contextual document-tree sidebar.
+- `/projects/[id]/credentials` is an authenticated placeholder for a future separately designed project-credentials vault. It stores and exposes no access data in the current slice.
 - `/projects/[id]/documents/[documentId]` opens a document in reading mode.
 - The nested `edit` and `history` routes represent explicit editing and immutable version history.
 - `/projects/[id]/settings` is one page with General, Members, Roles and permissions, and Audit tabs.
@@ -74,6 +76,7 @@ The alternatives were rejected for the following reasons:
 ## Flows without separate pages
 
 - Global documentation search uses a command dialog.
+- Project Credentials remains a placeholder and is excluded from global navigation and MCP until a separate security design and ADR are approved.
 - Project creation, document publication, and version restoration use dialogs.
 - Project archives are exposed as a projects-list filter.
 - Templates and images are part of document creation and editing workflows.
