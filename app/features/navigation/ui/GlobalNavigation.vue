@@ -29,7 +29,9 @@ onMounted(() => {
 <template>
   <SidebarMenu>
     <template v-if="initialLoadPending || navigation.pending.value">
-      <SidebarMenuSkeleton v-for="index in 3" :key="index" show-icon />
+      <SidebarMenuItem v-for="index in 3" :key="index">
+        <SidebarMenuSkeleton show-icon />
+      </SidebarMenuItem>
     </template>
     <SidebarMenuItem v-else-if="navigation.error.value" class="px-2">
       <p role="alert" class="mb-2 text-xs text-muted-foreground">
