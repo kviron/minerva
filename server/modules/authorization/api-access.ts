@@ -1,4 +1,11 @@
-export type ApiAccess = 'not-api' | 'public' | 'authenticated' | 'super-admin'
+export const API_ACCESS = {
+  NOT_API: 'not-api',
+  PUBLIC: 'public',
+  AUTHENTICATED: 'authenticated',
+  SUPER_ADMIN: 'super-admin',
+} as const
+
+export type ApiAccess = typeof API_ACCESS[keyof typeof API_ACCESS]
 
 const PUBLIC_ENDPOINTS = new Set([
   'POST /api/identity/sign-in',
@@ -13,16 +20,16 @@ function isPathOrDescendant(path: string, root: string): boolean {
 
 export function classifyApiAccess(method: string, path: string): ApiAccess {
   if (!isPathOrDescendant(path, '/api')) {
-    return 'not-api'
+    return API_ACCESS.NOT_API
   }
 
   if (isPathOrDescendant(path, '/api/auth') || PUBLIC_ENDPOINTS.has(`${method.toUpperCase()} ${path}`)) {
-    return 'public'
+    return API_ACCESS.PUBLIC
   }
 
   if (isPathOrDescendant(path, '/api/administration')) {
-    return 'super-admin'
+    return API_ACCESS.SUPER_ADMIN
   }
 
-  return 'authenticated'
+  return API_ACCESS.AUTHENTICATED
 }

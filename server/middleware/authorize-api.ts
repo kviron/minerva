@@ -1,7 +1,7 @@
 import type { H3Event } from 'h3'
 import { defineEventHandler, getMethod, getRequestURL, setResponseStatus } from 'h3'
 import { AuthorizationError } from '../modules/authorization/authorization-error'
-import { classifyApiAccess } from '../modules/authorization/api-access'
+import { API_ACCESS, classifyApiAccess } from '../modules/authorization/api-access'
 import { requireSuperAdmin } from '../modules/authorization/require-super-admin'
 import { requireSession } from '../modules/identity/session/require-session'
 import { IdentityError } from '../modules/identity/identity-error'
@@ -15,9 +15,9 @@ export function createAuthorizeApi(dependencies: AuthorizeApiDependencies) {
   return async function authorizeApi(event: H3Event): Promise<void> {
     const access = classifyApiAccess(getMethod(event), getRequestURL(event).pathname)
 
-    if (access === 'authenticated') {
+    if (access === API_ACCESS.AUTHENTICATED) {
       await dependencies.requireSession(event)
-    } else if (access === 'super-admin') {
+    } else if (access === API_ACCESS.SUPER_ADMIN) {
       await dependencies.requireSuperAdmin(event)
     }
   }

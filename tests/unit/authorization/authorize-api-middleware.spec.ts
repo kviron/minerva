@@ -5,6 +5,7 @@ import { AUTHORIZATION_CODE } from '../../../shared/authorization/constants'
 import { IDENTITY_CODE } from '../../../shared/identity/constants'
 import { createAuthorizeApi, createAuthorizeApiHandler } from '../../../server/middleware/authorize-api'
 import { AuthorizationError } from '../../../server/modules/authorization/authorization-error'
+import { API_ACCESS } from '../../../server/modules/authorization/api-access'
 import { IdentityError } from '../../../server/modules/identity/identity-error'
 
 function event(method: string, url: string): H3Event {
@@ -52,12 +53,12 @@ describe('createAuthorizeApi', () => {
     expect(requireSuperAdmin).toHaveBeenCalledWith(apiEvent)
   })
 
-  it.each(['authenticated', 'super-admin'] as const)('propagates %s guard errors unchanged', async (access) => {
+  it.each([API_ACCESS.AUTHENTICATED, API_ACCESS.SUPER_ADMIN])('propagates %s guard errors unchanged', async (access) => {
     const error = new Error('guard failed')
     const requireSession = vi.fn().mockRejectedValue(error)
     const requireSuperAdmin = vi.fn().mockRejectedValue(error)
     const authorizeApi = createAuthorizeApi({ requireSession, requireSuperAdmin })
-    const apiEvent = event('GET', access === 'authenticated' ? '/api/future' : '/api/administration')
+    const apiEvent = event('GET', access === API_ACCESS.AUTHENTICATED ? '/api/future' : '/api/administration')
 
     await expect(authorizeApi(apiEvent)).rejects.toBe(error)
   })
