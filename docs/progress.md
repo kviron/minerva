@@ -1,10 +1,10 @@
 # Minerva progress
 
-Last updated: 2026-07-01
+Last updated: 2026-07-02
 
 ## Current state
 
-The approved Identity backend foundation and its functional TypeScript refactor are implemented and verified. PostgreSQL, Better Auth, sessions, bootstrap, password recovery, and the existing authentication forms work together without a page-layout redesign, while shared identity rules and dependency-injected effects keep the application services independently testable.
+The approved Identity foundation and global-navigation slice are implemented and verified. Authenticated users now land on Dashboard, the sidebar obtains a server-filtered menu through the Navigation feature, and unfinished Dashboard and Project Credentials routes share an intentional development state without storing or exposing credentials.
 
 ## Completed
 
@@ -48,6 +48,7 @@ The approved Identity backend foundation and its functional TypeScript refactor 
 - Established the Nuxt-native feature-module convention with Identity as the reference implementation: API, model, and UI separation; vee-validate/Zod forms; explicit imports through the feature public API; and page-owned reset-route token handling, with visual and server behavior unchanged. Verification completed with a frozen install (1,013 installs across 1,174 packages, no changes), 58/58 unit tests across 14 files, 22/22 PostgreSQL integration tests across 6 files, 8/8 browser journeys, Nuxt typecheck, a production build, an unchanged Drizzle tree, and a clean diff check. The requested Docker Compose start exited 1 because another healthy Minerva PostgreSQL test container already owned port 5433; verification used that healthy PostgreSQL service and its healthy pinned Mailpit 1.30.0 companion on ports 1025/8025.
 - Made Nuxt pages and application Nitro APIs authenticated by default; approved public sign-in, recovery, invitation, legal, and readiness routes remain public, while global administration uses the server-resolved `superAdmin` flag.
 - Authorization now uses a browser-safe typed session boundary, request-scoped session reuse, and a single API access vocabulary without changing access behavior.
+- Added the protected Dashboard landing page, a shared authenticated-page development placeholder used only by Dashboard and Project Credentials, and a typed global Navigation feature. The server returns Dashboard, Projects, and Settings to every authenticated user and adds Administration only for strict `superAdmin === true`; the sidebar localizes stable labels, resolves icons through a closed Lucide registry, uses the design-system `SidebarMenuSkeleton`, and keeps Credentials outside global navigation and MCP. Verification on 2026-07-02 passed 167/167 unit tests and 22/22 PostgreSQL integration tests, Nuxt typecheck, and the production build. The single-worker browser run passed 16/17 before the unchanged public-pages cold-start journey exceeded its 30-second aggregate timeout; that complete journey then passed in isolation, while all new Dashboard, menu-filtering, Administration, and Credentials-placeholder assertions passed in the main run.
 
 ## Remaining
 
