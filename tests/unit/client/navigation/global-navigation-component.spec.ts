@@ -13,7 +13,7 @@ vi.mock('../../../../app/features/navigation/api/global-navigation-api', () => (
   globalNavigationApi: { load },
 }))
 
-mockNuxtImport('useRoute', () => () => ({ path: '/projects/42' }))
+vi.stubGlobal('useRoute', () => ({ path: '/projects/42' }))
 
 const Harness = defineComponent({
   components: { GlobalNavigation, SidebarProvider },
@@ -43,7 +43,12 @@ describe('GlobalNavigation', () => {
 
     const wrapper = mount(Harness, {
       global: {
-        stubs: { NuxtLink: RouterLinkStub },
+        stubs: {
+          NuxtLink: RouterLinkStub,
+          UiButton: {
+            template: '<button><slot /></button>',
+          },
+        },
       },
     })
     await nextTick()
