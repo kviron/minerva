@@ -1,0 +1,513 @@
+# Current User Sidebar Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Replace the sidebar demo identity with the active Better Auth user's real name, email, optional avatar, profile action, and working logout.
+
+**Architecture:** Keep Better Auth private to the Identity feature. A typed reactive session adapter feeds a pure current-user normalizer and `CurrentUserMenu`; the application sidebar composes that public feature, while `NavUser` remains presentational and emits actions.
+
+**Tech Stack:** Nuxt 4, Vue 3, TypeScript, Better Auth 1.6, shadcn-vue/Reka UI, Vitest, Vue Test Utils, Playwright, Bun.
+
+---
+
+## File map
+
+- Modify `shared/identity/session.ts`: define the browser-safe user/session shape used by route policy and the sidebar.
+- Modify `app/features/identity/api/auth-client.ts`: encapsulate Better Auth `useSession` and `signOut` behind typed adapters.
+- Create `app/features/identity/model/current-user.ts`: pure normalization of name, email, avatar URL, and fallback initials.
+- Create `app/features/identity/ui/CurrentUserMenu.vue`: own session states, profile navigation, and logout orchestration.
+- Modify `app/features/identity/index.ts`: export only the public current-user component alongside existing APIs.
+- Modify `app/components/nav/user/index.vue`: accept normalized display data and emit profile/logout actions.
+- Modify `app/components/app/sidebar/index.vue`: remove fixture data and compose `CurrentUserMenu`.
+- Add focused tests under `tests/unit/client/identity/` and update the existing navigation boundary test.
+- Modify `tests/e2e/identity.spec.ts`: verify real identity display, profile navigation, and logout.
+- Modify `docs/progress.md`: record the completed vertical slice.
+
+### Task 1: Expand the browser-safe session contract
+
+**Files:**
+- Modify: `shared/identity/session.ts`
+- Modify: `tests/unit/client/identity/session-contract.spec.ts`
+- Modify: `tests/unit/client/identity/auth-client.spec.ts`
+
+- [ ] **Step 1: Write the failing contract tests**
+
+Replace the first contract test and the auth-client fixture with assertions for the complete safe shape:
+
+```ts
+expectTypeOf<IdentitySessionView['user']>().toEqualTypeOf<{
+  readonly id: string
+  readonly name: string
+  readonly email: string
+  readonly image?: string | null
+  readonly superAdmin?: boolean
+}>()
+```
+
+In `auth-client.spec.ts`, make `getSession` resolve `{ data: { user }, error }` and expect that exact result.
+
+- [ ] **Step 2: Run the focused tests and verify failure**
+
+Run: `bun run test:unit -- tests/unit/client/identity/session-contract.spec.ts tests/unit/client/identity/auth-client.spec.ts`
+
+Expected: FAIL because `IdentitySessionView.user` does not require `id`, `name`, `email`, or expose `image`.
+
+- [ ] **Step 3: Implement the minimal safe contract**
+
+Replace `shared/identity/session.ts` with:
+
+```ts
+export interface IdentitySessionUserView {
+  readonly id: string
+  readonly name: string
+  readonly email: string
+  readonly image?: string | null
+  readonly superAdmin?: boolean
+}
+
+export interface IdentitySessionView {
+  readonly user: IdentitySessionUserView
+}
+
+export interface IdentitySessionResult {
+  readonly data: IdentitySessionView | null
+  readonly error: unknown
+}
+```
+
+- [ ] **Step 4: Run the focused tests and typecheck**
+
+Run: `bun run test:unit -- tests/unit/client/identity/session-contract.spec.ts tests/unit/client/identity/auth-client.spec.ts && bun run typecheck`
+
+Expected: both tests PASS and Nuxt typecheck exits 0.
+
+- [ ] **Step 5: Commit the contract slice**
+
+```powershell
+git add shared/identity/session.ts tests/unit/client/identity/session-contract.spec.ts tests/unit/client/identity/auth-client.spec.ts
+git commit -m "feat: expose safe current user session fields"
+```
+
+### Task 2: Add pure current-user normalization
+
+**Files:**
+- Create: `app/features/identity/model/current-user.ts`
+- Create: `tests/unit/client/identity/current-user.spec.ts`
+
+- [ ] **Step 1: Write failing normalization tests**
+
+Create a table-driven test covering Cyrillic, one-word, email, invalid avatar, and empty fallbacks:
+
+```ts
+import { describe, expect, it } from 'vitest'
+import { toCurrentUserView } from '../../../../app/features/identity/model/current-user'
+
+describe('current user view', () => {
+  it.each([
+    ['Иван Петров', 'ivan@example.com', null, 'ИП', undefined],
+    ['Prince', 'p@example.com', undefined, 'P', undefined],
+    ['', 'mail@example.com', 'javascript:alert(1)', 'M', undefined],
+    ['', '', '', '', undefined],
+    ['Ada Lovelace', 'ada@example.com', '/api/avatar/1', 'AL', '/api/avatar/1'],
+    ['Grace Hopper', 'grace@example.com', 'https://cdn.example/avatar.png', 'GH', 'https://cdn.example/avatar.png'],
+  ])('normalizes display values', (name, email, image, initials, avatar) => {
+    expect(toCurrentUserView({ id: 'u1', name, email, image })).toEqual({
+      name,
+      email,
+      initials,
+      avatar,
+    })
+  })
+})
+```
+
+- [ ] **Step 2: Run the test and verify failure**
+
+Run: `bun run test:unit -- tests/unit/client/identity/current-user.spec.ts`
+
+Expected: FAIL because `current-user.ts` does not exist.
+
+- [ ] **Step 3: Implement the pure normalizer**
+
+Create:
+
+```ts
+import type { IdentitySessionUserView } from '../../../../shared/identity/session'
+
+export interface CurrentUserView {
+  readonly name: string
+  readonly email: string
+  readonly initials: string
+  readonly avatar?: string
+}
+
+const acceptedAvatar = (value: string | null | undefined): string | undefined => {
+  const candidate = value?.trim()
+  if (!candidate) return undefined
+  if (candidate.startsWith('/') && !candidate.startsWith('//')) return candidate
+
+  try {
+    const url = new URL(candidate)
+    return url.protocol === 'http:' || url.protocol === 'https:' ? candidate : undefined
+  }
+  catch {
+    return undefined
+  }
+}
+
+const fallbackInitials = (name: string, email: string): string => {
+  const words = name.trim().split(/\s+/u).filter(Boolean)
+  if (words.length > 0)
+    return words.slice(0, 2).map(word => Array.from(word)[0]?.toLocaleUpperCase('ru-RU') ?? '').join('')
+
+  return Array.from(email.trim())[0]?.toLocaleUpperCase('ru-RU') ?? ''
+}
+
+export const toCurrentUserView = (user: IdentitySessionUserView): CurrentUserView => ({
+  name: user.name.trim(),
+  email: user.email.trim(),
+  initials: fallbackInitials(user.name, user.email),
+  avatar: acceptedAvatar(user.image),
+})
+```
+
+- [ ] **Step 4: Run the normalization tests**
+
+Run: `bun run test:unit -- tests/unit/client/identity/current-user.spec.ts`
+
+Expected: PASS.
+
+- [ ] **Step 5: Commit the model slice**
+
+```powershell
+git add app/features/identity/model/current-user.ts tests/unit/client/identity/current-user.spec.ts
+git commit -m "feat: normalize current user display data"
+```
+
+### Task 3: Encapsulate reactive session and logout adapters
+
+**Files:**
+- Modify: `app/features/identity/api/auth-client.ts`
+- Modify: `tests/unit/client/identity/auth-client.spec.ts`
+
+- [ ] **Step 1: Extend the mocked Better Auth client and write failing adapter tests**
+
+Hoist `useSession` and `signOut`, return them from `createAuthClient`, then add:
+
+```ts
+it('exposes reactive session state without exporting Better Auth', () => {
+  const state = { data: ref(null), isPending: ref(true), error: ref(null), refetch: vi.fn() }
+  useSession.mockReturnValue(state)
+  expect(useIdentitySession()).toBe(state)
+})
+
+it('returns the sign-out error contract', async () => {
+  signOut.mockResolvedValue({ data: null, error: null })
+  await expect(signOutIdentity()).resolves.toEqual({ error: null })
+})
+```
+
+- [ ] **Step 2: Run the adapter tests and verify failure**
+
+Run: `bun run test:unit -- tests/unit/client/identity/auth-client.spec.ts`
+
+Expected: FAIL because `useIdentitySession` and `signOutIdentity` are not exported.
+
+- [ ] **Step 3: Add typed Identity adapters**
+
+Keep the existing `getIdentitySession` and add:
+
+```ts
+import type { Ref } from 'vue'
+
+export interface IdentitySessionState {
+  readonly data: Ref<IdentitySessionView | null>
+  readonly isPending: Ref<boolean>
+  readonly error: Ref<unknown>
+  readonly refetch: () => Promise<unknown> | unknown
+}
+
+export function useIdentitySession(): IdentitySessionState {
+  return authClient.useSession() as IdentitySessionState
+}
+
+export async function signOutIdentity(): Promise<{ readonly error: unknown }> {
+  const result = await authClient.signOut()
+  return { error: result.error }
+}
+```
+
+- [ ] **Step 4: Run adapter tests and typecheck**
+
+Run: `bun run test:unit -- tests/unit/client/identity/auth-client.spec.ts && bun run typecheck`
+
+Expected: PASS and exit 0.
+
+- [ ] **Step 5: Commit the adapter slice**
+
+```powershell
+git add app/features/identity/api/auth-client.ts tests/unit/client/identity/auth-client.spec.ts
+git commit -m "feat: add current session and logout adapters"
+```
+
+### Task 4: Make NavUser a presentational real-user menu
+
+**Files:**
+- Modify: `app/components/nav/user/index.vue`
+- Create: `tests/unit/client/identity/nav-user.spec.ts`
+
+- [ ] **Step 1: Write failing component tests**
+
+Mount `NavUser` with stubs for dropdown/sidebar primitives and assert:
+
+```ts
+const user = { name: 'Иван Петров', email: 'ivan@example.com', initials: 'ИП' }
+const wrapper = mount(NavUser, { props: { user, logoutPending: false } })
+
+expect(wrapper.text()).toContain('Иван Петров')
+expect(wrapper.text()).toContain('ivan@example.com')
+expect(wrapper.text()).toContain('ИП')
+expect(wrapper.text()).toContain('Профиль')
+expect(wrapper.text()).toContain('Выйти')
+expect(wrapper.text()).not.toContain('Billing')
+expect(wrapper.text()).not.toContain('Notifications')
+```
+
+Trigger the profile and logout menu items and expect `profile` and `logout` emissions. Mount with `logoutPending: true` and expect the logout item to be disabled. Mount with `logoutError: 'Не удалось выйти'` and expect a `role="alert"` message.
+
+- [ ] **Step 2: Run the test and verify failure**
+
+Run: `bun run test:unit -- tests/unit/client/identity/nav-user.spec.ts`
+
+Expected: FAIL because the current component has hard-coded initials and demo actions.
+
+- [ ] **Step 3: Refactor NavUser**
+
+Use this public contract:
+
+```ts
+interface User {
+  readonly name: string
+  readonly email: string
+  readonly initials: string
+  readonly avatar?: string
+}
+
+defineProps<{
+  user: User
+  logoutPending: boolean
+  logoutError?: string
+}>()
+
+defineEmits<{
+  profile: []
+  logout: []
+}>()
+```
+
+Render `AvatarImage` only when `user.avatar` exists, render `user.initials` otherwise, and render `IconUser` when initials are empty. Replace the demo group with one `DropdownMenuItem` emitting `profile` and label `Профиль`. Keep a separator, then one disabled-while-pending `DropdownMenuItem` emitting `logout` and label `Выход…` or `Выйти`. Render `logoutError` in a compact `DropdownMenuLabel role="alert"`. Preserve `useSidebar()` placement behavior and use `size-8` instead of paired height/width classes.
+
+- [ ] **Step 4: Run the component tests**
+
+Run: `bun run test:unit -- tests/unit/client/identity/nav-user.spec.ts`
+
+Expected: PASS.
+
+- [ ] **Step 5: Commit the presentational UI slice**
+
+```powershell
+git add app/components/nav/user/index.vue tests/unit/client/identity/nav-user.spec.ts
+git commit -m "feat: present authenticated user menu"
+```
+
+### Task 5: Add CurrentUserMenu and compose it in the sidebar
+
+**Files:**
+- Create: `app/features/identity/ui/CurrentUserMenu.vue`
+- Modify: `app/features/identity/index.ts`
+- Modify: `app/components/app/sidebar/index.vue`
+- Create: `tests/unit/client/identity/current-user-menu.spec.ts`
+- Modify: `tests/unit/client/navigation/global-navigation-ui.spec.ts`
+
+- [ ] **Step 1: Write failing feature and boundary tests**
+
+Mock `useIdentitySession`, `signOutIdentity`, and `navigateTo`. Cover pending skeleton, error/retry, null session, authenticated `NavUser`, profile navigation to `/settings/profile`, logout error, and successful navigation to `/auth`.
+
+Update the sidebar boundary assertion to require:
+
+```ts
+expect(sidebar).toContain('<CurrentUserMenu />')
+expect(sidebar).toContain("from '@/features/identity'")
+expect(sidebar).not.toContain("name: 'shadcn'")
+expect(sidebar).not.toContain('<NavUser :user="data.user" />')
+```
+
+- [ ] **Step 2: Run the tests and verify failure**
+
+Run: `bun run test:unit -- tests/unit/client/identity/current-user-menu.spec.ts tests/unit/client/navigation/global-navigation-ui.spec.ts`
+
+Expected: FAIL because `CurrentUserMenu` does not exist and the sidebar still contains fixture data.
+
+- [ ] **Step 3: Implement CurrentUserMenu**
+
+Create a component with this orchestration:
+
+```vue
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import NavUser from '@/components/nav/user/index.vue'
+import { Button } from '@/components/ui/button'
+import { SidebarMenu, SidebarMenuItem, SidebarMenuSkeleton } from '@/components/ui/sidebar'
+import { signOutIdentity, useIdentitySession } from '../api/auth-client'
+import { toCurrentUserView } from '../model/current-user'
+
+const session = useIdentitySession()
+const logoutPending = ref(false)
+const logoutError = ref<string>()
+const user = computed(() => session.data.value ? toCurrentUserView(session.data.value.user) : null)
+
+const openProfile = () => navigateTo('/settings/profile')
+const logout = async () => {
+  if (logoutPending.value) return
+  logoutPending.value = true
+  logoutError.value = undefined
+  const result = await signOutIdentity()
+  logoutPending.value = false
+  if (result.error) {
+    logoutError.value = 'Не удалось выйти. Повторите попытку.'
+    return
+  }
+  await navigateTo('/auth')
+}
+</script>
+
+<template>
+  <SidebarMenu v-if="session.isPending.value">
+    <SidebarMenuItem><SidebarMenuSkeleton show-icon /></SidebarMenuItem>
+  </SidebarMenu>
+  <SidebarMenu v-else-if="session.error.value">
+    <SidebarMenuItem class="px-2">
+      <p role="alert" class="mb-2 text-xs text-muted-foreground">Не удалось загрузить пользователя.</p>
+      <Button size="sm" variant="outline" @click="session.refetch">Повторить</Button>
+    </SidebarMenuItem>
+  </SidebarMenu>
+  <NavUser
+    v-else-if="user"
+    :user="user"
+    :logout-pending="logoutPending"
+    :logout-error="logoutError"
+    @profile="openProfile"
+    @logout="logout"
+  />
+</template>
+```
+
+Vue templates access the nested session refs through `.value`; `user`, `logoutPending`, and `logoutError` are top-level refs and therefore use template auto-unwrapping. Do not import Better Auth outside the feature adapter.
+
+- [ ] **Step 4: Export and compose the feature**
+
+Add to `app/features/identity/index.ts`:
+
+```ts
+export { default as CurrentUserMenu } from './ui/CurrentUserMenu.vue'
+```
+
+In the sidebar, import `CurrentUserMenu` from `@/features/identity`, delete the `data` constant, replace `<NavUser :user="data.user" />` with `<CurrentUserMenu />`, and remove the direct `NavUser` dependency.
+
+- [ ] **Step 5: Run focused tests and typecheck**
+
+Run: `bun run test:unit -- tests/unit/client/identity/current-user-menu.spec.ts tests/unit/client/identity/nav-user.spec.ts tests/unit/client/navigation/global-navigation-ui.spec.ts && bun run typecheck`
+
+Expected: all focused tests PASS and typecheck exits 0.
+
+- [ ] **Step 6: Commit the feature slice**
+
+```powershell
+git add app/features/identity/ui/CurrentUserMenu.vue app/features/identity/index.ts app/components/app/sidebar/index.vue tests/unit/client/identity/current-user-menu.spec.ts tests/unit/client/navigation/global-navigation-ui.spec.ts
+git commit -m "feat: show current user in sidebar"
+```
+
+### Task 6: Verify the authenticated browser flow
+
+**Files:**
+- Modify: `tests/e2e/identity.spec.ts`
+
+- [ ] **Step 1: Add a failing browser test**
+
+Using the existing authenticated bootstrap user, add one test that signs in, asserts the sidebar contains that user's name and email, opens the user menu, follows `Профиль` to `/settings/profile`, reopens the menu, clicks `Выйти`, expects `/auth`, and confirms `/dashboard` redirects back to `/auth`.
+
+- [ ] **Step 2: Run the browser test and verify failure before final UI fixes**
+
+Run: `bun run test:e2e -- tests/e2e/identity.spec.ts --grep "sidebar current user"`
+
+Expected: FAIL at the first behavior not yet wired or not accessible by role/name.
+
+- [ ] **Step 3: Make only accessibility or selector fixes exposed by the test**
+
+Give the dropdown trigger an accessible label such as `Меню пользователя Иван Петров`, ensure menu items have their visible Russian labels, and do not add test-only attributes when role/name selectors suffice.
+
+- [ ] **Step 4: Run the browser test again**
+
+Run: `bun run test:e2e -- tests/e2e/identity.spec.ts --grep "sidebar current user"`
+
+Expected: PASS.
+
+- [ ] **Step 5: Commit browser coverage**
+
+```powershell
+git add app/components/nav/user/index.vue tests/e2e/identity.spec.ts
+git commit -m "test: cover current user sidebar flow"
+```
+
+### Task 7: Complete verification and canonical documentation
+
+**Files:**
+- Modify: `docs/progress.md`
+- Generated but never commit: `.tesserae/**`
+
+- [ ] **Step 1: Run the full relevant verification suite**
+
+Run:
+
+```powershell
+bun run test:unit
+bun run test:integration
+bun run typecheck
+bun run build
+bun run test:e2e
+```
+
+Expected: every command exits 0. If an unrelated pre-existing failure appears, record the exact command and failure without weakening assertions or broadening this slice.
+
+- [ ] **Step 2: Update progress**
+
+Add a dated `2026-07-03` entry stating that the sidebar now consumes the Identity public API, displays the active Better Auth user's safe session fields with avatar fallbacks, links to the profile route, and performs session-revoking logout. Include the exact verification commands that passed.
+
+- [ ] **Step 3: Refresh Tesserae through the Windows wrapper**
+
+Run: `.\scripts\refresh-tesserae.ps1`
+
+Expected: `sessions-import`, `compile`, and `obsidian-sync` report `ok`. Do not stage `.tesserae` files.
+
+- [ ] **Step 4: Verify the final diff and forbidden artifacts**
+
+Run:
+
+```powershell
+git diff --check
+git status --short
+git diff --cached --name-only
+```
+
+Expected: no whitespace errors; no `.tesserae`, session transcript, secret, `.env`, upload, backup, or generated index is staged.
+
+- [ ] **Step 5: Commit progress documentation**
+
+```powershell
+git add docs/progress.md
+git commit -m "docs: record current user sidebar slice"
+```
+
+- [ ] **Step 6: Perform completion review**
+
+Use `superpowers:requesting-code-review`, address findings with tests first, then use `superpowers:verification-before-completion` before claiming the slice complete.
