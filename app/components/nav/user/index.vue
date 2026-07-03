@@ -34,6 +34,12 @@ const emit = defineEmits<{
   profile: []
   logout: []
 }>()
+
+function handleLogoutSelect(event: Event) {
+  event.preventDefault()
+  emit('logout')
+}
+
 const { isMobile } = useSidebar()
 </script>
 <template>
@@ -93,7 +99,7 @@ const { isMobile } = useSidebar()
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem :disabled="logoutPending" @click="emit('logout')">
+            <DropdownMenuItem :disabled="logoutPending" @select="handleLogoutSelect">
               {{ logoutPending ? 'Выход…' : 'Выйти' }}
             </DropdownMenuItem>
           </DropdownMenuGroup>

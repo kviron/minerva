@@ -78,7 +78,7 @@ describe('NavUser', () => {
     expect(wrapper.findAllComponents({ name: 'IconUser' })).toHaveLength(2)
   })
 
-  it('offers localized actions, removes demo actions, and emits intent events', async () => {
+  it('offers localized actions, removes demo actions, and emits profile intent', async () => {
     const wrapper = mountMenu()
 
     expect(wrapper.text()).toContain('Профиль')
@@ -87,9 +87,20 @@ describe('NavUser', () => {
 
     const actions = wrapper.findAll('button')
     await actions.find(button => button.text() === 'Профиль')!.trigger('click')
-    await actions.find(button => button.text() === 'Выйти')!.trigger('click')
     expect(wrapper.emitted('profile')).toHaveLength(1)
+  })
+
+  it('keeps the menu open while emitting logout intent from selection', () => {
+    const wrapper = mountMenu({ logoutError: 'Не удалось выйти. Повторите попытку.' })
+    const logout = wrapper.findAll('button').find(button => button.text() === 'Выйти')!
+    const select = new Event('select', { cancelable: true })
+
+    logout.element.dispatchEvent(select)
+
+    expect(select.defaultPrevented).toBe(true)
     expect(wrapper.emitted('logout')).toHaveLength(1)
+    expect(wrapper.findAllComponents({ name: 'DropdownMenuLabel' })
+      .some(label => label.attributes('role') === 'alert')).toBe(true)
   })
 
   it('disables logout while pending and displays a compact safe error alert', () => {
