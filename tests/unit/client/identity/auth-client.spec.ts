@@ -1,5 +1,5 @@
 import { expect, it, vi } from 'vitest'
-import { ref } from 'vue'
+import { isRef, ref } from 'vue'
 
 const { getSession, signOut, useSession } = vi.hoisted(() => ({
   getSession: vi.fn(),
@@ -35,16 +35,69 @@ it('returns the browser-safe session data and lookup error from Better Auth', as
   })
 })
 
-it('returns the exact reactive session state from Better Auth', () => {
-  const sessionState = {
-    data: ref(null),
-    isPending: ref(true),
-    error: ref<unknown>(null),
+it('adapts the Better Auth session ref to public field refs', () => {
+  const error = new Error('lookup failed')
+  useSession.mockReturnValue(ref({
+    data: null,
+    isPending: true,
+    isRefetching: false,
+    error,
+    refetch: vi.fn(),
+  }))
+
+  const session = useIdentitySession()
+
+  expect(isRef(session.data)).toBe(true)
+  expect(isRef(session.isPending)).toBe(true)
+  expect(isRef(session.error)).toBe(true)
+  expect(session.data.value).toBeNull()
+  expect(session.isPending.value).toBe(true)
+  expect(session.error.value).toBe(error)
+})
+
+it('reflects replacement of the Better Auth session state', () => {
+  const source = ref({
+    data: null as null | { user: { id: string; name: string; email: string } },
+    isPending: true,
+    isRefetching: false,
+    error: null as unknown,
+    refetch: vi.fn(),
+  })
+  useSession.mockReturnValue(source)
+  const session = useIdentitySession()
+  const data = {
+    user: { id: 'user-42', name: 'Алиса', email: 'alisa@example.com' },
+  }
+  const error = new Error('replacement error')
+
+  source.value = {
+    data,
+    isPending: false,
+    isRefetching: false,
+    error,
     refetch: vi.fn(),
   }
-  useSession.mockReturnValue(sessionState)
 
-  expect(useIdentitySession()).toBe(sessionState)
+  expect(session.data.value).toEqual(data)
+  expect(session.isPending.value).toBe(false)
+  expect(session.error.value).toBe(error)
+})
+
+it('delegates refetch to the current Better Auth session state', async () => {
+  const refetch = vi.fn().mockResolvedValue('refetched')
+  const source = ref({
+    data: null,
+    isPending: false,
+    isRefetching: false,
+    error: null,
+    refetch: vi.fn(),
+  })
+  useSession.mockReturnValue(source)
+  const session = useIdentitySession()
+  source.value = { ...source.value, refetch }
+
+  await expect(session.refetch()).resolves.toBe('refetched')
+  expect(refetch).toHaveBeenCalledOnce()
 })
 
 it.each([null, new Error('logout failed')])(

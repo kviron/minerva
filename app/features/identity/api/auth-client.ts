@@ -1,4 +1,5 @@
 import { createAuthClient } from 'better-auth/vue'
+import { computed } from 'vue'
 import type { Ref } from 'vue'
 import type {
   IdentitySessionResult,
@@ -24,7 +25,14 @@ export async function getIdentitySession(): Promise<IdentitySessionResult> {
 }
 
 export function useIdentitySession(): IdentitySessionState {
-  return authClient.useSession() as unknown as IdentitySessionState
+  const session = authClient.useSession()
+
+  return {
+    data: computed(() => session.value.data as IdentitySessionView | null),
+    isPending: computed(() => session.value.isPending),
+    error: computed(() => session.value.error),
+    refetch: () => session.value.refetch(),
+  }
 }
 
 export async function signOutIdentity(): Promise<{ readonly error: unknown }> {
