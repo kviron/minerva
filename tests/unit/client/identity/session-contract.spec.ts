@@ -1,15 +1,22 @@
 import { describe, expectTypeOf, it } from 'vitest'
 import type {
   IdentitySessionResult,
+  IdentitySessionUserView,
   IdentitySessionView,
 } from '../../../../shared/identity/session'
 
 describe('identity session contract', () => {
-  it('accepts the browser-safe user shape used by route access', () => {
-    expectTypeOf<{ readonly user: { readonly superAdmin?: boolean } }>()
-      .toExtend<IdentitySessionView>()
-    expectTypeOf<IdentitySessionView>()
-      .toExtend<{ readonly user: { readonly superAdmin?: boolean } }>()
+  it('exposes the full browser-safe user shape', () => {
+    expectTypeOf<IdentitySessionUserView>()
+      .toEqualTypeOf<{
+        readonly id: string
+        readonly name: string
+        readonly email: string
+        readonly image?: string | null
+        readonly superAdmin?: boolean
+      }>()
+    expectTypeOf<IdentitySessionView['user']>()
+      .toEqualTypeOf<IdentitySessionUserView>()
   })
 
   it('exposes only nullable session data and an unknown error', () => {

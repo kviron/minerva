@@ -10,13 +10,20 @@ const { getIdentitySession } = await import('../../../../app/features/identity/a
 
 it('returns the browser-safe session data and lookup error from Better Auth', async () => {
   const error = new Error('lookup failed')
+  const user = {
+    id: 'user-42',
+    name: 'Алиса',
+    email: 'alisa@example.com',
+    image: 'https://example.com/alisa.png',
+    superAdmin: true,
+  }
   getSession.mockResolvedValue({
-    data: { user: { superAdmin: true } },
+    data: { user },
     error,
   })
 
   await expect(getIdentitySession()).resolves.toEqual({
-    data: { user: { superAdmin: true } },
+    data: { user },
     error,
   })
 })
