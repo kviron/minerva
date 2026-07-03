@@ -14,6 +14,7 @@ const data = {
   user: {
     name: 'shadcn',
     email: 'm@example.com',
+    initials: 'S',
     avatar: '/avatars/shadcn.jpg',
   },
 }
@@ -40,7 +41,7 @@ const data = {
       <GlobalNavigation />
     </SidebarContent>
     <SidebarFooter>
-      <NavUser :user="data.user" />
+      <NavUser :user="data.user" :logout-pending="false" />
     </SidebarFooter>
   </Sidebar>
 </template>

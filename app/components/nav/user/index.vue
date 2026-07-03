@@ -20,12 +20,19 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 interface User {
-  name: string
-  email: string
-  avatar: string
+  readonly name: string
+  readonly email: string
+  readonly initials: string
+  readonly avatar?: string
 }
 defineProps<{
-  user: User
+  readonly user: User
+  readonly logoutPending: boolean
+  readonly logoutError?: string
+}>()
+const emit = defineEmits<{
+  profile: []
+  logout: []
 }>()
 const { isMobile } = useSidebar()
 </script>
@@ -36,12 +43,14 @@ const { isMobile } = useSidebar()
         <DropdownMenuTrigger as-child>
           <SidebarMenuButton
             size="lg"
+            :aria-label="`Меню пользователя ${user.name}`"
             class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
           >
-            <Avatar class="h-8 w-8 rounded-lg grayscale">
-              <AvatarImage :src="user.avatar" :alt="user.name" />
+            <Avatar class="size-8 rounded-lg grayscale">
+              <AvatarImage v-if="user.avatar" :src="user.avatar" :alt="user.name" />
               <AvatarFallback class="rounded-lg">
-                CN
+                <template v-if="user.initials">{{ user.initials }}</template>
+                <IconUser v-else aria-hidden="true" />
               </AvatarFallback>
             </Avatar>
             <div class="grid flex-1 text-left text-sm leading-tight">
@@ -50,7 +59,7 @@ const { isMobile } = useSidebar()
                 {{ user.email }}
               </span>
             </div>
-            <IconDotsVertical class="ml-auto size-4" />
+            <IconDotsVertical class="ml-auto" />
           </SidebarMenuButton>
         </DropdownMenuTrigger>
         <DropdownMenuContent
@@ -61,10 +70,11 @@ const { isMobile } = useSidebar()
         >
           <DropdownMenuLabel class="p-0 font-normal">
             <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-              <Avatar class="h-8 w-8 rounded-lg">
-                <AvatarImage :src="user.avatar" :alt="user.name" />
+              <Avatar class="size-8 rounded-lg">
+                <AvatarImage v-if="user.avatar" :src="user.avatar" :alt="user.name" />
                 <AvatarFallback class="rounded-lg">
-                  CN
+                  <template v-if="user.initials">{{ user.initials }}</template>
+                  <IconUser v-else aria-hidden="true" />
                 </AvatarFallback>
               </Avatar>
               <div class="grid flex-1 text-left text-sm leading-tight">
@@ -77,20 +87,19 @@ const { isMobile } = useSidebar()
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              Account
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Billing
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Notifications
+            <DropdownMenuItem @click="emit('profile')">
+              Профиль
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            Log out
-          </DropdownMenuItem>
+          <DropdownMenuGroup>
+            <DropdownMenuItem :disabled="logoutPending" @click="emit('logout')">
+              {{ logoutPending ? 'Выход…' : 'Выйти' }}
+            </DropdownMenuItem>
+            <p v-if="logoutError" role="alert" class="px-2 py-1.5 text-xs text-destructive">
+              {{ logoutError }}
+            </p>
+          </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     </SidebarMenuItem>
