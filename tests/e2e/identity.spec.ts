@@ -2,6 +2,10 @@ import { expect, test, type Page } from '@playwright/test'
 
 const oldPassword = 'Correct-Horse-Battery-1'
 const newPassword = 'Different-Horse-Battery-2'
+const authenticatedUser = {
+  email: 'user@example.com',
+  name: 'Test.User',
+} as const
 
 async function submitLogin(page: Page, identifier: string, password = oldPassword) {
   await page.goto('/auth')
@@ -55,6 +59,28 @@ test('signs in by email', async ({ page }) => {
 test('signs in by username', async ({ page }) => {
   await submitLogin(page, 'test.user')
   await expect(page).toHaveURL(/\/dashboard$/)
+})
+
+test('sidebar current user opens profile and revokes the session on logout', async ({ page }) => {
+  await submitLogin(page, authenticatedUser.email)
+  await expect(page).toHaveURL(/\/dashboard$/)
+
+  const userMenu = page.getByRole('button', {
+    name: `Меню пользователя ${authenticatedUser.name}`,
+  })
+  await expect(userMenu).toContainText(authenticatedUser.name)
+  await expect(userMenu).toContainText(authenticatedUser.email)
+
+  await userMenu.click()
+  await page.getByRole('menuitem', { name: 'Профиль' }).click()
+  await expect(page).toHaveURL(/\/settings\/profile$/)
+
+  await userMenu.click()
+  await page.getByRole('menuitem', { name: 'Выйти' }).click()
+  await expect(page).toHaveURL(/\/auth$/)
+
+  await page.goto('/dashboard')
+  await expect(page).toHaveURL(/\/auth$/)
 })
 
 test('hides credential enumeration', async ({ page }) => {
