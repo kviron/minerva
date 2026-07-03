@@ -2,9 +2,11 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
+const sidebarState = vi.hoisted(() => ({ isMobile: false }))
+
 vi.mock('@/components/ui/sidebar', async (importOriginal) => ({
   ...await importOriginal<typeof import('@/components/ui/sidebar')>(),
-  useSidebar: () => ({ isMobile: false }),
+  useSidebar: () => sidebarState,
 }))
 
 import NavUser from '@/components/nav/user/index.vue'
@@ -34,6 +36,7 @@ const stubs = {
 }
 
 function mountMenu(overrides: Record<string, unknown> = {}) {
+  sidebarState.isMobile = false
   return mount(NavUser, {
     props: {
       user: { name: 'Анна Смирнова', email: 'anna@example.ru', initials: 'АС' },
@@ -94,6 +97,28 @@ describe('NavUser', () => {
     const logout = wrapper.findAll('button').find(button => button.text() === 'Выход…')!
 
     expect(logout.attributes('disabled')).toBeDefined()
-    expect(wrapper.get('[role="alert"]').text()).toBe('Не удалось выйти. Повторите попытку.')
+    const alert = wrapper.findAllComponents({ name: 'DropdownMenuLabel' })
+      .find(label => label.attributes('role') === 'alert')!
+    expect(alert.attributes('role')).toBe('alert')
+    expect(alert.text()).toBe('Не удалось выйти. Повторите попытку.')
+  })
+
+  it('opens beside the sidebar on desktop', () => {
+    const wrapper = mountMenu()
+
+    expect(wrapper.getComponent({ name: 'DropdownMenuContent' }).attributes('side')).toBe('right')
+  })
+
+  it('opens below the trigger on mobile', () => {
+    sidebarState.isMobile = true
+    const wrapper = mount(NavUser, {
+      props: {
+        user: { name: 'Анна Смирнова', email: 'anna@example.ru', initials: 'АС' },
+        logoutPending: false,
+      },
+      global: { stubs },
+    })
+
+    expect(wrapper.getComponent({ name: 'DropdownMenuContent' }).attributes('side')).toBe('bottom')
   })
 })

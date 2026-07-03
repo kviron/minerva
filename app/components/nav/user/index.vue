@@ -96,10 +96,14 @@ const { isMobile } = useSidebar()
             <DropdownMenuItem :disabled="logoutPending" @click="emit('logout')">
               {{ logoutPending ? 'Выход…' : 'Выйти' }}
             </DropdownMenuItem>
-            <p v-if="logoutError" role="alert" class="px-2 py-1.5 text-xs text-destructive">
-              {{ logoutError }}
-            </p>
           </DropdownMenuGroup>
+          <DropdownMenuLabel
+            v-if="logoutError"
+            role="alert"
+            class="px-2 py-1.5 text-xs font-normal text-destructive"
+          >
+            {{ logoutError }}
+          </DropdownMenuLabel>
         </DropdownMenuContent>
       </DropdownMenu>
     </SidebarMenuItem>
