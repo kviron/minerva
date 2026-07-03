@@ -23,6 +23,14 @@ const SidebarMenuSkeleton = {
   props: { showIcon: Boolean },
   template: '<div data-skeleton />',
 }
+const SidebarMenu = {
+  name: 'SidebarMenu',
+  template: '<ul data-sidebar-menu><slot /></ul>',
+}
+const SidebarMenuItem = {
+  name: 'SidebarMenuItem',
+  template: '<li data-sidebar-menu-item><slot /></li>',
+}
 const Button = {
   name: 'Button',
   template: '<button><slot /></button>',
@@ -43,7 +51,7 @@ function sessionState(input: {
 }
 
 const mountMenu = () => mount(CurrentUserMenu, {
-  global: { stubs: { NavUser, SidebarMenuSkeleton, Button } },
+  global: { stubs: { NavUser, SidebarMenu, SidebarMenuItem, SidebarMenuSkeleton, Button } },
 })
 
 describe('CurrentUserMenu', () => {
@@ -61,6 +69,7 @@ describe('CurrentUserMenu', () => {
     const wrapper = mountMenu()
 
     expect(wrapper.getComponent(SidebarMenuSkeleton).props('showIcon')).toBe(true)
+    expect(wrapper.get('[data-sidebar-menu] [data-sidebar-menu-item] [data-skeleton]').exists()).toBe(true)
     expect(wrapper.find('[data-nav-user]').exists()).toBe(false)
   })
 
@@ -69,7 +78,9 @@ describe('CurrentUserMenu', () => {
     adapters.useIdentitySession.mockReturnValue(sessionState({ error: new Error('private'), refetch }))
     const wrapper = mountMenu()
 
-    expect(wrapper.get('[role="alert"]').text()).toContain('Не удалось загрузить пользователя.')
+    expect(wrapper.get('[data-sidebar-menu] [data-sidebar-menu-item] [role="alert"]').exists()).toBe(true)
+    expect(wrapper.get('[role="alert"]').text()).toBe('Не удалось загрузить пользователя.')
+    expect(wrapper.get('[role="alert"]').text()).not.toContain('Повторить')
     await wrapper.get('button').trigger('click')
     expect(refetch).toHaveBeenCalledOnce()
   })

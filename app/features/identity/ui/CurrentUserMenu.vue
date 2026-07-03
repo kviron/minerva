@@ -2,7 +2,11 @@
 import { computed, ref } from 'vue'
 import NavUser from '@/components/nav/user/index.vue'
 import { Button } from '@/components/ui/button'
-import { SidebarMenuSkeleton } from '@/components/ui/sidebar'
+import {
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuSkeleton,
+} from '@/components/ui/sidebar'
 import { signOutIdentity, useIdentitySession } from '../api/auth-client'
 import { toCurrentUserView } from '../model/current-user'
 
@@ -43,17 +47,23 @@ async function logout() {
 </script>
 
 <template>
-  <SidebarMenuSkeleton v-if="session.isPending.value" show-icon />
-  <div
+  <SidebarMenu v-if="session.isPending.value">
+    <SidebarMenuItem>
+      <SidebarMenuSkeleton show-icon />
+    </SidebarMenuItem>
+  </SidebarMenu>
+  <SidebarMenu
     v-else-if="session.error.value"
-    role="alert"
-    class="space-y-2 px-2 text-xs text-destructive"
   >
-    <p>Не удалось загрузить пользователя.</p>
-    <Button variant="outline" size="sm" @click="session.refetch">
-      Повторить
-    </Button>
-  </div>
+    <SidebarMenuItem class="space-y-2 px-2 text-xs text-destructive">
+      <p role="alert">
+        Не удалось загрузить пользователя.
+      </p>
+      <Button variant="outline" size="sm" @click="session.refetch">
+        Повторить
+      </Button>
+    </SidebarMenuItem>
+  </SidebarMenu>
   <NavUser
     v-else-if="currentUser"
     :user="currentUser"
