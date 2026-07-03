@@ -11,6 +11,7 @@ export default defineConfig({
   webServer: {
     command: 'bun run dev --envName test --host 127.0.0.1',
     url: 'http://127.0.0.1:3000/api/health/database',
+    timeout: 180_000,
     reuseExistingServer: false,
     env: {
       ...process.env,
