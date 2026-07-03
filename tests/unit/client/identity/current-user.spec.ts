@@ -27,6 +27,10 @@ describe('toCurrentUserView', () => {
     expect(toCurrentUserView(user({ name: '  élodie  ' })).initials).toBe('É')
   })
 
+  it('caps initials at the first two words of a longer name', () => {
+    expect(toCurrentUserView(user({ name: 'Анна Мария Петрова' })).initials).toBe('АМ')
+  })
+
   it('falls back to the first trimmed email character when the name is empty', () => {
     expect(toCurrentUserView(user({
       name: '   ',
@@ -53,6 +57,8 @@ describe('toCurrentUserView', () => {
     '   ',
     'javascript:alert(1)',
     '//evil.example/avatar.png',
+    '/\\evil.example/avatar.png',
+    '/avatars\\me.png',
     'avatars/me.png',
     'http://',
     'https://exa mple.com/avatar.png',

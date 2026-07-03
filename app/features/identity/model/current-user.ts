@@ -24,7 +24,7 @@ const toInitials = (name: string, email: string): string => {
 const toAvatar = (image: string | null | undefined): string | undefined => {
   const avatar = image?.trim()
 
-  if (!avatar) {
+  if (!avatar || avatar.includes('\\')) {
     return undefined
   }
 
