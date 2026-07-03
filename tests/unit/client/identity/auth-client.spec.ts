@@ -1,12 +1,19 @@
 import { expect, it, vi } from 'vitest'
+import { ref } from 'vue'
 
-const { getSession } = vi.hoisted(() => ({ getSession: vi.fn() }))
-
-vi.mock('better-auth/vue', () => ({
-  createAuthClient: vi.fn(() => ({ getSession })),
+const { getSession, signOut, useSession } = vi.hoisted(() => ({
+  getSession: vi.fn(),
+  signOut: vi.fn(),
+  useSession: vi.fn(),
 }))
 
-const { getIdentitySession } = await import('../../../../app/features/identity/api/auth-client')
+vi.mock('better-auth/vue', () => ({
+  createAuthClient: vi.fn(() => ({ getSession, signOut, useSession })),
+}))
+
+const { getIdentitySession, signOutIdentity, useIdentitySession } = await import(
+  '../../../../app/features/identity/api/auth-client'
+)
 
 it('returns the browser-safe session data and lookup error from Better Auth', async () => {
   const error = new Error('lookup failed')
@@ -27,3 +34,24 @@ it('returns the browser-safe session data and lookup error from Better Auth', as
     error,
   })
 })
+
+it('returns the exact reactive session state from Better Auth', () => {
+  const sessionState = {
+    data: ref(null),
+    isPending: ref(true),
+    error: ref<unknown>(null),
+    refetch: vi.fn(),
+  }
+  useSession.mockReturnValue(sessionState)
+
+  expect(useIdentitySession()).toBe(sessionState)
+})
+
+it.each([null, new Error('logout failed')])(
+  'returns only the Better Auth sign-out error %#',
+  async (error) => {
+    signOut.mockResolvedValue({ data: null, error })
+
+    await expect(signOutIdentity()).resolves.toEqual({ error })
+  },
+)
