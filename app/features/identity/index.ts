@@ -1,5 +1,6 @@
 export { getIdentitySession } from './api/auth-client'
 export { decideRouteAccess } from './model/route-access'
 export { default as LoginForm } from './ui/LoginForm.vue'
+export { default as CurrentUserMenu } from './ui/CurrentUserMenu.vue'
 export { default as PasswordRecoveryForm } from './ui/PasswordRecoveryForm.vue'
 export { default as ResetPasswordForm } from './ui/ResetPasswordForm.vue'

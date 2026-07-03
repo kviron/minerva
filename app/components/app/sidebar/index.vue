@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { GlobalNavigation } from '@/features/navigation'
+import { CurrentUserMenu } from '@/features/identity'
 import {
   Sidebar,
   SidebarContent,
@@ -10,14 +11,6 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 
-const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    initials: 'S',
-    avatar: '/avatars/shadcn.jpg',
-  },
-}
 </script>
 
 <template>
@@ -41,7 +34,7 @@ const data = {
       <GlobalNavigation />
     </SidebarContent>
     <SidebarFooter>
-      <NavUser :user="data.user" :logout-pending="false" />
+      <CurrentUserMenu />
     </SidebarFooter>
   </Sidebar>
 </template>

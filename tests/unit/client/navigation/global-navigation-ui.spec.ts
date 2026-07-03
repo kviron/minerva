@@ -32,12 +32,25 @@ describe('global navigation UI boundary', () => {
     expect(ui).toContain('translateNavigationLabel(item.labelKey)')
   })
 
-  it('replaces sample navigation while preserving the sidebar header and user footer', async () => {
-    const sidebar = await read('../../../../app/components/app/sidebar/index.vue')
+  it('uses only public feature boundaries and removes the temporary user fixture', async () => {
+    const [sidebar, identityApi, currentUserMenu] = await Promise.all([
+      read('../../../../app/components/app/sidebar/index.vue'),
+      read('../../../../app/features/identity/index.ts'),
+      read('../../../../app/features/identity/ui/CurrentUserMenu.vue'),
+    ])
 
     expect(sidebar).toContain('<GlobalNavigation />')
     expect(sidebar).toContain('<SidebarHeader>')
-    expect(sidebar).toContain('<NavUser :user="data.user" />')
+    expect(sidebar).toContain('<CurrentUserMenu />')
+    expect(sidebar).toContain("from '@/features/identity'")
+    expect(sidebar).not.toContain('@/features/identity/')
+    expect(sidebar).not.toContain('NavUser')
+    expect(sidebar).not.toContain('data.user')
+    expect(sidebar).not.toMatch(/shadcn|avatar|initials/i)
+    expect(identityApi).toContain("export { default as CurrentUserMenu } from './ui/CurrentUserMenu.vue'")
+    expect(identityApi).not.toMatch(/useIdentitySession|signOutIdentity/)
+    expect(currentUserMenu).toContain("from '../api/auth-client'")
+    expect(currentUserMenu).toContain("from '../model/current-user'")
     expect(sidebar).not.toContain('navMain')
     expect(sidebar).not.toContain('navClouds')
     expect(sidebar).not.toContain('navSecondary')
