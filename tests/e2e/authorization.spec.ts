@@ -1,6 +1,7 @@
 import { expect, test, type APIResponse, type Page } from '@playwright/test'
+import { AUTHORIZATION_TEST_USER } from './global.setup'
 
-const password = 'Correct-Horse-Battery-1'
+const password = AUTHORIZATION_TEST_USER.password
 const publicOriginHeaders = { origin: 'http://127.0.0.1:3000' }
 
 async function signIn(page: Page, identifier: string) {
@@ -70,7 +71,7 @@ test('requires authentication before administration authorization', async ({ req
 })
 
 test('rejects an ordinary user from an administration API', async ({ page }) => {
-  await signIn(page, 'user@example.com')
+  await signIn(page, AUTHORIZATION_TEST_USER.email)
   await expectMainMenu(page, ['dashboard', 'projects', 'settings'])
   const response = await page.request.post('/api/administration/probe')
   await expectSafeAuthorizationError(response, 403, 'FORBIDDEN', '/api/administration/probe')
@@ -103,7 +104,7 @@ test('keeps sign-in and recovery endpoints callable', async ({ request }) => {
 })
 
 test('redirects an ordinary user away from administration', async ({ page }) => {
-  await signIn(page, 'user@example.com')
+  await signIn(page, AUTHORIZATION_TEST_USER.email)
   await page.goto('/administration/users')
   await expect(page).toHaveURL(/\/dashboard$/)
 })

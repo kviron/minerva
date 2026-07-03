@@ -3,6 +3,14 @@ import { AUTH_MODE } from '../../shared/identity/constants'
 import { createMinervaAuth } from '../../server/modules/identity/auth/create-auth'
 import { createTestDatabase, resetTestDatabase, TEST_DATABASE_URL } from '../helpers/database'
 
+export const AUTHORIZATION_TEST_USER = {
+  email: 'authorization.user@example.com',
+  username: 'authorization.user',
+  displayUsername: 'Authorization.User',
+  name: 'Authorization.User',
+  password: 'Correct-Horse-Battery-1',
+} as const
+
 export default async function globalSetup() {
   process.env.DATABASE_URL = TEST_DATABASE_URL
   process.env.BETTER_AUTH_SECRET = 'test-secret-012345678901234567890'
@@ -39,6 +47,7 @@ export default async function globalSetup() {
         password: 'Correct-Horse-Battery-1',
       },
     })
+    await auth.api.signUpEmail({ body: AUTHORIZATION_TEST_USER })
     const adminAuth = createMinervaAuth({
       mode: AUTH_MODE.BOOTSTRAP,
       db: database.db,
