@@ -1,0 +1,207 @@
+# Projects and RBAC Foundation Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Add the persistent Projects/RBAC/audit foundation and an atomic service that creates a project with isolated built-in roles, permissions, creator membership, and audit event.
+
+**Architecture:** Shared constants define the closed authorization vocabulary and pure role templates. Drizzle owns normalized PostgreSQL tables and constraints; a dependency-injected Projects application service validates input and executes every creation write in one transaction, with no transport or UI in this slice.
+
+**Tech Stack:** TypeScript, Nuxt/Nitro, Drizzle ORM, PostgreSQL 17, postgres.js, Vitest, Bun.
+
+---
+
+## File map
+
+- Create `shared/projects/constants.ts` and `shared/projects/types.ts`: closed domain vocabulary and derived types.
+- Create `server/modules/projects/project-templates.ts`: pure built-in role templates.
+- Create `server/modules/projects/create-project.ts`: validation, safe errors, dependency boundary, and transaction orchestration.
+- Create `server/infrastructure/database/schema/projects.ts`: projects, roles, permissions, memberships, and audit tables.
+- Modify `server/infrastructure/database/schema/index.ts` and `drizzle.config.ts`: expose the complete schema to runtime and migration generation.
+- Generate `drizzle/0001_projects_rbac_foundation.sql` and Drizzle metadata.
+- Create focused unit and PostgreSQL integration tests; extend the schema migration test.
+- Modify `docs/progress.md` after verification.
+
+### Task 1: Closed permission vocabulary and pure role templates
+
+**Files:**
+- Create: `tests/unit/projects/project-templates.spec.ts`
+- Create: `shared/projects/constants.ts`
+- Create: `shared/projects/types.ts`
+- Create: `server/modules/projects/project-templates.ts`
+
+- [ ] **Step 1: Write the failing unit test**
+
+Test exact values for `PROJECT_STATUS`, `PROJECT_ROLE_KEY`, `MEMBERSHIP_STATUS`, `AUDIT_CHANNEL`, `AUDIT_OUTCOME`, and `PROJECT_PERMISSION`; assert Admin has every permission, Editor has project view + every document permission + member/role view, Viewer has only project/document/history view, and all arrays contain no duplicates.
+
+```ts
+expect(BUILT_IN_PROJECT_ROLES.admin.permissions).toEqual(Object.values(PROJECT_PERMISSION))
+expect(BUILT_IN_PROJECT_ROLES.viewer.permissions).toEqual([
+  PROJECT_PERMISSION.PROJECT_VIEW,
+  PROJECT_PERMISSION.DOCUMENTS_VIEW,
+  PROJECT_PERMISSION.DOCUMENTS_VIEW_HISTORY,
+])
+expect(new Set(BUILT_IN_PROJECT_ROLES.editor.permissions).size)
+  .toBe(BUILT_IN_PROJECT_ROLES.editor.permissions.length)
+```
+
+- [ ] **Step 2: Verify RED**
+
+Run `bunx vitest run tests/unit/projects/project-templates.spec.ts`. Expected: FAIL because the modules do not exist.
+
+- [ ] **Step 3: Add constants and derived types**
+
+Define `as const` objects using these exact values:
+
+```ts
+export const PROJECT_PERMISSION = {
+  PROJECT_VIEW: 'project.view', PROJECT_UPDATE: 'project.update',
+  PROJECT_ARCHIVE: 'project.archive', PROJECT_RESTORE: 'project.restore',
+  DOCUMENTS_VIEW: 'documents.view', DOCUMENTS_CREATE: 'documents.create',
+  DOCUMENTS_UPDATE_DRAFT: 'documents.update_draft', DOCUMENTS_PUBLISH: 'documents.publish',
+  DOCUMENTS_MOVE: 'documents.move', DOCUMENTS_ARCHIVE: 'documents.archive',
+  DOCUMENTS_RESTORE: 'documents.restore', DOCUMENTS_VIEW_HISTORY: 'documents.view_history',
+  MEMBERS_VIEW: 'members.view', MEMBERS_INVITE: 'members.invite',
+  MEMBERS_ASSIGN_ROLE: 'members.assign_role', MEMBERS_REMOVE: 'members.remove',
+  ROLES_VIEW: 'roles.view', ROLES_CREATE: 'roles.create',
+  ROLES_UPDATE: 'roles.update', ROLES_DELETE: 'roles.delete', AUDIT_VIEW: 'audit.view',
+} as const
+export const PROJECT_STATUS = { ACTIVE: 'active', ARCHIVED: 'archived' } as const
+export const PROJECT_ROLE_KEY = { ADMIN: 'admin', EDITOR: 'editor', VIEWER: 'viewer' } as const
+export const PROJECT_ROLE_KIND = { BUILT_IN: 'built_in', CUSTOM: 'custom' } as const
+export const MEMBERSHIP_STATUS = { ACTIVE: 'active', REMOVED: 'removed' } as const
+export const AUDIT_CHANNEL = { WEB: 'web', API: 'api', MCP: 'mcp', SYSTEM: 'system' } as const
+export const AUDIT_OUTCOME = { SUCCEEDED: 'succeeded', FAILED: 'failed' } as const
+```
+
+Derive union types in `types.ts` with the existing `ValueOf<typeof import('./constants').X>` convention. Build `BUILT_IN_PROJECT_ROLES` from these constants; do not repeat permission strings.
+
+- [ ] **Step 4: Verify GREEN and commit**
+
+Run `bunx vitest run tests/unit/projects/project-templates.spec.ts`. Expected: PASS. Then commit only these four files with `feat: define project role templates`.
+
+### Task 2: PostgreSQL schema and generated migration
+
+**Files:**
+- Modify: `tests/integration/identity/schema.spec.ts`
+- Create: `server/infrastructure/database/schema/projects.ts`
+- Modify: `server/infrastructure/database/schema/index.ts`
+- Modify: `drizzle.config.ts`
+- Generate: `drizzle/0001_projects_rbac_foundation.sql`, `drizzle/meta/0001_snapshot.json`, `drizzle/meta/_journal.json`
+
+- [ ] **Step 1: Extend the migration test first**
+
+Require `projects`, `project_roles`, `project_role_permissions`, `project_memberships`, and `audit_events`; query PostgreSQL catalogs to assert unique `(project_id,user_id)`, unique `(role_id,permission_code)`, composite membership-to-role project integrity, and non-cascading user foreign keys.
+
+- [ ] **Step 2: Verify RED**
+
+Run `bun run test:integration -- tests/integration/identity/schema.spec.ts`. Expected: FAIL because the five tables are absent.
+
+- [ ] **Step 3: Define the Drizzle schema**
+
+Use UUID primary keys with `pg_catalog.gen_random_uuid()`, `timestamp(..., { withTimezone: true })`, enum-constrained text columns sourced from shared constants, `jsonb` audit metadata, indexes on every lookup FK/status, and these database constraints:
+
+```ts
+unique('project_roles_id_project_unique').on(table.id, table.projectId)
+uniqueIndex('project_roles_builtin_key_unique').on(table.projectId, table.builtInKey)
+  .where(sql`${table.builtInKey} is not null`)
+unique('project_role_permissions_unique').on(table.roleId, table.permissionCode)
+unique('project_memberships_project_user_unique').on(table.projectId, table.userId)
+foreignKey({ columns: [table.roleId, table.projectId], foreignColumns: [projectRole.id, projectRole.projectId] })
+```
+
+Use `onDelete: 'restrict'` for all user references and `onDelete: 'cascade'` only from project to owned role/permission/membership records. Audit events remain append-only and use restricted project/user references.
+
+- [ ] **Step 4: Expose schema and generate migration**
+
+Export `projects.ts` from schema `index.ts`; point `drizzle.config.ts` at `schema/index.ts`. Run `bun run db:generate -- --name projects_rbac_foundation`. Inspect generated SQL and reject any destructive operation against identity tables.
+
+- [ ] **Step 5: Verify GREEN and commit**
+
+Run the focused integration test twice without resetting between the two `migrate` calls to prove migration idempotence. Expected: PASS. Commit schema, config, migration metadata, and test with `feat: add projects RBAC schema`.
+
+### Task 3: Pure command validation and safe errors
+
+**Files:**
+- Create: `tests/unit/projects/create-project.spec.ts`
+- Create: `server/modules/projects/create-project.ts`
+
+- [ ] **Step 1: Write failing unit cases**
+
+Cover trimmed valid input, blank name, name over 120 characters, description over 2000 characters, missing actor, and non-active actor. Assert only stable codes: `AUTH_REQUIRED`, `ACCOUNT_INACTIVE`, `INVALID_PROJECT_NAME`, `INVALID_PROJECT_DESCRIPTION`, `PROJECT_CREATE_FAILED`.
+
+- [ ] **Step 2: Verify RED**
+
+Run `bunx vitest run tests/unit/projects/create-project.spec.ts`. Expected: FAIL because the module does not exist.
+
+- [ ] **Step 3: Implement pure validation and dependency boundary**
+
+```ts
+export interface CreateProjectInput {
+  readonly actor: { readonly userId: string; readonly accountStatus: AccountStatus } | null
+  readonly channel: AuditChannel
+  readonly name: string
+  readonly description?: string | null
+}
+export interface CreateProjectDependencies {
+  readonly persist: (command: ValidCreateProjectCommand) => Promise<{ projectId: string }>
+}
+export const createProjectWith = (deps: CreateProjectDependencies) => async (input: CreateProjectInput) => {
+  const command = validateCreateProject(input)
+  if (!command.ok) return command
+  try { return { ok: true as const, value: await deps.persist(command.value) } }
+  catch { return { ok: false as const, code: 'PROJECT_CREATE_FAILED' as const } }
+}
+```
+
+Validation returns a discriminated Result and never throws for domain input. Preserve `undefined/null` description as `null`; trim non-null descriptions.
+
+- [ ] **Step 4: Verify GREEN and commit**
+
+Run the focused unit test. Expected: PASS. Commit with `feat: validate project creation`.
+
+### Task 4: Atomic project creation persistence
+
+**Files:**
+- Create: `tests/integration/projects/create-project.spec.ts`
+- Modify: `server/modules/projects/create-project.ts`
+
+- [ ] **Step 1: Write failing integration tests**
+
+Migrate a fresh database and insert active and disabled users. Assert success creates exactly one project, three isolated roles, exact permission rows, creator/Admin membership, and one `project.created` audit event. Create two projects and prove role IDs differ. Inject a persistence hook that throws before audit insertion and assert every project-domain table remains empty.
+
+- [ ] **Step 2: Verify RED**
+
+Run `bun run test:integration -- tests/integration/projects/create-project.spec.ts`. Expected: FAIL because production persistence is not wired.
+
+- [ ] **Step 3: Implement transaction persistence**
+
+Export a `createProjectPersistence(db, hooks = {})` adapter. Inside one `db.transaction`, insert project, roles, flattened permissions, membership, invoke optional `beforeAudit` test seam, insert audit event, and return `{ projectId }`. Export runtime `createProject` using `getDatabase().db`; do not open a second connection.
+
+The audit metadata is exactly `{ roleKey: 'admin' }`; it contains no user profile, secrets, credentials, or storage paths. Use returned Drizzle rows rather than querying role names.
+
+- [ ] **Step 4: Verify GREEN and commit**
+
+Run the focused integration test, then all project unit/integration tests. Expected: PASS. Commit with `feat: create projects atomically`.
+
+### Task 5: Full verification and canonical progress
+
+**Files:**
+- Modify: `docs/progress.md`
+- Refresh only: `.tesserae/**` via the repository wrapper; never stage it.
+
+- [ ] **Step 1: Run verification**
+
+Run in order: `bun run test:unit`, `bun run test:integration`, `bun run typecheck`, `bun run build`, and `bunx drizzle-kit check --config drizzle.config.ts`. Every command must exit 0; record exact test counts.
+
+- [ ] **Step 2: Review generated migration and scope**
+
+Run `git diff --check`, inspect `drizzle/0001_projects_rbac_foundation.sql`, and confirm no `.env`, `.output`, `.tesserae`, sidebar work, credentials, or generated indexes are staged.
+
+- [ ] **Step 3: Update progress and Tesserae**
+
+Append a `docs/progress.md` completion bullet describing the schema, atomic service, and exact verification evidence. Run `./scripts/refresh-tesserae.ps1`; require `sessions-import`, `compile`, and `obsidian-sync` to report `ok`.
+
+- [ ] **Step 4: Commit documentation only**
+
+Stage only `docs/progress.md` and commit with `docs: record projects RBAC foundation`. Leave `.tesserae`, `.output`, and the user's sidebar edit unstaged.
+
