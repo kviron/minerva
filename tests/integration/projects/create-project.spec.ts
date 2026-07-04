@@ -30,6 +30,22 @@ const command = (name: string) => ({
   description: 'Knowledge base',
 })
 
+function deferred() {
+  let resolve!: () => void
+  const promise = new Promise<void>((complete) => { resolve = complete })
+  return { promise, resolve }
+}
+
+async function waitForDatabaseCondition<T>(check: () => Promise<T | undefined>, description: string): Promise<T> {
+  const deadline = Date.now() + 5_000
+  while (Date.now() < deadline) {
+    const result = await check()
+    if (result !== undefined) return result
+    await new Promise(resolve => setTimeout(resolve, 10))
+  }
+  throw new Error(`Timed out waiting for ${description}`)
+}
+
 describe('createProjectPersistence', () => {
   async function expectProjectDomainEmpty(database: ReturnType<typeof createTestDatabase>) {
     for (const table of ['projects', 'project_roles', 'project_role_permissions', 'project_memberships', 'audit_events']) {
@@ -136,4 +152,51 @@ describe('createProjectPersistence', () => {
       await database.close()
     }
   })
+
+  it('waits for an in-flight disable and rejects the actor after the row lock is released', async () => {
+    const locker = createTestDatabase()
+    const creator = createTestDatabase()
+    const observer = createTestDatabase()
+    const updateStarted = deferred()
+    const releaseUpdate = deferred()
+    let lockTransaction: Promise<unknown> | undefined
+
+    try {
+      lockTransaction = locker.queryClient.begin(async (sql) => {
+        await sql`update "user" set status = 'disabled' where id = ${command('').actorUserId}`
+        updateStarted.resolve()
+        await releaseUpdate.promise
+      })
+      await updateStarted.promise
+
+      const service = createProjectWith({ persist: createProjectPersistence(creator.db) })
+      const creation = service({
+        actor: { userId: command('').actorUserId, accountStatus: ACCOUNT_STATUS.ACTIVE },
+        channel: AUDIT_CHANNEL.WEB,
+        name: 'Concurrent disable',
+      })
+
+      const waitingQuery = await waitForDatabaseCondition(async () => {
+        const [activity] = await observer.queryClient<{ query: string }[]>`
+          select query
+          from pg_stat_activity
+          where datname = current_database()
+            and pid <> pg_backend_pid()
+            and wait_event_type = 'Lock'
+            and lower(query) like '%for update%'
+        `
+        return activity
+      }, 'project creation to wait on SELECT FOR UPDATE')
+      expect(waitingQuery.query.toLowerCase()).toContain('for update')
+
+      releaseUpdate.resolve()
+      await lockTransaction
+      await expect(creation).resolves.toEqual({ ok: false, code: 'ACCOUNT_INACTIVE' })
+      await expectProjectDomainEmpty(observer)
+    } finally {
+      releaseUpdate.resolve()
+      await lockTransaction?.catch(() => undefined)
+      await Promise.all([locker.close(), creator.close(), observer.close()])
+    }
+  }, 10_000)
 })
