@@ -63,7 +63,12 @@ CREATE TABLE "projects" (
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"archived_at" timestamp with time zone,
 	"archived_by_user_id" uuid,
-	CONSTRAINT "projects_status_check" CHECK ("projects"."status" in ('active', 'archived'))
+	CONSTRAINT "projects_status_check" CHECK ("projects"."status" in ('active', 'archived')),
+	CONSTRAINT "projects_name_check" CHECK ("projects"."name" = btrim("projects"."name") and char_length("projects"."name") between 1 and 120),
+	CONSTRAINT "projects_description_check" CHECK (
+    "projects"."description" is null
+    or ("projects"."description" = btrim("projects"."description") and char_length("projects"."description") <= 2000)
+  )
 );
 --> statement-breakpoint
 ALTER TABLE "audit_events" ADD CONSTRAINT "audit_events_actor_user_id_user_id_fk" FOREIGN KEY ("actor_user_id") REFERENCES "public"."user"("id") ON DELETE restrict ON UPDATE no action;--> statement-breakpoint
@@ -71,7 +76,7 @@ ALTER TABLE "audit_events" ADD CONSTRAINT "audit_events_project_id_projects_id_f
 ALTER TABLE "project_memberships" ADD CONSTRAINT "project_memberships_project_id_projects_id_fk" FOREIGN KEY ("project_id") REFERENCES "public"."projects"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "project_memberships" ADD CONSTRAINT "project_memberships_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE restrict ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "project_memberships" ADD CONSTRAINT "project_memberships_removed_by_user_id_user_id_fk" FOREIGN KEY ("removed_by_user_id") REFERENCES "public"."user"("id") ON DELETE restrict ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "project_memberships" ADD CONSTRAINT "project_memberships_role_id_project_id_project_roles_fk" FOREIGN KEY ("role_id","project_id") REFERENCES "public"."project_roles"("id","project_id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "project_memberships" ADD CONSTRAINT "project_memberships_role_id_project_id_project_roles_fk" FOREIGN KEY ("role_id","project_id") REFERENCES "public"."project_roles"("id","project_id") ON DELETE restrict ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "project_role_permissions" ADD CONSTRAINT "project_role_permissions_role_id_project_roles_id_fk" FOREIGN KEY ("role_id") REFERENCES "public"."project_roles"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "project_roles" ADD CONSTRAINT "project_roles_project_id_projects_id_fk" FOREIGN KEY ("project_id") REFERENCES "public"."projects"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "projects" ADD CONSTRAINT "projects_created_by_user_id_user_id_fk" FOREIGN KEY ("created_by_user_id") REFERENCES "public"."user"("id") ON DELETE restrict ON UPDATE no action;--> statement-breakpoint

@@ -1,5 +1,5 @@
 {
-  "id": "cd8b5274-9f5a-4490-98b0-114d7f88f001",
+  "id": "94f2e0de-aacd-4a81-bc10-c61d3c3294eb",
   "prevId": "e14161d1-02c1-4765-9732-ea1b5d65255a",
   "version": "7",
   "dialect": "postgresql",
@@ -825,7 +825,7 @@
             "id",
             "project_id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "restrict",
           "onUpdate": "no action"
         }
       },
@@ -1209,6 +1209,14 @@
         "projects_status_check": {
           "name": "projects_status_check",
           "value": "\"projects\".\"status\" in ('active', 'archived')"
+        },
+        "projects_name_check": {
+          "name": "projects_name_check",
+          "value": "\"projects\".\"name\" = btrim(\"projects\".\"name\") and char_length(\"projects\".\"name\") between 1 and 120"
+        },
+        "projects_description_check": {
+          "name": "projects_description_check",
+          "value": "\n    \"projects\".\"description\" is null\n    or (\"projects\".\"description\" = btrim(\"projects\".\"description\") and char_length(\"projects\".\"description\") <= 2000)\n  "
         }
       },
       "isRLSEnabled": false

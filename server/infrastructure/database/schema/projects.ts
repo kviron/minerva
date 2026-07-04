@@ -39,6 +39,11 @@ export const projects = pgTable('projects', {
   archivedByUserId: uuid('archived_by_user_id').references(() => user.id, { onDelete: 'restrict' }),
 }, table => [
   check('projects_status_check', sql`${table.status} in (${enumSql(PROJECT_STATUS)})`),
+  check('projects_name_check', sql`${table.name} = btrim(${table.name}) and char_length(${table.name}) between 1 and 120`),
+  check('projects_description_check', sql`
+    ${table.description} is null
+    or (${table.description} = btrim(${table.description}) and char_length(${table.description}) <= 2000)
+  `),
   index('projects_status_idx').on(table.status),
   index('projects_created_by_user_id_idx').on(table.createdByUserId),
   index('projects_archived_by_user_id_idx').on(table.archivedByUserId),
@@ -94,7 +99,7 @@ export const projectMemberships = pgTable('project_memberships', {
     name: 'project_memberships_role_id_project_id_project_roles_fk',
     columns: [table.roleId, table.projectId],
     foreignColumns: [projectRoles.id, projectRoles.projectId],
-  }).onDelete('cascade'),
+  }).onDelete('restrict'),
   index('project_memberships_project_id_idx').on(table.projectId),
   index('project_memberships_user_id_idx').on(table.userId),
   index('project_memberships_role_id_idx').on(table.roleId),
