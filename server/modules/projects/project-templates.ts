@@ -2,7 +2,7 @@ import { PROJECT_PERMISSION, PROJECT_ROLE_KEY } from '../../../shared/projects/c
 
 export const BUILT_IN_PROJECT_ROLES = {
   [PROJECT_ROLE_KEY.ADMIN]: {
-    permissions: Object.values(PROJECT_PERMISSION),
+    permissions: Object.freeze(Object.values(PROJECT_PERMISSION)),
   },
   [PROJECT_ROLE_KEY.EDITOR]: {
     permissions: [

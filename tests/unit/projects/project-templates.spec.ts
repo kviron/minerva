@@ -19,7 +19,19 @@ import type {
   ProjectStatus,
 } from '../../../shared/projects/types'
 
+type IsReadonlyArray<T> = T extends readonly unknown[]
+  ? T extends unknown[]
+    ? false
+    : true
+  : false
+
 describe('project constants and built-in role templates', () => {
+  it('exposes readonly permission arrays for every built-in role', () => {
+    expectTypeOf<IsReadonlyArray<typeof BUILT_IN_PROJECT_ROLES.admin.permissions>>().toEqualTypeOf<true>()
+    expectTypeOf<IsReadonlyArray<typeof BUILT_IN_PROJECT_ROLES.editor.permissions>>().toEqualTypeOf<true>()
+    expectTypeOf<IsReadonlyArray<typeof BUILT_IN_PROJECT_ROLES.viewer.permissions>>().toEqualTypeOf<true>()
+  })
+
   it('defines the exact closed project vocabulary', () => {
     expect(PROJECT_STATUS).toEqual({ ACTIVE: 'active', ARCHIVED: 'archived' })
     expect(PROJECT_ROLE_KEY).toEqual({ ADMIN: 'admin', EDITOR: 'editor', VIEWER: 'viewer' })
