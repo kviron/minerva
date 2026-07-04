@@ -1,5 +1,6 @@
 import { ACCOUNT_STATUS } from '../../../shared/identity/constants'
 import type { AccountStatus } from '../../../shared/identity/types'
+import { eq } from 'drizzle-orm'
 import {
   AUDIT_OUTCOME,
   MEMBERSHIP_STATUS,
@@ -9,6 +10,7 @@ import {
 } from '../../../shared/projects/constants'
 import type { AuditChannel } from '../../../shared/projects/types'
 import { getDatabase } from '../../infrastructure/database/client'
+import { user } from '../../infrastructure/database/schema/auth'
 import {
   auditEvents,
   projectMemberships,
@@ -66,6 +68,16 @@ export interface CreateProjectPersistenceHooks {
   readonly beforeAudit?: () => void | Promise<void>
 }
 
+class CreateProjectActorError extends Error {
+  constructor(readonly code: typeof CREATE_PROJECT_ERROR.AUTH_REQUIRED | typeof CREATE_PROJECT_ERROR.ACCOUNT_INACTIVE) {
+    super(code)
+  }
+}
+
+function isBuiltInRoleKey(value: string | null): value is keyof typeof BUILT_IN_PROJECT_ROLES {
+  return value !== null && Object.hasOwn(BUILT_IN_PROJECT_ROLES, value)
+}
+
 const roleDisplayNames = {
   [PROJECT_ROLE_KEY.ADMIN]: 'Admin',
   [PROJECT_ROLE_KEY.EDITOR]: 'Editor',
@@ -77,6 +89,16 @@ export function createProjectPersistence(
   hooks: CreateProjectPersistenceHooks = {},
 ): CreateProjectDependencies['persist'] {
   return command => db.transaction(async (tx) => {
+    const [actor] = await tx.select({ status: user.status })
+      .from(user)
+      .where(eq(user.id, command.actorUserId))
+      .for('update')
+
+    if (!actor) throw new CreateProjectActorError(CREATE_PROJECT_ERROR.AUTH_REQUIRED)
+    if (actor.status !== ACCOUNT_STATUS.ACTIVE) {
+      throw new CreateProjectActorError(CREATE_PROJECT_ERROR.ACCOUNT_INACTIVE)
+    }
+
     const [project] = await tx.insert(projects).values({
       name: command.name,
       description: command.description,
@@ -95,10 +117,12 @@ export function createProjectPersistence(
       })),
     ).returning({ id: projectRoles.id, builtInKey: projectRoles.builtInKey })
 
-    const roleByKey = new Map(insertedRoles.map(role => [role.builtInKey, role]))
-    const permissionRows = insertedRoles.flatMap(role =>
-      BUILT_IN_PROJECT_ROLES[role.builtInKey as keyof typeof BUILT_IN_PROJECT_ROLES].permissions
-        .map(permissionCode => ({ roleId: role.id, permissionCode })),
+    const roleByKey = new Map(insertedRoles.map((role) => {
+      if (!isBuiltInRoleKey(role.builtInKey)) throw new Error('Built-in role insert returned an invalid key')
+      return [role.builtInKey, role] as const
+    }))
+    const permissionRows = [...roleByKey].flatMap(([roleKey, role]) =>
+      BUILT_IN_PROJECT_ROLES[roleKey].permissions.map(permissionCode => ({ roleId: role.id, permissionCode })),
     )
     await tx.insert(projectRolePermissions).values(permissionRows)
 
@@ -170,7 +194,10 @@ export const createProjectWith = (dependencies: CreateProjectDependencies) =>
       const created = await dependencies.persist(validation.value)
       return { ok: true, value: { projectId: created.projectId } }
     }
-    catch {
+    catch (error) {
+      if (error instanceof CreateProjectActorError) {
+        return { ok: false, code: error.code }
+      }
       return { ok: false, code: CREATE_PROJECT_ERROR.PROJECT_CREATE_FAILED }
     }
   }

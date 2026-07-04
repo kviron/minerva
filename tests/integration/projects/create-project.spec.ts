@@ -31,6 +31,13 @@ const command = (name: string) => ({
 })
 
 describe('createProjectPersistence', () => {
+  async function expectProjectDomainEmpty(database: ReturnType<typeof createTestDatabase>) {
+    for (const table of ['projects', 'project_roles', 'project_role_permissions', 'project_memberships', 'audit_events']) {
+      const [row] = await database.queryClient.unsafe<{ count: string }[]>(`select count(*) from ${table}`)
+      expect(row?.count, table).toBe('0')
+    }
+  }
+
   it('atomically creates a project with isolated built-in RBAC, creator membership, and audit event', async () => {
     const database = createTestDatabase()
     try {
@@ -94,10 +101,37 @@ describe('createProjectPersistence', () => {
       await expect(service({ actor: { userId: command('').actorUserId, accountStatus: ACCOUNT_STATUS.ACTIVE }, channel: AUDIT_CHANNEL.WEB, name: ' Rollback ', description: null }))
         .resolves.toEqual({ ok: false, code: 'PROJECT_CREATE_FAILED' })
 
-      for (const table of ['projects', 'project_roles', 'project_role_permissions', 'project_memberships', 'audit_events']) {
-        const [row] = await database.queryClient.unsafe<{ count: string }[]>(`select count(*) from ${table}`)
-        expect(row?.count, table).toBe('0')
-      }
+      await expectProjectDomainEmpty(database)
+    } finally {
+      await database.close()
+    }
+  })
+
+  it('rejects a stale active claim when the locked database actor is disabled', async () => {
+    const database = createTestDatabase()
+    try {
+      const service = createProjectWith({ persist: createProjectPersistence(database.db) })
+      await expect(service({
+        actor: { userId: '00000000-0000-4000-8000-000000000002', accountStatus: ACCOUNT_STATUS.ACTIVE },
+        channel: AUDIT_CHANNEL.WEB,
+        name: 'Forbidden',
+      })).resolves.toEqual({ ok: false, code: 'ACCOUNT_INACTIVE' })
+      await expectProjectDomainEmpty(database)
+    } finally {
+      await database.close()
+    }
+  })
+
+  it('returns a safe auth error when the locked database actor is missing', async () => {
+    const database = createTestDatabase()
+    try {
+      const service = createProjectWith({ persist: createProjectPersistence(database.db) })
+      await expect(service({
+        actor: { userId: '00000000-0000-4000-8000-000000000099', accountStatus: ACCOUNT_STATUS.ACTIVE },
+        channel: AUDIT_CHANNEL.WEB,
+        name: 'Missing actor',
+      })).resolves.toEqual({ ok: false, code: 'AUTH_REQUIRED' })
+      await expectProjectDomainEmpty(database)
     } finally {
       await database.close()
     }
