@@ -1,6 +1,22 @@
 import { ACCOUNT_STATUS } from '../../../shared/identity/constants'
 import type { AccountStatus } from '../../../shared/identity/types'
+import {
+  AUDIT_OUTCOME,
+  MEMBERSHIP_STATUS,
+  PROJECT_ROLE_KEY,
+  PROJECT_ROLE_KIND,
+  PROJECT_STATUS,
+} from '../../../shared/projects/constants'
 import type { AuditChannel } from '../../../shared/projects/types'
+import { getDatabase } from '../../infrastructure/database/client'
+import {
+  auditEvents,
+  projectMemberships,
+  projectRolePermissions,
+  projectRoles,
+  projects,
+} from '../../infrastructure/database/schema/projects'
+import { BUILT_IN_PROJECT_ROLES } from './project-templates'
 
 export const CREATE_PROJECT_ERROR = {
   AUTH_REQUIRED: 'AUTH_REQUIRED',
@@ -42,6 +58,75 @@ export interface CreateProjectDependencies {
   readonly persist: (
     command: ValidCreateProjectCommand,
   ) => Promise<{ readonly projectId: string }>
+}
+
+type ProjectDatabase = ReturnType<typeof getDatabase>['db']
+
+export interface CreateProjectPersistenceHooks {
+  readonly beforeAudit?: () => void | Promise<void>
+}
+
+const roleDisplayNames = {
+  [PROJECT_ROLE_KEY.ADMIN]: 'Admin',
+  [PROJECT_ROLE_KEY.EDITOR]: 'Editor',
+  [PROJECT_ROLE_KEY.VIEWER]: 'Viewer',
+} as const
+
+export function createProjectPersistence(
+  db: ProjectDatabase,
+  hooks: CreateProjectPersistenceHooks = {},
+): CreateProjectDependencies['persist'] {
+  return command => db.transaction(async (tx) => {
+    const [project] = await tx.insert(projects).values({
+      name: command.name,
+      description: command.description,
+      status: PROJECT_STATUS.ACTIVE,
+      createdByUserId: command.actorUserId,
+    }).returning({ id: projects.id })
+
+    if (!project) throw new Error('Project insert returned no row')
+
+    const insertedRoles = await tx.insert(projectRoles).values(
+      Object.values(PROJECT_ROLE_KEY).map(roleKey => ({
+        projectId: project.id,
+        kind: PROJECT_ROLE_KIND.BUILT_IN,
+        builtInKey: roleKey,
+        displayName: roleDisplayNames[roleKey],
+      })),
+    ).returning({ id: projectRoles.id, builtInKey: projectRoles.builtInKey })
+
+    const roleByKey = new Map(insertedRoles.map(role => [role.builtInKey, role]))
+    const permissionRows = insertedRoles.flatMap(role =>
+      BUILT_IN_PROJECT_ROLES[role.builtInKey as keyof typeof BUILT_IN_PROJECT_ROLES].permissions
+        .map(permissionCode => ({ roleId: role.id, permissionCode })),
+    )
+    await tx.insert(projectRolePermissions).values(permissionRows)
+
+    const adminRole = roleByKey.get(PROJECT_ROLE_KEY.ADMIN)
+    if (!adminRole) throw new Error('Admin role insert returned no row')
+
+    await tx.insert(projectMemberships).values({
+      projectId: project.id,
+      userId: command.actorUserId,
+      roleId: adminRole.id,
+      status: MEMBERSHIP_STATUS.ACTIVE,
+    })
+
+    await hooks.beforeAudit?.()
+
+    await tx.insert(auditEvents).values({
+      actorUserId: command.actorUserId,
+      channel: command.channel,
+      action: 'project.created',
+      outcome: AUDIT_OUTCOME.SUCCEEDED,
+      projectId: project.id,
+      targetType: 'project',
+      targetId: project.id,
+      metadata: { roleKey: PROJECT_ROLE_KEY.ADMIN },
+    })
+
+    return { projectId: project.id }
+  })
 }
 
 export function validateCreateProject(input: CreateProjectInput): CreateProjectValidationResult {
@@ -89,3 +174,6 @@ export const createProjectWith = (dependencies: CreateProjectDependencies) =>
       return { ok: false, code: CREATE_PROJECT_ERROR.PROJECT_CREATE_FAILED }
     }
   }
+
+export const createProject = (input: CreateProjectInput) =>
+  createProjectWith({ persist: createProjectPersistence(getDatabase().db) })(input)
