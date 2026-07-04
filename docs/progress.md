@@ -1,10 +1,10 @@
 # Minerva progress
 
-Last updated: 2026-07-04
+Last updated: 2026-07-05
 
 ## Current state
 
-The approved Identity foundation and global-navigation slice are implemented and verified. Authenticated users now land on Dashboard, the sidebar obtains a server-filtered menu through the Navigation feature, and unfinished Dashboard and Project Credentials routes share an intentional development state without storing or exposing credentials.
+The approved Identity foundation, global-navigation slice, and Projects RBAC foundation are implemented and verified. Authenticated users now land on Dashboard, the sidebar obtains a server-filtered menu through the Navigation feature, and the shared Projects application service can create a project atomically with its built-in roles, permission grants, creator membership, and audit event.
 
 ## Completed
 
@@ -51,6 +51,7 @@ The approved Identity foundation and global-navigation slice are implemented and
 - Added the protected Dashboard landing page, a shared authenticated-page development placeholder used only by Dashboard and Project Credentials, and a typed global Navigation feature. The server returns Dashboard, Projects, and Settings to every authenticated user and adds Administration only for strict `superAdmin === true`; the sidebar localizes stable labels, resolves icons through a closed Lucide registry, uses the design-system `SidebarMenuSkeleton`, and keeps Credentials outside global navigation and MCP. Verification on 2026-07-02 passed 167/167 unit tests, 22/22 PostgreSQL integration tests, 17/17 single-worker browser journeys, Nuxt typecheck, and the production build.
 - Added the Identity feature's public `CurrentUserMenu` to the authenticated sidebar, backed by the real safe Better Auth session projection for name, email, and an optional validated avatar with an initials fallback. The menu links to the profile, logs out by revoking the server session, and removes the demo Billing and Notifications actions. Isolated the browser rate-limit fixture so authentication E2E scenarios do not share throttle state. Verification on 2026-07-04 passed `bun run test:unit` (209/209 tests across 33 files), `bun run test:integration` (22/22 tests across 6 files), `bun run typecheck`, `bun run build`, and `bun run test:e2e` (18/18 browser journeys).
 - Replaced the authenticated header's template GitHub link with the shared localized light, dark, and system theme selector. Verification on 2026-07-04 passed the complete unit suite (214/214 tests across 35 files), Nuxt typecheck, and the production build.
+- Added the Projects RBAC foundation: immutable admin, editor, and viewer role templates; additive PostgreSQL tables and constraints for projects, roles, permissions, memberships, and audit events; and a validated shared project-creation service that locks and rechecks the creator account before atomically creating the complete project graph. Verification on 2026-07-05 passed `bun run test:unit` (232/232 tests across 37 files), `bun run test:integration` (29/29 tests across 7 files), `bun run typecheck`, `bun run build`, and `bunx drizzle-kit check --config drizzle.config.ts`. The production build retained three upstream bundler warnings (one Nuxt module-preload sourcemap warning and two VueUse pure-annotation warnings) plus Node's `DEP0155` deprecation warning. The reviewed `0001_projects_rbac_foundation.sql` migration is additive and contains no destructive or Identity-table operations.
 
 ## Remaining
 
