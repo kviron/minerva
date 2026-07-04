@@ -1,0 +1,29 @@
+# Header theme toggle design
+
+**Status:** proposed  
+**Date:** 2026-07-04
+
+## Goal
+
+Replace the template GitHub link in the authenticated application header with Minerva's existing theme selector. The selector must support the light, dark, and system preferences required by the product specification.
+
+## Design
+
+- Keep the theme control as the existing shared `modeToggle` component rather than embedding color-mode behavior in the header.
+- Render the control at the right edge of the authenticated application header in place of the GitHub link.
+- Use the installed shadcn-vue `Button` and `DropdownMenu` primitives.
+- Show the current sun/moon icon treatment on the trigger and expose an accessible Russian label.
+- Offer three Russian menu actions: `Светлая`, `Тёмная`, and `Системная`.
+- Set `useColorMode().preference` to `light`, `dark`, or `system` from the corresponding action. Persistence and system-theme resolution remain the responsibility of the installed `@nuxtjs/color-mode` module.
+- Use semantic design-system styling and preserve the header's existing layout at all viewport sizes.
+
+## Boundaries
+
+This change does not redesign the header, alter authentication or authorization, add a new theme system, or modify the user's in-progress sidebar collapse behavior. No ADR is required because the change follows the existing product requirement and installed color-mode architecture.
+
+## Verification
+
+- A component test proves that the header no longer exposes the GitHub link and renders the shared theme selector.
+- Component tests prove that each localized action assigns the matching color-mode preference.
+- Nuxt type checking and the relevant unit-test suite pass.
+
