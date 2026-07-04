@@ -23,6 +23,7 @@ import {
 import { user } from './auth'
 
 const enumValues = <T extends Record<string, string>>(values: T) => Object.values(values) as [T[keyof T], ...T[keyof T][]]
+const enumValueSql = (value: string) => sql.raw(`'${value.replaceAll("'", "''")}'`)
 const enumSql = (values: Record<string, string>) => sql.raw(Object.values(values).map(value => `'${value.replaceAll("'", "''")}'`).join(', '))
 const timezoneTimestamp = (name: string) => timestamp(name, { withTimezone: true })
 
@@ -54,6 +55,10 @@ export const projectRoles = pgTable('project_roles', {
 }, table => [
   check('project_roles_kind_check', sql`${table.kind} in (${enumSql(PROJECT_ROLE_KIND)})`),
   check('project_roles_built_in_key_check', sql`${table.builtInKey} is null or ${table.builtInKey} in (${enumSql(PROJECT_ROLE_KEY)})`),
+  check('project_roles_kind_built_in_key_check', sql`
+    (${table.kind} = ${enumValueSql(PROJECT_ROLE_KIND.BUILT_IN)} and ${table.builtInKey} is not null)
+    or (${table.kind} = ${enumValueSql(PROJECT_ROLE_KIND.CUSTOM)} and ${table.builtInKey} is null)
+  `),
   unique('project_roles_id_project_id_unique').on(table.id, table.projectId),
   uniqueIndex('project_roles_project_id_built_in_key_unique')
     .on(table.projectId, table.builtInKey)

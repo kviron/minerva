@@ -1,5 +1,5 @@
 {
-  "id": "c258972d-dd32-426c-842d-0cef90e238de",
+  "id": "cd8b5274-9f5a-4490-98b0-114d7f88f001",
   "prevId": "e14161d1-02c1-4765-9732-ea1b5d65255a",
   "version": "7",
   "dialect": "postgresql",
@@ -1056,6 +1056,10 @@
         "project_roles_built_in_key_check": {
           "name": "project_roles_built_in_key_check",
           "value": "\"project_roles\".\"built_in_key\" is null or \"project_roles\".\"built_in_key\" in ('admin', 'editor', 'viewer')"
+        },
+        "project_roles_kind_built_in_key_check": {
+          "name": "project_roles_kind_built_in_key_check",
+          "value": "\n    (\"project_roles\".\"kind\" = 'built_in' and \"project_roles\".\"built_in_key\" is not null)\n    or (\"project_roles\".\"kind\" = 'custom' and \"project_roles\".\"built_in_key\" is null)\n  "
         }
       },
       "isRLSEnabled": false

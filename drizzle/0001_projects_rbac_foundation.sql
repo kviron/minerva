@@ -46,7 +46,11 @@ CREATE TABLE "project_roles" (
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
 	CONSTRAINT "project_roles_id_project_id_unique" UNIQUE("id","project_id"),
 	CONSTRAINT "project_roles_kind_check" CHECK ("project_roles"."kind" in ('built_in', 'custom')),
-	CONSTRAINT "project_roles_built_in_key_check" CHECK ("project_roles"."built_in_key" is null or "project_roles"."built_in_key" in ('admin', 'editor', 'viewer'))
+	CONSTRAINT "project_roles_built_in_key_check" CHECK ("project_roles"."built_in_key" is null or "project_roles"."built_in_key" in ('admin', 'editor', 'viewer')),
+	CONSTRAINT "project_roles_kind_built_in_key_check" CHECK (
+    ("project_roles"."kind" = 'built_in' and "project_roles"."built_in_key" is not null)
+    or ("project_roles"."kind" = 'custom' and "project_roles"."built_in_key" is null)
+  )
 );
 --> statement-breakpoint
 CREATE TABLE "projects" (

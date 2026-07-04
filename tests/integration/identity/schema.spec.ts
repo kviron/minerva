@@ -189,3 +189,64 @@ it('creates the projects RBAC tables and integrity constraints idempotently', as
     await database.close()
   }
 })
+
+it('rejects invalid project RBAC rows at the database boundary', async () => {
+  const database = createTestDatabase()
+
+  try {
+    await migrate(database.db, { migrationsFolder: 'drizzle' })
+
+    const [user] = await database.queryClient<{ id: string }[]>`
+      insert into "user" (name, email)
+      values ('Schema test user', 'schema-test@example.com')
+      returning id
+    `
+    const [projectA, projectB] = await database.queryClient<{ id: string }[]>`
+      insert into projects (name, created_by_user_id)
+      values ('Project A', ${user!.id}), ('Project B', ${user!.id})
+      returning id
+    `
+
+    await expect(database.queryClient`
+      insert into project_roles (project_id, kind, built_in_key, display_name)
+      values (${projectA!.id}, 'built_in', null, 'Invalid built-in')
+    `).rejects.toThrow()
+
+    await expect(database.queryClient`
+      insert into project_roles (project_id, kind, built_in_key, display_name)
+      values (${projectA!.id}, 'custom', 'admin', 'Invalid custom')
+    `).rejects.toThrow()
+
+    await expect(database.queryClient`
+      insert into projects (name, status, created_by_user_id)
+      values ('Invalid status', 'deleted', ${user!.id})
+    `).rejects.toThrow()
+
+    const [role] = await database.queryClient<{ id: string }[]>`
+      insert into project_roles (project_id, kind, built_in_key, display_name)
+      values (${projectA!.id}, 'built_in', 'editor', 'Editor')
+      returning id
+    `
+
+    await expect(database.queryClient`
+      insert into project_role_permissions (role_id, permission_code)
+      values (${role!.id}, 'project.destroy')
+    `).rejects.toThrow()
+
+    await database.queryClient`
+      insert into project_role_permissions (role_id, permission_code)
+      values (${role!.id}, 'project.view')
+    `
+    await expect(database.queryClient`
+      insert into project_role_permissions (role_id, permission_code)
+      values (${role!.id}, 'project.view')
+    `).rejects.toThrow()
+
+    await expect(database.queryClient`
+      insert into project_memberships (project_id, user_id, role_id)
+      values (${projectB!.id}, ${user!.id}, ${role!.id})
+    `).rejects.toThrow()
+  } finally {
+    await database.close()
+  }
+})
