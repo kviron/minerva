@@ -1,10 +1,13 @@
 import { expect, test, type APIResponse, type Page } from '@playwright/test'
-import { AUTHORIZATION_TEST_USER } from './global.setup'
+import {
+  AUTHORIZATION_API_TEST_USER,
+  AUTHORIZATION_ROUTE_TEST_USER,
+} from './fixtures/users'
 
-const password = AUTHORIZATION_TEST_USER.password
+const testPassword = 'Correct-Horse-Battery-1'
 const publicOriginHeaders = { origin: 'http://127.0.0.1:3000' }
 
-async function signIn(page: Page, identifier: string) {
+async function signIn(page: Page, identifier: string, password: string) {
   await page.goto('/auth')
   await page.locator('#email').fill(identifier)
   await page.locator('#password').fill(password)
@@ -71,14 +74,14 @@ test('requires authentication before administration authorization', async ({ req
 })
 
 test('rejects an ordinary user from an administration API', async ({ page }) => {
-  await signIn(page, AUTHORIZATION_TEST_USER.email)
+  await signIn(page, AUTHORIZATION_API_TEST_USER.email, AUTHORIZATION_API_TEST_USER.password)
   await expectMainMenu(page, ['dashboard', 'projects', 'settings'])
   const response = await page.request.post('/api/administration/probe')
   await expectSafeAuthorizationError(response, 403, 'FORBIDDEN', '/api/administration/probe')
 })
 
 test('allows a super administrator through the administration guard', async ({ page }) => {
-  await signIn(page, 'admin@example.com')
+  await signIn(page, 'admin@example.com', testPassword)
   await expectMainMenu(page, ['dashboard', 'projects', 'settings', 'administration'])
   await expect(page.getByRole('link', { name: 'Администрирование' })).toBeVisible()
   const response = await page.request.post('/api/administration/probe')
@@ -89,7 +92,7 @@ test('allows a super administrator through the administration guard', async ({ p
 test('keeps sign-in and recovery endpoints callable', async ({ request }) => {
   const signIn = await request.post('/api/identity/sign-in', {
     headers: publicOriginHeaders,
-    data: { identifier: 'missing@example.com', password },
+    data: { identifier: 'missing@example.com', password: testPassword },
   })
   const recovery = await request.post('/api/identity/request-password-reset', {
     headers: publicOriginHeaders,
@@ -104,13 +107,13 @@ test('keeps sign-in and recovery endpoints callable', async ({ request }) => {
 })
 
 test('redirects an ordinary user away from administration', async ({ page }) => {
-  await signIn(page, AUTHORIZATION_TEST_USER.email)
+  await signIn(page, AUTHORIZATION_ROUTE_TEST_USER.email, AUTHORIZATION_ROUTE_TEST_USER.password)
   await page.goto('/administration/users')
   await expect(page).toHaveURL(/\/dashboard$/)
 })
 
 test('allows the bootstrapped super administrator into administration', async ({ page }) => {
-  await signIn(page, 'admin@example.com')
+  await signIn(page, 'admin@example.com', testPassword)
   await page.goto('/administration/users')
   await expect(page).toHaveURL(/\/administration\/users$/)
 })

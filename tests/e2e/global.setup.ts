@@ -2,14 +2,10 @@ import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import { AUTH_MODE } from '../../shared/identity/constants'
 import { createMinervaAuth } from '../../server/modules/identity/auth/create-auth'
 import { createTestDatabase, resetTestDatabase, TEST_DATABASE_URL } from '../helpers/database'
-
-export const AUTHORIZATION_TEST_USER = {
-  email: 'authorization.user@example.com',
-  username: 'authorization.user',
-  displayUsername: 'Authorization.User',
-  name: 'Authorization.User',
-  password: 'Correct-Horse-Battery-1',
-} as const
+import {
+  AUTHORIZATION_API_TEST_USER,
+  AUTHORIZATION_ROUTE_TEST_USER,
+} from './fixtures/users'
 
 export default async function globalSetup() {
   process.env.DATABASE_URL = TEST_DATABASE_URL
@@ -47,7 +43,8 @@ export default async function globalSetup() {
         password: 'Correct-Horse-Battery-1',
       },
     })
-    await auth.api.signUpEmail({ body: AUTHORIZATION_TEST_USER })
+    await auth.api.signUpEmail({ body: AUTHORIZATION_API_TEST_USER })
+    await auth.api.signUpEmail({ body: AUTHORIZATION_ROUTE_TEST_USER })
     const adminAuth = createMinervaAuth({
       mode: AUTH_MODE.BOOTSTRAP,
       db: database.db,
