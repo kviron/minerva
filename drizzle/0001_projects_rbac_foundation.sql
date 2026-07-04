@@ -30,10 +30,10 @@ CREATE TABLE "project_memberships" (
 CREATE TABLE "project_role_permissions" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"role_id" uuid NOT NULL,
-	"permission" text NOT NULL,
+	"permission_code" text NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	CONSTRAINT "project_role_permissions_role_id_permission_unique" UNIQUE("role_id","permission"),
-	CONSTRAINT "project_role_permissions_permission_check" CHECK ("project_role_permissions"."permission" in ('project.view', 'project.update', 'project.archive', 'project.restore', 'documents.view', 'documents.create', 'documents.update_draft', 'documents.publish', 'documents.move', 'documents.archive', 'documents.restore', 'documents.view_history', 'members.view', 'members.invite', 'members.assign_role', 'members.remove', 'roles.view', 'roles.create', 'roles.update', 'roles.delete', 'audit.view'))
+	CONSTRAINT "project_role_permissions_role_id_permission_code_unique" UNIQUE("role_id","permission_code"),
+	CONSTRAINT "project_role_permissions_permission_code_check" CHECK ("project_role_permissions"."permission_code" in ('project.view', 'project.update', 'project.archive', 'project.restore', 'documents.view', 'documents.create', 'documents.update_draft', 'documents.publish', 'documents.move', 'documents.archive', 'documents.restore', 'documents.view_history', 'members.view', 'members.invite', 'members.assign_role', 'members.remove', 'roles.view', 'roles.create', 'roles.update', 'roles.delete', 'audit.view'))
 );
 --> statement-breakpoint
 CREATE TABLE "project_roles" (
@@ -80,8 +80,10 @@ CREATE INDEX "project_memberships_project_id_idx" ON "project_memberships" USING
 CREATE INDEX "project_memberships_user_id_idx" ON "project_memberships" USING btree ("user_id");--> statement-breakpoint
 CREATE INDEX "project_memberships_role_id_idx" ON "project_memberships" USING btree ("role_id");--> statement-breakpoint
 CREATE INDEX "project_memberships_status_idx" ON "project_memberships" USING btree ("status");--> statement-breakpoint
+CREATE INDEX "project_memberships_removed_by_user_id_idx" ON "project_memberships" USING btree ("removed_by_user_id");--> statement-breakpoint
 CREATE INDEX "project_role_permissions_role_id_idx" ON "project_role_permissions" USING btree ("role_id");--> statement-breakpoint
 CREATE UNIQUE INDEX "project_roles_project_id_built_in_key_unique" ON "project_roles" USING btree ("project_id","built_in_key") WHERE "project_roles"."built_in_key" is not null;--> statement-breakpoint
 CREATE INDEX "project_roles_project_id_idx" ON "project_roles" USING btree ("project_id");--> statement-breakpoint
 CREATE INDEX "projects_status_idx" ON "projects" USING btree ("status");--> statement-breakpoint
-CREATE INDEX "projects_created_by_user_id_idx" ON "projects" USING btree ("created_by_user_id");
+CREATE INDEX "projects_created_by_user_id_idx" ON "projects" USING btree ("created_by_user_id");--> statement-breakpoint
+CREATE INDEX "projects_archived_by_user_id_idx" ON "projects" USING btree ("archived_by_user_id");

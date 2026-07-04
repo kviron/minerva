@@ -40,6 +40,7 @@ export const projects = pgTable('projects', {
   check('projects_status_check', sql`${table.status} in (${enumSql(PROJECT_STATUS)})`),
   index('projects_status_idx').on(table.status),
   index('projects_created_by_user_id_idx').on(table.createdByUserId),
+  index('projects_archived_by_user_id_idx').on(table.archivedByUserId),
 ])
 
 export const projectRoles = pgTable('project_roles', {
@@ -63,11 +64,11 @@ export const projectRoles = pgTable('project_roles', {
 export const projectRolePermissions = pgTable('project_role_permissions', {
   id: uuid('id').defaultRandom().primaryKey(),
   roleId: uuid('role_id').notNull().references(() => projectRoles.id, { onDelete: 'cascade' }),
-  permission: text('permission', { enum: enumValues(PROJECT_PERMISSION) }).notNull(),
+  permissionCode: text('permission_code', { enum: enumValues(PROJECT_PERMISSION) }).notNull(),
   createdAt: timezoneTimestamp('created_at').defaultNow().notNull(),
 }, table => [
-  check('project_role_permissions_permission_check', sql`${table.permission} in (${enumSql(PROJECT_PERMISSION)})`),
-  unique('project_role_permissions_role_id_permission_unique').on(table.roleId, table.permission),
+  check('project_role_permissions_permission_code_check', sql`${table.permissionCode} in (${enumSql(PROJECT_PERMISSION)})`),
+  unique('project_role_permissions_role_id_permission_code_unique').on(table.roleId, table.permissionCode),
   index('project_role_permissions_role_id_idx').on(table.roleId),
 ])
 
@@ -93,6 +94,7 @@ export const projectMemberships = pgTable('project_memberships', {
   index('project_memberships_user_id_idx').on(table.userId),
   index('project_memberships_role_id_idx').on(table.roleId),
   index('project_memberships_status_idx').on(table.status),
+  index('project_memberships_removed_by_user_id_idx').on(table.removedByUserId),
 ])
 
 export const auditEvents = pgTable('audit_events', {

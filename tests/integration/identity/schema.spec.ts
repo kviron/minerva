@@ -63,7 +63,7 @@ it('creates the projects RBAC tables and integrity constraints idempotently', as
 
     expect(uniqueConstraints).toEqual(expect.arrayContaining([
       { table_name: 'project_roles', columns: ['id', 'project_id'] },
-      { table_name: 'project_role_permissions', columns: ['role_id', 'permission'] },
+      { table_name: 'project_role_permissions', columns: ['role_id', 'permission_code'] },
       { table_name: 'project_memberships', columns: ['project_id', 'user_id'] },
     ]))
 
@@ -87,7 +87,7 @@ it('creates the projects RBAC tables and integrity constraints idempotently', as
           'projects_status_check',
           'project_roles_kind_check',
           'project_roles_built_in_key_check',
-          'project_role_permissions_permission_check',
+          'project_role_permissions_permission_code_check',
           'project_memberships_status_check',
           'audit_events_channel_check',
           'audit_events_outcome_check'
@@ -114,12 +114,59 @@ it('creates the projects RBAC tables and integrity constraints idempotently', as
 
     expect(membershipRoleForeignKey).toEqual([{ delete_rule: 'CASCADE' }])
 
-    const userForeignKeys = await database.queryClient<{ table_name: string, delete_rule: string }[]>`
-      select distinct tc.table_name, rc.delete_rule
+    const indexes = await database.queryClient<{ indexname: string }[]>`
+      select indexname
+      from pg_indexes
+      where schemaname = 'public'
+        and indexname in (
+          'projects_status_idx',
+          'projects_created_by_user_id_idx',
+          'projects_archived_by_user_id_idx',
+          'project_roles_project_id_idx',
+          'project_role_permissions_role_id_idx',
+          'project_memberships_project_id_idx',
+          'project_memberships_user_id_idx',
+          'project_memberships_role_id_idx',
+          'project_memberships_status_idx',
+          'project_memberships_removed_by_user_id_idx',
+          'audit_events_project_id_idx',
+          'audit_events_actor_user_id_idx',
+          'audit_events_action_idx',
+          'audit_events_created_at_idx'
+        )
+    `
+
+    expect(indexes.map(index => index.indexname).sort()).toEqual([
+      'audit_events_action_idx',
+      'audit_events_actor_user_id_idx',
+      'audit_events_created_at_idx',
+      'audit_events_project_id_idx',
+      'project_memberships_project_id_idx',
+      'project_memberships_removed_by_user_id_idx',
+      'project_memberships_role_id_idx',
+      'project_memberships_status_idx',
+      'project_memberships_user_id_idx',
+      'project_role_permissions_role_id_idx',
+      'project_roles_project_id_idx',
+      'projects_archived_by_user_id_idx',
+      'projects_created_by_user_id_idx',
+      'projects_status_idx',
+    ])
+
+    const userForeignKeys = await database.queryClient<{
+      table_name: string
+      column_name: string
+      referenced_table_name: string
+      delete_rule: string
+    }[]>`
+      select tc.table_name, kcu.column_name, ccu.table_name as referenced_table_name, rc.delete_rule
       from information_schema.table_constraints tc
       join information_schema.key_column_usage kcu
         on kcu.constraint_schema = tc.constraint_schema
        and kcu.constraint_name = tc.constraint_name
+      join information_schema.constraint_column_usage ccu
+        on ccu.constraint_schema = tc.constraint_schema
+       and ccu.constraint_name = tc.constraint_name
       join information_schema.referential_constraints rc
         on rc.constraint_schema = tc.constraint_schema
        and rc.constraint_name = tc.constraint_name
@@ -127,10 +174,17 @@ it('creates the projects RBAC tables and integrity constraints idempotently', as
         and tc.constraint_type = 'FOREIGN KEY'
         and tc.table_name in ('projects', 'project_memberships', 'audit_events')
         and kcu.column_name in ('created_by_user_id', 'archived_by_user_id', 'user_id', 'removed_by_user_id', 'actor_user_id')
+        and ccu.table_name = 'user'
+      order by tc.table_name, kcu.column_name
     `
 
-    expect(userForeignKeys).not.toHaveLength(0)
-    expect(userForeignKeys.every(foreignKey => foreignKey.delete_rule === 'RESTRICT')).toBe(true)
+    expect(userForeignKeys).toEqual([
+      { table_name: 'audit_events', column_name: 'actor_user_id', referenced_table_name: 'user', delete_rule: 'RESTRICT' },
+      { table_name: 'project_memberships', column_name: 'removed_by_user_id', referenced_table_name: 'user', delete_rule: 'RESTRICT' },
+      { table_name: 'project_memberships', column_name: 'user_id', referenced_table_name: 'user', delete_rule: 'RESTRICT' },
+      { table_name: 'projects', column_name: 'archived_by_user_id', referenced_table_name: 'user', delete_rule: 'RESTRICT' },
+      { table_name: 'projects', column_name: 'created_by_user_id', referenced_table_name: 'user', delete_rule: 'RESTRICT' },
+    ])
   } finally {
     await database.close()
   }

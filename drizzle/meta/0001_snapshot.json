@@ -1,5 +1,5 @@
 {
-  "id": "c02233f8-a17d-4081-924d-105906819699",
+  "id": "c258972d-dd32-426c-842d-0cef90e238de",
   "prevId": "e14161d1-02c1-4765-9732-ea1b5d65255a",
   "version": "7",
   "dialect": "postgresql",
@@ -756,6 +756,21 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "project_memberships_removed_by_user_id_idx": {
+          "name": "project_memberships_removed_by_user_id_idx",
+          "columns": [
+            {
+              "expression": "removed_by_user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
@@ -851,8 +866,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "permission": {
-          "name": "permission",
+        "permission_code": {
+          "name": "permission_code",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -899,20 +914,20 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "project_role_permissions_role_id_permission_unique": {
-          "name": "project_role_permissions_role_id_permission_unique",
+        "project_role_permissions_role_id_permission_code_unique": {
+          "name": "project_role_permissions_role_id_permission_code_unique",
           "nullsNotDistinct": false,
           "columns": [
             "role_id",
-            "permission"
+            "permission_code"
           ]
         }
       },
       "policies": {},
       "checkConstraints": {
-        "project_role_permissions_permission_check": {
-          "name": "project_role_permissions_permission_check",
-          "value": "\"project_role_permissions\".\"permission\" in ('project.view', 'project.update', 'project.archive', 'project.restore', 'documents.view', 'documents.create', 'documents.update_draft', 'documents.publish', 'documents.move', 'documents.archive', 'documents.restore', 'documents.view_history', 'members.view', 'members.invite', 'members.assign_role', 'members.remove', 'roles.view', 'roles.create', 'roles.update', 'roles.delete', 'audit.view')"
+        "project_role_permissions_permission_code_check": {
+          "name": "project_role_permissions_permission_code_check",
+          "value": "\"project_role_permissions\".\"permission_code\" in ('project.view', 'project.update', 'project.archive', 'project.restore', 'documents.view', 'documents.create', 'documents.update_draft', 'documents.publish', 'documents.move', 'documents.archive', 'documents.restore', 'documents.view_history', 'members.view', 'members.invite', 'members.assign_role', 'members.remove', 'roles.view', 'roles.create', 'roles.update', 'roles.delete', 'audit.view')"
         }
       },
       "isRLSEnabled": false
@@ -1129,6 +1144,21 @@
           "columns": [
             {
               "expression": "created_by_user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "projects_archived_by_user_id_idx": {
+          "name": "projects_archived_by_user_id_idx",
+          "columns": [
+            {
+              "expression": "archived_by_user_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
