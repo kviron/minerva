@@ -17,6 +17,7 @@
 - [ADR 0011: Display credential logins in authorized project lists](sources/adr-0011-display-credential-logins-in-authorized-project-lists.html)
 - [ADR 0012: Use feature-scoped actions for client effects](sources/adr-0012-use-feature-scoped-actions-for-client-effects.html)
 - [ADR 0013: Keep client actions stateless and feature-scoped](sources/adr-0013-keep-client-actions-stateless-and-feature-scoped.html)
+- [ADR 0014: Search authorized encrypted credential values server-side](sources/adr-0014-search-authorized-encrypted-credential-values-server-side.html)
 - [Authenticated Page Placeholder Design](sources/authenticated-page-placeholder-design.html): - **uses_metric** → mAP _(Metric)_
 - [Authorization Readability Refactor Design](sources/authorization-readability-refactor-design.html)
 - [Authorization Readability Refactor Implementation Plan](sources/authorization-readability-refactor-implementation-plan.html)
@@ -142,6 +143,11 @@ _sources/adr-0012-use-feature-scoped-actions-for-client-effects.html_
 _sources/adr-0013-keep-client-actions-stateless-and-feature-scoped.html_
 
 # ADR 0013: Keep client actions stateless and feature-scoped
+
+### ADR 0014: Search authorized encrypted credential values server-side
+_sources/adr-0014-search-authorized-encrypted-credential-values-server-side.html_
+
+# ADR 0014: Search authorized encrypted credential values server-side
 
 ### Authenticated Page Placeholder Design
 _sources/authenticated-page-placeholder-design.html_
@@ -656,7 +662,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 60
+- SourceDocument: 61
 
 ## Recently added
 - (none)

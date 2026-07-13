@@ -13,6 +13,7 @@ describe('AppHeader', () => {
     const wrapper = mount(AppHeader, {
       global: {
         stubs: {
+          AppBreadcrumbs: true,
           ModeToggle,
           UiSeparator: true,
           UiSidebarTrigger: true,

@@ -7,8 +7,10 @@ import { createCredentialCrypto } from '../../../server/modules/credentials/cryp
 import {
   archiveCredential,
   createCredential,
+  listAccessibleArchivedCredentials,
   listAccessibleCredentials,
   revealCredentialSecret,
+  searchAccessibleCredentials,
   updateCredential,
 } from '../../../server/modules/credentials/credentials'
 import { createProjectPersistence } from '../../../server/modules/projects/create-project'
@@ -94,6 +96,17 @@ it('stores encrypted values, returns only masked rows, updates explicitly, and r
       actorUserId: admin!.id, projectId, credentialId: created.value.credentialId, target: `field:${dynamicFieldId}`, channel: AUDIT_CHANNEL.WEB,
     })).toEqual({ ok: true, value: 'https://admin.example.com' })
 
+    for (const query of ['админ-панель', 'root@example', 'URL', 'admin.example.com']) {
+      const searchRows = await searchAccessibleCredentials(database.db, crypto, {
+        actorUserId: admin!.id, projectId, categoryId: null, query,
+      })
+      expect(searchRows.map(row => row.id)).toEqual([created.value.credentialId])
+      expect(JSON.stringify(searchRows)).not.toMatch(/rotated-password|https:\/\/admin\.example\.com/iu)
+    }
+    expect(await searchAccessibleCredentials(database.db, crypto, {
+      actorUserId: admin!.id, projectId, categoryId: null, query: 'not-found',
+    })).toEqual([])
+
     const audits = await database.queryClient<{ metadata: unknown }[]>`
       select metadata from audit_events where project_id = ${projectId} and action like 'credential.%'
     `
@@ -103,6 +116,16 @@ it('stores encrypted values, returns only masked rows, updates explicitly, and r
       actorUserId: admin!.id, channel: AUDIT_CHANNEL.WEB, projectId, credentialId: created.value.credentialId,
     })).toEqual({ ok: true })
     expect(await listAccessibleCredentials(database.db, crypto, { actorUserId: admin!.id, projectId, categoryId: null })).toEqual([])
+    const archivedRows = await listAccessibleArchivedCredentials(database.db, { actorUserId: admin!.id, projectId })
+    expect(archivedRows).toEqual([expect.objectContaining({
+      id: created.value.credentialId,
+      category: { id: category.value.categoryId, name: 'РџСЂРѕРґР°РєС€РµРЅ' },
+      hasLogin: true,
+      hasPassword: true,
+      dynamicFieldCount: 1,
+      archivedBy: { name: 'Admin' },
+    })])
+    expect(JSON.stringify(archivedRows)).not.toMatch(/root@example|rotated-password|ciphertext|nonce/iu)
   } finally {
     await database.close()
   }

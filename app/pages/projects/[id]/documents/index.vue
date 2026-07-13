@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ProjectSectionPlaceholder, ProjectShell } from '@/features/projects'
+import { DocumentsProvider, DocumentsView } from '@/features/documents'
+import { ProjectShell } from '@/features/projects'
 
 const route = useRoute()
 const projectId = computed(() => String(route.params.id))
@@ -8,11 +9,8 @@ const projectId = computed(() => String(route.params.id))
 
 <template>
   <ProjectShell :project-id="projectId" active="documents">
-    <template #default>
-      <ProjectSectionPlaceholder
-        title="Страницы проекта"
-        description="Управление деревом страниц и документацией появится в следующем срезе."
-      />
-    </template>
+    <DocumentsProvider>
+      <DocumentsView :project-id="projectId" />
+    </DocumentsProvider>
   </ProjectShell>
 </template>

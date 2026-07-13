@@ -5,7 +5,7 @@ const mocks = vi.hoisted(() => ({
     load: vi.fn(), create: vi.fn(), update: vi.fn(), replaceGrants: vi.fn(), archive: vi.fn(),
   },
   credentialsApi: {
-    load: vi.fn(), create: vi.fn(), update: vi.fn(), reveal: vi.fn(), archive: vi.fn(),
+    load: vi.fn(), loadArchive: vi.fn(), create: vi.fn(), update: vi.fn(), reveal: vi.fn(), archive: vi.fn(),
   },
   writeText: vi.fn(),
 }))
@@ -44,8 +44,19 @@ describe('entity-scoped credential actions', () => {
 
   it('uses the credentials API and clipboard directly', async () => {
     const actions = new CredentialsActions('project-1')
+    await actions.load('admin@example.com')
+    expect(mocks.credentialsApi.load).toHaveBeenCalledWith('project-1', 'admin@example.com', expect.anything())
     await expect(actions.revealPassword('credential-1')).resolves.toBe('secret')
     await actions.copyPassword('credential-1', 'secret')
     expect(mocks.writeText).toHaveBeenCalledWith('secret')
+  })
+
+  it('archives the explicit credential and returns refreshed rows', async () => {
+    const actions = new CredentialsActions('project-1')
+
+    await expect(actions.archive('credential-1')).resolves.toEqual([])
+
+    expect(mocks.credentialsApi.archive).toHaveBeenCalledWith('project-1', 'credential-1', expect.anything())
+    expect(mocks.credentialsApi.load).toHaveBeenCalledWith('project-1', '', expect.anything())
   })
 })

@@ -125,6 +125,14 @@
       },
       "name": "ADR 0013: Keep client actions stateless and feature-scoped"
     },
+    "SourceDocument:adr-0014-search-authorized-encrypted-credential-:0f8d6d174a85": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0014: Search authorized encrypted credential values server-side"
+    },
     "SourceDocument:authenticated-page-placeholder-design:a5867aed720c": {
       "aliases": [],
       "description": "",
@@ -505,7 +513,7 @@
       "aliases": [],
       "description": "Top-level snapshot of the wiki at compile time.",
       "metadata": {
-        "content_hash": "sha256-67f7f1b8fb7aeed45fd637966c4fc87aa9bfc66663fc04450989e3d0d1799e1d",
+        "content_hash": "sha256-0381a81ebbd08022e334e15cae64627898fa86de05204c2a97ef14e7623787cf",
         "synthesis_kind": "pulse"
       },
       "name": "Project Pulse"

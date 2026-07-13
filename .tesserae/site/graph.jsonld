@@ -114,6 +114,13 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:adr-0014-search-authorized-encrypted-credential-:0f8d6d174a85",
+      "@type": "CreativeWork",
+      "name": "ADR 0014: Search authorized encrypted credential values server-side",
+      "url": "sources/adr-0014-search-authorized-encrypted-credential-values-server-side.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
       "@type": "CreativeWork",
       "name": "Authenticated Page Placeholder Design",

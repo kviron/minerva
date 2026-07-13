@@ -330,6 +330,28 @@
     "created_ts": null
   },
   {
+    "id": "sources:adr-0014-search-authorized-encrypted-credential-values-server-side",
+    "title": "ADR 0014: Search authorized encrypted credential values server-side",
+    "kind": "sources",
+    "href": "sources/adr-0014-search-authorized-encrypted-credential-values-server-side.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0014-search-authorized-encrypted-credential-values.md",
+    "tokens": [
+      "adr",
+      "0014",
+      "search",
+      "authorized",
+      "encrypted",
+      "credential",
+      "values",
+      "server",
+      "side",
+      "sources"
+    ],
+    "len": 10,
+    "created_ts": null
+  },
+  {
     "id": "sources:authenticated-page-placeholder-design",
     "title": "Authenticated Page Placeholder Design",
     "kind": "sources",
@@ -1221,7 +1243,7 @@
       "metric",
       "1",
       "sourcedocument",
-      "60",
+      "61",
       "recently",
       "added",
       "none",

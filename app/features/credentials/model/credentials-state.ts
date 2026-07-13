@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { MaskedCredentialListItem } from '../../../../shared/credentials/contracts'
+import type { ArchivedCredentialListItem, MaskedCredentialListItem } from '../../../../shared/credentials/contracts'
 import type { CredentialFieldType } from '../../../../shared/credentials/types'
 import type { CredentialCreateBody, CredentialUpdateBody, SecretOperation } from './actions/types'
 
@@ -17,11 +17,11 @@ export type CredentialSaveCommand =
 
 interface CredentialsState {
   rows: MaskedCredentialListItem[]
+  archivedRows: ArchivedCredentialListItem[]
   editorOpen: boolean
   editingId: string | null
   title: string
   categoryId: string
-  loginMode: SecretMode
   loginValue: string
   passwordMode: SecretMode
   passwordValue: string
@@ -33,14 +33,18 @@ interface CredentialsState {
 const operation = (mode: SecretMode, value: string): SecretOperation =>
   mode === 'replace' ? { kind: 'replace', value } : { kind: mode }
 
+const loginOperation = (value: string): SecretOperation => value
+  ? { kind: 'replace', value }
+  : { kind: 'clear' }
+
 export const useCredentialsStore = defineStore('credentials', {
   state: (): CredentialsState => ({
     rows: [],
+    archivedRows: [],
     editorOpen: false,
     editingId: null,
     title: '',
     categoryId: '',
-    loginMode: 'replace',
     loginValue: '',
     passwordMode: 'replace',
     passwordValue: '',
@@ -52,6 +56,10 @@ export const useCredentialsStore = defineStore('credentials', {
   actions: {
     applyRows(value: readonly MaskedCredentialListItem[]) {
       this.rows = [...value]
+    },
+
+    applyArchivedRows(value: readonly ArchivedCredentialListItem[]) {
+      this.archivedRows = [...value]
     },
 
     setEditorOpen(open: boolean) {
@@ -71,7 +79,6 @@ export const useCredentialsStore = defineStore('credentials', {
       this.editingId = null
       this.title = ''
       this.categoryId = initialCategoryId
-      this.loginMode = 'replace'
       this.loginValue = ''
       this.passwordMode = 'replace'
       this.passwordValue = ''
@@ -83,12 +90,29 @@ export const useCredentialsStore = defineStore('credentials', {
       this.editingId = row.id
       this.title = row.title
       this.categoryId = row.category.id
-      this.loginMode = row.hasLogin ? 'keep' : 'clear'
-      this.loginValue = ''
+      this.loginValue = row.login ?? ''
       this.passwordMode = row.hasPassword ? 'keep' : 'clear'
       this.passwordValue = ''
       this.fields = row.dynamicFields.map(field => ({ ...field, mode: 'keep', value: '' }))
       this.editorOpen = true
+    },
+
+    clearLogin() {
+      this.loginValue = ''
+    },
+
+    applyRevealedPassword(value: string) {
+      this.passwordValue = value
+    },
+
+    setPasswordValue(value: string) {
+      this.passwordValue = value
+      this.passwordMode = value ? 'replace' : 'clear'
+    },
+
+    clearPassword() {
+      this.passwordValue = ''
+      this.passwordMode = 'clear'
     },
 
     addField() {
@@ -126,7 +150,7 @@ export const useCredentialsStore = defineStore('credentials', {
           body: {
             categoryId: this.categoryId,
             title: normalizedTitle,
-            login: operation(this.loginMode, this.loginValue),
+            login: loginOperation(this.loginValue),
             password: operation(this.passwordMode, this.passwordValue),
             fields: this.fields.map(field => ({
               id: field.id,
@@ -142,7 +166,7 @@ export const useCredentialsStore = defineStore('credentials', {
         body: {
           categoryId: this.categoryId,
           title: normalizedTitle,
-          login: this.loginMode === 'replace' ? this.loginValue : null,
+          login: this.loginValue || null,
           password: this.passwordMode === 'replace' ? this.passwordValue : null,
           fields: this.fields.map(field => ({ label: field.label, type: field.type, value: field.value })),
         },

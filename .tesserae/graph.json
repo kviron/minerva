@@ -491,6 +491,39 @@
       }
     },
     {
+      "id": "SourceDocument:adr-0014-search-authorized-encrypted-credential-:0f8d6d174a85",
+      "name": "ADR 0014: Search authorized encrypted credential values server-side",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0014-search-authorized-encrypted-credential-values.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "ADR 0014: Search authorized encrypted credential values server-side",
+            "anchor": "adr-0014-search-authorized-encrypted-credential-values-server-side"
+          },
+          {
+            "level": 2,
+            "text": "Context",
+            "anchor": "context"
+          },
+          {
+            "level": 2,
+            "text": "Decision",
+            "anchor": "decision"
+          },
+          {
+            "level": 2,
+            "text": "Consequences",
+            "anchor": "consequences"
+          }
+        ]
+      }
+    },
+    {
       "id": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
       "name": "Authenticated Page Placeholder Design",
       "type": "SourceDocument",
@@ -3330,7 +3363,7 @@
       "source_path": null,
       "metadata": {
         "synthesis_kind": "pulse",
-        "content_hash": "sha256-67f7f1b8fb7aeed45fd637966c4fc87aa9bfc66663fc04450989e3d0d1799e1d",
+        "content_hash": "sha256-0381a81ebbd08022e334e15cae64627898fa86de05204c2a97ef14e7623787cf",
         "input_ids": []
       }
     }
@@ -3702,6 +3735,13 @@
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:adr-0013-keep-client-actions-stateless-and-featu:966a5da70b18",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0014-search-authorized-encrypted-credential-:0f8d6d174a85",
       "type": "summarizes",
       "evidence": null,
       "metadata": {}

@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { FolderOpen } from '@lucide/vue'
 import type { ProjectOverviewProjection } from '../../../../shared/projects/contracts'
-import { projectRoleLabel, projectStatusLabel, projectUpdatedAtLabel } from '../model/presentation'
+import { projectRoleLabel, projectStatusLabel } from '../model/presentation'
 
 defineProps<{ project: ProjectOverviewProjection }>()
 </script>
 
 <template>
   <div class="flex flex-col gap-4">
+    <h1 class="text-2xl font-semibold">{{ project.name }}</h1>
+
     <UiCard>
       <UiCardHeader>
         <UiCardTitle>О проекте</UiCardTitle>

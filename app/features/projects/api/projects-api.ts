@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { PROJECT_PERMISSION } from '../../../../shared/projects/constants'
 import type {
   AdministrationProjectsResponse,
   MemberProjectsResponse,
@@ -34,13 +35,7 @@ const projectOverviewSchema = z.object({
   updatedAt: z.string().datetime(),
   activeMemberCount: z.number().int().nonnegative(),
   role: roleSchema,
-  permissions: z.array(z.enum([
-    'project.view', 'project.update', 'project.archive', 'project.restore',
-    'documents.view', 'documents.create', 'documents.update_draft', 'documents.publish',
-    'documents.move', 'documents.archive', 'documents.restore', 'documents.view_history',
-    'members.view', 'members.invite', 'members.assign_role', 'members.remove',
-    'roles.view', 'roles.create', 'roles.update', 'roles.delete', 'audit.view',
-  ])),
+  permissions: z.array(z.nativeEnum(PROJECT_PERMISSION)),
 }).strict()
 
 export function parseMemberProjectsResponse(value: unknown): MemberProjectsResponse {
@@ -67,16 +62,16 @@ export interface CreateProjectInput {
 }
 
 export const projectsApi = {
-  async list(): Promise<MemberProjectsResponse> {
-    return parseMemberProjectsResponse(await $fetch('/api/projects'))
+  async list(signal?: AbortSignal): Promise<MemberProjectsResponse> {
+    return parseMemberProjectsResponse(await $fetch('/api/projects', { signal }))
   },
-  async listAdministration(): Promise<AdministrationProjectsResponse> {
-    return parseAdministrationProjectsResponse(await $fetch('/api/administration/projects'))
+  async listAdministration(signal?: AbortSignal): Promise<AdministrationProjectsResponse> {
+    return parseAdministrationProjectsResponse(await $fetch('/api/administration/projects', { signal }))
   },
-  async get(projectId: string): Promise<ProjectOverviewProjection> {
-    return parseProjectOverviewResponse(await $fetch(`/api/projects/${projectId}`))
+  async get(projectId: string, signal?: AbortSignal): Promise<ProjectOverviewProjection> {
+    return parseProjectOverviewResponse(await $fetch(`/api/projects/${projectId}`, { signal }))
   },
-  async create(input: CreateProjectInput): Promise<void> {
-    await $fetch('/api/projects', { method: 'POST', body: input })
+  async create(input: CreateProjectInput, signal?: AbortSignal): Promise<void> {
+    await $fetch('/api/projects', { method: 'POST', body: input, signal })
   },
 }

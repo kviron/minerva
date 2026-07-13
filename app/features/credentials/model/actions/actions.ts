@@ -4,6 +4,7 @@ import type { CredentialSaveCommand } from '../credentials-state'
 
 export const CREDENTIAL_ACTION = {
   LOAD: 'credentials.load',
+  LOAD_ARCHIVE: 'credentials.archive.load',
   SAVE: 'credential.save',
   ARCHIVE: 'credential.archive',
   REVEAL_PASSWORD: 'credential.password.reveal',
@@ -18,7 +19,13 @@ export class CredentialsActions extends BaseActions {
 
   public load = this.createAsyncAction({
     name: CREDENTIAL_ACTION.LOAD,
-    run: (signal: AbortSignal) => credentialsApi.load(this.projectId, signal),
+    run: (signal: AbortSignal, query: string = '') => credentialsApi.load(this.projectId, query, signal),
+    options: { concurrency: 'abort', mutation: false },
+  })
+
+  public loadArchive = this.createAsyncAction({
+    name: CREDENTIAL_ACTION.LOAD_ARCHIVE,
+    run: (signal: AbortSignal) => credentialsApi.loadArchive(this.projectId, signal),
   })
 
   public save = this.createAsyncAction({
@@ -30,7 +37,7 @@ export class CredentialsActions extends BaseActions {
       else {
         await credentialsApi.update(this.projectId, command.credentialId, command.body, signal)
       }
-      return await credentialsApi.load(this.projectId, signal)
+      return await credentialsApi.load(this.projectId, '', signal)
     },
     idGetter: command => command.kind === 'update' ? command.credentialId : 'new',
   })
@@ -39,7 +46,7 @@ export class CredentialsActions extends BaseActions {
     name: CREDENTIAL_ACTION.ARCHIVE,
     run: async (signal: AbortSignal, credentialId: string) => {
       await credentialsApi.archive(this.projectId, credentialId, signal)
-      return await credentialsApi.load(this.projectId, signal)
+      return await credentialsApi.load(this.projectId, '', signal)
     },
     idGetter: credentialId => credentialId,
   })

@@ -42,3 +42,7 @@ export const updateCredentialBodySchema = z.object({
 export const revealCredentialBodySchema = z.object({
   target: z.string().regex(/^(login|password|field:[0-9a-f-]{36})$/i),
 }).strict()
+
+export const searchCredentialBodySchema = z.object({
+  query: z.string().max(500),
+}).strict()

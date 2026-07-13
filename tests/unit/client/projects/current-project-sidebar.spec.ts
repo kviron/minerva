@@ -35,7 +35,8 @@ describe('current project sidebar', () => {
 
     expect(component).toContain('if (projectId !== null)')
     expect(component).toContain('watch(selectedProjectId')
-    expect(component).toContain('useProjects()')
+    expect(component).toContain('useProjectsStore()')
+    expect(component).toContain('useProjectsActions()')
   })
 
   it('replaces the main navigation with project-scoped links', async () => {

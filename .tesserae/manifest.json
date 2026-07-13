@@ -192,6 +192,10 @@
       "sha256": "23d4e213669148ff1adb3d0421c918676fd29ff40a0993b9192f9ca51cde1b88",
       "source_kind": "SourceDocument"
     },
+    "D:\\develop\\minerva\\docs\\decisions\\0014-search-authorized-encrypted-credential-values.md": {
+      "sha256": "b6d130fd72eaa3d20e34d333d1a577de7f435868027d67f171a7db5c6148536e",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\docs\\operations\\credential-encryption.md": {
       "sha256": "1759722834776f493afed7b5cc3dc1ae47ed2a4296fff6069bc2c0091bcace6f",
       "source_kind": "SourceDocument"
@@ -205,7 +209,7 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\progress.md": {
-      "sha256": "343c4637b3636c73f8270c96ce4ab81b6c029f140d351cc9fd33ebb504e3d561",
+      "sha256": "6eefc7c260c9bb9a03b27740ea434fada3a5b67d1e67105990037e3534ac613b",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\roadmap.md": {
@@ -365,7 +369,7 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-11-project-credentials-design.md": {
-      "sha256": "5a9c556a392cc7e909a8328d70d02f1d941005c0fd9ca29ae9b4088c9ea0387e",
+      "sha256": "3ce87f43efeaf8005741e28bd2b305aaf73ecddd479e885fa52ca614a954f5b0",
       "source_kind": "SourceDocument"
     }
   }

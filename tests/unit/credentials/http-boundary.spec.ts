@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import { describe, expect, it } from 'vitest'
-import { createCredentialBodySchema, revealCredentialBodySchema, updateCredentialBodySchema } from '../../../server/modules/credentials/http-schemas'
+import { createCredentialBodySchema, revealCredentialBodySchema, searchCredentialBodySchema, updateCredentialBodySchema } from '../../../server/modules/credentials/http-schemas'
 
 const read = (path: string) => readFile(new URL(path, import.meta.url), 'utf8')
 
@@ -14,6 +14,17 @@ describe('credential HTTP boundary', () => {
     }).success).toBe(true)
     expect(revealCredentialBodySchema.safeParse({ target: 'password' }).success).toBe(true)
     expect(revealCredentialBodySchema.safeParse({ target: 'all' }).success).toBe(false)
+    expect(searchCredentialBodySchema.safeParse({ query: 'admin@example.com' }).success).toBe(true)
+    expect(searchCredentialBodySchema.safeParse({ query: 'x'.repeat(501) }).success).toBe(false)
+  })
+
+  it('keeps secret-capable search in a no-store POST body instead of the URL', async () => {
+    const source = await read('../../../server/api/projects/[id]/credentials/search.post.ts')
+
+    expect(source).toContain('readBody(event)')
+    expect(source).toContain("setHeader(event, 'Cache-Control', 'no-store')")
+    expect(source).toContain('searchAccessibleCredentials')
+    expect(source).not.toContain('getQuery')
   })
 
   it('keeps reveal no-store, rate-limited, session-derived, and outside MCP', async () => {

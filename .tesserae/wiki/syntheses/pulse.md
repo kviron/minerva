@@ -1,5 +1,5 @@
 ---
-content_hash: sha256-67f7f1b8fb7aeed45fd637966c4fc87aa9bfc66663fc04450989e3d0d1799e1d
+content_hash: sha256-0381a81ebbd08022e334e15cae64627898fa86de05204c2a97ef14e7623787cf
 generator: heuristic-v1
 inputs: []
 slug: pulse
@@ -21,6 +21,7 @@ sources:
   - docs/decisions/0011-display-credential-logins-in-project-lists.md
   - docs/decisions/0012-use-feature-scoped-actions-for-client-effects.md
   - docs/decisions/0013-keep-client-actions-stateless-and-feature-scoped.md
+  - docs/decisions/0014-search-authorized-encrypted-credential-values.md
   - docs/operations/credential-encryption.md
   - docs/operations/tesserae.md
   - docs/product-spec.md
@@ -77,7 +78,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 60
+- SourceDocument: 61
 
 ## Recently added
 - (none)

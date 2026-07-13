@@ -1,4 +1,4 @@
-import type { MaskedCredentialListItem } from '../../../../shared/credentials/contracts'
+import type { ArchivedCredentialListItem, MaskedCredentialListItem } from '../../../../shared/credentials/contracts'
 import type { CredentialFieldType } from '../../../../shared/credentials/types'
 import type { CredentialCreateBody, CredentialUpdateBody } from '../model/actions/types'
 
@@ -44,9 +44,40 @@ export function parseCredentialList(value: unknown): readonly MaskedCredentialLi
   })
 }
 
+export function parseArchivedCredentialList(value: unknown): readonly ArchivedCredentialListItem[] {
+  if (!Array.isArray(value)) {
+    throw new Error('Invalid archived credential list')
+  }
+
+  return value.map((item) => {
+    if (!record(item) || 'login' in item || 'password' in item || 'dynamicFields' in item
+      || typeof item.id !== 'string' || typeof item.title !== 'string' || !record(item.category)
+      || typeof item.category.id !== 'string' || typeof item.category.name !== 'string'
+      || typeof item.hasLogin !== 'boolean' || typeof item.hasPassword !== 'boolean'
+      || typeof item.dynamicFieldCount !== 'number' || !Number.isInteger(item.dynamicFieldCount) || item.dynamicFieldCount < 0
+      || typeof item.archivedAt !== 'string' || !record(item.archivedBy) || typeof item.archivedBy.name !== 'string') {
+      throw new Error('Invalid archived credential list')
+    }
+
+    return {
+      id: item.id,
+      title: item.title,
+      category: { id: item.category.id, name: item.category.name },
+      hasLogin: item.hasLogin,
+      hasPassword: item.hasPassword,
+      dynamicFieldCount: item.dynamicFieldCount,
+      archivedAt: item.archivedAt,
+      archivedBy: { name: item.archivedBy.name },
+    }
+  })
+}
+
 export const credentialsApi = {
-  load: async (projectId: string, signal: AbortSignal) =>
-    parseCredentialList(await $fetch(`/api/projects/${projectId}/credentials`, { signal })),
+  load: async (projectId: string, query: string, signal: AbortSignal) => parseCredentialList(query.trim()
+    ? await $fetch(`/api/projects/${projectId}/credentials/search`, { method: 'POST', body: { query }, signal })
+    : await $fetch(`/api/projects/${projectId}/credentials`, { signal })),
+  loadArchive: async (projectId: string, signal: AbortSignal) =>
+    parseArchivedCredentialList(await $fetch(`/api/projects/${projectId}/credentials/archive`, { signal })),
   create: (projectId: string, body: CredentialCreateBody, signal: AbortSignal) =>
     $fetch(`/api/projects/${projectId}/credentials`, { method: 'POST', body, signal }),
   update: (projectId: string, credentialId: string, body: CredentialUpdateBody, signal: AbortSignal) =>

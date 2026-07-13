@@ -46,6 +46,7 @@
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:adr-0011-display-credential-logins-in-authorized:aec4bfcacf1d"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:adr-0012-use-feature-scoped-actions-for-client-e:bf4977d67411"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:adr-0013-keep-client-actions-stateless-and-featu:966a5da70b18"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:adr-0014-search-authorized-encrypted-credential-:0f8d6d174a85"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:authorization-readability-refactor-design:64e22f5e0bd4"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:authorization-readability-refactor-implementatio:cff925f10e13"}

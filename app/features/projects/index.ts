@@ -1,4 +1,5 @@
 export { default as ProjectsView } from './ui/ProjectsView.vue'
+export { default as ProjectsProvider } from './ui/ProjectsProvider.vue'
 export { default as CurrentProjectSidebar } from './ui/CurrentProjectSidebar.vue'
 export { default as ProjectNavigation } from './ui/ProjectNavigation.vue'
 export { default as ProjectOverview } from './ui/ProjectOverview.vue'
@@ -18,3 +19,5 @@ export {
 } from './model/project-sections'
 export type { ProjectSection } from './model/project-sections'
 export { projectIdFromPath } from './model/current-project-route'
+export { useProjectsStore } from './model/projects-state'
+export { useProjectOverviewStore } from './model/project-overview-state'

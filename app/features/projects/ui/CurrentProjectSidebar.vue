@@ -2,15 +2,21 @@
 import { computed, watch } from 'vue'
 import { ChevronsUpDown, FileKey, Files, Folder, LayoutDashboard, Settings } from '@lucide/vue'
 import { useSidebar } from '@/components/ui/sidebar'
+import { PROJECT_ACTION } from '../model/actions/actions'
+import { useProjectsActions } from '../model/actions/provider'
+import { PROJECTS_SCOPE } from '../model/actions/types'
 import { projectIdFromPath } from '../model/current-project-route'
-import { useProjects } from '../model/use-projects'
+import { useProjectsStore } from '../model/projects-state'
 
 const route = useRoute()
 const { isMobile } = useSidebar()
+const actions = useProjectsActions()
+const state = useProjectsStore()
 const selectedProjectId = computed(() => projectIdFromPath(route.path))
-const { projects, pending, load } = useProjects()
+const projects = computed(() => state.projects)
+const pending = computed(() => actions.isPendingFor(PROJECT_ACTION.LOAD, PROJECTS_SCOPE.MEMBER))
 const selectedProject = computed(() =>
-  projects.value.find(project => project.id === selectedProjectId.value) ?? null,
+  state.projects.find(project => project.id === selectedProjectId.value) ?? null,
 )
 const projectNavigation = computed(() => selectedProjectId.value === null
   ? []
@@ -21,9 +27,17 @@ const projectNavigation = computed(() => selectedProjectId.value === null
       { label: 'Настройки', to: `/projects/${selectedProjectId.value}/settings`, icon: Settings, exact: false },
     ])
 
+const load = async () => {
+  const projects = await actions.load(PROJECTS_SCOPE.MEMBER)
+  if (projects) {
+    state.applyProjects(projects)
+  }
+}
+
 watch(selectedProjectId, (projectId) => {
-  if (projectId !== null)
+  if (projectId !== null) {
     void load()
+  }
 }, { immediate: true })
 </script>
 

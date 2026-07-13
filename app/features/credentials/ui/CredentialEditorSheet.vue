@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { ArrowDown, ArrowUp, Plus, Trash2 } from '@lucide/vue'
+import { Eye, EyeOff, ArrowDown, ArrowUp, Plus, Trash2, X } from '@lucide/vue'
+import { ref, watch } from 'vue'
 import { CREDENTIAL_ACTION } from '../model/actions/actions'
 import { useCredentialsActions } from '../model/actions/provider'
 import { useCategoryManagementStore } from '../model/category-management-state'
 import { useCredentialsStore, type SecretMode } from '../model/credentials-state'
 
 const actions = useCredentialsActions()
+const emit = defineEmits<{ saved: [] }>()
 const state = useCredentialsStore()
 const categoryState = useCategoryManagementStore()
+const passwordVisible = ref(false)
 const modes: { value: SecretMode, label: string }[] = [
   { value: 'keep', label: 'Оставить' }, { value: 'replace', label: 'Заменить' }, { value: 'clear', label: 'Очистить' },
 ]
@@ -22,7 +25,32 @@ const save = async () => {
   }
   state.setEditorOpen(false)
   state.applyRows(rows)
+  emit('saved')
 }
+const clearPassword = () => {
+  state.clearPassword()
+  passwordVisible.value = false
+}
+const togglePasswordVisibility = async () => {
+  if (state.editingId && state.passwordMode === 'keep' && !state.passwordValue) {
+    const credentialId = state.editingId
+    const value = await actions.revealPassword(state.editingId)
+    if (!value || !state.editorOpen || state.editingId !== credentialId) {
+      return
+    }
+    state.applyRevealedPassword(value)
+  }
+  if (!state.passwordValue) {
+    return
+  }
+  passwordVisible.value = !passwordVisible.value
+}
+
+watch(() => state.editorOpen, (open) => {
+  if (!open) {
+    passwordVisible.value = false
+  }
+})
 </script>
 
 <template>
@@ -32,7 +60,7 @@ const save = async () => {
         <UiSheetTitle>{{ state.editingId ? 'Редактировать учётные данные' : 'Новые учётные данные' }}</UiSheetTitle>
         <UiSheetDescription>Секретные значения шифруются и не отображаются после сохранения.</UiSheetDescription>
       </UiSheetHeader>
-      <div class="min-h-0 flex-1 overflow-y-auto px-4">
+      <div class="min-h-0 flex-1 overflow-y-auto px-6">
         <UiFieldGroup>
           <UiField>
             <UiFieldLabel for="credential-title">Название</UiFieldLabel>
@@ -54,53 +82,57 @@ const save = async () => {
             <UiFieldDescription v-if="state.editingId">Категория существующей записи не меняется, чтобы сохранить
               криптографическую привязку значений.</UiFieldDescription>
           </UiField>
-          <UiFieldSet>
-            <UiFieldLegend>Логин</UiFieldLegend>
-            <UiFieldGroup>
-              <UiField v-if="state.editingId">
-                <UiFieldLabel>Действие</UiFieldLabel>
-                <UiSelect v-model="state.loginMode">
-                  <UiSelectTrigger>
-                    <UiSelectValue />
-                  </UiSelectTrigger>
-                  <UiSelectContent>
-                    <UiSelectGroup>
-                      <UiSelectItem v-for="mode in modes" :key="mode.value" :value="mode.value">{{ mode.label }}
-                      </UiSelectItem>
-                    </UiSelectGroup>
-                  </UiSelectContent>
-                </UiSelect>
-              </UiField>
-              <UiField v-if="!state.editingId || state.loginMode === 'replace'">
-                <UiFieldLabel for="credential-login">Новое значение</UiFieldLabel>
-                <UiInput id="credential-login" v-model="state.loginValue" autocomplete="off" />
-              </UiField>
-            </UiFieldGroup>
-          </UiFieldSet>
-          <UiFieldSet>
-            <UiFieldLegend>Пароль</UiFieldLegend>
-            <UiFieldGroup>
-              <UiField v-if="state.editingId">
-                <UiFieldLabel>Действие</UiFieldLabel>
-                <UiSelect v-model="state.passwordMode">
-                  <UiSelectTrigger>
-                    <UiSelectValue />
-                  </UiSelectTrigger>
-                  <UiSelectContent>
-                    <UiSelectGroup>
-                      <UiSelectItem v-for="mode in modes" :key="mode.value" :value="mode.value">{{ mode.label }}
-                      </UiSelectItem>
-                    </UiSelectGroup>
-                  </UiSelectContent>
-                </UiSelect>
-              </UiField>
-              <UiField v-if="!state.editingId || state.passwordMode === 'replace'">
-                <UiFieldLabel for="credential-password">Новое значение</UiFieldLabel>
-                <UiInput id="credential-password" v-model="state.passwordValue" type="password"
-                  autocomplete="new-password" />
-              </UiField>
-            </UiFieldGroup>
-          </UiFieldSet>
+          <UiField>
+            <UiFieldLabel for="credential-login">Логин</UiFieldLabel>
+            <UiInputGroup>
+              <UiInputGroupInput id="credential-login" v-model="state.loginValue" autocomplete="off" />
+              <UiInputGroupAddon v-if="state.loginValue" align="inline-end">
+                <UiInputGroupButton
+                  size="icon-xs"
+                  aria-label="Очистить логин"
+                  title="Очистить логин"
+                  @click="state.clearLogin"
+                >
+                  <X />
+                </UiInputGroupButton>
+              </UiInputGroupAddon>
+            </UiInputGroup>
+          </UiField>
+          <UiField>
+            <UiFieldLabel for="credential-password">Пароль</UiFieldLabel>
+            <UiInputGroup>
+              <UiInputGroupInput
+                id="credential-password"
+                :model-value="state.passwordValue"
+                :type="passwordVisible ? 'text' : 'password'"
+                :placeholder="state.editingId && state.passwordMode === 'keep' ? '••••••••' : ''"
+                autocomplete="new-password"
+                @update:model-value="state.setPasswordValue"
+              />
+              <UiInputGroupAddon align="inline-end">
+                <UiInputGroupButton
+                  size="icon-xs"
+                  :disabled="actions.isPendingFor(CREDENTIAL_ACTION.REVEAL_PASSWORD, state.editingId ?? 'new') || (state.passwordMode !== 'keep' && !state.passwordValue)"
+                  :aria-label="passwordVisible ? 'Скрыть пароль' : 'Показать пароль'"
+                  :title="passwordVisible ? 'Скрыть пароль' : 'Показать пароль'"
+                  @click="togglePasswordVisibility"
+                >
+                  <UiSpinner v-if="actions.isPendingFor(CREDENTIAL_ACTION.REVEAL_PASSWORD, state.editingId ?? 'new')" />
+                  <EyeOff v-else-if="passwordVisible" />
+                  <Eye v-else />
+                </UiInputGroupButton>
+                <UiInputGroupButton
+                  v-if="state.passwordValue || state.passwordMode === 'keep'"
+                  size="icon-xs"
+                  aria-label="Очистить пароль"
+                  title="Очистить пароль"
+                  @click="clearPassword"
+                >
+                  <X />
+                </UiInputGroupButton>
+              </UiInputGroupAddon>
+            </UiInputGroup>
+          </UiField>
           <UiFieldSet>
             <div class="flex items-center justify-between gap-2">
               <UiFieldLegend>Дополнительные поля</UiFieldLegend>

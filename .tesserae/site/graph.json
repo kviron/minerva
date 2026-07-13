@@ -374,6 +374,13 @@
       "evidence": null,
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0014-search-authorized-encrypted-credential-:0f8d6d174a85",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
       "type": "summarizes"
     },
@@ -1189,6 +1196,39 @@
       },
       "name": "ADR 0013: Keep client actions stateless and feature-scoped",
       "source_path": "D:\\develop\\minerva\\docs\\decisions\\0013-keep-client-actions-stateless-and-feature-scoped.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0014-search-authorized-encrypted-credential-:0f8d6d174a85",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0014-search-authorized-encrypted-credential-values-server-side",
+            "level": 1,
+            "text": "ADR 0014: Search authorized encrypted credential values server-side"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0014: Search authorized encrypted credential values server-side",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0014-search-authorized-encrypted-credential-values.md",
       "type": "SourceDocument"
     },
     {
@@ -4027,7 +4067,7 @@
       "description": "Top-level snapshot of the wiki at compile time.",
       "id": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "metadata": {
-        "content_hash": "sha256-67f7f1b8fb7aeed45fd637966c4fc87aa9bfc66663fc04450989e3d0d1799e1d",
+        "content_hash": "sha256-0381a81ebbd08022e334e15cae64627898fa86de05204c2a97ef14e7623787cf",
         "input_ids": [],
         "synthesis_kind": "pulse"
       },

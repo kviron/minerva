@@ -175,6 +175,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>sources/adr-0014-search-authorized-encrypted-credential-values-server-side.html</loc>
+    <lastmod>2024-09-21T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>sources/authenticated-page-placeholder-design.html</loc>
     <lastmod>2024-05-25T00:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -619,6 +625,12 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>raw/d-develop-minerva-docs-decisions-0014-search-authorized-encrypted-credential-values-md.html</loc>
+    <lastmod>2024-03-05T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>raw/d-develop-minerva-docs-operations-credential-encryption-md.html</loc>
     <lastmod>2024-02-13T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -969,6 +981,12 @@
   <url>
     <loc>raw/docs-decisions-0013-keep-client-actions-stateless-and-feature-scoped-md.html</loc>
     <lastmod>2024-10-04T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-decisions-0014-search-authorized-encrypted-credential-values-md.html</loc>
+    <lastmod>2024-04-18T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto'
-import { and, asc, desc, eq, inArray, isNull, notInArray, sql } from 'drizzle-orm'
+import { and, asc, desc, eq, inArray, isNotNull, isNull, notInArray, sql } from 'drizzle-orm'
 import { CREDENTIAL_FIELD_TYPE } from '../../../shared/credentials/constants'
-import type { MaskedCredentialListItem, CredentialSecretTarget } from '../../../shared/credentials/contracts'
+import type { ArchivedCredentialListItem, MaskedCredentialListItem, CredentialSecretTarget } from '../../../shared/credentials/contracts'
 import type { CredentialFieldType } from '../../../shared/credentials/types'
 import { AUDIT_OUTCOME, PROJECT_PERMISSION } from '../../../shared/projects/constants'
 import type { AuditChannel } from '../../../shared/projects/types'
@@ -19,6 +19,7 @@ import {
   resolveCredentialActorAccess,
 } from './categories'
 import type { createCredentialCrypto, CredentialSecretEnvelope } from './crypto'
+import { matchesCredentialSearch, normalizeCredentialSearchQuery } from './search'
 
 type CredentialDatabase = ReturnType<typeof getDatabase>['db']
 type CredentialCrypto = ReturnType<typeof createCredentialCrypto>
@@ -136,6 +137,23 @@ export async function listAccessibleCredentials(
   crypto: CredentialCrypto,
   input: Readonly<{ actorUserId: string, projectId: string, categoryId: string | null }>,
 ): Promise<readonly MaskedCredentialListItem[]> {
+  return await listCredentialProjections(db, crypto, input, '')
+}
+
+export async function searchAccessibleCredentials(
+  db: CredentialDatabase,
+  crypto: CredentialCrypto,
+  input: Readonly<{ actorUserId: string, projectId: string, categoryId: string | null, query: string }>,
+): Promise<readonly MaskedCredentialListItem[]> {
+  return await listCredentialProjections(db, crypto, input, normalizeCredentialSearchQuery(input.query))
+}
+
+const listCredentialProjections = async (
+  db: CredentialDatabase,
+  crypto: CredentialCrypto,
+  input: Readonly<{ actorUserId: string, projectId: string, categoryId: string | null }>,
+  normalizedQuery: string,
+): Promise<readonly MaskedCredentialListItem[]> => {
   const [categories, access] = await Promise.all([
     listAccessibleCredentialCategories(db, input),
     resolveCredentialActorAccess(db, input.actorUserId, input.projectId),
@@ -162,29 +180,99 @@ export async function listAccessibleCredentials(
     credentialId: credentialFields.credentialId,
     label: credentialFields.label,
     type: credentialFields.type,
+    ciphertext: credentialFields.ciphertext,
+    nonce: credentialFields.nonce,
+    keyVersion: credentialFields.keyVersion,
   }).from(credentialFields).where(inArray(credentialFields.credentialId, rows.map(row => row.id))).orderBy(asc(credentialFields.position))
 
-  return rows.map((row) => {
-    const category = categoryById.get(row.categoryId)!
-    return {
+  const projections: MaskedCredentialListItem[] = []
+  for (const row of rows) {
+    const category = categoryById.get(row.categoryId)
+    if (!category) continue
+
+    const login = row.loginCiphertext && row.loginNonce && row.loginKeyVersion
+      ? crypto.decrypt(
+          { ciphertext: row.loginCiphertext, nonce: row.loginNonce, keyVersion: row.loginKeyVersion },
+          context(input.projectId, row.categoryId, row.id, 'login'),
+        )
+      : null
+    const rowFields = fields.filter(field => field.credentialId === row.id)
+    if (normalizedQuery && !matchesCredentialSearch(normalizedQuery, {
+      title: row.title,
+      login,
+      fields: rowFields.map(field => ({
+        label: field.label,
+        value: crypto.decrypt(
+          { ciphertext: field.ciphertext, nonce: field.nonce, keyVersion: field.keyVersion },
+          context(input.projectId, row.categoryId, row.id, `field:${field.id}`),
+        ),
+      })),
+    })) continue
+
+    projections.push({
       id: row.id,
       title: row.title,
       category: { id: category.id, name: category.name },
-      login: row.loginCiphertext && row.loginNonce && row.loginKeyVersion
-        ? crypto.decrypt(
-            { ciphertext: row.loginCiphertext, nonce: row.loginNonce, keyVersion: row.loginKeyVersion },
-            context(input.projectId, row.categoryId, row.id, 'login'),
-          )
-        : null,
+      login,
       hasLogin: row.loginCiphertext !== null,
       hasPassword: row.passwordCiphertext !== null,
-      dynamicFields: fields.filter(field => field.credentialId === row.id).map(({ id, label, type }) => ({ id, label, type })),
+      dynamicFields: rowFields.map(({ id, label, type }) => ({ id, label, type })),
       updatedAt: row.updatedAt.toISOString(),
       updatedBy: { name: row.updatedByName.trim(), avatar: safeAvatar(row.updatedByAvatar) },
       canUpdate: access.permissions.has(PROJECT_PERMISSION.CREDENTIALS_UPDATE),
       canArchive: access.permissions.has(PROJECT_PERMISSION.CREDENTIALS_ARCHIVE),
-    }
-  })
+    })
+  }
+  return projections
+}
+
+export async function listAccessibleArchivedCredentials(
+  db: CredentialDatabase,
+  input: Readonly<{ actorUserId: string, projectId: string }>,
+): Promise<readonly ArchivedCredentialListItem[]> {
+  const categories = await listAccessibleCredentialCategories(db, { ...input, includeArchived: true })
+  if (categories.length === 0) return []
+
+  const categoryById = new Map(categories.map(category => [category.id, category]))
+  const rows = await db.select({
+    id: credentials.id,
+    title: credentials.title,
+    categoryId: credentials.categoryId,
+    loginCiphertext: credentials.loginCiphertext,
+    passwordCiphertext: credentials.passwordCiphertext,
+    archivedAt: credentials.archivedAt,
+    archivedByName: user.name,
+  }).from(credentials).innerJoin(user, eq(credentials.archivedByUserId, user.id)).where(and(
+    eq(credentials.projectId, input.projectId),
+    inArray(credentials.categoryId, [...categoryById.keys()]),
+    isNotNull(credentials.archivedAt),
+  )).orderBy(desc(credentials.archivedAt), asc(credentials.id))
+
+  const fields = rows.length === 0 ? [] : await db.select({
+    credentialId: credentialFields.credentialId,
+  }).from(credentialFields).where(inArray(credentialFields.credentialId, rows.map(row => row.id)))
+  const fieldCounts = new Map<string, number>()
+  for (const field of fields) {
+    fieldCounts.set(field.credentialId, (fieldCounts.get(field.credentialId) ?? 0) + 1)
+  }
+
+  const archived: ArchivedCredentialListItem[] = []
+  for (const row of rows) {
+    const category = categoryById.get(row.categoryId)
+    if (!category || !row.archivedAt) continue
+
+    archived.push({
+      id: row.id,
+      title: row.title,
+      category: { id: category.id, name: category.name },
+      hasLogin: row.loginCiphertext !== null,
+      hasPassword: row.passwordCiphertext !== null,
+      dynamicFieldCount: fieldCounts.get(row.id) ?? 0,
+      archivedAt: row.archivedAt.toISOString(),
+      archivedBy: { name: row.archivedByName.trim() },
+    })
+  }
+  return archived
 }
 
 export async function revealCredentialSecret(

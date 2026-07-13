@@ -1,28 +1,35 @@
 <script setup lang="ts">
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
+import { PROJECT_ACTION } from '../model/actions/actions'
+import { useProjectsActions } from '../model/actions/provider'
+import { useProjectOverviewStore } from '../model/project-overview-state'
 import type { ProjectSection } from '../model/project-sections'
-import { useProjectOverview } from '../model/use-project-overview'
 
 const props = defineProps<{
   projectId: string
   active: ProjectSection
 }>()
 
-const { project, pending, error, load } = useProjectOverview(() => props.projectId)
+const actions = useProjectsActions()
+const state = useProjectOverviewStore()
+const project = computed(() => state.project)
+const pending = computed(() => actions.isPendingFor(PROJECT_ACTION.LOAD_OVERVIEW, props.projectId))
+const error = computed(() => actions.error.value)
+
+const load = async () => {
+  state.clearProject()
+  const project = await actions.loadOverview(props.projectId)
+  if (project) {
+    state.applyProject(project)
+  }
+}
 
 watch(() => props.projectId, load, { immediate: true })
 </script>
 
 <template>
   <div class="flex flex-col gap-4 px-4 lg:px-6">
-    <template v-if="pending">
-      <div class="flex flex-col gap-2">
-        <UiSkeleton class="h-8 w-64" />
-        <UiSkeleton class="h-4 w-full max-w-xl" />
-      </div>
-      <UiSkeleton class="h-8 w-80" />
-      <UiSkeleton class="h-48 w-full" />
-    </template>
+    <UiSkeleton v-if="pending" class="h-48 w-full" />
 
     <UiEmpty v-else-if="error" class="border border-dashed" role="alert">
       <UiEmptyHeader>
@@ -35,14 +42,6 @@ watch(() => props.projectId, load, { immediate: true })
     </UiEmpty>
 
     <template v-else-if="project">
-      <div class="flex flex-col gap-1">
-        <NuxtLink to="/projects" class="text-sm text-muted-foreground hover:underline">Проекты</NuxtLink>
-        <h1 class="text-2xl font-semibold">{{ project.name }}</h1>
-        <p class="text-sm text-muted-foreground">
-          {{ project.description || 'Описание проекта пока не добавлено.' }}
-        </p>
-      </div>
-
       <slot :project="project" />
     </template>
   </div>

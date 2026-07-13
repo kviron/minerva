@@ -14,4 +14,15 @@ export type MaskedCredentialListItem = Readonly<{
   canArchive: boolean
 }>
 
+export type ArchivedCredentialListItem = Readonly<{
+  id: string
+  title: string
+  category: Readonly<{ id: string, name: string }>
+  hasLogin: boolean
+  hasPassword: boolean
+  dynamicFieldCount: number
+  archivedAt: string
+  archivedBy: Readonly<{ name: string }>
+}>
+
 export type CredentialSecretTarget = 'login' | 'password' | `field:${string}`

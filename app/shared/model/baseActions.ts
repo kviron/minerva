@@ -25,6 +25,7 @@ export interface ActionConfig {
   errorMessage?: string
   onError?: (errorMessage: string, rawError: unknown) => void
   mutation?: boolean
+  concurrency?: 'abort' | 'ignore' | 'allow'
 }
 
 export interface AsyncActionDefinition<Args extends unknown[], T> {
@@ -61,7 +62,7 @@ export abstract class BaseActions {
     return async (...args: Args): Promise<T | undefined> => {
       const targetId = idGetter?.(...args) ?? 'global'
       const key = this.pendingKey(name, targetId)
-      const concurrency = this.options.concurrency ?? 'ignore'
+      const concurrency = options.concurrency ?? this.options.concurrency ?? 'ignore'
       if (concurrency === 'ignore' && this.pendingMap.value[key]) {
         return undefined
       }
@@ -100,8 +101,10 @@ export abstract class BaseActions {
         return undefined
       }
       finally {
-        this.setLoading(key, false)
-        this.abortControllers.delete(key)
+        if (concurrency !== 'abort' || this.abortControllers.get(key) === controller) {
+          this.setLoading(key, false)
+          this.abortControllers.delete(key)
+        }
       }
     }
   }

@@ -105,8 +105,8 @@ const initials = (name: string) => name.split(/\s+/u).filter(Boolean).slice(0, 2
               </UiDropdownMenuTrigger>
               <UiDropdownMenuContent align="end">
                 <UiDropdownMenuGroup>
-                  <UiDropdownMenuItem v-if="row.canUpdate" @click="emit('edit', row)"><Pencil />Редактировать</UiDropdownMenuItem>
-                  <UiDropdownMenuItem v-if="row.canArchive" variant="destructive" @click="emit('delete', row)"><Trash2 />Удалить</UiDropdownMenuItem>
+                  <UiDropdownMenuItem v-if="row.canUpdate" @select="emit('edit', row)"><Pencil />Редактировать</UiDropdownMenuItem>
+                  <UiDropdownMenuItem v-if="row.canArchive" variant="destructive" @select="emit('delete', row)"><Trash2 />Удалить</UiDropdownMenuItem>
                 </UiDropdownMenuGroup>
               </UiDropdownMenuContent>
             </UiDropdownMenu>

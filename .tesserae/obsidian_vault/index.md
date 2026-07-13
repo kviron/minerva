@@ -17,6 +17,7 @@
 - [[adr-0011-display-credential-logins-in-authorized-project-lists]] — SourceDocument
 - [[adr-0012-use-feature-scoped-actions-for-client-effects]] — SourceDocument
 - [[adr-0013-keep-client-actions-stateless-and-feature-scoped]] — SourceDocument
+- [[adr-0014-search-authorized-encrypted-credential-values-server-side]] — SourceDocument
 - [[authenticated-page-placeholder-design]] — SourceDocument
 - [[authorization-readability-refactor-design]] — SourceDocument
 - [[authorization-readability-refactor-implementation-plan]] — SourceDocument

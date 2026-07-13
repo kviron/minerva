@@ -2,8 +2,8 @@
 
 This directory contains a dependency-free JSONL export of the validated Tesserae ResearchGraph.
 
-- nodes: 65
-- edges: 95
+- nodes: 66
+- edges: 96
 - node file: `nodes.jsonl`
 - edge file: `edges.jsonl`
 

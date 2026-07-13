@@ -105,7 +105,7 @@ export const hasCredentialCategoryAccess = async (
 
 export async function listAccessibleCredentialCategories(
   db: CredentialDatabase,
-  input: Readonly<{ actorUserId: string, projectId: string }>,
+  input: Readonly<{ actorUserId: string, projectId: string, includeArchived?: boolean }>,
 ): Promise<readonly CredentialCategoryListItem[]> {
   const access = await resolveCredentialActorAccess(db, input.actorUserId, input.projectId)
   if (!access?.permissions.has(PROJECT_PERMISSION.CREDENTIALS_VIEW)) return []
@@ -115,10 +115,10 @@ export async function listAccessibleCredentialCategories(
     name: credentialCategories.name,
     description: credentialCategories.description,
     position: credentialCategories.position,
-  }).from(credentialCategories).where(and(
-    eq(credentialCategories.projectId, input.projectId),
-    isNull(credentialCategories.archivedAt),
-  )).orderBy(asc(credentialCategories.position), asc(credentialCategories.id))
+  }).from(credentialCategories).where(input.includeArchived
+    ? eq(credentialCategories.projectId, input.projectId)
+    : and(eq(credentialCategories.projectId, input.projectId), isNull(credentialCategories.archivedAt)))
+    .orderBy(asc(credentialCategories.position), asc(credentialCategories.id))
 
   if (access.permissions.has(PROJECT_PERMISSION.CREDENTIAL_CATEGORIES_MANAGE_ACCESS)) return categories
 

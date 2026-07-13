@@ -21,6 +21,9 @@ describe('credentials table and editor', () => {
     expect(table).toContain('Удалить')
     expect(table).toContain('<Pencil')
     expect(table).toContain('<Trash2')
+    expect(table).toContain('@select="emit(\'edit\', row)"')
+    expect(table).toContain('@select="emit(\'delete\', row)"')
+    expect(table).not.toContain('@click="emit(\'delete\', row)"')
     expect(table).toContain('<UiHoverCard')
     expect(table).toContain('<UiAvatarFallback>')
     expect(table).toContain('row.updatedBy.name')
@@ -40,6 +43,31 @@ describe('credentials table and editor', () => {
     expect(editor).toContain('state.moveField')
     expect(editor).toContain('state.removeField')
     expect(editor).toContain(':disabled="actions.isPendingFor')
+  })
+
+  it('aligns editor content and edits the visible login without a mode selector', async () => {
+    const editor = await read('../../../../app/features/credentials/ui/CredentialEditorSheet.vue')
+
+    expect(editor).toContain('class="min-h-0 flex-1 overflow-y-auto px-6"')
+    expect(editor).toContain('<UiInputGroupInput id="credential-login" v-model="state.loginValue"')
+    expect(editor).toContain('<UiInputGroupButton')
+    expect(editor).toContain('aria-label="Очистить логин"')
+    expect(editor).toContain('@click="state.clearLogin"')
+    expect(editor).not.toContain('v-model="state.loginMode"')
+  })
+
+  it('edits and reveals the password through controls inside its input', async () => {
+    const editor = await read('../../../../app/features/credentials/ui/CredentialEditorSheet.vue')
+
+    expect(editor).toContain('id="credential-password"')
+    expect(editor).toContain(':type="passwordVisible ? \'text\' : \'password\'"')
+    expect(editor).toContain('@update:model-value="state.setPasswordValue"')
+    expect(editor).toContain('@click="togglePasswordVisibility"')
+    expect(editor).toContain('actions.revealPassword(state.editingId)')
+    expect(editor).toContain('<EyeOff v-else-if="passwordVisible"')
+    expect(editor).toContain('<Eye v-else')
+    expect(editor).toContain('@click="clearPassword"')
+    expect(editor).not.toContain('v-model="state.passwordMode"')
   })
 
   it('loads and mutates through strict feature adapters', async () => {
@@ -66,6 +94,9 @@ describe('credentials table and editor', () => {
     expect(view).toContain('<UiAlertDialogTitle>Удалить учётные данные?</UiAlertDialogTitle>')
     expect(view).toContain('Вы точно хотите удалить')
     expect(view).toContain('@delete="requestDelete"')
+    expect(view).toContain('<UiButton variant="destructive"')
+    expect(view).toContain('@click="confirmDelete"')
+    expect(view).not.toContain('<UiAlertDialogAction')
   })
 
   it('filters only masked list data and gates creation by its permission', async () => {
