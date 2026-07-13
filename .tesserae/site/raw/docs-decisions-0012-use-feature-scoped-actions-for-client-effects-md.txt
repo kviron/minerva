@@ -1,0 +1,30 @@
+0012-use-feature-scoped-actions-for-client-effects.md
+=====================================================
+
+# ADR 0012: Use feature-scoped actions for client effects
+
+Date: 2026-07-12  
+Status: superseded by ADR 0013
+
+## Context
+
+Credentials UI state had accumulated API calls, loading flags, error handling, clipboard effects, and mutation orchestration. Components depended on state objects whose methods mixed synchronous draft transformations with infrastructure effects. Repeating this pattern for Projects, Administration, and other entities would make business operations difficult to test and reuse.
+
+## Decision
+
+Introduce a client-side `BaseActions` abstraction and feature-scoped action classes under `feature/model/actions`. An action class declares named synchronous or asynchronous entity operations through `createSyncAction` and `createAsyncAction`.
+
+Actions are intentionally authorization-agnostic. They do not decide whether the current user may invoke an operation; server-verified permissions remain authoritative, while UI capabilities only control presentation. Actions receive narrow API and browser capabilities, own pending/error/concurrency handling, and apply successful results to synchronous feature state models.
+
+Each feature creates one action-class instance at a provider composition root. Descendant views inject that instance and invoke actions instead of importing API adapters or effectful state methods. State models retain deterministic draft transformations and immutable updates only.
+
+`BaseActions` tracks pending state by action name plus entity id, supports ignore/abort/allow concurrency, accepts an `AbortSignal` execution context, emits optional analytics events without entity values, and exposes safe configured errors rather than raw infrastructure errors.
+
+## Consequences
+
+- UI components have one feature-level command boundary and no direct network or clipboard effects.
+- API adapters stay strict and receive cancellation signals from actions.
+- State models become easier to unit test as synchronous transformations.
+- Actions remain reusable across multiple components within the provider scope.
+- Authorization must never move into client actions; every mutation continues to be checked server-side with permission codes.
+- Future feature migrations should be incremental and behavior-preserving rather than introducing one global service container.

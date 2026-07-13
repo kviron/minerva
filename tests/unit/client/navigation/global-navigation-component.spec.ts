@@ -73,10 +73,9 @@ describe('GlobalNavigation', () => {
     expect(links.map(link => link.props('to'))).toEqual([
       '/dashboard',
       '/projects',
-      '/settings',
     ])
-    expect(links.map(link => link.text())).toEqual(['Главная', 'Проекты', 'Настройки'])
+    expect(links.map(link => link.text())).toEqual(['Главная', 'Проекты'])
     expect(links[1]?.attributes('data-active')).toBe('true')
-    expect(wrapper.findAll('svg[aria-hidden="true"]')).toHaveLength(3)
+    expect(wrapper.findAll('svg[aria-hidden="true"]')).toHaveLength(2)
   })
 })

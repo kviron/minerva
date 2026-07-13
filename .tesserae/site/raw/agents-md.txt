@@ -29,6 +29,7 @@ Application implementation is blocked until the user approves the audited design
 - Update `docs/progress.md` after every completed slice.
 - Refresh Tesserae after canonical documentation or implementation changes by running `./scripts/refresh-tesserae.ps1`; do not call `tesserae refresh` directly on Windows.
 - Do not commit `.tesserae`, session transcripts, secrets, `.env` files, uploads, backups, or generated indexes.
+- Prefer contextual typing, explicit container and return types, discriminated unions, and control-flow narrowing over type assertions. Do not use non-null assertions to bypass nullability. Use `as const` only to preserve literal types and closed sets; keep any unavoidable `as SomeType` local to an external boundary and justify it with validation or a comment.
 
 ## Safety
 

@@ -1,7 +1,7 @@
 # Minerva architecture
 
 Status: proposed  
-Last updated: 2026-06-29
+Last updated: 2026-07-11
 
 ## Architectural style
 
@@ -11,6 +11,8 @@ This keeps the first release operable on one VPS while preserving boundaries tha
 
 ## Client application structure
 
+Client features place effectful operations in entity-scoped `BaseActions` subclasses under `model/actions`. Actions are stateless services over concrete feature API adapters: every business input is an explicit method argument, results are returned to the caller, and actions never import, read, or mutate Pinia stores. The calling UI or feature composition boundary explicitly applies returned safe projections to its store. Pinia stores own server projections, editor drafts, transient UI values, and deterministic transformations but perform no HTTP or clipboard effects. `createAsyncAction` and `createSyncAction` provide shared pending, cancellation, safe-error, and value-free analytics orchestration through named definition objects. Features must not combine unrelated entities into one action façade. Server permission checks remain authoritative under ADR 0013.
+
 The client keeps Nuxt's standard `app/pages`, `app/layouts`, and `app/middleware` entry points. Business capabilities live as vertical modules below `app/features/<feature>` with optional `api`, `model`, and `ui` directories and a deliberate public `index.ts`.
 
 Pages own routes, layouts, route parameters, and composition. Feature UI owns feature-specific presentation, models own schemas and interaction state, and API adapters own HTTP or external-client calls. Business forms use `vee-validate` with Zod while Nitro validation and server-side authorization remain authoritative.
@@ -18,6 +20,12 @@ Pages own routes, layouts, route parameters, and composition. Feature UI owns fe
 The dependency direction is `pages/layouts -> feature public API -> ui -> model -> api`. Features may also use `app/components/ui`, `app/lib`, and browser-safe root `shared` contracts. Feature internals are private, shared UI primitives do not depend on features, and cross-feature orchestration belongs in pages by default.
 
 Do not auto-scan `app/features`; explicit imports preserve visible boundaries. Do not use Nuxt Layers for ordinary business features. Reconsider Layers when a substantial partial Nuxt application must be reused across applications, distributed independently, or overridden as platform configuration. See ADR 0008.
+
+## TypeScript typing
+
+Prefer contextual typing and control-flow narrowing over type assertions. Type the enclosing state, function parameters, and return values so that object literals, `null`, empty arrays, and empty records are checked without property-level `as` expressions. Pinia option stores declare an explicit state return type instead of asserting each initial value.
+
+Values from untyped external boundaries must be validated with schemas, parsers, or type guards before entering application code. Do not use `as SomeType` or non-null assertions (`!`) merely to silence the compiler. `as const` remains appropriate for literal preservation and closed sets. If an external library boundary makes an assertion unavoidable, isolate it at that boundary and document why it is safe.
 
 ## Module boundaries
 
@@ -40,6 +48,10 @@ Owns project lifecycle and project metadata. It depends on Authorization for acc
 ### Documents
 
 Owns document trees, draft concurrency, Tiptap validation, publication, complete immutable snapshots, restore behavior, links, backlinks, and templates. A version snapshot fixes the title, content, internal-link targets, and referenced image IDs; restore keeps the document's current slug.
+
+### Credentials
+
+Owns user-created single-level credential categories, role/member category grants, encrypted credential values, ordered dynamic fields, masking, explicit reveal, key-version metadata, and recoverable archival. It depends on Authorization for active membership and stable permission decisions and on Audit for secret-free events. Project Admin has implicit non-removable access to every category. Credentials expose no MCP resources or tools.
 
 ### Search
 
@@ -75,6 +87,7 @@ Owns Streamable HTTP framing, capability/resource/tool registration, canonical r
 - Store internal links as stable source/target IDs with link type and version/draft origin.
 - Store immutable version references to image IDs and prevent physical deletion while any published version references an image.
 - Use a numeric draft revision for optimistic concurrency.
+- Store credential values only as authenticated ciphertext with versioned keys held outside PostgreSQL; authorized list projections may contain login plaintext under ADR 0011 but never password plaintext.
 
 ## Error contract
 

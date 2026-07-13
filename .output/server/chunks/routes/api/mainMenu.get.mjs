@@ -1,7 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/routes/api/mainMenu.get');import { d as defineEventHandler } from '../../_/nitro.mjs';
-import { I as IDENTITY_CODE } from '../../_/constants.mjs';
-import { g as getAuth } from '../../_/get-auth.mjs';
-import { I as IdentityError } from '../../_/identity-error.mjs';
+globalThis.__timing__.logStart('Load chunks/routes/api/mainMenu.get');import { d as defineEventHandler, m as requireSession } from '../../_/nitro.mjs';
 import 'node:events';
 import 'node:buffer';
 import 'node:fs';
@@ -19,28 +16,45 @@ import 'better-auth/plugins/username';
 import 'drizzle-orm';
 import 'drizzle-orm/pg-core';
 
-function createRequireSession(getSession2) {
-  return async function requireSession2(event) {
-    const session = await getSession2(event.headers);
-    if (session === null) {
-      throw new IdentityError(IDENTITY_CODE.AUTH_REQUIRED);
-    }
-    return session;
-  };
-}
-const requireSession = createRequireSession(
-  async (headers) => {
-    var _a;
-    return (_a = await getAuth().api.getSession({ headers })) != null ? _a : null;
+const GLOBAL_NAVIGATION = {
+  DASHBOARD: {
+    id: "dashboard",
+    labelKey: "navigation.dashboard",
+    to: "/dashboard",
+    icon: "layout-dashboard"
+  },
+  PROJECTS: {
+    id: "projects",
+    labelKey: "navigation.projects",
+    to: "/projects",
+    icon: "folder-kanban"
+  },
+  SETTINGS: {
+    id: "settings",
+    labelKey: "navigation.settings",
+    to: "/settings",
+    icon: "settings"
+  },
+  ADMINISTRATION: {
+    id: "administration",
+    labelKey: "navigation.administration",
+    to: "/administration",
+    icon: "shield-check"
   }
-);
+};
+
+function getGlobalNavigation(session) {
+  const baseNavigation = [
+    { ...GLOBAL_NAVIGATION.DASHBOARD },
+    { ...GLOBAL_NAVIGATION.PROJECTS },
+    { ...GLOBAL_NAVIGATION.SETTINGS }
+  ];
+  return session.user.superAdmin === true ? [...baseNavigation, { ...GLOBAL_NAVIGATION.ADMINISTRATION }] : baseNavigation;
+}
 
 const mainMenu_get = defineEventHandler(async (event) => {
-  await requireSession(event);
-  return [
-    { title: "\u0413\u043B\u0430\u0432\u043D\u0430\u044F", url: "/" },
-    { title: "\u041F\u0440\u043E\u0435\u043A\u0442\u044B", url: "/catalog" }
-  ];
+  const session = await requireSession(event);
+  return getGlobalNavigation(session);
 });
 
 export { mainMenu_get as default };;globalThis.__timing__.logEnd('Load chunks/routes/api/mainMenu.get');

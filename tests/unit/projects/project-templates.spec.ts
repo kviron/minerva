@@ -61,6 +61,14 @@ describe('project constants and built-in role templates', () => {
       ROLES_UPDATE: 'roles.update',
       ROLES_DELETE: 'roles.delete',
       AUDIT_VIEW: 'audit.view',
+      CREDENTIALS_VIEW: 'credentials.view',
+      CREDENTIALS_CREATE: 'credentials.create',
+      CREDENTIALS_UPDATE: 'credentials.update',
+      CREDENTIALS_ARCHIVE: 'credentials.archive',
+      CREDENTIAL_CATEGORIES_CREATE: 'credential_categories.create',
+      CREDENTIAL_CATEGORIES_UPDATE: 'credential_categories.update',
+      CREDENTIAL_CATEGORIES_ARCHIVE: 'credential_categories.archive',
+      CREDENTIAL_CATEGORIES_MANAGE_ACCESS: 'credential_categories.manage_access',
     })
 
     expectTypeOf(PROJECT_STATUS.ACTIVE).toEqualTypeOf<ProjectStatus>()

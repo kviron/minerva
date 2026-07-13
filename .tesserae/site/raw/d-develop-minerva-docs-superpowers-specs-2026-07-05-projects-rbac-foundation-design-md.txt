@@ -1,0 +1,152 @@
+2026-07-05-projects-rbac-foundation-design.md
+=============================================
+
+# Projects and RBAC foundation design
+
+**Status:** proposed  
+**Date:** 2026-07-05
+
+## Goal
+
+Establish the persistent Projects and project-scoped RBAC foundation and an atomic application service for project creation. This slice does not expose HTTP or MCP endpoints and does not implement project-list, settings, document, or credentials UI.
+
+## Scope
+
+This slice delivers:
+
+- project lifecycle metadata;
+- project-local roles and stable permission assignments;
+- recoverable project memberships;
+- a minimal append-only audit record for project creation;
+- one shared `createProject` application service;
+- schema, migration, unit tests, and PostgreSQL integration tests.
+
+Project listing, project settings, member invitations and removal workflows, role-matrix editing, global administration UI, documents, and credentials remain later vertical slices.
+
+## Data model
+
+### Projects
+
+`projects` stores:
+
+- a UUID primary key;
+- a non-empty name and optional description;
+- lifecycle status `active` or `archived`;
+- the creator user UUID;
+- creation and update timestamps;
+- nullable archive timestamp and archiving user UUID.
+
+Project names are not unique. Routes and relationships use the stable project UUID. Archival is recoverable; this slice does not physically delete projects.
+
+### Project roles
+
+`project_roles` stores one project-local role per row:
+
+- a UUID primary key and project UUID;
+- kind `built_in` or `custom`;
+- a nullable stable built-in key `admin`, `editor`, or `viewer`;
+- a display name for custom roles;
+- creation and update timestamps.
+
+Built-in role keys are unique within a project. UI code will localize built-in keys; authorization never depends on a localized role name. Custom roles have no built-in key and retain their user-authored display name.
+
+`project_role_permissions` stores the unique pair of role UUID and stable permission code. Permission definitions remain closed constants in shared code rather than mutable database rows. A composite project/role foreign key makes it impossible for a membership to reference a role from another project; application services enforce the same boundary before persistence.
+
+### Project memberships
+
+`project_memberships` stores:
+
+- a UUID primary key;
+- project, user, and role UUIDs;
+- status `active` or `removed`;
+- joined, updated, and nullable removed timestamps;
+- the user UUID that removed the member when applicable.
+
+The project/user pair is unique. Removing a member preserves the row and historical identity. A later re-add flow reactivates that membership with its newly assigned role. Physical user deletion does not cascade through projects; the separately proposed account-anonymization decision preserves the user UUID as a tombstone.
+
+### Audit events
+
+`audit_events` provides the minimum append-only shape needed by the architecture:
+
+- a UUID primary key and UTC creation timestamp;
+- nullable actor user UUID;
+- channel, action, outcome, project UUID, target type, and target UUID;
+- structured JSON metadata that must not contain secrets or raw storage paths.
+
+The first event is `project.created`. Mutation APIs for audit records are not exposed, and application code never updates or deletes an event.
+
+All new timestamps use timezone-aware PostgreSQL timestamps and all user foreign keys preserve referenced identities rather than cascading deletion.
+
+## Permission vocabulary and built-in templates
+
+Stable permission codes cover the canonical groups:
+
+- Project: `project.view`, `project.update`, `project.archive`, `project.restore`.
+- Documents: `documents.view`, `documents.create`, `documents.update_draft`, `documents.publish`, `documents.move`, `documents.archive`, `documents.restore`, `documents.view_history`.
+- Members: `members.view`, `members.invite`, `members.assign_role`, `members.remove`.
+- Roles: `roles.view`, `roles.create`, `roles.update`, `roles.delete`.
+- Audit: `audit.view`.
+
+The initial templates are copied into every new project:
+
+- `Admin` receives every initial permission. Its project, member, and role administration safety set will be non-removable when role editing is implemented.
+- `Editor` receives project view; every initial document permission; member view; and role view.
+- `Viewer` receives project view, document view, and document history view only.
+
+The role records and assignments are project-local so later custom roles and matrix edits cannot change another project. Stable codes, not role keys or names, are the authorization interface.
+
+## Atomic project creation
+
+Any active authenticated user may create a project. `createProject` accepts an actor context plus a validated command containing name and optional description.
+
+The service performs one PostgreSQL transaction:
+
+1. Verify that the actor is an active authenticated user.
+2. Insert the active project.
+3. Copy the three built-in role templates and permission assignments.
+4. Create the actor's active membership with the project's Admin role.
+5. Append `project.created` with channel and target metadata.
+6. Return the created project identifier through a stable result type.
+
+Any failed step rolls back every write. A project cannot become visible without its built-in roles, its first active Admin, and its creation audit event.
+
+The application service owns orchestration and domain results. Future Nitro handlers, UI adapters, and MCP tools must call this same service rather than reproduce project rules. Database errors are classified into stable safe codes; raw SQL details do not cross the module boundary.
+
+## Invariants and errors
+
+- Every active project starts with exactly one built-in Admin, Editor, and Viewer role.
+- The creator starts as an active Admin member.
+- A user has at most one membership row per project.
+- A role has each permission at most once.
+- Project names are trimmed, non-empty, and length-bounded; descriptions are trimmed and length-bounded.
+- Archived projects are not physically deleted.
+- The last-active-Project-Admin rule is part of the shared Projects/Authorization domain, but removal and role-change commands that exercise it are deferred.
+- Stable errors distinguish authentication, inactive account, invalid input, and persistence failure without leaking database details.
+
+## Testing
+
+Unit tests cover permission constants, exact built-in role templates, command normalization and validation, and safe result/error classification.
+
+PostgreSQL integration tests cover:
+
+- migration-created tables, constraints, indexes, and foreign keys;
+- successful atomic creation with project, roles, permissions, creator membership, and audit event;
+- template isolation across two projects;
+- project/user and role/permission uniqueness;
+- complete rollback when a transaction step fails;
+- preservation of user-linked rows by non-cascading foreign keys;
+- idempotent migration execution.
+
+The slice completes only after the unit and integration suites, Nuxt type checking, production build, migration-tree review, progress update, and Tesserae refresh pass.
+
+## Explicitly deferred
+
+- API and MCP transport adapters.
+- Project list and shadcn-vue Table/Empty UI based on Figma node `26:84`.
+- Project creation form.
+- Project settings and member management.
+- Invitation acceptance and membership reactivation.
+- Role editing and last-admin mutation workflows.
+- The global super-admin project table.
+- Documents and credentials persistence.
+- Account deletion/anonymization implementation described by ADR 0009.

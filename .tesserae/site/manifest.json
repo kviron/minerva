@@ -1,14 +1,14 @@
 {
-  "file_count": 412,
+  "file_count": 616,
   "files": [
     {
       "path": "about.html",
-      "sha256": "afe306c06dfe3dcb8b96fdc44acecd4d34d24bd6f4ab23d1588a4fdf29112e73",
-      "size": 22206
+      "sha256": "fb8d14ed90032ab9db2111504f1c4a0f2fea4a1119ad729acbc2b9303f490389",
+      "size": 29220
     },
     {
       "path": "ai-readme.md",
-      "sha256": "b291a7f554428b41ceeb1ffdf298dbeb05b977a03029f7bf22dd463daa49678e",
+      "sha256": "cb312bb60678bc7f9017177933cd827cd83161e2eca2df470d196ba1eea92611",
       "size": 1278
     },
     {
@@ -43,33 +43,33 @@
     },
     {
       "path": "concepts/index.html",
-      "sha256": "83d46881d88ffa2ba30973807fde381bbf12702595b03051b00e2b7de177f7cb",
-      "size": 21353
+      "sha256": "44f3b2b7b0e6cf77dd38fd22b0fcb98c3641736e6e7a863e6e52067aa8c1119a",
+      "size": 28430
     },
     {
       "path": "entities/index.html",
-      "sha256": "70d330a9152adbbc874e70944aeced98e3640a8c8308d806d0907195ca46fef7",
-      "size": 22224
+      "sha256": "c7486cc20d9fc973ab11b5c656298657ccb68ce3c9cfb565a58e0bf144443f77",
+      "size": 29301
     },
     {
       "path": "entities/map.html",
-      "sha256": "e8faa468a7c0588c453a95520c1d6d17d38ab8759504e621ccab0dea5e0a5632",
-      "size": 30718
+      "sha256": "87a400f2b7850adc8d153bd22d31dd0d95b13def62b46cdaec970804c69085e9",
+      "size": 41400
     },
     {
       "path": "entities/map.json",
-      "sha256": "032f6128cc1c96e9a2b5af644617844fb11aaa48d695c2c5760589317b44813d",
-      "size": 2134
+      "sha256": "583c793b13c7d874d0160403c3cc0df7ff2b16f03847a78e2b3560ec96187533",
+      "size": 3460
     },
     {
       "path": "entities/map.txt",
-      "sha256": "692f426ae420e2a8493dbc8a5d970c94babbee40e29870095a0132329a130099",
-      "size": 891
+      "sha256": "01f9ec014704ab017da0b5bde0d896cdb3ba24b01cc6112d1a3d08ae19c42882",
+      "size": 1554
     },
     {
       "path": "entities/math.html",
-      "sha256": "cc3fa70496f440f7831bded8ef8426da5e1e74acd5bbe05683aa5471816e2bcc",
-      "size": 24713
+      "sha256": "921076882e8593e516fc2891bbb92b6161290efb210d06f9c564fba5d2f10f9d",
+      "size": 31790
     },
     {
       "path": "entities/math.json",
@@ -83,18 +83,18 @@
     },
     {
       "path": "graph/index.html",
-      "sha256": "50ea73670f1314eb6ddf044df81554ca0c89e296988ab94aeb74660c86d5b46e",
-      "size": 27453
+      "sha256": "4c0be9fb2757f1124bc751f15cdeedffb6872ab0b177c7c4f8a7a33116243f47",
+      "size": 34530
     },
     {
       "path": "graph/payload-core.json",
-      "sha256": "11e822b201092c8f559d5726b97e653b524a4908300d5d81b8422a00041ee050",
-      "size": 1672
+      "sha256": "a1b29d945dd2e1cad840d8754a2d4396733eba23f2a526c0d4b26af1dcfc4f1a",
+      "size": 1628
     },
     {
       "path": "graph/payload-core.json.gz",
-      "sha256": "b7fa1b8ccd703b1930e36955d3753d67e31939e71867a209a6bd283c53d3ff38",
-      "size": 668
+      "sha256": "28425880c10fa2c69842124d6ca760c9e2dec0278fc279fc388155a4a4d6b654",
+      "size": 644
     },
     {
       "path": "graph/payload-rest.json",
@@ -108,43 +108,43 @@
     },
     {
       "path": "graph/payload.json",
-      "sha256": "11e822b201092c8f559d5726b97e653b524a4908300d5d81b8422a00041ee050",
-      "size": 1672
+      "sha256": "a1b29d945dd2e1cad840d8754a2d4396733eba23f2a526c0d4b26af1dcfc4f1a",
+      "size": 1628
     },
     {
       "path": "graph/payload.json.gz",
-      "sha256": "b7fa1b8ccd703b1930e36955d3753d67e31939e71867a209a6bd283c53d3ff38",
-      "size": 668
+      "sha256": "28425880c10fa2c69842124d6ca760c9e2dec0278fc279fc388155a4a4d6b654",
+      "size": 644
     },
     {
       "path": "graph.json",
-      "sha256": "e5280273f32d1078ec0484f39bdd63bdadaeab2dd85fbc78d1bcacd533a5d70d",
-      "size": 84169
+      "sha256": "c321849eb3e41dec1d9266da4fa6eb9d56836c36789a33d65876d625025f9f0f",
+      "size": 130005
     },
     {
       "path": "graph.json.gz",
-      "sha256": "fb844b6846cd5f8acabfc9099d148dae449abd4cc7a8b7132ddbb2dfbe650ab7",
-      "size": 9047
+      "sha256": "6840ef31f4ad07db02b1c5deb5b3fa95e3641be4b31d3bff3df3b356fbdfc141",
+      "size": 12867
     },
     {
       "path": "graph.jsonld",
-      "sha256": "587f140017a3066ae6e74feebe5014b971ba92894b8a7a04f34a3a5286ae3d02",
-      "size": 12526
+      "sha256": "bc2f1933e25f891d366b1e76f9d7883edde538bf63504e5b5fec2461a614c575",
+      "size": 19126
     },
     {
       "path": "index.html",
-      "sha256": "55d1185527386dc774ebfb5bd38fe16be080dea739b4c4051d87c87171b19169",
-      "size": 51132
+      "sha256": "5dd0bd8aa4fd58178c1736f8a91debf0554f2e12999c34d4bf9acc6eeb5a3c0e",
+      "size": 58604
     },
     {
       "path": "llms-full.txt",
-      "sha256": "db48a9c81531295be7127a56e29ed06b200c16112f6edfa7fd05e28d8428aa75",
-      "size": 13993
+      "sha256": "1c6755386f3f3967c990331f751d052669b693f4b144485dcb3d720dc95a6e1d",
+      "size": 22410
     },
     {
       "path": "llms.txt",
-      "sha256": "f71d8b4c01be578ae43febfeca3b6064817468b2864b46c29f7156f79a662e32",
-      "size": 4836
+      "sha256": "4ee3d889a7151c963192321069c453523582763d8bd31ee428a6218847ec3742",
+      "size": 7446
     },
     {
       "path": "nginx.snippet.conf",
@@ -153,63 +153,63 @@
     },
     {
       "path": "papers/index.html",
-      "sha256": "5c949ff3cab374505872319399c713fae2d59ef09caf2ad384dcc17df542d96b",
-      "size": 21317
+      "sha256": "4355eb825c0070d77784fb24428d84babb9bf331e1a22fbd4b0ba65d9fd98b4a",
+      "size": 28394
     },
     {
       "path": "questions/index.html",
-      "sha256": "99670c6e2de9cb02b01ea4bbf3bf514810e0e44d37f0544ec509949110c2de1b",
-      "size": 21322
+      "sha256": "eeebfa684ec9cb08a0de7e08a2ffc18c1eedf9bc8a969307fff08e822f707762",
+      "size": 28399
     },
     {
       "path": "raw/agents-md.html",
-      "sha256": "64b3f0f50a10b4a22e724c2905f9d7acc483e0599f7f03980943cd84f2b233e8",
-      "size": 24176
+      "sha256": "36afea4db9c402df10a41738891f4e1f5d34c36e074a01dcc8b0b4a938235e96",
+      "size": 31644
     },
     {
       "path": "raw/agents-md.json",
-      "sha256": "dd7429df850b10428c4932cbe5a69b5e3c3caeb24a4764fac3e79d5c01dfcc0b",
-      "size": 3858
+      "sha256": "8bb512dba3e0624a055bcae0b99e0a8fbf42ac662eac77f9a9e8599211f91c0a",
+      "size": 4586
     },
     {
       "path": "raw/agents-md.txt",
-      "sha256": "31d0f40111a42df6234704bdb0e52d642ef01deb4df96c41ce4fd8123a29bb21",
-      "size": 1889
+      "sha256": "8c25e1bde33adbba0f55d3bc494ade0e3e13d6b1cd97a5efa48f6efa37c3c7fa",
+      "size": 2253
     },
     {
       "path": "raw/d-develop-minerva-agents-md.html",
-      "sha256": "2379f039ba61b24a6a5b269abd5ac85ad746e34509afdb6f947f2829d2f1b10e",
-      "size": 24220
+      "sha256": "7e0d8598e62c339b5063c864273234028a12e4ca0b92ec835770818af2329c6d",
+      "size": 31688
     },
     {
       "path": "raw/d-develop-minerva-agents-md.json",
-      "sha256": "750c339d79e837777935f6362c3dcccf55750bdeb5ba9976267be2e699bb0547",
-      "size": 3880
+      "sha256": "98c3990d7351cec12bb2ff34008bbfc93bff8c6af80d8b621f0cb36d0440025e",
+      "size": 4608
     },
     {
       "path": "raw/d-develop-minerva-agents-md.txt",
-      "sha256": "31d0f40111a42df6234704bdb0e52d642ef01deb4df96c41ce4fd8123a29bb21",
-      "size": 1889
+      "sha256": "8c25e1bde33adbba0f55d3bc494ade0e3e13d6b1cd97a5efa48f6efa37c3c7fa",
+      "size": 2253
     },
     {
       "path": "raw/d-develop-minerva-docs-architecture-md.html",
-      "sha256": "cb245394c506a2f1bbd58591fccc82fae774a4284f3b1088330dce843698bea0",
-      "size": 30005
+      "sha256": "67f02d090062e18d9fde0ced9cb4229beb7fa6793526e8ae67b52d91c06df373",
+      "size": 39799
     },
     {
       "path": "raw/d-develop-minerva-docs-architecture-md.json",
-      "sha256": "f5415bd6e546e1fd89c2c462497e8d9187cc136a6fd1130baf685e1b83ad3646",
-      "size": 11976
+      "sha256": "98d0e3330bf9ab9028113d19c68cb50f59d49566cda3d3e9336add12ccb5fac3",
+      "size": 16660
     },
     {
       "path": "raw/d-develop-minerva-docs-architecture-md.txt",
-      "sha256": "007709fda32754bda03ceea56553b410a20dc172b9aef42a498877fd4b3a1e08",
-      "size": 5940
+      "sha256": "da2db5dac667a70aa07d92999ced3a57a686d8092738f52378b2abb3b2e29cb3",
+      "size": 8282
     },
     {
       "path": "raw/d-develop-minerva-docs-backlog-md.html",
-      "sha256": "e2b71e5c328d54b3d8b6478e01b50cce735a183a0c8c7c0802618a27c3da8f37",
-      "size": 24182
+      "sha256": "15b179bd1cd1ab5ed01d4fe55311036d56e12e11a152279116d3cdd60f66601b",
+      "size": 31259
     },
     {
       "path": "raw/d-develop-minerva-docs-backlog-md.json",
@@ -223,8 +223,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0001-modular-monolith-md.html",
-      "sha256": "1079af5dc3bd10b65806e1fae741a32d8d6980c9d619f44aa7cb0f595801b4ad",
-      "size": 22866
+      "sha256": "198ad6ccd7683c7a4ea39e78e6a3a1a7d3d54dc52bf27ae51816f4ed2dbfdc83",
+      "size": 29943
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0001-modular-monolith-md.json",
@@ -238,8 +238,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0002-project-rbac-md.html",
-      "sha256": "bf6bde865dced72adbcfff9260f6c84528b78296f58a72383fb9cf2b91745e91",
-      "size": 23230
+      "sha256": "585978d4bd074e070cd98f1c2f8780c422a470244baf26ae8e2c758640e1f842",
+      "size": 30307
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0002-project-rbac-md.json",
@@ -253,8 +253,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0003-document-versioning-md.html",
-      "sha256": "cba3244d3c42c5979e31126618cf8f81683d30da18fe058cb54dc025741544d1",
-      "size": 23254
+      "sha256": "8b1ca08b3e6f110c1c62b82a47dedc643555d5c744310b2fea71c50b7f2d1ee3",
+      "size": 30331
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0003-document-versioning-md.json",
@@ -268,8 +268,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0004-mcp-first-release-boundary-md.html",
-      "sha256": "481e0c30e58d37d983a01b9a9302750eddb8e7ccafdbe6831a63bbe7140476f3",
-      "size": 23012
+      "sha256": "bf17de7dfbeb319a8ff520492247c627b5ac0d1d48251e4bc19bcc9d3f4d1f90",
+      "size": 30089
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0004-mcp-first-release-boundary-md.json",
@@ -283,8 +283,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0005-mcp-oauth-resource-and-revocation-md.html",
-      "sha256": "22d394582f54623617e4aa3c483d3cf7ca87a3f31fa27b7694dc80949ca2712b",
-      "size": 24092
+      "sha256": "09cdcc74b8429f7ef7e6d0191bb5b0d53b672292503d24c9d3f5eea81f161423",
+      "size": 31169
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0005-mcp-oauth-resource-and-revocation-md.json",
@@ -298,8 +298,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0006-use-bun-package-manager-md.html",
-      "sha256": "64a9d6912bd44b9c56df0328df4198f2fa5a1c5077f0c1a7b4d9a2ed972fef6a",
-      "size": 23495
+      "sha256": "fb8784d76606da6a05b0a52d8a041f65b02bd5e7dd00396cf48612ce61660626",
+      "size": 30572
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0006-use-bun-package-manager-md.json",
@@ -313,8 +313,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0007-separate-authentication-profiles-and-project-roles-md.html",
-      "sha256": "b991467303fb25f610ad42f0209ccff3a80088f7cf107b3837807b7ad8538df4",
-      "size": 24289
+      "sha256": "0a9ef0e02bb4e4d01bed7cf01b4e568e61c7880dbd14995a472d6317fe858aa4",
+      "size": 31366
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0007-separate-authentication-profiles-and-project-roles-md.json",
@@ -328,8 +328,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0008-use-nuxt-native-feature-modules-md.html",
-      "sha256": "e32b1a6a562ed5aedf19a7712ce3afcc46a93c59691cd435da113c221b108811",
-      "size": 24379
+      "sha256": "c323d9686722752a83b84499519946704db3046977af4cbb91caa92a73ab734f",
+      "size": 31456
     },
     {
       "path": "raw/d-develop-minerva-docs-decisions-0008-use-nuxt-native-feature-modules-md.json",
@@ -342,9 +342,99 @@
       "size": 2089
     },
     {
+      "path": "raw/d-develop-minerva-docs-decisions-0009-anonymize-deleted-user-accounts-md.html",
+      "sha256": "a03989356e6c409ff25e3917fb99950da74d02dfa7c6271b2111b1c0e3ca390b",
+      "size": 31512
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0009-anonymize-deleted-user-accounts-md.json",
+      "sha256": "bcbccb65435924bd8e29ddd2dbac80cc19766fda9278131b7ab002d847788f19",
+      "size": 4513
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0009-anonymize-deleted-user-accounts-md.txt",
+      "sha256": "740a830563981e7e9ec6e364c022fbb44eaebbb1cd603e3475a1c35eec6660ec",
+      "size": 2226
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0010-store-project-credentials-with-category-access-md.html",
+      "sha256": "a0e77e482949532cfd1f55497278c0d6141df3b1f4408e95e7ea4f6f168e255d",
+      "size": 31996
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0010-store-project-credentials-with-category-access-md.json",
+      "sha256": "e8e026e65e03e21e21d43a2b109caed77e751d1998fb1888603e6cb6555ff52d",
+      "size": 5433
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0010-store-project-credentials-with-category-access-md.txt",
+      "sha256": "74a2312f82377c66cde2cba61e9ac1e05918ab21cba23511fd2c241cfd400ef7",
+      "size": 2702
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0011-display-credential-logins-in-project-lists-md.html",
+      "sha256": "cc2ce0b0a3858491134d3b28d44b8469361e59a564f4dbbd897e0bd62f6cdeeb",
+      "size": 30766
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0011-display-credential-logins-in-project-lists-md.json",
+      "sha256": "74b97abcf1a9ffbb5dd7c416870c72681322dacbe6c2b26e062e64789cff8554",
+      "size": 3055
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0011-display-credential-logins-in-project-lists-md.txt",
+      "sha256": "f7edbc63291734c1dba309b3f8e9fab5001b98c1fac190ab96c6b88a6c0ca18e",
+      "size": 1509
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0012-use-feature-scoped-actions-for-client-effects-md.html",
+      "sha256": "f82a9db06389608b6216f06baefdeb64c555f1b9fa59a3a7494968962cb49d60",
+      "size": 31770
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0012-use-feature-scoped-actions-for-client-effects-md.json",
+      "sha256": "ed30385c097bdbf4e89db0815cdbe42ad84373e3fa561efc281c8b9bc81c33bc",
+      "size": 4911
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0012-use-feature-scoped-actions-for-client-effects-md.txt",
+      "sha256": "1bb4ce03fa7fd5d0f6d704f4059e5da1234f0c2bfa9b404ad245d3d56a382fae",
+      "size": 2440
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0013-keep-client-actions-stateless-and-feature-scoped-md.html",
+      "sha256": "5f2465765e0f9b5ecfb0d149a4823d2e6917dab01812b97f04f96553bd0b8841",
+      "size": 33677
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0013-keep-client-actions-stateless-and-feature-scoped-md.json",
+      "sha256": "37e19f98680ac7a0cee8cd95a4ebd67e3d988d4cdbea3f0ab110aa1d31ae41e3",
+      "size": 8215
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-decisions-0013-keep-client-actions-stateless-and-feature-scoped-md.txt",
+      "sha256": "20e34703a88b899ddb4d1c72f056c704a3fe3fa39037da18b8b7efbd2ee91383",
+      "size": 4095
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-operations-credential-encryption-md.html",
+      "sha256": "fc5dc19a7292300dccd5f27b80e659c1e45d6ea6382fa232ca6dd04fee4de362",
+      "size": 32183
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-operations-credential-encryption-md.json",
+      "sha256": "814fee8f47501ae5c54dafb99243ed0fbc3552018b2a89094823e70e34ce4a04",
+      "size": 5440
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-operations-credential-encryption-md.txt",
+      "sha256": "c52a796fe592bd17d83827a5fa6f620cadc49f9d538a4a703ef2aa0d6731e900",
+      "size": 2675
+    },
+    {
       "path": "raw/d-develop-minerva-docs-operations-tesserae-md.html",
-      "sha256": "76c7a74ea593ad7bf9087e78397758b157e24b5c5918faed0f0189edbc36185b",
-      "size": 24572
+      "sha256": "a9e43e3fa78061e5bdee9f27c313dcf49ab8e2ed9f6890c064d1e65de720a48e",
+      "size": 31649
     },
     {
       "path": "raw/d-develop-minerva-docs-operations-tesserae-md.json",
@@ -358,53 +448,53 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-product-spec-md.html",
-      "sha256": "67ef770182d16a8b2ff02b18dbfc3d94d5cddbbfb29f7dea5748806718f87c65",
-      "size": 35356
+      "sha256": "3e89dca6fe64868df03be1ee7f848d693e5ff7364fd011391ff116e437de7be0",
+      "size": 43760
     },
     {
       "path": "raw/d-develop-minerva-docs-product-spec-md.json",
-      "sha256": "d7f74afaac40c6501a9a9fa0684ad33fdf5b2eef8f3071baa692d07934c5fad1",
-      "size": 21734
+      "sha256": "5738569e86875eab63a42882ebd270bcc2c17bc4bb1d612e141d4986b584a236",
+      "size": 24010
     },
     {
       "path": "raw/d-develop-minerva-docs-product-spec-md.txt",
-      "sha256": "d0fea6202a8b26d6be7346ff5e286568774625a3e45148849bb0e425c5631dd3",
-      "size": 10819
+      "sha256": "00c67ab9a9a872701e6a2f686c65014ec6377e5619a729b229c7feeb3a2a66ce",
+      "size": 11957
     },
     {
       "path": "raw/d-develop-minerva-docs-progress-md.html",
-      "sha256": "4ed01ada3c09e3261348d3db99638ed0c0f254a79e2d984764c8c1340f0444d8",
-      "size": 29016
+      "sha256": "ea0089459b7d87342a96e016bf13e1f79ddf522e89ce73156b47f3686acaf446",
+      "size": 60714
     },
     {
       "path": "raw/d-develop-minerva-docs-progress-md.json",
-      "sha256": "529b88ba27d4fe1c9835dadd4af13de271a1ae73e0b68268db2921104d781da2",
-      "size": 13516
+      "sha256": "ef7eac37105e06ead2adecec29c0a3a05f7ad73e559e9eef22f6c334041d45cb",
+      "size": 60594
     },
     {
       "path": "raw/d-develop-minerva-docs-progress-md.txt",
-      "sha256": "a444bf3e9302de44dc5a95ab8d978f2ee3a5019cddee8c52e4a6d2d527360c44",
-      "size": 6706
+      "sha256": "c3733e4dc53a06979113ac12879cbf9c96a81784671e4d5c12dd7ae670896d6a",
+      "size": 30245
     },
     {
       "path": "raw/d-develop-minerva-docs-roadmap-md.html",
-      "sha256": "aeb158235753ad61515a1b837596135e6643d494034c7169939ad6389775f8de",
-      "size": 26538
+      "sha256": "d732e3530c8293d4b74005e79bc4f5520e72438a790d9966bee00ff9dc424f9c",
+      "size": 34485
     },
     {
       "path": "raw/d-develop-minerva-docs-roadmap-md.json",
-      "sha256": "41cda6ed21bbba24057904188486c5ec873056f3a45cb955e0d20fac0e1770fd",
-      "size": 6576
+      "sha256": "7c8922869b421dfaa3f2b6e8540436fcf590f5ef8c8019a5c9cc52e1b7c2d46c",
+      "size": 7842
     },
     {
       "path": "raw/d-develop-minerva-docs-roadmap-md.txt",
-      "sha256": "a6b8c1e07fed8f0ea32572ff87ed2ef6d09ff6d153d57c8a6223417e60f847ec",
-      "size": 3235
+      "sha256": "60d73e9565b4ebb3ec3ce675ce844e0e429f20920d10826d9ab3835f1314a41d",
+      "size": 3868
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-foundation-md.html",
-      "sha256": "59b280ef2b838a3577ca418704989463557cc3dbb1aae5cb0d1b8d0b2eed6ee7",
-      "size": 43448
+      "sha256": "81f92f77ecbc62cb207c971416c4d980ae409c2d437458e5ba4308bba2b95f10",
+      "size": 50525
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-foundation-md.json",
@@ -418,8 +508,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.html",
-      "sha256": "62d729ed88a2e019bfd9bc31cea80ce843d7e005c90c4b84f3f76e63d662b18f",
-      "size": 43864
+      "sha256": "ed7c89f9acf0a1232443e784e2c794852d4cc90c7a780b70a9afdc228e5012a0",
+      "size": 50941
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.json",
@@ -433,8 +523,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.html",
-      "sha256": "39291458a01e65dd6f8199c0c1ed3c5be4f8b647046b834ebc33f575e4b17c00",
-      "size": 28694
+      "sha256": "9e42b25ff28a247f2b47c90ec54ae6600d0e8867c2f242a0e01f827856cbad47",
+      "size": 35771
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.json",
@@ -448,8 +538,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.html",
-      "sha256": "1046c335b20372a91db8b611f61c624efc15e7e1b3a688774d99de30f4178fde",
-      "size": 35375
+      "sha256": "5772322e8c2179d0e4f88371d5d385332303265572646debd54a75b7aeb6e1ab",
+      "size": 42452
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.json",
@@ -463,8 +553,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-postgresql-compose-md.html",
-      "sha256": "816da1fd9240eb25b552f92eb8e461d893496a2794a4a74dfb5fed9687997cde",
-      "size": 28150
+      "sha256": "b7d5d1e74cbcf8c5b1c0f94a84d9c51d6a3ae7c277a8077099af4f92d6dcd6df",
+      "size": 35227
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-postgresql-compose-md.json",
@@ -478,8 +568,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.html",
-      "sha256": "6eaf62db9433db69c6e76f28827dc275f77a43da6d0c658b89e3dd8c7f78eb32",
-      "size": 28538
+      "sha256": "cf71c4e712a9fbcf26e02c5b6c6aa93a4616bbc5a09c8ed2b99bf2f6278358d0",
+      "size": 35615
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.json",
@@ -493,8 +583,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-28-forgot-password-ui-md.html",
-      "sha256": "c67954a5866aaaada4b50d45c8a984b6cda0f213c999f73b7bf3d10a03ceef73",
-      "size": 34660
+      "sha256": "e3436b744a54193bb784c421d6b6244bd263ff0f69b5fb800d6a94836a7f7383",
+      "size": 41737
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-28-forgot-password-ui-md.json",
@@ -508,8 +598,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-28-reset-password-ui-md.html",
-      "sha256": "0340e5f57c7f733f8790ee47a4dce6c3db048b69479309e3f53a2a06b379f48f",
-      "size": 34410
+      "sha256": "dd15022bc5c2ca3a3a7d20c2cdf01180d454559798d33bcc74645c0bbfa2f681",
+      "size": 41487
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-28-reset-password-ui-md.json",
@@ -523,8 +613,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-29-identity-backend-foundation-md.html",
-      "sha256": "24f64786eb1da766b88a14ef17615614549477b3514d5a3a7af68ccbf5c3d019",
-      "size": 59301
+      "sha256": "e79ac9e9d540295a296437b9f4c0a586ac8f6743789482d6f63c5951f2932809",
+      "size": 66378
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-29-identity-backend-foundation-md.json",
@@ -538,8 +628,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-29-identity-functional-refactor-md.html",
-      "sha256": "1bf312f25ee38385b58e43abe0484c136b63e317c807f6378426ded95c1fa9ba",
-      "size": 63261
+      "sha256": "13bf9d5fc8b092cb42f74bff08e0a996fa7d5ab1a43ee741471cc4c38a99aad9",
+      "size": 70338
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-29-identity-functional-refactor-md.json",
@@ -553,8 +643,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-29-nuxt-feature-modules-md.html",
-      "sha256": "5434a52eafc9163a9da6e5c4ec78528a789af09fe91590885fa28638ef6ec46e",
-      "size": 57497
+      "sha256": "2b596bdd592fdf508db6835fed9d62a0aff257e3f729199f9c73b865df72da4e",
+      "size": 64574
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-29-nuxt-feature-modules-md.json",
@@ -568,8 +658,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-30-route-authorization-md.html",
-      "sha256": "d35ebe58f41d1817c9b58a906f3d4bf71ff25c1dfbab24465f0307c053d8978b",
-      "size": 52108
+      "sha256": "a3bbf22f74761e4677fe79d04cd5c9d5916652898e75d9bb2725b9d60dfddac8",
+      "size": 59185
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-06-30-route-authorization-md.json",
@@ -582,9 +672,114 @@
       "size": 23563
     },
     {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-01-authorization-readability-refactor-md.html",
+      "sha256": "f50547b0862d35dfcb6e34a387b528a5c21db6a98d2757225d8a1a6311aad55c",
+      "size": 45028
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-01-authorization-readability-refactor-md.json",
+      "sha256": "e38323ee592b6716b13469745f5a4f7be759017815b61d9a0a37dbafc0cf49c8",
+      "size": 25330
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-01-authorization-readability-refactor-md.txt",
+      "sha256": "1d478d2f4711aec28905b30cd603bcd0ea70d13746beaa3ea997b0c19297b88d",
+      "size": 12632
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-01-global-navigation-and-page-placeholder-md.html",
+      "sha256": "7421734bdda743c797c8ae859ae40e10ac099ca13c792e0224a61f49f729c72b",
+      "size": 61135
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-01-global-navigation-and-page-placeholder-md.json",
+      "sha256": "fcb87d37d72ccce9674cc0f90d22af31fc86e12f4241662ea8e6d24ebd4b3c5b",
+      "size": 48680
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-01-global-navigation-and-page-placeholder-md.txt",
+      "sha256": "7ee4867cbe8aa0567f1d05f0113a8d99c843348c312ee7b76f6a249a5fe7af32",
+      "size": 24249
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-03-current-user-sidebar-md.html",
+      "sha256": "ba456410996fb023c5177047eaec80495c1e9a92af96ffee68d73ac3dbf1d7d9",
+      "size": 55037
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-03-current-user-sidebar-md.json",
+      "sha256": "5fc9d18583674fadca6bb9d52206bcf645f2ae015b1da22db13ceb1f0d04c5c8",
+      "size": 39044
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-03-current-user-sidebar-md.txt",
+      "sha256": "2bfa9c46744e973bc73b0dfff09367b56507e403d32988f84c08d51284cbf7b4",
+      "size": 19420
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-04-header-theme-toggle-md.html",
+      "sha256": "732e5c27198a1ebe661acd6f0e5b643b0dc05e3729945da2c86e41e715e5a2b9",
+      "size": 40979
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-04-header-theme-toggle-md.json",
+      "sha256": "60e700f9553a0762b93079b7e8ed0b8cffbebde54c1223245b1bcf1b404ea273",
+      "size": 18010
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-04-header-theme-toggle-md.txt",
+      "sha256": "e2f5f6bebfb3a3940ce4de9942e730d53836d380cb0cbf8a8a588003ef5c3528",
+      "size": 8919
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-05-projects-list-and-create-ui-md.html",
+      "sha256": "c3a05e62fb1d57cf862ec10072859ea04e3aee2850d7f638a8cce7763d324020",
+      "size": 46514
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-05-projects-list-and-create-ui-md.json",
+      "sha256": "126a33de75938cdabc47865df6eabb1b457c8e23dc46d45d1d90ca361c8cfa7d",
+      "size": 26084
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-05-projects-list-and-create-ui-md.txt",
+      "sha256": "5c297410a309a5fb6313eef1975a9d3da956cef7c156bc6ff8432c77926d5df0",
+      "size": 13009
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-05-projects-rbac-foundation-md.html",
+      "sha256": "962875ed4092badcd1af94d6242c98c7c4f98dc004e4685668dc0c0855eeb747",
+      "size": 44909
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-05-projects-rbac-foundation-md.json",
+      "sha256": "d727b1b2abe295c1b71ea12b33c96d809123d58b3acf0449afaeca0d4c74338b",
+      "size": 23964
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-05-projects-rbac-foundation-md.txt",
+      "sha256": "95d91d6aded63a077b979733fbec3c5037f511b2528490ea0f7c4d24c3790d31",
+      "size": 11946
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-11-project-credentials-md.html",
+      "sha256": "47eef21b625ff6c93e2f3ea0f2dbe3121941c652a51783dc22debffacad6b604",
+      "size": 33947
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-11-project-credentials-md.json",
+      "sha256": "cca2ed604ce57a418944f227af69215127c7a6c36b8cac8e916744d9b38a2027",
+      "size": 6820
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-plans-2026-07-11-project-credentials-md.txt",
+      "sha256": "def292b97781be24c04f3933083eacf37e6aa095d43106371dd798a2005f8623",
+      "size": 3370
+    },
+    {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html",
-      "sha256": "44bc1a4fff46e087504859c86149db39c1f39bf5894159c6eb48d774ae1c93b9",
-      "size": 28912
+      "sha256": "588afee5b6ad3798e4a0749686aed577f66b6975458d4998e61ba9fcce8c1a90",
+      "size": 35989
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.json",
@@ -598,8 +793,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.html",
-      "sha256": "4733b03c525d4f86ba40c10528c812ba7d64b9fe3ae2fb070884e5dc27333450",
-      "size": 36420
+      "sha256": "d1e8e2843c9998cf7689234da64c8cfa8ad66816d6906bb9605714918995ca15",
+      "size": 43497
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.json",
@@ -613,23 +808,23 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.html",
-      "sha256": "ef0734140414d174792eb419ef93baefd3018b03256feb77684da5fac4e8799c",
-      "size": 28909
+      "sha256": "8a1cab7928bf4e55b70adda7cf9b96423e5d27b3f865c305450a3c255706b97d",
+      "size": 36547
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.json",
-      "sha256": "2eda057408a6b8c250af582003c7ade7cc69420b0d13398ba1a5dd6a18419dc2",
-      "size": 10496
+      "sha256": "85b184668585cdfd3b8941ffd66a22744f5ccaf4985a0ae1179b0458d3ec8aa0",
+      "size": 11544
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.txt",
-      "sha256": "7a904c0d4731185e3b1688e7ce91388d33c48e828690b8d514457671751abc21",
-      "size": 5217
+      "sha256": "329c5d8c361e97e4f6e216a7fe8773473ff75fdd068c36a94064e7dd4ae5e685",
+      "size": 5741
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.html",
-      "sha256": "a64ec437c8ed62928d39bb677dffa1cce3366ee595f553dfadbd74c9d2d9dce6",
-      "size": 24710
+      "sha256": "7620cb7d55749cb495c63c47e63fd2b828de67fc1c86e870a163d64bada7586a",
+      "size": 31787
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.json",
@@ -643,8 +838,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.html",
-      "sha256": "2f06be1250267d8ef265aaebda7a84640a0fb2c53b002c872ffc36398431bcfc",
-      "size": 24125
+      "sha256": "0ece1c33f611eadfedfd8758111adf82238b148efd02cc6072c4c7ce9a12a147",
+      "size": 31202
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.json",
@@ -658,8 +853,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.html",
-      "sha256": "a581e1b324906c0f70c623f8f06c2a02fbb942ac2639cb46a3d7bba881f67146",
-      "size": 25842
+      "sha256": "51139ab1586b32c0d7843b336e4ef88430b26c71a496bac27252dc788bfc8118",
+      "size": 32919
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.json",
@@ -673,8 +868,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-28-identity-backend-foundation-design-md.html",
-      "sha256": "5a71882e5edd576ddde83c6ae338ddb10955702f34aca048dec01fd167043075",
-      "size": 38575
+      "sha256": "bed3122e74b05d7fbf2d3b3a0e5eecf4cbf37db134fe70f478789454df9971ab",
+      "size": 45652
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-28-identity-backend-foundation-design-md.json",
@@ -688,8 +883,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.html",
-      "sha256": "6dc35f963ae8dee9588609e06cb7d73000bb7d6054973451c5c3ee3c88632bf0",
-      "size": 26023
+      "sha256": "55877527574aeba668293e74f243473e2a775b0d0dad69e293b0a2e77b70a669",
+      "size": 33100
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.json",
@@ -703,8 +898,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-28-user-identity-profile-design-md.html",
-      "sha256": "0965f7d55dd7db60a3ce60eb55a9f3d0112417ead7475ada9f50671e99987fca",
-      "size": 32799
+      "sha256": "3e22a040766d4d21db4b4a63a13b2959949d9a8fae57ad71bf6b9d103e2e1869",
+      "size": 39876
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-28-user-identity-profile-design-md.json",
@@ -718,8 +913,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-29-identity-functional-refactor-design-md.html",
-      "sha256": "1c536e393597fbc31728c9277413d94822a51e8858db231ad82aa4cc7e8d3dab",
-      "size": 31020
+      "sha256": "50d6e7734110af6a91aec7ab1e55924ff4337e2c304eac4ffcb13ed478e06dd7",
+      "size": 38097
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-29-identity-functional-refactor-design-md.json",
@@ -733,8 +928,8 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-29-nuxt-feature-modules-design-md.html",
-      "sha256": "f05f7a48f91ebd615f572d1ce4cd83fc5f1a116faacc7b7f1e42948c49d921f3",
-      "size": 31023
+      "sha256": "18dc53200b1f3de2c0622ba1a65f3496448ae66481f5696e046407d9011b1a32",
+      "size": 38100
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-29-nuxt-feature-modules-design-md.json",
@@ -748,38 +943,158 @@
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-30-route-authorization-design-md.html",
-      "sha256": "4d463db3acb116a62b3513010e53c761c7f8be198c919d1a172e0d4831957d73",
-      "size": 31332
+      "sha256": "8c86703a0d533a6f9977c4798ad17843efd3050d63d482defa94e92993bfeb4e",
+      "size": 38412
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-30-route-authorization-design-md.json",
-      "sha256": "21739abdf3cd8bd389e9832b4c87afc2df6ae0eb4e7aac3cd982e789a6cfa964",
-      "size": 14370
+      "sha256": "93e9702aa64273519ca39497197efb9a520a911f99b79bb4088cc559fbe9db87",
+      "size": 14376
     },
     {
       "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-06-30-route-authorization-design-md.txt",
-      "sha256": "d61a0c1ffe01365fe81620ed19711d9ba86b8f6246e7f8fbc01f648852e22566",
-      "size": 7152
+      "sha256": "b45ae289bcdc9de6b3585e21d473e6eb8d0d7372e1c0646119e5db8d1b74df53",
+      "size": 7155
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-authenticated-page-placeholder-design-md.html",
+      "sha256": "976b9938d0c9f0d24ba3cad6c60e8d0944ffe78c38741a43ac2bc406eb0c912a",
+      "size": 34701
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-authenticated-page-placeholder-design-md.json",
+      "sha256": "a4240fdba75e474b97d3d600c020784dc4fc753635a903d3e30c34888bf13836",
+      "size": 9104
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-authenticated-page-placeholder-design-md.txt",
+      "sha256": "f8702add60db2db2fbfb807a189cc9b8d37799ee4e1ba8e6e925b3a7657c5c52",
+      "size": 4530
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-authorization-readability-refactor-design-md.html",
+      "sha256": "7f95a523d6f9b876c939ae26f53321f2e0fafc6edb949b7abb9344b01cc724c8",
+      "size": 35845
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-authorization-readability-refactor-design-md.json",
+      "sha256": "fae3f0d5d33f77ae4ddd2d5e20435723d5fc6b9c8eacdc24171379799ce0ed01",
+      "size": 10754
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-authorization-readability-refactor-design-md.txt",
+      "sha256": "9545db0d2cac0471208640f8e3ff7ceda0fea6167dc95bf91e4ce890b3f06356",
+      "size": 5359
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-global-navigation-design-md.html",
+      "sha256": "b248c59d39e0537c86c1f0fdf4f981932fbb23604e37c69c080ddafd499399f2",
+      "size": 39651
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-global-navigation-design-md.json",
+      "sha256": "893d06bd8ad8faef624361c881a5250b2b00636c9a9b77c613fd045fa9d7122d",
+      "size": 16064
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-global-navigation-design-md.txt",
+      "sha256": "2eacc971033e7eda428d5f90359a34e19720e6f2e96a143018b2e9a36914d74d",
+      "size": 7997
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-03-current-user-sidebar-design-md.html",
+      "sha256": "29ddd421783e9b07a6bb51a0fcd8a5f3b552fed4104ce8d0b9ca43418703f189",
+      "size": 38151
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-03-current-user-sidebar-design-md.json",
+      "sha256": "e2acd3cbf5591962e8ab390f9bc617b516f0cdd28cdd3debdd7b8154784ed743",
+      "size": 14136
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-03-current-user-sidebar-design-md.txt",
+      "sha256": "acf20cd3e53ab01a5b5d17a73e6b3d2fed7058de33b9ef802f9acdff5efdaa5a",
+      "size": 7036
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-04-header-theme-toggle-design-md.html",
+      "sha256": "99552eba6262342e5a73c8e6e83865b3f4cdc029998622ea917ccf89e837eece",
+      "size": 31321
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-04-header-theme-toggle-design-md.json",
+      "sha256": "aa9d9c7108f60e175302dcf44989d18e6749ed3beb93bbad4c7f9e7ab4fd22e2",
+      "size": 3722
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-04-header-theme-toggle-design-md.txt",
+      "sha256": "4f6da38e7fc7a54019e7b789ec65a82fc09b7b7c800b5f07f1178f7cec18f724",
+      "size": 1827
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-05-projects-list-and-create-ui-design-md.html",
+      "sha256": "ec33b855d5899fcd0d14126c953f27a165f365b3142121915dbcdb5e040598a4",
+      "size": 40816
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-05-projects-list-and-create-ui-design-md.json",
+      "sha256": "93167cc9497e147adfdf73f5e1a3489efeb8fe19dc86cefe20313dc35ac2b0e3",
+      "size": 17802
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-05-projects-list-and-create-ui-design-md.txt",
+      "sha256": "3422dc5ca41c20565d2dff67dbaba1ed6d99c055f9979d8e9ea320c5192692b6",
+      "size": 8875
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-05-projects-rbac-foundation-design-md.html",
+      "sha256": "8b5c0ac1789a72cacccee628f7316f3ecbf21f713dab0aa873538d66240be599",
+      "size": 39197
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-05-projects-rbac-foundation-design-md.json",
+      "sha256": "24b9c98ffe09c7a6541d8abf8ba9f0054317954cf0b5574507815102a0816069",
+      "size": 15494
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-05-projects-rbac-foundation-design-md.txt",
+      "sha256": "b4caf6ff5529b49dfffcc2f428a07be29bb942a73d8083a0a514040c7f2edc64",
+      "size": 7719
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-11-project-credentials-design-md.html",
+      "sha256": "526250910a591cb9871b929f9689f268a54729b91970882cca2f39971f42267e",
+      "size": 37146
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-11-project-credentials-design-md.json",
+      "sha256": "be0b627aac96eae58452d86efbf32a1e99395c039cde3472f3bbcbb0350c9e20",
+      "size": 12834
+    },
+    {
+      "path": "raw/d-develop-minerva-docs-superpowers-specs-2026-07-11-project-credentials-design-md.txt",
+      "sha256": "17272d8faa0d2d6897dd7671e3231a57379cbaabb099623e61a2bed69300934d",
+      "size": 6384
     },
     {
       "path": "raw/docs-architecture-md.html",
-      "sha256": "e37844ddd308825985e84b5320dafee6cade50d8944315ba2926e01f2bd369da",
-      "size": 29959
+      "sha256": "1f96ca78fda60a4d9ebcc45363c89108145f8ba2a129bc3128bf188465440e4e",
+      "size": 39753
     },
     {
       "path": "raw/docs-architecture-md.json",
-      "sha256": "3efa8b5f5652c7cc163c87fa633aac40f89b8658421f106c7f25e5be152fe55e",
-      "size": 11953
+      "sha256": "747bb6c0a549b1dfd8d48dd3a4e9c219b0adceb760ca4d6358fbf31695136f6b",
+      "size": 16637
     },
     {
       "path": "raw/docs-architecture-md.txt",
-      "sha256": "007709fda32754bda03ceea56553b410a20dc172b9aef42a498877fd4b3a1e08",
-      "size": 5940
+      "sha256": "da2db5dac667a70aa07d92999ced3a57a686d8092738f52378b2abb3b2e29cb3",
+      "size": 8282
     },
     {
       "path": "raw/docs-backlog-md.html",
-      "sha256": "5769d0f4a9cffe13038830ee842027bdba00c372dc8bc6244bfb5cafde1e3229",
-      "size": 24136
+      "sha256": "ba8e9e1b8946a9dec61b7b9583ff03e3c32ce2ef08216de1a9e74519beef16f2",
+      "size": 31213
     },
     {
       "path": "raw/docs-backlog-md.json",
@@ -793,8 +1108,8 @@
     },
     {
       "path": "raw/docs-decisions-0001-modular-monolith-md.html",
-      "sha256": "8c1a6562164cb5d1c622e09046185c7d75e501fa7ebe7b1b0764596b3ad73257",
-      "size": 22818
+      "sha256": "40ebabc8a50c0fdcfc3becb9ce18ad3d8028cc7073b54722c9c9b6d9ed364f54",
+      "size": 29895
     },
     {
       "path": "raw/docs-decisions-0001-modular-monolith-md.json",
@@ -808,8 +1123,8 @@
     },
     {
       "path": "raw/docs-decisions-0002-project-rbac-md.html",
-      "sha256": "a509c57175531ef5912c94f26c3b8efa9ab073c737b60c7a431d20012bbbce56",
-      "size": 23182
+      "sha256": "f959a92207dbd5d44d5afbd809290b4687adc3c27221393b05129c6d172f15ad",
+      "size": 30259
     },
     {
       "path": "raw/docs-decisions-0002-project-rbac-md.json",
@@ -823,8 +1138,8 @@
     },
     {
       "path": "raw/docs-decisions-0003-document-versioning-md.html",
-      "sha256": "6703cfe53c2f119f7e8e559046be749d77270ea576a6acb3d9dd44d8d4d64505",
-      "size": 23206
+      "sha256": "145ea4f3a58383997b4ecec843f1090f751653e36c7563f72ae14cda1f734f22",
+      "size": 30283
     },
     {
       "path": "raw/docs-decisions-0003-document-versioning-md.json",
@@ -838,8 +1153,8 @@
     },
     {
       "path": "raw/docs-decisions-0004-mcp-first-release-boundary-md.html",
-      "sha256": "69e2909f39108fa9bec7366b816e336b488ab74585f80199ac144318a701f700",
-      "size": 22964
+      "sha256": "c8be4d832f89d3b4a6d54e6f036b8009918b6c96ed047906460668950a9f366a",
+      "size": 30041
     },
     {
       "path": "raw/docs-decisions-0004-mcp-first-release-boundary-md.json",
@@ -853,8 +1168,8 @@
     },
     {
       "path": "raw/docs-decisions-0005-mcp-oauth-resource-and-revocation-md.html",
-      "sha256": "6452d0eb3b38883578979f7eca8e31d7c5070f9e3a1198ea23b16bead94bd5f2",
-      "size": 24044
+      "sha256": "9ae490a740d8e3217e0cf1c76beffe69f6dbf41fe98dd396fb8d21529d487a79",
+      "size": 31121
     },
     {
       "path": "raw/docs-decisions-0005-mcp-oauth-resource-and-revocation-md.json",
@@ -868,8 +1183,8 @@
     },
     {
       "path": "raw/docs-decisions-0006-use-bun-package-manager-md.html",
-      "sha256": "a09240a00a46a05587f5b6df62d1b09c4e7059b3a96b80c3b1061652c131591e",
-      "size": 23447
+      "sha256": "6a5af4c261ac9cf04b400cc0ae42c3c0b7eb3108699303077445912d3df18154",
+      "size": 30524
     },
     {
       "path": "raw/docs-decisions-0006-use-bun-package-manager-md.json",
@@ -883,8 +1198,8 @@
     },
     {
       "path": "raw/docs-decisions-0007-separate-authentication-profiles-and-project-roles-md.html",
-      "sha256": "a8e9cb4a96dcc6c0073a18a678ffc774a9a499ea96e52394772aec15f9b7e61d",
-      "size": 24241
+      "sha256": "45889a98a8f498a5e5d469ed68426cbbcadcecb70acd7342a878d584a28a98ac",
+      "size": 31318
     },
     {
       "path": "raw/docs-decisions-0007-separate-authentication-profiles-and-project-roles-md.json",
@@ -898,8 +1213,8 @@
     },
     {
       "path": "raw/docs-decisions-0008-use-nuxt-native-feature-modules-md.html",
-      "sha256": "104fa3c3e80856622eb3f4c668ada2dfe15f069db0e5a4c5ff3961a1f4b52d31",
-      "size": 24331
+      "sha256": "1bf8c61fabd03f5980abc58829fcf683ce0261e43df276d524d5dd46688450b7",
+      "size": 31408
     },
     {
       "path": "raw/docs-decisions-0008-use-nuxt-native-feature-modules-md.json",
@@ -912,9 +1227,99 @@
       "size": 2089
     },
     {
+      "path": "raw/docs-decisions-0009-anonymize-deleted-user-accounts-md.html",
+      "sha256": "4a86eb5c3acfc06ca6f93ee0cbbc956a963aa7e54db86cbe00c031c5de39c4b4",
+      "size": 31464
+    },
+    {
+      "path": "raw/docs-decisions-0009-anonymize-deleted-user-accounts-md.json",
+      "sha256": "1e87dc4e9caecc75e1b33fb7f2df9c7ed6e0d4b03097733562f1fec069fb511e",
+      "size": 4489
+    },
+    {
+      "path": "raw/docs-decisions-0009-anonymize-deleted-user-accounts-md.txt",
+      "sha256": "740a830563981e7e9ec6e364c022fbb44eaebbb1cd603e3475a1c35eec6660ec",
+      "size": 2226
+    },
+    {
+      "path": "raw/docs-decisions-0010-store-project-credentials-with-category-access-md.html",
+      "sha256": "adcd222c0865d777dcf2c76cc92247112ceadfe3688d5cbe37a597fba1556f05",
+      "size": 31948
+    },
+    {
+      "path": "raw/docs-decisions-0010-store-project-credentials-with-category-access-md.json",
+      "sha256": "d4ecc8cd18828e328bb8b425b2be62cc8730a854782e50b95076c34488449661",
+      "size": 5409
+    },
+    {
+      "path": "raw/docs-decisions-0010-store-project-credentials-with-category-access-md.txt",
+      "sha256": "74a2312f82377c66cde2cba61e9ac1e05918ab21cba23511fd2c241cfd400ef7",
+      "size": 2702
+    },
+    {
+      "path": "raw/docs-decisions-0011-display-credential-logins-in-project-lists-md.html",
+      "sha256": "943e4b97adab73fc122191cd0c5900e55e564e5982a3eee104ba006e41b43466",
+      "size": 30718
+    },
+    {
+      "path": "raw/docs-decisions-0011-display-credential-logins-in-project-lists-md.json",
+      "sha256": "fb474de8f2bb262227b9774edfd5b8dbcb296427586b91739dad065cd64d0adc",
+      "size": 3031
+    },
+    {
+      "path": "raw/docs-decisions-0011-display-credential-logins-in-project-lists-md.txt",
+      "sha256": "f7edbc63291734c1dba309b3f8e9fab5001b98c1fac190ab96c6b88a6c0ca18e",
+      "size": 1509
+    },
+    {
+      "path": "raw/docs-decisions-0012-use-feature-scoped-actions-for-client-effects-md.html",
+      "sha256": "12ba6b81a14a09c2c33269aa44a68133ede0a5d69a6f8ad4758516b5875df350",
+      "size": 31722
+    },
+    {
+      "path": "raw/docs-decisions-0012-use-feature-scoped-actions-for-client-effects-md.json",
+      "sha256": "008e55ab8cd6be61e3dc76a7a7413d6ccb8d39c879a89ef9b290d1685d1aabc3",
+      "size": 4887
+    },
+    {
+      "path": "raw/docs-decisions-0012-use-feature-scoped-actions-for-client-effects-md.txt",
+      "sha256": "1bb4ce03fa7fd5d0f6d704f4059e5da1234f0c2bfa9b404ad245d3d56a382fae",
+      "size": 2440
+    },
+    {
+      "path": "raw/docs-decisions-0013-keep-client-actions-stateless-and-feature-scoped-md.html",
+      "sha256": "c295f3ef32c14171dee1a48dd009445fdafd922ddb6e890e4d9275c150979962",
+      "size": 33629
+    },
+    {
+      "path": "raw/docs-decisions-0013-keep-client-actions-stateless-and-feature-scoped-md.json",
+      "sha256": "46a9aa13aff56a5d24a02d80348dfb7924e2db09746068d7124db3c731676ead",
+      "size": 8191
+    },
+    {
+      "path": "raw/docs-decisions-0013-keep-client-actions-stateless-and-feature-scoped-md.txt",
+      "sha256": "20e34703a88b899ddb4d1c72f056c704a3fe3fa39037da18b8b7efbd2ee91383",
+      "size": 4095
+    },
+    {
+      "path": "raw/docs-operations-credential-encryption-md.html",
+      "sha256": "55c540d4c3047c9cd47df0e6a4b61dcae30934c5185756e3483c8fdaa2260275",
+      "size": 32135
+    },
+    {
+      "path": "raw/docs-operations-credential-encryption-md.json",
+      "sha256": "8b8490969df8c4b8e35a7e38bae56265091c5e04066e89af5e20ff74e7bfad96",
+      "size": 5416
+    },
+    {
+      "path": "raw/docs-operations-credential-encryption-md.txt",
+      "sha256": "c52a796fe592bd17d83827a5fa6f620cadc49f9d538a4a703ef2aa0d6731e900",
+      "size": 2675
+    },
+    {
       "path": "raw/docs-operations-tesserae-md.html",
-      "sha256": "e541b3d76ee65876eb48a70c57f41e96594aaf8cb5a4db9701876e8667576111",
-      "size": 24524
+      "sha256": "2511565e7d518671dec45fd5194fd7cc01a4d2f2db26935b37a671c8f749ca22",
+      "size": 31601
     },
     {
       "path": "raw/docs-operations-tesserae-md.json",
@@ -928,53 +1333,53 @@
     },
     {
       "path": "raw/docs-product-spec-md.html",
-      "sha256": "3c02a44f6f38f7e78e3e8159e19c556a0c5c2236e4a99b0563606b341b5dbc2e",
-      "size": 35310
+      "sha256": "b030ccf84d86ab12171b3788d57419854c092e70f9a3482d88ec0dc7ab09c321",
+      "size": 43714
     },
     {
       "path": "raw/docs-product-spec-md.json",
-      "sha256": "bcee188b7a5f34a2dd7c212207d699ebd72418ba2ed1e264b2e28738fa0d0a09",
-      "size": 21711
+      "sha256": "c6b2b134231fb845993f0187e2ab8306a8e19987632ce36ceded959999092591",
+      "size": 23987
     },
     {
       "path": "raw/docs-product-spec-md.txt",
-      "sha256": "d0fea6202a8b26d6be7346ff5e286568774625a3e45148849bb0e425c5631dd3",
-      "size": 10819
+      "sha256": "00c67ab9a9a872701e6a2f686c65014ec6377e5619a729b229c7feeb3a2a66ce",
+      "size": 11957
     },
     {
       "path": "raw/docs-progress-md.html",
-      "sha256": "3224f1301b1bfa2d78f757d1178b4dd0cf65e10196867a8dae8067c2644bfad7",
-      "size": 28970
+      "sha256": "2ac8dca66b0036ff775222c86e8aa5f17cfec2522bd10c28db6e4e6852da845d",
+      "size": 60668
     },
     {
       "path": "raw/docs-progress-md.json",
-      "sha256": "b1cc8485a736df97ab5954f6f26cd4e576afe8e62ba33af16a0122189eaca529",
-      "size": 13493
+      "sha256": "797c8a6b357f767b518351fc7238bfa03ef7aed2334f84354435790b17fc089d",
+      "size": 60571
     },
     {
       "path": "raw/docs-progress-md.txt",
-      "sha256": "a444bf3e9302de44dc5a95ab8d978f2ee3a5019cddee8c52e4a6d2d527360c44",
-      "size": 6706
+      "sha256": "c3733e4dc53a06979113ac12879cbf9c96a81784671e4d5c12dd7ae670896d6a",
+      "size": 30245
     },
     {
       "path": "raw/docs-roadmap-md.html",
-      "sha256": "63983ed4ba41a281a23d17852178bdf37afb7d7c18622eb45bcc73211fd87129",
-      "size": 26492
+      "sha256": "48de3abf2ef1a0c054b7d44b8289471edf49eb25ce847f7dc385f82707af76a6",
+      "size": 34439
     },
     {
       "path": "raw/docs-roadmap-md.json",
-      "sha256": "9e55b8a5a1b3d78457fa50395e1ca4c0486de5e9f7561d8bb57fe02a26c13cfe",
-      "size": 6553
+      "sha256": "cedcf60ff0b4be5f1c5e22c2ebb1080f04f7120ba2d661911923b17dc0648af0",
+      "size": 7819
     },
     {
       "path": "raw/docs-roadmap-md.txt",
-      "sha256": "a6b8c1e07fed8f0ea32572ff87ed2ef6d09ff6d153d57c8a6223417e60f847ec",
-      "size": 3235
+      "sha256": "60d73e9565b4ebb3ec3ce675ce844e0e429f20920d10826d9ab3835f1314a41d",
+      "size": 3868
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-foundation-md.html",
-      "sha256": "389506020329f7d2924034779b44dafaf900d9627f1998471e97a14b99b72558",
-      "size": 43398
+      "sha256": "8194d46726c769bfd099a4718bd7e663c780725f2a6d7867fb53b6919cc47273",
+      "size": 50475
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-foundation-md.json",
@@ -988,8 +1393,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.html",
-      "sha256": "ab403130efe3f5b0f7ba3bf824263f0c0ede223a4d9881a85b0ebd094739e417",
-      "size": 43814
+      "sha256": "d28ee1c7ba39f8ad8dda5a5913dabfbb87828b07bc978287cbb9ea455dfab699",
+      "size": 50891
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.json",
@@ -1003,8 +1408,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.html",
-      "sha256": "1e3969cbab5b6997fb986791bbeb25fc113e1900f0d3dfdcf1608a8ac10607dd",
-      "size": 28644
+      "sha256": "e885702c90bb0645d0c58acd8de2c0c26d62fb893d5ea8d04274ab900ff96ff6",
+      "size": 35721
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.json",
@@ -1018,8 +1423,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.html",
-      "sha256": "73a68a15a382c791af96bd231bd7f43e4b46fbbafbd76f26ab586144f71a5410",
-      "size": 35325
+      "sha256": "f20cd0f3ba186c247e30e739f3f573e0d9f6d7acdeb85d59ca1596fa74596ff9",
+      "size": 42402
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.json",
@@ -1033,8 +1438,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-27-postgresql-compose-md.html",
-      "sha256": "373d8605ad48674ecae45260ae387ec9d2c3677db29732a477e1a83d54b3f3c5",
-      "size": 28100
+      "sha256": "2aaebf999cc075fcdb4880247847b25155bbe365ed35f88c71a88f2d26f47bc7",
+      "size": 35177
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-27-postgresql-compose-md.json",
@@ -1048,8 +1453,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.html",
-      "sha256": "d4f6c6e512a6835d9993187ded2a707726a9f35dcc9e445105788042a4026930",
-      "size": 28488
+      "sha256": "1930220d8639c59a2b794c72fd1b42523c8d74c09a0a3cc35a7a088d0bfb14b9",
+      "size": 35565
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.json",
@@ -1063,8 +1468,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-28-forgot-password-ui-md.html",
-      "sha256": "3b097110efa8790959367624cd93828d63df5d8ee9b70fef55779130618c9477",
-      "size": 34610
+      "sha256": "73cdeeafba449bcf3790b2caf8e4f460f7aa07bb18013bd572bf6ca581afb191",
+      "size": 41687
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-28-forgot-password-ui-md.json",
@@ -1078,8 +1483,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-28-reset-password-ui-md.html",
-      "sha256": "af682a1efad2136079e09a900d886d67db197ce66af3ecdb5a87fe7ac52d1a20",
-      "size": 34360
+      "sha256": "5c667d9ac2cc4286c91cce5c85ddf1f424a90f9cd2c3c0668a2c7a5595f06342",
+      "size": 41437
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-28-reset-password-ui-md.json",
@@ -1093,8 +1498,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-29-identity-backend-foundation-md.html",
-      "sha256": "19355590fcb58051cb7882d175468024ec0ec13e6cbe4ac1c379cfc1bfab380b",
-      "size": 59251
+      "sha256": "684973396b2fa4f121334f7d6ed7b1af926be45a2b77166930cf0e15074b510f",
+      "size": 66328
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-29-identity-backend-foundation-md.json",
@@ -1108,8 +1513,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-29-identity-functional-refactor-md.html",
-      "sha256": "1c2817c0aba475bb05be0346f50218517a4335b3f6c43630ff79f42a27e1c09a",
-      "size": 63211
+      "sha256": "7e3876f97fcb218e1dbc7147aa28f0a740322e7a328cca39397ddc1042c1e488",
+      "size": 70288
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-29-identity-functional-refactor-md.json",
@@ -1123,8 +1528,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-29-nuxt-feature-modules-md.html",
-      "sha256": "9e85a14b780ec468c84173417ed90bf3337be2fa3b6a542176cdae3cabc3f6b4",
-      "size": 57447
+      "sha256": "ae57f71d0cbc8349868fee0cc4be515945d8220361caa1b7f392ae99d1056268",
+      "size": 64524
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-29-nuxt-feature-modules-md.json",
@@ -1138,8 +1543,8 @@
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-30-route-authorization-md.html",
-      "sha256": "bb2129eddf86e0c4fa891e4992fb77fb1bb0eb389f7374321d4c583b6d154abf",
-      "size": 52058
+      "sha256": "7b14320956d5fdafabb76b3c053fb7b67e917ac249c318773120826caa149807",
+      "size": 59135
     },
     {
       "path": "raw/docs-superpowers-plans-2026-06-30-route-authorization-md.json",
@@ -1152,9 +1557,114 @@
       "size": 23563
     },
     {
+      "path": "raw/docs-superpowers-plans-2026-07-01-authorization-readability-refactor-md.html",
+      "sha256": "80ce93247ca06a469dc0aaf2e2a5af7e10d6154d8dcbd048eb32b0397bf8c511",
+      "size": 44978
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-01-authorization-readability-refactor-md.json",
+      "sha256": "4e375bebf0328c9a3751dc00531312d84c7eb6852b6ccf8682b88e8af0b985f9",
+      "size": 25305
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-01-authorization-readability-refactor-md.txt",
+      "sha256": "1d478d2f4711aec28905b30cd603bcd0ea70d13746beaa3ea997b0c19297b88d",
+      "size": 12632
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-01-global-navigation-and-page-placeholder-md.html",
+      "sha256": "c090d808c555da47e10046ed806f502cbca2fddd9d7320645ef55ab292757009",
+      "size": 61085
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-01-global-navigation-and-page-placeholder-md.json",
+      "sha256": "e619d5ae17fe5b1fb7e14484af8144e72d655ad6403507ab12f9c62c6150c0cb",
+      "size": 48655
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-01-global-navigation-and-page-placeholder-md.txt",
+      "sha256": "7ee4867cbe8aa0567f1d05f0113a8d99c843348c312ee7b76f6a249a5fe7af32",
+      "size": 24249
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-03-current-user-sidebar-md.html",
+      "sha256": "741a8bcc09e088c2185217366687327d4afb1e46860c5ae1a7d4898e62485a2d",
+      "size": 54987
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-03-current-user-sidebar-md.json",
+      "sha256": "ef91419d804c1aa69083fb45cafc60901aec1e7da498ab57f26126bd7e57968f",
+      "size": 39019
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-03-current-user-sidebar-md.txt",
+      "sha256": "2bfa9c46744e973bc73b0dfff09367b56507e403d32988f84c08d51284cbf7b4",
+      "size": 19420
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-04-header-theme-toggle-md.html",
+      "sha256": "6bd816d956a47ea0884680ab6303f24760e42678b33caf8ce91a61207ee6e9df",
+      "size": 40929
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-04-header-theme-toggle-md.json",
+      "sha256": "efb75560d491c6c0777a68f0d1320d687f84849d43fe701d8183c83274c991d2",
+      "size": 17985
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-04-header-theme-toggle-md.txt",
+      "sha256": "e2f5f6bebfb3a3940ce4de9942e730d53836d380cb0cbf8a8a588003ef5c3528",
+      "size": 8919
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-05-projects-list-and-create-ui-md.html",
+      "sha256": "a4259a0c07788732e4dec51ec07474228ae4de41890dd20b3687be40d754acb1",
+      "size": 46464
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-05-projects-list-and-create-ui-md.json",
+      "sha256": "f4febb174db86fd49b37dd66d33d9e65bb3a6852b00f19bcd54b74fe3f42fa25",
+      "size": 26059
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-05-projects-list-and-create-ui-md.txt",
+      "sha256": "5c297410a309a5fb6313eef1975a9d3da956cef7c156bc6ff8432c77926d5df0",
+      "size": 13009
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-05-projects-rbac-foundation-md.html",
+      "sha256": "64ce8024af7a4fc30ca939dc91bee42e1053c81e234d99d1a354c8e8285eed6c",
+      "size": 44859
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-05-projects-rbac-foundation-md.json",
+      "sha256": "7aef7a7a8b2464bf3ad2e3ec1cd71992583d5d0479adef9f9dbfa4b5124766c6",
+      "size": 23939
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-05-projects-rbac-foundation-md.txt",
+      "sha256": "95d91d6aded63a077b979733fbec3c5037f511b2528490ea0f7c4d24c3790d31",
+      "size": 11946
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-11-project-credentials-md.html",
+      "sha256": "c0dcd11b5459a79b6ada49dbf9e4458dd20a160269af7348e130f7ef53796162",
+      "size": 33897
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-11-project-credentials-md.json",
+      "sha256": "c21cd7b409d33fc97dfa3eb4bd6de61323793dbf379d8c57b6610b439d1267fb",
+      "size": 6795
+    },
+    {
+      "path": "raw/docs-superpowers-plans-2026-07-11-project-credentials-md.txt",
+      "sha256": "def292b97781be24c04f3933083eacf37e6aa095d43106371dd798a2005f8623",
+      "size": 3370
+    },
+    {
       "path": "raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html",
-      "sha256": "152ceaa8740af977081c38a26562b19c7fb08de7a0a0c0e658a17dc48b8bd345",
-      "size": 28862
+      "sha256": "0f72b638ae630adc5fca2d7d01b0311f785fed9122fee6fbddf4c26c40f54148",
+      "size": 35939
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.json",
@@ -1168,8 +1678,8 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.html",
-      "sha256": "612724424aabcfd2385240c53004016256eb519aff75a3a5f8535b2723f96498",
-      "size": 36370
+      "sha256": "72a481ee3aaa097e92b7b1e19e9cb95b0b2892a90ae18a99835f4cfce91200b3",
+      "size": 43447
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.json",
@@ -1183,23 +1693,23 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.html",
-      "sha256": "d3bb27927cf5d4c8296d07dc285d80e438a594809098e3beb27c9739905f05b3",
-      "size": 28859
+      "sha256": "a46983f40e95e81badaa97d1603cc725b3dfb4532531d2595efc6fad1d7b35b2",
+      "size": 36497
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.json",
-      "sha256": "7cfe4e63fe1c8b182aecfc0202fb2d5fde51f85822029c5590a95a2db6d1188b",
-      "size": 10471
+      "sha256": "74390d4cbfa11a6ed3fb801a811adb79550db7ee4b286ab64d7f4bd055fe0232",
+      "size": 11519
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.txt",
-      "sha256": "7a904c0d4731185e3b1688e7ce91388d33c48e828690b8d514457671751abc21",
-      "size": 5217
+      "sha256": "329c5d8c361e97e4f6e216a7fe8773473ff75fdd068c36a94064e7dd4ae5e685",
+      "size": 5741
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.html",
-      "sha256": "2fff484c0aacb1a7cccd9c6905721e11dae0b52191e7963a10cb69d1a9c6aa1f",
-      "size": 24660
+      "sha256": "102be795787800ea3f26e9894eef165b8cfbd5d928e515736f05d530fd572285",
+      "size": 31737
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.json",
@@ -1213,8 +1723,8 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.html",
-      "sha256": "ad89b5bd9f6fac09a23bfc243fa39d25efb3e5ec89fa77480543a7f6e25426a9",
-      "size": 24075
+      "sha256": "d1d40049ccbe59aab1df5a035d7cfcf68c896da4949f74e79f45f3a29010d15f",
+      "size": 31152
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.json",
@@ -1228,8 +1738,8 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.html",
-      "sha256": "d72750da7af839dfbe7e392f83ef48c4323c97840a0f9da5d7a3b46f3d91cb01",
-      "size": 25792
+      "sha256": "88455b9fae11b4f8ce7fdaf1efac2427c6d79194c48f73e421238ed77830ddeb",
+      "size": 32869
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.json",
@@ -1243,8 +1753,8 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-28-identity-backend-foundation-design-md.html",
-      "sha256": "3020933fd7e03a83ce3dd893e371ec8fcc3512779a8116d9977769c8326c0a3d",
-      "size": 38525
+      "sha256": "e776cc68adc26b4c54c483ddf58ac33b205fe09768fa6594385fee802dfba277",
+      "size": 45602
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-28-identity-backend-foundation-design-md.json",
@@ -1258,8 +1768,8 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.html",
-      "sha256": "a8189fb570b367581a60a7033e7bf4949dd94bbb59f4f639f9b70a13f5d33205",
-      "size": 25973
+      "sha256": "3504d9c4aed4b5406f36cd472feec2c348005132f590decea64c34c02354fc7b",
+      "size": 33050
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.json",
@@ -1273,8 +1783,8 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-28-user-identity-profile-design-md.html",
-      "sha256": "4d6e80d7b93fbcd0c8a01ce80cdd4a149bd694f5f13d21273bc01bd13732b30b",
-      "size": 32749
+      "sha256": "ee1100ed201bd0d2fa9b393ccf01063438eeae45aa8570310d1c8860380aef67",
+      "size": 39826
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-28-user-identity-profile-design-md.json",
@@ -1288,8 +1798,8 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-29-identity-functional-refactor-design-md.html",
-      "sha256": "f1b7523b559c299d673ea9e37f1cddaa978099b176df002cb87ddf020106fdd1",
-      "size": 30970
+      "sha256": "bef8bd197d3742bf8a586b5e963b424d7415ca7e702ad3fe8c1211a508281ee9",
+      "size": 38047
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-29-identity-functional-refactor-design-md.json",
@@ -1303,8 +1813,8 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-29-nuxt-feature-modules-design-md.html",
-      "sha256": "af205cb204a35868cfc8015bc0774857af8b879b1693af50dfaaf636f799df1f",
-      "size": 30973
+      "sha256": "f0bf9520fabda45def72d3bf78371816871aadd09239b6b4ecd61de3c17b04ff",
+      "size": 38050
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-29-nuxt-feature-modules-design-md.json",
@@ -1318,23 +1828,143 @@
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-30-route-authorization-design-md.html",
-      "sha256": "1b8214d9d53f50c989982eacb11d208128758e5a205d291123cb13e2580ed8a8",
-      "size": 31282
+      "sha256": "e14f895dc1e8ad80081ba385591de970076894c652f08dae20b34c0b5f4aae37",
+      "size": 38362
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-30-route-authorization-design-md.json",
-      "sha256": "32f91bd6030b102db0eb4b10e7c446b175040e78ffc9f2ac7218cbc6b1008740",
-      "size": 14345
+      "sha256": "f7873b3860c4efd9467e8ba8261b276e98a7c6cf0ee48c89efe85c1c40459eeb",
+      "size": 14351
     },
     {
       "path": "raw/docs-superpowers-specs-2026-06-30-route-authorization-design-md.txt",
-      "sha256": "d61a0c1ffe01365fe81620ed19711d9ba86b8f6246e7f8fbc01f648852e22566",
-      "size": 7152
+      "sha256": "b45ae289bcdc9de6b3585e21d473e6eb8d0d7372e1c0646119e5db8d1b74df53",
+      "size": 7155
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-01-authenticated-page-placeholder-design-md.html",
+      "sha256": "37ee6e86d6c8776c34536c108ce2090f96b384b0f375d91f2d13f992a08cd2fe",
+      "size": 34651
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-01-authenticated-page-placeholder-design-md.json",
+      "sha256": "48c7ffd56a6a156a9c1c7301aec25a92af1fb5bed159a2a3424fe0ca1676f8c5",
+      "size": 9079
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-01-authenticated-page-placeholder-design-md.txt",
+      "sha256": "f8702add60db2db2fbfb807a189cc9b8d37799ee4e1ba8e6e925b3a7657c5c52",
+      "size": 4530
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-01-authorization-readability-refactor-design-md.html",
+      "sha256": "64eeddc1d637a833140673bd5e6f2c38fbf78a49b42ed2c5c2d508341d6eb2a6",
+      "size": 35795
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-01-authorization-readability-refactor-design-md.json",
+      "sha256": "a13ae981c5a47341019113df19058bc69105d8ca00e93242fba91382dd5e7fbf",
+      "size": 10729
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-01-authorization-readability-refactor-design-md.txt",
+      "sha256": "9545db0d2cac0471208640f8e3ff7ceda0fea6167dc95bf91e4ce890b3f06356",
+      "size": 5359
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-01-global-navigation-design-md.html",
+      "sha256": "258c58b75305519c6d1ea0d83be82a8a45fe0f67d47337d71d066fdc92494d33",
+      "size": 39601
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-01-global-navigation-design-md.json",
+      "sha256": "60e1bad2f2d0026a2fb51053bb491d0bb4469b6980824956056dfd26f79dd810",
+      "size": 16039
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-01-global-navigation-design-md.txt",
+      "sha256": "2eacc971033e7eda428d5f90359a34e19720e6f2e96a143018b2e9a36914d74d",
+      "size": 7997
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-03-current-user-sidebar-design-md.html",
+      "sha256": "9ccd434dfb818f3261b00793391b8c88da1ea30b1112db3cd7ec7c3b462b06a9",
+      "size": 38101
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-03-current-user-sidebar-design-md.json",
+      "sha256": "f0ed1b968cc5ece3b88359436f4e238a0693e28492ac65f665145533953ddc70",
+      "size": 14111
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-03-current-user-sidebar-design-md.txt",
+      "sha256": "acf20cd3e53ab01a5b5d17a73e6b3d2fed7058de33b9ef802f9acdff5efdaa5a",
+      "size": 7036
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-04-header-theme-toggle-design-md.html",
+      "sha256": "3922331130e082c73ad1246a2b8829d5a6c99b236ca35d8a7f60c24e0f4ae45a",
+      "size": 31271
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-04-header-theme-toggle-design-md.json",
+      "sha256": "6222aedba80c69e23479d00b9be3a13e5add639ed8d024f96663884e205c20ab",
+      "size": 3697
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-04-header-theme-toggle-design-md.txt",
+      "sha256": "4f6da38e7fc7a54019e7b789ec65a82fc09b7b7c800b5f07f1178f7cec18f724",
+      "size": 1827
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-05-projects-list-and-create-ui-design-md.html",
+      "sha256": "176fe3a5998ba807cd7945268e7634be23543a62247276799cdf764a9d35bc7e",
+      "size": 40766
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-05-projects-list-and-create-ui-design-md.json",
+      "sha256": "9a711721d4b43aaa2698aa71e8fe14b9ed116da68dc846e8a921b2c42bf038c9",
+      "size": 17777
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-05-projects-list-and-create-ui-design-md.txt",
+      "sha256": "3422dc5ca41c20565d2dff67dbaba1ed6d99c055f9979d8e9ea320c5192692b6",
+      "size": 8875
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-05-projects-rbac-foundation-design-md.html",
+      "sha256": "80d7a93fb4637d726117ecde0b7e22c85e0cc00a781fb4589a9f38b0d710c85e",
+      "size": 39147
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-05-projects-rbac-foundation-design-md.json",
+      "sha256": "90bd0f4f7866d927d9f90c3f4a870c38f5a3152a0582c4c56c29a922e485ba55",
+      "size": 15469
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-05-projects-rbac-foundation-design-md.txt",
+      "sha256": "b4caf6ff5529b49dfffcc2f428a07be29bb942a73d8083a0a514040c7f2edc64",
+      "size": 7719
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-11-project-credentials-design-md.html",
+      "sha256": "5f5d2a1af916c01cf107734d0531410ffa04805ffe076c3ae5aee1cec38f6c54",
+      "size": 37096
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-11-project-credentials-design-md.json",
+      "sha256": "677b21581a86fc4865fb2fa5a29a47d6fefdd62c5f3466df2bbcfd7ff1a2109e",
+      "size": 12809
+    },
+    {
+      "path": "raw/docs-superpowers-specs-2026-07-11-project-credentials-design-md.txt",
+      "sha256": "17272d8faa0d2d6897dd7671e3231a57379cbaabb099623e61a2bed69300934d",
+      "size": 6384
     },
     {
       "path": "repos/index.html",
-      "sha256": "43a3a748d5683440544aaddb7c96a9241f49e4f6a09b543be12b829fd0a45f9b",
-      "size": 21281
+      "sha256": "f66df5ccfa88e1e57cde016000a724ceaee6978b54235bca8d0f4c6a0526a4f4",
+      "size": 28358
     },
     {
       "path": "robots.txt",
@@ -1343,33 +1973,33 @@
     },
     {
       "path": "rss.xml",
-      "sha256": "165fee61957e8142d8ce614c3679ed524e4323495ead042e83170c41b5ef64d4",
+      "sha256": "02133c3ade0ab8f9241ea20ae236a2517d1e00bc0634e0cb6c2c2856a2f285e4",
       "size": 1144
     },
     {
       "path": "search-index.json",
-      "sha256": "8196a53404ee44845cc940b85e12ea155cfa3e41bcfe4b72c8966cb1d686f3ce",
-      "size": 23963
+      "sha256": "eb3d446f2d3fbab61c9db9a93fbb288149455874a4f2b7bc374f125c947df34d",
+      "size": 36472
     },
     {
       "path": "search-index.json.gz",
-      "sha256": "927f3d8de52f21ac542c8dd1af7487a5aac72e6696c66e8c1e728aa023857e49",
-      "size": 2846
+      "sha256": "43b46b6797f1c0fef719264c5322d4262357cfc20916109e3ee87a9a0e6670e6",
+      "size": 3933
     },
     {
       "path": "sessions/index.html",
-      "sha256": "a55e1db07cf1977a43447665c5ace8204edd54fb70c2a25325cfec57d3fc2925",
+      "sha256": "47455ddcb6310c5a053972bd2dc80f3cc6d575ca83cdd7c95899199d393fbd23",
       "size": 12054
     },
     {
       "path": "sitemap.xml",
-      "sha256": "0461eaff1ebe672676da9849893bc359228cbb9f09845111f63c61ab9a53233e",
-      "size": 28321
+      "sha256": "592d04617c25a0bd27271d1d6d6f83ee553872d4a88bfd8a07514dd11997ae62",
+      "size": 43203
     },
     {
       "path": "sources/adr-0001-use-a-modular-nuxt-nitro-monolith.html",
-      "sha256": "bed0b1bc48d45340c21ad9330a26e24e9a3cad0c6483284a56a7e390c4ffa086",
-      "size": 25716
+      "sha256": "1b7be53002799bc7d502cb70c1e1205455ab94113c42bfec112dbdf01d8463e2",
+      "size": 32793
     },
     {
       "path": "sources/adr-0001-use-a-modular-nuxt-nitro-monolith.json",
@@ -1383,8 +2013,8 @@
     },
     {
       "path": "sources/adr-0002-use-global-super-administration-and-project-scoped-rbac.html",
-      "sha256": "72b61a81f108434e3a38e2af80974e59d3313e2465f3a15d1a8169362f91400b",
-      "size": 25824
+      "sha256": "8c0b8d018dede4b4bab1f551032c5d36b540d2f25c0d37eef20867a2a85575ee",
+      "size": 32901
     },
     {
       "path": "sources/adr-0002-use-global-super-administration-and-project-scoped-rbac.json",
@@ -1398,8 +2028,8 @@
     },
     {
       "path": "sources/adr-0003-separate-mutable-drafts-from-immutable-published-versions.html",
-      "sha256": "dee543f461d57e33048efe3a6e28e43b1d9ab91bd0c379aeba33c3dd3fc91c5d",
-      "size": 25848
+      "sha256": "abec2c496b3ee2645b4fe4e7b9ac3ec7d4748e58a00362143ff65d3dc83f6e0e",
+      "size": 32925
     },
     {
       "path": "sources/adr-0003-separate-mutable-drafts-from-immutable-published-versions.json",
@@ -1413,8 +2043,8 @@
     },
     {
       "path": "sources/adr-0004-limit-the-first-mcp-release-to-documentation-workflows.html",
-      "sha256": "29e1a2c16b9c8aac5b92816f091cc1d49175bab496ccf191345717c7a1c91f81",
-      "size": 25847
+      "sha256": "51e9decb35b40b67440fd202fad523e2923d4d87f60490cf65087a0ed9a84c80",
+      "size": 32924
     },
     {
       "path": "sources/adr-0004-limit-the-first-mcp-release-to-documentation-workflows.json",
@@ -1428,8 +2058,8 @@
     },
     {
       "path": "sources/adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation.html",
-      "sha256": "56ce61b528e3a498eee66040fa055070100611d06da832a9d27085d8121730b6",
-      "size": 25911
+      "sha256": "c0531059c1bab16e01b94b358aebb4e38f89878c147c4ec5af0aaff774d54e1d",
+      "size": 32988
     },
     {
       "path": "sources/adr-0005-bind-mcp-tokens-to-one-resource-and-enforce-immediate-revocation.json",
@@ -1443,8 +2073,8 @@
     },
     {
       "path": "sources/adr-0006-use-bun-as-the-package-manager.html",
-      "sha256": "f9f9dd52e80fa30caa3fbeaad2644eda71f94d6b19b95d5313bd839020490ace",
-      "size": 25712
+      "sha256": "ba23cf0f1139fb7feb7985bf10a1bea7f615268798551bf496337bc454fd0837",
+      "size": 32789
     },
     {
       "path": "sources/adr-0006-use-bun-as-the-package-manager.json",
@@ -1458,8 +2088,8 @@
     },
     {
       "path": "sources/adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles.html",
-      "sha256": "75e629800157fac7e0a14cdf61ae404d7ed97876b66d94695ef46d64fccdbfc5",
-      "size": 25999
+      "sha256": "0eff68339365ee5754428e7a35f3cea6b4c89bdd47d09f8311c3bec95ceb951a",
+      "size": 33076
     },
     {
       "path": "sources/adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles.json",
@@ -1473,8 +2103,8 @@
     },
     {
       "path": "sources/adr-0008-use-nuxt-native-client-feature-modules.html",
-      "sha256": "02b09ad742b321233c55dd5dca3c23c2fbca27b8a741c4a5001a0f84addea477",
-      "size": 25776
+      "sha256": "b7a2bccfb73b16ea9a57ea26749592d210e95db676baebcdab076346f8220ce8",
+      "size": 32853
     },
     {
       "path": "sources/adr-0008-use-nuxt-native-client-feature-modules.json",
@@ -1487,9 +2117,174 @@
       "size": 154
     },
     {
+      "path": "sources/adr-0009-anonymize-deleted-user-accounts-while-preserving-identity-references.html",
+      "sha256": "9b90e0aca9a4e8bc8cd655f56775b59f0603b89d4d43cc183a5665cfefc1c37c",
+      "size": 33064
+    },
+    {
+      "path": "sources/adr-0009-anonymize-deleted-user-accounts-while-preserving-identity-references.json",
+      "sha256": "29cd29cd2390d03c8b17576453e5c8ca9f6e0a96e432cd77c20733e7e7a42aa6",
+      "size": 831
+    },
+    {
+      "path": "sources/adr-0009-anonymize-deleted-user-accounts-while-preserving-identity-references.txt",
+      "sha256": "976bff240303f7db45e5bcb2a81f20ebab0a5ec5fd946a04b03720aa061ae1a1",
+      "size": 244
+    },
+    {
+      "path": "sources/adr-0010-store-encrypted-project-credentials-with-category-scoped-access.html",
+      "sha256": "a03b387fc74e25fd565da309a105b835b9e52fbc584acb49a8e1654718dc232f",
+      "size": 33059
+    },
+    {
+      "path": "sources/adr-0010-store-encrypted-project-credentials-with-category-scoped-access.json",
+      "sha256": "7e7e17e7a13ac6ba10970d2a7468a30249a68b07183a6a06cba9075c1685e67f",
+      "size": 841
+    },
+    {
+      "path": "sources/adr-0010-store-encrypted-project-credentials-with-category-scoped-access.txt",
+      "sha256": "8a931fa849751b3c0a5f46cdcffe14075ee46285a032cb2e88c919dace0a6a32",
+      "size": 229
+    },
+    {
+      "path": "sources/adr-0011-display-credential-logins-in-authorized-project-lists.html",
+      "sha256": "6e6ca75bc5d0a369a94cf012dbe1bd9a522465defed74cec9c460906e4dc3935",
+      "size": 32981
+    },
+    {
+      "path": "sources/adr-0011-display-credential-logins-in-authorized-project-lists.json",
+      "sha256": "44576b00ca5b5108ecf2972fdc728afd807201d8610c6d94e5c083d8fb1e2f36",
+      "size": 793
+    },
+    {
+      "path": "sources/adr-0011-display-credential-logins-in-authorized-project-lists.txt",
+      "sha256": "466f715c5f3a2b69984e5fb39785a60ca402f7207c79fb15717650bc5459e898",
+      "size": 199
+    },
+    {
+      "path": "sources/adr-0012-use-feature-scoped-actions-for-client-effects.html",
+      "sha256": "a67b844ccc5504581232082debfc03bc938b2365f6fa841575857e6160ec2fe1",
+      "size": 32931
+    },
+    {
+      "path": "sources/adr-0012-use-feature-scoped-actions-for-client-effects.json",
+      "sha256": "019404af7b9a6264b9129c33139ebb1d024912ae47cc49bb27958cbbd00ad25d",
+      "size": 767
+    },
+    {
+      "path": "sources/adr-0012-use-feature-scoped-actions-for-client-effects.txt",
+      "sha256": "b432372ddab3d79dfc8c0a385e419f0a0dbb5a1822bd5f8f36d9177e17027f98",
+      "size": 175
+    },
+    {
+      "path": "sources/adr-0013-keep-client-actions-stateless-and-feature-scoped.html",
+      "sha256": "f51049c4b1f659f4325c7cf3bd8fb496a740a81cf3996ed3c2102dfc78004b80",
+      "size": 32958
+    },
+    {
+      "path": "sources/adr-0013-keep-client-actions-stateless-and-feature-scoped.json",
+      "sha256": "23d7f716a53d8c315f67ba6d743582d57fd4240a43584529f6831298b0274618",
+      "size": 785
+    },
+    {
+      "path": "sources/adr-0013-keep-client-actions-stateless-and-feature-scoped.txt",
+      "sha256": "577464ca3a65d35ac16b3e5cccf1c3aca1b56cedb857bf4361f79a6046adc48a",
+      "size": 184
+    },
+    {
+      "path": "sources/authenticated-page-placeholder-design.html",
+      "sha256": "e839efc5f7d53ab8d7bf4e7d10e0b60679dabad7dc42fbbfa05be632af37db27",
+      "size": 33174
+    },
+    {
+      "path": "sources/authenticated-page-placeholder-design.json",
+      "sha256": "ff3ec5cf138dff8fbf18729eafc987a45e9f074b5cc9023a40cced040354e32b",
+      "size": 1144
+    },
+    {
+      "path": "sources/authenticated-page-placeholder-design.txt",
+      "sha256": "3024d879fcfbb2d5cb20459fab26268e1fa1a16a6f7a6f9ba44d9c034ccc32f9",
+      "size": 342
+    },
+    {
+      "path": "sources/authorization-readability-refactor-design.html",
+      "sha256": "39e7d08ac7fd1e40fedd99e364fbee59327b128cfc06d799d362b373d57cb709",
+      "size": 32849
+    },
+    {
+      "path": "sources/authorization-readability-refactor-design.json",
+      "sha256": "c4091942b32a73b51021fc19184bcf51f591db2fa6c10538fa78fcccc0bb97b5",
+      "size": 730
+    },
+    {
+      "path": "sources/authorization-readability-refactor-design.txt",
+      "sha256": "a51edf2d7f3d32ccea380e3c1cce8494633c2673292f455473c0e4f03fafa0f6",
+      "size": 133
+    },
+    {
+      "path": "sources/authorization-readability-refactor-implementation-plan.html",
+      "sha256": "cbae51f8f59695676c2cef3d19079f34ee93b984dcc33b2d590ed51ffabf3749",
+      "size": 32933
+    },
+    {
+      "path": "sources/authorization-readability-refactor-implementation-plan.json",
+      "sha256": "79ba9e93940d60294679510d4bcccdd80763e2226a1053713aa4d25da61020a5",
+      "size": 775
+    },
+    {
+      "path": "sources/authorization-readability-refactor-implementation-plan.txt",
+      "sha256": "335a797f06d86d82f38cdedc998678a67b752c5241eb713afccaf07eb5435ffe",
+      "size": 172
+    },
+    {
+      "path": "sources/credential-encryption-operations.html",
+      "sha256": "9f26363cc54d8d8c382f4dceeb50ad6799ec91c391850b51ac60e78d5cf349f2",
+      "size": 32701
+    },
+    {
+      "path": "sources/credential-encryption-operations.json",
+      "sha256": "afc855037e751f6dcbf6165753590f909ea4eb7db8d8ebba71702ae3e7e89bea",
+      "size": 603
+    },
+    {
+      "path": "sources/credential-encryption-operations.txt",
+      "sha256": "901ced26d9d7184e0dc1b6db496cca3a63ffbb43be90faa57c5e9c39ea99954e",
+      "size": 106
+    },
+    {
+      "path": "sources/current-user-sidebar-design.html",
+      "sha256": "b61054b09b1516bd834c3525c3243c8945c9c6a2226ec0920007dc695f443e0e",
+      "size": 32709
+    },
+    {
+      "path": "sources/current-user-sidebar-design.json",
+      "sha256": "a6dc356faca2a48bbf02d80ffe3ccc8f065f2436dcf1888d7900800abe43fde1",
+      "size": 632
+    },
+    {
+      "path": "sources/current-user-sidebar-design.txt",
+      "sha256": "c91ae12ac62c066a4cfd6c8d71751cb2a2aca86ab52e482fa2d7ba1c911ef3a3",
+      "size": 91
+    },
+    {
+      "path": "sources/current-user-sidebar-implementation-plan.html",
+      "sha256": "4392efd5ae12530d046c10579516fe849ecf76cef40367b97a0388c625459842",
+      "size": 33158
+    },
+    {
+      "path": "sources/current-user-sidebar-implementation-plan.json",
+      "sha256": "fc20d3b3699b6b137a2728ed7aa7f906c16dba4d45bf42cfb33647d0c42fdbe8",
+      "size": 1125
+    },
+    {
+      "path": "sources/current-user-sidebar-implementation-plan.txt",
+      "sha256": "1e086a1fef9f968658b1c449bd7cb10928ff7051114d85f41b9e1734f735fb9a",
+      "size": 351
+    },
+    {
       "path": "sources/forgot-password-ui-design.html",
-      "sha256": "fcef9015cb7a93b3c76e4c1ccf84dcdafd54caa6dbf821200532d1e468a29efd",
-      "size": 25612
+      "sha256": "7b69e19150b112a042d3a3bf41b61918e3698f8d2748546cd1fcb28e90eeb2f1",
+      "size": 32689
     },
     {
       "path": "sources/forgot-password-ui-design.json",
@@ -1503,8 +2298,8 @@
     },
     {
       "path": "sources/forgot-password-ui-implementation-plan.html",
-      "sha256": "6b2c7afbfecf892ead05178b363cc871fddcf5c20f7dd3031a32b2a04ac528ce",
-      "size": 25702
+      "sha256": "164f96604ecfab22bb83e2ad2cf53cc68d06cc505a9db1d1dea9e2c437f3507e",
+      "size": 32779
     },
     {
       "path": "sources/forgot-password-ui-implementation-plan.json",
@@ -1517,39 +2312,99 @@
       "size": 124
     },
     {
+      "path": "sources/global-navigation-and-page-placeholder-implementation-plan.html",
+      "sha256": "34a31c433987fe2cbda52fa252de63350aaed490b6cf3755888ffa49638f81ee",
+      "size": 33292
+    },
+    {
+      "path": "sources/global-navigation-and-page-placeholder-implementation-plan.json",
+      "sha256": "9bd5d7bf8e656234c1c59cc8254bf0c5e5cda080bc6a01925d9180485140eb38",
+      "size": 1241
+    },
+    {
+      "path": "sources/global-navigation-and-page-placeholder-implementation-plan.txt",
+      "sha256": "cf18282df71d1115f6cf542246cff82e281ee455e4a8b87c42b5e41f87c90726",
+      "size": 405
+    },
+    {
+      "path": "sources/global-navigation-design.html",
+      "sha256": "aeb2d22ad6fd836cf671179def43ab9123207bbda532a1ed482a1a2cdb0e1813",
+      "size": 33247
+    },
+    {
+      "path": "sources/global-navigation-design.json",
+      "sha256": "7ab61a56342331bc10c812c22de90c284bd02461e9ac1cbae94c2a23f7e0d41c",
+      "size": 1053
+    },
+    {
+      "path": "sources/global-navigation-design.txt",
+      "sha256": "756a8f8a9fa022695a9a25e288592fe87c6d2f73bde570ee05aeb5c57176262e",
+      "size": 303
+    },
+    {
+      "path": "sources/header-theme-toggle-design.html",
+      "sha256": "4e5d3f0c50bd4fd2215f50115f387cb78f3021721c91d083dd90fa52ed2e1b83",
+      "size": 32699
+    },
+    {
+      "path": "sources/header-theme-toggle-design.json",
+      "sha256": "448e8db64c67aae22a7daed0e57adddf8bc00a26d784e0d877a474ed5c016a03",
+      "size": 625
+    },
+    {
+      "path": "sources/header-theme-toggle-design.txt",
+      "sha256": "6356ea99f849b0bde71b5f8aad65fdf886316b54278161b53d57b194cdbcbcf6",
+      "size": 88
+    },
+    {
+      "path": "sources/header-theme-toggle-implementation-plan.html",
+      "sha256": "2cf1bc1c202328c43c03613f3928a1cdd58062af98c48f1746393c747c7f6d54",
+      "size": 33150
+    },
+    {
+      "path": "sources/header-theme-toggle-implementation-plan.json",
+      "sha256": "fd03753744c4aac4244e5f472881cef5753bd0accd66cc1732608ccda8e99378",
+      "size": 1118
+    },
+    {
+      "path": "sources/header-theme-toggle-implementation-plan.txt",
+      "sha256": "ddc8dcef08372c4145c62f3538ec652a449cb0fe8dd83518d1dd903dbaec106b",
+      "size": 348
+    },
+    {
       "path": "sources/identity-backend-foundation-design.html",
-      "sha256": "a3eb658e5798fb6ff228751ed2ced7169eec5368cf3e48804b8031b565b2594d",
-      "size": 26021
+      "sha256": "0dfd96c14a478925a1b39fca050fdbefd827b807cff51b3175cef166e0ca87b4",
+      "size": 33150
     },
     {
       "path": "sources/identity-backend-foundation-design.json",
-      "sha256": "766bbe0ece240a00825557991269758f65b44a7a479c36e059949b7079769534",
-      "size": 1141
+      "sha256": "409faa1fac1a66d14f3cddabf1e1609657965025ee232c1d9d783a489007f6ab",
+      "size": 1123
     },
     {
       "path": "sources/identity-backend-foundation-design.txt",
-      "sha256": "077a71ae1872da693cf58015bb85f3d8d791d6d258c3fbce2cccd0ceed92e9d2",
-      "size": 342
+      "sha256": "c26ef6569bd2527fbc013bccaa6b553e3054e43e16fa9876b8d39825a8623ca7",
+      "size": 333
     },
     {
       "path": "sources/identity-backend-foundation-implementation-plan.html",
-      "sha256": "6c8e5fc716a67740bc90be43a97782e16a662687008a184a3518f46c7dd47ea3",
-      "size": 26085
+      "sha256": "b15f0ab78c75bc3bf98fd7018fe9e5f3124adc2e65a8a1ee8add6f02db17c75d",
+      "size": 33240
     },
     {
       "path": "sources/identity-backend-foundation-implementation-plan.json",
-      "sha256": "502abca3c8e08acb2ec294582f1aca901a7fb3b84868737dc287793b185275de",
-      "size": 1192
+      "sha256": "be7c3c8a2d1dfcdd84eab1f4b2e8befe709a4c09a2450af0f4c30977857d0a37",
+      "size": 1174
     },
     {
       "path": "sources/identity-backend-foundation-implementation-plan.txt",
-      "sha256": "685b03d326b5241b326e74786a1c623718d1b97c68411f4b61cc71556d37c98c",
-      "size": 381
+      "sha256": "d3d814ea5cb0224af3738b4e28bb7852fda55c9f08dbdb65db85579add3d4887",
+      "size": 372
     },
     {
       "path": "sources/identity-functional-refactor-design.html",
-      "sha256": "a709da8d3aaa4c216863c71da3ec7400d2e2406544747170797c03c1a55648e0",
-      "size": 25712
+      "sha256": "e9729eb06b45d6c6deecd012677f7d74c230ef61e1505c36393305dd2dced265",
+      "size": 32789
     },
     {
       "path": "sources/identity-functional-refactor-design.json",
@@ -1563,8 +2418,8 @@
     },
     {
       "path": "sources/identity-functional-refactor-implementation-plan.html",
-      "sha256": "1c7a02ad75b24719a5f9431764f41e79fcd02b723c30f90ca62bbde7c847f9a8",
-      "size": 26032
+      "sha256": "8a3c339acce95887ec6ccdf2fab81ce249af72ecf7530311462ad10e298ec902",
+      "size": 33187
     },
     {
       "path": "sources/identity-functional-refactor-implementation-plan.json",
@@ -1578,13 +2433,13 @@
     },
     {
       "path": "sources/index.html",
-      "sha256": "88aa4c13ca7405edc9a716680cfe5a46b5f48618b37ca5398cc0bbafd349b940",
-      "size": 30434
+      "sha256": "533e88a440daf3b86df41cdd5ba9e5882782a142843ea9bd2e9a502c1d55c9af",
+      "size": 42440
     },
     {
       "path": "sources/minerva-agent-instructions.html",
-      "sha256": "a1c6d0e94cfe64e6804d41da75354aa9f2ccc69912dae71f22aa315cf0af3f5e",
-      "size": 25510
+      "sha256": "bf170bf2e880c6787a1144d9111b01c735f6ef42261233a2724d837cc4d8bec7",
+      "size": 32587
     },
     {
       "path": "sources/minerva-agent-instructions.json",
@@ -1598,8 +2453,8 @@
     },
     {
       "path": "sources/minerva-architecture.html",
-      "sha256": "5d0cbd5bc5cf66fb9f20b582cd592228cd5311eaeaff41624e3ac3dee9fa20f1",
-      "size": 25486
+      "sha256": "390c9ef7f3c47b5fc17bf1fdd02e2f1aac3b77bd6bd7e7b17ed9aa3a099bc6ba",
+      "size": 32563
     },
     {
       "path": "sources/minerva-architecture.json",
@@ -1613,8 +2468,8 @@
     },
     {
       "path": "sources/minerva-backlog.html",
-      "sha256": "0f2ddb3a8240449fdc892c500f256ebdcf23ecbbd8b8d0833d09f882a6adf7d3",
-      "size": 25436
+      "sha256": "fb0b72703ea3f9c953676266a9fe1e0db62c9f01b9e6bf7eedc788e2a12967b2",
+      "size": 32513
     },
     {
       "path": "sources/minerva-backlog.json",
@@ -1628,8 +2483,8 @@
     },
     {
       "path": "sources/minerva-executable-foundation-implementation-plan.html",
-      "sha256": "4db81048d16355a28232d80bbc7f2be3c0cdd8ac9bc1290bb3330b854b1e2795",
-      "size": 25773
+      "sha256": "ad12e3653cfa36f1a785d0a731184d387a2e96f7252af3b8c06244037f617a33",
+      "size": 32850
     },
     {
       "path": "sources/minerva-executable-foundation-implementation-plan.json",
@@ -1643,8 +2498,8 @@
     },
     {
       "path": "sources/minerva-figma-prototype-implementation-plan.html",
-      "sha256": "2f44450fc4c7cc3baa6405ba341691b1a11136260cb1cba068e6e52ae193d9fa",
-      "size": 25752
+      "sha256": "c4aebf0e72810bb9137363f0665da7497e4218bcda675f51357c7d80da22ff84",
+      "size": 32829
     },
     {
       "path": "sources/minerva-figma-prototype-implementation-plan.json",
@@ -1658,8 +2513,8 @@
     },
     {
       "path": "sources/minerva-mvp-delivery-plan.html",
-      "sha256": "090e293fa782a64e690414ca41088543aaedaf2826a3a8fa9dccf7407efcee47",
-      "size": 25600
+      "sha256": "f20934d4e249417ae72eb1ff2061470eef489ec44053a761fb730e241bcc099f",
+      "size": 32677
     },
     {
       "path": "sources/minerva-mvp-delivery-plan.json",
@@ -1673,8 +2528,8 @@
     },
     {
       "path": "sources/minerva-mvp-design.html",
-      "sha256": "e6438b807110fb3e90ed0c704e77d0ec265a72d714f36ee132613610d3820e0f",
-      "size": 25542
+      "sha256": "a683df70ff5a19149178eda8f1c964c46d1de9d4b4f70800e53aa84c59aebc83",
+      "size": 32619
     },
     {
       "path": "sources/minerva-mvp-design.json",
@@ -1688,38 +2543,38 @@
     },
     {
       "path": "sources/minerva-mvp-route-map-design.html",
-      "sha256": "283c939ed2d3fcc715c83ca25f0ea0e2532506e0dcb27e7015b385b93e6b3690",
-      "size": 25973
+      "sha256": "ddd561900ba3f46603e2cec74ce70b4995f8d53e74b41dd5c26a553d7900e609",
+      "size": 33090
     },
     {
       "path": "sources/minerva-mvp-route-map-design.json",
-      "sha256": "6d1c7c5ec61e81461a18a5f4d9bdacb8c7d383915bb98c78c0d13616bb9768da",
-      "size": 1099
+      "sha256": "7cb6f0ca115c1a63110f277bf3221e1202d73dd48f6e1088f0eafaf285a3d4ae",
+      "size": 1081
     },
     {
       "path": "sources/minerva-mvp-route-map-design.txt",
-      "sha256": "28d365d7dcda367045511bbdcda002b67f9c7476d69019481a12ff1842c56601",
-      "size": 324
+      "sha256": "dec1ea77961506fd92e2a617263b9f6777beded423c02ced66d3589c2d07df37",
+      "size": 315
     },
     {
       "path": "sources/minerva-mvp-ux-ui-prototype-design.html",
-      "sha256": "ab3dedf73c6cbb0cff8823cb11e8f1c16972244048cc1596c9f85046c6b16d65",
-      "size": 26007
+      "sha256": "affa721abfc13f9b4f37bf12536a69fe9286459cd2b8b566a89138a6f0d0df61",
+      "size": 33136
     },
     {
       "path": "sources/minerva-mvp-ux-ui-prototype-design.json",
-      "sha256": "f50563228bc36b516c41c54dc91e819ea6a751b1c93b03c3b8a3c2c14e95dbc5",
-      "size": 1127
+      "sha256": "f5829919c5e70782184c5cf53dcee3921714ae60e3bd035e679600b995376666",
+      "size": 1109
     },
     {
       "path": "sources/minerva-mvp-ux-ui-prototype-design.txt",
-      "sha256": "539afdae668e1a64b781ea97e72a9527c663d99f42f759321707664388fa76b3",
-      "size": 342
+      "sha256": "5576e0f78b4024d65ca9e37885e9dda0f620a158451585a70c20ad965dce1273",
+      "size": 333
     },
     {
       "path": "sources/minerva-product-specification.html",
-      "sha256": "063d346626a560f3047202b0a10aa83737523b92c6bfc8f8156fec8f1b1cdd3e",
-      "size": 25558
+      "sha256": "835eea6bc67c187c254a5b9c8ae3a640fa321b2bd2453d6b6bd5580b8b2724dd",
+      "size": 32635
     },
     {
       "path": "sources/minerva-product-specification.json",
@@ -1733,23 +2588,23 @@
     },
     {
       "path": "sources/minerva-progress.html",
-      "sha256": "9e658144d13b090961d6a619407ff6739f4bd87166962ace87e8de4846e8b43a",
-      "size": 25801
+      "sha256": "6f4d34289204296e5d2da67e6eba4a95d755ba3f360ba8e690a70b8de9d8924f",
+      "size": 32894
     },
     {
       "path": "sources/minerva-progress.json",
-      "sha256": "e86a9553aa26f037f5fcffd919fb5bcbb5ab8b7d7125719acd1f8679347b5261",
-      "size": 929
+      "sha256": "a65fe10964a1f04bd5261226da2a91f08d6d513f061877fdeee58ab48a9330d0",
+      "size": 911
     },
     {
       "path": "sources/minerva-progress.txt",
-      "sha256": "12c518a49e1a6f046e3d3408f5fdfa0a217cd41786fdfe7ef0c5ee6876b74be7",
-      "size": 288
+      "sha256": "969cbbd8f2ff5783a591ebecabec4d4f7ba88bc9876ffbc6cbbb75041775f3d0",
+      "size": 279
     },
     {
       "path": "sources/minerva-roadmap.html",
-      "sha256": "c4128d7efe0264fb95aa61f76443bebc3bb6252ae89f454a92f11dda60dda3e9",
-      "size": 25436
+      "sha256": "f8e98386a821418b3eafbb1607cf33bb002c30a1fdab7a588c032ed2e83caabd",
+      "size": 32513
     },
     {
       "path": "sources/minerva-roadmap.json",
@@ -1763,53 +2618,53 @@
     },
     {
       "path": "sources/mvp-route-skeleton-implementation-plan.html",
-      "sha256": "b6b50005ed760696b305f0fe7dd88d6839687ff05f01301ae4a99a6d7406413f",
-      "size": 26013
+      "sha256": "9dc701a9f40093e412d4d45a0fcdb5d721aaf3dfd9c77ccfff9db6ae49cb0589",
+      "size": 33150
     },
     {
       "path": "sources/mvp-route-skeleton-implementation-plan.json",
-      "sha256": "fbd25b1e4fe7fc9c90b9296f86606752bec43dafcc96544cddddb1abf9d55073",
-      "size": 1129
+      "sha256": "8181d934389ff06ef4f5bc098343c93ef99d226c8c041c677987437dcc682d47",
+      "size": 1111
     },
     {
       "path": "sources/mvp-route-skeleton-implementation-plan.txt",
-      "sha256": "8bcd06ea68d2ceb94e23d4c485b3ad29e2eecbffe84bb04d01a542903e35e3df",
-      "size": 354
+      "sha256": "33c99438a060074a8e2c17ecfd93d77db7cd819f86da35ad0d47c72ab0cc4eb9",
+      "size": 345
     },
     {
       "path": "sources/nuxt-feature-modules-design.html",
-      "sha256": "9174a3923437e17198e65ba47edb6b07172400cb8aed89f563441a47a2bbaef8",
-      "size": 25943
+      "sha256": "a9f4a3c701f5f4be2cf043924e4c85450b76f8138a4212c38adee4338e317119",
+      "size": 33080
     },
     {
       "path": "sources/nuxt-feature-modules-design.json",
-      "sha256": "a59b3ba7d7fce7248550ba3ed1472232e1c2f7c546f0987cdc39c09077ca7111",
-      "size": 1092
+      "sha256": "c8b4428406bc671845f3015059fe34336ceaf28cbbd937ad19cfbf718d6663e0",
+      "size": 1074
     },
     {
       "path": "sources/nuxt-feature-modules-design.txt",
-      "sha256": "9ff867e22c25fd8c9b0bdc31b6e95e2357649184f48cc846f1677c28ca815c43",
-      "size": 321
+      "sha256": "a42949cb8daa0efdfb852c49ea7af80b9bb94e82594dae5c25abbb78787d29f6",
+      "size": 312
     },
     {
       "path": "sources/nuxt-feature-modules-implementation-plan.html",
-      "sha256": "f1a5e7b4c5c3381683410398097ef31cae307181610e5c5c8e2f857773472bca",
-      "size": 26033
+      "sha256": "7dc03c5bd418b51e254453d4a81dd19573dc96660537099bfab038f4b5dd477c",
+      "size": 33170
     },
     {
       "path": "sources/nuxt-feature-modules-implementation-plan.json",
-      "sha256": "63a3f683946c62bc155224237ba8e8906af36020b8a11aeff16ad99635d2782b",
-      "size": 1143
+      "sha256": "8cc3cdcffdfddec327f88fcd53fa324922c488f8f24a61cf3c64c4d59fe5a1ad",
+      "size": 1125
     },
     {
       "path": "sources/nuxt-feature-modules-implementation-plan.txt",
-      "sha256": "2c8e34f67b726c7c73377ec441a713a9dea3cf18b368c508580e7c1231f634ed",
-      "size": 360
+      "sha256": "d8c4db6b8bb28bc1f808cd7742a4893768df43e7bd3b8c6bbddebe012c84965a",
+      "size": 351
     },
     {
       "path": "sources/postgresql-docker-compose-design.html",
-      "sha256": "aa7e75fd9f261ba241c3aac9e9e17dd7220fa1c8cb0591989381bbdf5a4552db",
-      "size": 25668
+      "sha256": "1c87457a4ea9ebc97645b7d4c5ba3fa594aa63414a9c44c5bd00eb73b88e2b17",
+      "size": 32745
     },
     {
       "path": "sources/postgresql-docker-compose-design.json",
@@ -1823,8 +2678,8 @@
     },
     {
       "path": "sources/postgresql-docker-compose-implementation-plan.html",
-      "sha256": "7859507e3045086ff889ec969af5277ea0cc3ce3c9bd55ff89965da63fec956b",
-      "size": 25758
+      "sha256": "03e5c848fdfa8f153352c2ca15cd095db4a79c7721aaba5ee578e733d21d8d5b",
+      "size": 32835
     },
     {
       "path": "sources/postgresql-docker-compose-implementation-plan.json",
@@ -1837,9 +2692,99 @@
       "size": 145
     },
     {
+      "path": "sources/project-credentials-design.html",
+      "sha256": "318d2699b7417b4190b96694d112b3a3843cb1dbec94863ec4699dd86874d681",
+      "size": 32760
+    },
+    {
+      "path": "sources/project-credentials-design.json",
+      "sha256": "d2e398c19d18fc158bf037809e823c1e20c0a9f58e706c4feb1748b7798466bc",
+      "size": 625
+    },
+    {
+      "path": "sources/project-credentials-design.txt",
+      "sha256": "3f4901a2cafde37265f6ec2a5ae567629ef48218cdbbc25552a5fa11b0ce6d36",
+      "size": 88
+    },
+    {
+      "path": "sources/project-credentials-implementation-plan.html",
+      "sha256": "c75fadfd2832ea68f2066625152c30c900e16ccd234dfec18c1d763212362846",
+      "size": 32789
+    },
+    {
+      "path": "sources/project-credentials-implementation-plan.json",
+      "sha256": "094f41175c2691b8c7c0eb6dfdd207b4a5bc3fcf1afa0008a7eef120623ec4b7",
+      "size": 676
+    },
+    {
+      "path": "sources/project-credentials-implementation-plan.txt",
+      "sha256": "3b83d7cf411f5775a1e7f633d8785dee96d5abc530a698ec643a04422f4903cf",
+      "size": 127
+    },
+    {
+      "path": "sources/projects-and-rbac-foundation-design.html",
+      "sha256": "8d0bd8ed925845ee405fbea36e2248431fbca6aca6ce7f452eb4d60c8cb20dad",
+      "size": 32781
+    },
+    {
+      "path": "sources/projects-and-rbac-foundation-design.json",
+      "sha256": "81a201abf6f302770cb1a08c03925a113d8e2f59261dffff12cb451ca3e72f6b",
+      "size": 680
+    },
+    {
+      "path": "sources/projects-and-rbac-foundation-design.txt",
+      "sha256": "fcedbdbb8653f0d42141325fbe301b94583cbe2a27db0ec33d4244a303d51eaa",
+      "size": 115
+    },
+    {
+      "path": "sources/projects-and-rbac-foundation-implementation-plan.html",
+      "sha256": "652aa43932d00e1a2547a33be79ff08ef3987432ea16240463497197beb43c17",
+      "size": 33242
+    },
+    {
+      "path": "sources/projects-and-rbac-foundation-implementation-plan.json",
+      "sha256": "fd23a25484dfc14b474d5e3933f57dc6b7cc5085fbe673dc2816ae3c749a7b65",
+      "size": 1173
+    },
+    {
+      "path": "sources/projects-and-rbac-foundation-implementation-plan.txt",
+      "sha256": "e45a2f915a4190cc02e6a284b0c44b8ffca4907a0c6d46054c3d716456cc7ab2",
+      "size": 375
+    },
+    {
+      "path": "sources/projects-list-and-create-ui-design.html",
+      "sha256": "6b528334c37cd05e474c4bb83db2263aa590b8990ffbb27ee17bf5053ad8b797",
+      "size": 33150
+    },
+    {
+      "path": "sources/projects-list-and-create-ui-design.json",
+      "sha256": "8e06e208a2e31e77317e973881eb6dc54ac0a97725689486c762fad698fb0b44",
+      "size": 1123
+    },
+    {
+      "path": "sources/projects-list-and-create-ui-design.txt",
+      "sha256": "6d4bb4d99e3e6f31286fddd922295b19ad57405dc57de4e4085ab5fa8d1606e8",
+      "size": 333
+    },
+    {
+      "path": "sources/projects-list-and-create-ui-implementation-plan.html",
+      "sha256": "582c9a886ec0331649b62794c48ba08be2dc2b6853333a9058023c68545c3bac",
+      "size": 33240
+    },
+    {
+      "path": "sources/projects-list-and-create-ui-implementation-plan.json",
+      "sha256": "56187b90f12967cb3656e47d2a80276a09c7e5ebf01b1ab74b4eb0d83d16461f",
+      "size": 1174
+    },
+    {
+      "path": "sources/projects-list-and-create-ui-implementation-plan.txt",
+      "sha256": "1ed28a867e2daa166d8f2f7adc959799e6eb2a07c6bffc83ba1b3b025a07533a",
+      "size": 372
+    },
+    {
       "path": "sources/reset-password-ui-design.html",
-      "sha256": "4acc3e8cde752f19b0013f9c7881b38743bb9cc953a69c2125385aabf3f15b88",
-      "size": 25602
+      "sha256": "50697f1e53bc15c4fc419fed6e50260f81b51b643d8f1d135ed42095b4c928c6",
+      "size": 32679
     },
     {
       "path": "sources/reset-password-ui-design.json",
@@ -1853,8 +2798,8 @@
     },
     {
       "path": "sources/reset-password-ui-implementation-plan.html",
-      "sha256": "29dcefdcc2775a5eafbbbbfbeb29fc05228736cec63553d88fe54383ecb5d0b6",
-      "size": 25692
+      "sha256": "c71b0fc98407dc19c0ba74d09a6757cc0573bcc0bc22b8050231ea50737dc4fe",
+      "size": 32769
     },
     {
       "path": "sources/reset-password-ui-implementation-plan.json",
@@ -1868,8 +2813,8 @@
     },
     {
       "path": "sources/route-authorization-design.html",
-      "sha256": "46aa8f606918de26f99cb38ce781974b1d3fb3c0a61528bd3513283ea34c6a26",
-      "size": 25622
+      "sha256": "77f6cd1feb11cadce0739326702a67923bd8f82dd543c5e5aa449aaeec82d368",
+      "size": 32699
     },
     {
       "path": "sources/route-authorization-design.json",
@@ -1883,8 +2828,8 @@
     },
     {
       "path": "sources/route-authorization-implementation-plan.html",
-      "sha256": "5f9b62a3405b51861cfeda3621585d4a062a5e5bad74ead9393ca12497ed9848",
-      "size": 25712
+      "sha256": "c2ec467a8f79c540adb15b4881e2181574d760aa28482e37ab724fabf2e1c1c5",
+      "size": 32789
     },
     {
       "path": "sources/route-authorization-implementation-plan.json",
@@ -1898,8 +2843,8 @@
     },
     {
       "path": "sources/tesserae-development-memory.html",
-      "sha256": "f99c7ebd74e0306294f90d42b82ab7d8f290a99d19943e6e54fabaf05de386a0",
-      "size": 25558
+      "sha256": "0487fc6bae720dc59f30f8db56a5d21ed4201ec3f0e46485d74e67400c5944d8",
+      "size": 32635
     },
     {
       "path": "sources/tesserae-development-memory.json",
@@ -1913,8 +2858,8 @@
     },
     {
       "path": "sources/tesserae-refresh-wrapper-design.html",
-      "sha256": "ceb888f7c54fc8a2f9fe9d1d2ab5ef4eb47a5ca1939c4ba6275a6efaab831faa",
-      "size": 25672
+      "sha256": "cc741eca2ddf4350a7332e78592b7acf4a94697e5b1ae02ed5436ae572557e08",
+      "size": 32749
     },
     {
       "path": "sources/tesserae-refresh-wrapper-design.json",
@@ -1928,8 +2873,8 @@
     },
     {
       "path": "sources/tesserae-refresh-wrapper-implementation-plan.html",
-      "sha256": "c24a496cd0414f8011fdb82a71bb43eef6d2e9de094e64170dbda6925cd27074",
-      "size": 25762
+      "sha256": "29c710809275ba27446d5a25c19e1491bc2531855648405581237a3ca2bc4460",
+      "size": 32839
     },
     {
       "path": "sources/tesserae-refresh-wrapper-implementation-plan.json",
@@ -1943,8 +2888,8 @@
     },
     {
       "path": "sources/user-identity-and-profile-design.html",
-      "sha256": "9091c402bdc98662ae302712b46e366fac699947296fd6cad1cb479737a48b49",
-      "size": 25674
+      "sha256": "9c6b934296d1c62a811db4e731f8ff70ed61820f8b3295c8f747f8f78d7869c4",
+      "size": 32751
     },
     {
       "path": "sources/user-identity-and-profile-design.json",
@@ -1958,28 +2903,28 @@
     },
     {
       "path": "syntheses/index.html",
-      "sha256": "87471e93ca0b6c74fb2959b7fb41043574dee0bdb640d3e51bd883c90381214f",
-      "size": 22010
+      "sha256": "31cbf334e9423abcca4c6bfa17ad3d45a0dbea128d3fd4cc1cc03ab3d79a7316",
+      "size": 29087
     },
     {
       "path": "syntheses/pulse.html",
-      "sha256": "a3b284e83f3c9808a4b0c589327dd1930cc038860ea01f9fc87c785513eb2a9e",
-      "size": 25658
+      "sha256": "573ab92a26bc943c0adb7e4f41c66b93f4ca31482bd6719f02d4c3b4a57ca393",
+      "size": 32736
     },
     {
       "path": "syntheses/pulse.json",
-      "sha256": "009686f1e01d8439fdb2732371417377a9d30770040005d3e3fa4299cd6f596a",
-      "size": 3432
+      "sha256": "59068250fbd374caf36195f61bda064c260ad29aeb557f6d188fee3d67acbfff",
+      "size": 5012
     },
     {
       "path": "syntheses/pulse.txt",
-      "sha256": "cb09d12eb82def68027c831ed136b57b6ec6fee16562b2b42d157dc31b49059b",
+      "sha256": "80596d4dbc11f7049fe7ad434b0655fc799a0408b5d7edb4c895535e4b6408ee",
       "size": 327
     },
     {
       "path": "timeline/2026-06-24.html",
-      "sha256": "1434c3bfe887a64da9eba04abdb92ca95670870fa0852c5690f226ce126c3c26",
-      "size": 23775
+      "sha256": "0f0b14f7c7fe3bf2959b80cb8ef382f0f4e69d54107efa236b62b1501256723c",
+      "size": 30852
     },
     {
       "path": "timeline/2026-06-24.json",
@@ -1993,8 +2938,8 @@
     },
     {
       "path": "timeline/2026-06-27.html",
-      "sha256": "5ece6f07f38273bd89ca6211823acd1ebc5ea4730cb64ad94727d02be80466d1",
-      "size": 24125
+      "sha256": "94b615d27fa85862365029f57fddd2bafdc507eadb741af18188216aff6d908d",
+      "size": 31202
     },
     {
       "path": "timeline/2026-06-27.json",
@@ -2008,8 +2953,8 @@
     },
     {
       "path": "timeline/2026-06-28.html",
-      "sha256": "5d1b7f664e8828a34d7a86d4f274cd8ee296aaeea772c5187d7192d7630bee86",
-      "size": 24069
+      "sha256": "c75107f8a9c34f9950877edbb190c0ce6a19635e9feaec2309352534e5186b5f",
+      "size": 31146
     },
     {
       "path": "timeline/2026-06-28.json",
@@ -2023,8 +2968,8 @@
     },
     {
       "path": "timeline/2026-06-29.html",
-      "sha256": "62ef2a34fee79de6d4cbdd33a6d72708b5a80307cd975c19fb8ece81d38fa6a1",
-      "size": 24097
+      "sha256": "620f244ea45bbbbad227a52edbe9685bce960d3f51036f48147551f05203d7c2",
+      "size": 31174
     },
     {
       "path": "timeline/2026-06-29.json",
@@ -2038,8 +2983,8 @@
     },
     {
       "path": "timeline/2026-06-30.html",
-      "sha256": "4a7da712c45a4f42d8b5e912e22046deea2a97d816c892e9573715e2f8e3313f",
-      "size": 22697
+      "sha256": "5fc4c307edd9f8c955cd172932584cb53f25357ecbb63dbf25d17b85efe9b979",
+      "size": 29774
     },
     {
       "path": "timeline/2026-06-30.json",
@@ -2052,14 +2997,89 @@
       "size": 71
     },
     {
+      "path": "timeline/2026-07-01.html",
+      "sha256": "5ec9d377b76d0a55578e6b9cf50ea57d2ac004315333e9a5a35c20100700560e",
+      "size": 31019
+    },
+    {
+      "path": "timeline/2026-07-01.json",
+      "sha256": "5597f843de5fdcc1b227231b1c90e9595f1c641833333a4cbcce20db680e946e",
+      "size": 833
+    },
+    {
+      "path": "timeline/2026-07-01.txt",
+      "sha256": "14dcbcd005fee2d305d6c673da5d9609f7a8b7db47bc0a17ada93a1bb8d9a4f1",
+      "size": 71
+    },
+    {
+      "path": "timeline/2026-07-03.html",
+      "sha256": "e960dd0ea584950aa3110f891e678d8dcaebe4b195d8cac41deba527aa8bf315",
+      "size": 29977
+    },
+    {
+      "path": "timeline/2026-07-03.json",
+      "sha256": "68c44c30c43df284ab2f465d8d590da05b3dec6fdb26d88b86313d3ea2c992bf",
+      "size": 487
+    },
+    {
+      "path": "timeline/2026-07-03.txt",
+      "sha256": "d1711763dcf316c0fcd17aa1efbb1fd3c349cf31f536f62f8129f8ea4fb404d2",
+      "size": 71
+    },
+    {
+      "path": "timeline/2026-07-04.html",
+      "sha256": "a6bc7eb2d080cf59a98f2c940734f273946248576b51be49543c5230f6c6d743",
+      "size": 29973
+    },
+    {
+      "path": "timeline/2026-07-04.json",
+      "sha256": "539e1d64440cf731335177644c35c4659b0b5097aba0041af0d738ff8b347602",
+      "size": 485
+    },
+    {
+      "path": "timeline/2026-07-04.txt",
+      "sha256": "142432ed40d6036b010f08d20968c1ef9a863938766759ed79f6ee3b6b1a8978",
+      "size": 71
+    },
+    {
+      "path": "timeline/2026-07-05.html",
+      "sha256": "a59766eb8ef351d8a818a99715c72aa4a59a6545a41ee19c83e2c6ae00a94d14",
+      "size": 30653
+    },
+    {
+      "path": "timeline/2026-07-05.json",
+      "sha256": "c5ba7cbc75b5959d505242c62f602b5bd6b4b24be82e6873d0c83ea46e2b3a12",
+      "size": 702
+    },
+    {
+      "path": "timeline/2026-07-05.txt",
+      "sha256": "b6ca454feff5271d28c36a712313e994cdfdd1715af43de8cb79345996affe72",
+      "size": 71
+    },
+    {
+      "path": "timeline/2026-07-11.html",
+      "sha256": "128ef8caff56f9ebe0197e446f2f45c7070da67f1dd8b35b78ebba6ad0d40f08",
+      "size": 29775
+    },
+    {
+      "path": "timeline/2026-07-11.json",
+      "sha256": "0a4f78d4984477b9565f179a5d2f2bfa7cc3c94f405bb35af469df511664c074",
+      "size": 485
+    },
+    {
+      "path": "timeline/2026-07-11.txt",
+      "sha256": "2fa4edf6b4ea7581ed0f1aa6d0d3a1f05345a9f0138c5c3fd71bb690bcaa79d0",
+      "size": 71
+    },
+    {
       "path": "timeline/index.html",
-      "sha256": "c46a082b8d21ece0adcfb600f693ee609f3938da942110917a7c0555ce4b105d",
-      "size": 48917
+      "sha256": "a054f52f4f2a743210d219fb9a6603a4c5baaadafd2ef9ddef02f55859242c98",
+      "size": 57287
     },
     {
       "path": "topics/index.html",
-      "sha256": "9420b5c6111fc7ba11dafa1c50a697d07e10cdb580d06e92abd29f6d4c85501f",
-      "size": 21301
+      "sha256": "684e81cf364f6c718bc6f289e92409509bddb2caf1e3b2a69ed8db7790f45a45",
+      "size": 28378
     }
   ],
   "generator": "tesserae",

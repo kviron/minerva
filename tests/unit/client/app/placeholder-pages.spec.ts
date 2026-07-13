@@ -21,9 +21,10 @@ describe('pending pages', () => {
     ])
   })
 
-  it('renders the development placeholder on the dashboard and credentials pages', () => {
+  it('keeps the dashboard placeholder and replaces the credentials placeholder', () => {
     expect(dashboardSource).toContain('<AppPagePlaceholder')
-    expect(credentialsSource).toContain('<AppPagePlaceholder')
+    expect(credentialsSource).toContain('<CredentialsView')
+    expect(credentialsSource).not.toContain('<AppPagePlaceholder')
   })
 
   it('keeps credential and request logic out of the placeholder page', () => {

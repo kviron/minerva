@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { ProjectsView } from '@/features/projects'
+</script>
+
 <template>
-  <div />
+  <ProjectsView />
 </template>

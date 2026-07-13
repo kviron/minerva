@@ -5,6 +5,16 @@ import 'node:fs';
 import 'node:path';
 import 'node:crypto';
 import 'node:url';
+import 'zod';
+import 'drizzle-orm/postgres-js';
+import 'postgres';
+import 'nodemailer';
+import '@better-auth/core/error';
+import 'better-auth';
+import 'better-auth/adapters/drizzle';
+import 'better-auth/plugins/username';
+import 'drizzle-orm';
+import 'drizzle-orm/pg-core';
 
 const nitroApp = useNitroApp();
 const server = Bun.serve({

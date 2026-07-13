@@ -1,0 +1,335 @@
+2026-07-01-authorization-readability-refactor.md
+================================================
+
+# Authorization Readability Refactor Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Improve authorization type safety and readability while preserving every existing route, status, error code, and access decision.
+
+**Architecture:** Keep the Better Auth library assertion inside the Identity API adapter, expose a small browser-safe shared session view, cache successful server session resolution on the current H3 event, and centralize API access literals in an `as const` vocabulary. Pure policies remain separate from Nuxt/H3 effects.
+
+**Tech Stack:** TypeScript, Nuxt 4, H3/Nitro, Better Auth 1.6, Vitest, Playwright, Bun.
+
+---
+
+### Task 1: Type the client session at the adapter boundary
+
+**Files:**
+- Create: `shared/identity/session.ts`
+- Modify: `app/features/identity/api/auth-client.ts`
+- Modify: `app/features/identity/model/route-access.ts`
+- Modify: `app/features/identity/index.ts`
+- Modify: `app/middleware/auth.global.ts`
+- Modify: `tests/unit/client/identity/identity-api.spec.ts`
+- Modify: `tests/unit/client/identity/auth-middleware.spec.ts`
+- Modify: `tests/unit/client/identity/route-access.spec.ts`
+
+- [ ] **Step 1: Write failing type-boundary tests**
+
+Extend the client Identity tests so the adapter result is assignable to this contract and middleware consumes it without a local cast:
+
+```ts
+import type { IdentitySessionView } from '../../../../shared/identity/session'
+
+const session: IdentitySessionView = {
+  user: { superAdmin: true },
+}
+
+expect(session.user.superAdmin).toBe(true)
+```
+
+Keep the existing middleware behavior tests for allow, redirect, and `503`. Add a source-level regression assertion that `app/middleware/auth.global.ts` does not contain `as RouteSession` or `as IdentitySessionView`; the assertion belongs in `tests/unit/client/identity/auth-middleware.spec.ts` and reads only this repository-owned source file.
+
+- [ ] **Step 2: Run focused tests and confirm the contract is missing**
+
+```powershell
+bunx vitest run tests/unit/client/identity/auth-middleware.spec.ts tests/unit/client/identity/route-access.spec.ts tests/unit/client/identity/identity-api.spec.ts
+```
+
+Expected: FAIL because `shared/identity/session.ts` does not exist and middleware still contains the assertion.
+
+- [ ] **Step 3: Implement the client-safe boundary**
+
+Create `shared/identity/session.ts`:
+
+```ts
+export interface IdentitySessionView {
+  readonly user: {
+    readonly superAdmin?: boolean
+  }
+}
+
+export interface IdentitySessionResult {
+  readonly data: IdentitySessionView | null
+  readonly error: unknown
+}
+```
+
+Update `app/features/identity/api/auth-client.ts`:
+
+```ts
+import { createAuthClient } from 'better-auth/vue'
+import type { IdentitySessionResult, IdentitySessionView } from '../../../../shared/identity/session'
+
+const authClient = createAuthClient({ basePath: '/api/auth' })
+
+export async function getIdentitySession(): Promise<IdentitySessionResult> {
+  const result = await authClient.getSession()
+  return {
+    data: result.data as IdentitySessionView | null,
+    error: result.error,
+  }
+}
+```
+
+In `route-access.ts`, import `IdentitySessionView`, remove the local `RouteSession`, and type `session` as `IdentitySessionView | null`. Export the shared type from `app/features/identity/index.ts` with `export type { IdentitySessionView } from '../../../shared/identity/session'` only if a feature consumer needs it; otherwise keep the feature API smaller.
+
+Update `auth.global.ts` to pass `session` directly:
+
+```ts
+import { decideRouteAccess, getIdentitySession } from '@/features/identity'
+
+export default defineNuxtRouteMiddleware(async (to) => {
+  const { data: session, error } = await getIdentitySession()
+  const decision = decideRouteAccess({
+    path: to.path,
+    session,
+    sessionError: Boolean(error),
+  })
+
+  if (decision.type === 'redirect') return navigateTo(decision.to)
+  if (decision.type === 'error')
+    return abortNavigation(createError({ statusCode: 503, statusMessage: 'Service Unavailable' }))
+})
+```
+
+- [ ] **Step 4: Verify client Identity behavior and typecheck**
+
+```powershell
+bunx vitest run tests/unit/client/identity
+bun run typecheck
+```
+
+Expected: all client Identity tests and typecheck PASS; route decisions are unchanged.
+
+- [ ] **Step 5: Commit the typed adapter boundary**
+
+```powershell
+git add -- shared/identity/session.ts app/features/identity tests/unit/client/identity app/middleware/auth.global.ts
+git commit -m "refactor: type the client session boundary"
+```
+
+### Task 2: Cache a resolved session per H3 request
+
+**Files:**
+- Modify: `server/modules/identity/session/require-session.ts`
+- Modify: `tests/unit/identity/require-session.spec.ts`
+- Modify: `tests/integration/identity/session.spec.ts`
+- Modify: `tests/unit/authorization/require-super-admin.spec.ts`
+
+- [ ] **Step 1: Write failing request-cache tests**
+
+Add these cases to `tests/unit/identity/require-session.spec.ts` using events with `headers` and `context: {}`:
+
+```ts
+it('resolves a successful session once per event', async () => {
+  const session = { user: { id: 'user-id' } }
+  const getSession = vi.fn().mockResolvedValue(session)
+  const requireSession = createRequireSession(getSession)
+  const event = { headers: new Headers(), context: {} } as H3Event
+
+  await expect(requireSession(event)).resolves.toBe(session)
+  await expect(requireSession(event)).resolves.toBe(session)
+  expect(getSession).toHaveBeenCalledOnce()
+})
+
+it('never shares sessions between events', async () => {
+  const getSession = vi.fn()
+    .mockResolvedValueOnce({ user: { id: 'first' } })
+    .mockResolvedValueOnce({ user: { id: 'second' } })
+  const requireSession = createRequireSession(getSession)
+
+  const first = { headers: new Headers(), context: {} } as H3Event
+  const second = { headers: new Headers(), context: {} } as H3Event
+
+  await expect(requireSession(first)).resolves.toMatchObject({ user: { id: 'first' } })
+  await expect(requireSession(second)).resolves.toMatchObject({ user: { id: 'second' } })
+  expect(getSession).toHaveBeenCalledTimes(2)
+})
+```
+
+Also prove a `null` result and a thrown infrastructure error are not turned into cached authenticated sessions. Extend the super-admin test to call the guard after `requireSession(event)` and prove the resolver remains called once.
+
+- [ ] **Step 2: Run focused tests and observe duplicate resolution**
+
+```powershell
+bunx vitest run tests/unit/identity/require-session.spec.ts tests/unit/authorization/require-super-admin.spec.ts
+```
+
+Expected: FAIL because two calls with one event currently invoke the resolver twice.
+
+- [ ] **Step 3: Implement event-context caching**
+
+Update `server/modules/identity/session/require-session.ts`:
+
+```ts
+import type { H3Event } from 'h3'
+import { IDENTITY_CODE } from '../../../../shared/identity/constants'
+import { getAuth } from '../auth/get-auth'
+import { IdentityError } from '../identity-error'
+
+interface IdentitySessionContext {
+  identitySession?: unknown
+}
+
+export function createRequireSession<Session>(
+  getSession: (headers: Headers) => Promise<Session | null>,
+) {
+  return async function requireSession(event: H3Event): Promise<Session> {
+    const context = event.context as typeof event.context & IdentitySessionContext
+    if (context.identitySession !== undefined)
+      return context.identitySession as Session
+
+    const session = await getSession(event.headers)
+    if (session === null)
+      throw new IdentityError(IDENTITY_CODE.AUTH_REQUIRED)
+
+    context.identitySession = session
+    return session
+  }
+}
+
+export const requireSession = createRequireSession(async headers =>
+  await getAuth().api.getSession({ headers }) ?? null,
+)
+```
+
+Keep the cache local to `event.context`; do not introduce module-global session state or a complete actor object.
+
+- [ ] **Step 4: Verify unit and PostgreSQL session behavior**
+
+```powershell
+bunx vitest run tests/unit/identity/require-session.spec.ts tests/unit/authorization/require-super-admin.spec.ts
+docker compose --profile test up -d --wait postgres-test
+bunx vitest run tests/integration/identity/session.spec.ts
+bun run typecheck
+```
+
+Expected: focused unit and integration tests PASS; the resolver runs once per event and separate events remain isolated.
+
+- [ ] **Step 5: Commit request-scoped caching**
+
+```powershell
+git add -- server/modules/identity/session/require-session.ts tests/unit/identity/require-session.spec.ts tests/unit/authorization/require-super-admin.spec.ts tests/integration/identity/session.spec.ts
+git commit -m "refactor: cache the request session"
+```
+
+### Task 3: Centralize API access values
+
+**Files:**
+- Modify: `server/modules/authorization/api-access.ts`
+- Modify: `server/middleware/authorize-api.ts`
+- Modify: `tests/unit/authorization/api-access.spec.ts`
+- Modify: `tests/unit/authorization/authorize-api-middleware.spec.ts`
+
+- [ ] **Step 1: Write a failing vocabulary test**
+
+Add to `tests/unit/authorization/api-access.spec.ts`:
+
+```ts
+import { API_ACCESS } from '../../../server/modules/authorization/api-access'
+
+expect(API_ACCESS).toEqual({
+  NOT_API: 'not-api',
+  PUBLIC: 'public',
+  AUTHENTICATED: 'authenticated',
+  SUPER_ADMIN: 'super-admin',
+})
+```
+
+Replace expected raw literals in classifier tests with `API_ACCESS` members. Middleware tests must likewise exercise the constants through classifier behavior rather than duplicate a second vocabulary.
+
+- [ ] **Step 2: Run authorization tests and confirm the export is missing**
+
+```powershell
+bunx vitest run tests/unit/authorization/api-access.spec.ts tests/unit/authorization/authorize-api-middleware.spec.ts
+```
+
+Expected: FAIL because `API_ACCESS` is not exported.
+
+- [ ] **Step 3: Implement the closed-set vocabulary**
+
+At the top of `api-access.ts`:
+
+```ts
+export const API_ACCESS = {
+  NOT_API: 'not-api',
+  PUBLIC: 'public',
+  AUTHENTICATED: 'authenticated',
+  SUPER_ADMIN: 'super-admin',
+} as const
+
+export type ApiAccess = typeof API_ACCESS[keyof typeof API_ACCESS]
+```
+
+Return these members from `classifyApiAccess` and compare against them in `authorize-api.ts`. Do not change the public endpoint set or path matching.
+
+- [ ] **Step 4: Verify authorization behavior**
+
+```powershell
+bunx vitest run tests/unit/authorization
+bun run typecheck
+```
+
+Expected: all authorization tests and typecheck PASS with unchanged classification results.
+
+- [ ] **Step 5: Commit the vocabulary refactor**
+
+```powershell
+git add -- server/modules/authorization/api-access.ts server/middleware/authorize-api.ts tests/unit/authorization
+git commit -m "refactor: centralize API access values"
+```
+
+### Task 4: Full verification and project records
+
+**Files:**
+- Modify: `docs/progress.md`
+
+- [ ] **Step 1: Run the complete verification matrix**
+
+```powershell
+docker compose --profile test up -d --wait postgres-test mailpit
+bun run typecheck
+bun run test:unit
+bun run test:integration
+bun run test:e2e
+bun run build
+```
+
+Expected: every command exits `0`; public routes, `401/403`, redirects, password recovery, and administration behavior remain unchanged.
+
+- [ ] **Step 2: Record the completed refactor**
+
+Append one bullet to `docs/progress.md` stating that the authorization implementation now uses a browser-safe typed session boundary, request-scoped session reuse, and a single API-access vocabulary without changing access behavior.
+
+- [ ] **Step 3: Refresh Tesserae and exclude generated state**
+
+```powershell
+./scripts/refresh-tesserae.ps1
+git diff --check
+git status --short
+```
+
+Expected: sessions import, compile, and Obsidian sync succeed; `.tesserae`, `.output`, secrets, uploads, backups, and generated indexes are not staged or committed.
+
+- [ ] **Step 4: Commit progress documentation**
+
+```powershell
+git add -- docs/progress.md
+git commit -m "docs: record authorization readability refactor"
+```
+
+- [ ] **Step 5: Request final review**
+
+Use `superpowers:requesting-code-review`, then `superpowers:verification-before-completion`, and finally `superpowers:finishing-a-development-branch`. Do not claim a check passed without fresh successful output.

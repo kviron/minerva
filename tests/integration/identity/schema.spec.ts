@@ -47,6 +47,11 @@ it('creates the projects RBAC tables and integrity constraints idempotently', as
       'project_role_permissions',
       'project_memberships',
       'audit_events',
+      'credential_categories',
+      'credential_category_role_grants',
+      'credential_category_member_grants',
+      'credentials',
+      'credential_fields',
     ]))
 
     const uniqueConstraints = await database.queryClient<{ table_name: string, columns: string[] }[]>`

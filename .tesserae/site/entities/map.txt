@@ -5,7 +5,12 @@ mAP
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **uses_metric** → Authenticated Page Placeholder Design _(SourceDocument)_
+- **uses_metric** → Current User Sidebar Implementation Plan _(SourceDocument)_
+- **uses_metric** → Global Navigation Design _(SourceDocument)_
+- **uses_metric** → Global Navigation and Page Placeholder Implementation Plan _(SourceDocument)_
+- **uses_metric** → Header Theme Toggle Implementation Plan _(SourceDocument)_
 - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_
 - **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
 - **uses_metric** → Identity backend foundation design _(SourceDocument)_
@@ -15,8 +20,11 @@ mAP
 - **uses_metric** → Minerva progress _(SourceDocument)_
 - **uses_metric** → Nuxt Feature Modules Implementation Plan _(SourceDocument)_
 - **uses_metric** → Nuxt feature modules design _(SourceDocument)_
+- **uses_metric** → Projects List and Create UI Implementation Plan _(SourceDocument)_
+- **uses_metric** → Projects and RBAC Foundation Implementation Plan _(SourceDocument)_
+- **uses_metric** → Projects list and create UI design _(SourceDocument)_
 
 ## Connected node types
 
-- SourceDocument: 9
+- SourceDocument: 17
 - CommunitySummary: 1

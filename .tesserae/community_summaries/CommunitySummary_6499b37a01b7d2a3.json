@@ -1,0 +1,28 @@
+{
+  "community_id": "CommunitySummary:6499b37a01b7d2a3",
+  "member_ids": [
+    "Metric:map:592bcbe13f80",
+    "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
+    "SourceDocument:global-navigation-design:5a4a92c5119d",
+    "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+    "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
+    "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+    "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+    "SourceDocument:minerva-progress:c476087b907f",
+    "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
+    "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
+    "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387"
+  ],
+  "schema_version": 1,
+  "summary": {
+    "description": "Designs and implementation plans for Minerva's MVP navigation, routes, feature modules, identity backend, UI prototype, and related progress, with mAP as an associated metric.",
+    "tags": [
+      "minerva",
+      "mvp",
+      "routing",
+      "identity",
+      "nuxt-modules"
+    ],
+    "title": "Minerva MVP Foundation"
+  }
+}

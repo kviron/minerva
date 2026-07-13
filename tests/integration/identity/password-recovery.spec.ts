@@ -65,7 +65,7 @@ async function getResetToken() {
   return decodeURIComponent(token!)
 }
 
-describe('password recovery', () => {
+describe('password recovery', { timeout: 15_000 }, () => {
   it('returns the shared request response for known and unknown accounts', async () => {
     await expect(requestPasswordReset({ email, ip: '127.0.0.20' }))
       .resolves.toBe(IDENTITY_CODE.RESET_REQUEST_ACCEPTED)

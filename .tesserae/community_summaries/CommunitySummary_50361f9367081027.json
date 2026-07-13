@@ -1,0 +1,30 @@
+{
+  "community_id": "CommunitySummary:50361f9367081027",
+  "member_ids": [
+    "Metric:map:592bcbe13f80",
+    "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
+    "SourceDocument:current-user-sidebar-implementation-plan:30919ebc2609",
+    "SourceDocument:global-navigation-and-page-placeholder-implement:9e69b2e463f9",
+    "SourceDocument:global-navigation-design:5a4a92c5119d",
+    "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+    "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
+    "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+    "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+    "SourceDocument:minerva-progress:c476087b907f",
+    "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
+    "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
+    "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387"
+  ],
+  "schema_version": 1,
+  "summary": {
+    "description": "Designs, implementation plans, and progress tracking for Minerva's MVP route skeleton, global navigation, authenticated placeholders, identity backend foundation, Nuxt feature modules, and related UX structure.",
+    "tags": [
+      "minerva-mvp",
+      "navigation",
+      "identity",
+      "nuxt-modules",
+      "implementation-plans"
+    ],
+    "title": "Minerva MVP Foundation"
+  }
+}

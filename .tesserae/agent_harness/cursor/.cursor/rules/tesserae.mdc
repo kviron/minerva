@@ -28,13 +28,13 @@ Expected MCP tools: `schema`, `graph_summary`, `search_nodes`, `node_context`, `
 
 ## Graph summary
 
-- Nodes: 43
-- Edges: 58
+- Nodes: 64
+- Edges: 95
 
 ## Representative nodes
 
 - **MATH** (`Benchmark`) — D:\develop\minerva\docs\superpowers\plans\2026-06-29-identity-functional-refactor.md
-- **Minerva MVP Identity Planning** (`CommunitySummary`) — Design and implementation-plan documents for Minerva's MVP identity backend, Nuxt feature modules, routing, UX prototypes, and progress tracking, with mAP included as a related metric node.
+- **Minerva MVP Planning** (`CommunitySummary`) — Designs and implementation plans for Minerva's MVP navigation, identity, projects, route structure, feature modules, UI placeholders, and RBAC foundation.
 - **mAP** (`Metric`) — D:\develop\minerva\docs\progress.md
 - **ADR 0001: Use a modular Nuxt/Nitro monolith** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0001-modular-monolith.md
 - **ADR 0002: Use global super administration and project-scoped RBAC** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0002-project-rbac.md
@@ -44,7 +44,7 @@ Expected MCP tools: `schema`, `graph_summary`, `search_nodes`, `node_context`, `
 - **ADR 0006: Use Bun as the package manager** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0006-use-bun-package-manager.md
 - **ADR 0007: Separate authentication identity, user profiles, contacts, and project roles** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0007-separate-authentication-profiles-and-project-roles.md
 - **ADR 0008: Use Nuxt-native client feature modules** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0008-use-nuxt-native-feature-modules.md
-- **Forgot-password UI design** (`SourceDocument`) — D:\develop\minerva\docs\superpowers\specs\2026-06-28-forgot-password-ui-design.md
+- **ADR 0009: Anonymize deleted user accounts while preserving identity references** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0009-anonymize-deleted-user-accounts.md
 
 ## Agent instructions
 

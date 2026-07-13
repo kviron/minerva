@@ -6,7 +6,7 @@ source_path: D:\develop\minerva\docs\superpowers\plans\2026-06-29-nuxt-feature-m
 edges_out:
   uses_metric: [map]
 edges_in:
-  summarizes: [minerva-mvp-identity-planning, project-pulse]
+  summarizes: [minerva-mvp-planning, project-pulse]
 source_kind: SourceDocument
 ---
 
@@ -20,7 +20,7 @@ source_kind: SourceDocument
 
 ## Incoming
 
-- [[minerva-mvp-identity-planning]] → summarizes
+- [[minerva-mvp-planning]] → summarizes
 - [[project-pulse]] → summarizes
 
 ## Related (dataview)

@@ -24,6 +24,8 @@ export default defineConfig({
       SMTP_PORT: '1025',
       MAIL_FROM: 'Minerva <no-reply@minerva.local>',
       MAILPIT_API_URL: 'http://127.0.0.1:8025',
+      CREDENTIAL_ENCRYPTION_ACTIVE_KEY_VERSION: '1',
+      CREDENTIAL_ENCRYPTION_KEYS: '1:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
     },
   },
 })

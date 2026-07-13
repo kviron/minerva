@@ -129,11 +129,11 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\AGENTS.md": {
-      "sha256": "28bc1bd0b6c998b0b575f1a34d9a25ac1166f33dec72098d42c365412212ef44",
+      "sha256": "b6a97656a37720e7cd541a105af55ac5daf9e3e9e448772e6130bfff4cb5c8c3",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\architecture.md": {
-      "sha256": "620c358eec28b81732b1e7131dbef8b46601865c8031a51a89b046c75ad0e95f",
+      "sha256": "1aa29898916b96b1bb8d03da114dadc60b7d978a3660c8b0ef5d505d5ff584a6",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\backlog.md": {
@@ -172,20 +172,44 @@
       "sha256": "444217eb458211470b0372181ed6c08d3c55087f9f9987fbc7738ec896642ef7",
       "source_kind": "SourceDocument"
     },
+    "D:\\develop\\minerva\\docs\\decisions\\0009-anonymize-deleted-user-accounts.md": {
+      "sha256": "92e7b5239f20cc9013d834aaafdfd91bdcf1ea688515cda77bbede69e002a58b",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0010-store-project-credentials-with-category-access.md": {
+      "sha256": "2da7ef775ed91cbb3fd19703c474338c1aa89970b532381d77abba910ccb40f2",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0011-display-credential-logins-in-project-lists.md": {
+      "sha256": "011e0dc48a742d808ebe472ebd6fa88495c6e13e0fb3bce9bf2c076657695b48",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0012-use-feature-scoped-actions-for-client-effects.md": {
+      "sha256": "d79d6e15f0cb6cb8ed94a1d6f6b0e22d355289311029d7ddae353277d7b4390b",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0013-keep-client-actions-stateless-and-feature-scoped.md": {
+      "sha256": "23d4e213669148ff1adb3d0421c918676fd29ff40a0993b9192f9ca51cde1b88",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\operations\\credential-encryption.md": {
+      "sha256": "1759722834776f493afed7b5cc3dc1ae47ed2a4296fff6069bc2c0091bcace6f",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\docs\\operations\\tesserae.md": {
       "sha256": "5e559e1ce185d68c412255a72d741c09abae46956646d0178a6aa3e5d9599ae8",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\product-spec.md": {
-      "sha256": "7a4fcaf07d1b4b02ed5166753d9c33e9e711908b11e1e8ce29d2070242359eed",
+      "sha256": "0ed3f53fef9dec723601ba2aef10038f5c8eec59cb9084a6b5a27c861f54a9d2",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\progress.md": {
-      "sha256": "8db050d7a7391e5717621d09631bc5d3367c0f7d17de4d9f5fcbb9f47dbfb46c",
+      "sha256": "343c4637b3636c73f8270c96ce4ab81b6c029f140d351cc9fd33ebb504e3d561",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\roadmap.md": {
-      "sha256": "c6d242b7967cf0676cc44f62f9e0be023afc28500a85dffbc153c7bb613eed2f",
+      "sha256": "ce71aa88676f42c135d5ddd92670815d7bafbb9d79c6c094f7291428d8303bb7",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-foundation.md": {
@@ -236,6 +260,34 @@
       "sha256": "737da68baffc7ea3f041c5166dac4c1b9116b8b83a87db0a9ec5a0a907ca11b2",
       "source_kind": "SourceDocument"
     },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-01-authorization-readability-refactor.md": {
+      "sha256": "1d2795f8535ae94dbf0b5514a3071cfdd7db6c7addda03b43d2096f974cdf07d",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-01-global-navigation-and-page-placeholder.md": {
+      "sha256": "150dc7db03a666779171d923bb129bc5e092ebaca266481369a38b2007f72b04",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-03-current-user-sidebar.md": {
+      "sha256": "badd01e499061326fda008210177673bf38ff4fd2e587c844cfadae6fb448d4a",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-04-header-theme-toggle.md": {
+      "sha256": "38f0290ab2f8b68c6913c5af9bcf3ebe40ff04eb23a2804870a62d1e387c4a10",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-05-projects-list-and-create-ui.md": {
+      "sha256": "03bf6e85de565f5fc3bc28593c08a0fade89c4eea5cabdf78a6068b7d4890658",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-05-projects-rbac-foundation.md": {
+      "sha256": "3f21c15108a4b665e7f170d32bba8d9efa6aeebba8d5e791f4428759a2e3c260",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-11-project-credentials.md": {
+      "sha256": "cd6f6e9f1bbb1b710f70bc5ac1e80a52d74575c8bf946c1253c4bddc727fce76",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-mvp-design.md": {
       "sha256": "68951988868ab0b552312d71c3b4dc0a03a9be2c3a1eb6582f4a3dcd292e85e4",
       "source_kind": "SourceDocument"
@@ -245,7 +297,7 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-minerva-mvp-route-map-design.md": {
-      "sha256": "6857bd2000f1d66db4690a48a462f8716e8d1e59c254f1645b875b05bd538187",
+      "sha256": "7a85d29733302643ab6ea947ae24d0966c3ef59b8a18fec3d7de0f7d4aa9a495",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-27-postgresql-compose-design.md": {
@@ -281,7 +333,39 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-30-route-authorization-design.md": {
-      "sha256": "add8e51700e34aad6fe805a0d5af84f787635ece09ea17b99a9d054e06737179",
+      "sha256": "9bcfeae62e8f38310dc198dba067b2f04e13da0105c2bded91cdf45836dede6d",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-01-authenticated-page-placeholder-design.md": {
+      "sha256": "20e92694561978130e4148b3ad4b04f9b94ff3860fa670f0c3f86734389d13c0",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-01-authorization-readability-refactor-design.md": {
+      "sha256": "66e9722641f3a14d5d11fc9c2a5607a651251f897f66e54cf9553c4f9027ba29",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-01-global-navigation-design.md": {
+      "sha256": "d7c3673868808ade59da6355492dd0d5be23b81ba4a75feaeccae30ee5e59841",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-03-current-user-sidebar-design.md": {
+      "sha256": "7b1422e9f7c19f770bb68073c69084f31524eb2705426f490cc463e899fff5df",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-04-header-theme-toggle-design.md": {
+      "sha256": "04980cc7f0bda04b0665aff9277fc918490ab8ff71c64f199b4e29a396180435",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-05-projects-list-and-create-ui-design.md": {
+      "sha256": "3554e4602c26ed5603037de01be0a0149e634e50c870866e8883c68be1ef257c",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-05-projects-rbac-foundation-design.md": {
+      "sha256": "0a116e69eba1ad7a7e961320f2e3dd42733708ddb02c60593858635f3a3747d3",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-11-project-credentials-design.md": {
+      "sha256": "5a9c556a392cc7e909a8328d70d02f1d941005c0fd9ca29ae9b4088c9ea0387e",
       "source_kind": "SourceDocument"
     }
   }

@@ -13,7 +13,7 @@ title: Minerva MVP route map design
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
 
 ## Connected node types
 

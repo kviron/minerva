@@ -52,7 +52,8 @@ test('signs in by email', async ({ page }) => {
 
   await page.goto('/projects/test-project/credentials')
   await expect(page).toHaveURL(/\/projects\/test-project\/credentials$/)
-  await expect(page.getByRole('heading', { name: 'Страница в разработке' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Учётные данные' })).toBeVisible()
+  await expect(page.getByText('Не удалось загрузить категории').first()).toBeVisible()
   await expect(page.locator('input')).toHaveCount(0)
 })
 

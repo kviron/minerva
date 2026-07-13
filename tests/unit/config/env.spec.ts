@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseServerEnv } from '../../../shared/config/env'
+import { parseCredentialEncryptionEnv, parseServerEnv } from '../../../shared/config/env'
 
 const valid = {
   DATABASE_URL: 'postgresql://minerva:minerva@127.0.0.1:5432/minerva',
@@ -11,6 +11,8 @@ const valid = {
   SMTP_PORT: '1025',
   MAIL_FROM: 'Minerva <no-reply@minerva.local>',
   MAILPIT_API_URL: 'http://127.0.0.1:8025',
+  CREDENTIAL_ENCRYPTION_ACTIVE_KEY_VERSION: '1',
+  CREDENTIAL_ENCRYPTION_KEYS: `1:${Buffer.alloc(32, 1).toString('base64')}`,
 }
 
 describe('parseServerEnv', () => {
@@ -30,5 +32,19 @@ describe('parseServerEnv', () => {
 
   it('rejects short rate-limit secrets', () => {
     expect(() => parseServerEnv({ ...valid, RATE_LIMIT_HMAC_SECRET: 'short' })).toThrow()
+  })
+
+  it('parses versioned 256-bit credential encryption keys', () => {
+    const env = parseCredentialEncryptionEnv(valid)
+
+    expect(env.CREDENTIAL_ENCRYPTION_ACTIVE_KEY_VERSION).toBe(1)
+    expect(env.CREDENTIAL_ENCRYPTION_KEYS.get(1)).toEqual(Buffer.alloc(32, 1))
+  })
+
+  it('rejects missing, duplicate, malformed, and non-active credential keys', () => {
+    const key = Buffer.alloc(32, 1).toString('base64')
+    for (const CREDENTIAL_ENCRYPTION_KEYS of ['', `1:${key},1:${key}`, '1:not-base64', `2:${key}`]) {
+      expect(() => parseCredentialEncryptionEnv({ ...valid, CREDENTIAL_ENCRYPTION_KEYS })).toThrow()
+    }
   })
 })

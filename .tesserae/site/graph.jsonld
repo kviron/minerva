@@ -79,6 +79,83 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:adr-0009-anonymize-deleted-user-accounts-while-p:d0153bc9018c",
+      "@type": "CreativeWork",
+      "name": "ADR 0009: Anonymize deleted user accounts while preserving identity references",
+      "url": "sources/adr-0009-anonymize-deleted-user-accounts-while-preserving-identity-references.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0010-store-encrypted-project-credentials-wit:4632cca78149",
+      "@type": "CreativeWork",
+      "name": "ADR 0010: Store encrypted project credentials with category-scoped access",
+      "url": "sources/adr-0010-store-encrypted-project-credentials-with-category-scoped-access.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0011-display-credential-logins-in-authorized:aec4bfcacf1d",
+      "@type": "CreativeWork",
+      "name": "ADR 0011: Display credential logins in authorized project lists",
+      "url": "sources/adr-0011-display-credential-logins-in-authorized-project-lists.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0012-use-feature-scoped-actions-for-client-e:bf4977d67411",
+      "@type": "CreativeWork",
+      "name": "ADR 0012: Use feature-scoped actions for client effects",
+      "url": "sources/adr-0012-use-feature-scoped-actions-for-client-effects.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0013-keep-client-actions-stateless-and-featu:966a5da70b18",
+      "@type": "CreativeWork",
+      "name": "ADR 0013: Keep client actions stateless and feature-scoped",
+      "url": "sources/adr-0013-keep-client-actions-stateless-and-feature-scoped.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
+      "@type": "CreativeWork",
+      "name": "Authenticated Page Placeholder Design",
+      "url": "sources/authenticated-page-placeholder-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:authorization-readability-refactor-design:64e22f5e0bd4",
+      "@type": "CreativeWork",
+      "name": "Authorization Readability Refactor Design",
+      "url": "sources/authorization-readability-refactor-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:authorization-readability-refactor-implementatio:cff925f10e13",
+      "@type": "CreativeWork",
+      "name": "Authorization Readability Refactor Implementation Plan",
+      "url": "sources/authorization-readability-refactor-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:credential-encryption-operations:dc0ac941bdc7",
+      "@type": "CreativeWork",
+      "name": "Credential encryption operations",
+      "url": "sources/credential-encryption-operations.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:current-user-sidebar-design:f757fa1f0ebc",
+      "@type": "CreativeWork",
+      "name": "Current User Sidebar Design",
+      "url": "sources/current-user-sidebar-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:current-user-sidebar-implementation-plan:30919ebc2609",
+      "@type": "CreativeWork",
+      "name": "Current User Sidebar Implementation Plan",
+      "url": "sources/current-user-sidebar-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:forgot-password-ui-design:4253f2296159",
       "@type": "CreativeWork",
       "name": "Forgot-password UI design",
@@ -90,6 +167,34 @@
       "@type": "CreativeWork",
       "name": "Forgot-Password UI Implementation Plan",
       "url": "sources/forgot-password-ui-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:global-navigation-and-page-placeholder-implement:9e69b2e463f9",
+      "@type": "CreativeWork",
+      "name": "Global Navigation and Page Placeholder Implementation Plan",
+      "url": "sources/global-navigation-and-page-placeholder-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:global-navigation-design:5a4a92c5119d",
+      "@type": "CreativeWork",
+      "name": "Global Navigation Design",
+      "url": "sources/global-navigation-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:header-theme-toggle-design:aeea12351a47",
+      "@type": "CreativeWork",
+      "name": "Header theme toggle design",
+      "url": "sources/header-theme-toggle-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:header-theme-toggle-implementation-plan:e937037ab86b",
+      "@type": "CreativeWork",
+      "name": "Header Theme Toggle Implementation Plan",
+      "url": "sources/header-theme-toggle-implementation-plan.html",
       "additionalType": "SourceDocument"
     },
     {
@@ -237,6 +342,48 @@
       "@type": "CreativeWork",
       "name": "PostgreSQL Docker Compose Implementation Plan",
       "url": "sources/postgresql-docker-compose-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:project-credentials-design:38735cbc9ec3",
+      "@type": "CreativeWork",
+      "name": "Project Credentials Design",
+      "url": "sources/project-credentials-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:project-credentials-implementation-plan:085b0582b9af",
+      "@type": "CreativeWork",
+      "name": "Project Credentials Implementation Plan",
+      "url": "sources/project-credentials-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:projects-and-rbac-foundation-design:32e410d67569",
+      "@type": "CreativeWork",
+      "name": "Projects and RBAC foundation design",
+      "url": "sources/projects-and-rbac-foundation-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:projects-and-rbac-foundation-implementation-plan:52b38258da99",
+      "@type": "CreativeWork",
+      "name": "Projects and RBAC Foundation Implementation Plan",
+      "url": "sources/projects-and-rbac-foundation-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:projects-list-and-create-ui-design:b11de69f5972",
+      "@type": "CreativeWork",
+      "name": "Projects list and create UI design",
+      "url": "sources/projects-list-and-create-ui-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:projects-list-and-create-ui-implementation-plan:e222fdb83e93",
+      "@type": "CreativeWork",
+      "name": "Projects List and Create UI Implementation Plan",
+      "url": "sources/projects-list-and-create-ui-implementation-plan.html",
       "additionalType": "SourceDocument"
     },
     {

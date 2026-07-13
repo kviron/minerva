@@ -15,6 +15,13 @@
       "when": 1783207141886,
       "tag": "0001_projects_rbac_foundation",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783791267095,
+      "tag": "0002_project_credentials_foundation",
+      "breakpoints": true
     }
   ]
 }

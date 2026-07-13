@@ -14,7 +14,8 @@ describe('global navigation UI boundary', () => {
     expect(ui).toContain('SidebarMenuSkeleton')
     expect(ui).toContain('<NuxtLink')
     expect(ui).toContain('navigation.load')
-    expect(publicApi.trim()).toBe("export { default as GlobalNavigation } from './ui/GlobalNavigation.vue'")
+    expect(publicApi).toContain("export { default as GlobalNavigation } from './ui/GlobalNavigation.vue'")
+    expect(publicApi).toContain("export { default as GlobalSettingsNavigation } from './ui/GlobalSettingsNavigation.vue'")
     expect(sidebar).toContain("from '@/features/navigation'")
     expect(sidebar).not.toContain('@/features/navigation/')
   })
@@ -39,8 +40,8 @@ describe('global navigation UI boundary', () => {
       read('../../../../app/features/identity/ui/CurrentUserMenu.vue'),
     ])
 
-    expect(sidebar).toContain('<GlobalNavigation />')
-    expect(sidebar).toContain('<SidebarHeader>')
+    expect(sidebar).toContain('<GlobalNavigation v-if="currentProjectId === null" />')
+    expect(sidebar).toContain('<GlobalSettingsNavigation class="mt-auto" />')
     expect(sidebar).toContain('<CurrentUserMenu />')
     expect(sidebar).toContain("from '@/features/identity'")
     expect(sidebar).not.toContain('@/features/identity/')

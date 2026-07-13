@@ -55,6 +55,36 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>timeline/2026-07-01.html</loc>
+    <lastmod>2024-04-18T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>timeline/2026-07-03.html</loc>
+    <lastmod>2024-12-15T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>timeline/2026-07-04.html</loc>
+    <lastmod>2024-12-07T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>timeline/2026-07-05.html</loc>
+    <lastmod>2024-07-04T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>timeline/2026-07-11.html</loc>
+    <lastmod>2024-10-22T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>graph/index.html</loc>
     <lastmod>2024-12-13T00:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -115,6 +145,72 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>sources/adr-0009-anonymize-deleted-user-accounts-while-preserving-identity-references.html</loc>
+    <lastmod>2024-09-18T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/adr-0010-store-encrypted-project-credentials-with-category-scoped-access.html</loc>
+    <lastmod>2024-04-05T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/adr-0011-display-credential-logins-in-authorized-project-lists.html</loc>
+    <lastmod>2024-04-13T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/adr-0012-use-feature-scoped-actions-for-client-effects.html</loc>
+    <lastmod>2024-01-31T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/adr-0013-keep-client-actions-stateless-and-feature-scoped.html</loc>
+    <lastmod>2024-04-22T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/authenticated-page-placeholder-design.html</loc>
+    <lastmod>2024-05-25T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/authorization-readability-refactor-design.html</loc>
+    <lastmod>2024-09-01T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/authorization-readability-refactor-implementation-plan.html</loc>
+    <lastmod>2024-02-12T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/credential-encryption-operations.html</loc>
+    <lastmod>2024-04-04T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/current-user-sidebar-design.html</loc>
+    <lastmod>2024-02-12T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/current-user-sidebar-implementation-plan.html</loc>
+    <lastmod>2024-02-15T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>sources/forgot-password-ui-design.html</loc>
     <lastmod>2024-07-30T00:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -123,6 +219,30 @@
   <url>
     <loc>sources/forgot-password-ui-implementation-plan.html</loc>
     <lastmod>2024-08-31T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/global-navigation-and-page-placeholder-implementation-plan.html</loc>
+    <lastmod>2024-08-05T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/global-navigation-design.html</loc>
+    <lastmod>2024-11-11T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/header-theme-toggle-design.html</loc>
+    <lastmod>2024-05-21T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/header-theme-toggle-implementation-plan.html</loc>
+    <lastmod>2024-05-10T00:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -249,6 +369,42 @@
   <url>
     <loc>sources/postgresql-docker-compose-implementation-plan.html</loc>
     <lastmod>2024-04-26T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/project-credentials-design.html</loc>
+    <lastmod>2024-09-17T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/project-credentials-implementation-plan.html</loc>
+    <lastmod>2024-03-28T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/projects-and-rbac-foundation-design.html</loc>
+    <lastmod>2024-07-14T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/projects-and-rbac-foundation-implementation-plan.html</loc>
+    <lastmod>2024-01-13T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/projects-list-and-create-ui-design.html</loc>
+    <lastmod>2024-10-17T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>sources/projects-list-and-create-ui-implementation-plan.html</loc>
+    <lastmod>2024-04-19T00:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -433,6 +589,42 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>raw/d-develop-minerva-docs-decisions-0009-anonymize-deleted-user-accounts-md.html</loc>
+    <lastmod>2024-11-27T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-decisions-0010-store-project-credentials-with-category-access-md.html</loc>
+    <lastmod>2024-06-04T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-decisions-0011-display-credential-logins-in-project-lists-md.html</loc>
+    <lastmod>2024-10-14T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-decisions-0012-use-feature-scoped-actions-for-client-effects-md.html</loc>
+    <lastmod>2024-09-05T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-decisions-0013-keep-client-actions-stateless-and-feature-scoped-md.html</loc>
+    <lastmod>2024-01-03T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-operations-credential-encryption-md.html</loc>
+    <lastmod>2024-02-13T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>raw/d-develop-minerva-docs-operations-tesserae-md.html</loc>
     <lastmod>2024-10-29T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -529,6 +721,48 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-plans-2026-07-01-authorization-readability-refactor-md.html</loc>
+    <lastmod>2024-04-09T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-plans-2026-07-01-global-navigation-and-page-placeholder-md.html</loc>
+    <lastmod>2024-07-17T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-plans-2026-07-03-current-user-sidebar-md.html</loc>
+    <lastmod>2024-02-01T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-plans-2026-07-04-header-theme-toggle-md.html</loc>
+    <lastmod>2024-08-16T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-plans-2026-07-05-projects-list-and-create-ui-md.html</loc>
+    <lastmod>2024-01-23T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-plans-2026-07-05-projects-rbac-foundation-md.html</loc>
+    <lastmod>2024-11-09T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-plans-2026-07-11-project-credentials-md.html</loc>
+    <lastmod>2024-04-29T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html</loc>
     <lastmod>2024-10-30T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -601,6 +835,54 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-authenticated-page-placeholder-design-md.html</loc>
+    <lastmod>2024-04-07T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-authorization-readability-refactor-design-md.html</loc>
+    <lastmod>2024-02-26T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-07-01-global-navigation-design-md.html</loc>
+    <lastmod>2024-04-17T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-07-03-current-user-sidebar-design-md.html</loc>
+    <lastmod>2024-07-31T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-07-04-header-theme-toggle-design-md.html</loc>
+    <lastmod>2024-09-28T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-07-05-projects-list-and-create-ui-design-md.html</loc>
+    <lastmod>2024-04-28T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-07-05-projects-rbac-foundation-design-md.html</loc>
+    <lastmod>2024-03-12T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/d-develop-minerva-docs-superpowers-specs-2026-07-11-project-credentials-design-md.html</loc>
+    <lastmod>2024-06-12T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>raw/docs-architecture-md.html</loc>
     <lastmod>2024-01-08T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -657,6 +939,42 @@
   <url>
     <loc>raw/docs-decisions-0008-use-nuxt-native-feature-modules-md.html</loc>
     <lastmod>2024-04-30T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-decisions-0009-anonymize-deleted-user-accounts-md.html</loc>
+    <lastmod>2024-07-10T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-decisions-0010-store-project-credentials-with-category-access-md.html</loc>
+    <lastmod>2024-04-18T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-decisions-0011-display-credential-logins-in-project-lists-md.html</loc>
+    <lastmod>2024-06-07T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-decisions-0012-use-feature-scoped-actions-for-client-effects-md.html</loc>
+    <lastmod>2024-01-24T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-decisions-0013-keep-client-actions-stateless-and-feature-scoped-md.html</loc>
+    <lastmod>2024-10-04T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-operations-credential-encryption-md.html</loc>
+    <lastmod>2024-07-30T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -757,6 +1075,48 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>raw/docs-superpowers-plans-2026-07-01-authorization-readability-refactor-md.html</loc>
+    <lastmod>2024-12-28T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-plans-2026-07-01-global-navigation-and-page-placeholder-md.html</loc>
+    <lastmod>2024-10-02T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-plans-2026-07-03-current-user-sidebar-md.html</loc>
+    <lastmod>2024-04-09T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-plans-2026-07-04-header-theme-toggle-md.html</loc>
+    <lastmod>2024-05-05T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-plans-2026-07-05-projects-list-and-create-ui-md.html</loc>
+    <lastmod>2024-02-29T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-plans-2026-07-05-projects-rbac-foundation-md.html</loc>
+    <lastmod>2024-04-23T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-plans-2026-07-11-project-credentials-md.html</loc>
+    <lastmod>2024-10-01T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html</loc>
     <lastmod>2024-07-19T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -825,6 +1185,54 @@
   <url>
     <loc>raw/docs-superpowers-specs-2026-06-30-route-authorization-design-md.html</loc>
     <lastmod>2024-11-10T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-specs-2026-07-01-authenticated-page-placeholder-design-md.html</loc>
+    <lastmod>2024-11-29T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-specs-2026-07-01-authorization-readability-refactor-design-md.html</loc>
+    <lastmod>2024-12-01T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-specs-2026-07-01-global-navigation-design-md.html</loc>
+    <lastmod>2024-08-10T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-specs-2026-07-03-current-user-sidebar-design-md.html</loc>
+    <lastmod>2024-01-22T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-specs-2026-07-04-header-theme-toggle-design-md.html</loc>
+    <lastmod>2024-07-08T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-specs-2026-07-05-projects-list-and-create-ui-design-md.html</loc>
+    <lastmod>2024-06-19T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-specs-2026-07-05-projects-rbac-foundation-design-md.html</loc>
+    <lastmod>2024-02-17T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>raw/docs-superpowers-specs-2026-07-11-project-credentials-design-md.html</loc>
+    <lastmod>2024-01-11T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

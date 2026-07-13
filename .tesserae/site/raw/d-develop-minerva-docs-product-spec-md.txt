@@ -62,6 +62,16 @@ Initial permission groups:
 - Members: view, invite, assign role, remove.
 - Roles: view, create, update, delete.
 - Audit: view project audit.
+- Credentials: view, create, update, archive; credential categories: create, update, archive, manage access.
+
+### Project credentials
+
+- Projects start without predefined credential categories. Project Admins create single-level categories and grant access to project roles and/or individual active project members.
+- Every credential belongs to one category and contains a title, optional login/password, and ordered dynamic text, secret, URL, or note fields.
+- Every active Project Admin can read and administer every category; this access cannot be removed by category grants.
+- Other members require both the stable project permission and an allow grant through their role or membership. Explicit deny grants are not supported in the first release.
+- Credential values are authenticated-encrypted before persistence. Authorized lists display login plaintext but never password plaintext. Password reveal/copy is separately authorized, rate-limited, audited, and never logged with plaintext.
+- Credentials and categories are recoverably archived and are not exposed through MCP.
 
 ## Projects
 
@@ -138,7 +148,7 @@ Every MCP mutation records the user, OAuth client, grant, scopes, tool name, pro
 - Images are stored in S3-compatible storage with private objects and authorized download endpoints or short-lived signed URLs.
 - PostgreSQL and object storage receive automatic backups with a documented restore test.
 - Audit records are append-only through application APIs.
-- Secrets, customer credentials, FTP access, and admin-panel passwords are explicitly excluded from this release.
+- Credential access through MCP, bulk secret export, automatic login, and third-party secret-manager synchronization are explicitly excluded from this release.
 
 ## Acceptance criteria for the first release
 

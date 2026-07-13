@@ -1,0 +1,33 @@
+{
+  "community_id": "CommunitySummary:d3b05d7c45da055b",
+  "member_ids": [
+    "Metric:map:592bcbe13f80",
+    "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
+    "SourceDocument:current-user-sidebar-implementation-plan:30919ebc2609",
+    "SourceDocument:global-navigation-and-page-placeholder-implement:9e69b2e463f9",
+    "SourceDocument:global-navigation-design:5a4a92c5119d",
+    "SourceDocument:header-theme-toggle-implementation-plan:e937037ab86b",
+    "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
+    "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
+    "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
+    "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
+    "SourceDocument:minerva-progress:c476087b907f",
+    "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
+    "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
+    "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
+    "SourceDocument:projects-and-rbac-foundation-implementation-plan:52b38258da99",
+    "SourceDocument:projects-list-and-create-ui-design:b11de69f5972"
+  ],
+  "schema_version": 1,
+  "summary": {
+    "description": "Design and implementation-plan documents centered on Minerva's MVP Nuxt app structure, navigation, identity, RBAC, routes, placeholders, and early project UI foundations.",
+    "tags": [
+      "minerva-mvp",
+      "nuxt-architecture",
+      "identity-rbac",
+      "navigation-ui",
+      "implementation-plans"
+    ],
+    "title": "Minerva MVP Foundations"
+  }
+}

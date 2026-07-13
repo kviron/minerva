@@ -95,6 +95,7 @@ export const projectMemberships = pgTable('project_memberships', {
 }, table => [
   check('project_memberships_status_check', sql`${table.status} in (${enumSql(MEMBERSHIP_STATUS)})`),
   unique('project_memberships_project_id_user_id_unique').on(table.projectId, table.userId),
+  unique('project_memberships_id_project_id_unique').on(table.id, table.projectId),
   foreignKey({
     name: 'project_memberships_role_id_project_id_project_roles_fk',
     columns: [table.roleId, table.projectId],

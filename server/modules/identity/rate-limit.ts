@@ -5,7 +5,7 @@ import { getDatabase } from '../../infrastructure/database/client'
 import { IdentityError } from './identity-error'
 
 export interface RateLimitInput {
-  scope: 'sign-in' | 'recovery-request' | 'password-reset'
+  scope: 'sign-in' | 'recovery-request' | 'password-reset' | 'credential-reveal'
   ip: string
   identity?: string
   max: number

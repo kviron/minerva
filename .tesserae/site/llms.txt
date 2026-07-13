@@ -12,8 +12,23 @@
 - [ADR 0006: Use Bun as the package manager](sources/adr-0006-use-bun-as-the-package-manager.html)
 - [ADR 0007: Separate authentication identity, user profiles, contacts, and project roles](sources/adr-0007-separate-authentication-identity-user-profiles-contacts-and-project-roles.html)
 - [ADR 0008: Use Nuxt-native client feature modules](sources/adr-0008-use-nuxt-native-client-feature-modules.html)
+- [ADR 0009: Anonymize deleted user accounts while preserving identity references](sources/adr-0009-anonymize-deleted-user-accounts-while-preserving-identity-references.html)
+- [ADR 0010: Store encrypted project credentials with category-scoped access](sources/adr-0010-store-encrypted-project-credentials-with-category-scoped-access.html)
+- [ADR 0011: Display credential logins in authorized project lists](sources/adr-0011-display-credential-logins-in-authorized-project-lists.html)
+- [ADR 0012: Use feature-scoped actions for client effects](sources/adr-0012-use-feature-scoped-actions-for-client-effects.html)
+- [ADR 0013: Keep client actions stateless and feature-scoped](sources/adr-0013-keep-client-actions-stateless-and-feature-scoped.html)
+- [Authenticated Page Placeholder Design](sources/authenticated-page-placeholder-design.html): - **uses_metric** → mAP _(Metric)_
+- [Authorization Readability Refactor Design](sources/authorization-readability-refactor-design.html)
+- [Authorization Readability Refactor Implementation Plan](sources/authorization-readability-refactor-implementation-plan.html)
+- [Credential encryption operations](sources/credential-encryption-operations.html)
+- [Current User Sidebar Design](sources/current-user-sidebar-design.html)
+- [Current User Sidebar Implementation Plan](sources/current-user-sidebar-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [Forgot-password UI design](sources/forgot-password-ui-design.html)
 - [Forgot-Password UI Implementation Plan](sources/forgot-password-ui-implementation-plan.html)
+- [Global Navigation and Page Placeholder Implementation Plan](sources/global-navigation-and-page-placeholder-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
+- [Global Navigation Design](sources/global-navigation-design.html): - **uses_metric** → mAP _(Metric)_
+- [Header theme toggle design](sources/header-theme-toggle-design.html)
+- [Header Theme Toggle Implementation Plan](sources/header-theme-toggle-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [Identity backend foundation design](sources/identity-backend-foundation-design.html): - **uses_metric** → mAP _(Metric)_
 - [Identity Backend Foundation Implementation Plan](sources/identity-backend-foundation-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [Identity functional refactor design](sources/identity-functional-refactor-design.html)
@@ -35,6 +50,12 @@
 - [Nuxt Feature Modules Implementation Plan](sources/nuxt-feature-modules-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [PostgreSQL Docker Compose design](sources/postgresql-docker-compose-design.html)
 - [PostgreSQL Docker Compose Implementation Plan](sources/postgresql-docker-compose-implementation-plan.html)
+- [Project Credentials Design](sources/project-credentials-design.html)
+- [Project Credentials Implementation Plan](sources/project-credentials-implementation-plan.html)
+- [Projects and RBAC foundation design](sources/projects-and-rbac-foundation-design.html)
+- [Projects and RBAC Foundation Implementation Plan](sources/projects-and-rbac-foundation-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
+- [Projects list and create UI design](sources/projects-list-and-create-ui-design.html): - **uses_metric** → mAP _(Metric)_
+- [Projects List and Create UI Implementation Plan](sources/projects-list-and-create-ui-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [Reset-password UI design](sources/reset-password-ui-design.html)
 - [Reset-Password UI Implementation Plan](sources/reset-password-ui-implementation-plan.html)
 - [Route Authorization Design](sources/route-authorization-design.html)
@@ -46,7 +67,7 @@
 
 ## Entities
 
-- [mAP](entities/map.html): - **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity Functional Refactor Implementation Plan _(SourceDocum…
+- [mAP](entities/map.html): - **summarizes** → Minerva MVP Planning _(CommunitySummary)_ - **uses_metric** → Authenticated Page Placeholder Design _(SourceDocument)_ - **uses_metric** → Current User Sidebar Implementation Plan _(SourceDocument)_ - **uses_metric** → G…
 - [MATH](entities/math.html): - **evaluated_on** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
 
 ## Syntheses

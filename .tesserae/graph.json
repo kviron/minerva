@@ -10,15 +10,20 @@
       "metadata": {}
     },
     {
-      "id": "CommunitySummary:c0b1277fc51d578a",
-      "name": "Minerva MVP Identity Planning",
+      "id": "CommunitySummary:3b2f36265a3f3828",
+      "name": "Minerva MVP Planning",
       "type": "CommunitySummary",
       "aliases": [],
-      "description": "Design and implementation-plan documents for Minerva's MVP identity backend, Nuxt feature modules, routing, UX prototypes, and progress tracking, with mAP included as a related metric node.",
+      "description": "Designs and implementation plans for Minerva's MVP navigation, identity, projects, route structure, feature modules, UI placeholders, and RBAC foundation.",
       "source_path": null,
       "metadata": {
         "member_ids": [
           "Metric:map:592bcbe13f80",
+          "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
+          "SourceDocument:current-user-sidebar-implementation-plan:30919ebc2609",
+          "SourceDocument:global-navigation-and-page-placeholder-implement:9e69b2e463f9",
+          "SourceDocument:global-navigation-design:5a4a92c5119d",
+          "SourceDocument:header-theme-toggle-implementation-plan:e937037ab86b",
           "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
           "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
           "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
@@ -26,15 +31,18 @@
           "SourceDocument:minerva-progress:c476087b907f",
           "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
           "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
-          "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387"
+          "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
+          "SourceDocument:projects-and-rbac-foundation-implementation-plan:52b38258da99",
+          "SourceDocument:projects-list-and-create-ui-design:b11de69f5972",
+          "SourceDocument:projects-list-and-create-ui-implementation-plan:e222fdb83e93"
         ],
-        "member_count": 9,
+        "member_count": 17,
         "tags": [
           "minerva",
           "mvp",
-          "identity",
-          "nuxt",
-          "planning"
+          "implementation-plans",
+          "navigation",
+          "rbac"
         ],
         "extractor": "community_summaries.compile_community_summaries"
       }
@@ -313,6 +321,489 @@
       }
     },
     {
+      "id": "SourceDocument:adr-0009-anonymize-deleted-user-accounts-while-p:d0153bc9018c",
+      "name": "ADR 0009: Anonymize deleted user accounts while preserving identity references",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0009-anonymize-deleted-user-accounts.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "ADR 0009: Anonymize deleted user accounts while preserving identity references",
+            "anchor": "adr-0009-anonymize-deleted-user-accounts-while-preserving-identity-references"
+          },
+          {
+            "level": 2,
+            "text": "Context",
+            "anchor": "context"
+          },
+          {
+            "level": 2,
+            "text": "Decision",
+            "anchor": "decision"
+          },
+          {
+            "level": 2,
+            "text": "Consequences",
+            "anchor": "consequences"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:adr-0010-store-encrypted-project-credentials-wit:4632cca78149",
+      "name": "ADR 0010: Store encrypted project credentials with category-scoped access",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0010-store-project-credentials-with-category-access.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "ADR 0010: Store encrypted project credentials with category-scoped access",
+            "anchor": "adr-0010-store-encrypted-project-credentials-with-category-scoped-access"
+          },
+          {
+            "level": 2,
+            "text": "Context",
+            "anchor": "context"
+          },
+          {
+            "level": 2,
+            "text": "Decision",
+            "anchor": "decision"
+          },
+          {
+            "level": 2,
+            "text": "Consequences",
+            "anchor": "consequences"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:adr-0011-display-credential-logins-in-authorized:aec4bfcacf1d",
+      "name": "ADR 0011: Display credential logins in authorized project lists",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0011-display-credential-logins-in-project-lists.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "ADR 0011: Display credential logins in authorized project lists",
+            "anchor": "adr-0011-display-credential-logins-in-authorized-project-lists"
+          },
+          {
+            "level": 2,
+            "text": "Context",
+            "anchor": "context"
+          },
+          {
+            "level": 2,
+            "text": "Decision",
+            "anchor": "decision"
+          },
+          {
+            "level": 2,
+            "text": "Consequences",
+            "anchor": "consequences"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:adr-0012-use-feature-scoped-actions-for-client-e:bf4977d67411",
+      "name": "ADR 0012: Use feature-scoped actions for client effects",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0012-use-feature-scoped-actions-for-client-effects.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "ADR 0012: Use feature-scoped actions for client effects",
+            "anchor": "adr-0012-use-feature-scoped-actions-for-client-effects"
+          },
+          {
+            "level": 2,
+            "text": "Context",
+            "anchor": "context"
+          },
+          {
+            "level": 2,
+            "text": "Decision",
+            "anchor": "decision"
+          },
+          {
+            "level": 2,
+            "text": "Consequences",
+            "anchor": "consequences"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:adr-0013-keep-client-actions-stateless-and-featu:966a5da70b18",
+      "name": "ADR 0013: Keep client actions stateless and feature-scoped",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0013-keep-client-actions-stateless-and-feature-scoped.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "ADR 0013: Keep client actions stateless and feature-scoped",
+            "anchor": "adr-0013-keep-client-actions-stateless-and-feature-scoped"
+          },
+          {
+            "level": 2,
+            "text": "Context",
+            "anchor": "context"
+          },
+          {
+            "level": 2,
+            "text": "Decision",
+            "anchor": "decision"
+          },
+          {
+            "level": 2,
+            "text": "Consequences",
+            "anchor": "consequences"
+          },
+          {
+            "level": 2,
+            "text": "Supersedes",
+            "anchor": "supersedes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
+      "name": "Authenticated Page Placeholder Design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-01-authenticated-page-placeholder-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Authenticated Page Placeholder Design",
+            "anchor": "authenticated-page-placeholder-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Scope",
+            "anchor": "scope"
+          },
+          {
+            "level": 2,
+            "text": "Component boundary",
+            "anchor": "component-boundary"
+          },
+          {
+            "level": 2,
+            "text": "Route behavior",
+            "anchor": "route-behavior"
+          },
+          {
+            "level": 2,
+            "text": "Security boundary for future credentials",
+            "anchor": "security-boundary-for-future-credentials"
+          },
+          {
+            "level": 2,
+            "text": "Testing",
+            "anchor": "testing"
+          },
+          {
+            "level": 2,
+            "text": "Acceptance criteria",
+            "anchor": "acceptance-criteria"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:authorization-readability-refactor-design:64e22f5e0bd4",
+      "name": "Authorization Readability Refactor Design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-01-authorization-readability-refactor-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Authorization Readability Refactor Design",
+            "anchor": "authorization-readability-refactor-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Scope",
+            "anchor": "scope"
+          },
+          {
+            "level": 2,
+            "text": "Client session contract",
+            "anchor": "client-session-contract"
+          },
+          {
+            "level": 2,
+            "text": "Request-scoped session cache",
+            "anchor": "request-scoped-session-cache"
+          },
+          {
+            "level": 2,
+            "text": "API access vocabulary",
+            "anchor": "api-access-vocabulary"
+          },
+          {
+            "level": 2,
+            "text": "Error behavior",
+            "anchor": "error-behavior"
+          },
+          {
+            "level": 2,
+            "text": "Testing",
+            "anchor": "testing"
+          },
+          {
+            "level": 2,
+            "text": "Acceptance criteria",
+            "anchor": "acceptance-criteria"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:authorization-readability-refactor-implementatio:cff925f10e13",
+      "name": "Authorization Readability Refactor Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-01-authorization-readability-refactor.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Authorization Readability Refactor Implementation Plan",
+            "anchor": "authorization-readability-refactor-implementation-plan"
+          },
+          {
+            "level": 3,
+            "text": "Task 1: Type the client session at the adapter boundary",
+            "anchor": "task-1-type-the-client-session-at-the-adapter-boundary"
+          },
+          {
+            "level": 3,
+            "text": "Task 2: Cache a resolved session per H3 request",
+            "anchor": "task-2-cache-a-resolved-session-per-h3-request"
+          },
+          {
+            "level": 3,
+            "text": "Task 3: Centralize API access values",
+            "anchor": "task-3-centralize-api-access-values"
+          },
+          {
+            "level": 3,
+            "text": "Task 4: Full verification and project records",
+            "anchor": "task-4-full-verification-and-project-records"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:credential-encryption-operations:dc0ac941bdc7",
+      "name": "Credential encryption operations",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\operations\\credential-encryption.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Credential encryption operations",
+            "anchor": "credential-encryption-operations"
+          },
+          {
+            "level": 2,
+            "text": "Primitive and envelope",
+            "anchor": "primitive-and-envelope"
+          },
+          {
+            "level": 2,
+            "text": "Configuration",
+            "anchor": "configuration"
+          },
+          {
+            "level": 2,
+            "text": "Rotation",
+            "anchor": "rotation"
+          },
+          {
+            "level": 2,
+            "text": "Backup and recovery",
+            "anchor": "backup-and-recovery"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:current-user-sidebar-design:f757fa1f0ebc",
+      "name": "Current User Sidebar Design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-03-current-user-sidebar-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Current User Sidebar Design",
+            "anchor": "current-user-sidebar-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Selected approach",
+            "anchor": "selected-approach"
+          },
+          {
+            "level": 2,
+            "text": "Browser-safe session contract",
+            "anchor": "browser-safe-session-contract"
+          },
+          {
+            "level": 2,
+            "text": "Feature boundary and data flow",
+            "anchor": "feature-boundary-and-data-flow"
+          },
+          {
+            "level": 2,
+            "text": "Display rules",
+            "anchor": "display-rules"
+          },
+          {
+            "level": 2,
+            "text": "Menu behavior",
+            "anchor": "menu-behavior"
+          },
+          {
+            "level": 2,
+            "text": "Loading and error behavior",
+            "anchor": "loading-and-error-behavior"
+          },
+          {
+            "level": 2,
+            "text": "Testing",
+            "anchor": "testing"
+          },
+          {
+            "level": 2,
+            "text": "Documentation and architecture impact",
+            "anchor": "documentation-and-architecture-impact"
+          },
+          {
+            "level": 2,
+            "text": "Acceptance criteria",
+            "anchor": "acceptance-criteria"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:current-user-sidebar-implementation-plan:30919ebc2609",
+      "name": "Current User Sidebar Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-03-current-user-sidebar.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Current User Sidebar Implementation Plan",
+            "anchor": "current-user-sidebar-implementation-plan"
+          },
+          {
+            "level": 2,
+            "text": "File map",
+            "anchor": "file-map"
+          },
+          {
+            "level": 3,
+            "text": "Task 1: Expand the browser-safe session contract",
+            "anchor": "task-1-expand-the-browser-safe-session-contract"
+          },
+          {
+            "level": 3,
+            "text": "Task 2: Add pure current-user normalization",
+            "anchor": "task-2-add-pure-current-user-normalization"
+          },
+          {
+            "level": 3,
+            "text": "Task 3: Encapsulate reactive session and logout adapters",
+            "anchor": "task-3-encapsulate-reactive-session-and-logout-adapters"
+          },
+          {
+            "level": 3,
+            "text": "Task 4: Make NavUser a presentational real-user menu",
+            "anchor": "task-4-make-navuser-a-presentational-real-user-menu"
+          },
+          {
+            "level": 3,
+            "text": "Task 5: Add CurrentUserMenu and compose it in the sidebar",
+            "anchor": "task-5-add-currentusermenu-and-compose-it-in-the-sidebar"
+          },
+          {
+            "level": 3,
+            "text": "Task 6: Verify the authenticated browser flow",
+            "anchor": "task-6-verify-the-authenticated-browser-flow"
+          },
+          {
+            "level": 3,
+            "text": "Task 7: Complete verification and canonical documentation",
+            "anchor": "task-7-complete-verification-and-canonical-documentation"
+          }
+        ]
+      }
+    },
+    {
       "id": "SourceDocument:forgot-password-ui-design:4253f2296159",
       "name": "Forgot-password UI design",
       "type": "SourceDocument",
@@ -394,6 +885,218 @@
             "level": 3,
             "text": "Task 3: Record and verify the completed slice",
             "anchor": "task-3-record-and-verify-the-completed-slice"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:global-navigation-and-page-placeholder-implement:9e69b2e463f9",
+      "name": "Global Navigation and Page Placeholder Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-01-global-navigation-and-page-placeholder.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Global Navigation and Page Placeholder Implementation Plan",
+            "anchor": "global-navigation-and-page-placeholder-implementation-plan"
+          },
+          {
+            "level": 3,
+            "text": "Task 1: Add the reusable authenticated-page placeholder",
+            "anchor": "task-1-add-the-reusable-authenticated-page-placeholder"
+          },
+          {
+            "level": 3,
+            "text": "Task 2: Put the shared placeholder on Dashboard and Project Credentials",
+            "anchor": "task-2-put-the-shared-placeholder-on-dashboard-and-project-credentials"
+          },
+          {
+            "level": 3,
+            "text": "Task 3: Define the shared global-navigation contract",
+            "anchor": "task-3-define-the-shared-global-navigation-contract"
+          },
+          {
+            "level": 3,
+            "text": "Task 4: Build and expose the server-filtered menu",
+            "anchor": "task-4-build-and-expose-the-server-filtered-menu"
+          },
+          {
+            "level": 3,
+            "text": "Task 5: Add the client Navigation feature model and API",
+            "anchor": "task-5-add-the-client-navigation-feature-model-and-api"
+          },
+          {
+            "level": 3,
+            "text": "Task 6: Render global navigation in the sidebar",
+            "anchor": "task-6-render-global-navigation-in-the-sidebar"
+          },
+          {
+            "level": 3,
+            "text": "Task 7: Make Dashboard the authenticated destination",
+            "anchor": "task-7-make-dashboard-the-authenticated-destination"
+          },
+          {
+            "level": 3,
+            "text": "Task 8: Verify and record the completed slice",
+            "anchor": "task-8-verify-and-record-the-completed-slice"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:global-navigation-design:5a4a92c5119d",
+      "name": "Global Navigation Design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-01-global-navigation-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Global Navigation Design",
+            "anchor": "global-navigation-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Scope",
+            "anchor": "scope"
+          },
+          {
+            "level": 2,
+            "text": "Selected approach",
+            "anchor": "selected-approach"
+          },
+          {
+            "level": 2,
+            "text": "Global navigation contract",
+            "anchor": "global-navigation-contract"
+          },
+          {
+            "level": 2,
+            "text": "Server boundary",
+            "anchor": "server-boundary"
+          },
+          {
+            "level": 2,
+            "text": "Client feature boundary",
+            "anchor": "client-feature-boundary"
+          },
+          {
+            "level": 2,
+            "text": "Sidebar behavior",
+            "anchor": "sidebar-behavior"
+          },
+          {
+            "level": 2,
+            "text": "Routing changes",
+            "anchor": "routing-changes"
+          },
+          {
+            "level": 2,
+            "text": "Error behavior",
+            "anchor": "error-behavior"
+          },
+          {
+            "level": 2,
+            "text": "Testing",
+            "anchor": "testing"
+          },
+          {
+            "level": 2,
+            "text": "Documentation impact",
+            "anchor": "documentation-impact"
+          },
+          {
+            "level": 2,
+            "text": "Acceptance criteria",
+            "anchor": "acceptance-criteria"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:header-theme-toggle-design:aeea12351a47",
+      "name": "Header theme toggle design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-04-header-theme-toggle-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Header theme toggle design",
+            "anchor": "header-theme-toggle-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Design",
+            "anchor": "design"
+          },
+          {
+            "level": 2,
+            "text": "Boundaries",
+            "anchor": "boundaries"
+          },
+          {
+            "level": 2,
+            "text": "Verification",
+            "anchor": "verification"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:header-theme-toggle-implementation-plan:e937037ab86b",
+      "name": "Header Theme Toggle Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-04-header-theme-toggle.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Header Theme Toggle Implementation Plan",
+            "anchor": "header-theme-toggle-implementation-plan"
+          },
+          {
+            "level": 2,
+            "text": "File map",
+            "anchor": "file-map"
+          },
+          {
+            "level": 3,
+            "text": "Task 1: Localize and verify the shared theme selector",
+            "anchor": "task-1-localize-and-verify-the-shared-theme-selector"
+          },
+          {
+            "level": 3,
+            "text": "Task 2: Replace the header's GitHub link",
+            "anchor": "task-2-replace-the-header-s-github-link"
+          },
+          {
+            "level": 3,
+            "text": "Task 3: Verify and document the slice",
+            "anchor": "task-3-verify-and-document-the-slice"
           }
         ]
       }
@@ -800,6 +1503,11 @@
           },
           {
             "level": 2,
+            "text": "TypeScript typing",
+            "anchor": "typescript-typing"
+          },
+          {
+            "level": 2,
             "text": "Module boundaries",
             "anchor": "module-boundaries"
           },
@@ -827,6 +1535,11 @@
             "level": 3,
             "text": "Documents",
             "anchor": "documents"
+          },
+          {
+            "level": 3,
+            "text": "Credentials",
+            "anchor": "credentials"
           },
           {
             "level": 3,
@@ -1423,6 +2136,11 @@
             "anchor": "project-authorization"
           },
           {
+            "level": 3,
+            "text": "Project credentials",
+            "anchor": "project-credentials"
+          },
+          {
             "level": 2,
             "text": "Projects",
             "anchor": "projects"
@@ -1537,6 +2255,11 @@
             "level": 2,
             "text": "Slice 4: Document core",
             "anchor": "slice-4-document-core"
+          },
+          {
+            "level": 2,
+            "text": "Slice 4.5: Encrypted project credentials",
+            "anchor": "slice-4-5-encrypted-project-credentials"
           },
           {
             "level": 2,
@@ -1797,6 +2520,399 @@
             "level": 3,
             "text": "Task 2: Record and verify the infrastructure increment",
             "anchor": "task-2-record-and-verify-the-infrastructure-increment"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:project-credentials-design:38735cbc9ec3",
+      "name": "Project Credentials Design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-11-project-credentials-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Project Credentials Design",
+            "anchor": "project-credentials-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Scope and invariants",
+            "anchor": "scope-and-invariants"
+          },
+          {
+            "level": 2,
+            "text": "Permission vocabulary",
+            "anchor": "permission-vocabulary"
+          },
+          {
+            "level": 2,
+            "text": "Data model",
+            "anchor": "data-model"
+          },
+          {
+            "level": 2,
+            "text": "Application and API boundaries",
+            "anchor": "application-and-api-boundaries"
+          },
+          {
+            "level": 2,
+            "text": "Page composition",
+            "anchor": "page-composition"
+          },
+          {
+            "level": 2,
+            "text": "Category and credential editors",
+            "anchor": "category-and-credential-editors"
+          },
+          {
+            "level": 2,
+            "text": "Security and lifecycle",
+            "anchor": "security-and-lifecycle"
+          },
+          {
+            "level": 2,
+            "text": "Acceptance and deferred work",
+            "anchor": "acceptance-and-deferred-work"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:project-credentials-implementation-plan:085b0582b9af",
+      "name": "Project Credentials Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-11-project-credentials.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Project Credentials Implementation Plan",
+            "anchor": "project-credentials-implementation-plan"
+          },
+          {
+            "level": 2,
+            "text": "Slice 1: Contracts, permissions, and schema",
+            "anchor": "slice-1-contracts-permissions-and-schema"
+          },
+          {
+            "level": 2,
+            "text": "Slice 2: Encryption boundary",
+            "anchor": "slice-2-encryption-boundary"
+          },
+          {
+            "level": 2,
+            "text": "Slice 3: Category authorization and services",
+            "anchor": "slice-3-category-authorization-and-services"
+          },
+          {
+            "level": 2,
+            "text": "Slice 4: Credential services and HTTP adapters",
+            "anchor": "slice-4-credential-services-and-http-adapters"
+          },
+          {
+            "level": 2,
+            "text": "Slice 5: Category UI",
+            "anchor": "slice-5-category-ui"
+          },
+          {
+            "level": 2,
+            "text": "Slice 6: Credential table and editor",
+            "anchor": "slice-6-credential-table-and-editor"
+          },
+          {
+            "level": 2,
+            "text": "Slice 7: Browser journeys and completion",
+            "anchor": "slice-7-browser-journeys-and-completion"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:projects-and-rbac-foundation-design:32e410d67569",
+      "name": "Projects and RBAC foundation design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-05-projects-rbac-foundation-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Projects and RBAC foundation design",
+            "anchor": "projects-and-rbac-foundation-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Scope",
+            "anchor": "scope"
+          },
+          {
+            "level": 2,
+            "text": "Data model",
+            "anchor": "data-model"
+          },
+          {
+            "level": 3,
+            "text": "Projects",
+            "anchor": "projects"
+          },
+          {
+            "level": 3,
+            "text": "Project roles",
+            "anchor": "project-roles"
+          },
+          {
+            "level": 3,
+            "text": "Project memberships",
+            "anchor": "project-memberships"
+          },
+          {
+            "level": 3,
+            "text": "Audit events",
+            "anchor": "audit-events"
+          },
+          {
+            "level": 2,
+            "text": "Permission vocabulary and built-in templates",
+            "anchor": "permission-vocabulary-and-built-in-templates"
+          },
+          {
+            "level": 2,
+            "text": "Atomic project creation",
+            "anchor": "atomic-project-creation"
+          },
+          {
+            "level": 2,
+            "text": "Invariants and errors",
+            "anchor": "invariants-and-errors"
+          },
+          {
+            "level": 2,
+            "text": "Testing",
+            "anchor": "testing"
+          },
+          {
+            "level": 2,
+            "text": "Explicitly deferred",
+            "anchor": "explicitly-deferred"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:projects-and-rbac-foundation-implementation-plan:52b38258da99",
+      "name": "Projects and RBAC Foundation Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-05-projects-rbac-foundation.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Projects and RBAC Foundation Implementation Plan",
+            "anchor": "projects-and-rbac-foundation-implementation-plan"
+          },
+          {
+            "level": 2,
+            "text": "File map",
+            "anchor": "file-map"
+          },
+          {
+            "level": 3,
+            "text": "Task 1: Closed permission vocabulary and pure role templates",
+            "anchor": "task-1-closed-permission-vocabulary-and-pure-role-templates"
+          },
+          {
+            "level": 3,
+            "text": "Task 2: PostgreSQL schema and generated migration",
+            "anchor": "task-2-postgresql-schema-and-generated-migration"
+          },
+          {
+            "level": 3,
+            "text": "Task 3: Pure command validation and safe errors",
+            "anchor": "task-3-pure-command-validation-and-safe-errors"
+          },
+          {
+            "level": 3,
+            "text": "Task 4: Atomic project creation persistence",
+            "anchor": "task-4-atomic-project-creation-persistence"
+          },
+          {
+            "level": 3,
+            "text": "Task 5: Full verification and canonical progress",
+            "anchor": "task-5-full-verification-and-canonical-progress"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:projects-list-and-create-ui-design:b11de69f5972",
+      "name": "Projects list and create UI design",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-05-projects-list-and-create-ui-design.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Projects list and create UI design",
+            "anchor": "projects-list-and-create-ui-design"
+          },
+          {
+            "level": 2,
+            "text": "Goal",
+            "anchor": "goal"
+          },
+          {
+            "level": 2,
+            "text": "Scope",
+            "anchor": "scope"
+          },
+          {
+            "level": 2,
+            "text": "Server architecture and authorization",
+            "anchor": "server-architecture-and-authorization"
+          },
+          {
+            "level": 3,
+            "text": "Member project list",
+            "anchor": "member-project-list"
+          },
+          {
+            "level": 3,
+            "text": "Administration project list",
+            "anchor": "administration-project-list"
+          },
+          {
+            "level": 3,
+            "text": "Project creation",
+            "anchor": "project-creation"
+          },
+          {
+            "level": 2,
+            "text": "Client feature structure",
+            "anchor": "client-feature-structure"
+          },
+          {
+            "level": 2,
+            "text": "Visual composition",
+            "anchor": "visual-composition"
+          },
+          {
+            "level": 2,
+            "text": "UI states",
+            "anchor": "ui-states"
+          },
+          {
+            "level": 3,
+            "text": "Loading and failure",
+            "anchor": "loading-and-failure"
+          },
+          {
+            "level": 3,
+            "text": "No projects",
+            "anchor": "no-projects"
+          },
+          {
+            "level": 3,
+            "text": "No filter results",
+            "anchor": "no-filter-results"
+          },
+          {
+            "level": 3,
+            "text": "Creation dialog",
+            "anchor": "creation-dialog"
+          },
+          {
+            "level": 2,
+            "text": "Data and error flow",
+            "anchor": "data-and-error-flow"
+          },
+          {
+            "level": 2,
+            "text": "Testing",
+            "anchor": "testing"
+          },
+          {
+            "level": 2,
+            "text": "Explicitly deferred",
+            "anchor": "explicitly-deferred"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:projects-list-and-create-ui-implementation-plan:e222fdb83e93",
+      "name": "Projects List and Create UI Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-05-projects-list-and-create-ui.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Projects List and Create UI Implementation Plan",
+            "anchor": "projects-list-and-create-ui-implementation-plan"
+          },
+          {
+            "level": 2,
+            "text": "File map",
+            "anchor": "file-map"
+          },
+          {
+            "level": 3,
+            "text": "Task 1: Safe project list contracts and application queries",
+            "anchor": "task-1-safe-project-list-contracts-and-application-queries"
+          },
+          {
+            "level": 3,
+            "text": "Task 2: Authenticated list and creation endpoints",
+            "anchor": "task-2-authenticated-list-and-creation-endpoints"
+          },
+          {
+            "level": 3,
+            "text": "Task 3: Strict client API and pure project state",
+            "anchor": "task-3-strict-client-api-and-pure-project-state"
+          },
+          {
+            "level": 3,
+            "text": "Task 4: shadcn-vue table, empty, loading, and error composition",
+            "anchor": "task-4-shadcn-vue-table-empty-loading-and-error-composition"
+          },
+          {
+            "level": 3,
+            "text": "Task 5: Project creation dialog and page integration",
+            "anchor": "task-5-project-creation-dialog-and-page-integration"
+          },
+          {
+            "level": 3,
+            "text": "Task 6: Browser journeys, full verification, and progress",
+            "anchor": "task-6-browser-journeys-full-verification-and-progress"
           }
         ]
       }
@@ -2214,92 +3330,199 @@
       "source_path": null,
       "metadata": {
         "synthesis_kind": "pulse",
-        "content_hash": "sha256-d458cb53901ad56b3d75be7e62e97fc06628471416b1744994d7c84964fca317",
+        "content_hash": "sha256-67f7f1b8fb7aeed45fd637966c4fc87aa9bfc66663fc04450989e3d0d1799e1d",
         "input_ids": []
       }
     }
   ],
   "edges": [
     {
-      "source": "CommunitySummary:c0b1277fc51d578a",
+      "source": "CommunitySummary:3b2f36265a3f3828",
       "target": "Metric:map:592bcbe13f80",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:c0b1277fc51d578a"
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
       }
     },
     {
-      "source": "CommunitySummary:c0b1277fc51d578a",
+      "source": "CommunitySummary:3b2f36265a3f3828",
+      "target": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
+      }
+    },
+    {
+      "source": "CommunitySummary:3b2f36265a3f3828",
+      "target": "SourceDocument:current-user-sidebar-implementation-plan:30919ebc2609",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
+      }
+    },
+    {
+      "source": "CommunitySummary:3b2f36265a3f3828",
+      "target": "SourceDocument:global-navigation-and-page-placeholder-implement:9e69b2e463f9",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
+      }
+    },
+    {
+      "source": "CommunitySummary:3b2f36265a3f3828",
+      "target": "SourceDocument:global-navigation-design:5a4a92c5119d",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
+      }
+    },
+    {
+      "source": "CommunitySummary:3b2f36265a3f3828",
+      "target": "SourceDocument:header-theme-toggle-implementation-plan:e937037ab86b",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
+      }
+    },
+    {
+      "source": "CommunitySummary:3b2f36265a3f3828",
       "target": "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:c0b1277fc51d578a"
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
       }
     },
     {
-      "source": "CommunitySummary:c0b1277fc51d578a",
+      "source": "CommunitySummary:3b2f36265a3f3828",
       "target": "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:c0b1277fc51d578a"
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
       }
     },
     {
-      "source": "CommunitySummary:c0b1277fc51d578a",
+      "source": "CommunitySummary:3b2f36265a3f3828",
       "target": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:c0b1277fc51d578a"
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
       }
     },
     {
-      "source": "CommunitySummary:c0b1277fc51d578a",
+      "source": "CommunitySummary:3b2f36265a3f3828",
       "target": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:c0b1277fc51d578a"
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
       }
     },
     {
-      "source": "CommunitySummary:c0b1277fc51d578a",
+      "source": "CommunitySummary:3b2f36265a3f3828",
       "target": "SourceDocument:minerva-progress:c476087b907f",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:c0b1277fc51d578a"
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
       }
     },
     {
-      "source": "CommunitySummary:c0b1277fc51d578a",
+      "source": "CommunitySummary:3b2f36265a3f3828",
       "target": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:c0b1277fc51d578a"
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
       }
     },
     {
-      "source": "CommunitySummary:c0b1277fc51d578a",
+      "source": "CommunitySummary:3b2f36265a3f3828",
       "target": "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:c0b1277fc51d578a"
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
       }
     },
     {
-      "source": "CommunitySummary:c0b1277fc51d578a",
+      "source": "CommunitySummary:3b2f36265a3f3828",
       "target": "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
       "type": "summarizes",
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:c0b1277fc51d578a"
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
       }
+    },
+    {
+      "source": "CommunitySummary:3b2f36265a3f3828",
+      "target": "SourceDocument:projects-and-rbac-foundation-implementation-plan:52b38258da99",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
+      }
+    },
+    {
+      "source": "CommunitySummary:3b2f36265a3f3828",
+      "target": "SourceDocument:projects-list-and-create-ui-design:b11de69f5972",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
+      }
+    },
+    {
+      "source": "CommunitySummary:3b2f36265a3f3828",
+      "target": "SourceDocument:projects-list-and-create-ui-implementation-plan:e222fdb83e93",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:3b2f36265a3f3828"
+      }
+    },
+    {
+      "source": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "SourceDocument:current-user-sidebar-implementation-plan:30919ebc2609",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "SourceDocument:global-navigation-and-page-placeholder-implement:9e69b2e463f9",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "SourceDocument:global-navigation-design:5a4a92c5119d",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "SourceDocument:header-theme-toggle-implementation-plan:e937037ab86b",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
     },
     {
       "source": "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
@@ -2372,6 +3595,27 @@
       "metadata": {}
     },
     {
+      "source": "SourceDocument:projects-and-rbac-foundation-implementation-plan:52b38258da99",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "SourceDocument:projects-list-and-create-ui-design:b11de69f5972",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "SourceDocument:projects-list-and-create-ui-implementation-plan:e222fdb83e93",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:adr-0001-use-a-modular-nuxt-nitro-monolith:36bf23e62f88",
       "type": "summarizes",
@@ -2429,6 +3673,83 @@
     },
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0009-anonymize-deleted-user-accounts-while-p:d0153bc9018c",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0010-store-encrypted-project-credentials-wit:4632cca78149",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0011-display-credential-logins-in-authorized:aec4bfcacf1d",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0012-use-feature-scoped-actions-for-client-e:bf4977d67411",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0013-keep-client-actions-stateless-and-featu:966a5da70b18",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:authorization-readability-refactor-design:64e22f5e0bd4",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:authorization-readability-refactor-implementatio:cff925f10e13",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:credential-encryption-operations:dc0ac941bdc7",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:current-user-sidebar-design:f757fa1f0ebc",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:current-user-sidebar-implementation-plan:30919ebc2609",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:forgot-password-ui-design:4253f2296159",
       "type": "summarizes",
       "evidence": null,
@@ -2437,6 +3758,34 @@
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:forgot-password-ui-implementation-plan:011eede9a65c",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:global-navigation-and-page-placeholder-implement:9e69b2e463f9",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:global-navigation-design:5a4a92c5119d",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:header-theme-toggle-design:aeea12351a47",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:header-theme-toggle-implementation-plan:e937037ab86b",
       "type": "summarizes",
       "evidence": null,
       "metadata": {}
@@ -2584,6 +3933,48 @@
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:postgresql-docker-compose-implementation-plan:9887e9a9c654",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:project-credentials-design:38735cbc9ec3",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:project-credentials-implementation-plan:085b0582b9af",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:projects-and-rbac-foundation-design:32e410d67569",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:projects-and-rbac-foundation-implementation-plan:52b38258da99",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:projects-list-and-create-ui-design:b11de69f5972",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:projects-list-and-create-ui-implementation-plan:e222fdb83e93",
       "type": "summarizes",
       "evidence": null,
       "metadata": {}

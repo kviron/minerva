@@ -2,6 +2,8 @@ import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import { AUTH_MODE } from '../../shared/identity/constants'
 import { createMinervaAuth } from '../../server/modules/identity/auth/create-auth'
 import { createTestDatabase, resetTestDatabase, TEST_DATABASE_URL } from '../helpers/database'
+import { AUDIT_CHANNEL } from '../../shared/projects/constants'
+import { createProjectPersistence } from '../../server/modules/projects/create-project'
 import {
   AUTHORIZATION_API_TEST_USER,
   AUTHORIZATION_ROUTE_TEST_USER,
@@ -61,6 +63,29 @@ export default async function globalSetup() {
         password: 'Correct-Horse-Battery-1',
       },
     })
+    const [admin, viewer] = await database.queryClient<{ id: string }[]>`
+      select id from "user" where email in ('admin@example.com', ${AUTHORIZATION_API_TEST_USER.email})
+      order by case when email = 'admin@example.com' then 0 else 1 end
+    `
+    const persistProject = createProjectPersistence(database.db)
+    const primary = await persistProject({
+      actorUserId: admin!.id, channel: AUDIT_CHANNEL.WEB, name: 'Credentials E2E', description: null,
+    })
+    await persistProject({
+      actorUserId: admin!.id, channel: AUDIT_CHANNEL.WEB, name: 'Credentials E2E Foreign', description: null,
+    })
+    const [viewerRole] = await database.queryClient<{ id: string }[]>`
+      select id from project_roles where project_id = ${primary.projectId} and built_in_key = 'viewer'
+    `
+    await database.queryClient`
+      insert into project_role_permissions (role_id, permission_code)
+      values (${viewerRole!.id}, 'credentials.view')
+      on conflict do nothing
+    `
+    await database.queryClient`
+      insert into project_memberships (project_id, user_id, role_id)
+      values (${primary.projectId}, ${viewer!.id}, ${viewerRole!.id})
+    `
   } finally {
     await database.close()
   }

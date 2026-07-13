@@ -13,7 +13,7 @@ title: MVP Route Skeleton Implementation Plan
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
 
 ## Connected node types
 

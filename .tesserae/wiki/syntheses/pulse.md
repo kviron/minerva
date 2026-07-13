@@ -1,5 +1,5 @@
 ---
-content_hash: sha256-d458cb53901ad56b3d75be7e62e97fc06628471416b1744994d7c84964fca317
+content_hash: sha256-67f7f1b8fb7aeed45fd637966c4fc87aa9bfc66663fc04450989e3d0d1799e1d
 generator: heuristic-v1
 inputs: []
 slug: pulse
@@ -16,6 +16,12 @@ sources:
   - docs/decisions/0006-use-bun-package-manager.md
   - docs/decisions/0007-separate-authentication-profiles-and-project-roles.md
   - docs/decisions/0008-use-nuxt-native-feature-modules.md
+  - docs/decisions/0009-anonymize-deleted-user-accounts.md
+  - docs/decisions/0010-store-project-credentials-with-category-access.md
+  - docs/decisions/0011-display-credential-logins-in-project-lists.md
+  - docs/decisions/0012-use-feature-scoped-actions-for-client-effects.md
+  - docs/decisions/0013-keep-client-actions-stateless-and-feature-scoped.md
+  - docs/operations/credential-encryption.md
   - docs/operations/tesserae.md
   - docs/product-spec.md
   - docs/progress.md
@@ -32,6 +38,13 @@ sources:
   - docs/superpowers/plans/2026-06-29-identity-functional-refactor.md
   - docs/superpowers/plans/2026-06-29-nuxt-feature-modules.md
   - docs/superpowers/plans/2026-06-30-route-authorization.md
+  - docs/superpowers/plans/2026-07-01-authorization-readability-refactor.md
+  - docs/superpowers/plans/2026-07-01-global-navigation-and-page-placeholder.md
+  - docs/superpowers/plans/2026-07-03-current-user-sidebar.md
+  - docs/superpowers/plans/2026-07-04-header-theme-toggle.md
+  - docs/superpowers/plans/2026-07-05-projects-list-and-create-ui.md
+  - docs/superpowers/plans/2026-07-05-projects-rbac-foundation.md
+  - docs/superpowers/plans/2026-07-11-project-credentials.md
   - docs/superpowers/specs/2026-06-24-minerva-mvp-design.md
   - docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md
   - docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md
@@ -44,6 +57,14 @@ sources:
   - docs/superpowers/specs/2026-06-29-identity-functional-refactor-design.md
   - docs/superpowers/specs/2026-06-29-nuxt-feature-modules-design.md
   - docs/superpowers/specs/2026-06-30-route-authorization-design.md
+  - docs/superpowers/specs/2026-07-01-authenticated-page-placeholder-design.md
+  - docs/superpowers/specs/2026-07-01-authorization-readability-refactor-design.md
+  - docs/superpowers/specs/2026-07-01-global-navigation-design.md
+  - docs/superpowers/specs/2026-07-03-current-user-sidebar-design.md
+  - docs/superpowers/specs/2026-07-04-header-theme-toggle-design.md
+  - docs/superpowers/specs/2026-07-05-projects-list-and-create-ui-design.md
+  - docs/superpowers/specs/2026-07-05-projects-rbac-foundation-design.md
+  - docs/superpowers/specs/2026-07-11-project-credentials-design.md
 synthesis_kind: pulse
 title: Project Pulse
 ---
@@ -56,7 +77,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 39
+- SourceDocument: 60
 
 ## Recently added
 - (none)

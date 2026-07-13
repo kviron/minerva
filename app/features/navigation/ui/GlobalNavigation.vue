@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import {
   SidebarMenu,
@@ -18,6 +18,7 @@ import {
 const route = useRoute()
 const navigation = createGlobalNavigationState(globalNavigationApi.load)
 const initialLoadPending = ref(true)
+const mainItems = computed(() => navigation.items.value.filter(item => item.id !== 'settings'))
 
 onMounted(() => {
   void navigation.load().finally(() => {
@@ -42,7 +43,7 @@ onMounted(() => {
       </Button>
     </SidebarMenuItem>
     <template v-else>
-      <SidebarMenuItem v-for="item in navigation.items.value" :key="item.id">
+      <SidebarMenuItem v-for="item in mainItems" :key="item.id">
         <SidebarMenuButton
           as-child
           :is-active="isGlobalNavigationItemActive(item, route.path)"

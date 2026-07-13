@@ -4,27 +4,27 @@
     "title": "mAP",
     "kind": "entities",
     "href": "entities/map.html",
-    "summary": "- **summarizes** → Minerva MVP Identity Planning _(CommunitySummary)_ - **uses_metric** → Identity Backend Foundation Implementation Plan _(SourceDocument)_ - **uses_metric** → Identity Functional Re…",
+    "summary": "- **summarizes** → Minerva MVP Planning _(CommunitySummary)_ - **uses_metric** → Authenticated Page Placeholder Design _(SourceDocument)_ - **uses_metric** → Current User Sidebar Implementation Plan…",
     "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
     "tokens": [
       "map",
       "summarizes",
       "minerva",
       "mvp",
-      "identity",
       "planning",
       "communitysummary",
       "uses_metric",
-      "identity",
-      "backend",
-      "foundation",
-      "implementation",
-      "plan",
+      "authenticated",
+      "page",
+      "placeholder",
+      "design",
       "sourcedocument",
       "uses_metric",
-      "identity",
-      "functional",
-      "re",
+      "current",
+      "user",
+      "sidebar",
+      "implementation",
+      "plan",
       "entities"
     ],
     "len": 19,
@@ -222,6 +222,223 @@
     "created_ts": null
   },
   {
+    "id": "sources:adr-0009-anonymize-deleted-user-accounts-while-preserving-identity-references",
+    "title": "ADR 0009: Anonymize deleted user accounts while preserving identity references",
+    "kind": "sources",
+    "href": "sources/adr-0009-anonymize-deleted-user-accounts-while-preserving-identity-references.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0009-anonymize-deleted-user-accounts.md",
+    "tokens": [
+      "adr",
+      "0009",
+      "anonymize",
+      "deleted",
+      "user",
+      "accounts",
+      "while",
+      "preserving",
+      "identity",
+      "references",
+      "sources"
+    ],
+    "len": 11,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0010-store-encrypted-project-credentials-with-category-scoped-access",
+    "title": "ADR 0010: Store encrypted project credentials with category-scoped access",
+    "kind": "sources",
+    "href": "sources/adr-0010-store-encrypted-project-credentials-with-category-scoped-access.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0010-store-project-credentials-with-category-access.md",
+    "tokens": [
+      "adr",
+      "0010",
+      "store",
+      "encrypted",
+      "project",
+      "credentials",
+      "category",
+      "scoped",
+      "access",
+      "sources"
+    ],
+    "len": 10,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0011-display-credential-logins-in-authorized-project-lists",
+    "title": "ADR 0011: Display credential logins in authorized project lists",
+    "kind": "sources",
+    "href": "sources/adr-0011-display-credential-logins-in-authorized-project-lists.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0011-display-credential-logins-in-project-lists.md",
+    "tokens": [
+      "adr",
+      "0011",
+      "display",
+      "credential",
+      "logins",
+      "authorized",
+      "project",
+      "lists",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0012-use-feature-scoped-actions-for-client-effects",
+    "title": "ADR 0012: Use feature-scoped actions for client effects",
+    "kind": "sources",
+    "href": "sources/adr-0012-use-feature-scoped-actions-for-client-effects.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0012-use-feature-scoped-actions-for-client-effects.md",
+    "tokens": [
+      "adr",
+      "0012",
+      "use",
+      "feature",
+      "scoped",
+      "actions",
+      "client",
+      "effects",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0013-keep-client-actions-stateless-and-feature-scoped",
+    "title": "ADR 0013: Keep client actions stateless and feature-scoped",
+    "kind": "sources",
+    "href": "sources/adr-0013-keep-client-actions-stateless-and-feature-scoped.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0013-keep-client-actions-stateless-and-feature-scoped.md",
+    "tokens": [
+      "adr",
+      "0013",
+      "keep",
+      "client",
+      "actions",
+      "stateless",
+      "feature",
+      "scoped",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:authenticated-page-placeholder-design",
+    "title": "Authenticated Page Placeholder Design",
+    "kind": "sources",
+    "href": "sources/authenticated-page-placeholder-design.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-01-authenticated-page-placeholder-design.md",
+    "tokens": [
+      "authenticated",
+      "page",
+      "placeholder",
+      "design",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 8,
+    "created_ts": null
+  },
+  {
+    "id": "sources:authorization-readability-refactor-design",
+    "title": "Authorization Readability Refactor Design",
+    "kind": "sources",
+    "href": "sources/authorization-readability-refactor-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-01-authorization-readability-refactor-design.md",
+    "tokens": [
+      "authorization",
+      "readability",
+      "refactor",
+      "design",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:authorization-readability-refactor-implementation-plan",
+    "title": "Authorization Readability Refactor Implementation Plan",
+    "kind": "sources",
+    "href": "sources/authorization-readability-refactor-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-01-authorization-readability-refactor.md",
+    "tokens": [
+      "authorization",
+      "readability",
+      "refactor",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:credential-encryption-operations",
+    "title": "Credential encryption operations",
+    "kind": "sources",
+    "href": "sources/credential-encryption-operations.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\operations\\\\credential-encryption.md",
+    "tokens": [
+      "credential",
+      "encryption",
+      "operations",
+      "sources"
+    ],
+    "len": 4,
+    "created_ts": null
+  },
+  {
+    "id": "sources:current-user-sidebar-design",
+    "title": "Current User Sidebar Design",
+    "kind": "sources",
+    "href": "sources/current-user-sidebar-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-03-current-user-sidebar-design.md",
+    "tokens": [
+      "current",
+      "user",
+      "sidebar",
+      "design",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:current-user-sidebar-implementation-plan",
+    "title": "Current User Sidebar Implementation Plan",
+    "kind": "sources",
+    "href": "sources/current-user-sidebar-implementation-plan.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-03-current-user-sidebar.md",
+    "tokens": [
+      "current",
+      "user",
+      "sidebar",
+      "implementation",
+      "plan",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
     "id": "sources:forgot-password-ui-design",
     "title": "Forgot-password UI design",
     "kind": "sources",
@@ -254,6 +471,85 @@
       "sources"
     ],
     "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:global-navigation-and-page-placeholder-implementation-plan",
+    "title": "Global Navigation and Page Placeholder Implementation Plan",
+    "kind": "sources",
+    "href": "sources/global-navigation-and-page-placeholder-implementation-plan.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-01-global-navigation-and-page-placeholder.md",
+    "tokens": [
+      "global",
+      "navigation",
+      "page",
+      "placeholder",
+      "implementation",
+      "plan",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 10,
+    "created_ts": null
+  },
+  {
+    "id": "sources:global-navigation-design",
+    "title": "Global Navigation Design",
+    "kind": "sources",
+    "href": "sources/global-navigation-design.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-01-global-navigation-design.md",
+    "tokens": [
+      "global",
+      "navigation",
+      "design",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 7,
+    "created_ts": null
+  },
+  {
+    "id": "sources:header-theme-toggle-design",
+    "title": "Header theme toggle design",
+    "kind": "sources",
+    "href": "sources/header-theme-toggle-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-04-header-theme-toggle-design.md",
+    "tokens": [
+      "header",
+      "theme",
+      "toggle",
+      "design",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:header-theme-toggle-implementation-plan",
+    "title": "Header Theme Toggle Implementation Plan",
+    "kind": "sources",
+    "href": "sources/header-theme-toggle-implementation-plan.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-04-header-theme-toggle.md",
+    "tokens": [
+      "header",
+      "theme",
+      "toggle",
+      "implementation",
+      "plan",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 9,
     "created_ts": null
   },
   {
@@ -643,6 +939,120 @@
     "created_ts": null
   },
   {
+    "id": "sources:project-credentials-design",
+    "title": "Project Credentials Design",
+    "kind": "sources",
+    "href": "sources/project-credentials-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-11-project-credentials-design.md",
+    "tokens": [
+      "project",
+      "credentials",
+      "design",
+      "sources"
+    ],
+    "len": 4,
+    "created_ts": null
+  },
+  {
+    "id": "sources:project-credentials-implementation-plan",
+    "title": "Project Credentials Implementation Plan",
+    "kind": "sources",
+    "href": "sources/project-credentials-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-11-project-credentials.md",
+    "tokens": [
+      "project",
+      "credentials",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:projects-and-rbac-foundation-design",
+    "title": "Projects and RBAC foundation design",
+    "kind": "sources",
+    "href": "sources/projects-and-rbac-foundation-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-05-projects-rbac-foundation-design.md",
+    "tokens": [
+      "projects",
+      "rbac",
+      "foundation",
+      "design",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:projects-and-rbac-foundation-implementation-plan",
+    "title": "Projects and RBAC Foundation Implementation Plan",
+    "kind": "sources",
+    "href": "sources/projects-and-rbac-foundation-implementation-plan.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-05-projects-rbac-foundation.md",
+    "tokens": [
+      "projects",
+      "rbac",
+      "foundation",
+      "implementation",
+      "plan",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:projects-list-and-create-ui-design",
+    "title": "Projects list and create UI design",
+    "kind": "sources",
+    "href": "sources/projects-list-and-create-ui-design.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-05-projects-list-and-create-ui-design.md",
+    "tokens": [
+      "projects",
+      "list",
+      "create",
+      "ui",
+      "design",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:projects-list-and-create-ui-implementation-plan",
+    "title": "Projects List and Create UI Implementation Plan",
+    "kind": "sources",
+    "href": "sources/projects-list-and-create-ui-implementation-plan.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-05-projects-list-and-create-ui.md",
+    "tokens": [
+      "projects",
+      "list",
+      "create",
+      "ui",
+      "implementation",
+      "plan",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 10,
+    "created_ts": null
+  },
+  {
     "id": "sources:reset-password-ui-design",
     "title": "Reset-password UI design",
     "kind": "sources",
@@ -811,7 +1221,7 @@
       "metric",
       "1",
       "sourcedocument",
-      "39",
+      "60",
       "recently",
       "added",
       "none",

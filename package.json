@@ -5,6 +5,7 @@
   "scripts": {
     "build": "nuxt build",
     "auth:bootstrap": "bun scripts/bootstrap-super-admin.ts",
+    "credentials:key:init": "bun scripts/configure-local-credential-key.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "dev": "nuxt dev",
@@ -19,6 +20,7 @@
   "dependencies": {
     "@better-auth/drizzle-adapter": "1.6.22",
     "@lucide/vue": "^1.21.0",
+    "@pinia/nuxt": "^0.11.3",
     "@tanstack/vue-table": "^8.21.3",
     "@vee-validate/zod": "^4.15.1",
     "@vueuse/core": "^14.3.0",
@@ -28,6 +30,7 @@
     "drizzle-orm": "0.45.2",
     "nodemailer": "8.0.11",
     "nuxt": "^4.4.8",
+    "pinia": "^3.0.4",
     "postgres": "3.4.9",
     "reka-ui": "^2.10.1",
     "tailwind-merge": "^3.6.0",
