@@ -1,0 +1,18 @@
+{
+  "title": "2026-07-05",
+  "kind": "timeline_day",
+  "body_text": "Activity for 2026-07-05: 4 item(s) indexed.",
+  "source_path": "",
+  "links": [],
+  "body": "Activity for 2026-07-05",
+  "frontmatter": {
+    "date": "2026-07-05",
+    "activity": 4,
+    "sources": [
+      "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-05-projects-list-and-create-ui.md",
+      "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-05-projects-rbac-foundation.md",
+      "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-05-projects-list-and-create-ui-design.md",
+      "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-05-projects-rbac-foundation-design.md"
+    ]
+  }
+}

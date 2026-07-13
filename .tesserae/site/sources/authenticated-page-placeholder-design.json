@@ -1,0 +1,15 @@
+{
+  "title": "Authenticated Page Placeholder Design",
+  "kind": "sources",
+  "body_text": "# Authenticated Page Placeholder Design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-01-authenticated-page-placeholder-design.md",
+  "links": [],
+  "body": "# Authenticated Page Placeholder Design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "frontmatter": {
+    "kind": "sources",
+    "node_id": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
+    "node_type": "SourceDocument",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-01-authenticated-page-placeholder-design.md",
+    "title": "Authenticated Page Placeholder Design"
+  }
+}

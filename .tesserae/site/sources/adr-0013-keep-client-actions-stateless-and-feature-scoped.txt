@@ -1,0 +1,4 @@
+ADR 0013: Keep client actions stateless and feature-scoped
+==========================================================
+
+# ADR 0013: Keep client actions stateless and feature-scoped

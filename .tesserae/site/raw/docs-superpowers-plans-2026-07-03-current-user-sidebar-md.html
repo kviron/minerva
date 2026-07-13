@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026-07-03-current-user-sidebar.md · Tesserae</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script defer src="../assets/app.js"></script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar" role="banner">
+<a class="brand" href="../index.html">Tesserae</a>
+<nav role="navigation" aria-label="Primary"><a class="" href="../index.html"><span>Home</span></a><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="topnav-count">[60]</span></a><a class="" href="../concepts/index.html"><span>Concepts</span></a><a class="" href="../entities/index.html"><span>Entities</span> <span class="topnav-count">[2]</span></a><a class="" href="../papers/index.html"><span>Papers</span></a><a class="" href="../repos/index.html"><span>Repos</span></a><a class="" href="../topics/index.html"><span>Topics</span></a><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="topnav-count">[1]</span></a><a class="" href="../questions/index.html"><span>Questions</span></a><a class="" href="../sessions/index.html"><span>Sessions</span></a><a class="" href="../graph/index.html"><span>Graph</span></a><a class="" href="../about.html"><span>About</span></a></nav>
+<button class="search-button" data-open-search type="button" aria-label="Open search"><svg class="icon" viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="search-button-label">Search</span><kbd class="search-button-kbd" aria-hidden="true">/</kbd></button>
+<button class="theme-toggle" data-toggle-theme type="button" aria-label="Toggle color theme"><svg class="icon icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5.2" y1="5.2" x2="6.9" y2="6.9"/><line x1="17.1" y1="17.1" x2="18.8" y2="18.8"/><line x1="5.2" y1="18.8" x2="6.9" y2="17.1"/><line x1="17.1" y1="6.9" x2="18.8" y2="5.2"/></g></svg><svg class="icon icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.5 14.6a8 8 0 0 1-10.9-10.5.6.6 0 0 0-.8-.8 9.5 9.5 0 1 0 12.5 12.1.6.6 0 0 0-.8-.8z"/></svg></button>
+<button class="rail-toggle" aria-controls="rail" aria-expanded="false" aria-label="Toggle navigation drawer" data-toggle-rail type="button"><svg class="icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="rail-toggle-label">Menu</span></button>
+</header>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="Document tree"><nav class="rail-drawer-nav" aria-label="Primary (mobile)"><h2 class="rail-section-label">Browse</h2><ul class="rail-drawer-nav-list"><li><a class="" href="../index.html"><span>Home</span></a></li><li><a class="active" href="../sources/index.html" aria-current="page"><span>Sources</span> <span class="rail-nav-count">[60]</span></a></li><li><a class="" href="../concepts/index.html"><span>Concepts</span></a></li><li><a class="" href="../entities/index.html"><span>Entities</span> <span class="rail-nav-count">[2]</span></a></li><li><a class="" href="../papers/index.html"><span>Papers</span></a></li><li><a class="" href="../repos/index.html"><span>Repos</span></a></li><li><a class="" href="../topics/index.html"><span>Topics</span></a></li><li><a class="" href="../syntheses/index.html"><span>Syntheses</span> <span class="rail-nav-count">[1]</span></a></li><li><a class="" href="../questions/index.html"><span>Questions</span></a></li><li><a class="" href="../sessions/index.html"><span>Sessions</span></a></li><li><a class="" href="../graph/index.html"><span>Graph</span></a></li><li><a class="" href="../about.html"><span>About</span></a></li></ul></nav><div class="doc-tree-search-row"><label class="visually-hidden" for="doc-tree-filter">Filter source files</label><input class="doc-tree-search" id="doc-tree-filter" type="search" placeholder="Filter files…" aria-label="Filter source files" data-doc-tree-search></div><h2 class="rail-section-label">Files</h2><nav class="doc-tree" aria-label="Source explorer"><li class="doc-tree-leaf" data-doc-path="AGENTS.md"><a href="../raw/agents-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">AGENTS.md</span></a></li><details class="doc-tree-folder doc-tree-root"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">docs</span> <span class="doc-tree-count">[59]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/architecture.md"><a href="../raw/docs-architecture-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">architecture.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/backlog.md"><a href="../raw/docs-backlog-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">backlog.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">decisions</span> <span class="doc-tree-count">[13]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/decisions/0001-modular-monolith.md"><a href="../raw/docs-decisions-0001-modular-monolith-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0001-modular-monolith.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0002-project-rbac.md"><a href="../raw/docs-decisions-0002-project-rbac-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0002-project-rbac.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0003-document-versioning.md"><a href="../raw/docs-decisions-0003-document-versioning-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0003-document-versioning.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0004-mcp-first-release-boundary.md"><a href="../raw/docs-decisions-0004-mcp-first-release-boundary-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0004-mcp-first-release-boundary.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0005-mcp-oauth-resource-and-revocation.md"><a href="../raw/docs-decisions-0005-mcp-oauth-resource-and-revocation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0005-mcp-oauth-resource-and-revocation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0006-use-bun-package-manager.md"><a href="../raw/docs-decisions-0006-use-bun-package-manager-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0006-use-bun-package-manager.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0007-separate-authentication-profiles-and-project-roles.md"><a href="../raw/docs-decisions-0007-separate-authentication-profiles-and-project-roles-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0007-separate-authentication-profiles-and-project-roles.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0008-use-nuxt-native-feature-modules.md"><a href="../raw/docs-decisions-0008-use-nuxt-native-feature-modules-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0008-use-nuxt-native-feature-modules.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0009-anonymize-deleted-user-accounts.md"><a href="../raw/docs-decisions-0009-anonymize-deleted-user-accounts-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0009-anonymize-deleted-user-accounts.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0010-store-project-credentials-with-category-access.md"><a href="../raw/docs-decisions-0010-store-project-credentials-with-category-access-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0010-store-project-credentials-with-category-access.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0011-display-credential-logins-in-project-lists.md"><a href="../raw/docs-decisions-0011-display-credential-logins-in-project-lists-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0011-display-credential-logins-in-project-lists.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0012-use-feature-scoped-actions-for-client-effects.md"><a href="../raw/docs-decisions-0012-use-feature-scoped-actions-for-client-effects-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0012-use-feature-scoped-actions-for-client-effects.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/decisions/0013-keep-client-actions-stateless-and-feature-scoped.md"><a href="../raw/docs-decisions-0013-keep-client-actions-stateless-and-feature-scoped-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">0013-keep-client-actions-stateless-and-feature-scoped.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">operations</span> <span class="doc-tree-count">[2]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/operations/credential-encryption.md"><a href="../raw/docs-operations-credential-encryption-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">credential-encryption.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/operations/tesserae.md"><a href="../raw/docs-operations-tesserae-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">tesserae.md</span></a></li></ul></details></li><li class="doc-tree-leaf" data-doc-path="docs/product-spec.md"><a href="../raw/docs-product-spec-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">product-spec.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/progress.md"><a href="../raw/docs-progress-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">progress.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/roadmap.md"><a href="../raw/docs-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">roadmap.md</span></a></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">superpowers</span> <span class="doc-tree-count">[39]</span></summary><ul class="doc-tree-list"><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">plans</span> <span class="doc-tree-count">[19]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-24-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-figma-prototype.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-figma-prototype-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-figma-prototype.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-24-minerva-mvp-roadmap.md"><a href="../raw/docs-superpowers-plans-2026-06-24-minerva-mvp-roadmap-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-roadmap.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-mvp-route-skeleton.md"><a href="../raw/docs-superpowers-plans-2026-06-27-mvp-route-skeleton-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-mvp-route-skeleton.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-postgresql-compose.md"><a href="../raw/docs-superpowers-plans-2026-06-27-postgresql-compose-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-27-tesserae-refresh-wrapper.md"><a href="../raw/docs-superpowers-plans-2026-06-27-tesserae-refresh-wrapper-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-forgot-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-forgot-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-28-reset-password-ui.md"><a href="../raw/docs-superpowers-plans-2026-06-28-reset-password-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-identity-backend-foundation.md"><a href="../raw/docs-superpowers-plans-2026-06-29-identity-backend-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-backend-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-identity-functional-refactor.md"><a href="../raw/docs-superpowers-plans-2026-06-29-identity-functional-refactor-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-functional-refactor.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-29-nuxt-feature-modules.md"><a href="../raw/docs-superpowers-plans-2026-06-29-nuxt-feature-modules-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-nuxt-feature-modules.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-06-30-route-authorization.md"><a href="../raw/docs-superpowers-plans-2026-06-30-route-authorization-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-30-route-authorization.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-07-01-authorization-readability-refactor.md"><a href="../raw/docs-superpowers-plans-2026-07-01-authorization-readability-refactor-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-01-authorization-readability-refactor.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-07-01-global-navigation-and-page-placeholder.md"><a href="../raw/docs-superpowers-plans-2026-07-01-global-navigation-and-page-placeholder-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-01-global-navigation-and-page-placeholder.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-07-03-current-user-sidebar.md"><a href="../raw/docs-superpowers-plans-2026-07-03-current-user-sidebar-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-03-current-user-sidebar.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-07-04-header-theme-toggle.md"><a href="../raw/docs-superpowers-plans-2026-07-04-header-theme-toggle-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-04-header-theme-toggle.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-07-05-projects-list-and-create-ui.md"><a href="../raw/docs-superpowers-plans-2026-07-05-projects-list-and-create-ui-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-05-projects-list-and-create-ui.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-07-05-projects-rbac-foundation.md"><a href="../raw/docs-superpowers-plans-2026-07-05-projects-rbac-foundation-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-05-projects-rbac-foundation.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/plans/2026-07-11-project-credentials.md"><a href="../raw/docs-superpowers-plans-2026-07-11-project-credentials-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-11-project-credentials.md</span></a></li></ul></details></li><li class="doc-tree-folder-item"><details class="doc-tree-folder"><summary class="doc-tree-folder-summary"><span class="doc-tree-name">specs</span> <span class="doc-tree-count">[20]</span></summary><ul class="doc-tree-list"><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-mvp-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-mvp-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-mvp-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md"><a href="../raw/docs-superpowers-specs-2026-06-24-minerva-ui-prototype-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-24-minerva-ui-prototype-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-minerva-mvp-route-map-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-minerva-mvp-route-map-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-postgresql-compose-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-postgresql-compose-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-postgresql-compose-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-27-tesserae-refresh-wrapper-design.md"><a href="../raw/docs-superpowers-specs-2026-06-27-tesserae-refresh-wrapper-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-27-tesserae-refresh-wrapper-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-forgot-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-forgot-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-forgot-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-identity-backend-foundation-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-identity-backend-foundation-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-identity-backend-foundation-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-reset-password-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-reset-password-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-reset-password-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-28-user-identity-profile-design.md"><a href="../raw/docs-superpowers-specs-2026-06-28-user-identity-profile-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-28-user-identity-profile-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-29-identity-functional-refactor-design.md"><a href="../raw/docs-superpowers-specs-2026-06-29-identity-functional-refactor-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-identity-functional-refactor-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-29-nuxt-feature-modules-design.md"><a href="../raw/docs-superpowers-specs-2026-06-29-nuxt-feature-modules-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-29-nuxt-feature-modules-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-06-30-route-authorization-design.md"><a href="../raw/docs-superpowers-specs-2026-06-30-route-authorization-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-06-30-route-authorization-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-07-01-authenticated-page-placeholder-design.md"><a href="../raw/docs-superpowers-specs-2026-07-01-authenticated-page-placeholder-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-01-authenticated-page-placeholder-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-07-01-authorization-readability-refactor-design.md"><a href="../raw/docs-superpowers-specs-2026-07-01-authorization-readability-refactor-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-01-authorization-readability-refactor-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-07-01-global-navigation-design.md"><a href="../raw/docs-superpowers-specs-2026-07-01-global-navigation-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-01-global-navigation-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-07-03-current-user-sidebar-design.md"><a href="../raw/docs-superpowers-specs-2026-07-03-current-user-sidebar-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-03-current-user-sidebar-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-07-04-header-theme-toggle-design.md"><a href="../raw/docs-superpowers-specs-2026-07-04-header-theme-toggle-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-04-header-theme-toggle-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-07-05-projects-list-and-create-ui-design.md"><a href="../raw/docs-superpowers-specs-2026-07-05-projects-list-and-create-ui-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-05-projects-list-and-create-ui-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-07-05-projects-rbac-foundation-design.md"><a href="../raw/docs-superpowers-specs-2026-07-05-projects-rbac-foundation-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-05-projects-rbac-foundation-design.md</span></a></li><li class="doc-tree-leaf" data-doc-path="docs/superpowers/specs/2026-07-11-project-credentials-design.md"><a href="../raw/docs-superpowers-specs-2026-07-11-project-credentials-design-md.html"><span class="doc-tree-pill" aria-hidden="true">M</span><span class="doc-tree-name">2026-07-11-project-credentials-design.md</span></a></li></ul></details></li></ul></details></li></ul></details></nav></aside>
+<main class="main" id="main" aria-label="Main content">
+<button class="toc-toggle" aria-controls="toc" aria-expanded="false" data-toggle-toc type="button">On this page</button>
+<article class="article">
+<header class="article-header">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a class="crumb" href="../index.html">Home</a><span class="sep" aria-hidden="true">/</span><span class="crumb">Raw</span><span class="sep" aria-hidden="true">/</span><span class="crumb crumb-current">2026-07-03-current-user-sideb...</span></nav>
+</header>
+<div class="article-body"><p class="eyebrow raw-meta">18.4 KB · updated 2026-07-03 · md</p>
+<h1 class="raw-title" title="docs/superpowers/plans/2026-07-03-current-user-sidebar.md">2026-07-03-current-user-sidebar.md</h1>
+<p class="raw-path"><code>docs/superpowers/plans/2026-07-03-current-user-sidebar.md</code></p>
+<article class="raw-page"><section class="markdown-body raw-markdown"><h1 id="current-user-sidebar-implementation-plan">Current User Sidebar Implementation Plan</h1>
+<blockquote><p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (<code>- [ ]</code>) syntax for tracking.</p></blockquote>
+<p><strong>Goal:</strong> Replace the sidebar demo identity with the active Better Auth user&#x27;s real name, email, optional avatar, profile action, and working logout.</p>
+<p><strong>Architecture:</strong> Keep Better Auth private to the Identity feature. A typed reactive session adapter feeds a pure current-user normalizer and <code>CurrentUserMenu</code>; the application sidebar composes that public feature, while <code>NavUser</code> remains presentational and emits actions.</p>
+<p><strong>Tech Stack:</strong> Nuxt 4, Vue 3, TypeScript, Better Auth 1.6, shadcn-vue/Reka UI, Vitest, Vue Test Utils, Playwright, Bun.</p>
+<hr>
+<h2 id="file-map">File map</h2>
+<ul><li>Modify <code>shared/identity/session.ts</code>: define the browser-safe user/session shape used by route policy and the sidebar.</li><li>Modify <code>app/features/identity/api/auth-client.ts</code>: encapsulate Better Auth <code>useSession</code> and <code>signOut</code> behind typed adapters.</li><li>Create <code>app/features/identity/model/current-user.ts</code>: pure normalization of name, email, avatar URL, and fallback initials.</li><li>Create <code>app/features/identity/ui/CurrentUserMenu.vue</code>: own session states, profile navigation, and logout orchestration.</li><li>Modify <code>app/features/identity/index.ts</code>: export only the public current-user component alongside existing APIs.</li><li>Modify <code>app/components/nav/user/index.vue</code>: accept normalized display data and emit profile/logout actions.</li><li>Modify <code>app/components/app/sidebar/index.vue</code>: remove fixture data and compose <code>CurrentUserMenu</code>.</li><li>Add focused tests under <code>tests/unit/client/identity/</code> and update the existing navigation boundary test.</li><li>Modify <code>tests/e2e/identity.spec.ts</code>: verify real identity display, profile navigation, and logout.</li><li>Modify <code>docs/progress.md</code>: record the completed vertical slice.</li></ul>
+<h3 id="task-1-expand-the-browser-safe-session-contract">Task 1: Expand the browser-safe session contract</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>shared/identity/session.ts</code></li><li>Modify: <code>tests/unit/client/identity/session-contract.spec.ts</code></li><li>Modify: <code>tests/unit/client/identity/auth-client.spec.ts</code></li><li>[ ] <strong>Step 1: Write the failing contract tests</strong></li></ul>
+<p>Replace the first contract test and the auth-client fixture with assertions for the complete safe shape:</p>
+<pre><code class="language-ts">expectTypeOf&lt;IdentitySessionView[&#x27;user&#x27;]&gt;().toEqualTypeOf&lt;{
+  readonly id: string
+  readonly name: string
+  readonly email: string
+  readonly image?: string | null
+  readonly superAdmin?: boolean
+}&gt;()</code></pre>
+<p>In <code>auth-client.spec.ts</code>, make <code>getSession</code> resolve <code>{ data: { user }, error }</code> and expect that exact result.</p>
+<ul><li>[ ] <strong>Step 2: Run the focused tests and verify failure</strong></li></ul>
+<p>Run: <code>bun run test:unit -- tests/unit/client/identity/session-contract.spec.ts tests/unit/client/identity/auth-client.spec.ts</code></p>
+<p>Expected: FAIL because <code>IdentitySessionView.user</code> does not require <code>id</code>, <code>name</code>, <code>email</code>, or expose <code>image</code>.</p>
+<ul><li>[ ] <strong>Step 3: Implement the minimal safe contract</strong></li></ul>
+<p>Replace <code>shared/identity/session.ts</code> with:</p>
+<pre><code class="language-ts">export interface IdentitySessionUserView {
+  readonly id: string
+  readonly name: string
+  readonly email: string
+  readonly image?: string | null
+  readonly superAdmin?: boolean
+}
+
+export interface IdentitySessionView {
+  readonly user: IdentitySessionUserView
+}
+
+export interface IdentitySessionResult {
+  readonly data: IdentitySessionView | null
+  readonly error: unknown
+}</code></pre>
+<ul><li>[ ] <strong>Step 4: Run the focused tests and typecheck</strong></li></ul>
+<p>Run: <code>bun run test:unit -- tests/unit/client/identity/session-contract.spec.ts tests/unit/client/identity/auth-client.spec.ts &amp;&amp; bun run typecheck</code></p>
+<p>Expected: both tests PASS and Nuxt typecheck exits 0.</p>
+<ul><li>[ ] <strong>Step 5: Commit the contract slice</strong></li></ul>
+<pre><code class="language-powershell">git add shared/identity/session.ts tests/unit/client/identity/session-contract.spec.ts tests/unit/client/identity/auth-client.spec.ts
+git commit -m &quot;feat: expose safe current user session fields&quot;</code></pre>
+<h3 id="task-2-add-pure-current-user-normalization">Task 2: Add pure current-user normalization</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>app/features/identity/model/current-user.ts</code></li><li>Create: <code>tests/unit/client/identity/current-user.spec.ts</code></li><li>[ ] <strong>Step 1: Write failing normalization tests</strong></li></ul>
+<p>Create a table-driven test covering Cyrillic, one-word, email, invalid avatar, and empty fallbacks:</p>
+<pre><code class="language-ts">import { describe, expect, it } from &#x27;vitest&#x27;
+import { toCurrentUserView } from &#x27;../../../../app/features/identity/model/current-user&#x27;
+
+describe(&#x27;current user view&#x27;, () =&gt; {
+  it.each([
+    [&#x27;Иван Петров&#x27;, &#x27;ivan@example.com&#x27;, null, &#x27;ИП&#x27;, undefined],
+    [&#x27;Prince&#x27;, &#x27;p@example.com&#x27;, undefined, &#x27;P&#x27;, undefined],
+    [&#x27;&#x27;, &#x27;mail@example.com&#x27;, &#x27;javascript:alert(1)&#x27;, &#x27;M&#x27;, undefined],
+    [&#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;&#x27;, undefined],
+    [&#x27;Ada Lovelace&#x27;, &#x27;ada@example.com&#x27;, &#x27;/api/avatar/1&#x27;, &#x27;AL&#x27;, &#x27;/api/avatar/1&#x27;],
+    [&#x27;Grace Hopper&#x27;, &#x27;grace@example.com&#x27;, &#x27;https://cdn.example/avatar.png&#x27;, &#x27;GH&#x27;, &#x27;https://cdn.example/avatar.png&#x27;],
+  ])(&#x27;normalizes display values&#x27;, (name, email, image, initials, avatar) =&gt; {
+    expect(toCurrentUserView({ id: &#x27;u1&#x27;, name, email, image })).toEqual({
+      name,
+      email,
+      initials,
+      avatar,
+    })
+  })
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the test and verify failure</strong></li></ul>
+<p>Run: <code>bun run test:unit -- tests/unit/client/identity/current-user.spec.ts</code></p>
+<p>Expected: FAIL because <code>current-user.ts</code> does not exist.</p>
+<ul><li>[ ] <strong>Step 3: Implement the pure normalizer</strong></li></ul>
+<p>Create:</p>
+<pre><code class="language-ts">import type { IdentitySessionUserView } from &#x27;../../../../shared/identity/session&#x27;
+
+export interface CurrentUserView {
+  readonly name: string
+  readonly email: string
+  readonly initials: string
+  readonly avatar?: string
+}
+
+const acceptedAvatar = (value: string | null | undefined): string | undefined =&gt; {
+  const candidate = value?.trim()
+  if (!candidate) return undefined
+  if (candidate.startsWith(&#x27;/&#x27;) &amp;&amp; !candidate.startsWith(&#x27;//&#x27;)) return candidate
+
+  try {
+    const url = new URL(candidate)
+    return url.protocol === &#x27;http:&#x27; || url.protocol === &#x27;https:&#x27; ? candidate : undefined
+  }
+  catch {
+    return undefined
+  }
+}
+
+const fallbackInitials = (name: string, email: string): string =&gt; {
+  const words = name.trim().split(/\s+/u).filter(Boolean)
+  if (words.length &gt; 0)
+    return words.slice(0, 2).map(word =&gt; Array.from(word)[0]?.toLocaleUpperCase(&#x27;ru-RU&#x27;) ?? &#x27;&#x27;).join(&#x27;&#x27;)
+
+  return Array.from(email.trim())[0]?.toLocaleUpperCase(&#x27;ru-RU&#x27;) ?? &#x27;&#x27;
+}
+
+export const toCurrentUserView = (user: IdentitySessionUserView): CurrentUserView =&gt; ({
+  name: user.name.trim(),
+  email: user.email.trim(),
+  initials: fallbackInitials(user.name, user.email),
+  avatar: acceptedAvatar(user.image),
+})</code></pre>
+<ul><li>[ ] <strong>Step 4: Run the normalization tests</strong></li></ul>
+<p>Run: <code>bun run test:unit -- tests/unit/client/identity/current-user.spec.ts</code></p>
+<p>Expected: PASS.</p>
+<ul><li>[ ] <strong>Step 5: Commit the model slice</strong></li></ul>
+<pre><code class="language-powershell">git add app/features/identity/model/current-user.ts tests/unit/client/identity/current-user.spec.ts
+git commit -m &quot;feat: normalize current user display data&quot;</code></pre>
+<h3 id="task-3-encapsulate-reactive-session-and-logout-adapters">Task 3: Encapsulate reactive session and logout adapters</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>app/features/identity/api/auth-client.ts</code></li><li>Modify: <code>tests/unit/client/identity/auth-client.spec.ts</code></li><li>[ ] <strong>Step 1: Extend the mocked Better Auth client and write failing adapter tests</strong></li></ul>
+<p>Hoist <code>useSession</code> and <code>signOut</code>, return them from <code>createAuthClient</code>, then add:</p>
+<pre><code class="language-ts">it(&#x27;exposes reactive session state without exporting Better Auth&#x27;, () =&gt; {
+  const state = { data: ref(null), isPending: ref(true), error: ref(null), refetch: vi.fn() }
+  useSession.mockReturnValue(state)
+  expect(useIdentitySession()).toBe(state)
+})
+
+it(&#x27;returns the sign-out error contract&#x27;, async () =&gt; {
+  signOut.mockResolvedValue({ data: null, error: null })
+  await expect(signOutIdentity()).resolves.toEqual({ error: null })
+})</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the adapter tests and verify failure</strong></li></ul>
+<p>Run: <code>bun run test:unit -- tests/unit/client/identity/auth-client.spec.ts</code></p>
+<p>Expected: FAIL because <code>useIdentitySession</code> and <code>signOutIdentity</code> are not exported.</p>
+<ul><li>[ ] <strong>Step 3: Add typed Identity adapters</strong></li></ul>
+<p>Keep the existing <code>getIdentitySession</code> and add:</p>
+<pre><code class="language-ts">import type { Ref } from &#x27;vue&#x27;
+
+export interface IdentitySessionState {
+  readonly data: Ref&lt;IdentitySessionView | null&gt;
+  readonly isPending: Ref&lt;boolean&gt;
+  readonly error: Ref&lt;unknown&gt;
+  readonly refetch: () =&gt; Promise&lt;unknown&gt; | unknown
+}
+
+export function useIdentitySession(): IdentitySessionState {
+  return authClient.useSession() as IdentitySessionState
+}
+
+export async function signOutIdentity(): Promise&lt;{ readonly error: unknown }&gt; {
+  const result = await authClient.signOut()
+  return { error: result.error }
+}</code></pre>
+<ul><li>[ ] <strong>Step 4: Run adapter tests and typecheck</strong></li></ul>
+<p>Run: <code>bun run test:unit -- tests/unit/client/identity/auth-client.spec.ts &amp;&amp; bun run typecheck</code></p>
+<p>Expected: PASS and exit 0.</p>
+<ul><li>[ ] <strong>Step 5: Commit the adapter slice</strong></li></ul>
+<pre><code class="language-powershell">git add app/features/identity/api/auth-client.ts tests/unit/client/identity/auth-client.spec.ts
+git commit -m &quot;feat: add current session and logout adapters&quot;</code></pre>
+<h3 id="task-4-make-navuser-a-presentational-real-user-menu">Task 4: Make NavUser a presentational real-user menu</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>app/components/nav/user/index.vue</code></li><li>Create: <code>tests/unit/client/identity/nav-user.spec.ts</code></li><li>[ ] <strong>Step 1: Write failing component tests</strong></li></ul>
+<p>Mount <code>NavUser</code> with stubs for dropdown/sidebar primitives and assert:</p>
+<pre><code class="language-ts">const user = { name: &#x27;Иван Петров&#x27;, email: &#x27;ivan@example.com&#x27;, initials: &#x27;ИП&#x27; }
+const wrapper = mount(NavUser, { props: { user, logoutPending: false } })
+
+expect(wrapper.text()).toContain(&#x27;Иван Петров&#x27;)
+expect(wrapper.text()).toContain(&#x27;ivan@example.com&#x27;)
+expect(wrapper.text()).toContain(&#x27;ИП&#x27;)
+expect(wrapper.text()).toContain(&#x27;Профиль&#x27;)
+expect(wrapper.text()).toContain(&#x27;Выйти&#x27;)
+expect(wrapper.text()).not.toContain(&#x27;Billing&#x27;)
+expect(wrapper.text()).not.toContain(&#x27;Notifications&#x27;)</code></pre>
+<p>Trigger the profile and logout menu items and expect <code>profile</code> and <code>logout</code> emissions. Mount with <code>logoutPending: true</code> and expect the logout item to be disabled. Mount with <code>logoutError: &#x27;Не удалось выйти&#x27;</code> and expect a <code>role=&quot;alert&quot;</code> message.</p>
+<ul><li>[ ] <strong>Step 2: Run the test and verify failure</strong></li></ul>
+<p>Run: <code>bun run test:unit -- tests/unit/client/identity/nav-user.spec.ts</code></p>
+<p>Expected: FAIL because the current component has hard-coded initials and demo actions.</p>
+<ul><li>[ ] <strong>Step 3: Refactor NavUser</strong></li></ul>
+<p>Use this public contract:</p>
+<pre><code class="language-ts">interface User {
+  readonly name: string
+  readonly email: string
+  readonly initials: string
+  readonly avatar?: string
+}
+
+defineProps&lt;{
+  user: User
+  logoutPending: boolean
+  logoutError?: string
+}&gt;()
+
+defineEmits&lt;{
+  profile: []
+  logout: []
+}&gt;()</code></pre>
+<p>Render <code>AvatarImage</code> only when <code>user.avatar</code> exists, render <code>user.initials</code> otherwise, and render <code>IconUser</code> when initials are empty. Replace the demo group with one <code>DropdownMenuItem</code> emitting <code>profile</code> and label <code>Профиль</code>. Keep a separator, then one disabled-while-pending <code>DropdownMenuItem</code> emitting <code>logout</code> and label <code>Выход…</code> or <code>Выйти</code>. Render <code>logoutError</code> in a compact <code>DropdownMenuLabel role=&quot;alert&quot;</code>. Preserve <code>useSidebar()</code> placement behavior and use <code>size-8</code> instead of paired height/width classes.</p>
+<ul><li>[ ] <strong>Step 4: Run the component tests</strong></li></ul>
+<p>Run: <code>bun run test:unit -- tests/unit/client/identity/nav-user.spec.ts</code></p>
+<p>Expected: PASS.</p>
+<ul><li>[ ] <strong>Step 5: Commit the presentational UI slice</strong></li></ul>
+<pre><code class="language-powershell">git add app/components/nav/user/index.vue tests/unit/client/identity/nav-user.spec.ts
+git commit -m &quot;feat: present authenticated user menu&quot;</code></pre>
+<h3 id="task-5-add-currentusermenu-and-compose-it-in-the-sidebar">Task 5: Add CurrentUserMenu and compose it in the sidebar</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Create: <code>app/features/identity/ui/CurrentUserMenu.vue</code></li><li>Modify: <code>app/features/identity/index.ts</code></li><li>Modify: <code>app/components/app/sidebar/index.vue</code></li><li>Create: <code>tests/unit/client/identity/current-user-menu.spec.ts</code></li><li>Modify: <code>tests/unit/client/navigation/global-navigation-ui.spec.ts</code></li><li>[ ] <strong>Step 1: Write failing feature and boundary tests</strong></li></ul>
+<p>Mock <code>useIdentitySession</code>, <code>signOutIdentity</code>, and <code>navigateTo</code>. Cover pending skeleton, error/retry, null session, authenticated <code>NavUser</code>, profile navigation to <code>/settings/profile</code>, logout error, and successful navigation to <code>/auth</code>.</p>
+<p>Update the sidebar boundary assertion to require:</p>
+<pre><code class="language-ts">expect(sidebar).toContain(&#x27;&lt;CurrentUserMenu /&gt;&#x27;)
+expect(sidebar).toContain(&quot;from &#x27;@/features/identity&#x27;&quot;)
+expect(sidebar).not.toContain(&quot;name: &#x27;shadcn&#x27;&quot;)
+expect(sidebar).not.toContain(&#x27;&lt;NavUser :user=&quot;data.user&quot; /&gt;&#x27;)</code></pre>
+<ul><li>[ ] <strong>Step 2: Run the tests and verify failure</strong></li></ul>
+<p>Run: <code>bun run test:unit -- tests/unit/client/identity/current-user-menu.spec.ts tests/unit/client/navigation/global-navigation-ui.spec.ts</code></p>
+<p>Expected: FAIL because <code>CurrentUserMenu</code> does not exist and the sidebar still contains fixture data.</p>
+<ul><li>[ ] <strong>Step 3: Implement CurrentUserMenu</strong></li></ul>
+<p>Create a component with this orchestration:</p>
+<pre><code class="language-vue">&lt;script setup lang=&quot;ts&quot;&gt;
+import { computed, ref } from &#x27;vue&#x27;
+import NavUser from &#x27;@/components/nav/user/index.vue&#x27;
+import { Button } from &#x27;@/components/ui/button&#x27;
+import { SidebarMenu, SidebarMenuItem, SidebarMenuSkeleton } from &#x27;@/components/ui/sidebar&#x27;
+import { signOutIdentity, useIdentitySession } from &#x27;../api/auth-client&#x27;
+import { toCurrentUserView } from &#x27;../model/current-user&#x27;
+
+const session = useIdentitySession()
+const logoutPending = ref(false)
+const logoutError = ref&lt;string&gt;()
+const user = computed(() =&gt; session.data.value ? toCurrentUserView(session.data.value.user) : null)
+
+const openProfile = () =&gt; navigateTo(&#x27;/settings/profile&#x27;)
+const logout = async () =&gt; {
+  if (logoutPending.value) return
+  logoutPending.value = true
+  logoutError.value = undefined
+  const result = await signOutIdentity()
+  logoutPending.value = false
+  if (result.error) {
+    logoutError.value = &#x27;Не удалось выйти. Повторите попытку.&#x27;
+    return
+  }
+  await navigateTo(&#x27;/auth&#x27;)
+}
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;SidebarMenu v-if=&quot;session.isPending.value&quot;&gt;
+    &lt;SidebarMenuItem&gt;&lt;SidebarMenuSkeleton show-icon /&gt;&lt;/SidebarMenuItem&gt;
+  &lt;/SidebarMenu&gt;
+  &lt;SidebarMenu v-else-if=&quot;session.error.value&quot;&gt;
+    &lt;SidebarMenuItem class=&quot;px-2&quot;&gt;
+      &lt;p role=&quot;alert&quot; class=&quot;mb-2 text-xs text-muted-foreground&quot;&gt;Не удалось загрузить пользователя.&lt;/p&gt;
+      &lt;Button size=&quot;sm&quot; variant=&quot;outline&quot; @click=&quot;session.refetch&quot;&gt;Повторить&lt;/Button&gt;
+    &lt;/SidebarMenuItem&gt;
+  &lt;/SidebarMenu&gt;
+  &lt;NavUser
+    v-else-if=&quot;user&quot;
+    :user=&quot;user&quot;
+    :logout-pending=&quot;logoutPending&quot;
+    :logout-error=&quot;logoutError&quot;
+    @profile=&quot;openProfile&quot;
+    @logout=&quot;logout&quot;
+  /&gt;
+&lt;/template&gt;</code></pre>
+<p>Vue templates access the nested session refs through <code>.value</code>; <code>user</code>, <code>logoutPending</code>, and <code>logoutError</code> are top-level refs and therefore use template auto-unwrapping. Do not import Better Auth outside the feature adapter.</p>
+<ul><li>[ ] <strong>Step 4: Export and compose the feature</strong></li></ul>
+<p>Add to <code>app/features/identity/index.ts</code>:</p>
+<pre><code class="language-ts">export { default as CurrentUserMenu } from &#x27;./ui/CurrentUserMenu.vue&#x27;</code></pre>
+<p>In the sidebar, import <code>CurrentUserMenu</code> from <code>@/features/identity</code>, delete the <code>data</code> constant, replace <code>&lt;NavUser :user=&quot;data.user&quot; /&gt;</code> with <code>&lt;CurrentUserMenu /&gt;</code>, and remove the direct <code>NavUser</code> dependency.</p>
+<ul><li>[ ] <strong>Step 5: Run focused tests and typecheck</strong></li></ul>
+<p>Run: <code>bun run test:unit -- tests/unit/client/identity/current-user-menu.spec.ts tests/unit/client/identity/nav-user.spec.ts tests/unit/client/navigation/global-navigation-ui.spec.ts &amp;&amp; bun run typecheck</code></p>
+<p>Expected: all focused tests PASS and typecheck exits 0.</p>
+<ul><li>[ ] <strong>Step 6: Commit the feature slice</strong></li></ul>
+<pre><code class="language-powershell">git add app/features/identity/ui/CurrentUserMenu.vue app/features/identity/index.ts app/components/app/sidebar/index.vue tests/unit/client/identity/current-user-menu.spec.ts tests/unit/client/navigation/global-navigation-ui.spec.ts
+git commit -m &quot;feat: show current user in sidebar&quot;</code></pre>
+<h3 id="task-6-verify-the-authenticated-browser-flow">Task 6: Verify the authenticated browser flow</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>tests/e2e/identity.spec.ts</code></li><li>[ ] <strong>Step 1: Add a failing browser test</strong></li></ul>
+<p>Using the existing authenticated bootstrap user, add one test that signs in, asserts the sidebar contains that user&#x27;s name and email, opens the user menu, follows <code>Профиль</code> to <code>/settings/profile</code>, reopens the menu, clicks <code>Выйти</code>, expects <code>/auth</code>, and confirms <code>/dashboard</code> redirects back to <code>/auth</code>.</p>
+<ul><li>[ ] <strong>Step 2: Run the browser test and verify failure before final UI fixes</strong></li></ul>
+<p>Run: <code>bun run test:e2e -- tests/e2e/identity.spec.ts --grep &quot;sidebar current user&quot;</code></p>
+<p>Expected: FAIL at the first behavior not yet wired or not accessible by role/name.</p>
+<ul><li>[ ] <strong>Step 3: Make only accessibility or selector fixes exposed by the test</strong></li></ul>
+<p>Give the dropdown trigger an accessible label such as <code>Меню пользователя Иван Петров</code>, ensure menu items have their visible Russian labels, and do not add test-only attributes when role/name selectors suffice.</p>
+<ul><li>[ ] <strong>Step 4: Run the browser test again</strong></li></ul>
+<p>Run: <code>bun run test:e2e -- tests/e2e/identity.spec.ts --grep &quot;sidebar current user&quot;</code></p>
+<p>Expected: PASS.</p>
+<ul><li>[ ] <strong>Step 5: Commit browser coverage</strong></li></ul>
+<pre><code class="language-powershell">git add app/components/nav/user/index.vue tests/e2e/identity.spec.ts
+git commit -m &quot;test: cover current user sidebar flow&quot;</code></pre>
+<h3 id="task-7-complete-verification-and-canonical-documentation">Task 7: Complete verification and canonical documentation</h3>
+<p><strong>Files:</strong></p>
+<ul><li>Modify: <code>docs/progress.md</code></li><li>Generated but never commit: <code>.tesserae/**</code></li><li>[ ] <strong>Step 1: Run the full relevant verification suite</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">bun run test:unit
+bun run test:integration
+bun run typecheck
+bun run build
+bun run test:e2e</code></pre>
+<p>Expected: every command exits 0. If an unrelated pre-existing failure appears, record the exact command and failure without weakening assertions or broadening this slice.</p>
+<ul><li>[ ] <strong>Step 2: Update progress</strong></li></ul>
+<p>Add a dated <code>2026-07-03</code> entry stating that the sidebar now consumes the Identity public API, displays the active Better Auth user&#x27;s safe session fields with avatar fallbacks, links to the profile route, and performs session-revoking logout. Include the exact verification commands that passed.</p>
+<ul><li>[ ] <strong>Step 3: Refresh Tesserae through the Windows wrapper</strong></li></ul>
+<p>Run: <code>.\scripts\refresh-tesserae.ps1</code></p>
+<p>Expected: <code>sessions-import</code>, <code>compile</code>, and <code>obsidian-sync</code> report <code>ok</code>. Do not stage <code>.tesserae</code> files.</p>
+<ul><li>[ ] <strong>Step 4: Verify the final diff and forbidden artifacts</strong></li></ul>
+<p>Run:</p>
+<pre><code class="language-powershell">git diff --check
+git status --short
+git diff --cached --name-only</code></pre>
+<p>Expected: no whitespace errors; no <code>.tesserae</code>, session transcript, secret, <code>.env</code>, upload, backup, or generated index is staged.</p>
+<ul><li>[ ] <strong>Step 5: Commit progress documentation</strong></li></ul>
+<pre><code class="language-powershell">git add docs/progress.md
+git commit -m &quot;docs: record current user sidebar slice&quot;</code></pre>
+<ul><li>[ ] <strong>Step 6: Perform completion review</strong></li></ul>
+<p>Use <code>superpowers:requesting-code-review</code>, address findings with tests first, then use <code>superpowers:verification-before-completion</code> before claiming the slice complete.</p></section></article></div>
+<footer class="article-footer">
+
+</footer>
+</article>
+</main>
+<aside class="toc-rail" id="toc"><aside class="toc" role="doc-toc" aria-label="On this page"><h2>On this page</h2><ol><li data-toc-target="file-map"><a class="toc-l-2" href="#file-map">File map</a></li><li data-toc-target="task-1-expand-the-browser-safe-session-contract"><a class="toc-l-3" href="#task-1-expand-the-browser-safe-session-contract">Task 1: Expand the browser-safe session contract</a></li><li data-toc-target="task-2-add-pure-current-user-normalization"><a class="toc-l-3" href="#task-2-add-pure-current-user-normalization">Task 2: Add pure current-user normalization</a></li><li data-toc-target="task-3-encapsulate-reactive-session-and-logout-adapters"><a class="toc-l-3" href="#task-3-encapsulate-reactive-session-and-logout-adapters">Task 3: Encapsulate reactive session and logout adapters</a></li><li data-toc-target="task-4-make-navuser-a-presentational-real-user-menu"><a class="toc-l-3" href="#task-4-make-navuser-a-presentational-real-user-menu">Task 4: Make NavUser a presentational real-user menu</a></li><li data-toc-target="task-5-add-currentusermenu-and-compose-it-in-the-sidebar"><a class="toc-l-3" href="#task-5-add-currentusermenu-and-compose-it-in-the-sidebar">Task 5: Add CurrentUserMenu and compose it in the sidebar</a></li><li data-toc-target="task-6-verify-the-authenticated-browser-flow"><a class="toc-l-3" href="#task-6-verify-the-authenticated-browser-flow">Task 6: Verify the authenticated browser flow</a></li><li data-toc-target="task-7-complete-verification-and-canonical-documentation"><a class="toc-l-3" href="#task-7-complete-verification-and-canonical-documentation">Task 7: Complete verification and canonical documentation</a></li></ol></aside></aside>
+</div>
+<nav class="mobile-bottom-nav" aria-label="Quick"><ul><li><a class="" href="../index.html" aria-label="Home"><span class="icon" aria-hidden="true">⌂</span><span class="label">Home</span></a></li><li><a class="" href="../concepts/index.html" aria-label="Concepts"><span class="icon" aria-hidden="true">◆</span><span class="label">Concepts</span></a></li><li><a class="" href="../papers/index.html" aria-label="Papers"><span class="icon" aria-hidden="true">¶</span><span class="label">Papers</span></a></li><li><a class="" href="../syntheses/index.html" aria-label="Syntheses"><span class="icon" aria-hidden="true">✱</span><span class="label">Syntheses</span></a></li><li><a class="" href="../sessions/index.html" aria-label="Sessions"><span class="icon" aria-hidden="true">◷</span><span class="label">Sessions</span></a></li><li><a class="" href="../graph/index.html" aria-label="Graph"><span class="icon" aria-hidden="true">⁂</span><span class="label">Graph</span></a></li></ul></nav>
+<div class="palette" id="palette" hidden role="dialog" aria-modal="true" aria-label="Search palette">
+<div class="palette-box"><div class="palette-input-row"><svg class="palette-input-icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="13.5" y1="13.5" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><label class="visually-hidden" for="search">Search the wiki</label><input id="search" type="search" placeholder="Search the wiki…" aria-label="Search the wiki" autocomplete="off" spellcheck="false"><button class="palette-close" type="button" aria-label="Close search" data-close-search><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false"><line x1="5" y1="5" x2="15" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="15" y1="5" x2="5" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div><div class="visually-hidden" id="palette-live" aria-live="polite" aria-atomic="true"></div><footer class="palette-hint" aria-hidden="true"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>tab</kbd> filter type</span><span><kbd>esc</kbd> close</span></footer></div>
+</div>
+</body>
+</html>

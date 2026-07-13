@@ -1,0 +1,15 @@
+{
+  "title": "Global Navigation and Page Placeholder Implementation Plan",
+  "kind": "sources",
+  "body_text": "# Global Navigation and Page Placeholder Implementation Plan\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-01-global-navigation-and-page-placeholder.md",
+  "links": [],
+  "body": "# Global Navigation and Page Placeholder Implementation Plan\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "frontmatter": {
+    "kind": "sources",
+    "node_id": "SourceDocument:global-navigation-and-page-placeholder-implement:9e69b2e463f9",
+    "node_type": "SourceDocument",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-01-global-navigation-and-page-placeholder.md",
+    "title": "Global Navigation and Page Placeholder Implementation Plan"
+  }
+}

@@ -1,0 +1,58 @@
+0013-keep-client-actions-stateless-and-feature-scoped.md
+========================================================
+
+# ADR 0013: Keep client actions stateless and feature-scoped
+
+Date: 2026-07-13  
+Status: accepted
+
+## Context
+
+ADR 0012 introduced feature-scoped action classes to centralize client effects, pending state, safe errors, concurrency, cancellation, and analytics. Its first implementation also injected feature state and effect capabilities into action constructors and allowed actions to read drafts and apply successful results directly to state. That mixed API orchestration with state ownership, made action signatures hide required business inputs, and shaped production constructors around test substitution.
+
+Minerva has multiple independent client features, including Identity, Projects, Administration, and Credentials. Each feature needs a consistent effect boundary without creating one application-wide action container or coupling actions to Pinia stores.
+
+## Decision
+
+Every client feature that has effectful operations owns its action layer under `feature/model/actions`. Different entities within one feature use separate action classes when their operations and APIs are independent.
+
+An action is a stateless, authorization-agnostic service method over a feature API or required browser effect:
+
+- it receives every business input explicitly through method arguments;
+- it may retain stable composition data such as the current route's project id in its instance;
+- it calls the concrete feature API adapter or browser capability;
+- it returns the resulting safe projection or operation result;
+- it never imports, reads, or mutates Pinia or another feature state container;
+- it never derives an API command from a store draft;
+- it never makes authorization decisions, which remain server-side and permission-code based.
+
+The calling UI or a feature composition function obtains data from actions and explicitly applies it to the feature's Pinia store. Stores own server projections, editor drafts, revealed transient values, and deterministic transformations. Stores do not perform HTTP or clipboard effects.
+
+Actions use `BaseActions.createAsyncAction` or `createSyncAction` instead of reimplementing cross-cutting orchestration. Both factories accept one named definition object:
+
+```ts
+this.createAsyncAction({
+  name: CREDENTIAL_ACTION.LOAD,
+  run: signal => credentialsApi.load(this.projectId, signal),
+  idGetter: undefined,
+  options: { mutation: false, errorMessage: 'Не удалось загрузить данные' },
+})
+```
+
+`BaseActions` owns pending state, safe error exposure, concurrency policy, `AbortSignal` creation, optional mutation-success hooks, and value-free analytics metadata. Action definitions must not log business arguments, credentials, secrets, or raw API errors.
+
+Concrete feature API adapters are imported directly by their action classes. Tests substitute those module boundaries rather than adding test-only dependency objects to production constructors. A genuinely variable runtime capability may still be injected when multiple production implementations exist; this is an exception justified by the capability, not the default action pattern.
+
+## Consequences
+
+- Required inputs are visible in each action method signature.
+- Actions can be understood and tested independently from Pinia state.
+- Stores remain the single owner of client state and deterministic draft transformations.
+- UI composition explicitly shows when an API result enters a store.
+- Features and entities do not accumulate into a global action façade.
+- Pending, cancellation, safe errors, and analytics remain consistent through `BaseActions`.
+- A small amount of result-to-store composition remains at UI or feature composition boundaries.
+
+## Supersedes
+
+This ADR supersedes the state mutation, injected-capability-by-default, and single-feature-façade portions of ADR 0012. ADR 0012 remains historical context for introducing `BaseActions` and feature-scoped effect orchestration.

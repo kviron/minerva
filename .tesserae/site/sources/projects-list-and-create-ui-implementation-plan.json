@@ -1,0 +1,15 @@
+{
+  "title": "Projects List and Create UI Implementation Plan",
+  "kind": "sources",
+  "body_text": "# Projects List and Create UI Implementation Plan\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-05-projects-list-and-create-ui.md",
+  "links": [],
+  "body": "# Projects List and Create UI Implementation Plan\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "frontmatter": {
+    "kind": "sources",
+    "node_id": "SourceDocument:projects-list-and-create-ui-implementation-plan:e222fdb83e93",
+    "node_type": "SourceDocument",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-05-projects-list-and-create-ui.md",
+    "title": "Projects List and Create UI Implementation Plan"
+  }
+}
