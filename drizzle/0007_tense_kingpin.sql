@@ -1,0 +1,1 @@
+ALTER TABLE "documents" ADD COLUMN "draft_internal_link_target_ids" uuid[] DEFAULT ARRAY[]::uuid[] NOT NULL;

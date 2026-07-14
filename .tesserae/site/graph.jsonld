@@ -121,6 +121,13 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:adr-0015-allow-permanent-discard-only-for-never-:ad0e022447a8",
+      "@type": "CreativeWork",
+      "name": "ADR 0015: Allow permanent discard only for never-published document branches",
+      "url": "sources/adr-0015-allow-permanent-discard-only-for-never-published-document-branches.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
       "@type": "CreativeWork",
       "name": "Authenticated Page Placeholder Design",
@@ -142,6 +149,13 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:create-a-child-document-from-the-tree-plan:c668b02e359c",
+      "@type": "CreativeWork",
+      "name": "Create a child document from the tree plan",
+      "url": "sources/create-a-child-document-from-the-tree-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:credential-encryption-operations:dc0ac941bdc7",
       "@type": "CreativeWork",
       "name": "Credential encryption operations",
@@ -160,6 +174,41 @@
       "@type": "CreativeWork",
       "name": "Current User Sidebar Implementation Plan",
       "url": "sources/current-user-sidebar-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:document-archive-and-restore-plan:142d78fd4d07",
+      "@type": "CreativeWork",
+      "name": "Document archive and restore plan",
+      "url": "sources/document-archive-and-restore-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:document-images-implementation-plan:ef556c9efb9f",
+      "@type": "CreativeWork",
+      "name": "Document Images Implementation Plan",
+      "url": "sources/document-images-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:document-internal-links-and-backlinks-plan:91b264292f5e",
+      "@type": "CreativeWork",
+      "name": "Document internal links and backlinks plan",
+      "url": "sources/document-internal-links-and-backlinks-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:document-publication-history-and-restore-plan:c6d6e4c4d3fb",
+      "@type": "CreativeWork",
+      "name": "Document publication, history, and restore plan",
+      "url": "sources/document-publication-history-and-restore-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:document-tree-move-and-reorder-plan:1a18184e6b6e",
+      "@type": "CreativeWork",
+      "name": "Document tree move and reorder plan",
+      "url": "sources/document-tree-move-and-reorder-plan.html",
       "additionalType": "SourceDocument"
     },
     {
@@ -335,6 +384,13 @@
       "@type": "CreativeWork",
       "name": "Nuxt Feature Modules Implementation Plan",
       "url": "sources/nuxt-feature-modules-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:permanently-discard-never-published-documents-pl:3703b799c811",
+      "@type": "CreativeWork",
+      "name": "Permanently discard never-published documents plan",
+      "url": "sources/permanently-discard-never-published-documents-plan.html",
       "additionalType": "SourceDocument"
     },
     {

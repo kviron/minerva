@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 import { cn } from '@/lib/utils'
 import type { DocumentContentMark, DocumentContentNode } from '../../../../shared/documents/contracts'
+import { DOCUMENT_LINK_CONTEXT } from '../model/document-link-context'
+import { documentImageId, documentImageUrl } from '../model/document-image'
 
 const props = defineProps<{ node: DocumentContentNode }>()
+const linkContext = inject(DOCUMENT_LINK_CONTEXT, null)
 
 const mark = (type: string): DocumentContentMark | undefined => props.node.marks?.find(item => item.type === type)
 const safeLink = computed(() => {
@@ -13,6 +16,18 @@ const safeLink = computed(() => {
   }
   return /^(?:https?:|mailto:|\/)/u.test(href) ? href : null
 })
+const internalTargetId = computed(() => {
+  const href = mark('link')?.attrs?.href
+  if (typeof href !== 'string') return null
+  const match = /^document:([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$/iu.exec(href)
+  return match?.[1]?.toLowerCase() ?? null
+})
+const internalTarget = computed(() => {
+  const targetId = internalTargetId.value
+  return targetId && linkContext?.value.targets.get(targetId) || null
+})
+const imageId = computed(() => documentImageId(props.node.attrs?.imageId))
+const imageAlt = computed(() => typeof props.node.attrs?.alt === 'string' ? props.node.attrs.alt : '')
 const textClass = computed(() => cn(
   mark('bold') && 'font-semibold',
   mark('italic') && 'italic',
@@ -39,13 +54,31 @@ const headingClass = computed(() => {
 </script>
 
 <template>
+  <NuxtLink
+    v-if="node.type === 'text' && internalTargetId && internalTarget && linkContext"
+    :to="`/projects/${linkContext.projectId}/documents/${internalTarget.id}`"
+    :class="cn('text-primary underline underline-offset-4', textClass)"
+  >{{ node.text ?? internalTarget.title }}</NuxtLink>
+  <span
+    v-else-if="node.type === 'text' && internalTargetId"
+    :class="cn('text-muted-foreground line-through', textClass)"
+    title="Недоступная страница"
+  >{{ node.text ?? 'Недоступная страница' }}</span>
   <a
-    v-if="node.type === 'text' && safeLink"
+    v-else-if="node.type === 'text' && safeLink"
     :href="safeLink"
     :class="cn('text-primary underline underline-offset-4', textClass)"
     rel="noopener noreferrer"
   >{{ node.text ?? '' }}</a>
   <span v-else-if="node.type === 'text'" :class="textClass">{{ node.text ?? '' }}</span>
+  <img
+    v-else-if="node.type === 'image' && imageId && linkContext"
+    :src="documentImageUrl(linkContext.projectId, imageId)"
+    :alt="imageAlt"
+    class="my-4 max-h-[40rem] max-w-full rounded-md border object-contain"
+    loading="lazy"
+  >
+  <p v-else-if="node.type === 'image'" class="text-sm text-muted-foreground">Недоступное изображение</p>
   <br v-else-if="node.type === 'hardBreak'">
   <UiSeparator v-else-if="node.type === 'horizontalRule'" class="my-6" />
   <component :is="headingTag" v-else-if="node.type === 'heading'" :class="headingClass">

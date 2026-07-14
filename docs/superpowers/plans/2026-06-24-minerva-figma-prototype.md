@@ -409,7 +409,7 @@ Cancel: Отмена
 Primary: Опубликовать
 ```
 
-The change summary field is visibly required.
+The change summary field is optional and is labeled accordingly.
 
 - [ ] **Step 4: Build `07 Version history`**
 

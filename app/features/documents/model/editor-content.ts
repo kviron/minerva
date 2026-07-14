@@ -16,7 +16,13 @@ const toEditorNode = (node: DocumentContentNode): JSONContent => ({
   ...(node.text !== undefined ? { text: node.text } : {}),
 })
 
-export const toTiptapEditorContent = (content: DocumentContent): JSONContent => ({
-  type: 'doc',
-  content: content.content.map(toEditorNode),
-})
+export const toTiptapEditorContent = (content: DocumentContent): JSONContent => {
+  const editorContent: JSONContent[] = content.content.length > 0
+    ? content.content.map(toEditorNode)
+    : [{ type: 'paragraph' }]
+
+  return {
+    type: 'doc',
+    content: editorContent,
+  }
+}

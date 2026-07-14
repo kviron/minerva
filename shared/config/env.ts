@@ -51,8 +51,18 @@ const credentialEncryptionEnvSchema = z.object({
   }
 })
 
+const objectStorageEnvSchema = z.object({
+  S3_ENDPOINT: z.string().url(),
+  S3_REGION: z.string().min(1).default('us-east-1'),
+  S3_BUCKET: z.string().regex(/^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$/u),
+  S3_ACCESS_KEY_ID: z.string().min(1),
+  S3_SECRET_ACCESS_KEY: z.string().min(8),
+  S3_FORCE_PATH_STYLE: z.enum(['true', 'false']).default('true').transform(value => value === 'true'),
+})
+
 export type ServerEnv = z.infer<typeof serverEnvSchema>
 export type CredentialEncryptionEnv = z.infer<typeof credentialEncryptionEnvSchema>
+export type ObjectStorageEnv = z.infer<typeof objectStorageEnvSchema>
 
 export function parseServerEnv(input: Record<string, string | undefined>): ServerEnv {
   return serverEnvSchema.parse(input)
@@ -62,8 +72,13 @@ export function parseCredentialEncryptionEnv(input: Record<string, string | unde
   return credentialEncryptionEnvSchema.parse(input)
 }
 
+export function parseObjectStorageEnv(input: Record<string, string | undefined>): ObjectStorageEnv {
+  return objectStorageEnvSchema.parse(input)
+}
+
 let cachedServerEnv: ServerEnv | undefined
 let cachedCredentialEncryptionEnv: CredentialEncryptionEnv | undefined
+let cachedObjectStorageEnv: ObjectStorageEnv | undefined
 
 export function getServerEnv(): ServerEnv {
   return cachedServerEnv ??= parseServerEnv(process.env)
@@ -71,4 +86,8 @@ export function getServerEnv(): ServerEnv {
 
 export function getCredentialEncryptionEnv(): CredentialEncryptionEnv {
   return cachedCredentialEncryptionEnv ??= parseCredentialEncryptionEnv(process.env)
+}
+
+export function getObjectStorageEnv(): ObjectStorageEnv {
+  return cachedObjectStorageEnv ??= parseObjectStorageEnv(process.env)
 }

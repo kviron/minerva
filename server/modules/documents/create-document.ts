@@ -144,7 +144,7 @@ export const createDocumentPersistence = (db: DocumentsDatabase): CreateDocument
       ))
     const existingSlugs = await tx.select({ slug: documents.slug })
       .from(documents)
-      .where(and(eq(documents.projectId, command.projectId), isNull(documents.archivedAt)))
+      .where(eq(documents.projectId, command.projectId))
     const slug = nextAvailableSlug(slugBaseFromTitle(command.title), existingSlugs.map(row => row.slug))
 
     const [created] = await tx.insert(documents).values({

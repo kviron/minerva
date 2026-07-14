@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 
 const mocks = vi.hoisted(() => ({
-  documentsApi: { listRoots: vi.fn(), create: vi.fn() },
+  documentsApi: { listRoots: vi.fn(), create: vi.fn(), listArchive: vi.fn(), restore: vi.fn() },
 }))
 
 vi.mock('../../../../app/features/documents/api/documents-api', () => ({ documentsApi: mocks.documentsApi }))
@@ -21,12 +21,22 @@ const roots = [{
   updatedAt: '2026-07-13T10:00:00.000Z',
   publicationState: 'published',
 }] as const
+const archive = [{
+  id: '8d9443ec-c626-4417-a8e0-c931dd378ca6',
+  title: 'Старая архитектура',
+  originalParentId: null,
+  pageCount: 2,
+  archivedAt: '2026-07-14T10:00:00.000Z',
+  archivedByName: 'Admin',
+}] as const
 
 beforeEach(() => {
   vi.clearAllMocks()
   setActivePinia(createPinia())
   mocks.documentsApi.listRoots.mockResolvedValue(roots)
   mocks.documentsApi.create.mockResolvedValue({ documentId: 'document-2' })
+  mocks.documentsApi.listArchive.mockResolvedValue(archive)
+  mocks.documentsApi.restore.mockResolvedValue({ restoredCount: 1, restoredAt: '2026-07-14T12:00:00.000Z' })
 })
 
 describe('documents first-level feature', () => {
@@ -55,10 +65,18 @@ describe('documents first-level feature', () => {
     expect(mocks.documentsApi.listRoots).toHaveBeenCalledWith('project-1', expect.anything())
   })
 
+  it('loads and restores archive batches through stateless actions', async () => {
+    const actions = new DocumentsActions()
+    await expect(actions.loadArchive('project-1')).resolves.toEqual(archive)
+    await expect(actions.restore('project-1', archive[0].id)).resolves.toEqual({ archive, roots })
+    expect(mocks.documentsApi.restore).toHaveBeenCalledWith('project-1', archive[0].id, expect.anything())
+  })
+
   it('renders root documents as links and includes loading, error, and empty states', async () => {
-    const [view, list, page, dialog] = await Promise.all([
+    const [view, list, archive, page, dialog] = await Promise.all([
       read('../../../../app/features/documents/ui/DocumentsView.vue'),
       read('../../../../app/features/documents/ui/DocumentRootList.vue'),
+      read('../../../../app/features/documents/ui/DocumentsArchive.vue'),
       read('../../../../app/pages/projects/[id]/documents/index.vue'),
       read('../../../../app/features/documents/ui/CreateDocumentDialog.vue'),
     ])
@@ -66,6 +84,9 @@ describe('documents first-level feature', () => {
     expect(page).toContain('<DocumentsProvider>')
     expect(page).toContain('<DocumentsView :project-id="projectId" />')
     expect(view).toContain('<DocumentRootList')
+    expect(view).toContain('<UiTabsList>')
+    expect(view).toContain('Архив')
+    expect(view).toContain('<DocumentsArchive')
     expect(view).toContain('UiSkeleton')
     expect(view).toContain('UiAlert')
     expect(view).toContain('UiEmpty')
@@ -81,5 +102,7 @@ describe('documents first-level feature', () => {
     expect(dialog).toContain('<UiSelectGroup>')
     expect(dialog).toContain('Корневой раздел')
     expect(dialog).toContain('SYSTEM_DOCUMENT_TEMPLATES')
+    expect(archive).toContain('<UiAlertDialogTitle>Восстановить ветку?</UiAlertDialogTitle>')
+    expect(archive).toContain('DOCUMENTS_RESTORE')
   })
 })

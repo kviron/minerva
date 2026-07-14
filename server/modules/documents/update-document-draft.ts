@@ -1,12 +1,13 @@
-import { and, eq, isNull, sql } from 'drizzle-orm'
-import { DOCUMENT_DRAFT_UPDATE_CODE } from '../../../shared/documents/constants'
+import { and, eq, inArray, isNull, sql } from 'drizzle-orm'
+import { DOCUMENT_DRAFT_UPDATE_CODE, DOCUMENT_PUBLICATION_STATE } from '../../../shared/documents/constants'
 import type { DocumentContent } from '../../../shared/documents/contracts'
 import { AUDIT_OUTCOME, MEMBERSHIP_STATUS, PROJECT_PERMISSION } from '../../../shared/projects/constants'
 import type { AuditChannel } from '../../../shared/projects/types'
 import { getDatabase } from '../../infrastructure/database/client'
 import { documents } from '../../infrastructure/database/schema/documents'
+import { documentImages } from '../../infrastructure/database/schema/files'
 import { auditEvents, projectMemberships, projectRolePermissions } from '../../infrastructure/database/schema/projects'
-import { parseDocumentContent } from './content-schema'
+import { extractInternalDocumentLinkTargetIds, extractReferencedImageIds, parseDocumentContent } from './content-schema'
 
 export const UPDATE_DOCUMENT_DRAFT_ERROR = {
   INVALID_DRAFT: 'INVALID_DRAFT',
@@ -29,6 +30,8 @@ export interface UpdateDocumentDraftInput {
 
 export interface ValidDocumentDraftUpdate extends Omit<UpdateDocumentDraftInput, 'content'> {
   readonly content: DocumentContent
+  readonly internalLinkTargetIds: readonly string[]
+  readonly referencedImageIds: readonly string[]
 }
 
 type ValidationResult =
@@ -37,7 +40,7 @@ type ValidationResult =
 
 type PersistenceResult =
   | { readonly ok: true, readonly draftRevision: number, readonly updatedAt: string }
-  | { readonly ok: false, readonly code: typeof UPDATE_DOCUMENT_DRAFT_ERROR.NOT_FOUND | typeof UPDATE_DOCUMENT_DRAFT_ERROR.DRAFT_CONFLICT }
+  | { readonly ok: false, readonly code: typeof UPDATE_DOCUMENT_DRAFT_ERROR.INVALID_DRAFT | typeof UPDATE_DOCUMENT_DRAFT_ERROR.NOT_FOUND | typeof UPDATE_DOCUMENT_DRAFT_ERROR.DRAFT_CONFLICT }
 
 export type UpdateDocumentDraftResult =
   | { readonly ok: true, readonly value: { readonly draftRevision: number, readonly updatedAt: string } }
@@ -61,7 +64,16 @@ export const validateDocumentDraftUpdate = (input: UpdateDocumentDraftInput): Va
   ) {
     return { ok: false, code: UPDATE_DOCUMENT_DRAFT_ERROR.INVALID_DRAFT }
   }
-  return { ok: true, value: { ...input, title, content } }
+  return {
+    ok: true,
+    value: {
+      ...input,
+      title,
+      content,
+      internalLinkTargetIds: extractInternalDocumentLinkTargetIds(content),
+      referencedImageIds: extractReferencedImageIds(content),
+    },
+  }
 }
 
 export const updateDocumentDraftPersistence = (db: DocumentsDatabase): UpdateDocumentDraftDependencies['persist'] =>
@@ -80,12 +92,26 @@ export const updateDocumentDraftPersistence = (db: DocumentsDatabase): UpdateDoc
       return { ok: false, code: UPDATE_DOCUMENT_DRAFT_ERROR.NOT_FOUND }
     }
 
+    if (command.referencedImageIds.length > 0) {
+      const imageRows = await tx.select({ id: documentImages.id }).from(documentImages).where(and(
+        eq(documentImages.projectId, command.projectId),
+        isNull(documentImages.archivedAt),
+        inArray(documentImages.id, command.referencedImageIds),
+      ))
+      if (imageRows.length !== command.referencedImageIds.length) {
+        return { ok: false, code: UPDATE_DOCUMENT_DRAFT_ERROR.INVALID_DRAFT }
+      }
+    }
+
     const updatedAt = new Date()
     const [updated] = await tx.update(documents)
       .set({
         title: command.title,
         draftContent: command.content,
+        draftInternalLinkTargetIds: [...command.internalLinkTargetIds],
+        draftReferencedImageIds: [...command.referencedImageIds],
         draftRevision: sql`${documents.draftRevision} + 1`,
+        publicationState: DOCUMENT_PUBLICATION_STATE.DRAFT,
         updatedAt,
       })
       .where(and(

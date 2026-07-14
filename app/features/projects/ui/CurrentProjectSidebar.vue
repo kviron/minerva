@@ -43,7 +43,6 @@ watch(selectedProjectId, (projectId) => {
 
 <template>
   <UiSidebarGroup class="group-data-[collapsible=icon]:hidden">
-    <UiSidebarGroupLabel>Текущий проект</UiSidebarGroupLabel>
     <UiSidebarMenu>
       <UiSidebarMenuItem v-if="selectedProjectId !== null && pending">
         <UiSidebarMenuSkeleton show-icon />

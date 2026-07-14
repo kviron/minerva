@@ -5,12 +5,17 @@ import {
   SYSTEM_DOCUMENT_TEMPLATES,
   type DocumentTemplate,
 } from '../../../../shared/documents/constants'
-import type { CreateDocumentRequest, RootDocumentListItem } from '../../../../shared/documents/contracts'
+import type {
+  CreateDocumentRequest,
+  DocumentRelationItem,
+  RootDocumentListItem,
+} from '../../../../shared/documents/contracts'
 
 const ROOT_PARENT = 'root'
 const props = defineProps<{
   open: boolean
   roots: readonly RootDocumentListItem[]
+  fixedParent?: DocumentRelationItem
   pending?: boolean
   submitError?: string
 }>()
@@ -26,12 +31,10 @@ const titleError = ref('')
 const selectedTemplate = computed(() => SYSTEM_DOCUMENT_TEMPLATES.find(item => item.value === template.value))
 
 watch(() => props.open, (open) => {
-  if (!open) {
-    title.value = ''
-    parent.value = ROOT_PARENT
-    template.value = DOCUMENT_TEMPLATE.BLANK
-    titleError.value = ''
-  }
+  title.value = ''
+  parent.value = open ? props.fixedParent?.id ?? ROOT_PARENT : ROOT_PARENT
+  template.value = DOCUMENT_TEMPLATE.BLANK
+  titleError.value = ''
 })
 
 const submit = () => {
@@ -80,7 +83,13 @@ const submit = () => {
             <UiFieldError v-if="titleError" :errors="[titleError]" />
           </UiField>
 
-          <UiField>
+          <UiField v-if="fixedParent" data-disabled>
+            <UiFieldLabel for="document-fixed-parent">Родительская страница</UiFieldLabel>
+            <UiInput id="document-fixed-parent" :model-value="fixedParent.title" disabled />
+            <UiFieldDescription>Новая страница будет создана внутри выбранного документа.</UiFieldDescription>
+          </UiField>
+
+          <UiField v-else>
             <UiFieldLabel for="document-parent">Расположение</UiFieldLabel>
             <UiSelect v-model="parent">
               <UiSelectTrigger id="document-parent">

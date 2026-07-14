@@ -9,7 +9,7 @@ import type {
 } from '../../../shared/documents/contracts'
 import { MEMBERSHIP_STATUS, PROJECT_PERMISSION } from '../../../shared/projects/constants'
 import { getDatabase } from '../../infrastructure/database/client'
-import { documents } from '../../infrastructure/database/schema/documents'
+import { documents, documentVersions } from '../../infrastructure/database/schema/documents'
 import { projectMemberships, projectRolePermissions } from '../../infrastructure/database/schema/projects'
 
 type DocumentsDatabase = ReturnType<typeof getDatabase>['db']
@@ -23,6 +23,7 @@ interface DocumentTreeRow {
   readonly updatedAt: Date
   readonly publicationState: DocumentPublicationState
   readonly archivedAt: Date | null
+  readonly draftInternalLinkTargetIds?: readonly string[]
 }
 
 interface SelectedDocumentRow {
@@ -34,12 +35,16 @@ interface SelectedDocumentRow {
   readonly draftContent: DocumentContent
   readonly publicationState: DocumentPublicationState
   readonly updatedAt: Date
+  readonly draftInternalLinkTargetIds?: readonly string[]
 }
 
 const compareRows = (left: DocumentTreeRow, right: DocumentTreeRow): number =>
   left.position - right.position || left.title.localeCompare(right.title, 'ru')
 
-export const buildDocumentTree = (rows: readonly DocumentTreeRow[]): DocumentTreeResponse => {
+export const buildDocumentTree = (
+  rows: readonly DocumentTreeRow[],
+  versionedDocumentIds: ReadonlySet<string> = new Set<string>(),
+): DocumentTreeResponse => {
   const activeRows = rows.filter(row => row.archivedAt === null)
   const childrenByParent = new Map<string | null, DocumentTreeRow[]>()
   for (const row of activeRows) {
@@ -66,6 +71,7 @@ export const buildDocumentTree = (rows: readonly DocumentTreeRow[]): DocumentTre
       slug: row.slug,
       updatedAt: row.updatedAt.toISOString(),
       publicationState: row.publicationState,
+      hasPublishedVersions: versionedDocumentIds.has(row.id),
       children,
     }
   }
@@ -106,6 +112,16 @@ export const buildDocumentDetail = (
     .toSorted(compareRows)
     .map(({ id, title }): DocumentRelationItem => ({ id, title }))
 
+  const targetIds = selected.draftInternalLinkTargetIds ?? []
+  const internalLinks = targetIds.flatMap((id): readonly DocumentRelationItem[] => {
+    const target = rowById.get(id)
+    return target ? [{ id: target.id, title: target.title }] : []
+  })
+  const backlinks = activeRows
+    .filter(row => row.id !== selected.id && (row.draftInternalLinkTargetIds ?? []).includes(selected.id))
+    .toSorted(compareRows)
+    .map(({ id, title }): DocumentRelationItem => ({ id, title }))
+
   return {
     id: selected.id,
     title: selected.title,
@@ -117,6 +133,8 @@ export const buildDocumentDetail = (
     updatedAt: selected.updatedAt.toISOString(),
     ancestors: ancestors.reverse(),
     children,
+    internalLinks,
+    backlinks,
   }
 }
 
@@ -147,6 +165,7 @@ const loadActiveTreeRows = (db: DocumentsDatabase, projectId: string) => db.sele
   updatedAt: documents.updatedAt,
   publicationState: documents.publicationState,
   archivedAt: documents.archivedAt,
+  draftInternalLinkTargetIds: documents.draftInternalLinkTargetIds,
 })
   .from(documents)
   .where(and(eq(documents.projectId, projectId), isNull(documents.archivedAt)))
@@ -160,7 +179,13 @@ export const listDocumentTreeForUser = async (
   if (!await canViewDocuments(db, projectId, actorUserId)) {
     return null
   }
-  return buildDocumentTree(await loadActiveTreeRows(db, projectId))
+  const [rows, versionRows] = await Promise.all([
+    loadActiveTreeRows(db, projectId),
+    db.selectDistinct({ documentId: documentVersions.documentId })
+      .from(documentVersions)
+      .where(eq(documentVersions.projectId, projectId)),
+  ])
+  return buildDocumentTree(rows, new Set(versionRows.map(row => row.documentId)))
 }
 
 export const getDocumentForUser = async (
@@ -182,6 +207,7 @@ export const getDocumentForUser = async (
     draftContent: documents.draftContent,
     publicationState: documents.publicationState,
     updatedAt: documents.updatedAt,
+    draftInternalLinkTargetIds: documents.draftInternalLinkTargetIds,
   })
     .from(documents)
     .where(and(

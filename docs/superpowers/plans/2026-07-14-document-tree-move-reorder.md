@@ -1,0 +1,37 @@
+# Document tree move and reorder plan
+
+Date: 2026-07-14  
+Status: approved in conversation
+
+## Outcome
+
+An authorized project member can move an active document to another active parent, including the project root, and choose its exact position among the target siblings. The tree and the selected-page breadcrumbs refresh immediately without changing the document ID, slug, draft revision, content, or published history.
+
+## Rules
+
+- Moving requires the server-verified `documents.move` permission; role names and UI visibility are not authorization.
+- Source document and target parent must be active documents in the same active project.
+- A document cannot become its own parent or be moved below any of its descendants.
+- `targetPosition` is a zero-based insertion index after removing the source from its current sibling list.
+- Source and target sibling positions are compacted transactionally to `0..n-1`.
+- Project locking serializes document creation and tree moves so concurrent operations cannot allocate conflicting order.
+- Missing resources and denied access return the same safe not-found result.
+- Audit metadata contains only source/target parent IDs and positions, never document content.
+- Archive and restore remain a separate following slice.
+
+## UI
+
+- Members with `documents.move` see a three-dot menu on every row in the reader tree.
+- `Переместить` opens a titled Dialog composed from existing shadcn-vue fields and Select controls.
+- The parent selector excludes the selected document and its descendants.
+- The position selector offers `В начало` and insertion after each target sibling.
+- The Dialog stays open on request failure and closes only after the refreshed tree and selected document have been applied to Pinia.
+
+## TDD slices
+
+1. Test the pure placement planner: same-parent reorder, cross-parent move, root move, missing target, self/descendant cycles, and invalid positions.
+2. Test the transactional service: permission enforcement, compact positions, stable identity/revision/history, and safe audit metadata.
+3. Add strict shared contracts, Zod body validation, and a thin Nitro PATCH endpoint.
+4. Add a stateless client action that moves, then reloads the tree and selected document.
+5. Add the permission-aware tree menu and move Dialog using existing shadcn-vue components.
+6. Run focused integration tests, full unit tests, Nuxt typecheck, production build, progress update, and Tesserae refresh.

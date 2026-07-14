@@ -1,0 +1,2 @@
+ALTER TABLE "document_versions" DROP CONSTRAINT "document_versions_change_summary_check";--> statement-breakpoint
+ALTER TABLE "document_versions" ADD CONSTRAINT "document_versions_change_summary_check" CHECK ("document_versions"."change_summary" = btrim("document_versions"."change_summary") and char_length("document_versions"."change_summary") between 0 and 1000);

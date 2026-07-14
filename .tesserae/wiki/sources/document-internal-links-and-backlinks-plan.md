@@ -1,0 +1,8 @@
+---
+kind: sources
+node_id: "SourceDocument:document-internal-links-and-backlinks-plan:91b264292f5e"
+node_type: SourceDocument
+source_path: "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-document-internal-links-backlinks.md"
+title: Document internal links and backlinks plan
+---
+# Document internal links and backlinks plan

@@ -524,6 +524,39 @@
       }
     },
     {
+      "id": "SourceDocument:adr-0015-allow-permanent-discard-only-for-never-:ad0e022447a8",
+      "name": "ADR 0015: Allow permanent discard only for never-published document branches",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0015-discard-never-published-document-branches.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "ADR 0015: Allow permanent discard only for never-published document branches",
+            "anchor": "adr-0015-allow-permanent-discard-only-for-never-published-document-branches"
+          },
+          {
+            "level": 2,
+            "text": "Decision",
+            "anchor": "decision"
+          },
+          {
+            "level": 2,
+            "text": "Rationale",
+            "anchor": "rationale"
+          },
+          {
+            "level": 2,
+            "text": "Consequences",
+            "anchor": "consequences"
+          }
+        ]
+      }
+    },
+    {
       "id": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
       "name": "Authenticated Page Placeholder Design",
       "type": "SourceDocument",
@@ -668,6 +701,39 @@
             "level": 3,
             "text": "Task 4: Full verification and project records",
             "anchor": "task-4-full-verification-and-project-records"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:create-a-child-document-from-the-tree-plan:c668b02e359c",
+      "name": "Create a child document from the tree plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-document-tree-create-child.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Create a child document from the tree plan",
+            "anchor": "create-a-child-document-from-the-tree-plan"
+          },
+          {
+            "level": 2,
+            "text": "Outcome",
+            "anchor": "outcome"
+          },
+          {
+            "level": 2,
+            "text": "Rules",
+            "anchor": "rules"
+          },
+          {
+            "level": 2,
+            "text": "TDD slice",
+            "anchor": "tdd-slice"
           }
         ]
       }
@@ -832,6 +898,181 @@
             "level": 3,
             "text": "Task 7: Complete verification and canonical documentation",
             "anchor": "task-7-complete-verification-and-canonical-documentation"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:document-archive-and-restore-plan:142d78fd4d07",
+      "name": "Document archive and restore plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-document-archive-restore.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Document archive and restore plan",
+            "anchor": "document-archive-and-restore-plan"
+          },
+          {
+            "level": 2,
+            "text": "Outcome",
+            "anchor": "outcome"
+          },
+          {
+            "level": 2,
+            "text": "Rules",
+            "anchor": "rules"
+          },
+          {
+            "level": 2,
+            "text": "UI",
+            "anchor": "ui"
+          },
+          {
+            "level": 2,
+            "text": "TDD slices",
+            "anchor": "tdd-slices"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:document-images-implementation-plan:ef556c9efb9f",
+      "name": "Document Images Implementation Plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-document-images.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Document Images Implementation Plan",
+            "anchor": "document-images-implementation-plan"
+          },
+          {
+            "level": 2,
+            "text": "Architecture",
+            "anchor": "architecture"
+          },
+          {
+            "level": 2,
+            "text": "TDD slices",
+            "anchor": "tdd-slices"
+          },
+          {
+            "level": 2,
+            "text": "Security invariants",
+            "anchor": "security-invariants"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:document-internal-links-and-backlinks-plan:91b264292f5e",
+      "name": "Document internal links and backlinks plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-document-internal-links-backlinks.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Document internal links and backlinks plan",
+            "anchor": "document-internal-links-and-backlinks-plan"
+          },
+          {
+            "level": 2,
+            "text": "Outcome",
+            "anchor": "outcome"
+          },
+          {
+            "level": 2,
+            "text": "Rules",
+            "anchor": "rules"
+          },
+          {
+            "level": 2,
+            "text": "TDD slices",
+            "anchor": "tdd-slices"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:document-publication-history-and-restore-plan:c6d6e4c4d3fb",
+      "name": "Document publication, history, and restore plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-document-publication-history.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Document publication, history, and restore plan",
+            "anchor": "document-publication-history-and-restore-plan"
+          },
+          {
+            "level": 2,
+            "text": "Outcome",
+            "anchor": "outcome"
+          },
+          {
+            "level": 2,
+            "text": "Rules",
+            "anchor": "rules"
+          },
+          {
+            "level": 2,
+            "text": "TDD slices",
+            "anchor": "tdd-slices"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SourceDocument:document-tree-move-and-reorder-plan:1a18184e6b6e",
+      "name": "Document tree move and reorder plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-document-tree-move-reorder.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Document tree move and reorder plan",
+            "anchor": "document-tree-move-and-reorder-plan"
+          },
+          {
+            "level": 2,
+            "text": "Outcome",
+            "anchor": "outcome"
+          },
+          {
+            "level": 2,
+            "text": "Rules",
+            "anchor": "rules"
+          },
+          {
+            "level": 2,
+            "text": "UI",
+            "anchor": "ui"
+          },
+          {
+            "level": 2,
+            "text": "TDD slices",
+            "anchor": "tdd-slices"
           }
         ]
       }
@@ -2482,6 +2723,34 @@
       }
     },
     {
+      "id": "SourceDocument:permanently-discard-never-published-documents-pl:3703b799c811",
+      "name": "Permanently discard never-published documents plan",
+      "type": "SourceDocument",
+      "aliases": [],
+      "description": "",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-document-discard-unpublished.md",
+      "metadata": {
+        "source_kind": "SourceDocument",
+        "sections": [
+          {
+            "level": 1,
+            "text": "Permanently discard never-published documents plan",
+            "anchor": "permanently-discard-never-published-documents-plan"
+          },
+          {
+            "level": 2,
+            "text": "Outcome",
+            "anchor": "outcome"
+          },
+          {
+            "level": 2,
+            "text": "TDD slices",
+            "anchor": "tdd-slices"
+          }
+        ]
+      }
+    },
+    {
       "id": "SourceDocument:postgresql-docker-compose-design:1d13eb67950d",
       "name": "PostgreSQL Docker Compose design",
       "type": "SourceDocument",
@@ -3363,7 +3632,7 @@
       "source_path": null,
       "metadata": {
         "synthesis_kind": "pulse",
-        "content_hash": "sha256-0381a81ebbd08022e334e15cae64627898fa86de05204c2a97ef14e7623787cf",
+        "content_hash": "sha256-04896a36987488a2445e0add8c245135f3117ce7742778924f304b1ef0eda088",
         "input_ids": []
       }
     }
@@ -3748,6 +4017,13 @@
     },
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0015-allow-permanent-discard-only-for-never-:ad0e022447a8",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
       "type": "summarizes",
       "evidence": null,
@@ -3769,6 +4045,13 @@
     },
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:create-a-child-document-from-the-tree-plan:c668b02e359c",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:credential-encryption-operations:dc0ac941bdc7",
       "type": "summarizes",
       "evidence": null,
@@ -3784,6 +4067,41 @@
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:current-user-sidebar-implementation-plan:30919ebc2609",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:document-archive-and-restore-plan:142d78fd4d07",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:document-images-implementation-plan:ef556c9efb9f",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:document-internal-links-and-backlinks-plan:91b264292f5e",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:document-publication-history-and-restore-plan:c6d6e4c4d3fb",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:document-tree-move-and-reorder-plan:1a18184e6b6e",
       "type": "summarizes",
       "evidence": null,
       "metadata": {}
@@ -3959,6 +4277,13 @@
     {
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
+      "type": "summarizes",
+      "evidence": null,
+      "metadata": {}
+    },
+    {
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:permanently-discard-never-published-documents-pl:3703b799c811",
       "type": "summarizes",
       "evidence": null,
       "metadata": {}

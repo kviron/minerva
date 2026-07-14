@@ -1,5 +1,5 @@
 ---
-content_hash: sha256-0381a81ebbd08022e334e15cae64627898fa86de05204c2a97ef14e7623787cf
+content_hash: sha256-04896a36987488a2445e0add8c245135f3117ce7742778924f304b1ef0eda088
 generator: heuristic-v1
 inputs: []
 slug: pulse
@@ -22,6 +22,7 @@ sources:
   - docs/decisions/0012-use-feature-scoped-actions-for-client-effects.md
   - docs/decisions/0013-keep-client-actions-stateless-and-feature-scoped.md
   - docs/decisions/0014-search-authorized-encrypted-credential-values.md
+  - docs/decisions/0015-discard-never-published-document-branches.md
   - docs/operations/credential-encryption.md
   - docs/operations/tesserae.md
   - docs/product-spec.md
@@ -46,6 +47,13 @@ sources:
   - docs/superpowers/plans/2026-07-05-projects-list-and-create-ui.md
   - docs/superpowers/plans/2026-07-05-projects-rbac-foundation.md
   - docs/superpowers/plans/2026-07-11-project-credentials.md
+  - docs/superpowers/plans/2026-07-14-document-archive-restore.md
+  - docs/superpowers/plans/2026-07-14-document-discard-unpublished.md
+  - docs/superpowers/plans/2026-07-14-document-images.md
+  - docs/superpowers/plans/2026-07-14-document-internal-links-backlinks.md
+  - docs/superpowers/plans/2026-07-14-document-publication-history.md
+  - docs/superpowers/plans/2026-07-14-document-tree-create-child.md
+  - docs/superpowers/plans/2026-07-14-document-tree-move-reorder.md
   - docs/superpowers/specs/2026-06-24-minerva-mvp-design.md
   - docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md
   - docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md
@@ -78,7 +86,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 61
+- SourceDocument: 69
 
 ## Recently added
 - (none)

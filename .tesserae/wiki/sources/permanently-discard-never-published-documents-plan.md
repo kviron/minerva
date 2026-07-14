@@ -1,0 +1,8 @@
+---
+kind: sources
+node_id: "SourceDocument:permanently-discard-never-published-documents-pl:3703b799c811"
+node_type: SourceDocument
+source_path: "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-document-discard-unpublished.md"
+title: Permanently discard never-published documents plan
+---
+# Permanently discard never-published documents plan

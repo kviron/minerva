@@ -8,6 +8,7 @@ import { DOCUMENT_ACTION } from '../model/actions/actions'
 import { useDocumentsActions } from '../model/actions/provider'
 import { useDocumentsStore } from '../model/documents-state'
 import CreateDocumentDialog from './CreateDocumentDialog.vue'
+import DocumentsArchive from './DocumentsArchive.vue'
 import DocumentRootList from './DocumentRootList.vue'
 
 const props = defineProps<{ projectId: string }>()
@@ -15,6 +16,7 @@ const actions = useDocumentsActions()
 const state = useDocumentsStore()
 const projectState = useProjectOverviewStore()
 const createOpen = ref(false)
+const activeTab = ref('pages')
 const loadError = ref<string | null>(null)
 const pending = computed(() => actions.isPendingFor(DOCUMENT_ACTION.LOAD_ROOTS, props.projectId))
 const creating = computed(() => actions.isPendingFor(DOCUMENT_ACTION.CREATE, props.projectId))
@@ -23,6 +25,12 @@ const canCreate = computed(() => {
   const project = projectState.project
   return project?.id === props.projectId
     && project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_CREATE)
+})
+const canViewArchive = computed(() => {
+  const project = projectState.project
+  return project?.id === props.projectId
+    && (project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_ARCHIVE)
+      || project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_RESTORE))
 })
 
 const load = async () => {
@@ -62,12 +70,19 @@ watch(() => props.projectId, load, { immediate: true })
           Корневые страницы — основные разделы документации проекта. Каждый раздел может содержать собственную страницу и вложенные документы.
         </p>
       </div>
-      <UiButton v-if="canCreate" @click="setCreateOpen(true)">
+      <UiButton v-if="canCreate && activeTab === 'pages'" @click="setCreateOpen(true)">
         <Plus data-icon="inline-start" />
         Создать страницу
       </UiButton>
     </div>
 
+    <UiTabs v-model="activeTab" class="flex flex-col gap-4">
+      <UiTabsList>
+        <UiTabsTrigger value="pages">Страницы</UiTabsTrigger>
+        <UiTabsTrigger v-if="canViewArchive" value="archive">Архив</UiTabsTrigger>
+      </UiTabsList>
+
+      <UiTabsContent value="pages" class="flex flex-col gap-4">
     <UiCard v-if="pending">
       <UiCardHeader>
         <UiSkeleton class="h-5 w-48" />
@@ -103,6 +118,12 @@ watch(() => props.projectId, load, { immediate: true })
     </UiEmpty>
 
     <DocumentRootList v-else :project-id="projectId" :documents="state.roots" />
+      </UiTabsContent>
+
+      <UiTabsContent v-if="canViewArchive" value="archive">
+        <DocumentsArchive :project-id="projectId" />
+      </UiTabsContent>
+    </UiTabs>
 
     <CreateDocumentDialog
       :open="createOpen"

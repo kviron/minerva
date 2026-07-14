@@ -1,0 +1,23 @@
+# Create a child document from the tree plan
+
+Date: 2026-07-14  
+Status: approved in conversation
+
+## Outcome
+
+An authorized member can create a document directly inside any active document from that document's three-dot tree menu.
+
+## Rules
+
+- The action is visible only with `documents.create`.
+- The selected tree document is passed as the fixed `parentId`; the user cannot accidentally change it in this flow.
+- The existing create-document service, HTTP endpoint, templates, validation, and audit path remain the single mutation path.
+- After a successful creation, the dialog closes and the newly created child document opens.
+- The existing landing-page flow continues to allow root or root-page placement.
+
+## TDD slice
+
+1. Add a client regression test for permission-aware menu composition, parent propagation, and navigation.
+2. Extend the reusable create dialog with an optional fixed parent.
+3. Wire the tree branch event and tree-level create action.
+4. Run focused tests, typecheck, update progress, and refresh Tesserae.

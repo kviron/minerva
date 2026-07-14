@@ -13,6 +13,7 @@ import { DOCUMENT_ACTION } from '../model/actions/actions'
 import { useDocumentsActions } from '../model/actions/provider'
 import { useDocumentsStore } from '../model/documents-state'
 import { toTiptapEditorContent } from '../model/editor-content'
+import { createDocumentImageExtension } from '../model/document-image'
 import DocumentEditorToolbar from './DocumentEditorToolbar.vue'
 
 type EditorStatus = 'loading' | 'saved' | 'dirty' | 'saving' | 'conflict' | 'error'
@@ -35,7 +36,10 @@ const initializing = ref(false)
 const dirtySequence = ref(0)
 const savedSequence = ref(0)
 const saveInFlight = ref(false)
-let activeSave: Promise<void> | null = null
+const publishDialogOpen = ref(false)
+const publicationSummary = ref('')
+const publishError = ref<string | null>(null)
+let activeSave: Promise<boolean> | null = null
 let resolveLeaveDecision: ((allow: boolean) => void) | null = null
 const leaveDialogOpen = ref(false)
 
@@ -46,7 +50,15 @@ const canEdit = computed(() => {
 })
 const loading = computed(() => actions.isPendingFor(DOCUMENT_ACTION.LOAD_DOCUMENT, `${props.projectId}:${props.documentId}`))
 const saving = computed(() => saveInFlight.value)
+const publishing = computed(() => actions.isPendingFor(DOCUMENT_ACTION.PUBLISH, `${props.projectId}:${props.documentId}`))
 const hasUnsavedChanges = computed(() => dirtySequence.value > savedSequence.value)
+const canPublish = computed(() => {
+  const project = projectState.project
+  return project?.id === props.projectId
+    && project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_PUBLISH)
+})
+const canSaveAndPublish = computed(() => canPublish.value
+  && (currentDocument.value?.publicationState === 'draft' || hasUnsavedChanges.value))
 const statusLabel = computed(() => {
   if (status.value === 'saving') {
     return 'Сохранение…'
@@ -64,14 +76,15 @@ const statusLabel = computed(() => {
 })
 
 const editor = useEditor({
-  content: { type: 'doc', content: [] },
+  content: { type: 'doc', content: [{ type: 'paragraph' }] },
   extensions: [
     StarterKit.configure({ link: false }),
-    Link.configure({ openOnClick: false, autolink: true, defaultProtocol: 'https' }),
+    Link.configure({ openOnClick: false, autolink: true, defaultProtocol: 'https', protocols: ['document'] }),
+    createDocumentImageExtension(props.projectId),
   ],
   editorProps: {
     attributes: {
-      class: 'min-h-[28rem] px-6 py-5 outline-none',
+      class: 'min-h-[28rem] px-6 py-5 outline-none [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4',
       'aria-label': 'Содержимое документа',
     },
   },
@@ -111,26 +124,33 @@ function applyLoadedDocument(document: DocumentDetailResponse): void {
 async function load(): Promise<void> {
   status.value = 'loading'
   loadError.value = null
-  const document = await actions.loadDocument(props.projectId, props.documentId)
-  if (!document) {
+  const [document, tree] = await Promise.all([
+    actions.loadDocument(props.projectId, props.documentId),
+    actions.loadTree(props.projectId),
+  ])
+  if (!document || !tree) {
     loadError.value = actions.error.value
     status.value = 'error'
     return
   }
+  state.applyTree(tree)
   applyLoadedDocument(document)
 }
 
-async function performSave(): Promise<void> {
+async function performSave(): Promise<boolean> {
   const activeEditor = editor.value
   const document = currentDocument.value
-  if (!activeEditor || !document || !canEdit.value || status.value === 'conflict' || !hasUnsavedChanges.value) {
-    return
+  if (!activeEditor || !document || !canEdit.value || status.value === 'conflict') {
+    return false
+  }
+  if (!hasUnsavedChanges.value) {
+    return true
   }
   const normalizedTitle = title.value.trim()
   if (normalizedTitle.length === 0 || normalizedTitle.length > 200) {
     saveError.value = 'Название должно содержать от 1 до 200 символов.'
     status.value = 'error'
-    return
+    return false
   }
 
   let content: DocumentContent
@@ -140,7 +160,7 @@ async function performSave(): Promise<void> {
   catch {
     saveError.value = 'Содержимое документа имеет неподдерживаемый формат.'
     status.value = 'error'
-    return
+    return false
   }
 
   const savingSequence = dirtySequence.value
@@ -155,14 +175,14 @@ async function performSave(): Promise<void> {
   if (!result) {
     saveError.value = actions.error.value
     status.value = 'error'
-    return
+    return false
   }
   if (!result.ok) {
     if (result.code === DOCUMENT_DRAFT_UPDATE_CODE.DRAFT_CONFLICT) {
       status.value = 'conflict'
       saveError.value = null
     }
-    return
+    return false
   }
 
   revision.value = result.value.draftRevision
@@ -177,16 +197,17 @@ async function performSave(): Promise<void> {
     title: normalizedTitle,
     draftContent: content,
     draftRevision: result.value.draftRevision,
+    publicationState: 'draft',
     updatedAt: result.value.updatedAt,
   }
   currentDocument.value = updated
   state.applyCurrent(updated)
   if (dirtySequence.value > savedSequence.value) {
     status.value = 'dirty'
+    return false
   }
-  else {
-    status.value = 'saved'
-  }
+  status.value = 'saved'
+  return true
 }
 
 function confirmUnsavedChanges(): Promise<boolean> {
@@ -221,7 +242,7 @@ function handleBeforeUnload(event: BeforeUnloadEvent): void {
   event.returnValue = ''
 }
 
-function saveDraft(): Promise<void> {
+function saveDraft(): Promise<boolean> {
   if (activeSave !== null) {
     return activeSave
   }
@@ -233,6 +254,38 @@ function saveDraft(): Promise<void> {
   })
   activeSave = operation
   return operation
+}
+
+function setPublishDialogOpen(open: boolean): void {
+  publishDialogOpen.value = open
+  if (!open) {
+    publicationSummary.value = ''
+    publishError.value = null
+  }
+}
+
+async function publishAndView(): Promise<void> {
+  publishError.value = null
+  const saved = await saveDraft()
+  if (!saved || hasUnsavedChanges.value) {
+    return
+  }
+  const result = await actions.publish(props.projectId, props.documentId, {
+    changeSummary: publicationSummary.value.trim(),
+    expectedRevision: revision.value,
+  })
+  if (!result) {
+    publishError.value = actions.error.value ?? 'Не удалось опубликовать страницу.'
+    return
+  }
+  if (!result.ok) {
+    publishError.value = result.code === DOCUMENT_DRAFT_UPDATE_CODE.DRAFT_CONFLICT
+      ? 'Страница изменилась в другом окне. Загрузите актуальную версию и повторите действие.'
+      : 'Не удалось опубликовать страницу. Попробуйте ещё раз.'
+    return
+  }
+  setPublishDialogOpen(false)
+  await navigateTo(`/projects/${props.projectId}/documents/${props.documentId}`)
 }
 
 watch(title, () => markDirty(), { flush: 'sync' })
@@ -303,6 +356,14 @@ onBeforeUnmount(() => window.removeEventListener('beforeunload', handleBeforeUnl
           <UiSpinner v-if="saving" data-icon="inline-start" />
           Сохранить
         </UiButton>
+        <UiButton
+          v-if="canPublish"
+          size="sm"
+          :disabled="saving || publishing || status === 'conflict' || !canSaveAndPublish"
+          @click="setPublishDialogOpen(true)"
+        >
+          Сохранить и опубликовать
+        </UiButton>
         <UiButton as-child variant="outline" size="sm">
           <NuxtLink :to="`/projects/${projectId}/documents/${documentId}`">Просмотр</NuxtLink>
         </UiButton>
@@ -310,9 +371,49 @@ onBeforeUnmount(() => window.removeEventListener('beforeunload', handleBeforeUnl
     </div>
 
     <div class="overflow-hidden rounded-md border bg-background">
-      <DocumentEditorToolbar :editor="editor" />
+      <DocumentEditorToolbar
+        :editor="editor"
+        :documents="state.tree"
+        :current-document-id="documentId"
+        :project-id="projectId"
+      />
       <EditorContent :editor="editor" />
     </div>
+
+    <UiDialog :open="publishDialogOpen" @update:open="setPublishDialogOpen">
+      <UiDialogContent>
+        <UiDialogHeader>
+          <UiDialogTitle>Сохранить и опубликовать</UiDialogTitle>
+          <UiDialogDescription>
+            Черновик будет сохранён, опубликован как новая неизменяемая версия, после чего откроется просмотр страницы.
+          </UiDialogDescription>
+        </UiDialogHeader>
+        <UiFieldGroup>
+          <UiField>
+            <UiFieldLabel for="editor-publication-summary">Комментарий к версии (необязательно)</UiFieldLabel>
+            <UiTextarea
+              id="editor-publication-summary"
+              v-model="publicationSummary"
+              maxlength="1000"
+              placeholder="Кратко опишите изменения"
+            />
+          </UiField>
+        </UiFieldGroup>
+        <UiAlert v-if="publishError" variant="destructive" role="alert">
+          <UiAlertTitle>Не удалось опубликовать страницу</UiAlertTitle>
+          <UiAlertDescription>{{ publishError }}</UiAlertDescription>
+        </UiAlert>
+        <UiDialogFooter>
+          <UiButton variant="outline" :disabled="saving || publishing" @click="setPublishDialogOpen(false)">
+            Отмена
+          </UiButton>
+          <UiButton :disabled="saving || publishing" @click="publishAndView">
+            <UiSpinner v-if="saving || publishing" data-icon="inline-start" />
+            Сохранить и опубликовать
+          </UiButton>
+        </UiDialogFooter>
+      </UiDialogContent>
+    </UiDialog>
 
     <UiAlertDialog :open="leaveDialogOpen" @update:open="setLeaveDialogOpen">
       <UiAlertDialogContent>

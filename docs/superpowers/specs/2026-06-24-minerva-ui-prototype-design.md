@@ -108,7 +108,7 @@ The prototype shows the normal saved state. Conflict resolution is designed in t
 
 ### 6. Publish dialog
 
-A shadcn dialog requires a change summary before publishing. The primary action creates the immutable version; cancel returns to the editor.
+A shadcn dialog offers an optional change summary before publishing. The primary action creates the immutable version; cancel returns to the editor.
 
 ### 7. Version history
 

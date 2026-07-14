@@ -1,0 +1,20 @@
+# ADR 0015: Allow permanent discard only for never-published document branches
+
+Date: 2026-07-14  
+Status: accepted
+
+## Decision
+
+An active document branch may be physically deleted only when every document in that branch is still a draft and no document in the branch has any immutable published version. The operation requires the existing `documents.archive` permission and is checked transactionally on the server. If the branch contains current or historical published material, the only removal operation is recoverable archive.
+
+## Rationale
+
+Empty or mistakenly created drafts do not need to occupy the archive indefinitely. Published information, including a page edited back into draft state after publication, remains recoverable and keeps its immutable history.
+
+## Consequences
+
+- The reader-tree menu shows `Удалить` instead of `В архив` only for a fully discardable branch.
+- Deleting a parent permanently deletes its entire discardable descendant branch so no orphaned documents remain.
+- The server rejects stale discard requests if any version is created before the transaction completes.
+- Permanent deletion records content-free audit metadata before the documents and their cascading dependent rows are removed.
+- No separate permission is introduced in the first release; `documents.archive` governs both lifecycle removal choices.

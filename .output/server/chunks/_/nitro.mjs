@@ -764,6 +764,84 @@ function isError(input) {
   return input?.constructor?.__h3_error__ === true;
 }
 
+function parse(multipartBodyBuffer, boundary) {
+  let lastline = "";
+  let state = 0 /* INIT */;
+  let buffer = [];
+  const allParts = [];
+  let currentPartHeaders = [];
+  for (let i = 0; i < multipartBodyBuffer.length; i++) {
+    const prevByte = i > 0 ? multipartBodyBuffer[i - 1] : null;
+    const currByte = multipartBodyBuffer[i];
+    const newLineChar = currByte === 10 || currByte === 13;
+    if (!newLineChar) {
+      lastline += String.fromCodePoint(currByte);
+    }
+    const newLineDetected = currByte === 10 && prevByte === 13;
+    if (0 /* INIT */ === state && newLineDetected) {
+      if ("--" + boundary === lastline) {
+        state = 1 /* READING_HEADERS */;
+      }
+      lastline = "";
+    } else if (1 /* READING_HEADERS */ === state && newLineDetected) {
+      if (lastline.length > 0) {
+        const i2 = lastline.indexOf(":");
+        if (i2 > 0) {
+          const name = lastline.slice(0, i2).toLowerCase();
+          const value = lastline.slice(i2 + 1).trim();
+          currentPartHeaders.push([name, value]);
+        }
+      } else {
+        state = 2 /* READING_DATA */;
+        buffer = [];
+      }
+      lastline = "";
+    } else if (2 /* READING_DATA */ === state) {
+      if (lastline.length > boundary.length + 4) {
+        lastline = "";
+      }
+      if ("--" + boundary === lastline) {
+        const j = buffer.length - lastline.length;
+        const part = buffer.slice(0, j - 1);
+        allParts.push(process$1(part, currentPartHeaders));
+        buffer = [];
+        currentPartHeaders = [];
+        lastline = "";
+        state = 3 /* READING_PART_SEPARATOR */;
+      } else {
+        buffer.push(currByte);
+      }
+      if (newLineDetected) {
+        lastline = "";
+      }
+    } else if (3 /* READING_PART_SEPARATOR */ === state && newLineDetected) {
+      state = 1 /* READING_HEADERS */;
+    }
+  }
+  return allParts;
+}
+function process$1(data, headers) {
+  const dataObj = {};
+  const contentDispositionHeader = headers.find((h) => h[0] === "content-disposition")?.[1] || "";
+  for (const i of contentDispositionHeader.split(";")) {
+    const s = i.split("=");
+    if (s.length !== 2) {
+      continue;
+    }
+    const key = (s[0] || "").trim();
+    if (key === "name" || key === "filename") {
+      const _value = (s[1] || "").trim().replace(/"/g, "");
+      dataObj[key] = Buffer.from(_value, "latin1").toString("utf8");
+    }
+  }
+  const contentType = headers.find((h) => h[0] === "content-type")?.[1] || "";
+  if (contentType) {
+    dataObj.type = contentType;
+  }
+  dataObj.data = Buffer.from(data);
+  return dataObj;
+}
+
 function getQuery(event) {
   return getQuery$1(event.path || "");
 }
@@ -954,6 +1032,21 @@ async function readBody(event, options = {}) {
   }
   request[ParsedBodySymbol] = parsed;
   return parsed;
+}
+async function readMultipartFormData(event) {
+  const contentType = getRequestHeader(event, "content-type");
+  if (!contentType || !contentType.startsWith("multipart/form-data")) {
+    return;
+  }
+  const boundary = contentType.match(/boundary=([^;]*)(;|$)/i)?.[1];
+  if (!boundary) {
+    return;
+  }
+  const body = await readRawBody(event, false);
+  if (!body) {
+    return;
+  }
+  return parse(body, boundary);
 }
 function getRequestWebStream(event) {
   if (!PayloadMethods$1.includes(event.method)) {
@@ -4126,7 +4219,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "994e9ccb-07e1-4ca4-a90d-709f1e26d9fa",
+    "buildId": "3f967cfa-ac79-49c4-964a-98008de9f720",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4512,600 +4605,586 @@ _RsAMqRps4We9yEX_U5kgERLSwxo6coihF0nyZUvnpig
 ];
 
 const assets = {
-  "/_nuxt/2cb0YN0t.js": {
+  "/_nuxt/1HradoUo.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"2031-8ZcMLImEa0h88xXt5bdJK20innw\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 8241,
-    "path": "../public/_nuxt/2cb0YN0t.js"
-  },
-  "/_nuxt/BAoxhSc0.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"50e-IrtG9tfZDkUadKeqsbIQRmJSB94\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 1294,
-    "path": "../public/_nuxt/BAoxhSc0.js"
-  },
-  "/_nuxt/B7bCiVId.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"3f8-1d/wLzGiJGODR7U15FYGRFZuFv0\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 1016,
-    "path": "../public/_nuxt/B7bCiVId.js"
-  },
-  "/_nuxt/BBQAu454.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"274-90IwX89LO898v+hC9vugQUSYk7I\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 628,
-    "path": "../public/_nuxt/BBQAu454.js"
-  },
-  "/_nuxt/B1VOWRTk.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"60c-n0E8t44munqleeX/ZLsJkboJqsc\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 1548,
-    "path": "../public/_nuxt/B1VOWRTk.js"
-  },
-  "/_nuxt/BBJKbKAf.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"11a-rBfuxf38DbVe1uHXjNMXNjY5TwA\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 282,
-    "path": "../public/_nuxt/BBJKbKAf.js"
-  },
-  "/_nuxt/8bma1ZKt.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"109cb-JFoYQWG5ZBQA8U526vMoDhtH5Rw\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 68043,
-    "path": "../public/_nuxt/8bma1ZKt.js"
-  },
-  "/_nuxt/BbW5NlOw.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"93-JLzL17e+Z2kURAMN2goTqmNXddE\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 147,
-    "path": "../public/_nuxt/BbW5NlOw.js"
-  },
-  "/_nuxt/Bbrnprlu.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"6bcc-XNhFNtLI2F3ACSLDgHiBWezJesw\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 27596,
-    "path": "../public/_nuxt/Bbrnprlu.js"
-  },
-  "/_nuxt/Bf_GWUqR.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"268-TEkdSIDk1Mc4b8sTgJ55ihz5T6M\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 616,
-    "path": "../public/_nuxt/Bf_GWUqR.js"
-  },
-  "/_nuxt/BGZEStIy.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"100c-us3X2Zm6yWrO3zDDDHVvJqNIF98\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 4108,
-    "path": "../public/_nuxt/BGZEStIy.js"
-  },
-  "/_nuxt/BeKV0hVN.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"f3-xVFwxKW2zyCvH4cHUuT2kuwVn50\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
+    "etag": "\"f3-LOEDOj5ZgB2G+mTPRdUVBMUbT18\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
     "size": 243,
-    "path": "../public/_nuxt/BeKV0hVN.js"
+    "path": "../public/_nuxt/1HradoUo.js"
   },
-  "/_nuxt/Bcf2zeJw.js": {
+  "/_nuxt/4u8Hd-5k.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"91-l+KYeSJr17OKWZxEBUObHrQzCcc\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 145,
-    "path": "../public/_nuxt/Bcf2zeJw.js"
+    "etag": "\"46ea-0xo5SiEI1jntWQjBf0bUjELAgfo\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 18154,
+    "path": "../public/_nuxt/4u8Hd-5k.js"
   },
-  "/_nuxt/BJQL2OPc.js": {
+  "/_nuxt/10exndWp.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"28b7-yecesi17/Ast5vh2lwhShJmYd+M\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 10423,
-    "path": "../public/_nuxt/BJQL2OPc.js"
+    "etag": "\"10214-Ve/vHx0lCXvIHY7vc73JlUeZ4DY\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 66068,
+    "path": "../public/_nuxt/10exndWp.js"
   },
-  "/_nuxt/ByLpQtwA.js": {
+  "/_nuxt/4wgQuHGW.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"91-BMXcs4WXLS9sQzXoMFHfY/eW4w0\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 145,
-    "path": "../public/_nuxt/ByLpQtwA.js"
-  },
-  "/_nuxt/BrKycR-H.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1626-MXeyJzAWsGJr2WrhFYz/Pu074xQ\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 5670,
-    "path": "../public/_nuxt/BrKycR-H.js"
-  },
-  "/_nuxt/C4iGAUjy.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"91-MtnjDhxpPXLCqcMOfzJ2JIcHkHM\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 145,
-    "path": "../public/_nuxt/C4iGAUjy.js"
-  },
-  "/_nuxt/BzwTnp7r.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"ea-GADnL+893c6VT5BpyH1b5lEy3IA\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 234,
-    "path": "../public/_nuxt/BzwTnp7r.js"
-  },
-  "/_nuxt/C-lq0rF_.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"28d-kYE4KOJb59jHJ+NysgCz7Uj7Eys\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 653,
-    "path": "../public/_nuxt/C-lq0rF_.js"
-  },
-  "/_nuxt/C8haCgxU.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"74e-Y2jPZkWa8lEiMLd8YIDgYTeCIuQ\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 1870,
-    "path": "../public/_nuxt/C8haCgxU.js"
-  },
-  "/_nuxt/Cb7FdjH3.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"215-8hpy2V0KJB4f0K5enl773fRBcmc\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 533,
-    "path": "../public/_nuxt/Cb7FdjH3.js"
-  },
-  "/_nuxt/CDrjIwEo.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1259-x3iZx1j9JEqFr7s1jBSgMMAn/hg\"",
-    "mtime": "2026-07-13T22:58:43.260Z",
-    "size": 4697,
-    "path": "../public/_nuxt/CDrjIwEo.js"
-  },
-  "/_nuxt/ChzF_3Oh.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"26ce-ZnYKUP7aAQ8zEDixNcQTTHX93GQ\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 9934,
-    "path": "../public/_nuxt/ChzF_3Oh.js"
-  },
-  "/_nuxt/CcxlaNIZ.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"5b636-XEc2tm6KWpUlnLLQYKy3z+Uidis\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 374326,
-    "path": "../public/_nuxt/CcxlaNIZ.js"
-  },
-  "/_nuxt/CDPTHO9B.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"699d9-/yRvMQXxLYqLmub6EhfsSP9Mu8s\"",
-    "mtime": "2026-07-13T22:58:43.260Z",
-    "size": 432601,
-    "path": "../public/_nuxt/CDPTHO9B.js"
-  },
-  "/_nuxt/clu1wtCo.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"121-NrItuaHvJM1yogdpvt6BMS8MENQ\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 289,
-    "path": "../public/_nuxt/clu1wtCo.js"
-  },
-  "/_nuxt/CNdKeS1Q.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"720-N0b2w3s4qM3/oEvEqw54IYepU9g\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 1824,
-    "path": "../public/_nuxt/CNdKeS1Q.js"
-  },
-  "/_nuxt/Co_HfRUu.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"94-LRnQPoB7kJMWDcBIpQwLa18X6dk\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 148,
-    "path": "../public/_nuxt/Co_HfRUu.js"
-  },
-  "/_nuxt/CMHemPsR.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1f29-S71xH2+RhoRFIG7xyHQooFTZpLM\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 7977,
-    "path": "../public/_nuxt/CMHemPsR.js"
-  },
-  "/_nuxt/CRaV3bAG.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"213-Iqghvs1NOYPzPh0m4B2j2CWwMQg\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 531,
-    "path": "../public/_nuxt/CRaV3bAG.js"
-  },
-  "/_nuxt/Cq8lohL8.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"ba-M7Cc3WQrjA8g3rLA9Cvl8nlWoYQ\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 186,
-    "path": "../public/_nuxt/Cq8lohL8.js"
-  },
-  "/_nuxt/CROjWvte.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"dd7-w8e+/p+pYX1YUFSTwpbEzb1C0xA\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 3543,
-    "path": "../public/_nuxt/CROjWvte.js"
-  },
-  "/_nuxt/CU-h3sZN.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"14b-H35kdZ9qS8YiWHHeCct98Ks/iJE\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 331,
-    "path": "../public/_nuxt/CU-h3sZN.js"
-  },
-  "/_nuxt/CUc-Ksz-.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"3d5-3rmz2mVMfIFZJUmHbtF9Uomo0JE\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 981,
-    "path": "../public/_nuxt/CUc-Ksz-.js"
-  },
-  "/_nuxt/CUVwICzr.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"f4a-YO2syCIfFKusDlkOX1Jy16XPc6Y\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 3914,
-    "path": "../public/_nuxt/CUVwICzr.js"
-  },
-  "/_nuxt/CuRno-43.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"91-zXYffJBC/WMr5YaHJrrnwq/Def0\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 145,
-    "path": "../public/_nuxt/CuRno-43.js"
-  },
-  "/_nuxt/cuwnoIoa.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"757-qxOuX5VtJNvHDXvTgZAdVncX7v0\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 1879,
-    "path": "../public/_nuxt/cuwnoIoa.js"
-  },
-  "/_nuxt/CV5M2RZl.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"13a-ecLESGCiBNbf/pJxqclACQ2gmUk\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 314,
-    "path": "../public/_nuxt/CV5M2RZl.js"
-  },
-  "/_nuxt/CwuWQqZw.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"547-Iage4CnXALN3LyLz964g3BNptIw\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 1351,
-    "path": "../public/_nuxt/CwuWQqZw.js"
-  },
-  "/_nuxt/CZGZQBD7.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"239-7C0Ce5lXBTpWk92cdMnbiP2a2+M\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 569,
-    "path": "../public/_nuxt/CZGZQBD7.js"
-  },
-  "/_nuxt/D1gbxq4V.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"7d-1KKbQ1liKAHR39I+AV88YGTtlZ0\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 125,
-    "path": "../public/_nuxt/D1gbxq4V.js"
-  },
-  "/_nuxt/D2tnm_F6.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"f34-cOiM0Rb2STjoS+BOEwixKJ46rJ0\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 3892,
-    "path": "../public/_nuxt/D2tnm_F6.js"
-  },
-  "/_nuxt/D8d9orZT.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"fb5-wIzWuWo4wWT3+v2MNCyjFN9DpP0\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 4021,
-    "path": "../public/_nuxt/D8d9orZT.js"
-  },
-  "/_nuxt/D9pNMdyP.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"7ca8-aXfZoBjKErjbKO5+z5EBJB61klA\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 31912,
-    "path": "../public/_nuxt/D9pNMdyP.js"
-  },
-  "/_nuxt/DEZAcMEr.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"591-qXAmqgq2tDdhnRuwuECfznvp7TY\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 1425,
-    "path": "../public/_nuxt/DEZAcMEr.js"
-  },
-  "/_nuxt/DEH81V-D.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"f4-VcFHi7KA3J0UqLzPjGnyKYbzsOg\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 244,
-    "path": "../public/_nuxt/DEH81V-D.js"
-  },
-  "/_nuxt/DH6Mq_A7.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"3eef-8/uNgDHsC4R+EIDjf+YdemNciXc\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 16111,
-    "path": "../public/_nuxt/DH6Mq_A7.js"
-  },
-  "/_nuxt/DfeVkTTf.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"ecf-TOiedqAtNcmXjv697rk7XstjvfA\"",
-    "mtime": "2026-07-13T22:58:43.260Z",
-    "size": 3791,
-    "path": "../public/_nuxt/DfeVkTTf.js"
-  },
-  "/_nuxt/DHHsgXDP.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"137-A4HwA1yNs6SDukGtiL1RxkbW8pU\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 311,
-    "path": "../public/_nuxt/DHHsgXDP.js"
-  },
-  "/_nuxt/DHQ9mXeD.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"d96-x7zk7KhbJt7OU8vIC2Npnv1b4hw\"",
-    "mtime": "2026-07-13T22:58:43.260Z",
-    "size": 3478,
-    "path": "../public/_nuxt/DHQ9mXeD.js"
-  },
-  "/_nuxt/Dhz6h9Qo.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"339-6aZLUeY7GvBS+yYqmzm3qDG/nq4\"",
-    "mtime": "2026-07-13T22:58:43.260Z",
-    "size": 825,
-    "path": "../public/_nuxt/Dhz6h9Qo.js"
-  },
-  "/_nuxt/DHSqQnJT.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1a2c-GAHWpw4JZ3+unIlZ80a0GlYWngY\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 6700,
-    "path": "../public/_nuxt/DHSqQnJT.js"
-  },
-  "/_nuxt/DkdpQbCG.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"f9-2xPMpa0RWJZNjolLJHjegiWBXZY\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 249,
-    "path": "../public/_nuxt/DkdpQbCG.js"
-  },
-  "/_nuxt/DkhX8dDI.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"b0c-YmeK9r00cD0/IF9Udx6vjI5Pzzw\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 2828,
-    "path": "../public/_nuxt/DkhX8dDI.js"
-  },
-  "/_nuxt/DlfITm-C.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1040-ZA6iBTfBsTVWuFlWX+5Vzk9d1AY\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 4160,
-    "path": "../public/_nuxt/DlfITm-C.js"
-  },
-  "/_nuxt/DocumentEditor.CB_sgp2t.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"36f-v4UxYPw6s7MaYLLDlm8z2r04q4k\"",
-    "mtime": "2026-07-13T22:58:43.260Z",
-    "size": 879,
-    "path": "../public/_nuxt/DocumentEditor.CB_sgp2t.css"
-  },
-  "/_nuxt/Dn66DNev.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"4c1-5TgTGBRXnLxnMadV/JA8+iT6jnc\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 1217,
-    "path": "../public/_nuxt/Dn66DNev.js"
-  },
-  "/_nuxt/Dqluy_vJ.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"2d4-31sLxqivnJbcKWcbab86S7TvyJY\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 724,
-    "path": "../public/_nuxt/Dqluy_vJ.js"
-  },
-  "/_nuxt/Dq_S9lP3.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"630-JJIZ5BM1Emjge7r/XEREUCo1O80\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 1584,
-    "path": "../public/_nuxt/Dq_S9lP3.js"
-  },
-  "/_nuxt/DQsuom9D.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"45b-ALToCGB8us7bRc3q/nSFGDQcJpI\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
+    "etag": "\"45b-2uNvHYg9ZGyCIOoGUa5ZJLNBl6Y\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
     "size": 1115,
-    "path": "../public/_nuxt/DQsuom9D.js"
+    "path": "../public/_nuxt/4wgQuHGW.js"
   },
-  "/_nuxt/DXeSVyWx.js": {
+  "/_nuxt/7omZda-5.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"f0f-TPTuk1C1vbh3+NxuHV0tqC35N9I\"",
-    "mtime": "2026-07-13T22:58:43.260Z",
+    "etag": "\"7cf9-Ogkv12ZJvf+DzrIbq0NowUgZoWY\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 31993,
+    "path": "../public/_nuxt/7omZda-5.js"
+  },
+  "/_nuxt/9kuA5pzG.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"640c-iiLrkQs8rdVzMv1CmwmH55frInE\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 25612,
+    "path": "../public/_nuxt/9kuA5pzG.js"
+  },
+  "/_nuxt/a3nfvANV.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2100-/m7Yv4kG+n2m8xwKZv1qxjg9+Ms\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 8448,
+    "path": "../public/_nuxt/a3nfvANV.js"
+  },
+  "/_nuxt/BaTNupkk.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"ecf-VnQRRaN60GPnLWP9nYlkV4ceqSk\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 3791,
+    "path": "../public/_nuxt/BaTNupkk.js"
+  },
+  "/_nuxt/BeheRKzs.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"f2f-vUdBhG9akNni2Z8tst4Zw/jOhM8\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 3887,
+    "path": "../public/_nuxt/BeheRKzs.js"
+  },
+  "/_nuxt/BfwMphd-.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"215-06aRNOv6Xn3GllftpHe6HCyfd84\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 533,
+    "path": "../public/_nuxt/BfwMphd-.js"
+  },
+  "/_nuxt/BiwvHlgZ.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"f0f-nehR1oZatoLwvKAYynIYPIHUqhk\"",
+    "mtime": "2026-07-14T03:08:54.441Z",
     "size": 3855,
-    "path": "../public/_nuxt/DXeSVyWx.js"
+    "path": "../public/_nuxt/BiwvHlgZ.js"
   },
-  "/_nuxt/DUNmRTT2.js": {
+  "/_nuxt/Bmj8zqcI.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"228-P1PNc459CSjRZNFqwdV/s6NlG14\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 552,
-    "path": "../public/_nuxt/DUNmRTT2.js"
+    "etag": "\"74e-NYForvHqg4byfj17M0P31MO8lHc\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 1870,
+    "path": "../public/_nuxt/Bmj8zqcI.js"
   },
-  "/_nuxt/DYhgdtpU.js": {
+  "/_nuxt/B3bzelBz.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"121-nq7dGqqB2fJ5+86yqPdpP5ZufV0\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
+    "etag": "\"5c5fa-iLiH4f+1Rqvnw5HtTo+w2R3Q6FM\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 378362,
+    "path": "../public/_nuxt/B3bzelBz.js"
+  },
+  "/_nuxt/BPeJsgBq.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"651-Mqp2XgyNDBLpANIC2MU8XSBg5pQ\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 1617,
+    "path": "../public/_nuxt/BPeJsgBq.js"
+  },
+  "/_nuxt/BnuVLJNs.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2db6-gx7w090Vv2SWGYBB5/pJqp0BYHA\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 11702,
+    "path": "../public/_nuxt/BnuVLJNs.js"
+  },
+  "/_nuxt/Bqv35ARu.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"11a-a/XwW+JRfIASg2jW8zk6nj26Mss\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 282,
+    "path": "../public/_nuxt/Bqv35ARu.js"
+  },
+  "/_nuxt/BP6E-Eyo.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"371-R9OY8sdIxwfNuhpCVimAKsoI85M\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 881,
+    "path": "../public/_nuxt/BP6E-Eyo.js"
+  },
+  "/_nuxt/BSLff-_C.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"13e6-37cS0AB6Y3ADGThuVdnXWQp2Lng\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 5094,
+    "path": "../public/_nuxt/BSLff-_C.js"
+  },
+  "/_nuxt/BTpmcTcu.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"38d-lKGlUTkeF7khSt34+pvOEl4Ymgs\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 909,
+    "path": "../public/_nuxt/BTpmcTcu.js"
+  },
+  "/_nuxt/BuXnn0O0.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"630-eKEu0AuJxfBFFUlv9ddzNLXvEu0\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 1584,
+    "path": "../public/_nuxt/BuXnn0O0.js"
+  },
+  "/_nuxt/Bw6-ewwf.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"d96-O6245OW48SKQzXG89+HlaaivQGE\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 3478,
+    "path": "../public/_nuxt/Bw6-ewwf.js"
+  },
+  "/_nuxt/BW2Qr-mf.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"123e-5MRe2pUsdesI+BAzkxZt3+JbcB8\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 4670,
+    "path": "../public/_nuxt/BW2Qr-mf.js"
+  },
+  "/_nuxt/CAAQb2LZ.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"f4-uz6CWa/ajr43FLjqIbu8FFfFrn0\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 244,
+    "path": "../public/_nuxt/CAAQb2LZ.js"
+  },
+  "/_nuxt/CEueAu56.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"f1a-Uo8BZRQSaQa9IIWT8toUXb+kwlU\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 3866,
+    "path": "../public/_nuxt/CEueAu56.js"
+  },
+  "/_nuxt/Cf-Gct7g.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"827b-SZRaHe6GcAKKb+Ij6TQPDJVNb0M\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 33403,
+    "path": "../public/_nuxt/Cf-Gct7g.js"
+  },
+  "/_nuxt/CFu4G2w4.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1626-jLQCj+dh4rD0kE0xIC++BbvbYmk\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 5670,
+    "path": "../public/_nuxt/CFu4G2w4.js"
+  },
+  "/_nuxt/CGVIms-t.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"a5a-HwdvErCQuY0lw1I3sBe+03/V+ZA\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 2650,
+    "path": "../public/_nuxt/CGVIms-t.js"
+  },
+  "/_nuxt/CL5lLddd.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"f9-nHLHiz7zMbeseTnZrSrD5dK4syY\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 249,
+    "path": "../public/_nuxt/CL5lLddd.js"
+  },
+  "/_nuxt/CLQVLukE.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"93-NjrTJ9g0g0wU8xL5ou6iYJeT+jk\"",
+    "mtime": "2026-07-14T03:08:54.444Z",
+    "size": 147,
+    "path": "../public/_nuxt/CLQVLukE.js"
+  },
+  "/_nuxt/CLy1emdD.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"94-nMhGKdySmfwVAeoOZx/EWfpo1bM\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 148,
+    "path": "../public/_nuxt/CLy1emdD.js"
+  },
+  "/_nuxt/COuNZyew.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"91-MhZ4k4pVA5O1YuM6jJXMl+dI8gM\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 145,
+    "path": "../public/_nuxt/COuNZyew.js"
+  },
+  "/_nuxt/CLteGEVx.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"720-yqPBU778sLMyhnTKx6JokaYwmAA\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 1824,
+    "path": "../public/_nuxt/CLteGEVx.js"
+  },
+  "/_nuxt/Cm1N0VQE.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"3d5-Edk9cHpf7waf5vGHTiq3LYqeYJw\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 981,
+    "path": "../public/_nuxt/Cm1N0VQE.js"
+  },
+  "/_nuxt/CsAVUfmm.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"289c-nkTi/1nB2q+i81ca0XyaYeV4Ruc\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 10396,
+    "path": "../public/_nuxt/CsAVUfmm.js"
+  },
+  "/_nuxt/CsR_EkWG.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1565-Hjh7HpqeTSz2EV0GYKHUQj9vcA0\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 5477,
+    "path": "../public/_nuxt/CsR_EkWG.js"
+  },
+  "/_nuxt/CUYoeLkG.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"137-/dfM44lEkjgo0mhToOHUFhVtrlQ\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 311,
+    "path": "../public/_nuxt/CUYoeLkG.js"
+  },
+  "/_nuxt/CUDgHJKR.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"14a-jus65tiaaDVKvXfAv+2kV1B2XRg\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 330,
+    "path": "../public/_nuxt/CUDgHJKR.js"
+  },
+  "/_nuxt/CwOKy2WZ.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"546-ZMXe355+VmhRHfRAJJAUGVwjas8\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 1350,
+    "path": "../public/_nuxt/CwOKy2WZ.js"
+  },
+  "/_nuxt/CvnOCTc1.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"ec-ftP+TX4H6JT3o4L/Mt+mNqDZvgU\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 236,
+    "path": "../public/_nuxt/CvnOCTc1.js"
+  },
+  "/_nuxt/D1KIxiFE.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"19d-Zw+oDp36O70hzOC3tQI/iGwZ57o\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 413,
+    "path": "../public/_nuxt/D1KIxiFE.js"
+  },
+  "/_nuxt/DaOZCPnE.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2f4-j0njNaiYnRJ+xbYbqLHUnOkMA5U\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 756,
+    "path": "../public/_nuxt/DaOZCPnE.js"
+  },
+  "/_nuxt/CxwPm98V.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"5d76-XX2Tw283sEXazwAoxbGh0FIhROg\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 23926,
+    "path": "../public/_nuxt/CxwPm98V.js"
+  },
+  "/_nuxt/DD3ngwt3.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"121-OtE5/EM7kj7k09YSdQLQbybqJXA\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
     "size": 289,
-    "path": "../public/_nuxt/DYhgdtpU.js"
+    "path": "../public/_nuxt/DD3ngwt3.js"
   },
-  "/_nuxt/error-500.BW0Y54Of.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"773-NSoEX19gPmM2NozVKWotHuvxtho\"",
-    "mtime": "2026-07-13T22:58:43.260Z",
-    "size": 1907,
-    "path": "../public/_nuxt/error-500.BW0Y54Of.css"
-  },
-  "/_nuxt/jamo2B5G.js": {
+  "/_nuxt/DD0QBgld.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"96-6qMb9ToqnnZxtJeolAElZwZDFmE\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 150,
-    "path": "../public/_nuxt/jamo2B5G.js"
+    "etag": "\"3f8-pt2PMOg1bgCcXNUjJSAehof5qls\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 1016,
+    "path": "../public/_nuxt/DD0QBgld.js"
+  },
+  "/_nuxt/DBK5fTAT.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"228-zwskL95T2hVA7wdhBP3KplWa5BA\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 552,
+    "path": "../public/_nuxt/DBK5fTAT.js"
+  },
+  "/_nuxt/DGi-lVP7.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"91-1zMjao457t92EHqj2KEhk6LsarU\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 145,
+    "path": "../public/_nuxt/DGi-lVP7.js"
+  },
+  "/_nuxt/DhgggAlN.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"121-LrxPnHjz2iKCkE7TiqhiD3DRLMI\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 289,
+    "path": "../public/_nuxt/DhgggAlN.js"
+  },
+  "/_nuxt/Dj9Di0nv.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"23c-KHd9BopPIQNyhyFtk5M/PqDmbnw\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 572,
+    "path": "../public/_nuxt/Dj9Di0nv.js"
+  },
+  "/_nuxt/DhIzANXX.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2d4-Tk/zmjxrxOjm5fJTFc6HuwjgXMw\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 724,
+    "path": "../public/_nuxt/DhIzANXX.js"
+  },
+  "/_nuxt/DESK3bLD.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"699b8-QQqH493zP4BhtgFX0ki6KSOYZJ8\"",
+    "mtime": "2026-07-14T03:08:54.441Z",
+    "size": 432568,
+    "path": "../public/_nuxt/DESK3bLD.js"
+  },
+  "/_nuxt/DjWKMWaj.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"228-zwskL95T2hVA7wdhBP3KplWa5BA\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 552,
+    "path": "../public/_nuxt/DjWKMWaj.js"
+  },
+  "/_nuxt/Dlv8Mbkr.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"91-I1Q93+BdVS9TbMNKT6YlSZAwFcU\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 145,
+    "path": "../public/_nuxt/Dlv8Mbkr.js"
+  },
+  "/_nuxt/DNaMB3ra.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"5fcb-KBaINnEAJnzyxpr+zqWwd3KjbJY\"",
+    "mtime": "2026-07-14T03:08:54.444Z",
+    "size": 24523,
+    "path": "../public/_nuxt/DNaMB3ra.js"
+  },
+  "/_nuxt/DOGWk7Ip.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2033-fI8DK9c6jg6ugmZlultEMlffTcs\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 8243,
+    "path": "../public/_nuxt/DOGWk7Ip.js"
+  },
+  "/_nuxt/DocumentEditor.7PYacQ80.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"36f-GYU4DAGihMdxloQId0XgUmZIalU\"",
+    "mtime": "2026-07-14T03:08:54.441Z",
+    "size": 879,
+    "path": "../public/_nuxt/DocumentEditor.7PYacQ80.css"
+  },
+  "/_nuxt/DoUb7GVe.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"ba-Z63WsSZOr7qz0ckNs3UtxxmOyfo\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 186,
+    "path": "../public/_nuxt/DoUb7GVe.js"
+  },
+  "/_nuxt/DUaOY8Uw.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"ff1-XyA8glJJL+NbDlSZ73QR/9+7DXg\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 4081,
+    "path": "../public/_nuxt/DUaOY8Uw.js"
+  },
+  "/_nuxt/Dw_xgD0b.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"91-CEMOz1R4+10qxHJYppvIXaZKwoo\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 145,
+    "path": "../public/_nuxt/Dw_xgD0b.js"
+  },
+  "/_nuxt/DuvESigm.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"239-l1ujCFEEcKtuQ3u4oJ75WEOsKzY\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 569,
+    "path": "../public/_nuxt/DuvESigm.js"
+  },
+  "/_nuxt/D_flChTG.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"653-hIMTwReizBB+aPWhzYKu0o4E13I\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 1619,
+    "path": "../public/_nuxt/D_flChTG.js"
+  },
+  "/_nuxt/DUASmJ_f.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"13a-hQqTy5oQVV5t7nhcbwZLuM9t5WI\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 314,
+    "path": "../public/_nuxt/DUASmJ_f.js"
+  },
+  "/_nuxt/entry.C62ZTsGe.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"1aa82-LPFpTHtUyUsTFSbb3tCUqbsMvoc\"",
+    "mtime": "2026-07-14T03:08:54.430Z",
+    "size": 109186,
+    "path": "../public/_nuxt/entry.C62ZTsGe.css"
   },
   "/_nuxt/error-404.C3kT2QX-.css": {
     "type": "text/css; charset=utf-8",
     "etag": "\"97e-Xk26Nv4oQLpK3PtofolSggS9Z1M\"",
-    "mtime": "2026-07-13T22:58:43.251Z",
+    "mtime": "2026-07-14T03:08:54.441Z",
     "size": 2430,
     "path": "../public/_nuxt/error-404.C3kT2QX-.css"
   },
-  "/_nuxt/gcoWXQtj.js": {
+  "/_nuxt/EVRHeBiL.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"651-DPm9mW8N4MQ0wyIdzCKBbEgg8/4\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 1617,
-    "path": "../public/_nuxt/gcoWXQtj.js"
+    "etag": "\"dd5-R1bwdt1os2OLMVyZhgf82LLJoXc\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 3541,
+    "path": "../public/_nuxt/EVRHeBiL.js"
   },
-  "/_nuxt/GF_qaUZq.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"19d-m3AmRCuL/p79FwLUi76u3M0A8tI\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 413,
-    "path": "../public/_nuxt/GF_qaUZq.js"
-  },
-  "/_nuxt/JhXoB7No.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"a5a-5sOR+dsA+jAGYw82TcQEcjHgylQ\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 2650,
-    "path": "../public/_nuxt/JhXoB7No.js"
-  },
-  "/_nuxt/MiYBfSaj.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1b9-bgKiB6ivmoEbcuhNy269oOGXE+4\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 441,
-    "path": "../public/_nuxt/MiYBfSaj.js"
-  },
-  "/_nuxt/entry.Ml_T8Vq6.css": {
+  "/_nuxt/error-500.BW0Y54Of.css": {
     "type": "text/css; charset=utf-8",
-    "etag": "\"1a873-TcuvDClZAMo8Fy+mmk/SEk8Q6zg\"",
-    "mtime": "2026-07-13T22:58:43.260Z",
-    "size": 108659,
-    "path": "../public/_nuxt/entry.Ml_T8Vq6.css"
+    "etag": "\"773-NSoEX19gPmM2NozVKWotHuvxtho\"",
+    "mtime": "2026-07-14T03:08:54.441Z",
+    "size": 1907,
+    "path": "../public/_nuxt/error-500.BW0Y54Of.css"
   },
-  "/_nuxt/OBBQSudO.js": {
+  "/_nuxt/HFC77VLB.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"10f-F5FI3mMvJ1vtHGkAp2V79LFpZds\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 271,
-    "path": "../public/_nuxt/OBBQSudO.js"
+    "etag": "\"4c1-zYF6f4bP2pCgnZlGOLFsPuZZn/o\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 1217,
+    "path": "../public/_nuxt/HFC77VLB.js"
   },
-  "/_nuxt/Qi--qwdE.js": {
+  "/_nuxt/eYvZTy3i.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"5d77-o0UDE+n+srKiEKPGo7dZaKhPsZA\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 23927,
-    "path": "../public/_nuxt/Qi--qwdE.js"
+    "etag": "\"2206-aF8DeYGC9h5uPe+WEKeNJKbbmow\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 8710,
+    "path": "../public/_nuxt/eYvZTy3i.js"
   },
-  "/_nuxt/QYQY5k4c.js": {
+  "/_nuxt/iYdDCPyt.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"228-P1PNc459CSjRZNFqwdV/s6NlG14\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 552,
-    "path": "../public/_nuxt/QYQY5k4c.js"
+    "etag": "\"30d-gu/019wEWjesZmn/6Zw90B2D/ck\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 781,
+    "path": "../public/_nuxt/iYdDCPyt.js"
   },
-  "/_nuxt/ReAQ56qf.js": {
+  "/_nuxt/kCSJZiRt.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"16b-VOH8Gf/Mk2nBagdWvU44C/vNyg4\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 363,
-    "path": "../public/_nuxt/ReAQ56qf.js"
+    "etag": "\"ea-yl3wZPzUGVr1w4/KjQNCY+hUSOk\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 234,
+    "path": "../public/_nuxt/kCSJZiRt.js"
   },
-  "/_nuxt/SNAawjbm.js": {
+  "/_nuxt/mMN_M0K7.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"371-/+c49KoP5gx5zFpSML/TouWCE80\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 881,
-    "path": "../public/_nuxt/SNAawjbm.js"
+    "etag": "\"da0-xVzUy6NnR3u0s3Gc9Hhf81XocLI\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 3488,
+    "path": "../public/_nuxt/mMN_M0K7.js"
   },
-  "/_nuxt/t9fxZcuX.js": {
+  "/_nuxt/RAbAh41o.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"13e6-VoAU985f4b90ikeysK+vllQ4s98\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 5094,
-    "path": "../public/_nuxt/t9fxZcuX.js"
+    "etag": "\"b0c-XMqZeU5vJDbcHPOLNXM7ZOIYF/k\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 2828,
+    "path": "../public/_nuxt/RAbAh41o.js"
   },
-  "/_nuxt/T1hXnNRD.js": {
+  "/_nuxt/PwxOYyfx.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"91-pSm2U/rueGnQaDPvXUbh7czuwQs\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
+    "etag": "\"7d-4hNx+WXQ9CrK/g9m6+JaBUsw+oA\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 125,
+    "path": "../public/_nuxt/PwxOYyfx.js"
+  },
+  "/_nuxt/TihNEXx8.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"50e-w7QXvGVBbimjpDLfYttxsGv7Xh0\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
+    "size": 1294,
+    "path": "../public/_nuxt/TihNEXx8.js"
+  },
+  "/_nuxt/UST0GktA.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"274-Ap2I4amha6gELB0GbnO6HCilwWs\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 628,
+    "path": "../public/_nuxt/UST0GktA.js"
+  },
+  "/_nuxt/veecN3E9.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"91-0VEqYmx8AL8nOcsClhEcR02EZKU\"",
+    "mtime": "2026-07-14T03:08:54.442Z",
     "size": 145,
-    "path": "../public/_nuxt/T1hXnNRD.js"
-  },
-  "/_nuxt/tgo9SA0v.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"ec-I1UfyzpUbGOz0dGyd6R1rwCEWu0\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 236,
-    "path": "../public/_nuxt/tgo9SA0v.js"
+    "path": "../public/_nuxt/veecN3E9.js"
   },
   "/_nuxt/vZR10emV.js": {
     "type": "text/javascript; charset=utf-8",
     "etag": "\"158-usGa4wbt4XPmhjOUfxFesl5A9Fo\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
+    "mtime": "2026-07-14T03:08:54.442Z",
     "size": 344,
     "path": "../public/_nuxt/vZR10emV.js"
   },
-  "/_nuxt/v0uycdUf.js": {
+  "/_nuxt/XBsJWG-B.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"15e-zGpHXq3WN8jnu/3ntWaapAhtL8U\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
+    "etag": "\"1026-khID3EqD0M+RYbwYHsBOIjWsPms\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 4134,
+    "path": "../public/_nuxt/XBsJWG-B.js"
+  },
+  "/_nuxt/WPdj0SAA.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"15e-mLVOevvs0Z8nY2UHIOVgFp10s/4\"",
+    "mtime": "2026-07-14T03:08:54.444Z",
     "size": 350,
-    "path": "../public/_nuxt/v0uycdUf.js"
+    "path": "../public/_nuxt/WPdj0SAA.js"
   },
-  "/_nuxt/yawV82no.js": {
+  "/_nuxt/XuZ-Jwez.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"62d6-olDDf9vC2DzpHKG+sBAYeEA/Meg\"",
-    "mtime": "2026-07-13T22:58:43.262Z",
-    "size": 25302,
-    "path": "../public/_nuxt/yawV82no.js"
-  },
-  "/_nuxt/yqb7pKti.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"38d-Sa2yO1tq1Z1Ot1bKRPQ7hjT3vek\"",
-    "mtime": "2026-07-13T22:58:43.261Z",
-    "size": 909,
-    "path": "../public/_nuxt/yqb7pKti.js"
+    "etag": "\"96-k3AnAt6T5YislVar97rZgCt/s18\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 150,
+    "path": "../public/_nuxt/XuZ-Jwez.js"
   },
   "/_nuxt/builds/latest.json": {
     "type": "application/json",
-    "etag": "\"47-ilsoyRGQ8ZE5klEFTqRgL2rIymY\"",
-    "mtime": "2026-07-13T22:58:43.831Z",
+    "etag": "\"47-qf05lY4WWSGe2nJc7yUXm0gAf+Y\"",
+    "mtime": "2026-07-14T03:08:54.561Z",
     "size": 71,
     "path": "../public/_nuxt/builds/latest.json"
   },
-  "/_nuxt/builds/meta/994e9ccb-07e1-4ca4-a90d-709f1e26d9fa.json": {
+  "/_nuxt/ZdG1pmSF.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"60c-o0f4/O5JKYk2PSnB89ToEGhNZjI\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 1548,
+    "path": "../public/_nuxt/ZdG1pmSF.js"
+  },
+  "/_nuxt/builds/meta/3f967cfa-ac79-49c4-964a-98008de9f720.json": {
     "type": "application/json",
-    "etag": "\"58-Nne8QTypfPSu6b8d8RbqRfiiP7Q\"",
-    "mtime": "2026-07-13T22:58:43.832Z",
+    "etag": "\"58-FzNvvmNN6TeGxbdPY6/0qBwZoqI\"",
+    "mtime": "2026-07-14T03:08:54.561Z",
     "size": 88,
-    "path": "../public/_nuxt/builds/meta/994e9ccb-07e1-4ca4-a90d-709f1e26d9fa.json"
+    "path": "../public/_nuxt/builds/meta/3f967cfa-ac79-49c4-964a-98008de9f720.json"
+  },
+  "/_nuxt/ZRqxzNva.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1114-WdTlnqhhAozTeq+TkaMFbKepJvQ\"",
+    "mtime": "2026-07-14T03:08:54.443Z",
+    "size": 4372,
+    "path": "../public/_nuxt/ZRqxzNva.js"
   },
   "/images/auth/minerva-auth-visual.png": {
     "type": "image/png",
@@ -5415,19 +5494,34 @@ const credentialEncryptionEnvSchema = z.object({
     });
   }
 });
+const objectStorageEnvSchema = z.object({
+  S3_ENDPOINT: z.string().url(),
+  S3_REGION: z.string().min(1).default("us-east-1"),
+  S3_BUCKET: z.string().regex(/^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$/u),
+  S3_ACCESS_KEY_ID: z.string().min(1),
+  S3_SECRET_ACCESS_KEY: z.string().min(8),
+  S3_FORCE_PATH_STYLE: z.enum(["true", "false"]).default("true").transform((value) => value === "true")
+});
 function parseServerEnv(input) {
   return serverEnvSchema.parse(input);
 }
 function parseCredentialEncryptionEnv(input) {
   return credentialEncryptionEnvSchema.parse(input);
 }
+function parseObjectStorageEnv(input) {
+  return objectStorageEnvSchema.parse(input);
+}
 let cachedServerEnv;
 let cachedCredentialEncryptionEnv;
+let cachedObjectStorageEnv;
 function getServerEnv() {
   return cachedServerEnv != null ? cachedServerEnv : cachedServerEnv = parseServerEnv(process.env);
 }
 function getCredentialEncryptionEnv() {
   return cachedCredentialEncryptionEnv != null ? cachedCredentialEncryptionEnv : cachedCredentialEncryptionEnv = parseCredentialEncryptionEnv(process.env);
+}
+function getObjectStorageEnv() {
+  return cachedObjectStorageEnv != null ? cachedObjectStorageEnv : cachedObjectStorageEnv = parseObjectStorageEnv(process.env);
 }
 
 function createDatabase(url, max = 10) {
@@ -5618,16 +5712,16 @@ const AUDIT_OUTCOME = {
 const enumValues$1 = (values) => Object.values(values);
 const enumValueSql = (value) => sql.raw(`'${value.replaceAll("'", "''")}'`);
 const enumSql$1 = (values) => sql.raw(Object.values(values).map((value) => `'${value.replaceAll("'", "''")}'`).join(", "));
-const timezoneTimestamp$2 = (name) => timestamp(name, { withTimezone: true });
+const timezoneTimestamp$3 = (name) => timestamp(name, { withTimezone: true });
 const projects = pgTable("projects", {
   id: uuid("id").defaultRandom().primaryKey(),
   name: text("name").notNull(),
   description: text("description"),
   status: text("status", { enum: enumValues$1(PROJECT_STATUS) }).default(PROJECT_STATUS.ACTIVE).notNull(),
   createdByUserId: uuid("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$2("updated_at").defaultNow().notNull(),
-  archivedAt: timezoneTimestamp$2("archived_at"),
+  createdAt: timezoneTimestamp$3("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$3("updated_at").defaultNow().notNull(),
+  archivedAt: timezoneTimestamp$3("archived_at"),
   archivedByUserId: uuid("archived_by_user_id").references(() => user.id, { onDelete: "restrict" })
 }, (table) => [
   check("projects_status_check", sql`${table.status} in (${enumSql$1(PROJECT_STATUS)})`),
@@ -5646,8 +5740,8 @@ const projectRoles = pgTable("project_roles", {
   kind: text("kind", { enum: enumValues$1(PROJECT_ROLE_KIND) }).notNull(),
   builtInKey: text("built_in_key", { enum: enumValues$1(PROJECT_ROLE_KEY) }),
   displayName: text("display_name").notNull(),
-  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$2("updated_at").defaultNow().notNull()
+  createdAt: timezoneTimestamp$3("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$3("updated_at").defaultNow().notNull()
 }, (table) => [
   check("project_roles_kind_check", sql`${table.kind} in (${enumSql$1(PROJECT_ROLE_KIND)})`),
   check("project_roles_built_in_key_check", sql`${table.builtInKey} is null or ${table.builtInKey} in (${enumSql$1(PROJECT_ROLE_KEY)})`),
@@ -5663,7 +5757,7 @@ const projectRolePermissions = pgTable("project_role_permissions", {
   id: uuid("id").defaultRandom().primaryKey(),
   roleId: uuid("role_id").notNull().references(() => projectRoles.id, { onDelete: "cascade" }),
   permissionCode: text("permission_code", { enum: enumValues$1(PROJECT_PERMISSION) }).notNull(),
-  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull()
+  createdAt: timezoneTimestamp$3("created_at").defaultNow().notNull()
 }, (table) => [
   check("project_role_permissions_permission_code_check", sql`${table.permissionCode} in (${enumSql$1(PROJECT_PERMISSION)})`),
   unique("project_role_permissions_role_id_permission_code_unique").on(table.roleId, table.permissionCode),
@@ -5675,9 +5769,9 @@ const projectMemberships = pgTable("project_memberships", {
   userId: uuid("user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
   roleId: uuid("role_id").notNull(),
   status: text("status", { enum: enumValues$1(MEMBERSHIP_STATUS) }).default(MEMBERSHIP_STATUS.ACTIVE).notNull(),
-  joinedAt: timezoneTimestamp$2("joined_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$2("updated_at").defaultNow().notNull(),
-  removedAt: timezoneTimestamp$2("removed_at"),
+  joinedAt: timezoneTimestamp$3("joined_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$3("updated_at").defaultNow().notNull(),
+  removedAt: timezoneTimestamp$3("removed_at"),
   removedByUserId: uuid("removed_by_user_id").references(() => user.id, { onDelete: "restrict" })
 }, (table) => [
   check("project_memberships_status_check", sql`${table.status} in (${enumSql$1(MEMBERSHIP_STATUS)})`),
@@ -5696,7 +5790,7 @@ const projectMemberships = pgTable("project_memberships", {
 ]);
 const auditEvents = pgTable("audit_events", {
   id: uuid("id").defaultRandom().primaryKey(),
-  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull(),
+  createdAt: timezoneTimestamp$3("created_at").defaultNow().notNull(),
   actorUserId: uuid("actor_user_id").references(() => user.id, { onDelete: "restrict" }),
   channel: text("channel", { enum: enumValues$1(AUDIT_CHANNEL) }).notNull(),
   action: text("action").notNull(),
@@ -5741,7 +5835,7 @@ const auditEventsRelations = relations(auditEvents, ({ one }) => ({
 
 const enumValues = (values) => Object.values(values);
 const enumSql = (values) => sql.raw(Object.values(values).map((value) => `'${value.replaceAll("'", "''")}'`).join(", "));
-const timezoneTimestamp$1 = (name) => timestamp(name, { withTimezone: true });
+const timezoneTimestamp$2 = (name) => timestamp(name, { withTimezone: true });
 const credentialCategories = pgTable("credential_categories", {
   id: uuid("id").defaultRandom().primaryKey(),
   projectId: uuid("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
@@ -5750,9 +5844,9 @@ const credentialCategories = pgTable("credential_categories", {
   description: text("description"),
   position: integer("position").default(0).notNull(),
   createdByUserId: uuid("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$1("updated_at").defaultNow().notNull(),
-  archivedAt: timezoneTimestamp$1("archived_at"),
+  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$2("updated_at").defaultNow().notNull(),
+  archivedAt: timezoneTimestamp$2("archived_at"),
   archivedByUserId: uuid("archived_by_user_id").references(() => user.id, { onDelete: "restrict" })
 }, (table) => [
   check("credential_categories_name_check", sql`${table.name} = btrim(${table.name}) and char_length(${table.name}) between 1 and 120`),
@@ -5769,7 +5863,7 @@ const credentialCategoryRoleGrants = pgTable("credential_category_role_grants", 
   categoryId: uuid("category_id").notNull(),
   roleId: uuid("role_id").notNull(),
   createdByUserId: uuid("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull()
+  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull()
 }, (table) => [
   foreignKey({ columns: [table.categoryId, table.projectId], foreignColumns: [credentialCategories.id, credentialCategories.projectId], name: "credential_category_role_grants_category_project_fk" }).onDelete("cascade"),
   foreignKey({ columns: [table.roleId, table.projectId], foreignColumns: [projectRoles.id, projectRoles.projectId], name: "credential_category_role_grants_role_project_fk" }).onDelete("cascade"),
@@ -5782,7 +5876,7 @@ const credentialCategoryMemberGrants = pgTable("credential_category_member_grant
   categoryId: uuid("category_id").notNull(),
   membershipId: uuid("membership_id").notNull(),
   createdByUserId: uuid("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull()
+  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull()
 }, (table) => [
   foreignKey({ columns: [table.categoryId, table.projectId], foreignColumns: [credentialCategories.id, credentialCategories.projectId], name: "credential_category_member_grants_category_project_fk" }).onDelete("cascade"),
   foreignKey({ columns: [table.membershipId, table.projectId], foreignColumns: [projectMemberships.id, projectMemberships.projectId], name: "credential_category_member_grants_membership_project_fk" }).onDelete("cascade"),
@@ -5802,9 +5896,9 @@ const credentials = pgTable("credentials", {
   passwordKeyVersion: integer("password_key_version"),
   createdByUserId: uuid("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
   updatedByUserId: uuid("updated_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$1("updated_at").defaultNow().notNull(),
-  archivedAt: timezoneTimestamp$1("archived_at"),
+  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$2("updated_at").defaultNow().notNull(),
+  archivedAt: timezoneTimestamp$2("archived_at"),
   archivedByUserId: uuid("archived_by_user_id").references(() => user.id, { onDelete: "restrict" })
 }, (table) => [
   foreignKey({ columns: [table.categoryId, table.projectId], foreignColumns: [credentialCategories.id, credentialCategories.projectId], name: "credentials_category_project_fk" }).onDelete("restrict"),
@@ -5823,8 +5917,8 @@ const credentialFields = pgTable("credential_fields", {
   ciphertext: text("ciphertext").notNull(),
   nonce: text("nonce").notNull(),
   keyVersion: integer("key_version").notNull(),
-  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$1("updated_at").defaultNow().notNull()
+  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$2("updated_at").defaultNow().notNull()
 }, (table) => [
   check("credential_fields_label_check", sql`${table.label} = btrim(${table.label}) and char_length(${table.label}) between 1 and 120`),
   check("credential_fields_type_check", sql`${table.type} in (${enumSql(CREDENTIAL_FIELD_TYPE)})`),
@@ -5835,7 +5929,9 @@ const credentialFields = pgTable("credential_fields", {
 ]);
 
 const DOCUMENT_PUBLICATION_STATE = {
-  DRAFT: "draft"};
+  DRAFT: "draft",
+  PUBLISHED: "published"
+};
 const DOCUMENT_TEMPLATE = {
   BLANK: "blank",
   TECHNICAL_SPECIFICATION: "technical_specification",
@@ -5848,7 +5944,7 @@ const DOCUMENT_DRAFT_UPDATE_CODE = {
   DRAFT_CONFLICT: "DRAFT_CONFLICT"
 };
 
-const timezoneTimestamp = (name) => timestamp(name, { withTimezone: true });
+const timezoneTimestamp$1 = (name) => timestamp(name, { withTimezone: true });
 const documents = pgTable("documents", {
   id: uuid("id").defaultRandom().primaryKey(),
   projectId: uuid("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
@@ -5859,11 +5955,14 @@ const documents = pgTable("documents", {
   ownerUserId: uuid("owner_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
   draftRevision: integer("draft_revision").default(0).notNull(),
   draftContent: jsonb("draft_content").$type().default(sql`'{"type":"doc","content":[]}'::jsonb`).notNull(),
+  draftInternalLinkTargetIds: uuid("draft_internal_link_target_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
+  draftReferencedImageIds: uuid("draft_referenced_image_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
   publicationState: text("publication_state").$type().default(DOCUMENT_PUBLICATION_STATE.DRAFT).notNull(),
-  createdAt: timezoneTimestamp("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp("updated_at").defaultNow().notNull(),
-  archivedAt: timezoneTimestamp("archived_at"),
-  archivedByUserId: uuid("archived_by_user_id").references(() => user.id, { onDelete: "restrict" })
+  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$1("updated_at").defaultNow().notNull(),
+  archivedAt: timezoneTimestamp$1("archived_at"),
+  archivedByUserId: uuid("archived_by_user_id").references(() => user.id, { onDelete: "restrict" }),
+  archiveBatchId: uuid("archive_batch_id")
 }, (table) => [
   unique("documents_id_project_id_unique").on(table.id, table.projectId),
   foreignKey({
@@ -5876,10 +5975,60 @@ const documents = pgTable("documents", {
   check("documents_position_check", sql`${table.position} >= 0`),
   check("documents_draft_revision_check", sql`${table.draftRevision} >= 0`),
   check("documents_publication_state_check", sql`${table.publicationState} in ('draft', 'published')`),
-  uniqueIndex("documents_active_project_slug_unique").on(table.projectId, table.slug).where(sql`${table.archivedAt} is null`),
+  check("documents_archive_state_check", sql`(${table.archivedAt} is null and ${table.archiveBatchId} is null) or (${table.archivedAt} is not null and ${table.archiveBatchId} is not null)`),
+  uniqueIndex("documents_project_slug_unique").on(table.projectId, table.slug),
   index("documents_project_parent_position_idx").on(table.projectId, table.parentId, table.position),
+  index("documents_project_archive_batch_idx").on(table.projectId, table.archiveBatchId),
   index("documents_owner_user_id_idx").on(table.ownerUserId),
   index("documents_archived_by_user_id_idx").on(table.archivedByUserId)
+]);
+const documentVersions = pgTable("document_versions", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  projectId: uuid("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  documentId: uuid("document_id").notNull(),
+  versionNumber: integer("version_number").notNull(),
+  sourceDraftRevision: integer("source_draft_revision").notNull(),
+  title: text("title").notNull(),
+  draftContent: jsonb("draft_content").$type().notNull(),
+  internalLinkTargetIds: uuid("internal_link_target_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
+  referencedImageIds: uuid("referenced_image_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
+  changeSummary: text("change_summary").notNull(),
+  publishedByUserId: uuid("published_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  publishedAt: timezoneTimestamp$1("published_at").defaultNow().notNull()
+}, (table) => [
+  unique("document_versions_document_number_unique").on(table.documentId, table.versionNumber),
+  foreignKey({
+    columns: [table.documentId, table.projectId],
+    foreignColumns: [documents.id, documents.projectId],
+    name: "document_versions_document_project_fk"
+  }).onDelete("cascade"),
+  check("document_versions_number_check", sql`${table.versionNumber} > 0`),
+  check("document_versions_source_revision_check", sql`${table.sourceDraftRevision} >= 0`),
+  check("document_versions_title_check", sql`${table.title} = btrim(${table.title}) and char_length(${table.title}) between 1 and 200`),
+  check("document_versions_change_summary_check", sql`${table.changeSummary} = btrim(${table.changeSummary}) and char_length(${table.changeSummary}) between 0 and 1000`),
+  index("document_versions_project_document_idx").on(table.projectId, table.documentId, table.versionNumber),
+  index("document_versions_published_by_user_id_idx").on(table.publishedByUserId)
+]);
+
+const timezoneTimestamp = (name) => timestamp(name, { withTimezone: true });
+const documentImages = pgTable("document_images", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  projectId: uuid("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  objectKey: text("object_key").notNull(),
+  filename: text("filename").notNull(),
+  mimeType: text("mime_type").$type().notNull(),
+  byteSize: integer("byte_size").notNull(),
+  uploadedByUserId: uuid("uploaded_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  createdAt: timezoneTimestamp("created_at").defaultNow().notNull(),
+  archivedAt: timezoneTimestamp("archived_at")
+}, (table) => [
+  unique("document_images_id_project_id_unique").on(table.id, table.projectId),
+  unique("document_images_object_key_unique").on(table.objectKey),
+  check("document_images_filename_check", sql`${table.filename} = btrim(${table.filename}) and char_length(${table.filename}) between 1 and 200`),
+  check("document_images_mime_type_check", sql`${table.mimeType} in ('image/png', 'image/jpeg', 'image/gif', 'image/webp')`),
+  check("document_images_byte_size_check", sql`${table.byteSize} between 1 and 10485760`),
+  index("document_images_project_created_idx").on(table.projectId, table.createdAt),
+  index("document_images_uploaded_by_idx").on(table.uploadedByUserId)
 ]);
 
 const authSchema = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
@@ -5893,6 +6042,8 @@ const authSchema = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty
   credentialCategoryRoleGrants: credentialCategoryRoleGrants,
   credentialFields: credentialFields,
   credentials: credentials,
+  documentImages: documentImages,
+  documentVersions: documentVersions,
   documents: documents,
   projectMemberships: projectMemberships,
   projectMembershipsRelations: projectMembershipsRelations,
@@ -6106,8 +6257,19 @@ const _lazy_wZAlR4 = () => import('../routes/api/projects/_id/credentials/archiv
 const _lazy_46vAAg = () => import('../routes/api/projects/_id/index2.get.mjs');
 const _lazy_jBWZfQ = () => import('../routes/api/projects/_id/index2.post.mjs');
 const _lazy_CwOWA_ = () => import('../routes/api/projects/_id/credentials/search.post.mjs');
+const _lazy_cSYexR = () => import('../routes/api/projects/_id/documents/_documentId_.delete.mjs');
 const _lazy_eNYuAx = () => import('../routes/api/projects/_id/documents/_documentId_.get.mjs');
+const _lazy_4htcex = () => import('../routes/api/projects/_id/documents/_documentId/discard.delete.mjs');
 const _lazy_28tv8q = () => import('../routes/api/projects/_id/documents/_documentId/draft.patch.mjs');
+const _lazy_5jGVWs = () => import('../routes/api/projects/_id/documents/_documentId/move.patch.mjs');
+const _lazy_n00bAp = () => import('../routes/api/projects/_id/documents/_documentId/publish.post.mjs');
+const _lazy_Bh6p5c = () => import('../routes/api/projects/_id/documents/_documentId/restore.post.mjs');
+const _lazy_1W3mzS = () => import('../routes/api/projects/_id/documents/_documentId/versions.get.mjs');
+const _lazy_a8bJ3J = () => import('../routes/api/projects/_id/documents/_documentId/versions/_versionNumber_.get.mjs');
+const _lazy_ONP_Nd = () => import('../routes/api/projects/_id/documents/_documentId/versions/_versionNumber/restore.post.mjs');
+const _lazy_1P_mGJ = () => import('../routes/api/projects/_id/documents/archive.get.mjs');
+const _lazy_D4FJAM = () => import('../routes/api/projects/_id/documents/images/_imageId_.get.mjs');
+const _lazy_A8PVNE = () => import('../routes/api/projects/_id/documents/index.post.mjs');
 const _lazy_bz1l28 = () => import('../routes/api/projects/_id/index3.get.mjs');
 const _lazy_H7WRQR = () => import('../routes/api/projects/_id/index3.post.mjs');
 const _lazy_JopulS = () => import('../routes/api/projects/_id/documents/tree.get.mjs');
@@ -6140,8 +6302,19 @@ const handlers = [
   { route: '/api/projects/:id/credentials', handler: _lazy_46vAAg, lazy: true, middleware: false, method: "get" },
   { route: '/api/projects/:id/credentials', handler: _lazy_jBWZfQ, lazy: true, middleware: false, method: "post" },
   { route: '/api/projects/:id/credentials/search', handler: _lazy_CwOWA_, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/documents/:documentId', handler: _lazy_cSYexR, lazy: true, middleware: false, method: "delete" },
   { route: '/api/projects/:id/documents/:documentId', handler: _lazy_eNYuAx, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/documents/:documentId/discard', handler: _lazy_4htcex, lazy: true, middleware: false, method: "delete" },
   { route: '/api/projects/:id/documents/:documentId/draft', handler: _lazy_28tv8q, lazy: true, middleware: false, method: "patch" },
+  { route: '/api/projects/:id/documents/:documentId/move', handler: _lazy_5jGVWs, lazy: true, middleware: false, method: "patch" },
+  { route: '/api/projects/:id/documents/:documentId/publish', handler: _lazy_n00bAp, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/documents/:documentId/restore', handler: _lazy_Bh6p5c, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/documents/:documentId/versions', handler: _lazy_1W3mzS, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/documents/:documentId/versions/:versionNumber', handler: _lazy_a8bJ3J, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/documents/:documentId/versions/:versionNumber/restore', handler: _lazy_ONP_Nd, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/documents/archive', handler: _lazy_1P_mGJ, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/documents/images/:imageId', handler: _lazy_D4FJAM, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/documents/images', handler: _lazy_A8PVNE, lazy: true, middleware: false, method: "post" },
   { route: '/api/projects/:id/documents', handler: _lazy_bz1l28, lazy: true, middleware: false, method: "get" },
   { route: '/api/projects/:id/documents', handler: _lazy_H7WRQR, lazy: true, middleware: false, method: "post" },
   { route: '/api/projects/:id/documents/tree', handler: _lazy_JopulS, lazy: true, middleware: false, method: "get" },
@@ -6332,5 +6505,5 @@ function defineRenderHandler(render) {
   });
 }
 
-export { AUDIT_CHANNEL as A, auditEvents as B, CREDENTIAL_FIELD_TYPE as C, AUDIT_OUTCOME as D, credentialFields as E, credentialCategories as F, credentialCategoryRoleGrants as G, credentialCategoryMemberGrants as H, IDENTITY_CODE as I, ACCOUNT_STATUS as J, DOCUMENT_DRAFT_UPDATE_CODE as K, LOGIN_IDENTIFIER_KIND as L, MEMBERSHIP_STATUS as M, documents as N, DOCUMENT_TEMPLATE as O, PROJECT_PERMISSION as P, PROJECT_ROLE_KEY as Q, PROJECT_STATUS as R, joinRelativeURL as S, useRuntimeConfig as T, encodePath as U, defineRenderHandler as V, destr as W, getRouteRules as X, getResponseStatusText as Y, getResponseStatus as Z, getDatabase as a, user as b, createError$1 as c, defineEventHandler as d, getRequestURL as e, getAuth as f, getRouterParam as g, getServerEnv as h, readBody as i, getRequestIP as j, IdentityError as k, appendResponseHeader as l, requireSession as m, projects as n, projectMemberships as o, projectRoles as p, projectRolePermissions as q, requireSuperAdmin as r, PROJECT_ROLE_KIND as s, toWebRequest as t, useNitroApp as u, setResponseStatus as v, setHeader as w, getQuery as x, getCredentialEncryptionEnv as y, credentials as z };;globalThis.__timing__.logEnd('Load chunks/_/nitro');
+export { defineRenderHandler as $, AUDIT_CHANNEL as A, auditEvents as B, CREDENTIAL_FIELD_TYPE as C, AUDIT_OUTCOME as D, credentialFields as E, credentialCategories as F, credentialCategoryRoleGrants as G, credentialCategoryMemberGrants as H, IDENTITY_CODE as I, ACCOUNT_STATUS as J, DOCUMENT_DRAFT_UPDATE_CODE as K, LOGIN_IDENTIFIER_KIND as L, MEMBERSHIP_STATUS as M, documentImages as N, documents as O, PROJECT_PERMISSION as P, DOCUMENT_PUBLICATION_STATE as Q, documentVersions as R, DOCUMENT_TEMPLATE as S, send as T, getObjectStorageEnv as U, readMultipartFormData as V, PROJECT_ROLE_KEY as W, PROJECT_STATUS as X, joinRelativeURL as Y, useRuntimeConfig as Z, encodePath as _, getDatabase as a, destr as a0, getRouteRules as a1, getResponseStatusText as a2, getResponseStatus as a3, user as b, createError$1 as c, defineEventHandler as d, getRequestURL as e, getAuth as f, getRouterParam as g, getServerEnv as h, readBody as i, getRequestIP as j, IdentityError as k, appendResponseHeader as l, requireSession as m, projects as n, projectMemberships as o, projectRoles as p, projectRolePermissions as q, requireSuperAdmin as r, PROJECT_ROLE_KIND as s, toWebRequest as t, useNitroApp as u, setResponseStatus as v, setHeader as w, getQuery as x, getCredentialEncryptionEnv as y, credentials as z };;globalThis.__timing__.logEnd('Load chunks/_/nitro');
 //# sourceMappingURL=nitro.mjs.map

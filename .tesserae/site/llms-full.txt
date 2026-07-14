@@ -18,12 +18,19 @@
 - [ADR 0012: Use feature-scoped actions for client effects](sources/adr-0012-use-feature-scoped-actions-for-client-effects.html)
 - [ADR 0013: Keep client actions stateless and feature-scoped](sources/adr-0013-keep-client-actions-stateless-and-feature-scoped.html)
 - [ADR 0014: Search authorized encrypted credential values server-side](sources/adr-0014-search-authorized-encrypted-credential-values-server-side.html)
+- [ADR 0015: Allow permanent discard only for never-published document branches](sources/adr-0015-allow-permanent-discard-only-for-never-published-document-branches.html)
 - [Authenticated Page Placeholder Design](sources/authenticated-page-placeholder-design.html): - **uses_metric** → mAP _(Metric)_
 - [Authorization Readability Refactor Design](sources/authorization-readability-refactor-design.html)
 - [Authorization Readability Refactor Implementation Plan](sources/authorization-readability-refactor-implementation-plan.html)
+- [Create a child document from the tree plan](sources/create-a-child-document-from-the-tree-plan.html)
 - [Credential encryption operations](sources/credential-encryption-operations.html)
 - [Current User Sidebar Design](sources/current-user-sidebar-design.html)
 - [Current User Sidebar Implementation Plan](sources/current-user-sidebar-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
+- [Document archive and restore plan](sources/document-archive-and-restore-plan.html)
+- [Document Images Implementation Plan](sources/document-images-implementation-plan.html)
+- [Document internal links and backlinks plan](sources/document-internal-links-and-backlinks-plan.html)
+- [Document publication, history, and restore plan](sources/document-publication-history-and-restore-plan.html)
+- [Document tree move and reorder plan](sources/document-tree-move-and-reorder-plan.html)
 - [Forgot-password UI design](sources/forgot-password-ui-design.html)
 - [Forgot-Password UI Implementation Plan](sources/forgot-password-ui-implementation-plan.html)
 - [Global Navigation and Page Placeholder Implementation Plan](sources/global-navigation-and-page-placeholder-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
@@ -49,6 +56,7 @@
 - [MVP Route Skeleton Implementation Plan](sources/mvp-route-skeleton-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [Nuxt feature modules design](sources/nuxt-feature-modules-design.html): - **uses_metric** → mAP _(Metric)_
 - [Nuxt Feature Modules Implementation Plan](sources/nuxt-feature-modules-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
+- [Permanently discard never-published documents plan](sources/permanently-discard-never-published-documents-plan.html)
 - [PostgreSQL Docker Compose design](sources/postgresql-docker-compose-design.html)
 - [PostgreSQL Docker Compose Implementation Plan](sources/postgresql-docker-compose-implementation-plan.html)
 - [Project Credentials Design](sources/project-credentials-design.html)
@@ -149,6 +157,11 @@ _sources/adr-0014-search-authorized-encrypted-credential-values-server-side.html
 
 # ADR 0014: Search authorized encrypted credential values server-side
 
+### ADR 0015: Allow permanent discard only for never-published document branches
+_sources/adr-0015-allow-permanent-discard-only-for-never-published-document-branches.html_
+
+# ADR 0015: Allow permanent discard only for never-published document branches
+
 ### Authenticated Page Placeholder Design
 _sources/authenticated-page-placeholder-design.html_
 
@@ -177,6 +190,11 @@ _sources/authorization-readability-refactor-implementation-plan.html_
 
 # Authorization Readability Refactor Implementation Plan
 
+### Create a child document from the tree plan
+_sources/create-a-child-document-from-the-tree-plan.html_
+
+# Create a child document from the tree plan
+
 ### Credential encryption operations
 _sources/credential-encryption-operations.html_
 
@@ -204,6 +222,31 @@ _sources/current-user-sidebar-implementation-plan.html_
 
 - CommunitySummary: 1
 - Metric: 1
+
+### Document archive and restore plan
+_sources/document-archive-and-restore-plan.html_
+
+# Document archive and restore plan
+
+### Document Images Implementation Plan
+_sources/document-images-implementation-plan.html_
+
+# Document Images Implementation Plan
+
+### Document internal links and backlinks plan
+_sources/document-internal-links-and-backlinks-plan.html_
+
+# Document internal links and backlinks plan
+
+### Document publication, history, and restore plan
+_sources/document-publication-history-and-restore-plan.html_
+
+# Document publication, history, and restore plan
+
+### Document tree move and reorder plan
+_sources/document-tree-move-and-reorder-plan.html_
+
+# Document tree move and reorder plan
 
 ### Forgot-password UI design
 _sources/forgot-password-ui-design.html_
@@ -483,6 +526,11 @@ _sources/nuxt-feature-modules-implementation-plan.html_
 - CommunitySummary: 1
 - Metric: 1
 
+### Permanently discard never-published documents plan
+_sources/permanently-discard-never-published-documents-plan.html_
+
+# Permanently discard never-published documents plan
+
 ### PostgreSQL Docker Compose design
 _sources/postgresql-docker-compose-design.html_
 
@@ -662,7 +710,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 61
+- SourceDocument: 69
 
 ## Recently added
 - (none)

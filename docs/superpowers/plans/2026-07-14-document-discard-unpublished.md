@@ -1,0 +1,16 @@
+# Permanently discard never-published documents plan
+
+Date: 2026-07-14  
+Status: approved in conversation
+
+## Outcome
+
+The document-tree lifecycle action is `Удалить` for a never-published branch without versions and `В архив` for every branch containing published history.
+
+## TDD slices
+
+1. Test the pure discard eligibility and branch placement plan.
+2. Test transactional permission, history protection, cascading branch deletion, sibling compaction, and content-free audit metadata.
+3. Add a strict discard Nitro boundary and client response validation.
+4. Add version-history metadata to tree reads and render the permission-aware dynamic menu and confirmation.
+5. Run focused unit/integration tests, typecheck, build, update progress, and refresh Tesserae.

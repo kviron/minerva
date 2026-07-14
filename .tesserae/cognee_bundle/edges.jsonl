@@ -47,12 +47,19 @@
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:adr-0012-use-feature-scoped-actions-for-client-e:bf4977d67411"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:adr-0013-keep-client-actions-stateless-and-featu:966a5da70b18"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:adr-0014-search-authorized-encrypted-credential-:0f8d6d174a85"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:adr-0015-allow-permanent-discard-only-for-never-:ad0e022447a8"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:authorization-readability-refactor-design:64e22f5e0bd4"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:authorization-readability-refactor-implementatio:cff925f10e13"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:create-a-child-document-from-the-tree-plan:c668b02e359c"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:credential-encryption-operations:dc0ac941bdc7"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:current-user-sidebar-design:f757fa1f0ebc"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:current-user-sidebar-implementation-plan:30919ebc2609"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:document-archive-and-restore-plan:142d78fd4d07"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:document-images-implementation-plan:ef556c9efb9f"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:document-internal-links-and-backlinks-plan:91b264292f5e"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:document-publication-history-and-restore-plan:c6d6e4c4d3fb"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:document-tree-move-and-reorder-plan:1a18184e6b6e"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:forgot-password-ui-design:4253f2296159"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:forgot-password-ui-implementation-plan:011eede9a65c"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:global-navigation-and-page-placeholder-implement:9e69b2e463f9"}
@@ -78,6 +85,7 @@
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:nuxt-feature-modules-design:1dc66fa31506"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387"}
+{"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:permanently-discard-never-published-documents-pl:3703b799c811"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:postgresql-docker-compose-design:1d13eb67950d"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:postgresql-docker-compose-implementation-plan:9887e9a9c654"}
 {"evidence": null, "metadata": {}, "relationship": "summarizes", "source_id": "Synthesis:synthesis-project-pulse:edf62281b49c", "target_id": "SourceDocument:project-credentials-design:38735cbc9ec3"}

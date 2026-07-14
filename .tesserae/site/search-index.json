@@ -352,6 +352,29 @@
     "created_ts": null
   },
   {
+    "id": "sources:adr-0015-allow-permanent-discard-only-for-never-published-document-branches",
+    "title": "ADR 0015: Allow permanent discard only for never-published document branches",
+    "kind": "sources",
+    "href": "sources/adr-0015-allow-permanent-discard-only-for-never-published-document-branches.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0015-discard-never-published-document-branches.md",
+    "tokens": [
+      "adr",
+      "0015",
+      "allow",
+      "permanent",
+      "discard",
+      "only",
+      "never",
+      "published",
+      "document",
+      "branches",
+      "sources"
+    ],
+    "len": 11,
+    "created_ts": null
+  },
+  {
     "id": "sources:authenticated-page-placeholder-design",
     "title": "Authenticated Page Placeholder Design",
     "kind": "sources",
@@ -400,6 +423,24 @@
       "readability",
       "refactor",
       "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:create-a-child-document-from-the-tree-plan",
+    "title": "Create a child document from the tree plan",
+    "kind": "sources",
+    "href": "sources/create-a-child-document-from-the-tree-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-14-document-tree-create-child.md",
+    "tokens": [
+      "create",
+      "child",
+      "document",
+      "tree",
       "plan",
       "sources"
     ],
@@ -458,6 +499,94 @@
       "sources"
     ],
     "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:document-archive-and-restore-plan",
+    "title": "Document archive and restore plan",
+    "kind": "sources",
+    "href": "sources/document-archive-and-restore-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-14-document-archive-restore.md",
+    "tokens": [
+      "document",
+      "archive",
+      "restore",
+      "plan",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:document-images-implementation-plan",
+    "title": "Document Images Implementation Plan",
+    "kind": "sources",
+    "href": "sources/document-images-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-14-document-images.md",
+    "tokens": [
+      "document",
+      "images",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:document-internal-links-and-backlinks-plan",
+    "title": "Document internal links and backlinks plan",
+    "kind": "sources",
+    "href": "sources/document-internal-links-and-backlinks-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-14-document-internal-links-backlinks.md",
+    "tokens": [
+      "document",
+      "internal",
+      "links",
+      "backlinks",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:document-publication-history-and-restore-plan",
+    "title": "Document publication, history, and restore plan",
+    "kind": "sources",
+    "href": "sources/document-publication-history-and-restore-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-14-document-publication-history.md",
+    "tokens": [
+      "document",
+      "publication",
+      "history",
+      "restore",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:document-tree-move-and-reorder-plan",
+    "title": "Document tree move and reorder plan",
+    "kind": "sources",
+    "href": "sources/document-tree-move-and-reorder-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-14-document-tree-move-reorder.md",
+    "tokens": [
+      "document",
+      "tree",
+      "move",
+      "reorder",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
     "created_ts": null
   },
   {
@@ -926,6 +1055,25 @@
     "created_ts": null
   },
   {
+    "id": "sources:permanently-discard-never-published-documents-plan",
+    "title": "Permanently discard never-published documents plan",
+    "kind": "sources",
+    "href": "sources/permanently-discard-never-published-documents-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-14-document-discard-unpublished.md",
+    "tokens": [
+      "permanently",
+      "discard",
+      "never",
+      "published",
+      "documents",
+      "plan",
+      "sources"
+    ],
+    "len": 7,
+    "created_ts": null
+  },
+  {
     "id": "sources:postgresql-docker-compose-design",
     "title": "PostgreSQL Docker Compose design",
     "kind": "sources",
@@ -1243,7 +1391,7 @@
       "metric",
       "1",
       "sourcedocument",
-      "61",
+      "69",
       "recently",
       "added",
       "none",

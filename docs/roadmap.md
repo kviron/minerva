@@ -26,7 +26,7 @@ Acceptance: authorization results match across UI and API, and inaccessible proj
 
 ## Slice 4: Document core
 
-Deliver document tree, Tiptap editor, draft autosave, optimistic conflicts, publication summaries, complete immutable version snapshots, full-snapshot restore with stable slugs, archive, internal links, backlinks, protected historical image references, and system templates.
+Deliver document tree, Tiptap editor, explicit draft saves, optimistic conflicts, publication summaries, complete immutable version snapshots, full-snapshot restore with stable slugs, archive, internal links, backlinks, protected historical image references, and system templates.
 
 Acceptance: an Editor completes the full draft-to-publish-to-restore journey while a Viewer remains read-only.
 

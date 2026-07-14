@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ChevronRight, FileText, Pencil } from '@lucide/vue'
-import { computed } from 'vue'
+import { ChevronRight, Pencil } from '@lucide/vue'
+import { computed, provide } from 'vue'
 import { useProjectOverviewStore } from '@/features/projects'
 import type { DocumentDetailResponse } from '../../../../shared/documents/contracts'
 import { PROJECT_PERMISSION } from '../../../../shared/projects/constants'
 import { formatDocumentUpdatedAt } from '../model/presentation'
+import { DOCUMENT_LINK_CONTEXT } from '../model/document-link-context'
 import DocumentContentNode from './DocumentContentNode.vue'
+import DocumentVersionControls from './DocumentVersionControls.vue'
 
 const props = defineProps<{
   projectId: string
@@ -18,6 +20,11 @@ const canEdit = computed(() => {
   return project?.id === props.projectId
     && project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_UPDATE_DRAFT)
 })
+const linkContext = computed(() => ({
+  projectId: props.projectId,
+  targets: new Map(props.document.internalLinks.map(target => [target.id, target])),
+}))
+provide(DOCUMENT_LINK_CONTEXT, linkContext)
 </script>
 
 <template>
@@ -41,12 +48,15 @@ const canEdit = computed(() => {
           Обновлено {{ formatDocumentUpdatedAt(document.updatedAt) }} · ревизия {{ document.draftRevision }}
         </p>
       </div>
-      <UiButton v-if="canEdit" as-child variant="outline" size="sm">
-        <NuxtLink :to="`/projects/${projectId}/documents/${document.id}/edit`">
-          <Pencil data-icon="inline-start" />
-          Редактировать
-        </NuxtLink>
-      </UiButton>
+      <div class="flex flex-wrap items-center gap-2">
+        <UiButton v-if="canEdit" as-child variant="outline" size="sm">
+          <NuxtLink :to="`/projects/${projectId}/documents/${document.id}/edit`">
+            <Pencil data-icon="inline-start" />
+            Редактировать
+          </NuxtLink>
+        </UiButton>
+        <DocumentVersionControls :project-id="projectId" :document="document" />
+      </div>
     </header>
 
     <UiSeparator class="my-6" />
@@ -60,19 +70,16 @@ const canEdit = computed(() => {
     </div>
     <p v-else class="text-sm text-muted-foreground">Страница пока не содержит текста.</p>
 
-    <template v-if="document.children.length > 0">
-      <UiSeparator class="my-8" />
-      <section class="flex flex-col gap-3" aria-labelledby="child-documents-heading">
-        <h2 id="child-documents-heading" class="text-lg font-semibold">Дочерние страницы</h2>
-        <ul class="grid gap-2 sm:grid-cols-2">
-          <li v-for="child in document.children" :key="child.id">
+    <template v-if="document.backlinks.length > 0">
+      <UiSeparator class="my-6" />
+      <section class="flex flex-col gap-3" aria-labelledby="document-backlinks-heading">
+        <h2 id="document-backlinks-heading" class="text-lg font-semibold">На эту страницу ссылаются</h2>
+        <ul class="flex flex-col gap-2">
+          <li v-for="backlink in document.backlinks" :key="backlink.id">
             <NuxtLink
-              :to="`/projects/${projectId}/documents/${child.id}`"
-              class="flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition-colors hover:bg-muted"
-            >
-              <FileText class="size-4 text-muted-foreground" aria-hidden="true" />
-              <span class="truncate">{{ child.title }}</span>
-            </NuxtLink>
+              :to="`/projects/${projectId}/documents/${backlink.id}`"
+              class="text-sm text-primary hover:underline"
+            >{{ backlink.title }}</NuxtLink>
           </li>
         </ul>
       </section>

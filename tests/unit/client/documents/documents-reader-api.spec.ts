@@ -16,6 +16,7 @@ describe('documents reader API boundary', () => {
       slug: 'architecture',
       updatedAt: '2026-07-14T10:00:00.000Z',
       publicationState: 'published',
+      hasPublishedVersions: true,
       children: [],
     }])).toHaveLength(1)
     expect(() => parseDocumentTreeResponse([{ id, children: [] }])).toThrow('Invalid document tree response')
@@ -36,6 +37,8 @@ describe('documents reader API boundary', () => {
       updatedAt: '2026-07-14T10:00:00.000Z',
       ancestors: [],
       children: [],
+      internalLinks: [],
+      backlinks: [],
     }
     expect(parseDocumentDetailResponse(response)).toEqual(response)
     expect(() => parseDocumentDetailResponse({ ...response, storagePath: '/private/document.json' }))

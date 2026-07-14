@@ -20,7 +20,7 @@ describe('update document draft', () => {
   it('normalizes a valid update and rejects invalid revisions, titles, and Tiptap nodes', () => {
     expect(validateDocumentDraftUpdate(input)).toEqual({
       ok: true,
-      value: { ...input, title: 'Архитектура' },
+      value: { ...input, title: 'Архитектура', internalLinkTargetIds: [], referencedImageIds: [] },
     })
     expect(validateDocumentDraftUpdate({ ...input, expectedRevision: -1 })).toEqual({
       ok: false,
@@ -50,7 +50,7 @@ describe('update document draft', () => {
       ok: false,
       code: UPDATE_DOCUMENT_DRAFT_ERROR.DRAFT_CONFLICT,
     })
-    expect(persist).toHaveBeenNthCalledWith(1, { ...input, title: 'Архитектура' })
+    expect(persist).toHaveBeenNthCalledWith(1, { ...input, title: 'Архитектура', internalLinkTargetIds: [], referencedImageIds: [] })
   })
 
   it('keeps the PATCH boundary strict and authorization in the shared service', async () => {

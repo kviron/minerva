@@ -20,3 +20,17 @@ export const updateDocumentDraftBodySchema = z.object({
   content: documentContentSchema,
   expectedRevision: z.number().int().nonnegative(),
 }).strict()
+
+export const moveDocumentBodySchema = z.object({
+  targetParentId: z.string().uuid().nullable(),
+  targetPosition: z.number().int().nonnegative(),
+}).strict()
+
+export const publishDocumentBodySchema = z.object({
+  changeSummary: z.string().trim().max(1000).optional().default(''),
+  expectedRevision: z.number().int().nonnegative(),
+}).strict()
+
+export const restoreDocumentVersionBodySchema = z.object({
+  expectedRevision: z.number().int().nonnegative(),
+}).strict()
