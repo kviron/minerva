@@ -3,7 +3,10 @@ import type { AccountStatus } from '../../../shared/identity/types'
 import { eq } from 'drizzle-orm'
 import {
   AUDIT_OUTCOME,
+  CREATE_PROJECT_ERROR,
   MEMBERSHIP_STATUS,
+  PROJECT_DESCRIPTION_MAX_LENGTH,
+  PROJECT_NAME_MAX_LENGTH,
   PROJECT_ROLE_KEY,
   PROJECT_ROLE_KIND,
   PROJECT_STATUS,
@@ -19,17 +22,12 @@ import {
   projects,
 } from '../../infrastructure/database/schema/projects'
 import { BUILT_IN_PROJECT_ROLES } from './project-templates'
+import { projectDescriptionContentFromText } from './project-description'
 
-export const CREATE_PROJECT_ERROR = {
-  AUTH_REQUIRED: 'AUTH_REQUIRED',
-  ACCOUNT_INACTIVE: 'ACCOUNT_INACTIVE',
-  INVALID_PROJECT_NAME: 'INVALID_PROJECT_NAME',
-  INVALID_PROJECT_DESCRIPTION: 'INVALID_PROJECT_DESCRIPTION',
-  PROJECT_CREATE_FAILED: 'PROJECT_CREATE_FAILED',
-} as const
+export { CREATE_PROJECT_ERROR }
 
 export type CreateProjectErrorCode =
-  typeof CREATE_PROJECT_ERROR[keyof typeof CREATE_PROJECT_ERROR]
+  Exclude<typeof CREATE_PROJECT_ERROR[keyof typeof CREATE_PROJECT_ERROR], typeof CREATE_PROJECT_ERROR.INVALID_REQUEST>
 
 export interface CreateProjectInput {
   readonly actor: {
@@ -102,8 +100,10 @@ export function createProjectPersistence(
     const [project] = await tx.insert(projects).values({
       name: command.name,
       description: command.description,
+      descriptionContent: projectDescriptionContentFromText(command.description),
       status: PROJECT_STATUS.ACTIVE,
       createdByUserId: command.actorUserId,
+      statusChangedByUserId: command.actorUserId,
     }).returning({ id: projects.id })
 
     if (!project) throw new Error('Project insert returned no row')
@@ -163,12 +163,12 @@ export function validateCreateProject(input: CreateProjectInput): CreateProjectV
   }
 
   const name = input.name.trim()
-  if (name.length === 0 || name.length > 120) {
+  if (name.length === 0 || name.length > PROJECT_NAME_MAX_LENGTH) {
     return { ok: false, code: CREATE_PROJECT_ERROR.INVALID_PROJECT_NAME }
   }
 
   const description = input.description == null ? null : input.description.trim()
-  if (description !== null && description.length > 2000) {
+  if (description !== null && description.length > PROJECT_DESCRIPTION_MAX_LENGTH) {
     return { ok: false, code: CREATE_PROJECT_ERROR.INVALID_PROJECT_DESCRIPTION }
   }
 

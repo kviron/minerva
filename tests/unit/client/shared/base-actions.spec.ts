@@ -24,6 +24,18 @@ class TestActions extends BaseActions {
     },
   })
 
+  failWithParser = this.createAsyncAction({
+    name: 'fail-with-parser',
+    run: async () => {
+      throw { data: { code: 'KNOWN' } }
+    },
+    options: {
+      errorParser: rawError => rawError !== null && typeof rawError === 'object'
+        ? 'Распознанная ошибка'
+        : undefined,
+    },
+  })
+
   uppercase = this.createSyncAction({
     name: 'uppercase',
     run: (value: string) => value.toUpperCase(),
@@ -56,5 +68,13 @@ describe('BaseActions', () => {
     await expect(actions.fail('one')).resolves.toBeUndefined()
     expect(actions.error.value).toBe('Безопасная ошибка')
     expect(actions.error.value).not.toContain('private detail')
+  })
+
+  it('allows a feature to translate a validated API error', async () => {
+    const actions = new TestActions()
+
+    await actions.failWithParser()
+
+    expect(actions.error.value).toBe('Распознанная ошибка')
   })
 })

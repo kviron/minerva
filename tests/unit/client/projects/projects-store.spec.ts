@@ -13,14 +13,15 @@ describe('projects Pinia stores', () => {
       name: 'Minerva',
       description: null,
       status: 'active',
+      iconId: null,
       updatedAt: '2026-07-10T10:00:00.000Z',
       role: { builtInKey: 'admin', customName: null },
     }] as const
 
-    store.applyProjects(projects)
+    store.applyMemberProjects(projects)
 
-    expect(store.projects).toEqual(projects)
-    expect(store.projects).not.toBe(projects)
+    expect(store.list).toEqual({ scope: 'member', projects, nextCursor: null })
+    expect(store.list.projects).not.toBe(projects)
   })
 
   it('stores and clears the current overview projection', () => {
@@ -30,6 +31,7 @@ describe('projects Pinia stores', () => {
       name: 'Minerva',
       description: null,
       status: 'active',
+      iconId: null,
       createdAt: '2026-07-10T10:00:00.000Z',
       updatedAt: '2026-07-10T10:00:00.000Z',
       activeMemberCount: 1,

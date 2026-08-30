@@ -33,7 +33,12 @@ describe('project constants and built-in role templates', () => {
   })
 
   it('defines the exact closed project vocabulary', () => {
-    expect(PROJECT_STATUS).toEqual({ ACTIVE: 'active', ARCHIVED: 'archived' })
+    expect(PROJECT_STATUS).toEqual({
+      ACTIVE: 'active',
+      PAUSED: 'paused',
+      CLOSED: 'closed',
+      ARCHIVED: 'archived',
+    })
     expect(PROJECT_ROLE_KEY).toEqual({ ADMIN: 'admin', EDITOR: 'editor', VIEWER: 'viewer' })
     expect(PROJECT_ROLE_KIND).toEqual({ BUILT_IN: 'built_in', CUSTOM: 'custom' })
     expect(MEMBERSHIP_STATUS).toEqual({ ACTIVE: 'active', REMOVED: 'removed' })
@@ -42,6 +47,10 @@ describe('project constants and built-in role templates', () => {
     expect(PROJECT_PERMISSION).toEqual({
       PROJECT_VIEW: 'project.view',
       PROJECT_UPDATE: 'project.update',
+      PROJECT_PAUSE: 'project.pause',
+      PROJECT_RESUME: 'project.resume',
+      PROJECT_CLOSE: 'project.close',
+      PROJECT_REOPEN: 'project.reopen',
       PROJECT_ARCHIVE: 'project.archive',
       PROJECT_RESTORE: 'project.restore',
       DOCUMENTS_VIEW: 'documents.view',
@@ -52,6 +61,7 @@ describe('project constants and built-in role templates', () => {
       DOCUMENTS_ARCHIVE: 'documents.archive',
       DOCUMENTS_RESTORE: 'documents.restore',
       DOCUMENTS_VIEW_HISTORY: 'documents.view_history',
+      DOCUMENTS_SHARE: 'documents.share',
       MEMBERS_VIEW: 'members.view',
       MEMBERS_INVITE: 'members.invite',
       MEMBERS_ASSIGN_ROLE: 'members.assign_role',
@@ -69,6 +79,8 @@ describe('project constants and built-in role templates', () => {
       CREDENTIAL_CATEGORIES_UPDATE: 'credential_categories.update',
       CREDENTIAL_CATEGORIES_ARCHIVE: 'credential_categories.archive',
       CREDENTIAL_CATEGORIES_MANAGE_ACCESS: 'credential_categories.manage_access',
+      PROJECT_AI_USE: 'project.ai.use',
+      PROJECT_AI_MANAGE: 'project.ai.manage',
     })
 
     expectTypeOf(PROJECT_STATUS.ACTIVE).toEqualTypeOf<ProjectStatus>()
@@ -95,8 +107,10 @@ describe('project constants and built-in role templates', () => {
       PROJECT_PERMISSION.DOCUMENTS_ARCHIVE,
       PROJECT_PERMISSION.DOCUMENTS_RESTORE,
       PROJECT_PERMISSION.DOCUMENTS_VIEW_HISTORY,
+      PROJECT_PERMISSION.DOCUMENTS_SHARE,
       PROJECT_PERMISSION.MEMBERS_VIEW,
       PROJECT_PERMISSION.ROLES_VIEW,
+      PROJECT_PERMISSION.PROJECT_AI_USE,
     ])
   })
 
@@ -105,6 +119,7 @@ describe('project constants and built-in role templates', () => {
       PROJECT_PERMISSION.PROJECT_VIEW,
       PROJECT_PERMISSION.DOCUMENTS_VIEW,
       PROJECT_PERMISSION.DOCUMENTS_VIEW_HISTORY,
+      PROJECT_PERMISSION.PROJECT_AI_USE,
     ])
   })
 

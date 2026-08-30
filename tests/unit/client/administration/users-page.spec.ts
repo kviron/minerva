@@ -46,6 +46,7 @@ describe('administration users page', () => {
 
     expect(endpoint).toContain('await requireSuperAdmin(event)')
     expect(endpoint).toContain('return listAllUsers()')
+    expect(endpoint).toContain("'Cache-Control', 'private, no-store'")
     expect(query).toContain('.from(user)')
     expect(query).not.toMatch(/\baccount\b|\bsession\b|password|token|disabledReason/)
   })

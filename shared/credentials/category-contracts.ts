@@ -1,44 +1,70 @@
-export type CredentialCategoryDetails = Readonly<{
-  id: string
-  name: string
-  description: string | null
-}>
+import { z } from 'zod'
+import { PROJECT_ROLE_KEY } from '../projects/constants'
 
-export type CredentialCategoryListItem = CredentialCategoryDetails & Readonly<{
-  position: number
-}>
+const credentialCategoryDetailsBaseSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(1),
+  description: z.string().nullable(),
+}).strict()
 
-export type CredentialCategory = CredentialCategoryDetails & Readonly<{
-  roleIds: readonly string[]
-  membershipIds: readonly string[]
-}>
+export const credentialCategoryDetailsSchema = credentialCategoryDetailsBaseSchema.readonly()
 
-export type CredentialCategoryRole = Readonly<{
-  id: string
-  name: string
-  builtInKey: 'admin' | 'editor' | 'viewer' | null
-}>
+export const credentialCategoryListItemSchema = credentialCategoryDetailsBaseSchema.extend({
+  position: z.number().int().nonnegative(),
+}).strict().readonly()
 
-export type CredentialCategoryMember = Readonly<{
-  membershipId: string
-  userId: string
-  name: string
-  email: string
-}>
+export const credentialCategorySchema = credentialCategoryDetailsBaseSchema.extend({
+  roleIds: z.array(z.string().uuid()).readonly(),
+  membershipIds: z.array(z.string().uuid()).readonly(),
+}).strict().readonly()
 
-export type CredentialCategoryManagement = Readonly<{
-  canManage: boolean
-  canCreateCategories: boolean
-  canCreateCredentials: boolean
-  categories: readonly CredentialCategory[]
-  roles: readonly CredentialCategoryRole[]
-  members: readonly CredentialCategoryMember[]
-}>
+export const credentialCategoryRoleSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(1),
+  builtInKey: z.nativeEnum(PROJECT_ROLE_KEY).nullable(),
+}).strict().readonly()
 
-export type CredentialCategoryBody = Readonly<Pick<CredentialCategoryDetails, 'name' | 'description'>>
-export type CredentialCategoryGrantsBody = Readonly<{
-  roleIds: readonly string[]
-  membershipIds: readonly string[]
-}>
-export type CredentialCategoryIdResponse = Readonly<{ categoryId: string }>
-export type CredentialCategoryMutationResponse = Readonly<{ ok: true }>
+export const credentialCategoryMemberSchema = z.object({
+  membershipId: z.string().uuid(),
+  userId: z.string().uuid(),
+  name: z.string().min(1),
+  email: z.string().email(),
+}).strict().readonly()
+
+export const credentialCategoryManagementSchema = z.object({
+  canManage: z.boolean(),
+  canCreateCategories: z.boolean(),
+  canCreateCredentials: z.boolean(),
+  categories: z.array(credentialCategorySchema).readonly(),
+  roles: z.array(credentialCategoryRoleSchema).readonly(),
+  members: z.array(credentialCategoryMemberSchema).readonly(),
+}).strict().readonly()
+
+export const credentialCategoryBodySchema = z.object({
+  name: z.string(),
+  description: z.string().nullable(),
+}).strict().readonly()
+
+export const credentialCategoryGrantsBodySchema = z.object({
+  roleIds: z.array(z.string().uuid()).max(100).readonly(),
+  membershipIds: z.array(z.string().uuid()).max(1000).readonly(),
+}).strict().readonly()
+
+export const credentialCategoryIdResponseSchema = z.object({
+  categoryId: z.string().uuid(),
+}).strict().readonly()
+
+export const credentialCategoryMutationResponseSchema = z.object({
+  ok: z.literal(true),
+}).strict().readonly()
+
+export type CredentialCategoryDetails = z.infer<typeof credentialCategoryDetailsSchema>
+export type CredentialCategoryListItem = z.infer<typeof credentialCategoryListItemSchema>
+export type CredentialCategory = z.infer<typeof credentialCategorySchema>
+export type CredentialCategoryRole = z.infer<typeof credentialCategoryRoleSchema>
+export type CredentialCategoryMember = z.infer<typeof credentialCategoryMemberSchema>
+export type CredentialCategoryManagement = z.infer<typeof credentialCategoryManagementSchema>
+export type CredentialCategoryBody = z.infer<typeof credentialCategoryBodySchema>
+export type CredentialCategoryGrantsBody = z.infer<typeof credentialCategoryGrantsBodySchema>
+export type CredentialCategoryIdResponse = z.infer<typeof credentialCategoryIdResponseSchema>
+export type CredentialCategoryMutationResponse = z.infer<typeof credentialCategoryMutationResponseSchema>

@@ -7,13 +7,19 @@ import { ACCOUNT_STATUS, AUTH_MODE, IDENTITY_CODE } from '../../../../shared/ide
 import type { AccountStatus } from '../../../../shared/identity/types'
 import * as authSchema from '../../../infrastructure/database/schema'
 import type { CreateMinervaAuthInput } from './contracts'
+import { createOAuthGrantManagement } from '../oauth-grants'
+import { createMinervaOAuthProvider } from './oauth-provider'
 
-export function createMinervaAuth({ mode, db, baseURL, trustedOrigins, mailer }: CreateMinervaAuthInput) {
+export function createMinervaAuth({ mode, db, baseURL, trustedOrigins, mailer, oauth }: CreateMinervaAuthInput) {
+  const grantManagement = oauth ? createOAuthGrantManagement(db) : null
   return betterAuth({
     baseURL,
     trustedOrigins,
     database: drizzleAdapter(db, { provider: 'pg', schema: authSchema }),
-    advanced: { database: { generateId: 'uuid' } },
+    advanced: {
+      database: { generateId: 'uuid' },
+      useSecureCookies: new URL(baseURL).protocol === 'https:',
+    },
     emailAndPassword: {
       enabled: true,
       disableSignUp: mode === AUTH_MODE.RUNTIME,
@@ -46,7 +52,10 @@ export function createMinervaAuth({ mode, db, baseURL, trustedOrigins, mailer }:
     },
     disabledPaths: ['/is-username-available'],
     rateLimit: { enabled: true, storage: 'database' },
-    plugins: [username()],
+    plugins: [username(), ...(oauth ? [createMinervaOAuthProvider({
+      ...oauth,
+      ensureActiveGrant: input => grantManagement?.ensureActive(input) ?? Promise.reject(new Error('OAuth grant management is unavailable')),
+    })] : [])],
     databaseHooks: {
       user: {
         create: {

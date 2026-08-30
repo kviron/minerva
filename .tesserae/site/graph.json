@@ -3,153 +3,162 @@
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "Metric:map:592bcbe13f80",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:current-user-sidebar-implementation-plan:30919ebc2609",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:global-navigation-and-page-placeholder-implement:9e69b2e463f9",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:global-navigation-design:5a4a92c5119d",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:header-theme-toggle-implementation-plan:e937037ab86b",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:identity-backend-foundation-design:9f706c9220cd",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:identity-backend-foundation-implementation-plan:bc6fbd79de2b",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:minerva-mvp-route-map-design:3fc45371dcc9",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:minerva-mvp-ux-ui-prototype-design:eb24c40aac13",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:minerva-progress:c476087b907f",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
+      "target": "SourceDocument:project-ai-assistant-design:7657895969dc",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
+      },
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:projects-and-rbac-foundation-implementation-plan:52b38258da99",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:projects-list-and-create-ui-design:b11de69f5972",
       "type": "summarizes"
     },
     {
       "evidence": null,
       "metadata": {
-        "community_id": "CommunitySummary:3b2f36265a3f3828"
+        "community_id": "CommunitySummary:0b5b4ccbd0191c91"
       },
-      "source": "CommunitySummary:3b2f36265a3f3828",
+      "source": "CommunitySummary:0b5b4ccbd0191c91",
       "target": "SourceDocument:projects-list-and-create-ui-implementation-plan:e222fdb83e93",
       "type": "summarizes"
     },
@@ -255,6 +264,13 @@
       "evidence": null,
       "metadata": {},
       "source": "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
+      "target": "Metric:map:592bcbe13f80",
+      "type": "uses_metric"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "SourceDocument:project-ai-assistant-design:7657895969dc",
       "target": "Metric:map:592bcbe13f80",
       "type": "uses_metric"
     },
@@ -388,6 +404,97 @@
       "evidence": null,
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0016-link-oauth-consents-and-token-families-:74f8df6e8504",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0017-serialize-oauth-token-issuance-with-gra:74eee0fbb575",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0018-use-leased-idempotency-records-for-mcp-:433151c20ffb",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0019-isolate-project-ai-connections-and-requ:c6c43423f954",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0020-use-allow-listed-structured-external-em:49c778db4d05",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0021-use-postgresql-leases-and-content-free-:ca02875937aa",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0022-retain-private-ai-conversations-for-thi:797aff917327",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0023-use-short-lived-server-owned-ai-documen:28ad1f7e33ac",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0024-use-revocable-capability-links-for-publ:ae6bf21861e8",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0025-run-production-on-a-hardened-single-vps:2793135bdcb1",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0026-compose-data-grids-from-shared-table-me:909133c3269b",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0027-resolve-current-audit-targets-through-s:13f0928cd395",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:adr-0028-compose-project-lifecycle-from-pure-tra:7827b224a85e",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
       "type": "summarizes"
     },
@@ -472,6 +579,13 @@
       "evidence": null,
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:encrypted-backup-and-isolated-restore:3aa13f8ea267",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:forgot-password-ui-design:4253f2296159",
       "type": "summarizes"
     },
@@ -536,6 +650,34 @@
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:identity-functional-refactor-implementation-plan:5b715b2b772d",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:local-restore-drill-record-2026-08-06:ec76f38040f7",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:mcp-and-oauth-operations:00a05ba136f2",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:mcp-documentation-interface-implementation-plan:bc0b02c06bf3",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:mcp-oauth-threat-model-and-design:b65b71477ce8",
       "type": "summarizes"
     },
     {
@@ -668,6 +810,62 @@
       "evidence": null,
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:production-configuration-and-health:80638887288f",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:production-readiness-audited-design:a38e7c684bac",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:production-readiness-implementation-plan:9ce17340df01",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:production-readiness-threat-model:387307ee4395",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:project-ai-assistant-design:7657895969dc",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:project-ai-assistant-implementation-plan:387afa89b3a9",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:project-ai-document-proposals-audited-design:cb4c50fe0d3a",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:project-ai-document-proposals-implementation-pla:0d2e72510456",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:project-credentials-design:38735cbc9ec3",
       "type": "summarizes"
     },
@@ -676,6 +874,27 @@
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:project-credentials-implementation-plan:085b0582b9af",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:project-lifecycle-audited-design:8022c555e295",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:project-lifecycle-implementation-plan:b38fbc78bc42",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:project-lifecycle-threat-and-race-model:5d44516d631d",
       "type": "summarizes"
     },
     {
@@ -710,6 +929,27 @@
       "evidence": null,
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:public-documentation-sharing-audited-design:13ba1b2a7cc8",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:public-documentation-sharing-implementation-plan:b042bb039eaf",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:public-documentation-sharing-operations:2dd6d7209036",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:reset-password-ui-design:ae063bdcc1cf",
       "type": "summarizes"
     },
@@ -718,6 +958,13 @@
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:reset-password-ui-implementation-plan:170bb8c1c5fb",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:restore-drill-record:9b8d008a4129",
       "type": "summarizes"
     },
     {
@@ -759,6 +1006,13 @@
       "evidence": null,
       "metadata": {},
       "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
+      "target": "SourceDocument:transport-security-and-structured-logging:8aa2c67e6791",
+      "type": "summarizes"
+    },
+    {
+      "evidence": null,
+      "metadata": {},
+      "source": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "target": "SourceDocument:user-identity-and-profile-design:4c26d4b8aa62",
       "type": "summarizes"
     }
@@ -775,11 +1029,11 @@
     },
     {
       "aliases": [],
-      "description": "Designs and implementation plans for Minerva's MVP navigation, identity, projects, route structure, feature modules, UI placeholders, and RBAC foundation.",
-      "id": "CommunitySummary:3b2f36265a3f3828",
+      "description": "Designs, implementation plans, and progress notes for Minerva's MVP navigation, identity, project management, route structure, and UI foundations.",
+      "id": "CommunitySummary:0b5b4ccbd0191c91",
       "metadata": {
         "extractor": "community_summaries.compile_community_summaries",
-        "member_count": 17,
+        "member_count": 18,
         "member_ids": [
           "Metric:map:592bcbe13f80",
           "SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
@@ -795,19 +1049,20 @@
           "SourceDocument:mvp-route-skeleton-implementation-plan:ddbfd38adb72",
           "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",
           "SourceDocument:nuxt-feature-modules-implementation-plan:80680f067387",
+          "SourceDocument:project-ai-assistant-design:7657895969dc",
           "SourceDocument:projects-and-rbac-foundation-implementation-plan:52b38258da99",
           "SourceDocument:projects-list-and-create-ui-design:b11de69f5972",
           "SourceDocument:projects-list-and-create-ui-implementation-plan:e222fdb83e93"
         ],
         "tags": [
-          "minerva",
-          "mvp",
+          "minerva-mvp",
           "implementation-plans",
-          "navigation",
-          "rbac"
+          "ui-design",
+          "identity-rbac",
+          "nuxt-architecture"
         ]
       },
-      "name": "Minerva MVP Planning",
+      "name": "Minerva MVP Blueprint",
       "source_path": null,
       "type": "CommunitySummary"
     },
@@ -944,6 +1199,11 @@
             "anchor": "consequences",
             "level": 2,
             "text": "Consequences"
+          },
+          {
+            "anchor": "project-lifecycle-amendment",
+            "level": 2,
+            "text": "Project lifecycle amendment"
           }
         ],
         "source_kind": "SourceDocument"
@@ -977,6 +1237,11 @@
             "anchor": "consequences",
             "level": 2,
             "text": "Consequences"
+          },
+          {
+            "anchor": "project-lifecycle-amendment",
+            "level": 2,
+            "text": "Project lifecycle amendment"
           }
         ],
         "source_kind": "SourceDocument"
@@ -1318,6 +1583,465 @@
       },
       "name": "ADR 0015: Allow permanent discard only for never-published document branches",
       "source_path": "D:\\develop\\minerva\\docs\\decisions\\0015-discard-never-published-document-branches.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0016-link-oauth-consents-and-token-families-:74f8df6e8504",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0016-link-oauth-consents-and-token-families-through-a-minerva-grant",
+            "level": 1,
+            "text": "ADR 0016: Link OAuth consents and token families through a Minerva grant"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0016: Link OAuth consents and token families through a Minerva grant",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0016-link-oauth-consents-and-token-families.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0017-serialize-oauth-token-issuance-with-gra:74eee0fbb575",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0017-serialize-oauth-token-issuance-with-grant-revocation",
+            "level": 1,
+            "text": "ADR 0017: Serialize OAuth token issuance with grant revocation"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0017: Serialize OAuth token issuance with grant revocation",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0017-serialize-oauth-token-issuance-with-grant-revocation.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0018-use-leased-idempotency-records-for-mcp-:433151c20ffb",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0018-use-leased-idempotency-records-for-mcp-mutations",
+            "level": 1,
+            "text": "ADR 0018: Use leased idempotency records for MCP mutations"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0018: Use leased idempotency records for MCP mutations",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0018-use-leased-idempotency-records-for-mcp-mutations.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0019-isolate-project-ai-connections-and-requ:c6c43423f954",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0019-isolate-project-ai-connections-and-require-user-confirmed-mutations",
+            "level": 1,
+            "text": "ADR 0019: Isolate project AI connections and require user-confirmed mutations"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          },
+          {
+            "anchor": "project-lifecycle-amendment",
+            "level": 2,
+            "text": "Project lifecycle amendment"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0019: Isolate project AI connections and require user-confirmed mutations",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0019-isolate-project-ai-connections-and-require-user-confirmed-mutations.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0020-use-allow-listed-structured-external-em:49c778db4d05",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0020-use-allow-listed-structured-external-embeds",
+            "level": 1,
+            "text": "ADR 0020: Use allow-listed structured external embeds"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "rationale",
+            "level": 2,
+            "text": "Rationale"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0020: Use allow-listed structured external embeds",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0020-use-allow-listed-external-embeds.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0021-use-postgresql-leases-and-content-free-:ca02875937aa",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0021-use-postgresql-leases-and-content-free-ai-usage-events",
+            "level": 1,
+            "text": "ADR 0021: Use PostgreSQL leases and content-free AI usage events"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0021: Use PostgreSQL leases and content-free AI usage events",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0021-use-postgresql-leases-and-content-free-ai-usage-events.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0022-retain-private-ai-conversations-for-thi:797aff917327",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0022-retain-private-ai-conversations-for-thirty-days",
+            "level": 1,
+            "text": "ADR 0022: Retain private AI conversations for thirty days"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0022: Retain private AI conversations for thirty days",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0022-retain-private-ai-conversations-for-thirty-days.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0023-use-short-lived-server-owned-ai-documen:28ad1f7e33ac",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0023-use-short-lived-server-owned-ai-document-proposals",
+            "level": 1,
+            "text": "ADR 0023: Use short-lived server-owned AI document proposals"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0023: Use short-lived server-owned AI document proposals",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0023-use-short-lived-server-owned-ai-document-proposals.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0024-use-revocable-capability-links-for-publ:ae6bf21861e8",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0024-use-revocable-capability-links-for-public-documentation",
+            "level": 1,
+            "text": "ADR 0024: Use revocable capability links for public documentation"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          },
+          {
+            "anchor": "project-lifecycle-amendment",
+            "level": 2,
+            "text": "Project lifecycle amendment"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0024: Use revocable capability links for public documentation",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0024-use-revocable-capability-links-for-public-documentation.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0025-run-production-on-a-hardened-single-vps:2793135bdcb1",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0025-run-production-on-a-hardened-single-vps-with-off-host-recovery",
+            "level": 1,
+            "text": "ADR 0025: Run production on a hardened single VPS with off-host recovery"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          },
+          {
+            "anchor": "alternatives-rejected",
+            "level": 2,
+            "text": "Alternatives rejected"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0025: Run production on a hardened single VPS with off-host recovery",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0025-run-production-on-a-hardened-single-vps.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0026-compose-data-grids-from-shared-table-me:909133c3269b",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0026-compose-data-grids-from-shared-table-mechanics",
+            "level": 1,
+            "text": "ADR 0026: Compose data grids from shared table mechanics"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          },
+          {
+            "anchor": "alternatives-rejected",
+            "level": 2,
+            "text": "Alternatives rejected"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0026: Compose data grids from shared table mechanics",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0026-compose-data-grids-from-shared-table-mechanics.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0027-resolve-current-audit-targets-through-s:13f0928cd395",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0027-resolve-current-audit-targets-through-safe-projections",
+            "level": 1,
+            "text": "ADR 0027: Resolve current audit targets through safe projections"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          },
+          {
+            "anchor": "alternatives-rejected",
+            "level": 2,
+            "text": "Alternatives rejected"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0027: Resolve current audit targets through safe projections",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0027-resolve-current-audit-targets-through-safe-projections.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:adr-0028-compose-project-lifecycle-from-pure-tra:7827b224a85e",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "adr-0028-compose-project-lifecycle-from-pure-transition-and-operation-policies",
+            "level": 1,
+            "text": "ADR 0028: Compose project lifecycle from pure transition and operation policies"
+          },
+          {
+            "anchor": "context",
+            "level": 2,
+            "text": "Context"
+          },
+          {
+            "anchor": "decision",
+            "level": 2,
+            "text": "Decision"
+          },
+          {
+            "anchor": "consequences",
+            "level": 2,
+            "text": "Consequences"
+          },
+          {
+            "anchor": "alternatives-rejected",
+            "level": 2,
+            "text": "Alternatives rejected"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0028: Compose project lifecycle from pure transition and operation policies",
+      "source_path": "D:\\develop\\minerva\\docs\\decisions\\0028-compose-project-lifecycle-from-pure-transition-policies.md",
       "type": "SourceDocument"
     },
     {
@@ -1839,6 +2563,49 @@
       },
       "name": "Document tree move and reorder plan",
       "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-document-tree-move-reorder.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:encrypted-backup-and-isolated-restore:3aa13f8ea267",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "encrypted-backup-and-isolated-restore",
+            "level": 1,
+            "text": "Encrypted backup and isolated restore"
+          },
+          {
+            "anchor": "what-counts-as-a-recoverable-backup",
+            "level": 2,
+            "text": "What counts as a recoverable backup"
+          },
+          {
+            "anchor": "one-time-production-setup",
+            "level": 2,
+            "text": "One-time production setup"
+          },
+          {
+            "anchor": "manual-backup-and-verification",
+            "level": 2,
+            "text": "Manual backup and verification"
+          },
+          {
+            "anchor": "isolated-restore-drill",
+            "level": 2,
+            "text": "Isolated restore drill"
+          },
+          {
+            "anchor": "required-failure-simulations",
+            "level": 2,
+            "text": "Required failure simulations"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Encrypted backup and isolated restore",
+      "source_path": "D:\\develop\\minerva\\docs\\operations\\backup-and-restore.md",
       "type": "SourceDocument"
     },
     {
@@ -2479,6 +3246,263 @@
     {
       "aliases": [],
       "description": "",
+      "id": "SourceDocument:local-restore-drill-record-2026-08-06:ec76f38040f7",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "local-restore-drill-record-2026-08-06",
+            "level": 1,
+            "text": "Local restore drill record — 2026-08-06"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Local restore drill record — 2026-08-06",
+      "source_path": "D:\\develop\\minerva\\docs\\operations\\restore-drill-2026-08-06-local.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:mcp-and-oauth-operations:00a05ba136f2",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "mcp-and-oauth-operations",
+            "level": 1,
+            "text": "MCP and OAuth operations"
+          },
+          {
+            "anchor": "local-setup",
+            "level": 2,
+            "text": "Local setup"
+          },
+          {
+            "anchor": "production-issuer-and-resource",
+            "level": 2,
+            "text": "Production issuer and resource"
+          },
+          {
+            "anchor": "reverse-proxy-trust",
+            "level": 2,
+            "text": "Reverse proxy trust"
+          },
+          {
+            "anchor": "secrets-and-rotation",
+            "level": 2,
+            "text": "Secrets and rotation"
+          },
+          {
+            "anchor": "limits-and-monitoring",
+            "level": 2,
+            "text": "Limits and monitoring"
+          },
+          {
+            "anchor": "incident-revocation",
+            "level": 2,
+            "text": "Incident revocation"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "MCP and OAuth operations",
+      "source_path": "D:\\develop\\minerva\\docs\\operations\\mcp-oauth.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:mcp-documentation-interface-implementation-plan:bc0b02c06bf3",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "mcp-documentation-interface-implementation-plan",
+            "level": 1,
+            "text": "MCP documentation interface implementation plan"
+          },
+          {
+            "anchor": "goal",
+            "level": 2,
+            "text": "Goal"
+          },
+          {
+            "anchor": "delivery-rules",
+            "level": 2,
+            "text": "Delivery rules"
+          },
+          {
+            "anchor": "slice-6-1-package-and-schema-spike",
+            "level": 2,
+            "text": "Slice 6.1: package and schema spike"
+          },
+          {
+            "anchor": "slice-6-2-oauth-provider-and-discovery",
+            "level": 2,
+            "text": "Slice 6.2: OAuth provider and discovery"
+          },
+          {
+            "anchor": "slice-6-3-consent-and-grant-management",
+            "level": 2,
+            "text": "Slice 6.3: consent and grant management"
+          },
+          {
+            "anchor": "slice-6-4-authenticated-streamable-http-shell",
+            "level": 2,
+            "text": "Slice 6.4: authenticated Streamable HTTP shell"
+          },
+          {
+            "anchor": "slice-6-5-read-only-project-and-document-capabilities",
+            "level": 2,
+            "text": "Slice 6.5: read-only project and document capabilities"
+          },
+          {
+            "anchor": "slice-6-6-mutation-idempotency-foundation",
+            "level": 2,
+            "text": "Slice 6.6: mutation idempotency foundation"
+          },
+          {
+            "anchor": "slice-6-7-document-mutation-tools",
+            "level": 2,
+            "text": "Slice 6.7: document mutation tools"
+          },
+          {
+            "anchor": "slice-6-8-real-client-acceptance-and-hardening",
+            "level": 2,
+            "text": "Slice 6.8: real-client acceptance and hardening"
+          },
+          {
+            "anchor": "expected-implementation-areas",
+            "level": 2,
+            "text": "Expected implementation areas"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "MCP documentation interface implementation plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-mcp-documentation-interface.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:mcp-oauth-threat-model-and-design:b65b71477ce8",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "mcp-oauth-threat-model-and-design",
+            "level": 1,
+            "text": "MCP OAuth threat model and design"
+          },
+          {
+            "anchor": "scope",
+            "level": 2,
+            "text": "Scope"
+          },
+          {
+            "anchor": "security-invariants",
+            "level": 2,
+            "text": "Security invariants"
+          },
+          {
+            "anchor": "assets-and-trust-boundaries",
+            "level": 2,
+            "text": "Assets and trust boundaries"
+          },
+          {
+            "anchor": "threats-and-required-controls",
+            "level": 2,
+            "text": "Threats and required controls"
+          },
+          {
+            "anchor": "token-theft-and-replay",
+            "level": 3,
+            "text": "Token theft and replay"
+          },
+          {
+            "anchor": "audience-confusion-and-malicious-resource-servers",
+            "level": 3,
+            "text": "Audience confusion and malicious resource servers"
+          },
+          {
+            "anchor": "stale-authorization",
+            "level": 3,
+            "text": "Stale authorization"
+          },
+          {
+            "anchor": "over-broad-delegation",
+            "level": 3,
+            "text": "Over-broad delegation"
+          },
+          {
+            "anchor": "confused-deputy-and-cross-project-access",
+            "level": 3,
+            "text": "Confused deputy and cross-project access"
+          },
+          {
+            "anchor": "csrf-login-csrf-redirect-abuse-and-client-impersonation",
+            "level": 3,
+            "text": "CSRF, login CSRF, redirect abuse, and client impersonation"
+          },
+          {
+            "anchor": "grant-revocation-races",
+            "level": 3,
+            "text": "Grant revocation races"
+          },
+          {
+            "anchor": "mutation-replay-and-duplicate-delivery",
+            "level": 3,
+            "text": "Mutation replay and duplicate delivery"
+          },
+          {
+            "anchor": "schema-and-content-attacks",
+            "level": 3,
+            "text": "Schema and content attacks"
+          },
+          {
+            "anchor": "session-fixation-and-transport-abuse",
+            "level": 3,
+            "text": "Session fixation and transport abuse"
+          },
+          {
+            "anchor": "information-leakage-through-discovery-and-errors",
+            "level": 3,
+            "text": "Information leakage through discovery and errors"
+          },
+          {
+            "anchor": "scope-to-capability-mapping",
+            "level": 2,
+            "text": "Scope-to-capability mapping"
+          },
+          {
+            "anchor": "token-strategy",
+            "level": 2,
+            "text": "Token strategy"
+          },
+          {
+            "anchor": "audit-events",
+            "level": 2,
+            "text": "Audit events"
+          },
+          {
+            "anchor": "verification-gates",
+            "level": 2,
+            "text": "Verification gates"
+          },
+          {
+            "anchor": "approval-decisions",
+            "level": 2,
+            "text": "Approval decisions"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "MCP OAuth threat model and design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-14-mcp-oauth-threat-model.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
       "id": "SourceDocument:minerva-agent-instructions:7b4afaaff5ff",
       "metadata": {
         "sections": [
@@ -2576,6 +3600,11 @@
             "text": "Credentials"
           },
           {
+            "anchor": "ai-assistant",
+            "level": 3,
+            "text": "AI Assistant"
+          },
+          {
             "anchor": "search",
             "level": 3,
             "text": "Search"
@@ -2652,6 +3681,11 @@
             "anchor": "operations-and-integrations",
             "level": 2,
             "text": "Operations and integrations"
+          },
+          {
+            "anchor": "ai-assistant-later-increments",
+            "level": 2,
+            "text": "AI assistant later increments"
           },
           {
             "anchor": "sensitive-data",
@@ -3175,9 +4209,19 @@
             "text": "Project credentials"
           },
           {
+            "anchor": "project-ai-assistant",
+            "level": 3,
+            "text": "Project AI assistant"
+          },
+          {
             "anchor": "projects",
             "level": 2,
             "text": "Projects"
+          },
+          {
+            "anchor": "project-lifecycle",
+            "level": 3,
+            "text": "Project lifecycle"
           },
           {
             "anchor": "documentation",
@@ -3286,6 +4330,11 @@
             "text": "Slice 3: Projects and RBAC"
           },
           {
+            "anchor": "slice-3-5-audited-project-lifecycle-completion",
+            "level": 2,
+            "text": "Slice 3.5: Audited project lifecycle completion"
+          },
+          {
             "anchor": "slice-4-document-core",
             "level": 2,
             "text": "Slice 4: Document core"
@@ -3304,6 +4353,11 @@
             "anchor": "slice-6-mcp-documentation-interface",
             "level": 2,
             "text": "Slice 6: MCP documentation interface"
+          },
+          {
+            "anchor": "slice-6-5-project-ai-assistant",
+            "level": 2,
+            "text": "Slice 6.5: Project AI assistant"
           },
           {
             "anchor": "slice-7-production-readiness",
@@ -3593,6 +4647,605 @@
     {
       "aliases": [],
       "description": "",
+      "id": "SourceDocument:production-configuration-and-health:80638887288f",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "production-configuration-and-health",
+            "level": 1,
+            "text": "Production configuration and health"
+          },
+          {
+            "anchor": "secret-file-boundary",
+            "level": 2,
+            "text": "Secret-file boundary"
+          },
+          {
+            "anchor": "health-endpoints",
+            "level": 2,
+            "text": "Health endpoints"
+          },
+          {
+            "anchor": "immutable-image-and-production-graph",
+            "level": 2,
+            "text": "Immutable image and production graph"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Production configuration and health",
+      "source_path": "D:\\develop\\minerva\\docs\\operations\\production-configuration.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:production-readiness-audited-design:a38e7c684bac",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "production-readiness-audited-design",
+            "level": 1,
+            "text": "Production readiness: audited design"
+          },
+          {
+            "anchor": "goal",
+            "level": 2,
+            "text": "Goal"
+          },
+          {
+            "anchor": "audited-baseline",
+            "level": 2,
+            "text": "Audited baseline"
+          },
+          {
+            "anchor": "target-topology",
+            "level": 2,
+            "text": "Target topology"
+          },
+          {
+            "anchor": "runtime-and-container-boundary",
+            "level": 2,
+            "text": "Runtime and container boundary"
+          },
+          {
+            "anchor": "configuration-and-secrets",
+            "level": 2,
+            "text": "Configuration and secrets"
+          },
+          {
+            "anchor": "network-and-proxy-trust",
+            "level": 2,
+            "text": "Network and proxy trust"
+          },
+          {
+            "anchor": "health-and-deployment-lifecycle",
+            "level": 2,
+            "text": "Health and deployment lifecycle"
+          },
+          {
+            "anchor": "security-headers",
+            "level": 2,
+            "text": "Security headers"
+          },
+          {
+            "anchor": "logs-audit-and-monitoring",
+            "level": 2,
+            "text": "Logs, audit, and monitoring"
+          },
+          {
+            "anchor": "backup-and-recovery",
+            "level": 2,
+            "text": "Backup and recovery"
+          },
+          {
+            "anchor": "release-verification",
+            "level": 2,
+            "text": "Release verification"
+          },
+          {
+            "anchor": "deferred",
+            "level": 2,
+            "text": "Deferred"
+          },
+          {
+            "anchor": "approval-decisions",
+            "level": 2,
+            "text": "Approval decisions"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Production readiness: audited design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-08-04-production-readiness-design.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:production-readiness-implementation-plan:9ce17340df01",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "production-readiness-implementation-plan",
+            "level": 1,
+            "text": "Production readiness implementation plan"
+          },
+          {
+            "anchor": "preconditions",
+            "level": 2,
+            "text": "Preconditions"
+          },
+          {
+            "anchor": "slice-pr-1-production-configuration-and-health-boundary",
+            "level": 2,
+            "text": "Slice PR.1: production configuration and health boundary"
+          },
+          {
+            "anchor": "slice-pr-2-immutable-application-image-and-production-compose",
+            "level": 2,
+            "text": "Slice PR.2: immutable application image and production Compose"
+          },
+          {
+            "anchor": "slice-pr-3-transport-security-and-structured-logging",
+            "level": 2,
+            "text": "Slice PR.3: transport security and structured logging"
+          },
+          {
+            "anchor": "slice-pr-4-encrypted-off-host-backup-and-restore-drill",
+            "level": 2,
+            "text": "Slice PR.4: encrypted off-host backup and restore drill"
+          },
+          {
+            "anchor": "slice-pr-5-safe-audit-browsing",
+            "level": 2,
+            "text": "Slice PR.5: safe audit browsing"
+          },
+          {
+            "anchor": "slice-pr-6-release-automation-and-clean-vps-acceptance",
+            "level": 2,
+            "text": "Slice PR.6: release automation and clean-VPS acceptance"
+          },
+          {
+            "anchor": "deferred-follow-ups",
+            "level": 2,
+            "text": "Deferred follow-ups"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Production readiness implementation plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-08-04-production-readiness.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:production-readiness-threat-model:387307ee4395",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "production-readiness-threat-model",
+            "level": 1,
+            "text": "Production readiness threat model"
+          },
+          {
+            "anchor": "assets-and-trust-boundaries",
+            "level": 2,
+            "text": "Assets and trust boundaries"
+          },
+          {
+            "anchor": "threats-and-required-controls",
+            "level": 2,
+            "text": "Threats and required controls"
+          },
+          {
+            "anchor": "public-service-exposure-and-proxy-spoofing",
+            "level": 3,
+            "text": "Public service exposure and proxy spoofing"
+          },
+          {
+            "anchor": "secret-disclosure",
+            "level": 3,
+            "text": "Secret disclosure"
+          },
+          {
+            "anchor": "capability-and-token-leakage-through-logs",
+            "level": 3,
+            "text": "Capability and token leakage through logs"
+          },
+          {
+            "anchor": "container-escape-and-lateral-movement",
+            "level": 3,
+            "text": "Container escape and lateral movement"
+          },
+          {
+            "anchor": "supply-chain-compromise",
+            "level": 3,
+            "text": "Supply-chain compromise"
+          },
+          {
+            "anchor": "migration-failure-and-incompatible-rollback",
+            "level": 3,
+            "text": "Migration failure and incompatible rollback"
+          },
+          {
+            "anchor": "backup-theft-deletion-and-ransomware",
+            "level": 3,
+            "text": "Backup theft, deletion, and ransomware"
+          },
+          {
+            "anchor": "incomplete-database-object-key-recovery",
+            "level": 3,
+            "text": "Incomplete database/object/key recovery"
+          },
+          {
+            "anchor": "disk-memory-and-log-exhaustion",
+            "level": 3,
+            "text": "Disk, memory, and log exhaustion"
+          },
+          {
+            "anchor": "health-endpoint-reconnaissance",
+            "level": 3,
+            "text": "Health endpoint reconnaissance"
+          },
+          {
+            "anchor": "header-and-browser-attacks",
+            "level": 3,
+            "text": "Header and browser attacks"
+          },
+          {
+            "anchor": "audit-abuse-and-metadata-leakage",
+            "level": 3,
+            "text": "Audit abuse and metadata leakage"
+          },
+          {
+            "anchor": "operational-mistakes",
+            "level": 3,
+            "text": "Operational mistakes"
+          },
+          {
+            "anchor": "verification-gates",
+            "level": 2,
+            "text": "Verification gates"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Production readiness threat model",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-08-04-production-readiness-threat-model.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:project-ai-assistant-design:7657895969dc",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "project-ai-assistant-design",
+            "level": 1,
+            "text": "Project AI Assistant design"
+          },
+          {
+            "anchor": "goal",
+            "level": 2,
+            "text": "Goal"
+          },
+          {
+            "anchor": "first-release-boundary",
+            "level": 2,
+            "text": "First release boundary"
+          },
+          {
+            "anchor": "ux",
+            "level": 2,
+            "text": "UX"
+          },
+          {
+            "anchor": "authorization",
+            "level": 2,
+            "text": "Authorization"
+          },
+          {
+            "anchor": "server-architecture",
+            "level": 2,
+            "text": "Server architecture"
+          },
+          {
+            "anchor": "data-model",
+            "level": 2,
+            "text": "Data model"
+          },
+          {
+            "anchor": "grounding-and-tool-policy",
+            "level": 2,
+            "text": "Grounding and tool policy"
+          },
+          {
+            "anchor": "threat-model",
+            "level": 2,
+            "text": "Threat model"
+          },
+          {
+            "anchor": "prompt-injection",
+            "level": 3,
+            "text": "Prompt injection"
+          },
+          {
+            "anchor": "credential-exposure",
+            "level": 3,
+            "text": "Credential exposure"
+          },
+          {
+            "anchor": "authorization-drift",
+            "level": 3,
+            "text": "Authorization drift"
+          },
+          {
+            "anchor": "cross-project-leakage",
+            "level": 3,
+            "text": "Cross-project leakage"
+          },
+          {
+            "anchor": "uncontrolled-mutations",
+            "level": 3,
+            "text": "Uncontrolled mutations"
+          },
+          {
+            "anchor": "cost-and-denial-of-service",
+            "level": 3,
+            "text": "Cost and denial of service"
+          },
+          {
+            "anchor": "unsafe-output",
+            "level": 3,
+            "text": "Unsafe output"
+          },
+          {
+            "anchor": "audit",
+            "level": 2,
+            "text": "Audit"
+          },
+          {
+            "anchor": "deferred",
+            "level": 2,
+            "text": "Deferred"
+          },
+          {
+            "anchor": "acceptance-for-the-read-only-slice",
+            "level": 2,
+            "text": "Acceptance for the read-only slice"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project AI Assistant design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-15-project-ai-assistant-design.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:project-ai-assistant-implementation-plan:387afa89b3a9",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "project-ai-assistant-implementation-plan",
+            "level": 1,
+            "text": "Project AI Assistant implementation plan"
+          },
+          {
+            "anchor": "slice-ai-1-canonical-boundary-and-permissions",
+            "level": 2,
+            "text": "Slice AI.1: canonical boundary and permissions"
+          },
+          {
+            "anchor": "slice-ai-2-encrypted-provider-connections",
+            "level": 2,
+            "text": "Slice AI.2: encrypted provider connections"
+          },
+          {
+            "anchor": "slice-ai-3-provider-neutral-read-only-orchestration",
+            "level": 2,
+            "text": "Slice AI.3: provider-neutral read-only orchestration"
+          },
+          {
+            "anchor": "slice-ai-4-project-wide-assistant-widget",
+            "level": 2,
+            "text": "Slice AI.4: project-wide assistant widget"
+          },
+          {
+            "anchor": "slice-ai-5-persistent-conversations",
+            "level": 2,
+            "text": "Slice AI.5: persistent conversations"
+          },
+          {
+            "anchor": "slice-ai-6-proposed-documentation-changes",
+            "level": 2,
+            "text": "Slice AI.6: proposed documentation changes"
+          },
+          {
+            "anchor": "verification-gate",
+            "level": 2,
+            "text": "Verification gate"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project AI Assistant implementation plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-15-project-ai-assistant.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:project-ai-document-proposals-audited-design:cb4c50fe0d3a",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "project-ai-document-proposals-audited-design",
+            "level": 1,
+            "text": "Project AI document proposals: audited design"
+          },
+          {
+            "anchor": "goal",
+            "level": 2,
+            "text": "Goal"
+          },
+          {
+            "anchor": "audited-baseline",
+            "level": 2,
+            "text": "Audited baseline"
+          },
+          {
+            "anchor": "product-boundary",
+            "level": 2,
+            "text": "Product boundary"
+          },
+          {
+            "anchor": "user-flow",
+            "level": 2,
+            "text": "User flow"
+          },
+          {
+            "anchor": "proposal-state",
+            "level": 2,
+            "text": "Proposal state"
+          },
+          {
+            "anchor": "server-architecture",
+            "level": 2,
+            "text": "Server architecture"
+          },
+          {
+            "anchor": "proposal-generation",
+            "level": 3,
+            "text": "Proposal generation"
+          },
+          {
+            "anchor": "atomic-confirmation",
+            "level": 3,
+            "text": "Atomic confirmation"
+          },
+          {
+            "anchor": "authorization-matrix",
+            "level": 2,
+            "text": "Authorization matrix"
+          },
+          {
+            "anchor": "security-analysis",
+            "level": 2,
+            "text": "Security analysis"
+          },
+          {
+            "anchor": "prompt-injection",
+            "level": 3,
+            "text": "Prompt injection"
+          },
+          {
+            "anchor": "tampering-and-replay",
+            "level": 3,
+            "text": "Tampering and replay"
+          },
+          {
+            "anchor": "authorization-drift",
+            "level": 3,
+            "text": "Authorization drift"
+          },
+          {
+            "anchor": "content-exposure",
+            "level": 3,
+            "text": "Content exposure"
+          },
+          {
+            "anchor": "partial-and-stale-effects",
+            "level": 3,
+            "text": "Partial and stale effects"
+          },
+          {
+            "anchor": "denial-of-service",
+            "level": 3,
+            "text": "Denial of service"
+          },
+          {
+            "anchor": "ui-composition",
+            "level": 2,
+            "text": "UI composition"
+          },
+          {
+            "anchor": "alternatives-rejected",
+            "level": 2,
+            "text": "Alternatives rejected"
+          },
+          {
+            "anchor": "approval-questions",
+            "level": 2,
+            "text": "Approval questions"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project AI document proposals: audited design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-31-project-ai-document-proposals-design.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:project-ai-document-proposals-implementation-pla:0d2e72510456",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "project-ai-document-proposals-implementation-plan",
+            "level": 1,
+            "text": "Project AI document proposals implementation plan"
+          },
+          {
+            "anchor": "preconditions",
+            "level": 2,
+            "text": "Preconditions"
+          },
+          {
+            "anchor": "slice-ai-6-1-proposal-contracts-lifecycle-and-storage",
+            "level": 2,
+            "text": "Slice AI.6.1: proposal contracts, lifecycle, and storage"
+          },
+          {
+            "anchor": "slice-ai-6-2-transaction-aware-documents-primitives",
+            "level": 2,
+            "text": "Slice AI.6.2: transaction-aware Documents primitives"
+          },
+          {
+            "anchor": "slice-ai-6-3-update-proposal-generation-end-to-end",
+            "level": 2,
+            "text": "Slice AI.6.3: update proposal generation end to end"
+          },
+          {
+            "anchor": "slice-ai-6-4-create-proposal-end-to-end",
+            "level": 2,
+            "text": "Slice AI.6.4: create proposal end to end"
+          },
+          {
+            "anchor": "slice-ai-6-5-abuse-ux-and-release-verification",
+            "level": 2,
+            "text": "Slice AI.6.5: abuse, UX, and release verification"
+          },
+          {
+            "anchor": "deferred-follow-ups",
+            "level": 2,
+            "text": "Deferred follow-ups"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project AI document proposals implementation plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-31-project-ai-document-proposals.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
       "id": "SourceDocument:project-credentials-design:38735cbc9ec3",
       "metadata": {
         "sections": [
@@ -3704,6 +5357,315 @@
       },
       "name": "Project Credentials Implementation Plan",
       "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-11-project-credentials.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:project-lifecycle-audited-design:8022c555e295",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "project-lifecycle-audited-design",
+            "level": 1,
+            "text": "Project lifecycle: audited design"
+          },
+          {
+            "anchor": "goal",
+            "level": 2,
+            "text": "Goal"
+          },
+          {
+            "anchor": "audited-baseline",
+            "level": 2,
+            "text": "Audited baseline"
+          },
+          {
+            "anchor": "terminology",
+            "level": 2,
+            "text": "Terminology"
+          },
+          {
+            "anchor": "state-model",
+            "level": 2,
+            "text": "State model"
+          },
+          {
+            "anchor": "reusable-lifecycle-pattern",
+            "level": 2,
+            "text": "Reusable lifecycle pattern"
+          },
+          {
+            "anchor": "project-operation-policy",
+            "level": 2,
+            "text": "Project operation policy"
+          },
+          {
+            "anchor": "server-authorization-boundary",
+            "level": 2,
+            "text": "Server authorization boundary"
+          },
+          {
+            "anchor": "persistence-and-business-history",
+            "level": 2,
+            "text": "Persistence and business history"
+          },
+          {
+            "anchor": "concurrency-and-atomicity",
+            "level": 2,
+            "text": "Concurrency and atomicity"
+          },
+          {
+            "anchor": "transition-effects",
+            "level": 2,
+            "text": "Transition effects"
+          },
+          {
+            "anchor": "pause-and-close",
+            "level": 3,
+            "text": "Pause and close"
+          },
+          {
+            "anchor": "archive",
+            "level": 3,
+            "text": "Archive"
+          },
+          {
+            "anchor": "restore",
+            "level": 3,
+            "text": "Restore"
+          },
+          {
+            "anchor": "last-admin-and-global-administration-invariants",
+            "level": 2,
+            "text": "Last-admin and global administration invariants"
+          },
+          {
+            "anchor": "http-contracts-and-safe-errors",
+            "level": 2,
+            "text": "HTTP contracts and safe errors"
+          },
+          {
+            "anchor": "client-architecture-and-ux",
+            "level": 2,
+            "text": "Client architecture and UX"
+          },
+          {
+            "anchor": "verification-strategy",
+            "level": 2,
+            "text": "Verification strategy"
+          },
+          {
+            "anchor": "rollout-and-compatibility",
+            "level": 2,
+            "text": "Rollout and compatibility"
+          },
+          {
+            "anchor": "deferred",
+            "level": 2,
+            "text": "Deferred"
+          },
+          {
+            "anchor": "approval-decisions",
+            "level": 2,
+            "text": "Approval decisions"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project lifecycle: audited design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-08-28-project-lifecycle-design.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:project-lifecycle-implementation-plan:b38fbc78bc42",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "project-lifecycle-implementation-plan",
+            "level": 1,
+            "text": "Project lifecycle implementation plan"
+          },
+          {
+            "anchor": "preconditions",
+            "level": 2,
+            "text": "Preconditions"
+          },
+          {
+            "anchor": "slice-pl-0-canonical-adoption-and-permission-template-correction",
+            "level": 2,
+            "text": "Slice PL.0: canonical adoption and permission-template correction"
+          },
+          {
+            "anchor": "slice-pl-1-pure-lifecycle-and-operation-policies",
+            "level": 2,
+            "text": "Slice PL.1: pure lifecycle and operation policies"
+          },
+          {
+            "anchor": "slice-pl-2-persistence-migration-and-transition-service",
+            "level": 2,
+            "text": "Slice PL.2: persistence, migration, and transition service"
+          },
+          {
+            "anchor": "slice-pl-3-unified-project-operation-access-and-read-only-core",
+            "level": 2,
+            "text": "Slice PL.3: unified project operation access and read-only core"
+          },
+          {
+            "anchor": "slice-pl-4-public-sharing-ai-oauth-mcp-and-privacy-boundaries",
+            "level": 2,
+            "text": "Slice PL.4: public sharing, AI, OAuth/MCP, and privacy boundaries"
+          },
+          {
+            "anchor": "slice-pl-5-project-lists-archive-surface-actions-and-read-only-ux",
+            "level": 2,
+            "text": "Slice PL.5: project lists, archive surface, Actions, and read-only UX"
+          },
+          {
+            "anchor": "slice-pl-6-end-to-end-and-release-verification",
+            "level": 2,
+            "text": "Slice PL.6: end-to-end and release verification"
+          },
+          {
+            "anchor": "deferred-follow-ups",
+            "level": 2,
+            "text": "Deferred follow-ups"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project lifecycle implementation plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-08-28-project-lifecycle.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:project-lifecycle-threat-and-race-model:5d44516d631d",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "project-lifecycle-threat-and-race-model",
+            "level": 1,
+            "text": "Project lifecycle threat and race model"
+          },
+          {
+            "anchor": "assets-and-trust-boundaries",
+            "level": 2,
+            "text": "Assets and trust boundaries"
+          },
+          {
+            "anchor": "threats-and-required-controls",
+            "level": 2,
+            "text": "Threats and required controls"
+          },
+          {
+            "anchor": "enum-only-lifecycle-enforcement",
+            "level": 3,
+            "text": "Enum-only lifecycle enforcement"
+          },
+          {
+            "anchor": "permission-only-mutation-after-close",
+            "level": 3,
+            "text": "Permission-only mutation after close"
+          },
+          {
+            "anchor": "transition-versus-in-flight-mutation-race",
+            "level": 3,
+            "text": "Transition versus in-flight mutation race"
+          },
+          {
+            "anchor": "stale-and-aba-clients",
+            "level": 3,
+            "text": "Stale and ABA clients"
+          },
+          {
+            "anchor": "duplicate-transition-through-retry",
+            "level": 3,
+            "text": "Duplicate transition through retry"
+          },
+          {
+            "anchor": "unauthorized-restore-of-an-archived-project",
+            "level": 3,
+            "text": "Unauthorized restore of an archived project"
+          },
+          {
+            "anchor": "last-administrator-loss",
+            "level": 3,
+            "text": "Last administrator loss"
+          },
+          {
+            "anchor": "privilege-escalation-during-migration",
+            "level": 3,
+            "text": "Privilege escalation during migration"
+          },
+          {
+            "anchor": "archived-data-exposure",
+            "level": 3,
+            "text": "Archived data exposure"
+          },
+          {
+            "anchor": "public-capability-resurrection",
+            "level": 3,
+            "text": "Public capability resurrection"
+          },
+          {
+            "anchor": "cross-project-oauth-mcp-revocation",
+            "level": 3,
+            "text": "Cross-project OAuth/MCP revocation"
+          },
+          {
+            "anchor": "ai-continuation-after-freeze",
+            "level": 3,
+            "text": "AI continuation after freeze"
+          },
+          {
+            "anchor": "external-effect-inside-database-lock",
+            "level": 3,
+            "text": "External effect inside database lock"
+          },
+          {
+            "anchor": "sensitive-reads-in-read-only-projects",
+            "level": 3,
+            "text": "Sensitive reads in read-only projects"
+          },
+          {
+            "anchor": "security-action-blocked-by-read-only-policy",
+            "level": 3,
+            "text": "Security action blocked by read-only policy"
+          },
+          {
+            "anchor": "lifecycle-reason-disclosure",
+            "level": 3,
+            "text": "Lifecycle reason disclosure"
+          },
+          {
+            "anchor": "status-probing-and-project-enumeration",
+            "level": 3,
+            "text": "Status probing and project enumeration"
+          },
+          {
+            "anchor": "rollback-incompatibility",
+            "level": 3,
+            "text": "Rollback incompatibility"
+          },
+          {
+            "anchor": "audit-and-history-tampering",
+            "level": 3,
+            "text": "Audit and history tampering"
+          },
+          {
+            "anchor": "verification-gates",
+            "level": 2,
+            "text": "Verification gates"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project lifecycle threat and race model",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-08-28-project-lifecycle-threat-model.md",
       "type": "SourceDocument"
     },
     {
@@ -3986,6 +5948,205 @@
     {
       "aliases": [],
       "description": "",
+      "id": "SourceDocument:public-documentation-sharing-audited-design:13ba1b2a7cc8",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "public-documentation-sharing-audited-design",
+            "level": 1,
+            "text": "Public documentation sharing: audited design"
+          },
+          {
+            "anchor": "goal",
+            "level": 2,
+            "text": "Goal"
+          },
+          {
+            "anchor": "audited-baseline",
+            "level": 2,
+            "text": "Audited baseline"
+          },
+          {
+            "anchor": "product-rules",
+            "level": 2,
+            "text": "Product rules"
+          },
+          {
+            "anchor": "scope",
+            "level": 3,
+            "text": "Scope"
+          },
+          {
+            "anchor": "link-lifecycle",
+            "level": 3,
+            "text": "Link lifecycle"
+          },
+          {
+            "anchor": "public-reader",
+            "level": 3,
+            "text": "Public reader"
+          },
+          {
+            "anchor": "sharing-dialog",
+            "level": 3,
+            "text": "Sharing dialog"
+          },
+          {
+            "anchor": "server-architecture",
+            "level": 2,
+            "text": "Server architecture"
+          },
+          {
+            "anchor": "storage",
+            "level": 3,
+            "text": "Storage"
+          },
+          {
+            "anchor": "application-services",
+            "level": 3,
+            "text": "Application services"
+          },
+          {
+            "anchor": "http-boundaries",
+            "level": 3,
+            "text": "HTTP boundaries"
+          },
+          {
+            "anchor": "images-links-and-embeds",
+            "level": 3,
+            "text": "Images, links, and embeds"
+          },
+          {
+            "anchor": "security-analysis",
+            "level": 2,
+            "text": "Security analysis"
+          },
+          {
+            "anchor": "capability-secrecy",
+            "level": 3,
+            "text": "Capability secrecy"
+          },
+          {
+            "anchor": "enumeration-and-authorization",
+            "level": 3,
+            "text": "Enumeration and authorization"
+          },
+          {
+            "anchor": "draft-and-metadata-leakage",
+            "level": 3,
+            "text": "Draft and metadata leakage"
+          },
+          {
+            "anchor": "caching-and-indexing",
+            "level": 3,
+            "text": "Caching and indexing"
+          },
+          {
+            "anchor": "alternatives-rejected",
+            "level": 2,
+            "text": "Alternatives rejected"
+          },
+          {
+            "anchor": "approval-questions",
+            "level": 2,
+            "text": "Approval questions"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Public documentation sharing: audited design",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-31-public-documentation-sharing-design.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:public-documentation-sharing-implementation-plan:b042bb039eaf",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "public-documentation-sharing-implementation-plan",
+            "level": 1,
+            "text": "Public documentation sharing implementation plan"
+          },
+          {
+            "anchor": "preconditions",
+            "level": 2,
+            "text": "Preconditions"
+          },
+          {
+            "anchor": "slice-ds-1-contracts-permission-lifecycle-and-storage",
+            "level": 2,
+            "text": "Slice DS.1: contracts, permission, lifecycle, and storage"
+          },
+          {
+            "anchor": "slice-ds-2-public-published-projection",
+            "level": 2,
+            "text": "Slice DS.2: public published projection"
+          },
+          {
+            "anchor": "slice-ds-3-authenticated-sharing-dialog",
+            "level": 2,
+            "text": "Slice DS.3: authenticated sharing dialog"
+          },
+          {
+            "anchor": "slice-ds-4-public-reader-and-navigation",
+            "level": 2,
+            "text": "Slice DS.4: public reader and navigation"
+          },
+          {
+            "anchor": "slice-ds-5-abuse-and-release-verification",
+            "level": 2,
+            "text": "Slice DS.5: abuse and release verification"
+          },
+          {
+            "anchor": "deferred-follow-ups",
+            "level": 2,
+            "text": "Deferred follow-ups"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Public documentation sharing implementation plan",
+      "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-31-public-documentation-sharing.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:public-documentation-sharing-operations:2dd6d7209036",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "public-documentation-sharing-operations",
+            "level": 1,
+            "text": "Public documentation sharing operations"
+          },
+          {
+            "anchor": "runtime-boundary",
+            "level": 2,
+            "text": "Runtime boundary"
+          },
+          {
+            "anchor": "incident-response",
+            "level": 2,
+            "text": "Incident response"
+          },
+          {
+            "anchor": "release-checks",
+            "level": 2,
+            "text": "Release checks"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Public documentation sharing operations",
+      "source_path": "D:\\develop\\minerva\\docs\\operations\\public-documentation-sharing.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
       "id": "SourceDocument:reset-password-ui-design:ae063bdcc1cf",
       "metadata": {
         "sections": [
@@ -4067,6 +6228,24 @@
       },
       "name": "Reset-Password UI Implementation Plan",
       "source_path": "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-28-reset-password-ui.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
+      "id": "SourceDocument:restore-drill-record:9b8d008a4129",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "restore-drill-record",
+            "level": 1,
+            "text": "Restore drill record"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Restore drill record",
+      "source_path": "D:\\develop\\minerva\\docs\\operations\\restore-drill-record-template.md",
       "type": "SourceDocument"
     },
     {
@@ -4312,6 +6491,44 @@
     {
       "aliases": [],
       "description": "",
+      "id": "SourceDocument:transport-security-and-structured-logging:8aa2c67e6791",
+      "metadata": {
+        "sections": [
+          {
+            "anchor": "transport-security-and-structured-logging",
+            "level": 1,
+            "text": "Transport security and structured logging"
+          },
+          {
+            "anchor": "header-ownership",
+            "level": 2,
+            "text": "Header ownership"
+          },
+          {
+            "anchor": "request-identity",
+            "level": 2,
+            "text": "Request identity"
+          },
+          {
+            "anchor": "closed-structured-logs",
+            "level": 2,
+            "text": "Closed structured logs"
+          },
+          {
+            "anchor": "initial-operator-alerts",
+            "level": 2,
+            "text": "Initial operator alerts"
+          }
+        ],
+        "source_kind": "SourceDocument"
+      },
+      "name": "Transport security and structured logging",
+      "source_path": "D:\\develop\\minerva\\docs\\operations\\transport-security-and-logging.md",
+      "type": "SourceDocument"
+    },
+    {
+      "aliases": [],
+      "description": "",
       "id": "SourceDocument:user-identity-and-profile-design:4c26d4b8aa62",
       "metadata": {
         "sections": [
@@ -4392,7 +6609,7 @@
       "description": "Top-level snapshot of the wiki at compile time.",
       "id": "Synthesis:synthesis-project-pulse:edf62281b49c",
       "metadata": {
-        "content_hash": "sha256-04896a36987488a2445e0add8c245135f3117ce7742778924f304b1ef0eda088",
+        "content_hash": "sha256-12a6fb0e7527132d1a551a3d06a804656528bf5a0fe3782e3f58ae04bdba21fb",
         "input_ids": [],
         "synthesis_kind": "pulse"
       },

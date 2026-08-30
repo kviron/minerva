@@ -1,8 +1,8 @@
 import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};globalThis.__timing__.logStart('Load chunks/_/nitro');import { EventEmitter } from 'node:events';
 import { Buffer as Buffer$1 } from 'node:buffer';
-import { promises, existsSync } from 'node:fs';
+import { promises, existsSync, readFileSync } from 'node:fs';
 import { resolve as resolve$1, dirname as dirname$1, join } from 'node:path';
-import { createHash } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 import { drizzle } from 'drizzle-orm/postgres-js';
@@ -12,8 +12,9 @@ import { APIError } from '@better-auth/core/error';
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { username } from 'better-auth/plugins/username';
-import { sql, relations } from 'drizzle-orm';
-import { pgTable, timestamp, text, boolean, uuid, index, bigint, integer, jsonb, check, unique, uniqueIndex, foreignKey } from 'drizzle-orm/pg-core';
+import { sql, relations, eq, and } from 'drizzle-orm';
+import { pgTable, timestamp, text, boolean, uuid as uuid$2, index, bigint, integer, jsonb, check, unique, uniqueIndex, foreignKey } from 'drizzle-orm/pg-core';
+import { oauthProvider, getOAuthProviderState } from '@better-auth/oauth-provider';
 
 const suspectProtoRx = /"(?:_|\\u0{2}5[Ff]){2}(?:p|\\u0{2}70)(?:r|\\u0{2}72)(?:o|\\u0{2}6[Ff])(?:t|\\u0{2}74)(?:o|\\u0{2}6[Ff])(?:_|\\u0{2}5[Ff]){2}"\s*:/;
 const suspectConstructorRx = /"(?:c|\\u0063)(?:o|\\u006[Ff])(?:n|\\u006[Ee])(?:s|\\u0073)(?:t|\\u0074)(?:r|\\u0072)(?:u|\\u0075)(?:c|\\u0063)(?:t|\\u0074)(?:o|\\u006[Ff])(?:r|\\u0072)"\s*:/;
@@ -842,8 +843,35 @@ function process$1(data, headers) {
   return dataObj;
 }
 
+async function validateData(data, fn) {
+  try {
+    const res = await fn(data);
+    if (res === false) {
+      throw createValidationError();
+    }
+    if (res === true) {
+      return data;
+    }
+    return res ?? data;
+  } catch (error) {
+    throw createValidationError(error);
+  }
+}
+function createValidationError(validateError) {
+  throw createError$1({
+    status: 400,
+    statusMessage: "Validation Error",
+    message: validateError?.message || "Validation Error",
+    data: validateError
+  });
+}
+
 function getQuery(event) {
   return getQuery$1(event.path || "");
+}
+function getValidatedQuery(event, validate) {
+  const query = getQuery(event);
+  return validateData(query, validate);
 }
 function getRouterParams(event, opts = {}) {
   let params = event.context.params || {};
@@ -854,6 +882,10 @@ function getRouterParams(event, opts = {}) {
     }
   }
   return params;
+}
+function getValidatedRouterParams(event, validate, opts = {}) {
+  const routerParams = getRouterParams(event, opts);
+  return validateData(routerParams, validate);
 }
 function getRouterParam(event, name, opts = {}) {
   const params = getRouterParams(event, opts);
@@ -893,6 +925,7 @@ function getRequestHeader(event, name) {
   const value = headers[name.toLowerCase()];
   return value;
 }
+const getHeader = getRequestHeader;
 function getRequestHost(event, opts = {}) {
   if (opts.xForwardedHost) {
     const _header = event.node.req.headers["x-forwarded-host"];
@@ -1032,6 +1065,10 @@ async function readBody(event, options = {}) {
   }
   request[ParsedBodySymbol] = parsed;
   return parsed;
+}
+async function readValidatedBody(event, validate) {
+  const _body = await readBody(event, { strict: true });
+  return validateData(_body, validate);
 }
 async function readMultipartFormData(event) {
   const contentType = getRequestHeader(event, "content-type");
@@ -1580,6 +1617,182 @@ function mergeHeaders$1(defaults, ...inputs) {
     }
   }
   return merged;
+}
+
+function formatEventStreamMessage(message) {
+  let result = "";
+  if (message.id) {
+    result += `id: ${_sanitizeSingleLine(message.id)}
+`;
+  }
+  if (message.event) {
+    result += `event: ${_sanitizeSingleLine(message.event)}
+`;
+  }
+  if (typeof message.retry === "number" && Number.isInteger(message.retry)) {
+    result += `retry: ${message.retry}
+`;
+  }
+  const data = typeof message.data === "string" ? message.data : "";
+  for (const line of data.split(/\r\n|\r|\n/)) {
+    result += `data: ${line}
+`;
+  }
+  result += "\n";
+  return result;
+}
+function _sanitizeSingleLine(value) {
+  return value.replace(/[\n\r]/g, "");
+}
+function formatEventStreamMessages(messages) {
+  let result = "";
+  for (const msg of messages) {
+    result += formatEventStreamMessage(msg);
+  }
+  return result;
+}
+function setEventStreamHeaders(event) {
+  const headers = {
+    "Content-Type": "text/event-stream",
+    "Cache-Control": "private, no-cache, no-store, no-transform, must-revalidate, max-age=0",
+    "X-Accel-Buffering": "no"
+    // prevent nginx from buffering the response
+  };
+  if (!isHttp2Request(event)) {
+    headers.Connection = "keep-alive";
+  }
+  setResponseHeaders(event, headers);
+}
+function isHttp2Request(event) {
+  return getHeader(event, ":path") !== void 0 && getHeader(event, ":method") !== void 0;
+}
+
+class EventStream {
+  _h3Event;
+  _transformStream = new TransformStream();
+  _writer;
+  _encoder = new TextEncoder();
+  _writerIsClosed = false;
+  _paused = false;
+  _unsentData;
+  _disposed = false;
+  _handled = false;
+  constructor(event, opts = {}) {
+    this._h3Event = event;
+    this._writer = this._transformStream.writable.getWriter();
+    this._writer.closed.then(() => {
+      this._writerIsClosed = true;
+    });
+    if (opts.autoclose !== false) {
+      this._h3Event.node.req.on("close", () => this.close());
+    }
+  }
+  async push(message) {
+    if (typeof message === "string") {
+      await this._sendEvent({ data: message });
+      return;
+    }
+    if (Array.isArray(message)) {
+      if (message.length === 0) {
+        return;
+      }
+      if (typeof message[0] === "string") {
+        const msgs = [];
+        for (const item of message) {
+          msgs.push({ data: item });
+        }
+        await this._sendEvents(msgs);
+        return;
+      }
+      await this._sendEvents(message);
+      return;
+    }
+    await this._sendEvent(message);
+  }
+  async _sendEvent(message) {
+    if (this._writerIsClosed) {
+      return;
+    }
+    if (this._paused && !this._unsentData) {
+      this._unsentData = formatEventStreamMessage(message);
+      return;
+    }
+    if (this._paused) {
+      this._unsentData += formatEventStreamMessage(message);
+      return;
+    }
+    await this._writer.write(this._encoder.encode(formatEventStreamMessage(message))).catch();
+  }
+  async _sendEvents(messages) {
+    if (this._writerIsClosed) {
+      return;
+    }
+    const payload = formatEventStreamMessages(messages);
+    if (this._paused && !this._unsentData) {
+      this._unsentData = payload;
+      return;
+    }
+    if (this._paused) {
+      this._unsentData += payload;
+      return;
+    }
+    await this._writer.write(this._encoder.encode(payload)).catch();
+  }
+  pause() {
+    this._paused = true;
+  }
+  get isPaused() {
+    return this._paused;
+  }
+  async resume() {
+    this._paused = false;
+    await this.flush();
+  }
+  async flush() {
+    if (this._writerIsClosed) {
+      return;
+    }
+    if (this._unsentData?.length) {
+      await this._writer.write(this._encoder.encode(this._unsentData));
+      this._unsentData = void 0;
+    }
+  }
+  /**
+   * Close the stream and the connection if the stream is being sent to the client
+   */
+  async close() {
+    if (this._disposed) {
+      return;
+    }
+    if (!this._writerIsClosed) {
+      try {
+        await this._writer.close();
+      } catch {
+      }
+    }
+    if (this._h3Event._handled && this._handled && !this._h3Event.node.res.closed) {
+      this._h3Event.node.res.end();
+    }
+    this._disposed = true;
+  }
+  /**
+   * Triggers callback when the writable stream is closed.
+   * It is also triggered after calling the `close()` method.
+   */
+  onClosed(cb) {
+    this._writer.closed.then(cb);
+  }
+  async send() {
+    setEventStreamHeaders(this._h3Event);
+    setResponseStatus(this._h3Event, 200);
+    this._h3Event._handled = true;
+    this._handled = true;
+    await sendStream(this._h3Event, this._transformStream.readable);
+  }
+}
+
+function createEventStream(event, opts) {
+  return new EventStream(event, opts);
 }
 
 class H3Event {
@@ -4219,7 +4432,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "3f967cfa-ac79-49c4-964a-98008de9f720",
+    "buildId": "b3716c26-4312-4853-a91e-f394c7d9eb60",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4566,6 +4779,87 @@ function defineNitroPlugin(def) {
   return def;
 }
 
+const REQUEST_EVENT = {
+  COMPLETED: "http.request.completed",
+  FAILED: "http.request.failed"
+};
+const REQUEST_LEVEL = {
+  INFO: "info",
+  ERROR: "error"
+};
+const canonicalRequestId = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu;
+const uuid$1 = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu;
+const publicCapability = /^[A-Za-z0-9_-]{43}$/u;
+const createRequestIdentity = (inbound, createId) => inbound && canonicalRequestId.test(inbound) ? inbound.toLowerCase() : createId();
+const requestTelemetryRoute = (pathname) => {
+  const segments = pathname.split("/").filter(Boolean);
+  const publicApi = segments[0] === "api" && segments[1] === "public" && segments[2] === "documentation";
+  const publicPage = segments[0] === "share" && segments[1] === "documentation";
+  const safeSegments = segments.map((segment, index) => {
+    if ((publicApi && index === 3 || publicPage && index === 2) && publicCapability.test(segment)) return "[capability]";
+    if (uuid$1.test(segment)) return "[id]";
+    if (/^\d+$/u.test(segment)) return "[number]";
+    return /^[A-Za-z][A-Za-z0-9._-]{0,63}$/u.test(segment) ? segment : "[segment]";
+  });
+  return `/${safeSegments.join("/")}`;
+};
+const createRequestLogRecord = (input) => ({
+  timestamp: input.occurredAt,
+  level: input.type === "failed" ? REQUEST_LEVEL.ERROR : REQUEST_LEVEL.INFO,
+  event: input.type === "failed" ? REQUEST_EVENT.FAILED : REQUEST_EVENT.COMPLETED,
+  requestId: input.requestId,
+  method: input.method.toUpperCase().slice(0, 16),
+  route: input.route.slice(0, 256),
+  statusCode: Number.isSafeInteger(input.statusCode) ? input.statusCode : 500,
+  durationMs: Math.max(0, Math.round(input.durationMs))
+});
+
+const observationFrom = (value) => {
+  if (!value || typeof value !== "object") return void 0;
+  const requestId = Reflect.get(value, "requestId");
+  const startedAt = Reflect.get(value, "startedAt");
+  const failed = Reflect.get(value, "failed");
+  return typeof requestId === "string" && typeof startedAt === "number" && typeof failed === "boolean" ? { requestId, startedAt, failed } : void 0;
+};
+const errorStatusCode = (error) => {
+  if (!error || typeof error !== "object") return 500;
+  const statusCode = Reflect.get(error, "statusCode");
+  return typeof statusCode === "number" && Number.isSafeInteger(statusCode) ? statusCode : 500;
+};
+const createRecord = (event, observation, type, statusCode) => createRequestLogRecord({
+  type,
+  requestId: observation.requestId,
+  method: getMethod(event),
+  route: requestTelemetryRoute(getRequestURL(event).pathname),
+  statusCode,
+  durationMs: performance.now() - observation.startedAt,
+  occurredAt: (/* @__PURE__ */ new Date()).toISOString()
+});
+const writeRecord = (record) => {
+  process.stdout.write(`${JSON.stringify(record)}
+`);
+};
+const _wFeLemrflV55V3sjBqCw3oTWliDD5QmZ8nhJY3fFw_Q = defineNitroPlugin((nitroApp) => {
+  nitroApp.hooks.hook("request", (event) => {
+    const requestId = createRequestIdentity(getHeader(event, "x-request-id"), randomUUID);
+    event.context.requestObservation = { requestId, startedAt: performance.now(), failed: false };
+    setHeader(event, "X-Request-ID", requestId);
+  });
+  nitroApp.hooks.hook("afterResponse", (event) => {
+    const observation = observationFrom(event.context.requestObservation);
+    if (!observation || observation.failed) return;
+    writeRecord(createRecord(event, observation, "completed", getResponseStatus(event)));
+  });
+  nitroApp.hooks.hook("error", (error, context) => {
+    const event = context.event;
+    if (!event) return;
+    const observation = observationFrom(event.context.requestObservation);
+    if (!observation || observation.failed) return;
+    event.context.requestObservation = { ...observation, failed: true };
+    writeRecord(createRecord(event, observation, "failed", errorStatusCode(error)));
+  });
+});
+
 const _e2PzcV5McmjOx0U8GVHV2ume71ISs_fLiFGcs4Y8WF4 = defineNitroPlugin((nitro) => {
   createDebugger(nitro.hooks, { tag: "nitro-runtime" });
 });
@@ -4600,591 +4894,816 @@ const _RsAMqRps4We9yEX_U5kgERLSwxo6coihF0nyZUvnpig = defineNitroPlugin((nitro) =
 
 const plugins = [
   _gibI9lLmcnuGhjE6_O9CuYZsh8tC4Gza4rC7oZC1UKo,
+_wFeLemrflV55V3sjBqCw3oTWliDD5QmZ8nhJY3fFw_Q,
 _e2PzcV5McmjOx0U8GVHV2ume71ISs_fLiFGcs4Y8WF4,
 _RsAMqRps4We9yEX_U5kgERLSwxo6coihF0nyZUvnpig
 ];
 
 const assets = {
-  "/_nuxt/1HradoUo.js": {
+  "/_nuxt/0OmktEbl.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"f3-LOEDOj5ZgB2G+mTPRdUVBMUbT18\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 243,
-    "path": "../public/_nuxt/1HradoUo.js"
+    "etag": "\"66e-av7gzXyn6O6SU6hf9kD0yyybS4U\"",
+    "mtime": "2026-08-30T12:06:38.678Z",
+    "size": 1646,
+    "path": "../public/_nuxt/0OmktEbl.js"
   },
-  "/_nuxt/4u8Hd-5k.js": {
+  "/_nuxt/-NHgln5L.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"46ea-0xo5SiEI1jntWQjBf0bUjELAgfo\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 18154,
-    "path": "../public/_nuxt/4u8Hd-5k.js"
+    "etag": "\"14f5-RizXUgfNZrP0SQaaQoBcDbnhtJo\"",
+    "mtime": "2026-08-30T12:06:38.684Z",
+    "size": 5365,
+    "path": "../public/_nuxt/-NHgln5L.js"
   },
-  "/_nuxt/10exndWp.js": {
+  "/_nuxt/0QFmeVZ6.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"10214-Ve/vHx0lCXvIHY7vc73JlUeZ4DY\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 66068,
-    "path": "../public/_nuxt/10exndWp.js"
+    "etag": "\"3be0-umL22jKb+cs1tq8imV1vVcw+emM\"",
+    "mtime": "2026-08-30T12:06:38.684Z",
+    "size": 15328,
+    "path": "../public/_nuxt/0QFmeVZ6.js"
   },
-  "/_nuxt/4wgQuHGW.js": {
+  "/_nuxt/1vyu6QnQ.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"45b-2uNvHYg9ZGyCIOoGUa5ZJLNBl6Y\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 1115,
-    "path": "../public/_nuxt/4wgQuHGW.js"
+    "etag": "\"36c-whp+jsdfrjatKHsxrv883cYr3j0\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 876,
+    "path": "../public/_nuxt/1vyu6QnQ.js"
   },
-  "/_nuxt/7omZda-5.js": {
+  "/_nuxt/2VH6Y686.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"7cf9-Ogkv12ZJvf+DzrIbq0NowUgZoWY\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 31993,
-    "path": "../public/_nuxt/7omZda-5.js"
+    "etag": "\"e269-M5R1oq2tSr9bkwtzrpWlSvLIlGE\"",
+    "mtime": "2026-08-30T12:06:38.684Z",
+    "size": 57961,
+    "path": "../public/_nuxt/2VH6Y686.js"
   },
-  "/_nuxt/9kuA5pzG.js": {
+  "/_nuxt/9pQ3eFd1.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"640c-iiLrkQs8rdVzMv1CmwmH55frInE\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 25612,
-    "path": "../public/_nuxt/9kuA5pzG.js"
+    "etag": "\"d8-coEbOB2c1IWv7XoHeuGPY8gjkN8\"",
+    "mtime": "2026-08-30T12:06:38.678Z",
+    "size": 216,
+    "path": "../public/_nuxt/9pQ3eFd1.js"
   },
-  "/_nuxt/a3nfvANV.js": {
+  "/_nuxt/94yGyqqf.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"2100-/m7Yv4kG+n2m8xwKZv1qxjg9+Ms\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 8448,
-    "path": "../public/_nuxt/a3nfvANV.js"
+    "etag": "\"b07-pfInohsNO5/A9YVFZW/a+QQjJ9A\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 2823,
+    "path": "../public/_nuxt/94yGyqqf.js"
   },
-  "/_nuxt/BaTNupkk.js": {
+  "/_nuxt/41vteUI0.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"ecf-VnQRRaN60GPnLWP9nYlkV4ceqSk\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 3791,
-    "path": "../public/_nuxt/BaTNupkk.js"
+    "etag": "\"319-GdH/7jUlZLtkttAtBis6snThCCE\"",
+    "mtime": "2026-08-30T12:06:38.666Z",
+    "size": 793,
+    "path": "../public/_nuxt/41vteUI0.js"
   },
-  "/_nuxt/BeheRKzs.js": {
+  "/_nuxt/B4zzYtVx.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"f2f-vUdBhG9akNni2Z8tst4Zw/jOhM8\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 3887,
-    "path": "../public/_nuxt/BeheRKzs.js"
-  },
-  "/_nuxt/BfwMphd-.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"215-06aRNOv6Xn3GllftpHe6HCyfd84\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 533,
-    "path": "../public/_nuxt/BfwMphd-.js"
-  },
-  "/_nuxt/BiwvHlgZ.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"f0f-nehR1oZatoLwvKAYynIYPIHUqhk\"",
-    "mtime": "2026-07-14T03:08:54.441Z",
-    "size": 3855,
-    "path": "../public/_nuxt/BiwvHlgZ.js"
-  },
-  "/_nuxt/Bmj8zqcI.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"74e-NYForvHqg4byfj17M0P31MO8lHc\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 1870,
-    "path": "../public/_nuxt/Bmj8zqcI.js"
-  },
-  "/_nuxt/B3bzelBz.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"5c5fa-iLiH4f+1Rqvnw5HtTo+w2R3Q6FM\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 378362,
-    "path": "../public/_nuxt/B3bzelBz.js"
-  },
-  "/_nuxt/BPeJsgBq.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"651-Mqp2XgyNDBLpANIC2MU8XSBg5pQ\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 1617,
-    "path": "../public/_nuxt/BPeJsgBq.js"
-  },
-  "/_nuxt/BnuVLJNs.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"2db6-gx7w090Vv2SWGYBB5/pJqp0BYHA\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 11702,
-    "path": "../public/_nuxt/BnuVLJNs.js"
-  },
-  "/_nuxt/Bqv35ARu.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"11a-a/XwW+JRfIASg2jW8zk6nj26Mss\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 282,
-    "path": "../public/_nuxt/Bqv35ARu.js"
-  },
-  "/_nuxt/BP6E-Eyo.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"371-R9OY8sdIxwfNuhpCVimAKsoI85M\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 881,
-    "path": "../public/_nuxt/BP6E-Eyo.js"
-  },
-  "/_nuxt/BSLff-_C.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"13e6-37cS0AB6Y3ADGThuVdnXWQp2Lng\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 5094,
-    "path": "../public/_nuxt/BSLff-_C.js"
-  },
-  "/_nuxt/BTpmcTcu.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"38d-lKGlUTkeF7khSt34+pvOEl4Ymgs\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 909,
-    "path": "../public/_nuxt/BTpmcTcu.js"
-  },
-  "/_nuxt/BuXnn0O0.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"630-eKEu0AuJxfBFFUlv9ddzNLXvEu0\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 1584,
-    "path": "../public/_nuxt/BuXnn0O0.js"
-  },
-  "/_nuxt/Bw6-ewwf.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"d96-O6245OW48SKQzXG89+HlaaivQGE\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 3478,
-    "path": "../public/_nuxt/Bw6-ewwf.js"
-  },
-  "/_nuxt/BW2Qr-mf.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"123e-5MRe2pUsdesI+BAzkxZt3+JbcB8\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 4670,
-    "path": "../public/_nuxt/BW2Qr-mf.js"
-  },
-  "/_nuxt/CAAQb2LZ.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"f4-uz6CWa/ajr43FLjqIbu8FFfFrn0\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 244,
-    "path": "../public/_nuxt/CAAQb2LZ.js"
-  },
-  "/_nuxt/CEueAu56.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"f1a-Uo8BZRQSaQa9IIWT8toUXb+kwlU\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 3866,
-    "path": "../public/_nuxt/CEueAu56.js"
-  },
-  "/_nuxt/Cf-Gct7g.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"827b-SZRaHe6GcAKKb+Ij6TQPDJVNb0M\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 33403,
-    "path": "../public/_nuxt/Cf-Gct7g.js"
-  },
-  "/_nuxt/CFu4G2w4.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1626-jLQCj+dh4rD0kE0xIC++BbvbYmk\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 5670,
-    "path": "../public/_nuxt/CFu4G2w4.js"
-  },
-  "/_nuxt/CGVIms-t.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"a5a-HwdvErCQuY0lw1I3sBe+03/V+ZA\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 2650,
-    "path": "../public/_nuxt/CGVIms-t.js"
-  },
-  "/_nuxt/CL5lLddd.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"f9-nHLHiz7zMbeseTnZrSrD5dK4syY\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 249,
-    "path": "../public/_nuxt/CL5lLddd.js"
-  },
-  "/_nuxt/CLQVLukE.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"93-NjrTJ9g0g0wU8xL5ou6iYJeT+jk\"",
-    "mtime": "2026-07-14T03:08:54.444Z",
-    "size": 147,
-    "path": "../public/_nuxt/CLQVLukE.js"
-  },
-  "/_nuxt/CLy1emdD.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"94-nMhGKdySmfwVAeoOZx/EWfpo1bM\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 148,
-    "path": "../public/_nuxt/CLy1emdD.js"
-  },
-  "/_nuxt/COuNZyew.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"91-MhZ4k4pVA5O1YuM6jJXMl+dI8gM\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 145,
-    "path": "../public/_nuxt/COuNZyew.js"
-  },
-  "/_nuxt/CLteGEVx.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"720-yqPBU778sLMyhnTKx6JokaYwmAA\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 1824,
-    "path": "../public/_nuxt/CLteGEVx.js"
-  },
-  "/_nuxt/Cm1N0VQE.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"3d5-Edk9cHpf7waf5vGHTiq3LYqeYJw\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 981,
-    "path": "../public/_nuxt/Cm1N0VQE.js"
-  },
-  "/_nuxt/CsAVUfmm.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"289c-nkTi/1nB2q+i81ca0XyaYeV4Ruc\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 10396,
-    "path": "../public/_nuxt/CsAVUfmm.js"
-  },
-  "/_nuxt/CsR_EkWG.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1565-Hjh7HpqeTSz2EV0GYKHUQj9vcA0\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 5477,
-    "path": "../public/_nuxt/CsR_EkWG.js"
-  },
-  "/_nuxt/CUYoeLkG.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"137-/dfM44lEkjgo0mhToOHUFhVtrlQ\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 311,
-    "path": "../public/_nuxt/CUYoeLkG.js"
-  },
-  "/_nuxt/CUDgHJKR.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"14a-jus65tiaaDVKvXfAv+2kV1B2XRg\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 330,
-    "path": "../public/_nuxt/CUDgHJKR.js"
-  },
-  "/_nuxt/CwOKy2WZ.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"546-ZMXe355+VmhRHfRAJJAUGVwjas8\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 1350,
-    "path": "../public/_nuxt/CwOKy2WZ.js"
-  },
-  "/_nuxt/CvnOCTc1.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"ec-ftP+TX4H6JT3o4L/Mt+mNqDZvgU\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 236,
-    "path": "../public/_nuxt/CvnOCTc1.js"
-  },
-  "/_nuxt/D1KIxiFE.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"19d-Zw+oDp36O70hzOC3tQI/iGwZ57o\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 413,
-    "path": "../public/_nuxt/D1KIxiFE.js"
-  },
-  "/_nuxt/DaOZCPnE.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"2f4-j0njNaiYnRJ+xbYbqLHUnOkMA5U\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 756,
-    "path": "../public/_nuxt/DaOZCPnE.js"
-  },
-  "/_nuxt/CxwPm98V.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"5d76-XX2Tw283sEXazwAoxbGh0FIhROg\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 23926,
-    "path": "../public/_nuxt/CxwPm98V.js"
-  },
-  "/_nuxt/DD3ngwt3.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"121-OtE5/EM7kj7k09YSdQLQbybqJXA\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 289,
-    "path": "../public/_nuxt/DD3ngwt3.js"
-  },
-  "/_nuxt/DD0QBgld.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"3f8-pt2PMOg1bgCcXNUjJSAehof5qls\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
+    "etag": "\"3f8-Z04sUE6XAtrDbJo152H6fzJLCHA\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
     "size": 1016,
-    "path": "../public/_nuxt/DD0QBgld.js"
+    "path": "../public/_nuxt/B4zzYtVx.js"
   },
-  "/_nuxt/DBK5fTAT.js": {
+  "/_nuxt/B7oIlAc3.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"228-zwskL95T2hVA7wdhBP3KplWa5BA\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 552,
-    "path": "../public/_nuxt/DBK5fTAT.js"
+    "etag": "\"1af-ADPmA92AdBsoA2jmwscb22Pp4UQ\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 431,
+    "path": "../public/_nuxt/B7oIlAc3.js"
   },
-  "/_nuxt/DGi-lVP7.js": {
+  "/_nuxt/B7wahygf.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"91-1zMjao457t92EHqj2KEhk6LsarU\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 145,
-    "path": "../public/_nuxt/DGi-lVP7.js"
+    "etag": "\"9731-GJ8ROEbMoXyv4sseYy3QOwLHXM0\"",
+    "mtime": "2026-08-30T12:06:38.678Z",
+    "size": 38705,
+    "path": "../public/_nuxt/B7wahygf.js"
   },
-  "/_nuxt/DhgggAlN.js": {
+  "/_nuxt/BB59rW8S.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"121-LrxPnHjz2iKCkE7TiqhiD3DRLMI\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 289,
-    "path": "../public/_nuxt/DhgggAlN.js"
+    "etag": "\"9d-jw/OjWz0KfzanviiWzvaNGZqoJE\"",
+    "mtime": "2026-08-30T12:06:38.678Z",
+    "size": 157,
+    "path": "../public/_nuxt/BB59rW8S.js"
   },
-  "/_nuxt/Dj9Di0nv.js": {
+  "/_nuxt/BbK6vX8l.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"23c-KHd9BopPIQNyhyFtk5M/PqDmbnw\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 572,
-    "path": "../public/_nuxt/Dj9Di0nv.js"
+    "etag": "\"126-eIN5DrlJVdv9IqSoTXYcvJWuICY\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 294,
+    "path": "../public/_nuxt/BbK6vX8l.js"
   },
-  "/_nuxt/DhIzANXX.js": {
+  "/_nuxt/AzBvApwg.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"2d4-Tk/zmjxrxOjm5fJTFc6HuwjgXMw\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 724,
-    "path": "../public/_nuxt/DhIzANXX.js"
+    "etag": "\"2359f-HdY/ayzdoFy1oZKiWZ0s6ap1Lkc\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 144799,
+    "path": "../public/_nuxt/AzBvApwg.js"
   },
-  "/_nuxt/DESK3bLD.js": {
+  "/_nuxt/Bj2WU7Se.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"699b8-QQqH493zP4BhtgFX0ki6KSOYZJ8\"",
-    "mtime": "2026-07-14T03:08:54.441Z",
-    "size": 432568,
-    "path": "../public/_nuxt/DESK3bLD.js"
+    "etag": "\"296-AWFO3aCVrrV87aElVGJU+V9yVyA\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 662,
+    "path": "../public/_nuxt/Bj2WU7Se.js"
   },
-  "/_nuxt/DjWKMWaj.js": {
+  "/_nuxt/BgYwsW3l.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"228-zwskL95T2hVA7wdhBP3KplWa5BA\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 552,
-    "path": "../public/_nuxt/DjWKMWaj.js"
+    "etag": "\"8927-8ylfTvxr1bkGFf26k2qrwVKlAxA\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 35111,
+    "path": "../public/_nuxt/BgYwsW3l.js"
   },
-  "/_nuxt/Dlv8Mbkr.js": {
+  "/_nuxt/BL4H4Ny-.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"91-I1Q93+BdVS9TbMNKT6YlSZAwFcU\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 145,
-    "path": "../public/_nuxt/Dlv8Mbkr.js"
+    "etag": "\"19b5-Vhb22W52OkC4XnPvTaEBDY75zcs\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 6581,
+    "path": "../public/_nuxt/BL4H4Ny-.js"
   },
-  "/_nuxt/DNaMB3ra.js": {
+  "/_nuxt/BKkl5na6.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"5fcb-KBaINnEAJnzyxpr+zqWwd3KjbJY\"",
-    "mtime": "2026-07-14T03:08:54.444Z",
-    "size": 24523,
-    "path": "../public/_nuxt/DNaMB3ra.js"
+    "etag": "\"492-BDO/m1qHWVNP0GLk9mNDC3X8gD8\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 1170,
+    "path": "../public/_nuxt/BKkl5na6.js"
   },
-  "/_nuxt/DOGWk7Ip.js": {
+  "/_nuxt/BlMcyPNj.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"2033-fI8DK9c6jg6ugmZlultEMlffTcs\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 8243,
-    "path": "../public/_nuxt/DOGWk7Ip.js"
+    "etag": "\"137-UESmJh+r3/fou/hs8fCvxqtAxSw\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 311,
+    "path": "../public/_nuxt/BlMcyPNj.js"
   },
-  "/_nuxt/DocumentEditor.7PYacQ80.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"36f-GYU4DAGihMdxloQId0XgUmZIalU\"",
-    "mtime": "2026-07-14T03:08:54.441Z",
-    "size": 879,
-    "path": "../public/_nuxt/DocumentEditor.7PYacQ80.css"
-  },
-  "/_nuxt/DoUb7GVe.js": {
+  "/_nuxt/BLRvqCsp.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"ba-Z63WsSZOr7qz0ckNs3UtxxmOyfo\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 186,
-    "path": "../public/_nuxt/DoUb7GVe.js"
+    "etag": "\"278-3xRBSw+kiQ/KM1Wnuti2Rx5br6s\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 632,
+    "path": "../public/_nuxt/BLRvqCsp.js"
   },
-  "/_nuxt/DUaOY8Uw.js": {
+  "/_nuxt/BluErhDo.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"ff1-XyA8glJJL+NbDlSZ73QR/9+7DXg\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 4081,
-    "path": "../public/_nuxt/DUaOY8Uw.js"
+    "etag": "\"1022-ga1CrDyiPCTmmr809TaZtXc/Jv4\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 4130,
+    "path": "../public/_nuxt/BluErhDo.js"
   },
-  "/_nuxt/Dw_xgD0b.js": {
+  "/_nuxt/BNb3cVzY.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"91-CEMOz1R4+10qxHJYppvIXaZKwoo\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 145,
-    "path": "../public/_nuxt/Dw_xgD0b.js"
+    "etag": "\"6f4-wzsLQqPEZPKeBFrYFrBdeUY4stQ\"",
+    "mtime": "2026-08-30T12:06:38.684Z",
+    "size": 1780,
+    "path": "../public/_nuxt/BNb3cVzY.js"
   },
-  "/_nuxt/DuvESigm.js": {
+  "/_nuxt/BOu2gdIr.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"239-l1ujCFEEcKtuQ3u4oJ75WEOsKzY\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
+    "etag": "\"630-gMxNLOZQQvm5xNWffSNoqYqKGy4\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 1584,
+    "path": "../public/_nuxt/BOu2gdIr.js"
+  },
+  "/_nuxt/BOU7PYM0.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"45b-MM2EZ133cTKLrvBe7w8beq/7qqY\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 1115,
+    "path": "../public/_nuxt/BOU7PYM0.js"
+  },
+  "/_nuxt/BleA28p_.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"239-KOzTNdnP3z16PMFxlO3aievVOkQ\"",
+    "mtime": "2026-08-30T12:06:38.685Z",
     "size": 569,
-    "path": "../public/_nuxt/DuvESigm.js"
+    "path": "../public/_nuxt/BleA28p_.js"
   },
-  "/_nuxt/D_flChTG.js": {
+  "/_nuxt/BPLj3dvt.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"653-hIMTwReizBB+aPWhzYKu0o4E13I\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 1619,
-    "path": "../public/_nuxt/D_flChTG.js"
+    "etag": "\"2d4-4/o1dPG3rgUMmP+jYymAzoLF8cE\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 724,
+    "path": "../public/_nuxt/BPLj3dvt.js"
   },
-  "/_nuxt/DUASmJ_f.js": {
+  "/_nuxt/BpywybXM.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"13a-hQqTy5oQVV5t7nhcbwZLuM9t5WI\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 314,
-    "path": "../public/_nuxt/DUASmJ_f.js"
+    "etag": "\"bfd-8RbiRfiVE2edjka+lgWMLUIU2ko\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 3069,
+    "path": "../public/_nuxt/BpywybXM.js"
   },
-  "/_nuxt/entry.C62ZTsGe.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"1aa82-LPFpTHtUyUsTFSbb3tCUqbsMvoc\"",
-    "mtime": "2026-07-14T03:08:54.430Z",
-    "size": 109186,
-    "path": "../public/_nuxt/entry.C62ZTsGe.css"
-  },
-  "/_nuxt/error-404.C3kT2QX-.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"97e-Xk26Nv4oQLpK3PtofolSggS9Z1M\"",
-    "mtime": "2026-07-14T03:08:54.441Z",
-    "size": 2430,
-    "path": "../public/_nuxt/error-404.C3kT2QX-.css"
-  },
-  "/_nuxt/EVRHeBiL.js": {
+  "/_nuxt/Btqq_VtS.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"dd5-R1bwdt1os2OLMVyZhgf82LLJoXc\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 3541,
-    "path": "../public/_nuxt/EVRHeBiL.js"
+    "etag": "\"3ab-H7/sHFm//LznNkjU0UxGIV866AM\"",
+    "mtime": "2026-08-30T12:06:38.701Z",
+    "size": 939,
+    "path": "../public/_nuxt/Btqq_VtS.js"
   },
-  "/_nuxt/error-500.BW0Y54Of.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": "\"773-NSoEX19gPmM2NozVKWotHuvxtho\"",
-    "mtime": "2026-07-14T03:08:54.441Z",
-    "size": 1907,
-    "path": "../public/_nuxt/error-500.BW0Y54Of.css"
-  },
-  "/_nuxt/HFC77VLB.js": {
+  "/_nuxt/Br25OLEZ.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"4c1-zYF6f4bP2pCgnZlGOLFsPuZZn/o\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 1217,
-    "path": "../public/_nuxt/HFC77VLB.js"
+    "etag": "\"2bf9-FQxSMVtNttvjtAz+u0Sd7/LHXEg\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 11257,
+    "path": "../public/_nuxt/Br25OLEZ.js"
   },
-  "/_nuxt/eYvZTy3i.js": {
+  "/_nuxt/BThoySlL.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"2206-aF8DeYGC9h5uPe+WEKeNJKbbmow\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 8710,
-    "path": "../public/_nuxt/eYvZTy3i.js"
+    "etag": "\"1243-ksKDiGgfw39wLQewFDiRBROP7yg\"",
+    "mtime": "2026-08-30T12:06:38.666Z",
+    "size": 4675,
+    "path": "../public/_nuxt/BThoySlL.js"
   },
-  "/_nuxt/iYdDCPyt.js": {
+  "/_nuxt/BtsiK0kE.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"30d-gu/019wEWjesZmn/6Zw90B2D/ck\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 781,
-    "path": "../public/_nuxt/iYdDCPyt.js"
+    "etag": "\"7cae-LnXSSdKqHJneKKQYGPGtwXKSV5E\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 31918,
+    "path": "../public/_nuxt/BtsiK0kE.js"
   },
-  "/_nuxt/kCSJZiRt.js": {
+  "/_nuxt/BUhw3yaI.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"ea-yl3wZPzUGVr1w4/KjQNCY+hUSOk\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 234,
-    "path": "../public/_nuxt/kCSJZiRt.js"
+    "etag": "\"2ab-jUWy2oPvrh0plusKFVfSu4jTkR8\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 683,
+    "path": "../public/_nuxt/BUhw3yaI.js"
   },
-  "/_nuxt/mMN_M0K7.js": {
+  "/_nuxt/BrlbU3P-.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"da0-xVzUy6NnR3u0s3Gc9Hhf81XocLI\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 3488,
-    "path": "../public/_nuxt/mMN_M0K7.js"
+    "etag": "\"f3-S3C5RYfY5oEps2fm0YXs/B2kca8\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 243,
+    "path": "../public/_nuxt/BrlbU3P-.js"
   },
-  "/_nuxt/RAbAh41o.js": {
+  "/_nuxt/BURVyIRO.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"b0c-XMqZeU5vJDbcHPOLNXM7ZOIYF/k\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 2828,
-    "path": "../public/_nuxt/RAbAh41o.js"
+    "etag": "\"e7-VNB3uNhMdRxJ9Xwgs/6pJcP1Wys\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 231,
+    "path": "../public/_nuxt/BURVyIRO.js"
   },
-  "/_nuxt/PwxOYyfx.js": {
+  "/_nuxt/BwDihf1O.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"7d-4hNx+WXQ9CrK/g9m6+JaBUsw+oA\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 125,
-    "path": "../public/_nuxt/PwxOYyfx.js"
+    "etag": "\"f4-csFXxXax2oYIaKSOMMrf1OvJPF8\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 244,
+    "path": "../public/_nuxt/BwDihf1O.js"
   },
-  "/_nuxt/TihNEXx8.js": {
+  "/_nuxt/BwMrU84D.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"50e-w7QXvGVBbimjpDLfYttxsGv7Xh0\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 1294,
-    "path": "../public/_nuxt/TihNEXx8.js"
-  },
-  "/_nuxt/UST0GktA.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"274-Ap2I4amha6gELB0GbnO6HCilwWs\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 628,
-    "path": "../public/_nuxt/UST0GktA.js"
-  },
-  "/_nuxt/veecN3E9.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"91-0VEqYmx8AL8nOcsClhEcR02EZKU\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
+    "etag": "\"91-KdsqeP9MsP13/eIErE6iLFU5IL4\"",
+    "mtime": "2026-08-30T12:06:38.685Z",
     "size": 145,
-    "path": "../public/_nuxt/veecN3E9.js"
+    "path": "../public/_nuxt/BwMrU84D.js"
   },
-  "/_nuxt/vZR10emV.js": {
+  "/_nuxt/C0TCh2gp.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"158-usGa4wbt4XPmhjOUfxFesl5A9Fo\"",
-    "mtime": "2026-07-14T03:08:54.442Z",
-    "size": 344,
-    "path": "../public/_nuxt/vZR10emV.js"
+    "etag": "\"ff6-GLDCfZHUn12ZAsmG0n8uqdBuVb0\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 4086,
+    "path": "../public/_nuxt/C0TCh2gp.js"
   },
-  "/_nuxt/XBsJWG-B.js": {
+  "/_nuxt/BVTnQJob.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"1026-khID3EqD0M+RYbwYHsBOIjWsPms\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 4134,
-    "path": "../public/_nuxt/XBsJWG-B.js"
+    "etag": "\"e57-fHqs/mNlDyn63DhXPF+I6NH7gUU\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 3671,
+    "path": "../public/_nuxt/BVTnQJob.js"
   },
-  "/_nuxt/WPdj0SAA.js": {
+  "/_nuxt/C3nJrBjr.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"15e-mLVOevvs0Z8nY2UHIOVgFp10s/4\"",
-    "mtime": "2026-07-14T03:08:54.444Z",
+    "etag": "\"4e1-6Cv/c1zHtGMxgGED1Z8+lPzr5IA\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 1249,
+    "path": "../public/_nuxt/C3nJrBjr.js"
+  },
+  "/_nuxt/C6mv32Er.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"91-5H9IZJQ7X+cZXMpQWOyLrold3cs\"",
+    "mtime": "2026-08-30T12:06:38.685Z",
+    "size": 145,
+    "path": "../public/_nuxt/C6mv32Er.js"
+  },
+  "/_nuxt/C71Tzrip.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"91-ldtjhK6dKzKGuTBLg1yZGfkFjYI\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 145,
+    "path": "../public/_nuxt/C71Tzrip.js"
+  },
+  "/_nuxt/C8AJfa3_.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"7d8-kB+yWCMimMzN6xaYFcZpp7fNURk\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 2008,
+    "path": "../public/_nuxt/C8AJfa3_.js"
+  },
+  "/_nuxt/C7RYKm-V.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2e1c-LGPCoKUJKC4lB23Me311tejqORU\"",
+    "mtime": "2026-08-30T12:06:38.666Z",
+    "size": 11804,
+    "path": "../public/_nuxt/C7RYKm-V.js"
+  },
+  "/_nuxt/C8bjzvAv.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"f66-37TCBG6bcyj81izZ72IYdr+i65I\"",
+    "mtime": "2026-08-30T12:06:38.678Z",
+    "size": 3942,
+    "path": "../public/_nuxt/C8bjzvAv.js"
+  },
+  "/_nuxt/CaVZyeKT.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"648-R9ApQtvffbehCZIoCdW3iYfthQk\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 1608,
+    "path": "../public/_nuxt/CaVZyeKT.js"
+  },
+  "/_nuxt/CAjbx3UP.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"aac1-4aKTjkNgsMLDfnNyQsvAJmYPcL0\"",
+    "mtime": "2026-08-30T12:06:38.678Z",
+    "size": 43713,
+    "path": "../public/_nuxt/CAjbx3UP.js"
+  },
+  "/_nuxt/CBXOHngn.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"b73-eoOkcfOftL2DOXITOmhNGgkrhzk\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 2931,
+    "path": "../public/_nuxt/CBXOHngn.js"
+  },
+  "/_nuxt/CB_o-I5f.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"edb-u02S484kC2m5Y9DhgHePnLkkzWg\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 3803,
+    "path": "../public/_nuxt/CB_o-I5f.js"
+  },
+  "/_nuxt/C1dGP41x.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"45118-rO37btdqcXdYE6xfIpyBIvv0lXw\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 282904,
+    "path": "../public/_nuxt/C1dGP41x.js"
+  },
+  "/_nuxt/CC4XVubb.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"93-tHiwOykp59otrJM5egk/eSCikjI\"",
+    "mtime": "2026-08-30T12:06:38.701Z",
+    "size": 147,
+    "path": "../public/_nuxt/CC4XVubb.js"
+  },
+  "/_nuxt/CCBN247d.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"14b-dDLClPCLI6aZ89KpOT5EG9/gaRE\"",
+    "mtime": "2026-08-30T12:06:38.685Z",
+    "size": 331,
+    "path": "../public/_nuxt/CCBN247d.js"
+  },
+  "/_nuxt/CeFgzHN-.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"f2a-7ibTwlwi7MMJAzdqwFF4BWYlXKU\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 3882,
+    "path": "../public/_nuxt/CeFgzHN-.js"
+  },
+  "/_nuxt/CgHvhQD2.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"fad-8rjSn8qDxBFbfViVSBN6Zo+2b8E\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 4013,
+    "path": "../public/_nuxt/CgHvhQD2.js"
+  },
+  "/_nuxt/CDEJJA4w.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"3d6-v2rn302KeRgFjpzAwbq5+XW5Wg8\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 982,
+    "path": "../public/_nuxt/CDEJJA4w.js"
+  },
+  "/_nuxt/CjPCk9oC.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"6a6d-DPHvGU5jLpzWEKVWmRqV1+bA7FE\"",
+    "mtime": "2026-08-30T12:06:38.685Z",
+    "size": 27245,
+    "path": "../public/_nuxt/CjPCk9oC.js"
+  },
+  "/_nuxt/ClTfvy4a.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"c3-YuB5tYlC1a0vPXt07584lQZlN3Y\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 195,
+    "path": "../public/_nuxt/ClTfvy4a.js"
+  },
+  "/_nuxt/CHRdvowB.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"13a-m09f5ivCFNEcvLfWjxpUmjMy724\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 314,
+    "path": "../public/_nuxt/CHRdvowB.js"
+  },
+  "/_nuxt/Cl104HAo.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"12041-dEE7LnERre87MnxJ9ZTiGTtABx8\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 73793,
+    "path": "../public/_nuxt/Cl104HAo.js"
+  },
+  "/_nuxt/CniPQI_t.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"663-izyh7C3HhRc8MK/+oJoXXpyeOSQ\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 1635,
+    "path": "../public/_nuxt/CniPQI_t.js"
+  },
+  "/_nuxt/Co9-sw0P.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"10f-OLNmUap+hXDp8gBCKP8XBoh6TCY\"",
+    "mtime": "2026-08-30T12:06:38.678Z",
+    "size": 271,
+    "path": "../public/_nuxt/Co9-sw0P.js"
+  },
+  "/_nuxt/CqdlvtMO.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"371-8c+6FMO5A3Onnld31xoCOCDm4Ck\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 881,
+    "path": "../public/_nuxt/CqdlvtMO.js"
+  },
+  "/_nuxt/CrID8IAo.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"13e6-gSiWM370TDvzpo4AkuFY4YUbcp4\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 5094,
+    "path": "../public/_nuxt/CrID8IAo.js"
+  },
+  "/_nuxt/Cs4y3z6v.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"144-SQWEYjdPCGDlvZiKw7lZDKEyMiQ\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 324,
+    "path": "../public/_nuxt/Cs4y3z6v.js"
+  },
+  "/_nuxt/CtQrcwQX.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"8b8-zHRXRYJRqGA2EeT2ZsygRLDATSQ\"",
+    "mtime": "2026-08-30T12:06:38.685Z",
+    "size": 2232,
+    "path": "../public/_nuxt/CtQrcwQX.js"
+  },
+  "/_nuxt/CWpBe6V3.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1c9-Z1HgCxp7LFs9/Csjn1UdQrzaSb0\"",
+    "mtime": "2026-08-30T12:06:38.685Z",
+    "size": 457,
+    "path": "../public/_nuxt/CWpBe6V3.js"
+  },
+  "/_nuxt/CXYlZzOq.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"f7d-Z0ewLzZCzuZDFFDgndWKZygOGIk\"",
+    "mtime": "2026-08-30T12:06:38.666Z",
+    "size": 3965,
+    "path": "../public/_nuxt/CXYlZzOq.js"
+  },
+  "/_nuxt/C_icKTN-.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"648-Mavj7H07/sd9XNFd0e6GGnaMJjI\"",
+    "mtime": "2026-08-30T12:06:38.685Z",
+    "size": 1608,
+    "path": "../public/_nuxt/C_icKTN-.js"
+  },
+  "/_nuxt/CyrWH7_B.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"18e-gDq3QmGBgpMOS/SLxmIDfvLMKvE\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 398,
+    "path": "../public/_nuxt/CyrWH7_B.js"
+  },
+  "/_nuxt/D5UX12Tb.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"318-g/kiqcj+NImAgiV3YGJo7bdOXGE\"",
+    "mtime": "2026-08-30T12:06:38.684Z",
+    "size": 792,
+    "path": "../public/_nuxt/D5UX12Tb.js"
+  },
+  "/_nuxt/D2KhM9uG.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"296-AWFO3aCVrrV87aElVGJU+V9yVyA\"",
+    "mtime": "2026-08-30T12:06:38.666Z",
+    "size": 662,
+    "path": "../public/_nuxt/D2KhM9uG.js"
+  },
+  "/_nuxt/D8aDAgt1.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"3d3-1X+7ei6I83qP7KbWX7trLRlp/5g\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 979,
+    "path": "../public/_nuxt/D8aDAgt1.js"
+  },
+  "/_nuxt/D9XOcY78.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"318-236lsVWSUaqrA5CcAI2Grj7Ov28\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 792,
+    "path": "../public/_nuxt/D9XOcY78.js"
+  },
+  "/_nuxt/DaERUlld.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1237-Lg4k5rcSpd3xYtHP+oUu2Tim3ic\"",
+    "mtime": "2026-08-30T12:06:38.685Z",
+    "size": 4663,
+    "path": "../public/_nuxt/DaERUlld.js"
+  },
+  "/_nuxt/DCZxInBS.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"28e-P9SIbSiBBJkft0ZMs/ukmKYoJOU\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 654,
+    "path": "../public/_nuxt/DCZxInBS.js"
+  },
+  "/_nuxt/DeT2aUra.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"91-rSfY+vLzqgXtjG0VwMGx6+EE5uw\"",
+    "mtime": "2026-08-30T12:06:38.666Z",
+    "size": 145,
+    "path": "../public/_nuxt/DeT2aUra.js"
+  },
+  "/_nuxt/DFbGV8z_.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"5d78-HjCxG3Ug87Mv5aUsKYD3PUF/+qQ\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 23928,
+    "path": "../public/_nuxt/DFbGV8z_.js"
+  },
+  "/_nuxt/DeuTWfM9.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"10a6-YYhOqWA9h55LA6wu7WgA22a7S50\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 4262,
+    "path": "../public/_nuxt/DeuTWfM9.js"
+  },
+  "/_nuxt/DIvAM3Tn.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"d1b-GU/OaJ67yJqT1MNQBio61YguMi8\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 3355,
+    "path": "../public/_nuxt/DIvAM3Tn.js"
+  },
+  "/_nuxt/Djbdn-IM.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"720-Kiwkb2Gf50qy1KE6m8a8icwuIi8\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 1824,
+    "path": "../public/_nuxt/Djbdn-IM.js"
+  },
+  "/_nuxt/DKntMAqG.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1208-Gz4ehzr1CY9YdiBwsH/Mz2UzenQ\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 4616,
+    "path": "../public/_nuxt/DKntMAqG.js"
+  },
+  "/_nuxt/DMzWtSy1.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"a9-RsbEfcqifalZiS9zwW+KLUsZ4cY\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 169,
+    "path": "../public/_nuxt/DMzWtSy1.js"
+  },
+  "/_nuxt/Djbn1TaB.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2896-l4yTreUcAwDGMI9ZiUrMnooUnIc\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 10390,
+    "path": "../public/_nuxt/Djbn1TaB.js"
+  },
+  "/_nuxt/dnEnB94i.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"7d-XXRu2mnTbnJfb8WOELPGTXBC1vM\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 125,
+    "path": "../public/_nuxt/dnEnB94i.js"
+  },
+  "/_nuxt/DlNprukh.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"5fa7-5xwJC0v91nMe9Iz+wYuxorJZ5c0\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 24487,
+    "path": "../public/_nuxt/DlNprukh.js"
+  },
+  "/_nuxt/DocumentEditor.5Ge0_uj8.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"7be-w5Z6HD1EbANOAtkB/sZFSZHOmlg\"",
+    "mtime": "2026-08-30T12:06:38.651Z",
+    "size": 1982,
+    "path": "../public/_nuxt/DocumentEditor.5Ge0_uj8.css"
+  },
+  "/_nuxt/DoublLX8.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"15e-a3yeiTyWAveApgVFG0fSfqzOXZQ\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
     "size": 350,
-    "path": "../public/_nuxt/WPdj0SAA.js"
+    "path": "../public/_nuxt/DoublLX8.js"
   },
-  "/_nuxt/XuZ-Jwez.js": {
+  "/_nuxt/DtARBCkz.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": "\"96-k3AnAt6T5YislVar97rZgCt/s18\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 150,
-    "path": "../public/_nuxt/XuZ-Jwez.js"
+    "etag": "\"a0-9zgqbrizd9ff6oqOQ5bAIvwKCb4\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 160,
+    "path": "../public/_nuxt/DtARBCkz.js"
+  },
+  "/_nuxt/DT3ywxGk.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"14a-Z1ant11fpqityFyl8f/i1EGvvcY\"",
+    "mtime": "2026-08-30T12:06:38.685Z",
+    "size": 330,
+    "path": "../public/_nuxt/DT3ywxGk.js"
+  },
+  "/_nuxt/DTQXsfk0.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1a25-om92aEfofNvKRJHK4isLc5c6vVI\"",
+    "mtime": "2026-08-30T12:06:38.692Z",
+    "size": 6693,
+    "path": "../public/_nuxt/DTQXsfk0.js"
+  },
+  "/_nuxt/DWJpyv5s.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"1ae-/eUfdcjNHQFAwdp4gzRZTLN1beI\"",
+    "mtime": "2026-08-30T12:06:38.685Z",
+    "size": 430,
+    "path": "../public/_nuxt/DWJpyv5s.js"
+  },
+  "/_nuxt/DwxWilwj.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"14b-QacuUoo8TcQjWhsfc1I9PS8ERNU\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 331,
+    "path": "../public/_nuxt/DwxWilwj.js"
+  },
+  "/_nuxt/DzQX66A4.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"a4-sbvuQJ5lOGQGopv8JLQhTYBv6BY\"",
+    "mtime": "2026-08-30T12:06:38.684Z",
+    "size": 164,
+    "path": "../public/_nuxt/DzQX66A4.js"
+  },
+  "/_nuxt/F3FklRMn.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"10b9-WNycPZTmPKmH5jolFkpZWY2BkaM\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 4281,
+    "path": "../public/_nuxt/F3FklRMn.js"
+  },
+  "/_nuxt/HhZbMtO0.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"e7f-tVP4d/AhkkpgRKnx6O+cWJgyhp0\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 3711,
+    "path": "../public/_nuxt/HhZbMtO0.js"
+  },
+  "/_nuxt/Dfxuhtj_.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"6caac-qMNXHTBDmOqNQ19Q2pmALSsAnFM\"",
+    "mtime": "2026-08-30T12:06:38.666Z",
+    "size": 445100,
+    "path": "../public/_nuxt/Dfxuhtj_.js"
+  },
+  "/_nuxt/k-T89IX1.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"cf-WUAZKv70AS0+fa/mMCd7WUSzUTI\"",
+    "mtime": "2026-08-30T12:06:38.700Z",
+    "size": 207,
+    "path": "../public/_nuxt/k-T89IX1.js"
+  },
+  "/_nuxt/kLIimDF9.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"5f1-h4GgoyBItXqdPQwHEwrNL3HFXX0\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 1521,
+    "path": "../public/_nuxt/kLIimDF9.js"
+  },
+  "/_nuxt/Kzc7UgiF.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"168-XCWSW4uh+olY2ZlTG+chFNjGJrU\"",
+    "mtime": "2026-08-30T12:06:38.666Z",
+    "size": 360,
+    "path": "../public/_nuxt/Kzc7UgiF.js"
+  },
+  "/_nuxt/entry.C0SFREuy.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": "\"1d1d2-7ifrPgMTz8gooERgo/7L3PR6sNs\"",
+    "mtime": "2026-08-30T12:06:38.666Z",
+    "size": 119250,
+    "path": "../public/_nuxt/entry.C0SFREuy.css"
+  },
+  "/_nuxt/lgF-yTOY.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"502-D4ptIrqx86nArjpyZFZNJ/4t9RI\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 1282,
+    "path": "../public/_nuxt/lgF-yTOY.js"
+  },
+  "/_nuxt/LwH39CgS.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"e5-6Kr6LNOWJEsMF+3uOipVH1x0hY4\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 229,
+    "path": "../public/_nuxt/LwH39CgS.js"
+  },
+  "/_nuxt/oJLKJ7kF.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"731-KNeSUnPODpUHhoEQmlu6jEKgnT4\"",
+    "mtime": "2026-08-30T12:06:38.701Z",
+    "size": 1841,
+    "path": "../public/_nuxt/oJLKJ7kF.js"
+  },
+  "/_nuxt/pBV_3Zxr.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"fc-FpaDsSRDHAxrqdrkpl87JlOv7EA\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 252,
+    "path": "../public/_nuxt/pBV_3Zxr.js"
+  },
+  "/_nuxt/RUwLWmbu.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"91-jycfdkmUr+TGEzHQOS0JIdPxrq8\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 145,
+    "path": "../public/_nuxt/RUwLWmbu.js"
+  },
+  "/_nuxt/qWRj23b0.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"55-NxwikMQF5tsbW8HcbksEJchUAzo\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 85,
+    "path": "../public/_nuxt/qWRj23b0.js"
+  },
+  "/_nuxt/szA7pWFo.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"94-gEHqjkvQAi2B5rvufMVY4PEzmFc\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 148,
+    "path": "../public/_nuxt/szA7pWFo.js"
+  },
+  "/_nuxt/uryZxHpO.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"2ac-q/BcYUqI8CNpAAOnHMPeX60509U\"",
+    "mtime": "2026-08-30T12:06:38.666Z",
+    "size": 684,
+    "path": "../public/_nuxt/uryZxHpO.js"
+  },
+  "/_nuxt/w9Mf-Y5_.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"3d5-HuEORDgtet2lHaWk4mcMLIrzKsA\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 981,
+    "path": "../public/_nuxt/w9Mf-Y5_.js"
+  },
+  "/_nuxt/UuNyOSkY.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"234a-+9It7o6HZ8oQZ/FtVqpZAT+TXWE\"",
+    "mtime": "2026-08-30T12:06:38.684Z",
+    "size": 9034,
+    "path": "../public/_nuxt/UuNyOSkY.js"
+  },
+  "/_nuxt/xlYQws15.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"90a9-LAKBpo3NyPtUkI82u3lXYbbZt9Y\"",
+    "mtime": "2026-08-30T12:06:38.677Z",
+    "size": 37033,
+    "path": "../public/_nuxt/xlYQws15.js"
+  },
+  "/_nuxt/Z9Mlo4kY.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"55f-jCGnH4EcaTqbZkpn4nSc6tIh4pU\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 1375,
+    "path": "../public/_nuxt/Z9Mlo4kY.js"
+  },
+  "/_nuxt/YAK5YD58.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"215-djP+V/i9RbQpzrdA2i4spHezkm4\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 533,
+    "path": "../public/_nuxt/YAK5YD58.js"
+  },
+  "/_nuxt/_fH8a0Bq.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"6ee-+dCa/Ruy45icrgJwVfxts5pHXAI\"",
+    "mtime": "2026-08-30T12:06:38.693Z",
+    "size": 1774,
+    "path": "../public/_nuxt/_fH8a0Bq.js"
   },
   "/_nuxt/builds/latest.json": {
     "type": "application/json",
-    "etag": "\"47-qf05lY4WWSGe2nJc7yUXm0gAf+Y\"",
-    "mtime": "2026-07-14T03:08:54.561Z",
+    "etag": "\"47-IZdOBVLTSpwCl32n7b8bDTQbGss\"",
+    "mtime": "2026-08-30T12:06:41.234Z",
     "size": 71,
     "path": "../public/_nuxt/builds/latest.json"
   },
-  "/_nuxt/ZdG1pmSF.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"60c-o0f4/O5JKYk2PSnB89ToEGhNZjI\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 1548,
-    "path": "../public/_nuxt/ZdG1pmSF.js"
-  },
-  "/_nuxt/builds/meta/3f967cfa-ac79-49c4-964a-98008de9f720.json": {
+  "/_nuxt/builds/meta/b3716c26-4312-4853-a91e-f394c7d9eb60.json": {
     "type": "application/json",
-    "etag": "\"58-FzNvvmNN6TeGxbdPY6/0qBwZoqI\"",
-    "mtime": "2026-07-14T03:08:54.561Z",
+    "etag": "\"58-sNvoOkBQZ0SDS5WSV9PnM12vEKQ\"",
+    "mtime": "2026-08-30T12:06:41.235Z",
     "size": 88,
-    "path": "../public/_nuxt/builds/meta/3f967cfa-ac79-49c4-964a-98008de9f720.json"
-  },
-  "/_nuxt/ZRqxzNva.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1114-WdTlnqhhAozTeq+TkaMFbKepJvQ\"",
-    "mtime": "2026-07-14T03:08:54.443Z",
-    "size": 4372,
-    "path": "../public/_nuxt/ZRqxzNva.js"
+    "path": "../public/_nuxt/builds/meta/b3716c26-4312-4853-a91e-f394c7d9eb60.json"
   },
   "/images/auth/minerva-auth-visual.png": {
     "type": "image/png",
@@ -5385,6 +5904,22 @@ const _qoihGq = eventHandler((event) => {
   return readAsset(id);
 });
 
+const HTTP_SECURITY_HEADERS = {
+  "Content-Security-Policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; frame-src 'self' https://embed.figma.com https://www.figma.com; form-action 'self'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'",
+  "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
+  "Cross-Origin-Resource-Policy": "same-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+  "Referrer-Policy": "no-referrer",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY"
+};
+
+const _7yksNR = defineEventHandler((event) => {
+  for (const [name, value] of Object.entries(HTTP_SECURITY_HEADERS)) {
+    setHeader(event, name, value);
+  }
+});
+
 var __defProp$1 = Object.defineProperty;
 var __defNormalProp$1 = (obj, key, value) => key in obj ? __defProp$1(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField$1 = (obj, key, value) => __defNormalProp$1(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -5407,16 +5942,28 @@ const PUBLIC_ENDPOINTS = /* @__PURE__ */ new Set([
   "POST /api/identity/sign-in",
   "POST /api/identity/request-password-reset",
   "POST /api/identity/reset-password",
-  "GET /api/health/database"
+  "GET /api/health/database",
+  "GET /api/health/live",
+  "GET /api/health/ready"
 ]);
 function isPathOrDescendant(path, root) {
   return path === root || path.startsWith(`${root}/`);
+}
+const publicDocumentationToken = /^[A-Za-z0-9_-]{43}$/u;
+const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu;
+function isPublicDocumentationEndpoint(method, path) {
+  var _a, _b;
+  if (method.toUpperCase() !== "GET") return false;
+  const segments = path.split("/").filter(Boolean);
+  if (segments[0] !== "api" || segments[1] !== "public" || segments[2] !== "documentation" || !publicDocumentationToken.test((_a = segments[3]) != null ? _a : "")) return false;
+  if (segments.length === 4) return true;
+  return segments.length === 6 && (segments[4] === "pages" || segments[4] === "images") && uuid.test((_b = segments[5]) != null ? _b : "");
 }
 function classifyApiAccess(method, path) {
   if (!isPathOrDescendant(path, "/api")) {
     return API_ACCESS.NOT_API;
   }
-  if (isPathOrDescendant(path, "/api/auth") || PUBLIC_ENDPOINTS.has(`${method.toUpperCase()} ${path}`)) {
+  if (isPathOrDescendant(path, "/api/auth") || PUBLIC_ENDPOINTS.has(`${method.toUpperCase()} ${path}`) || isPublicDocumentationEndpoint(method, path)) {
     return API_ACCESS.PUBLIC;
   }
   if (isPathOrDescendant(path, "/api/administration")) {
@@ -5448,6 +5995,10 @@ const LOGIN_IDENTIFIER_KIND = {
   EMAIL: "email",
   USERNAME: "username"
 };
+const OAUTH_GRANT_STATUS = {
+  ACTIVE: "active",
+  REVOKED: "revoked"
+};
 
 const credentialKeysSchema = z.string().transform((value, context) => {
   var _a;
@@ -5470,17 +6021,35 @@ const credentialKeysSchema = z.string().transform((value, context) => {
   }
   return keys;
 });
+const mcpResourceUrlSchema = z.string().transform((value, context) => {
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    context.addIssue({ code: z.ZodIssueCode.custom, message: "Invalid MCP resource URL" });
+    return z.NEVER;
+  }
+  const loopback = url.hostname === "127.0.0.1" || url.hostname === "localhost" || url.hostname === "[::1]";
+  const secureProtocol = url.protocol === "https:" || url.protocol === "http:" && loopback;
+  const canonical = url.toString() === value;
+  if (!secureProtocol || !canonical || url.pathname !== "/mcp" || url.username || url.password || url.search || url.hash) {
+    context.addIssue({ code: z.ZodIssueCode.custom, message: "Invalid canonical MCP resource URL" });
+    return z.NEVER;
+  }
+  return value;
+});
 const serverEnvSchema = z.object({
   DATABASE_URL: z.string().url(),
   BETTER_AUTH_SECRET: z.string().min(32),
   BETTER_AUTH_URL: z.string().url(),
+  MCP_RESOURCE_URL: mcpResourceUrlSchema,
   TRUSTED_ORIGINS: z.string().transform((value) => value.split(",").map((origin) => origin.trim()).filter(Boolean)).pipe(z.array(z.string().url()).min(1)),
   RATE_LIMIT_HMAC_SECRET: z.string().min(32),
   TRUST_PROXY: z.enum(["true", "false"]).default("false").transform((value) => value === "true"),
   SMTP_HOST: z.string().min(1),
   SMTP_PORT: z.coerce.number().int().min(1).max(65535),
   MAIL_FROM: z.string().min(3),
-  MAILPIT_API_URL: z.string().url()
+  MAILPIT_API_URL: z.string().url().optional()
 });
 const credentialEncryptionEnvSchema = z.object({
   CREDENTIAL_ENCRYPTION_ACTIVE_KEY_VERSION: z.coerce.number().int().positive(),
@@ -5511,18 +6080,65 @@ function parseCredentialEncryptionEnv(input) {
 function parseObjectStorageEnv(input) {
   return objectStorageEnvSchema.parse(input);
 }
+
+const DEFAULT_MAX_SECRET_BYTES = 65536;
+class SecretFileConfigurationError extends Error {
+  constructor(key) {
+    super(`Invalid secret file configuration for ${key}`);
+    this.name = "SecretFileConfigurationError";
+  }
+}
+const removeSingleTrailingLineEnding = (value) => value.endsWith("\r\n") ? value.slice(0, -2) : value.endsWith("\n") ? value.slice(0, -1) : value;
+const resolveSecretFileValues = (input, keys, readFile, maxSecretBytes = DEFAULT_MAX_SECRET_BYTES) => {
+  const resolved = { ...input };
+  for (const key of keys) {
+    const fileKey = `${key}_FILE`;
+    const directValue = input[key];
+    const filePath = input[fileKey];
+    if (directValue !== void 0 && filePath !== void 0) {
+      throw new SecretFileConfigurationError(key);
+    }
+    if (filePath === void 0) continue;
+    if (filePath.length === 0) throw new SecretFileConfigurationError(key);
+    try {
+      const content = readFile(filePath);
+      if (Buffer.byteLength(content, "utf8") > maxSecretBytes) {
+        throw new SecretFileConfigurationError(key);
+      }
+      resolved[key] = removeSingleTrailingLineEnding(content);
+    } catch (error) {
+      if (error instanceof SecretFileConfigurationError) throw error;
+      throw new SecretFileConfigurationError(key);
+    }
+  }
+  return resolved;
+};
+
+const SERVER_SECRET_KEYS = [
+  "DATABASE_URL",
+  "BETTER_AUTH_SECRET",
+  "RATE_LIMIT_HMAC_SECRET"
+];
+const CREDENTIAL_SECRET_KEYS = ["CREDENTIAL_ENCRYPTION_KEYS"];
+const OBJECT_STORAGE_SECRET_KEYS = ["S3_ACCESS_KEY_ID", "S3_SECRET_ACCESS_KEY"];
+const readSecretFile = (path) => readFileSync(path, "utf8");
 let cachedServerEnv;
 let cachedCredentialEncryptionEnv;
 let cachedObjectStorageEnv;
-function getServerEnv() {
-  return cachedServerEnv != null ? cachedServerEnv : cachedServerEnv = parseServerEnv(process.env);
-}
-function getCredentialEncryptionEnv() {
-  return cachedCredentialEncryptionEnv != null ? cachedCredentialEncryptionEnv : cachedCredentialEncryptionEnv = parseCredentialEncryptionEnv(process.env);
-}
-function getObjectStorageEnv() {
-  return cachedObjectStorageEnv != null ? cachedObjectStorageEnv : cachedObjectStorageEnv = parseObjectStorageEnv(process.env);
-}
+const getServerEnv = () => cachedServerEnv != null ? cachedServerEnv : cachedServerEnv = parseServerEnv(
+  resolveSecretFileValues(process.env, SERVER_SECRET_KEYS, readSecretFile)
+);
+const getCredentialEncryptionEnv = () => cachedCredentialEncryptionEnv != null ? cachedCredentialEncryptionEnv : cachedCredentialEncryptionEnv = parseCredentialEncryptionEnv(
+  resolveSecretFileValues(process.env, CREDENTIAL_SECRET_KEYS, readSecretFile)
+);
+const getObjectStorageEnv = () => cachedObjectStorageEnv != null ? cachedObjectStorageEnv : cachedObjectStorageEnv = parseObjectStorageEnv(
+  resolveSecretFileValues(process.env, OBJECT_STORAGE_SECRET_KEYS, readSecretFile)
+);
+const initializeRuntimeConfiguration = () => {
+  getServerEnv();
+  getCredentialEncryptionEnv();
+  getObjectStorageEnv();
+};
 
 function createDatabase(url, max = 10) {
   const queryClient = postgres(url, { max });
@@ -5560,7 +6176,7 @@ function createSmtpPasswordResetMailer(options) {
 }
 
 const user = pgTable("user", {
-  id: uuid("id").default(sql`pg_catalog.gen_random_uuid()`).primaryKey(),
+  id: uuid$2("id").default(sql`pg_catalog.gen_random_uuid()`).primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
@@ -5578,24 +6194,24 @@ const user = pgTable("user", {
 const session = pgTable(
   "session",
   {
-    id: uuid("id").default(sql`pg_catalog.gen_random_uuid()`).primaryKey(),
+    id: uuid$2("id").default(sql`pg_catalog.gen_random_uuid()`).primaryKey(),
     expiresAt: timestamp("expires_at").notNull(),
     token: text("token").notNull().unique(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").$onUpdate(() => /* @__PURE__ */ new Date()).notNull(),
     ipAddress: text("ip_address"),
     userAgent: text("user_agent"),
-    userId: uuid("user_id").notNull().references(() => user.id, { onDelete: "cascade" })
+    userId: uuid$2("user_id").notNull().references(() => user.id, { onDelete: "cascade" })
   },
   (table) => [index("session_userId_idx").on(table.userId)]
 );
 const account = pgTable(
   "account",
   {
-    id: uuid("id").default(sql`pg_catalog.gen_random_uuid()`).primaryKey(),
+    id: uuid$2("id").default(sql`pg_catalog.gen_random_uuid()`).primaryKey(),
     accountId: text("account_id").notNull(),
     providerId: text("provider_id").notNull(),
-    userId: uuid("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+    userId: uuid$2("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
     accessToken: text("access_token"),
     refreshToken: text("refresh_token"),
     idToken: text("id_token"),
@@ -5611,7 +6227,7 @@ const account = pgTable(
 const verification = pgTable(
   "verification",
   {
-    id: uuid("id").default(sql`pg_catalog.gen_random_uuid()`).primaryKey(),
+    id: uuid$2("id").default(sql`pg_catalog.gen_random_uuid()`).primaryKey(),
     identifier: text("identifier").notNull(),
     value: text("value").notNull(),
     expiresAt: timestamp("expires_at").notNull(),
@@ -5621,7 +6237,7 @@ const verification = pgTable(
   (table) => [index("verification_identifier_idx").on(table.identifier)]
 );
 const rateLimit = pgTable("rate_limit", {
-  id: uuid("id").default(sql`pg_catalog.gen_random_uuid()`).primaryKey(),
+  id: uuid$2("id").default(sql`pg_catalog.gen_random_uuid()`).primaryKey(),
   key: text("key").notNull().unique(),
   count: integer("count").notNull(),
   lastRequest: bigint("last_request", { mode: "number" }).notNull()
@@ -5643,16 +6259,89 @@ const accountRelations = relations(account, ({ one }) => ({
   })
 }));
 
-const CREDENTIAL_FIELD_TYPE = {
-  TEXT: "text",
-  SECRET: "secret",
-  URL: "url",
-  NOTE: "note"
+const AI_PROVIDER = {
+  OPENAI: "openai"
+};
+const AI_CONNECTION_STATUS = {
+  UNVERIFIED: "unverified",
+  VALID: "valid",
+  INVALID: "invalid"
+};
+const AI_ASSISTANT_AVAILABILITY = {
+  READY: "ready",
+  NOT_CONFIGURED: "not_configured",
+  DISABLED: "disabled",
+  NEEDS_VALIDATION: "needs_validation"
+};
+const AI_DOCUMENT_PROPOSAL_KIND = {
+  CREATE: "create",
+  UPDATE: "update"
+};
+const AI_DOCUMENT_PROPOSAL_STATUS = {
+  PENDING: "pending",
+  APPLIED: "applied",
+  REJECTED: "rejected",
+  STALE: "stale",
+  EXPIRED: "expired"
+};
+const AI_DOCUMENT_PROPOSAL_DECISION = {
+  CONFIRM: "confirm",
+  REJECT: "reject"
+};
+const AI_DOCUMENT_PROPOSAL_CONTENT_MAX_BYTES = 64 * 1024;
+const AI_MODEL_MAX_LENGTH = 100;
+const AI_API_KEY_MIN_LENGTH = 16;
+const AI_API_KEY_MAX_LENGTH = 512;
+const AI_SYSTEM_INSTRUCTIONS_MAX_LENGTH = 4e3;
+const AI_MAX_OUTPUT_TOKENS_MIN = 128;
+const AI_MAX_OUTPUT_TOKENS_MAX = 8192;
+const AI_REQUEST_TIMEOUT_MS_MIN = 5e3;
+const AI_REQUEST_TIMEOUT_MS_MAX = 12e4;
+const AI_QUESTION_MAX_LENGTH = 4e3;
+const AI_ASSISTANT_ANSWER_MAX_LENGTH = 12e3;
+const AI_TURN_RATE_MAX_REQUESTS = 10;
+const AI_TURN_RATE_WINDOW_SECONDS = 300;
+const AI_TURN_LEASE_GRACE_MS = 15e3;
+const AI_TURN_ERROR_CODE_MAX_LENGTH = 100;
+const AI_CONVERSATION_TITLE_MAX_LENGTH = 120;
+const AI_CONVERSATION_RETENTION_DAYS = 30;
+const AI_CONVERSATION_TRASH_DAYS = 7;
+const AI_CONVERSATION_PAGE_DEFAULT = 20;
+const AI_CONVERSATION_PAGE_MAX = 50;
+const AI_CONVERSATION_STATUS = {
+  ACTIVE: "active",
+  TRASH: "trash"
+};
+const AI_CONVERSATION_MESSAGE_ROLE = {
+  USER: "user",
+  ASSISTANT: "assistant"
+};
+const AI_TURN_OUTCOME = {
+  COMPLETED: "completed",
+  FAILED: "failed",
+  CANCELLED: "cancelled",
+  DENIED: "denied"
+};
+const AI_ASSISTANT_STREAM_EVENT = {
+  CONTEXT: "context",
+  DELTA: "delta",
+  COMPLETED: "completed",
+  ERROR: "error"
+};
+const AI_ASSISTANT_STREAM_ERROR = {
+  PERMISSION_DENIED: "PERMISSION_DENIED",
+  PROVIDER_UNAVAILABLE: "PROVIDER_UNAVAILABLE",
+  INVALID_RESPONSE: "INVALID_RESPONSE",
+  CANCELLED: "CANCELLED"
 };
 
 const PROJECT_PERMISSION = {
   PROJECT_VIEW: "project.view",
   PROJECT_UPDATE: "project.update",
+  PROJECT_PAUSE: "project.pause",
+  PROJECT_RESUME: "project.resume",
+  PROJECT_CLOSE: "project.close",
+  PROJECT_REOPEN: "project.reopen",
   PROJECT_ARCHIVE: "project.archive",
   PROJECT_RESTORE: "project.restore",
   DOCUMENTS_VIEW: "documents.view",
@@ -5663,6 +6352,7 @@ const PROJECT_PERMISSION = {
   DOCUMENTS_ARCHIVE: "documents.archive",
   DOCUMENTS_RESTORE: "documents.restore",
   DOCUMENTS_VIEW_HISTORY: "documents.view_history",
+  DOCUMENTS_SHARE: "documents.share",
   MEMBERS_VIEW: "members.view",
   MEMBERS_INVITE: "members.invite",
   MEMBERS_ASSIGN_ROLE: "members.assign_role",
@@ -5679,11 +6369,33 @@ const PROJECT_PERMISSION = {
   CREDENTIAL_CATEGORIES_CREATE: "credential_categories.create",
   CREDENTIAL_CATEGORIES_UPDATE: "credential_categories.update",
   CREDENTIAL_CATEGORIES_ARCHIVE: "credential_categories.archive",
-  CREDENTIAL_CATEGORIES_MANAGE_ACCESS: "credential_categories.manage_access"
+  CREDENTIAL_CATEGORIES_MANAGE_ACCESS: "credential_categories.manage_access",
+  PROJECT_AI_USE: "project.ai.use",
+  PROJECT_AI_MANAGE: "project.ai.manage"
 };
 const PROJECT_STATUS = {
   ACTIVE: "active",
+  PAUSED: "paused",
+  CLOSED: "closed",
   ARCHIVED: "archived"
+};
+const PROJECT_NAME_MAX_LENGTH = 120;
+const PROJECT_DESCRIPTION_MAX_LENGTH = 2e3;
+const PROJECT_LIST_DEFAULT_LIMIT = 50;
+const PROJECT_LIST_MAX_LIMIT = 100;
+const PROJECT_ICON_MAX_BYTES = 2 * 1024 * 1024;
+const PROJECT_ICON_MIME_TYPE = {
+  PNG: "image/png",
+  JPEG: "image/jpeg",
+  WEBP: "image/webp"
+};
+const CREATE_PROJECT_ERROR = {
+  INVALID_REQUEST: "INVALID_REQUEST",
+  AUTH_REQUIRED: "AUTH_REQUIRED",
+  ACCOUNT_INACTIVE: "ACCOUNT_INACTIVE",
+  INVALID_PROJECT_NAME: "INVALID_PROJECT_NAME",
+  INVALID_PROJECT_DESCRIPTION: "INVALID_PROJECT_DESCRIPTION",
+  PROJECT_CREATE_FAILED: "PROJECT_CREATE_FAILED"
 };
 const PROJECT_ROLE_KEY = {
   ADMIN: "admin",
@@ -5709,22 +6421,121 @@ const AUDIT_OUTCOME = {
   FAILED: "failed"
 };
 
-const enumValues$1 = (values) => Object.values(values);
+const PROJECT_LIFECYCLE_TRANSITION = {
+  PAUSE: "pause",
+  RESUME: "resume",
+  CLOSE: "close",
+  REOPEN: "reopen",
+  ARCHIVE: "archive",
+  RESTORE: "restore"
+};
+const PROJECT_OPERATION_MODE = {
+  AUTHENTICATED_READ: "authenticated_read",
+  CREDENTIAL_REVEAL: "credential_reveal",
+  WORK_MUTATION: "work_mutation",
+  SECURITY_REDUCTION: "security_reduction",
+  AI: "ai",
+  MCP: "mcp",
+  PUBLIC_READ: "public_read",
+  PUBLIC_CAPABILITY_ISSUE: "public_capability_issue",
+  PUBLIC_CAPABILITY_REVOKE: "public_capability_revoke"
+};
+const PROJECT_LIFECYCLE_RECEIPT_OUTCOME = {
+  APPLIED: "applied",
+  REPLAYED: "replayed"
+};
+const PROJECT_LIFECYCLE_CONFLICT_CODE = {
+  STALE_REVISION: "stale_revision",
+  TRANSITION_NOT_ALLOWED: "transition_not_allowed",
+  TRANSITION_ID_CONFLICT: "transition_id_conflict"
+};
+const PROJECT_LIFECYCLE_REASON_MAX_LENGTH = 500;
+const PROJECT_LIFECYCLE_PERMISSION_BY_TRANSITION = {
+  [PROJECT_LIFECYCLE_TRANSITION.PAUSE]: PROJECT_PERMISSION.PROJECT_PAUSE,
+  [PROJECT_LIFECYCLE_TRANSITION.RESUME]: PROJECT_PERMISSION.PROJECT_RESUME,
+  [PROJECT_LIFECYCLE_TRANSITION.CLOSE]: PROJECT_PERMISSION.PROJECT_CLOSE,
+  [PROJECT_LIFECYCLE_TRANSITION.REOPEN]: PROJECT_PERMISSION.PROJECT_REOPEN,
+  [PROJECT_LIFECYCLE_TRANSITION.ARCHIVE]: PROJECT_PERMISSION.PROJECT_ARCHIVE,
+  [PROJECT_LIFECYCLE_TRANSITION.RESTORE]: PROJECT_PERMISSION.PROJECT_RESTORE
+};
+const availableTransitions = {
+  [PROJECT_STATUS.ACTIVE]: [
+    PROJECT_LIFECYCLE_TRANSITION.PAUSE,
+    PROJECT_LIFECYCLE_TRANSITION.CLOSE
+  ],
+  [PROJECT_STATUS.PAUSED]: [
+    PROJECT_LIFECYCLE_TRANSITION.RESUME,
+    PROJECT_LIFECYCLE_TRANSITION.CLOSE
+  ],
+  [PROJECT_STATUS.CLOSED]: [
+    PROJECT_LIFECYCLE_TRANSITION.REOPEN,
+    PROJECT_LIFECYCLE_TRANSITION.ARCHIVE
+  ],
+  [PROJECT_STATUS.ARCHIVED]: [PROJECT_LIFECYCLE_TRANSITION.RESTORE]
+};
+const transitionTargets = {
+  [PROJECT_STATUS.ACTIVE]: {
+    [PROJECT_LIFECYCLE_TRANSITION.PAUSE]: PROJECT_STATUS.PAUSED,
+    [PROJECT_LIFECYCLE_TRANSITION.CLOSE]: PROJECT_STATUS.CLOSED
+  },
+  [PROJECT_STATUS.PAUSED]: {
+    [PROJECT_LIFECYCLE_TRANSITION.RESUME]: PROJECT_STATUS.ACTIVE,
+    [PROJECT_LIFECYCLE_TRANSITION.CLOSE]: PROJECT_STATUS.CLOSED
+  },
+  [PROJECT_STATUS.CLOSED]: {
+    [PROJECT_LIFECYCLE_TRANSITION.REOPEN]: PROJECT_STATUS.ACTIVE,
+    [PROJECT_LIFECYCLE_TRANSITION.ARCHIVE]: PROJECT_STATUS.ARCHIVED
+  },
+  [PROJECT_STATUS.ARCHIVED]: {
+    [PROJECT_LIFECYCLE_TRANSITION.RESTORE]: PROJECT_STATUS.CLOSED
+  }
+};
+/* @__PURE__ */ new Set([
+  PROJECT_OPERATION_MODE.AUTHENTICATED_READ,
+  PROJECT_OPERATION_MODE.CREDENTIAL_REVEAL,
+  PROJECT_OPERATION_MODE.SECURITY_REDUCTION,
+  PROJECT_OPERATION_MODE.PUBLIC_READ,
+  PROJECT_OPERATION_MODE.PUBLIC_CAPABILITY_REVOKE
+]);
+const decideProjectLifecycleTransition = (state, transition) => {
+  const nextState = transitionTargets[state][transition];
+  return nextState === void 0 ? { type: "reject", code: "transition_not_allowed", state, transition } : { type: "apply", previousState: state, nextState, transition };
+};
+const availableProjectLifecycleTransitions = (state) => availableTransitions[state];
+
+const enumValues$3 = (values) => Object.values(values);
 const enumValueSql = (value) => sql.raw(`'${value.replaceAll("'", "''")}'`);
-const enumSql$1 = (values) => sql.raw(Object.values(values).map((value) => `'${value.replaceAll("'", "''")}'`).join(", "));
-const timezoneTimestamp$3 = (name) => timestamp(name, { withTimezone: true });
+const enumSql$3 = (values) => sql.raw(Object.values(values).map((value) => `'${value.replaceAll("'", "''")}'`).join(", "));
+const timezoneTimestamp$7 = (name) => timestamp(name, { withTimezone: true });
 const projects = pgTable("projects", {
-  id: uuid("id").defaultRandom().primaryKey(),
+  id: uuid$2("id").defaultRandom().primaryKey(),
   name: text("name").notNull(),
   description: text("description"),
-  status: text("status", { enum: enumValues$1(PROJECT_STATUS) }).default(PROJECT_STATUS.ACTIVE).notNull(),
-  createdByUserId: uuid("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  createdAt: timezoneTimestamp$3("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$3("updated_at").defaultNow().notNull(),
-  archivedAt: timezoneTimestamp$3("archived_at"),
-  archivedByUserId: uuid("archived_by_user_id").references(() => user.id, { onDelete: "restrict" })
+  descriptionContent: jsonb("description_content").$type().default({ type: "doc", content: [] }).notNull(),
+  status: text("status", { enum: enumValues$3(PROJECT_STATUS) }).default(PROJECT_STATUS.ACTIVE).notNull(),
+  createdByUserId: uuid$2("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  createdAt: timezoneTimestamp$7("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$7("updated_at").defaultNow().notNull(),
+  archivedAt: timezoneTimestamp$7("archived_at"),
+  archivedByUserId: uuid$2("archived_by_user_id").references(() => user.id, { onDelete: "restrict" }),
+  lifecycleRevision: integer("lifecycle_revision").default(0).notNull(),
+  statusChangedAt: timezoneTimestamp$7("status_changed_at").defaultNow().notNull(),
+  statusChangedByUserId: uuid$2("status_changed_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" })
 }, (table) => [
-  check("projects_status_check", sql`${table.status} in (${enumSql$1(PROJECT_STATUS)})`),
+  check("projects_status_check", sql`${table.status} in (${enumSql$3(PROJECT_STATUS)})`),
+  check("projects_lifecycle_revision_check", sql`${table.lifecycleRevision} >= 0`),
+  check("projects_archive_state_check", sql`
+    (
+      ${table.status} = ${enumValueSql(PROJECT_STATUS.ARCHIVED)}
+      and ${table.archivedAt} is not null
+      and ${table.archivedByUserId} is not null
+    )
+    or (
+      ${table.status} <> ${enumValueSql(PROJECT_STATUS.ARCHIVED)}
+      and ${table.archivedAt} is null
+      and ${table.archivedByUserId} is null
+    )
+  `),
   check("projects_name_check", sql`${table.name} = btrim(${table.name}) and char_length(${table.name}) between 1 and 120`),
   check("projects_description_check", sql`
     ${table.description} is null
@@ -5732,19 +6543,58 @@ const projects = pgTable("projects", {
   `),
   index("projects_status_idx").on(table.status),
   index("projects_created_by_user_id_idx").on(table.createdByUserId),
-  index("projects_archived_by_user_id_idx").on(table.archivedByUserId)
+  index("projects_archived_by_user_id_idx").on(table.archivedByUserId),
+  index("projects_status_changed_by_user_id_idx").on(table.statusChangedByUserId)
+]);
+const projectLifecycleEvents = pgTable("project_lifecycle_events", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  transition: text("transition", { enum: enumValues$3(PROJECT_LIFECYCLE_TRANSITION) }).notNull(),
+  previousState: text("previous_state", { enum: enumValues$3(PROJECT_STATUS) }).notNull(),
+  nextState: text("next_state", { enum: enumValues$3(PROJECT_STATUS) }).notNull(),
+  revision: integer("revision").notNull(),
+  reason: text("reason"),
+  actorUserId: uuid$2("actor_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  channel: text("channel", { enum: enumValues$3(AUDIT_CHANNEL) }).notNull(),
+  transitionId: uuid$2("transition_id").notNull(),
+  createdAt: timezoneTimestamp$7("created_at").defaultNow().notNull()
+}, (table) => [
+  check("project_lifecycle_events_transition_check", sql`${table.transition} in (${enumSql$3(PROJECT_LIFECYCLE_TRANSITION)})`),
+  check("project_lifecycle_events_previous_state_check", sql`${table.previousState} in (${enumSql$3(PROJECT_STATUS)})`),
+  check("project_lifecycle_events_next_state_check", sql`${table.nextState} in (${enumSql$3(PROJECT_STATUS)})`),
+  check("project_lifecycle_events_revision_check", sql`${table.revision} > 0`),
+  check("project_lifecycle_events_reason_check", sql`
+    ${table.reason} is null
+    or (
+      ${table.reason} = btrim(${table.reason})
+      and char_length(${table.reason}) between 1 and ${sql.raw(String(PROJECT_LIFECYCLE_REASON_MAX_LENGTH))}
+    )
+  `),
+  check("project_lifecycle_events_transition_state_check", sql`
+    (${table.transition} = ${enumValueSql(PROJECT_LIFECYCLE_TRANSITION.PAUSE)} and ${table.previousState} = ${enumValueSql(PROJECT_STATUS.ACTIVE)} and ${table.nextState} = ${enumValueSql(PROJECT_STATUS.PAUSED)})
+    or (${table.transition} = ${enumValueSql(PROJECT_LIFECYCLE_TRANSITION.RESUME)} and ${table.previousState} = ${enumValueSql(PROJECT_STATUS.PAUSED)} and ${table.nextState} = ${enumValueSql(PROJECT_STATUS.ACTIVE)})
+    or (${table.transition} = ${enumValueSql(PROJECT_LIFECYCLE_TRANSITION.CLOSE)} and ${table.previousState} in (${enumValueSql(PROJECT_STATUS.ACTIVE)}, ${enumValueSql(PROJECT_STATUS.PAUSED)}) and ${table.nextState} = ${enumValueSql(PROJECT_STATUS.CLOSED)})
+    or (${table.transition} = ${enumValueSql(PROJECT_LIFECYCLE_TRANSITION.REOPEN)} and ${table.previousState} = ${enumValueSql(PROJECT_STATUS.CLOSED)} and ${table.nextState} = ${enumValueSql(PROJECT_STATUS.ACTIVE)})
+    or (${table.transition} = ${enumValueSql(PROJECT_LIFECYCLE_TRANSITION.ARCHIVE)} and ${table.previousState} = ${enumValueSql(PROJECT_STATUS.CLOSED)} and ${table.nextState} = ${enumValueSql(PROJECT_STATUS.ARCHIVED)})
+    or (${table.transition} = ${enumValueSql(PROJECT_LIFECYCLE_TRANSITION.RESTORE)} and ${table.previousState} = ${enumValueSql(PROJECT_STATUS.ARCHIVED)} and ${table.nextState} = ${enumValueSql(PROJECT_STATUS.CLOSED)})
+  `),
+  check("project_lifecycle_events_channel_check", sql`${table.channel} in (${enumSql$3(AUDIT_CHANNEL)})`),
+  unique("project_lifecycle_events_project_id_revision_unique").on(table.projectId, table.revision),
+  unique("project_lifecycle_events_project_id_transition_id_unique").on(table.projectId, table.transitionId),
+  index("project_lifecycle_events_project_created_at_idx").on(table.projectId, table.createdAt),
+  index("project_lifecycle_events_actor_user_id_idx").on(table.actorUserId)
 ]);
 const projectRoles = pgTable("project_roles", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  projectId: uuid("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
-  kind: text("kind", { enum: enumValues$1(PROJECT_ROLE_KIND) }).notNull(),
-  builtInKey: text("built_in_key", { enum: enumValues$1(PROJECT_ROLE_KEY) }),
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  kind: text("kind", { enum: enumValues$3(PROJECT_ROLE_KIND) }).notNull(),
+  builtInKey: text("built_in_key", { enum: enumValues$3(PROJECT_ROLE_KEY) }),
   displayName: text("display_name").notNull(),
-  createdAt: timezoneTimestamp$3("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$3("updated_at").defaultNow().notNull()
+  createdAt: timezoneTimestamp$7("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$7("updated_at").defaultNow().notNull()
 }, (table) => [
-  check("project_roles_kind_check", sql`${table.kind} in (${enumSql$1(PROJECT_ROLE_KIND)})`),
-  check("project_roles_built_in_key_check", sql`${table.builtInKey} is null or ${table.builtInKey} in (${enumSql$1(PROJECT_ROLE_KEY)})`),
+  check("project_roles_kind_check", sql`${table.kind} in (${enumSql$3(PROJECT_ROLE_KIND)})`),
+  check("project_roles_built_in_key_check", sql`${table.builtInKey} is null or ${table.builtInKey} in (${enumSql$3(PROJECT_ROLE_KEY)})`),
   check("project_roles_kind_built_in_key_check", sql`
     (${table.kind} = ${enumValueSql(PROJECT_ROLE_KIND.BUILT_IN)} and ${table.builtInKey} is not null)
     or (${table.kind} = ${enumValueSql(PROJECT_ROLE_KIND.CUSTOM)} and ${table.builtInKey} is null)
@@ -5754,27 +6604,27 @@ const projectRoles = pgTable("project_roles", {
   index("project_roles_project_id_idx").on(table.projectId)
 ]);
 const projectRolePermissions = pgTable("project_role_permissions", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  roleId: uuid("role_id").notNull().references(() => projectRoles.id, { onDelete: "cascade" }),
-  permissionCode: text("permission_code", { enum: enumValues$1(PROJECT_PERMISSION) }).notNull(),
-  createdAt: timezoneTimestamp$3("created_at").defaultNow().notNull()
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  roleId: uuid$2("role_id").notNull().references(() => projectRoles.id, { onDelete: "cascade" }),
+  permissionCode: text("permission_code", { enum: enumValues$3(PROJECT_PERMISSION) }).notNull(),
+  createdAt: timezoneTimestamp$7("created_at").defaultNow().notNull()
 }, (table) => [
-  check("project_role_permissions_permission_code_check", sql`${table.permissionCode} in (${enumSql$1(PROJECT_PERMISSION)})`),
+  check("project_role_permissions_permission_code_check", sql`${table.permissionCode} in (${enumSql$3(PROJECT_PERMISSION)})`),
   unique("project_role_permissions_role_id_permission_code_unique").on(table.roleId, table.permissionCode),
   index("project_role_permissions_role_id_idx").on(table.roleId)
 ]);
 const projectMemberships = pgTable("project_memberships", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  projectId: uuid("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
-  userId: uuid("user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  roleId: uuid("role_id").notNull(),
-  status: text("status", { enum: enumValues$1(MEMBERSHIP_STATUS) }).default(MEMBERSHIP_STATUS.ACTIVE).notNull(),
-  joinedAt: timezoneTimestamp$3("joined_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$3("updated_at").defaultNow().notNull(),
-  removedAt: timezoneTimestamp$3("removed_at"),
-  removedByUserId: uuid("removed_by_user_id").references(() => user.id, { onDelete: "restrict" })
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  userId: uuid$2("user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  roleId: uuid$2("role_id").notNull(),
+  status: text("status", { enum: enumValues$3(MEMBERSHIP_STATUS) }).default(MEMBERSHIP_STATUS.ACTIVE).notNull(),
+  joinedAt: timezoneTimestamp$7("joined_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$7("updated_at").defaultNow().notNull(),
+  removedAt: timezoneTimestamp$7("removed_at"),
+  removedByUserId: uuid$2("removed_by_user_id").references(() => user.id, { onDelete: "restrict" })
 }, (table) => [
-  check("project_memberships_status_check", sql`${table.status} in (${enumSql$1(MEMBERSHIP_STATUS)})`),
+  check("project_memberships_status_check", sql`${table.status} in (${enumSql$3(MEMBERSHIP_STATUS)})`),
   unique("project_memberships_project_id_user_id_unique").on(table.projectId, table.userId),
   unique("project_memberships_id_project_id_unique").on(table.id, table.projectId),
   foreignKey({
@@ -5789,19 +6639,19 @@ const projectMemberships = pgTable("project_memberships", {
   index("project_memberships_removed_by_user_id_idx").on(table.removedByUserId)
 ]);
 const auditEvents = pgTable("audit_events", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  createdAt: timezoneTimestamp$3("created_at").defaultNow().notNull(),
-  actorUserId: uuid("actor_user_id").references(() => user.id, { onDelete: "restrict" }),
-  channel: text("channel", { enum: enumValues$1(AUDIT_CHANNEL) }).notNull(),
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  createdAt: timezoneTimestamp$7("created_at").defaultNow().notNull(),
+  actorUserId: uuid$2("actor_user_id").references(() => user.id, { onDelete: "restrict" }),
+  channel: text("channel", { enum: enumValues$3(AUDIT_CHANNEL) }).notNull(),
   action: text("action").notNull(),
-  outcome: text("outcome", { enum: enumValues$1(AUDIT_OUTCOME) }).notNull(),
-  projectId: uuid("project_id").references(() => projects.id, { onDelete: "restrict" }),
+  outcome: text("outcome", { enum: enumValues$3(AUDIT_OUTCOME) }).notNull(),
+  projectId: uuid$2("project_id").references(() => projects.id, { onDelete: "restrict" }),
   targetType: text("target_type").notNull(),
-  targetId: uuid("target_id"),
+  targetId: uuid$2("target_id"),
   metadata: jsonb("metadata").default({}).notNull()
 }, (table) => [
-  check("audit_events_channel_check", sql`${table.channel} in (${enumSql$1(AUDIT_CHANNEL)})`),
-  check("audit_events_outcome_check", sql`${table.outcome} in (${enumSql$1(AUDIT_OUTCOME)})`),
+  check("audit_events_channel_check", sql`${table.channel} in (${enumSql$3(AUDIT_CHANNEL)})`),
+  check("audit_events_outcome_check", sql`${table.outcome} in (${enumSql$3(AUDIT_OUTCOME)})`),
   index("audit_events_project_id_idx").on(table.projectId),
   index("audit_events_actor_user_id_idx").on(table.actorUserId),
   index("audit_events_action_idx").on(table.action),
@@ -5812,7 +6662,12 @@ const projectsRelations = relations(projects, ({ many, one }) => ({
   archivedBy: one(user, { fields: [projects.archivedByUserId], references: [user.id], relationName: "projectArchiver" }),
   roles: many(projectRoles),
   memberships: many(projectMemberships),
-  auditEvents: many(auditEvents)
+  auditEvents: many(auditEvents),
+  lifecycleEvents: many(projectLifecycleEvents)
+}));
+const projectLifecycleEventsRelations = relations(projectLifecycleEvents, ({ one }) => ({
+  project: one(projects, { fields: [projectLifecycleEvents.projectId], references: [projects.id] }),
+  actor: one(user, { fields: [projectLifecycleEvents.actorUserId], references: [user.id] })
 }));
 const projectRolesRelations = relations(projectRoles, ({ many, one }) => ({
   project: one(projects, { fields: [projectRoles.projectId], references: [projects.id] }),
@@ -5833,21 +6688,301 @@ const auditEventsRelations = relations(auditEvents, ({ one }) => ({
   actor: one(user, { fields: [auditEvents.actorUserId], references: [user.id] })
 }));
 
-const enumValues = (values) => Object.values(values);
-const enumSql = (values) => sql.raw(Object.values(values).map((value) => `'${value.replaceAll("'", "''")}'`).join(", "));
-const timezoneTimestamp$2 = (name) => timestamp(name, { withTimezone: true });
+const enumValues$2 = (values) => Object.values(values);
+const enumSql$2 = (values) => sql.raw(Object.values(values).map((value) => `'${value.replaceAll("'", "''")}'`).join(", "));
+const numberSql$1 = (value) => sql.raw(String(value));
+const literalSql = (value) => sql.raw(`'${value.replaceAll("'", "''")}'`);
+const timezoneTimestamp$6 = (name) => timestamp(name, { withTimezone: true });
+const projectAiConnections = pgTable("project_ai_connections", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  provider: text("provider", { enum: enumValues$2(AI_PROVIDER) }).notNull(),
+  model: text("model").notNull(),
+  apiKeyCiphertext: text("api_key_ciphertext").notNull(),
+  apiKeyNonce: text("api_key_nonce").notNull(),
+  apiKeyKeyVersion: integer("api_key_key_version").notNull(),
+  enabled: boolean("enabled").default(true).notNull(),
+  status: text("status", { enum: enumValues$2(AI_CONNECTION_STATUS) }).default(AI_CONNECTION_STATUS.UNVERIFIED).notNull(),
+  systemInstructions: text("system_instructions"),
+  maxOutputTokens: integer("max_output_tokens").default(2048).notNull(),
+  requestTimeoutMs: integer("request_timeout_ms").default(3e4).notNull(),
+  lastValidatedAt: timezoneTimestamp$6("last_validated_at"),
+  createdByUserId: uuid$2("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  updatedByUserId: uuid$2("updated_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  createdAt: timezoneTimestamp$6("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$6("updated_at").defaultNow().notNull()
+}, (table) => [
+  unique("project_ai_connections_project_id_unique").on(table.projectId),
+  check("project_ai_connections_provider_check", sql`${table.provider} in (${enumSql$2(AI_PROVIDER)})`),
+  check("project_ai_connections_status_check", sql`${table.status} in (${enumSql$2(AI_CONNECTION_STATUS)})`),
+  check("project_ai_connections_model_check", sql`
+    ${table.model} = btrim(${table.model})
+    and char_length(${table.model}) between 1 and ${numberSql$1(AI_MODEL_MAX_LENGTH)}
+  `),
+  check("project_ai_connections_api_key_envelope_check", sql`
+    char_length(${table.apiKeyCiphertext}) > 0
+    and char_length(${table.apiKeyNonce}) > 0
+    and ${table.apiKeyKeyVersion} > 0
+  `),
+  check("project_ai_connections_system_instructions_check", sql`
+    ${table.systemInstructions} is null
+    or (
+      ${table.systemInstructions} = btrim(${table.systemInstructions})
+      and char_length(${table.systemInstructions}) between 1 and ${numberSql$1(AI_SYSTEM_INSTRUCTIONS_MAX_LENGTH)}
+    )
+  `),
+  check("project_ai_connections_limits_check", sql`
+    ${table.maxOutputTokens} between ${numberSql$1(AI_MAX_OUTPUT_TOKENS_MIN)} and ${numberSql$1(AI_MAX_OUTPUT_TOKENS_MAX)}
+    and ${table.requestTimeoutMs} between ${numberSql$1(AI_REQUEST_TIMEOUT_MS_MIN)} and ${numberSql$1(AI_REQUEST_TIMEOUT_MS_MAX)}
+  `),
+  index("project_ai_connections_status_idx").on(table.status),
+  index("project_ai_connections_updated_by_user_id_idx").on(table.updatedByUserId)
+]);
+const projectAiConnectionsRelations = relations(projectAiConnections, ({ one }) => ({
+  project: one(projects, { fields: [projectAiConnections.projectId], references: [projects.id] }),
+  createdBy: one(user, {
+    fields: [projectAiConnections.createdByUserId],
+    references: [user.id],
+    relationName: "projectAiConnectionCreator"
+  }),
+  updatedBy: one(user, {
+    fields: [projectAiConnections.updatedByUserId],
+    references: [user.id],
+    relationName: "projectAiConnectionUpdater"
+  })
+}));
+const projectAiTurnControls = pgTable("project_ai_turn_controls", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  userId: uuid$2("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  rateWindowStartedAt: timezoneTimestamp$6("rate_window_started_at").notNull(),
+  rateCount: integer("rate_count").default(0).notNull(),
+  leaseToken: uuid$2("lease_token"),
+  leaseExpiresAt: timezoneTimestamp$6("lease_expires_at"),
+  updatedAt: timezoneTimestamp$6("updated_at").defaultNow().notNull()
+}, (table) => [
+  unique("project_ai_turn_controls_project_user_unique").on(table.projectId, table.userId),
+  check("project_ai_turn_controls_rate_count_check", sql`${table.rateCount} >= 0`),
+  check("project_ai_turn_controls_lease_pair_check", sql`
+    (${table.leaseToken} is null and ${table.leaseExpiresAt} is null)
+    or (${table.leaseToken} is not null and ${table.leaseExpiresAt} is not null)
+  `),
+  index("project_ai_turn_controls_lease_expires_at_idx").on(table.leaseExpiresAt)
+]);
+const projectAiUsageEvents = pgTable("project_ai_usage_events", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  userId: uuid$2("user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  connectionId: uuid$2("connection_id").references(() => projectAiConnections.id, { onDelete: "set null" }),
+  requestId: uuid$2("request_id").notNull(),
+  provider: text("provider", { enum: enumValues$2(AI_PROVIDER) }).notNull(),
+  model: text("model").notNull(),
+  inputTokens: integer("input_tokens"),
+  outputTokens: integer("output_tokens"),
+  durationMs: integer("duration_ms").notNull(),
+  outcome: text("outcome", { enum: enumValues$2(AI_TURN_OUTCOME) }).notNull(),
+  errorCode: text("error_code"),
+  createdAt: timezoneTimestamp$6("created_at").defaultNow().notNull()
+}, (table) => [
+  unique("project_ai_usage_events_request_id_unique").on(table.requestId),
+  check("project_ai_usage_events_provider_check", sql`${table.provider} in (${enumSql$2(AI_PROVIDER)})`),
+  check("project_ai_usage_events_outcome_check", sql`${table.outcome} in (${enumSql$2(AI_TURN_OUTCOME)})`),
+  check("project_ai_usage_events_model_check", sql`
+    ${table.model} = btrim(${table.model})
+    and char_length(${table.model}) between 1 and ${numberSql$1(AI_MODEL_MAX_LENGTH)}
+  `),
+  check("project_ai_usage_events_numbers_check", sql`
+    (${table.inputTokens} is null or ${table.inputTokens} >= 0)
+    and (${table.outputTokens} is null or ${table.outputTokens} >= 0)
+    and ${table.durationMs} >= 0
+  `),
+  check("project_ai_usage_events_error_code_check", sql`
+    ${table.errorCode} is null
+    or (
+      ${table.errorCode} = btrim(${table.errorCode})
+      and char_length(${table.errorCode}) between 1 and ${numberSql$1(AI_TURN_ERROR_CODE_MAX_LENGTH)}
+    )
+  `),
+  index("project_ai_usage_events_project_created_at_idx").on(table.projectId, table.createdAt),
+  index("project_ai_usage_events_user_created_at_idx").on(table.userId, table.createdAt)
+]);
+const projectAiConversations = pgTable("project_ai_conversations", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  userId: uuid$2("user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  title: text("title").notNull(),
+  expiresAt: timezoneTimestamp$6("expires_at").notNull(),
+  deletedAt: timezoneTimestamp$6("deleted_at"),
+  purgeAfter: timezoneTimestamp$6("purge_after"),
+  createdAt: timezoneTimestamp$6("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$6("updated_at").defaultNow().notNull()
+}, (table) => [
+  check("project_ai_conversations_title_check", sql`
+    ${table.title} = btrim(${table.title})
+    and char_length(${table.title}) between 1 and ${numberSql$1(AI_CONVERSATION_TITLE_MAX_LENGTH)}
+  `),
+  check("project_ai_conversations_deletion_pair_check", sql`
+    (${table.deletedAt} is null and ${table.purgeAfter} is null)
+    or (${table.deletedAt} is not null and ${table.purgeAfter} is not null)
+  `),
+  index("project_ai_conversations_owner_active_idx").on(table.projectId, table.userId, table.deletedAt, table.updatedAt),
+  index("project_ai_conversations_cleanup_idx").on(table.purgeAfter, table.expiresAt)
+]);
+const projectAiConversationMessages = pgTable("project_ai_conversation_messages", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  conversationId: uuid$2("conversation_id").notNull().references(() => projectAiConversations.id, { onDelete: "cascade" }),
+  role: text("role", { enum: enumValues$2(AI_CONVERSATION_MESSAGE_ROLE) }).notNull(),
+  content: text("content").notNull(),
+  citations: jsonb("citations").default([]).notNull(),
+  turnRequestId: uuid$2("turn_request_id").notNull(),
+  createdAt: timezoneTimestamp$6("created_at").defaultNow().notNull()
+}, (table) => [
+  check("project_ai_conversation_messages_role_check", sql`
+    ${table.role} in (${enumSql$2(AI_CONVERSATION_MESSAGE_ROLE)})
+  `),
+  check("project_ai_conversation_messages_content_check", sql`
+    char_length(${table.content}) between 1 and ${numberSql$1(AI_ASSISTANT_ANSWER_MAX_LENGTH)}
+  `),
+  check("project_ai_conversation_messages_citations_check", sql`
+    jsonb_typeof(${table.citations}) = 'array'
+  `),
+  uniqueIndex("project_ai_conversation_messages_turn_role_unique").on(table.conversationId, table.turnRequestId, table.role),
+  index("project_ai_conversation_messages_conversation_created_idx").on(table.conversationId, table.createdAt, table.id)
+]);
+const projectAiConversationsRelations = relations(projectAiConversations, ({ many, one }) => ({
+  project: one(projects, { fields: [projectAiConversations.projectId], references: [projects.id] }),
+  user: one(user, { fields: [projectAiConversations.userId], references: [user.id] }),
+  messages: many(projectAiConversationMessages)
+}));
+const projectAiConversationMessagesRelations = relations(
+  projectAiConversationMessages,
+  ({ one }) => ({
+    conversation: one(projectAiConversations, {
+      fields: [projectAiConversationMessages.conversationId],
+      references: [projectAiConversations.id]
+    })
+  })
+);
+const projectAiDocumentProposals = pgTable("project_ai_document_proposals", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  userId: uuid$2("user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  conversationId: uuid$2("conversation_id").notNull().references(() => projectAiConversations.id, { onDelete: "cascade" }),
+  turnRequestId: uuid$2("turn_request_id").notNull(),
+  kind: text("kind", { enum: enumValues$2(AI_DOCUMENT_PROPOSAL_KIND) }).notNull(),
+  status: text("status", { enum: enumValues$2(AI_DOCUMENT_PROPOSAL_STATUS) }).default(AI_DOCUMENT_PROPOSAL_STATUS.PENDING).notNull(),
+  targetDocumentId: uuid$2("target_document_id"),
+  requestedParentId: uuid$2("requested_parent_id"),
+  expectedDraftRevision: integer("expected_draft_revision"),
+  baseTitle: text("base_title"),
+  baseContent: jsonb("base_content").$type(),
+  proposedTitle: text("proposed_title"),
+  proposedContent: jsonb("proposed_content").$type(),
+  contentHash: text("content_hash"),
+  appliedDocumentId: uuid$2("applied_document_id"),
+  appliedDraftRevision: integer("applied_draft_revision"),
+  expiresAt: timezoneTimestamp$6("expires_at").notNull(),
+  decidedAt: timezoneTimestamp$6("decided_at"),
+  purgeAfter: timezoneTimestamp$6("purge_after"),
+  createdAt: timezoneTimestamp$6("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$6("updated_at").defaultNow().notNull()
+}, (table) => [
+  unique("project_ai_document_proposals_turn_unique").on(table.projectId, table.userId, table.conversationId, table.turnRequestId),
+  check("project_ai_document_proposals_kind_check", sql`
+    ${table.kind} in (${enumSql$2(AI_DOCUMENT_PROPOSAL_KIND)})
+  `),
+  check("project_ai_document_proposals_status_check", sql`
+    ${table.status} in (${enumSql$2(AI_DOCUMENT_PROPOSAL_STATUS)})
+  `),
+  check("project_ai_document_proposals_payload_check", sql`
+    (
+      ${table.status} = ${literalSql(AI_DOCUMENT_PROPOSAL_STATUS.PENDING)}
+      and ${table.proposedTitle} is not null
+      and ${table.proposedContent} is not null
+      and ${table.contentHash} is not null
+      and ${table.decidedAt} is null
+      and ${table.purgeAfter} is null
+      and (
+        (
+          ${table.kind} = ${literalSql(AI_DOCUMENT_PROPOSAL_KIND.CREATE)}
+          and ${table.targetDocumentId} is null
+          and ${table.expectedDraftRevision} is null
+          and ${table.baseTitle} is null
+          and ${table.baseContent} is null
+        )
+        or (
+          ${table.kind} = ${literalSql(AI_DOCUMENT_PROPOSAL_KIND.UPDATE)}
+          and ${table.requestedParentId} is null
+          and ${table.targetDocumentId} is not null
+          and ${table.expectedDraftRevision} >= 0
+          and ${table.baseTitle} is not null
+          and ${table.baseContent} is not null
+        )
+      )
+    )
+    or (
+      ${table.status} <> ${literalSql(AI_DOCUMENT_PROPOSAL_STATUS.PENDING)}
+      and ${table.targetDocumentId} is null
+      and ${table.requestedParentId} is null
+      and ${table.expectedDraftRevision} is null
+      and ${table.baseTitle} is null
+      and ${table.baseContent} is null
+      and ${table.proposedTitle} is null
+      and ${table.proposedContent} is null
+      and ${table.contentHash} is null
+      and ${table.decidedAt} is not null
+      and ${table.purgeAfter} is not null
+    )
+  `),
+  check("project_ai_document_proposals_content_size_check", sql`
+    (${table.baseContent} is null or octet_length(${table.baseContent}::text) <= ${numberSql$1(AI_DOCUMENT_PROPOSAL_CONTENT_MAX_BYTES)})
+    and (${table.proposedContent} is null or octet_length(${table.proposedContent}::text) <= ${numberSql$1(AI_DOCUMENT_PROPOSAL_CONTENT_MAX_BYTES)})
+    and (${table.baseTitle} is null or (${table.baseTitle} = btrim(${table.baseTitle}) and char_length(${table.baseTitle}) between 1 and 200))
+    and (${table.proposedTitle} is null or (${table.proposedTitle} = btrim(${table.proposedTitle}) and char_length(${table.proposedTitle}) between 1 and 200))
+    and (${table.contentHash} is null or ${table.contentHash} ~ '^[0-9a-f]{64}$')
+  `),
+  check("project_ai_document_proposals_receipt_check", sql`
+    (
+      ${table.status} = ${literalSql(AI_DOCUMENT_PROPOSAL_STATUS.APPLIED)}
+      and ${table.appliedDocumentId} is not null
+      and ${table.appliedDraftRevision} >= 0
+    )
+    or (
+      ${table.status} <> ${literalSql(AI_DOCUMENT_PROPOSAL_STATUS.APPLIED)}
+      and ${table.appliedDocumentId} is null
+      and ${table.appliedDraftRevision} is null
+    )
+  `),
+  check("project_ai_document_proposals_time_check", sql`
+    ${table.expiresAt} > ${table.createdAt}
+    and (${table.purgeAfter} is null or ${table.purgeAfter} > ${table.decidedAt})
+  `),
+  index("project_ai_document_proposals_owner_status_idx").on(table.projectId, table.userId, table.status, table.createdAt),
+  index("project_ai_document_proposals_cleanup_idx").on(table.status, table.expiresAt, table.purgeAfter)
+]);
+
+const CREDENTIAL_FIELD_TYPE = {
+  TEXT: "text",
+  SECRET: "secret",
+  URL: "url",
+  NOTE: "note"
+};
+
+const enumValues$1 = (values) => Object.values(values);
+const enumSql$1 = (values) => sql.raw(Object.values(values).map((value) => `'${value.replaceAll("'", "''")}'`).join(", "));
+const timezoneTimestamp$5 = (name) => timestamp(name, { withTimezone: true });
 const credentialCategories = pgTable("credential_categories", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  projectId: uuid("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
   name: text("name").notNull(),
   normalizedName: text("normalized_name").notNull(),
   description: text("description"),
   position: integer("position").default(0).notNull(),
-  createdByUserId: uuid("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$2("updated_at").defaultNow().notNull(),
-  archivedAt: timezoneTimestamp$2("archived_at"),
-  archivedByUserId: uuid("archived_by_user_id").references(() => user.id, { onDelete: "restrict" })
+  createdByUserId: uuid$2("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  createdAt: timezoneTimestamp$5("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$5("updated_at").defaultNow().notNull(),
+  archivedAt: timezoneTimestamp$5("archived_at"),
+  archivedByUserId: uuid$2("archived_by_user_id").references(() => user.id, { onDelete: "restrict" })
 }, (table) => [
   check("credential_categories_name_check", sql`${table.name} = btrim(${table.name}) and char_length(${table.name}) between 1 and 120`),
   check("credential_categories_normalized_name_check", sql`${table.normalizedName} = btrim(${table.normalizedName}) and char_length(${table.normalizedName}) between 1 and 120`),
@@ -5858,12 +6993,12 @@ const credentialCategories = pgTable("credential_categories", {
   index("credential_categories_project_id_position_idx").on(table.projectId, table.position)
 ]);
 const credentialCategoryRoleGrants = pgTable("credential_category_role_grants", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  projectId: uuid("project_id").notNull(),
-  categoryId: uuid("category_id").notNull(),
-  roleId: uuid("role_id").notNull(),
-  createdByUserId: uuid("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull()
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull(),
+  categoryId: uuid$2("category_id").notNull(),
+  roleId: uuid$2("role_id").notNull(),
+  createdByUserId: uuid$2("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  createdAt: timezoneTimestamp$5("created_at").defaultNow().notNull()
 }, (table) => [
   foreignKey({ columns: [table.categoryId, table.projectId], foreignColumns: [credentialCategories.id, credentialCategories.projectId], name: "credential_category_role_grants_category_project_fk" }).onDelete("cascade"),
   foreignKey({ columns: [table.roleId, table.projectId], foreignColumns: [projectRoles.id, projectRoles.projectId], name: "credential_category_role_grants_role_project_fk" }).onDelete("cascade"),
@@ -5871,12 +7006,12 @@ const credentialCategoryRoleGrants = pgTable("credential_category_role_grants", 
   index("credential_category_role_grants_role_id_idx").on(table.roleId)
 ]);
 const credentialCategoryMemberGrants = pgTable("credential_category_member_grants", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  projectId: uuid("project_id").notNull(),
-  categoryId: uuid("category_id").notNull(),
-  membershipId: uuid("membership_id").notNull(),
-  createdByUserId: uuid("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull()
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull(),
+  categoryId: uuid$2("category_id").notNull(),
+  membershipId: uuid$2("membership_id").notNull(),
+  createdByUserId: uuid$2("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  createdAt: timezoneTimestamp$5("created_at").defaultNow().notNull()
 }, (table) => [
   foreignKey({ columns: [table.categoryId, table.projectId], foreignColumns: [credentialCategories.id, credentialCategories.projectId], name: "credential_category_member_grants_category_project_fk" }).onDelete("cascade"),
   foreignKey({ columns: [table.membershipId, table.projectId], foreignColumns: [projectMemberships.id, projectMemberships.projectId], name: "credential_category_member_grants_membership_project_fk" }).onDelete("cascade"),
@@ -5884,9 +7019,9 @@ const credentialCategoryMemberGrants = pgTable("credential_category_member_grant
   index("credential_category_member_grants_membership_id_idx").on(table.membershipId)
 ]);
 const credentials = pgTable("credentials", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  projectId: uuid("project_id").notNull(),
-  categoryId: uuid("category_id").notNull(),
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull(),
+  categoryId: uuid$2("category_id").notNull(),
   title: text("title").notNull(),
   loginCiphertext: text("login_ciphertext"),
   loginNonce: text("login_nonce"),
@@ -5894,12 +7029,12 @@ const credentials = pgTable("credentials", {
   passwordCiphertext: text("password_ciphertext"),
   passwordNonce: text("password_nonce"),
   passwordKeyVersion: integer("password_key_version"),
-  createdByUserId: uuid("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  updatedByUserId: uuid("updated_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$2("updated_at").defaultNow().notNull(),
-  archivedAt: timezoneTimestamp$2("archived_at"),
-  archivedByUserId: uuid("archived_by_user_id").references(() => user.id, { onDelete: "restrict" })
+  createdByUserId: uuid$2("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  updatedByUserId: uuid$2("updated_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  createdAt: timezoneTimestamp$5("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$5("updated_at").defaultNow().notNull(),
+  archivedAt: timezoneTimestamp$5("archived_at"),
+  archivedByUserId: uuid$2("archived_by_user_id").references(() => user.id, { onDelete: "restrict" })
 }, (table) => [
   foreignKey({ columns: [table.categoryId, table.projectId], foreignColumns: [credentialCategories.id, credentialCategories.projectId], name: "credentials_category_project_fk" }).onDelete("restrict"),
   check("credentials_title_check", sql`${table.title} = btrim(${table.title}) and char_length(${table.title}) between 1 and 200`),
@@ -5909,19 +7044,19 @@ const credentials = pgTable("credentials", {
   index("credentials_category_id_updated_at_idx").on(table.categoryId, table.updatedAt)
 ]);
 const credentialFields = pgTable("credential_fields", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  credentialId: uuid("credential_id").notNull().references(() => credentials.id, { onDelete: "cascade" }),
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  credentialId: uuid$2("credential_id").notNull().references(() => credentials.id, { onDelete: "cascade" }),
   label: text("label").notNull(),
-  type: text("type", { enum: enumValues(CREDENTIAL_FIELD_TYPE) }).notNull(),
+  type: text("type", { enum: enumValues$1(CREDENTIAL_FIELD_TYPE) }).notNull(),
   position: integer("position").notNull(),
   ciphertext: text("ciphertext").notNull(),
   nonce: text("nonce").notNull(),
   keyVersion: integer("key_version").notNull(),
-  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$2("updated_at").defaultNow().notNull()
+  createdAt: timezoneTimestamp$5("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$5("updated_at").defaultNow().notNull()
 }, (table) => [
   check("credential_fields_label_check", sql`${table.label} = btrim(${table.label}) and char_length(${table.label}) between 1 and 120`),
-  check("credential_fields_type_check", sql`${table.type} in (${enumSql(CREDENTIAL_FIELD_TYPE)})`),
+  check("credential_fields_type_check", sql`${table.type} in (${enumSql$1(CREDENTIAL_FIELD_TYPE)})`),
   check("credential_fields_position_check", sql`${table.position} >= 0`),
   check("credential_fields_key_version_check", sql`${table.keyVersion} > 0`),
   unique("credential_fields_credential_id_position_unique").on(table.credentialId, table.position),
@@ -5944,25 +7079,26 @@ const DOCUMENT_DRAFT_UPDATE_CODE = {
   DRAFT_CONFLICT: "DRAFT_CONFLICT"
 };
 
-const timezoneTimestamp$1 = (name) => timestamp(name, { withTimezone: true });
+const timezoneTimestamp$4 = (name) => timestamp(name, { withTimezone: true });
 const documents = pgTable("documents", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  projectId: uuid("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
-  parentId: uuid("parent_id"),
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  parentId: uuid$2("parent_id"),
   title: text("title").notNull(),
   slug: text("slug").notNull(),
   position: integer("position").default(0).notNull(),
-  ownerUserId: uuid("owner_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  ownerUserId: uuid$2("owner_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
   draftRevision: integer("draft_revision").default(0).notNull(),
   draftContent: jsonb("draft_content").$type().default(sql`'{"type":"doc","content":[]}'::jsonb`).notNull(),
-  draftInternalLinkTargetIds: uuid("draft_internal_link_target_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
-  draftReferencedImageIds: uuid("draft_referenced_image_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
+  draftSearchText: text("draft_search_text").default("").notNull(),
+  draftInternalLinkTargetIds: uuid$2("draft_internal_link_target_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
+  draftReferencedImageIds: uuid$2("draft_referenced_image_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
   publicationState: text("publication_state").$type().default(DOCUMENT_PUBLICATION_STATE.DRAFT).notNull(),
-  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull(),
-  updatedAt: timezoneTimestamp$1("updated_at").defaultNow().notNull(),
-  archivedAt: timezoneTimestamp$1("archived_at"),
-  archivedByUserId: uuid("archived_by_user_id").references(() => user.id, { onDelete: "restrict" }),
-  archiveBatchId: uuid("archive_batch_id")
+  createdAt: timezoneTimestamp$4("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$4("updated_at").defaultNow().notNull(),
+  archivedAt: timezoneTimestamp$4("archived_at"),
+  archivedByUserId: uuid$2("archived_by_user_id").references(() => user.id, { onDelete: "restrict" }),
+  archiveBatchId: uuid$2("archive_batch_id")
 }, (table) => [
   unique("documents_id_project_id_unique").on(table.id, table.projectId),
   foreignKey({
@@ -5980,21 +7116,23 @@ const documents = pgTable("documents", {
   index("documents_project_parent_position_idx").on(table.projectId, table.parentId, table.position),
   index("documents_project_archive_batch_idx").on(table.projectId, table.archiveBatchId),
   index("documents_owner_user_id_idx").on(table.ownerUserId),
-  index("documents_archived_by_user_id_idx").on(table.archivedByUserId)
+  index("documents_archived_by_user_id_idx").on(table.archivedByUserId),
+  index("documents_draft_search_idx").using("gin", sql`minerva_document_search_vector(${table.title}, ${table.draftSearchText})`)
 ]);
 const documentVersions = pgTable("document_versions", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  projectId: uuid("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
-  documentId: uuid("document_id").notNull(),
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  documentId: uuid$2("document_id").notNull(),
   versionNumber: integer("version_number").notNull(),
   sourceDraftRevision: integer("source_draft_revision").notNull(),
   title: text("title").notNull(),
   draftContent: jsonb("draft_content").$type().notNull(),
-  internalLinkTargetIds: uuid("internal_link_target_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
-  referencedImageIds: uuid("referenced_image_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
+  searchText: text("search_text").default("").notNull(),
+  internalLinkTargetIds: uuid$2("internal_link_target_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
+  referencedImageIds: uuid$2("referenced_image_ids").array().default(sql`ARRAY[]::uuid[]`).notNull(),
   changeSummary: text("change_summary").notNull(),
-  publishedByUserId: uuid("published_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  publishedAt: timezoneTimestamp$1("published_at").defaultNow().notNull()
+  publishedByUserId: uuid$2("published_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  publishedAt: timezoneTimestamp$4("published_at").defaultNow().notNull()
 }, (table) => [
   unique("document_versions_document_number_unique").on(table.documentId, table.versionNumber),
   foreignKey({
@@ -6007,20 +7145,78 @@ const documentVersions = pgTable("document_versions", {
   check("document_versions_title_check", sql`${table.title} = btrim(${table.title}) and char_length(${table.title}) between 1 and 200`),
   check("document_versions_change_summary_check", sql`${table.changeSummary} = btrim(${table.changeSummary}) and char_length(${table.changeSummary}) between 0 and 1000`),
   index("document_versions_project_document_idx").on(table.projectId, table.documentId, table.versionNumber),
-  index("document_versions_published_by_user_id_idx").on(table.publishedByUserId)
+  index("document_versions_published_by_user_id_idx").on(table.publishedByUserId),
+  index("document_versions_search_idx").using("gin", sql`minerva_document_search_vector(${table.title}, ${table.searchText})`)
 ]);
 
-const timezoneTimestamp = (name) => timestamp(name, { withTimezone: true });
+const DOCUMENT_PUBLIC_SHARE_SCOPE = {
+  DOCUMENT: "document",
+  BRANCH: "branch"
+};
+const DOCUMENT_PUBLIC_SHARE_STATUS = {
+  ACTIVE: "active",
+  REVOKED: "revoked"
+};
+const DOCUMENT_PUBLIC_SHARE_TOKEN_BYTES = 32;
+const DOCUMENT_PUBLIC_SHARE_TOKEN_LENGTH = 43;
+const DOCUMENT_PUBLIC_SHARE_TOKEN_HASH_LENGTH = 64;
+const DOCUMENT_PUBLIC_SHARE_URL_MAX_LENGTH = 2048;
+
+const enumValues = (values) => Object.values(values);
+const enumSql = (values) => sql.raw(Object.values(values).map((value) => `'${value.replaceAll("'", "''")}'`).join(", "));
+const numberSql = (value) => sql.raw(String(value));
+const timezoneTimestamp$3 = (name) => timestamp(name, { withTimezone: true });
+const documentPublicShares = pgTable("document_public_shares", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  rootDocumentId: uuid$2("root_document_id").notNull(),
+  scope: text("scope", { enum: enumValues(DOCUMENT_PUBLIC_SHARE_SCOPE) }).notNull(),
+  tokenHash: text("token_hash").notNull(),
+  tokenCiphertext: text("token_ciphertext").notNull(),
+  tokenNonce: text("token_nonce").notNull(),
+  tokenKeyVersion: integer("token_key_version").notNull(),
+  createdByUserId: uuid$2("created_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  revokedByUserId: uuid$2("revoked_by_user_id").references(() => user.id, { onDelete: "restrict" }),
+  createdAt: timezoneTimestamp$3("created_at").defaultNow().notNull(),
+  revokedAt: timezoneTimestamp$3("revoked_at"),
+  updatedAt: timezoneTimestamp$3("updated_at").defaultNow().notNull()
+}, (table) => [
+  foreignKey({
+    name: "document_public_shares_root_document_project_fk",
+    columns: [table.rootDocumentId, table.projectId],
+    foreignColumns: [documents.id, documents.projectId]
+  }).onDelete("cascade"),
+  check("document_public_shares_scope_check", sql`${table.scope} in (${enumSql(DOCUMENT_PUBLIC_SHARE_SCOPE)})`),
+  check("document_public_shares_token_hash_check", sql`
+    char_length(${table.tokenHash}) = ${numberSql(DOCUMENT_PUBLIC_SHARE_TOKEN_HASH_LENGTH)}
+    and ${table.tokenHash} ~ '^[0-9a-f]+$'
+  `),
+  check("document_public_shares_envelope_check", sql`
+    char_length(${table.tokenCiphertext}) > 0
+    and char_length(${table.tokenNonce}) > 0
+    and ${table.tokenKeyVersion} > 0
+  `),
+  check("document_public_shares_revocation_check", sql`
+    (${table.revokedAt} is null and ${table.revokedByUserId} is null)
+    or (${table.revokedAt} is not null and ${table.revokedByUserId} is not null)
+  `),
+  uniqueIndex("document_public_shares_token_hash_unique").on(table.tokenHash),
+  uniqueIndex("document_public_shares_active_scope_unique").on(table.projectId, table.rootDocumentId, table.scope).where(sql`${table.revokedAt} is null`),
+  index("document_public_shares_root_idx").on(table.projectId, table.rootDocumentId, table.createdAt),
+  index("document_public_shares_revoked_at_idx").on(table.revokedAt)
+]);
+
+const timezoneTimestamp$2 = (name) => timestamp(name, { withTimezone: true });
 const documentImages = pgTable("document_images", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  projectId: uuid("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
   objectKey: text("object_key").notNull(),
   filename: text("filename").notNull(),
   mimeType: text("mime_type").$type().notNull(),
   byteSize: integer("byte_size").notNull(),
-  uploadedByUserId: uuid("uploaded_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
-  createdAt: timezoneTimestamp("created_at").defaultNow().notNull(),
-  archivedAt: timezoneTimestamp("archived_at")
+  uploadedByUserId: uuid$2("uploaded_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull(),
+  archivedAt: timezoneTimestamp$2("archived_at")
 }, (table) => [
   unique("document_images_id_project_id_unique").on(table.id, table.projectId),
   unique("document_images_object_key_unique").on(table.objectKey),
@@ -6029,6 +7225,176 @@ const documentImages = pgTable("document_images", {
   check("document_images_byte_size_check", sql`${table.byteSize} between 1 and 10485760`),
   index("document_images_project_created_idx").on(table.projectId, table.createdAt),
   index("document_images_uploaded_by_idx").on(table.uploadedByUserId)
+]);
+const projectIcons = pgTable("project_icons", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  objectKey: text("object_key").notNull(),
+  mimeType: text("mime_type").$type().notNull(),
+  byteSize: integer("byte_size").notNull(),
+  updatedByUserId: uuid$2("updated_by_user_id").notNull().references(() => user.id, { onDelete: "restrict" }),
+  createdAt: timezoneTimestamp$2("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$2("updated_at").defaultNow().notNull()
+}, (table) => [
+  unique("project_icons_project_id_unique").on(table.projectId),
+  unique("project_icons_object_key_unique").on(table.objectKey),
+  check("project_icons_mime_type_check", sql`${table.mimeType} in ('image/png', 'image/jpeg', 'image/webp')`),
+  check("project_icons_byte_size_check", sql`${table.byteSize} between 1 and 2097152`),
+  index("project_icons_updated_by_user_id_idx").on(table.updatedByUserId)
+]);
+
+const timezoneTimestamp$1 = (name) => timestamp(name, { withTimezone: true });
+const oauthClient = pgTable("oauth_client", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  clientId: text("client_id").notNull().unique(),
+  clientSecret: text("client_secret"),
+  disabled: boolean("disabled").default(false),
+  skipConsent: boolean("skip_consent"),
+  enableEndSession: boolean("enable_end_session"),
+  subjectType: text("subject_type"),
+  scopes: text("scopes").array(),
+  userId: uuid$2("user_id").references(() => user.id, { onDelete: "cascade" }),
+  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$1("updated_at").defaultNow().notNull(),
+  name: text("name"),
+  uri: text("uri"),
+  icon: text("icon"),
+  contacts: text("contacts").array(),
+  tos: text("tos"),
+  policy: text("policy"),
+  softwareId: text("software_id"),
+  softwareVersion: text("software_version"),
+  softwareStatement: text("software_statement"),
+  redirectUris: text("redirect_uris").array().notNull(),
+  postLogoutRedirectUris: text("post_logout_redirect_uris").array(),
+  tokenEndpointAuthMethod: text("token_endpoint_auth_method"),
+  grantTypes: text("grant_types").array(),
+  responseTypes: text("response_types").array(),
+  public: boolean("public"),
+  type: text("type"),
+  requirePKCE: boolean("require_pkce"),
+  referenceId: text("reference_id"),
+  metadata: jsonb("metadata")
+}, (table) => [
+  index("oauth_client_user_id_idx").on(table.userId)
+]);
+const oauthGrants = pgTable("oauth_grants", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  userId: uuid$2("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  clientId: text("client_id").notNull().references(() => oauthClient.clientId, { onDelete: "cascade" }),
+  resource: text("resource").notNull(),
+  scopes: text("scopes").array().notNull(),
+  status: text("status", { enum: [OAUTH_GRANT_STATUS.ACTIVE, OAUTH_GRANT_STATUS.REVOKED] }).default(OAUTH_GRANT_STATUS.ACTIVE).notNull(),
+  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$1("updated_at").defaultNow().notNull(),
+  revokedAt: timezoneTimestamp$1("revoked_at")
+}, (table) => [
+  check("oauth_grants_status_check", sql`${table.status} in ('active', 'revoked')`),
+  check("oauth_grants_resource_check", sql`${table.resource} = btrim(${table.resource}) and char_length(${table.resource}) between 1 and 2048`),
+  check("oauth_grants_revocation_check", sql`
+    (${table.status} = 'active' and ${table.revokedAt} is null)
+    or (${table.status} = 'revoked' and ${table.revokedAt} is not null)
+  `),
+  uniqueIndex("oauth_grants_active_subject_unique").on(table.userId, table.clientId, table.resource).where(sql`${table.status} = 'active'`),
+  index("oauth_grants_user_id_idx").on(table.userId),
+  index("oauth_grants_client_id_idx").on(table.clientId),
+  index("oauth_grants_status_idx").on(table.status)
+]);
+const oauthRefreshToken = pgTable("oauth_refresh_token", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  token: text("token").notNull().unique(),
+  clientId: text("client_id").notNull().references(() => oauthClient.clientId, { onDelete: "cascade" }),
+  sessionId: uuid$2("session_id").references(() => session.id, { onDelete: "set null" }),
+  userId: uuid$2("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  referenceId: text("reference_id"),
+  expiresAt: timezoneTimestamp$1("expires_at").notNull(),
+  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull(),
+  revoked: timezoneTimestamp$1("revoked"),
+  authTime: timezoneTimestamp$1("auth_time"),
+  scopes: text("scopes").array().notNull()
+}, (table) => [
+  index("oauth_refresh_token_client_id_idx").on(table.clientId),
+  index("oauth_refresh_token_session_id_idx").on(table.sessionId),
+  index("oauth_refresh_token_user_id_idx").on(table.userId),
+  index("oauth_refresh_token_reference_id_idx").on(table.referenceId)
+]);
+const oauthAccessToken = pgTable("oauth_access_token", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  token: text("token").notNull().unique(),
+  clientId: text("client_id").notNull().references(() => oauthClient.clientId, { onDelete: "cascade" }),
+  sessionId: uuid$2("session_id").references(() => session.id, { onDelete: "set null" }),
+  userId: uuid$2("user_id").references(() => user.id, { onDelete: "cascade" }),
+  referenceId: text("reference_id"),
+  refreshId: uuid$2("refresh_id").references(() => oauthRefreshToken.id, { onDelete: "cascade" }),
+  expiresAt: timezoneTimestamp$1("expires_at").notNull(),
+  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull(),
+  scopes: text("scopes").array().notNull()
+}, (table) => [
+  index("oauth_access_token_client_id_idx").on(table.clientId),
+  index("oauth_access_token_session_id_idx").on(table.sessionId),
+  index("oauth_access_token_user_id_idx").on(table.userId),
+  index("oauth_access_token_reference_id_idx").on(table.referenceId),
+  index("oauth_access_token_refresh_id_idx").on(table.refreshId)
+]);
+const oauthConsent = pgTable("oauth_consent", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  clientId: text("client_id").notNull().references(() => oauthClient.clientId, { onDelete: "cascade" }),
+  userId: uuid$2("user_id").references(() => user.id, { onDelete: "cascade" }),
+  referenceId: text("reference_id"),
+  scopes: text("scopes").array().notNull(),
+  createdAt: timezoneTimestamp$1("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp$1("updated_at").defaultNow().notNull()
+}, (table) => [
+  index("oauth_consent_client_id_idx").on(table.clientId),
+  index("oauth_consent_user_id_idx").on(table.userId),
+  index("oauth_consent_reference_id_idx").on(table.referenceId)
+]);
+
+const timezoneTimestamp = (name) => timestamp(name, { withTimezone: true });
+const mcpIdempotencyRecords = pgTable("mcp_idempotency_records", {
+  id: uuid$2("id").defaultRandom().primaryKey(),
+  grantId: uuid$2("grant_id").notNull().references(() => oauthGrants.id, { onDelete: "cascade" }),
+  toolName: text("tool_name").notNull(),
+  projectId: uuid$2("project_id").notNull().references(() => projects.id, { onDelete: "cascade" }),
+  idempotencyKey: text("idempotency_key").notNull(),
+  requestHash: text("request_hash").notNull(),
+  status: text("status", { enum: ["in_progress", "completed"] }).notNull(),
+  leaseToken: uuid$2("lease_token"),
+  leaseExpiresAt: timezoneTimestamp("lease_expires_at"),
+  safeResult: jsonb("safe_result"),
+  createdAt: timezoneTimestamp("created_at").defaultNow().notNull(),
+  updatedAt: timezoneTimestamp("updated_at").defaultNow().notNull(),
+  retentionExpiresAt: timezoneTimestamp("retention_expires_at").notNull()
+}, (table) => [
+  unique("mcp_idempotency_scope_unique").on(table.grantId, table.toolName, table.projectId, table.idempotencyKey),
+  check("mcp_idempotency_tool_name_check", sql`
+    ${table.toolName} = btrim(${table.toolName})
+    and char_length(${table.toolName}) between 1 and 128
+    and ${table.toolName} ~ '^[a-z0-9_]+$'
+  `),
+  check("mcp_idempotency_key_check", sql`
+    ${table.idempotencyKey} = btrim(${table.idempotencyKey})
+    and char_length(${table.idempotencyKey}) between 1 and 128
+  `),
+  check("mcp_idempotency_request_hash_check", sql`${table.requestHash} ~ '^[a-f0-9]{64}$'`),
+  check("mcp_idempotency_state_check", sql`
+    (${table.status} = 'in_progress'
+      and ${table.leaseToken} is not null
+      and ${table.leaseExpiresAt} is not null
+      and ${table.safeResult} is null)
+    or
+    (${table.status} = 'completed'
+      and ${table.leaseToken} is null
+      and ${table.leaseExpiresAt} is null
+      and ${table.safeResult} is not null)
+  `),
+  check("mcp_idempotency_retention_check", sql`
+    ${table.retentionExpiresAt} > ${table.createdAt}
+    and ${table.retentionExpiresAt} <= ${table.createdAt} + interval '7 days'
+    and (${table.leaseExpiresAt} is null or ${table.leaseExpiresAt} <= ${table.retentionExpiresAt})
+  `),
+  index("mcp_idempotency_retention_idx").on(table.retentionExpiresAt),
+  index("mcp_idempotency_grant_idx").on(table.grantId)
 ]);
 
 const authSchema = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
@@ -6043,8 +7409,27 @@ const authSchema = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty
   credentialFields: credentialFields,
   credentials: credentials,
   documentImages: documentImages,
+  documentPublicShares: documentPublicShares,
   documentVersions: documentVersions,
   documents: documents,
+  mcpIdempotencyRecords: mcpIdempotencyRecords,
+  oauthAccessToken: oauthAccessToken,
+  oauthClient: oauthClient,
+  oauthConsent: oauthConsent,
+  oauthGrants: oauthGrants,
+  oauthRefreshToken: oauthRefreshToken,
+  projectAiConnections: projectAiConnections,
+  projectAiConnectionsRelations: projectAiConnectionsRelations,
+  projectAiConversationMessages: projectAiConversationMessages,
+  projectAiConversationMessagesRelations: projectAiConversationMessagesRelations,
+  projectAiConversations: projectAiConversations,
+  projectAiConversationsRelations: projectAiConversationsRelations,
+  projectAiDocumentProposals: projectAiDocumentProposals,
+  projectAiTurnControls: projectAiTurnControls,
+  projectAiUsageEvents: projectAiUsageEvents,
+  projectIcons: projectIcons,
+  projectLifecycleEvents: projectLifecycleEvents,
+  projectLifecycleEventsRelations: projectLifecycleEventsRelations,
   projectMemberships: projectMemberships,
   projectMembershipsRelations: projectMembershipsRelations,
   projectRolePermissions: projectRolePermissions,
@@ -6061,12 +7446,190 @@ const authSchema = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty
   verification: verification
 }, Symbol.toStringTag, { value: 'Module' }));
 
-function createMinervaAuth({ mode, db, baseURL, trustedOrigins, mailer }) {
+const OAUTH_GRANT_REVOCATION_RESULT = {
+  REVOKED: "revoked",
+  NOT_FOUND: "not_found",
+  STALE: "stale",
+  ALREADY_REVOKED: "already_revoked",
+  ACCOUNT_INACTIVE: "account_inactive"
+};
+function createOAuthGrantManagement(db) {
+  return {
+    ensureActive(command) {
+      return db.transaction(async (tx) => {
+        const [actor] = await tx.select({ status: user.status }).from(user).where(eq(user.id, command.actorUserId)).for("update");
+        if ((actor == null ? void 0 : actor.status) !== ACCOUNT_STATUS.ACTIVE) throw new Error("OAuth grant actor is inactive");
+        const [existing] = await tx.select({ id: oauthGrants.id, scopes: oauthGrants.scopes }).from(oauthGrants).where(and(
+          eq(oauthGrants.userId, command.actorUserId),
+          eq(oauthGrants.clientId, command.clientId),
+          eq(oauthGrants.resource, command.resource),
+          eq(oauthGrants.status, OAUTH_GRANT_STATUS.ACTIVE)
+        )).for("update");
+        if (existing) {
+          if (existing.scopes.join(" ") !== command.scopes.join(" ")) {
+            await tx.update(oauthGrants).set({ scopes: [...command.scopes], updatedAt: /* @__PURE__ */ new Date() }).where(eq(oauthGrants.id, existing.id));
+          }
+          return existing.id;
+        }
+        const [created] = await tx.insert(oauthGrants).values({
+          userId: command.actorUserId,
+          clientId: command.clientId,
+          resource: command.resource,
+          scopes: [...command.scopes]
+        }).returning({ id: oauthGrants.id });
+        if (!created) throw new Error("OAuth grant insert returned no row");
+        return created.id;
+      });
+    },
+    async listActive(actorUserId) {
+      const rows = await db.select({
+        id: oauthGrants.id,
+        clientId: oauthClient.clientId,
+        clientName: oauthClient.name,
+        resource: oauthGrants.resource,
+        scopes: oauthGrants.scopes,
+        createdAt: oauthGrants.createdAt,
+        updatedAt: oauthGrants.updatedAt
+      }).from(oauthGrants).innerJoin(oauthClient, eq(oauthClient.clientId, oauthGrants.clientId)).innerJoin(oauthConsent, sql`${oauthConsent.referenceId} = ${oauthGrants.id}::text`).where(and(
+        eq(oauthGrants.userId, actorUserId),
+        eq(oauthGrants.status, OAUTH_GRANT_STATUS.ACTIVE)
+      )).orderBy(oauthGrants.createdAt);
+      return rows.map((row) => {
+        var _a;
+        return {
+          id: row.id,
+          client: { id: row.clientId, name: (_a = row.clientName) != null ? _a : row.clientId },
+          resource: row.resource,
+          scopes: row.scopes,
+          createdAt: row.createdAt.toISOString(),
+          updatedAt: row.updatedAt.toISOString()
+        };
+      });
+    },
+    revoke(command) {
+      return db.transaction(async (tx) => {
+        const [actor] = await tx.select({ status: user.status }).from(user).where(eq(user.id, command.actorUserId)).for("update");
+        if ((actor == null ? void 0 : actor.status) !== ACCOUNT_STATUS.ACTIVE) {
+          return { type: OAUTH_GRANT_REVOCATION_RESULT.ACCOUNT_INACTIVE };
+        }
+        const [grant] = await tx.select({
+          id: oauthGrants.id,
+          status: oauthGrants.status,
+          updatedAt: oauthGrants.updatedAt
+        }).from(oauthGrants).where(and(
+          eq(oauthGrants.id, command.grantId),
+          eq(oauthGrants.userId, command.actorUserId)
+        )).for("update");
+        if (!grant) return { type: OAUTH_GRANT_REVOCATION_RESULT.NOT_FOUND };
+        if (grant.status === OAUTH_GRANT_STATUS.REVOKED) {
+          return { type: OAUTH_GRANT_REVOCATION_RESULT.ALREADY_REVOKED };
+        }
+        const expectedUpdatedAt = new Date(command.expectedUpdatedAt);
+        if (!Number.isFinite(expectedUpdatedAt.getTime()) || expectedUpdatedAt.getTime() !== grant.updatedAt.getTime()) {
+          return { type: OAUTH_GRANT_REVOCATION_RESULT.STALE };
+        }
+        const revokedAt = /* @__PURE__ */ new Date();
+        await tx.delete(oauthAccessToken).where(eq(oauthAccessToken.referenceId, grant.id));
+        await tx.delete(oauthRefreshToken).where(eq(oauthRefreshToken.referenceId, grant.id));
+        await tx.delete(oauthConsent).where(eq(oauthConsent.referenceId, grant.id));
+        await tx.update(oauthGrants).set({
+          status: OAUTH_GRANT_STATUS.REVOKED,
+          revokedAt,
+          updatedAt: revokedAt
+        }).where(eq(oauthGrants.id, grant.id));
+        await tx.insert(auditEvents).values({
+          actorUserId: command.actorUserId,
+          channel: command.channel,
+          action: "oauth.grant_revoked",
+          outcome: AUDIT_OUTCOME.SUCCEEDED,
+          targetType: "oauth_grant",
+          targetId: grant.id,
+          metadata: {}
+        });
+        return { type: OAUTH_GRANT_REVOCATION_RESULT.REVOKED };
+      });
+    }
+  };
+}
+
+const MCP_SCOPE = {
+  OFFLINE_ACCESS: "offline_access",
+  PROJECTS_READ: "projects:read",
+  DOCUMENTS_READ: "documents:read",
+  DOCUMENTS_WRITE: "documents:write",
+  DOCUMENTS_PUBLISH: "documents:publish"
+};
+const MCP_SCOPES = [
+  MCP_SCOPE.OFFLINE_ACCESS,
+  MCP_SCOPE.PROJECTS_READ,
+  MCP_SCOPE.DOCUMENTS_READ,
+  MCP_SCOPE.DOCUMENTS_WRITE,
+  MCP_SCOPE.DOCUMENTS_PUBLISH
+];
+
+async function resolveOAuthConsentReference({
+  state,
+  userId,
+  scopes,
+  canonicalResource,
+  ensureActive
+}) {
+  const clientId = (state == null ? void 0 : state.query) ? new URLSearchParams(state.query).get("client_id") : null;
+  if (!clientId) throw new Error("OAuth authorization context is unavailable");
+  return ensureActive({
+    actorUserId: userId,
+    clientId,
+    resource: canonicalResource,
+    scopes
+  });
+}
+
+const createMinervaOAuthProvider = ({ resource, ensureActiveGrant }) => oauthProvider({
+  loginPage: "/auth",
+  consentPage: "/oauth/consent",
+  scopes: [...MCP_SCOPES],
+  validAudiences: [resource],
+  grantTypes: ["authorization_code", "refresh_token"],
+  allowDynamicClientRegistration: false,
+  allowUnauthenticatedClientRegistration: false,
+  disableJwtPlugin: true,
+  storeTokens: "hashed",
+  ...ensureActiveGrant ? {
+    postLogin: {
+      page: "/oauth/consent",
+      shouldRedirect: () => false,
+      async consentReferenceId({ user, scopes }) {
+        if (!user) throw new Error("OAuth consent user is unavailable");
+        return resolveOAuthConsentReference({
+          state: await getOAuthProviderState(),
+          userId: user.id,
+          scopes,
+          canonicalResource: resource,
+          ensureActive: ensureActiveGrant
+        });
+      }
+    }
+  } : {},
+  rateLimit: {
+    token: { window: 60, max: 20 },
+    authorize: { window: 60, max: 30 },
+    introspect: { window: 60, max: 100 },
+    revoke: { window: 60, max: 30 },
+    register: { window: 60, max: 5 },
+    userinfo: { window: 60, max: 60 }
+  }
+});
+
+function createMinervaAuth({ mode, db, baseURL, trustedOrigins, mailer, oauth }) {
+  const grantManagement = oauth ? createOAuthGrantManagement(db) : null;
   return betterAuth({
     baseURL,
     trustedOrigins,
     database: drizzleAdapter(db, { provider: "pg", schema: authSchema }),
-    advanced: { database: { generateId: "uuid" } },
+    advanced: {
+      database: { generateId: "uuid" },
+      useSecureCookies: new URL(baseURL).protocol === "https:"
+    },
     emailAndPassword: {
       enabled: true,
       disableSignUp: mode === AUTH_MODE.RUNTIME,
@@ -6099,7 +7662,13 @@ function createMinervaAuth({ mode, db, baseURL, trustedOrigins, mailer }) {
     },
     disabledPaths: ["/is-username-available"],
     rateLimit: { enabled: true, storage: "database" },
-    plugins: [username()],
+    plugins: [username(), ...oauth ? [createMinervaOAuthProvider({
+      ...oauth,
+      ensureActiveGrant: (input) => {
+        var _a;
+        return (_a = grantManagement == null ? void 0 : grantManagement.ensureActive(input)) != null ? _a : Promise.reject(new Error("OAuth grant management is unavailable"));
+      }
+    })] : []],
     databaseHooks: {
       user: {
         create: {
@@ -6142,6 +7711,7 @@ function getAuth() {
     db: getDatabase().db,
     baseURL: env.BETTER_AUTH_URL,
     trustedOrigins: env.TRUSTED_ORIGINS,
+    oauth: { resource: env.MCP_RESOURCE_URL },
     mailer: createSmtpPasswordResetMailer({
       host: env.SMTP_HOST,
       port: env.SMTP_PORT,
@@ -6235,16 +7805,34 @@ const _jTrm0W = defineEventHandler(createAuthorizeApiHandler(
 
 const _SxA8c9 = defineEventHandler(() => {});
 
+const _lazy_easnkM = () => import('../routes/api/administration/audit.get.mjs');
+const _lazy_oHpjrF = () => import('../routes/api/administration/audit/_id/target.get.mjs');
 const _lazy_2RkfPl = () => import('../routes/api/administration/projects.get.mjs');
 const _lazy_dDpFfZ = () => import('../routes/api/administration/users.get.mjs');
 const _lazy_0c5X7R = () => import('../routes/api/administration/users/_id_.get.mjs');
 const _lazy_U3y6GK = () => import('../routes/api/auth/_...all_.mjs');
 const _lazy_afLbV3 = () => import('../routes/api/health/database.get.mjs');
+const _lazy_RART9Z = () => import('../routes/api/health/live.get.mjs');
+const _lazy_mmsPCW = () => import('../routes/api/health/ready.get.mjs');
 const _lazy_iQPd6z = () => import('../routes/api/identity/request-password-reset.post.mjs');
 const _lazy_JFxJTa = () => import('../routes/api/identity/reset-password.post.mjs');
 const _lazy_NUZdhU = () => import('../routes/api/identity/sign-in.post.mjs');
 const _lazy_2ASSPc = () => import('../routes/api/mainMenu.get.mjs');
+const _lazy_KtSLyD = () => import('../routes/api/oauth/grants/_grantId/revoke.post.mjs');
+const _lazy_dzXxQL = () => import('../routes/api/oauth/index.get.mjs');
 const _lazy_tTawS_ = () => import('../routes/api/projects/_id_.get.mjs');
+const _lazy_FFdyc3 = () => import('../routes/api/projects/_id/ai-assistant/availability.get.mjs');
+const _lazy_EvjJgZ = () => import('../routes/api/projects/_id/ai-assistant/connection.delete.mjs');
+const _lazy_k1Ff7x = () => import('../routes/api/projects/_id/ai-assistant/connection.get.mjs');
+const _lazy_FSTjDZ = () => import('../routes/api/projects/_id/ai-assistant/connection.put.mjs');
+const _lazy_tXrEkX = () => import('../routes/api/projects/_id/ai-assistant/connection/test.post.mjs');
+const _lazy_9Iquvm = () => import('../routes/api/projects/_id/ai-assistant/conversations/_conversationId_.delete.mjs');
+const _lazy_jAgE3R = () => import('../routes/api/projects/_id/ai-assistant/conversations/_conversationId_.get.mjs');
+const _lazy_jvNLA6 = () => import('../routes/api/projects/_id/ai-assistant/conversations/_conversationId/restore.post.mjs');
+const _lazy_VPy4Zp = () => import('../routes/api/projects/_id/ai-assistant/index.get.mjs');
+const _lazy_I7W3Ka = () => import('../routes/api/projects/_id/ai-assistant/index.post.mjs');
+const _lazy_RDy7tK = () => import('../routes/api/projects/_id/ai-assistant/turn.post.mjs');
+const _lazy_QtcCGU = () => import('../routes/api/projects/_id/ai-assistant/turn/stream.post.mjs');
 const _lazy_QVrJdy = () => import('../routes/api/projects/_id/credential-categories/_categoryId_.delete.mjs');
 const _lazy_AWqQFP = () => import('../routes/api/projects/_id/credential-categories/_categoryId_.patch.mjs');
 const _lazy_mcwD9Q = () => import('../routes/api/projects/_id/credential-categories/_categoryId/grants.put.mjs');
@@ -6257,6 +7845,7 @@ const _lazy_wZAlR4 = () => import('../routes/api/projects/_id/credentials/archiv
 const _lazy_46vAAg = () => import('../routes/api/projects/_id/index2.get.mjs');
 const _lazy_jBWZfQ = () => import('../routes/api/projects/_id/index2.post.mjs');
 const _lazy_CwOWA_ = () => import('../routes/api/projects/_id/credentials/search.post.mjs');
+const _lazy_JPR2Ga = () => import('../routes/api/projects/_id/description.patch.mjs');
 const _lazy_cSYexR = () => import('../routes/api/projects/_id/documents/_documentId_.delete.mjs');
 const _lazy_eNYuAx = () => import('../routes/api/projects/_id/documents/_documentId_.get.mjs');
 const _lazy_4htcex = () => import('../routes/api/projects/_id/documents/_documentId/discard.delete.mjs');
@@ -6264,6 +7853,11 @@ const _lazy_28tv8q = () => import('../routes/api/projects/_id/documents/_documen
 const _lazy_5jGVWs = () => import('../routes/api/projects/_id/documents/_documentId/move.patch.mjs');
 const _lazy_n00bAp = () => import('../routes/api/projects/_id/documents/_documentId/publish.post.mjs');
 const _lazy_Bh6p5c = () => import('../routes/api/projects/_id/documents/_documentId/restore.post.mjs');
+const _lazy_jBGRD5 = () => import('../routes/api/projects/_id/documents/_documentId/shares/_shareId_.delete.mjs');
+const _lazy_Twh18R = () => import('../routes/api/projects/_id/documents/_documentId/shares/_shareId/copy.post.mjs');
+const _lazy_P2Basm = () => import('../routes/api/projects/_id/documents/_documentId/shares/_shareId/rotate.post.mjs');
+const _lazy_3H2W2H = () => import('../routes/api/projects/_id/documents/_documentId/index.get.mjs');
+const _lazy_i3fOXb = () => import('../routes/api/projects/_id/documents/_documentId/index.post.mjs');
 const _lazy_1W3mzS = () => import('../routes/api/projects/_id/documents/_documentId/versions.get.mjs');
 const _lazy_a8bJ3J = () => import('../routes/api/projects/_id/documents/_documentId/versions/_versionNumber_.get.mjs');
 const _lazy_ONP_Nd = () => import('../routes/api/projects/_id/documents/_documentId/versions/_versionNumber/restore.post.mjs');
@@ -6272,24 +7866,55 @@ const _lazy_D4FJAM = () => import('../routes/api/projects/_id/documents/images/_
 const _lazy_A8PVNE = () => import('../routes/api/projects/_id/documents/index.post.mjs');
 const _lazy_bz1l28 = () => import('../routes/api/projects/_id/index3.get.mjs');
 const _lazy_H7WRQR = () => import('../routes/api/projects/_id/index3.post.mjs');
+const _lazy_IIndGb = () => import('../routes/api/projects/_id/documents/search.post.mjs');
 const _lazy_JopulS = () => import('../routes/api/projects/_id/documents/tree.get.mjs');
+const _lazy_Rz8189 = () => import('../routes/api/projects/_id/icon.delete.mjs');
+const _lazy_zzVToX = () => import('../routes/api/projects/_id/icon.get.mjs');
+const _lazy_kRutV4 = () => import('../routes/api/projects/_id/icon.put.mjs');
+const _lazy_r92RRu = () => import('../routes/api/projects/_id/lifecycle-transitions.post.mjs');
+const _lazy_HXqUKT = () => import('../routes/api/projects/_id/members.get.mjs');
 const _lazy_SncT14 = () => import('../routes/api/index.get.mjs');
 const _lazy_O1NWUv = () => import('../routes/api/index.post.mjs');
+const _lazy_m40i0F = () => import('../routes/api/public/documentation/_token_.get.mjs');
+const _lazy_LZ2CNm = () => import('../routes/api/public/documentation/_token/images/_imageId_.get.mjs');
+const _lazy_X7ZZ2q = () => import('../routes/api/public/documentation/_token/pages/_documentId_.get.mjs');
+const _lazy_7NaNLg = () => import('../routes/.well-known/oauth-authorization-server/api/auth.get.mjs');
+const _lazy_2qz1uK = () => import('../routes/.well-known/oauth-protected-resource/mcp.get.mjs');
+const _lazy_ARRP0f = () => import('../routes/mcp.post.mjs');
 const _lazy_6RVjpu = () => import('../routes/renderer.mjs');
 
 const handlers = [
   { route: '', handler: _qoihGq, lazy: false, middleware: true, method: undefined },
+  { route: '', handler: _7yksNR, lazy: false, middleware: true, method: undefined },
   { route: '', handler: _jTrm0W, lazy: false, middleware: true, method: undefined },
+  { route: '/api/administration/audit', handler: _lazy_easnkM, lazy: true, middleware: false, method: "get" },
+  { route: '/api/administration/audit/:id/target', handler: _lazy_oHpjrF, lazy: true, middleware: false, method: "get" },
   { route: '/api/administration/projects', handler: _lazy_2RkfPl, lazy: true, middleware: false, method: "get" },
   { route: '/api/administration/users', handler: _lazy_dDpFfZ, lazy: true, middleware: false, method: "get" },
   { route: '/api/administration/users/:id', handler: _lazy_0c5X7R, lazy: true, middleware: false, method: "get" },
   { route: '/api/auth/**:all', handler: _lazy_U3y6GK, lazy: true, middleware: false, method: undefined },
   { route: '/api/health/database', handler: _lazy_afLbV3, lazy: true, middleware: false, method: "get" },
+  { route: '/api/health/live', handler: _lazy_RART9Z, lazy: true, middleware: false, method: "get" },
+  { route: '/api/health/ready', handler: _lazy_mmsPCW, lazy: true, middleware: false, method: "get" },
   { route: '/api/identity/request-password-reset', handler: _lazy_iQPd6z, lazy: true, middleware: false, method: "post" },
   { route: '/api/identity/reset-password', handler: _lazy_JFxJTa, lazy: true, middleware: false, method: "post" },
   { route: '/api/identity/sign-in', handler: _lazy_NUZdhU, lazy: true, middleware: false, method: "post" },
   { route: '/api/mainMenu', handler: _lazy_2ASSPc, lazy: true, middleware: false, method: "get" },
+  { route: '/api/oauth/grants/:grantId/revoke', handler: _lazy_KtSLyD, lazy: true, middleware: false, method: "post" },
+  { route: '/api/oauth/grants', handler: _lazy_dzXxQL, lazy: true, middleware: false, method: "get" },
   { route: '/api/projects/:id', handler: _lazy_tTawS_, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/ai-assistant/availability', handler: _lazy_FFdyc3, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/ai-assistant/connection', handler: _lazy_EvjJgZ, lazy: true, middleware: false, method: "delete" },
+  { route: '/api/projects/:id/ai-assistant/connection', handler: _lazy_k1Ff7x, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/ai-assistant/connection', handler: _lazy_FSTjDZ, lazy: true, middleware: false, method: "put" },
+  { route: '/api/projects/:id/ai-assistant/connection/test', handler: _lazy_tXrEkX, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/ai-assistant/conversations/:conversationId', handler: _lazy_9Iquvm, lazy: true, middleware: false, method: "delete" },
+  { route: '/api/projects/:id/ai-assistant/conversations/:conversationId', handler: _lazy_jAgE3R, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/ai-assistant/conversations/:conversationId/restore', handler: _lazy_jvNLA6, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/ai-assistant/conversations', handler: _lazy_VPy4Zp, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/ai-assistant/conversations', handler: _lazy_I7W3Ka, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/ai-assistant/turn', handler: _lazy_RDy7tK, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/ai-assistant/turn/stream', handler: _lazy_QtcCGU, lazy: true, middleware: false, method: "post" },
   { route: '/api/projects/:id/credential-categories/:categoryId', handler: _lazy_QVrJdy, lazy: true, middleware: false, method: "delete" },
   { route: '/api/projects/:id/credential-categories/:categoryId', handler: _lazy_AWqQFP, lazy: true, middleware: false, method: "patch" },
   { route: '/api/projects/:id/credential-categories/:categoryId/grants', handler: _lazy_mcwD9Q, lazy: true, middleware: false, method: "put" },
@@ -6302,6 +7927,7 @@ const handlers = [
   { route: '/api/projects/:id/credentials', handler: _lazy_46vAAg, lazy: true, middleware: false, method: "get" },
   { route: '/api/projects/:id/credentials', handler: _lazy_jBWZfQ, lazy: true, middleware: false, method: "post" },
   { route: '/api/projects/:id/credentials/search', handler: _lazy_CwOWA_, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/description', handler: _lazy_JPR2Ga, lazy: true, middleware: false, method: "patch" },
   { route: '/api/projects/:id/documents/:documentId', handler: _lazy_cSYexR, lazy: true, middleware: false, method: "delete" },
   { route: '/api/projects/:id/documents/:documentId', handler: _lazy_eNYuAx, lazy: true, middleware: false, method: "get" },
   { route: '/api/projects/:id/documents/:documentId/discard', handler: _lazy_4htcex, lazy: true, middleware: false, method: "delete" },
@@ -6309,6 +7935,11 @@ const handlers = [
   { route: '/api/projects/:id/documents/:documentId/move', handler: _lazy_5jGVWs, lazy: true, middleware: false, method: "patch" },
   { route: '/api/projects/:id/documents/:documentId/publish', handler: _lazy_n00bAp, lazy: true, middleware: false, method: "post" },
   { route: '/api/projects/:id/documents/:documentId/restore', handler: _lazy_Bh6p5c, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/documents/:documentId/shares/:shareId', handler: _lazy_jBGRD5, lazy: true, middleware: false, method: "delete" },
+  { route: '/api/projects/:id/documents/:documentId/shares/:shareId/copy', handler: _lazy_Twh18R, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/documents/:documentId/shares/:shareId/rotate', handler: _lazy_P2Basm, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/documents/:documentId/shares', handler: _lazy_3H2W2H, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/documents/:documentId/shares', handler: _lazy_i3fOXb, lazy: true, middleware: false, method: "post" },
   { route: '/api/projects/:id/documents/:documentId/versions', handler: _lazy_1W3mzS, lazy: true, middleware: false, method: "get" },
   { route: '/api/projects/:id/documents/:documentId/versions/:versionNumber', handler: _lazy_a8bJ3J, lazy: true, middleware: false, method: "get" },
   { route: '/api/projects/:id/documents/:documentId/versions/:versionNumber/restore', handler: _lazy_ONP_Nd, lazy: true, middleware: false, method: "post" },
@@ -6317,9 +7948,21 @@ const handlers = [
   { route: '/api/projects/:id/documents/images', handler: _lazy_A8PVNE, lazy: true, middleware: false, method: "post" },
   { route: '/api/projects/:id/documents', handler: _lazy_bz1l28, lazy: true, middleware: false, method: "get" },
   { route: '/api/projects/:id/documents', handler: _lazy_H7WRQR, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/documents/search', handler: _lazy_IIndGb, lazy: true, middleware: false, method: "post" },
   { route: '/api/projects/:id/documents/tree', handler: _lazy_JopulS, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/icon', handler: _lazy_Rz8189, lazy: true, middleware: false, method: "delete" },
+  { route: '/api/projects/:id/icon', handler: _lazy_zzVToX, lazy: true, middleware: false, method: "get" },
+  { route: '/api/projects/:id/icon', handler: _lazy_kRutV4, lazy: true, middleware: false, method: "put" },
+  { route: '/api/projects/:id/lifecycle-transitions', handler: _lazy_r92RRu, lazy: true, middleware: false, method: "post" },
+  { route: '/api/projects/:id/members', handler: _lazy_HXqUKT, lazy: true, middleware: false, method: "get" },
   { route: '/api/projects', handler: _lazy_SncT14, lazy: true, middleware: false, method: "get" },
   { route: '/api/projects', handler: _lazy_O1NWUv, lazy: true, middleware: false, method: "post" },
+  { route: '/api/public/documentation/:token', handler: _lazy_m40i0F, lazy: true, middleware: false, method: "get" },
+  { route: '/api/public/documentation/:token/images/:imageId', handler: _lazy_LZ2CNm, lazy: true, middleware: false, method: "get" },
+  { route: '/api/public/documentation/:token/pages/:documentId', handler: _lazy_X7ZZ2q, lazy: true, middleware: false, method: "get" },
+  { route: '/.well-known/oauth-authorization-server/api/auth', handler: _lazy_7NaNLg, lazy: true, middleware: false, method: "get" },
+  { route: '/.well-known/oauth-protected-resource/mcp', handler: _lazy_2qz1uK, lazy: true, middleware: false, method: "get" },
+  { route: '/mcp', handler: _lazy_ARRP0f, lazy: true, middleware: false, method: "post" },
   { route: '/__nuxt_error', handler: _lazy_6RVjpu, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_6RVjpu, lazy: true, middleware: false, method: undefined }
@@ -6505,5 +8148,5 @@ function defineRenderHandler(render) {
   });
 }
 
-export { defineRenderHandler as $, AUDIT_CHANNEL as A, auditEvents as B, CREDENTIAL_FIELD_TYPE as C, AUDIT_OUTCOME as D, credentialFields as E, credentialCategories as F, credentialCategoryRoleGrants as G, credentialCategoryMemberGrants as H, IDENTITY_CODE as I, ACCOUNT_STATUS as J, DOCUMENT_DRAFT_UPDATE_CODE as K, LOGIN_IDENTIFIER_KIND as L, MEMBERSHIP_STATUS as M, documentImages as N, documents as O, PROJECT_PERMISSION as P, DOCUMENT_PUBLICATION_STATE as Q, documentVersions as R, DOCUMENT_TEMPLATE as S, send as T, getObjectStorageEnv as U, readMultipartFormData as V, PROJECT_ROLE_KEY as W, PROJECT_STATUS as X, joinRelativeURL as Y, useRuntimeConfig as Z, encodePath as _, getDatabase as a, destr as a0, getRouteRules as a1, getResponseStatusText as a2, getResponseStatus as a3, user as b, createError$1 as c, defineEventHandler as d, getRequestURL as e, getAuth as f, getRouterParam as g, getServerEnv as h, readBody as i, getRequestIP as j, IdentityError as k, appendResponseHeader as l, requireSession as m, projects as n, projectMemberships as o, projectRoles as p, projectRolePermissions as q, requireSuperAdmin as r, PROJECT_ROLE_KIND as s, toWebRequest as t, useNitroApp as u, setResponseStatus as v, setHeader as w, getQuery as x, getCredentialEncryptionEnv as y, credentials as z };;globalThis.__timing__.logEnd('Load chunks/_/nitro');
+export { AI_DOCUMENT_PROPOSAL_KIND as $, ACCOUNT_STATUS as A, readValidatedBody as B, getRequestIP as C, IdentityError as D, appendResponseHeader as E, createOAuthGrantManagement as F, createEventStream as G, AI_REQUEST_TIMEOUT_MS_MIN as H, IDENTITY_CODE as I, AI_REQUEST_TIMEOUT_MS_MAX as J, AI_MAX_OUTPUT_TOKENS_MIN as K, LOGIN_IDENTIFIER_KIND as L, AI_MAX_OUTPUT_TOKENS_MAX as M, AI_SYSTEM_INSTRUCTIONS_MAX_LENGTH as N, OAUTH_GRANT_REVOCATION_RESULT as O, AI_API_KEY_MIN_LENGTH as P, AI_API_KEY_MAX_LENGTH as Q, AI_PROVIDER as R, AI_CONVERSATION_PAGE_MAX as S, AI_CONVERSATION_PAGE_DEFAULT as T, AI_CONVERSATION_STATUS as U, AI_QUESTION_MAX_LENGTH as V, AI_ASSISTANT_ANSWER_MAX_LENGTH as W, AI_ASSISTANT_STREAM_EVENT as X, AI_ASSISTANT_STREAM_ERROR as Y, AI_MODEL_MAX_LENGTH as Z, AI_DOCUMENT_PROPOSAL_STATUS as _, user as a, OAUTH_GRANT_STATUS as a$, AI_CONNECTION_STATUS as a0, AI_ASSISTANT_AVAILABILITY as a1, AI_DOCUMENT_PROPOSAL_DECISION as a2, AI_CONVERSATION_TITLE_MAX_LENGTH as a3, AI_CONVERSATION_MESSAGE_ROLE as a4, PROJECT_PERMISSION as a5, AI_TURN_OUTCOME as a6, PROJECT_STATUS as a7, MEMBERSHIP_STATUS as a8, projectRolePermissions as a9, DOCUMENT_PUBLICATION_STATE as aA, DOCUMENT_DRAFT_UPDATE_CODE as aB, PROJECT_ROLE_KIND as aC, documentVersions as aD, credentialCategoryRoleGrants as aE, credentialCategoryMemberGrants as aF, credentialFields as aG, CREDENTIAL_FIELD_TYPE as aH, getQuery as aI, PROJECT_DESCRIPTION_MAX_LENGTH as aJ, DOCUMENT_TEMPLATE as aK, documentImages as aL, DOCUMENT_PUBLIC_SHARE_STATUS as aM, DOCUMENT_PUBLIC_SHARE_SCOPE as aN, DOCUMENT_PUBLIC_SHARE_URL_MAX_LENGTH as aO, DOCUMENT_PUBLIC_SHARE_TOKEN_LENGTH as aP, documentPublicShares as aQ, DOCUMENT_PUBLIC_SHARE_TOKEN_BYTES as aR, send as aS, readMultipartFormData as aT, PROJECT_ICON_MAX_BYTES as aU, PROJECT_ICON_MIME_TYPE as aV, PROJECT_LIFECYCLE_PERMISSION_BY_TRANSITION as aW, projectLifecycleEvents as aX, decideProjectLifecycleTransition as aY, availableProjectLifecycleTransitions as aZ, MCP_SCOPES as a_, projectMemberships as aa, projectAiConnections as ab, AI_TURN_RATE_WINDOW_SECONDS as ac, AI_TURN_RATE_MAX_REQUESTS as ad, AI_TURN_LEASE_GRACE_MS as ae, projectAiTurnControls as af, projectAiUsageEvents as ag, projectAiConversations as ah, projectAiConversationMessages as ai, AI_CONVERSATION_RETENTION_DAYS as aj, AI_CONVERSATION_TRASH_DAYS as ak, getCredentialEncryptionEnv as al, getRouterParam as am, readBody as an, PROJECT_LIST_MAX_LIMIT as ao, PROJECT_LIST_DEFAULT_LIMIT as ap, PROJECT_LIFECYCLE_TRANSITION as aq, PROJECT_LIFECYCLE_REASON_MAX_LENGTH as ar, PROJECT_NAME_MAX_LENGTH as as, PROJECT_ROLE_KEY as at, CREATE_PROJECT_ERROR as au, PROJECT_OPERATION_MODE as av, PROJECT_LIFECYCLE_RECEIPT_OUTCOME as aw, PROJECT_LIFECYCLE_CONFLICT_CODE as ax, projectRoles as ay, projectIcons as az, AuthorizationError as b, MCP_SCOPE as b0, oauthGrants as b1, mcpIdempotencyRecords as b2, oauthAccessToken as b3, sendWebResponse as b4, joinRelativeURL as b5, useRuntimeConfig as b6, encodePath as b7, defineRenderHandler as b8, destr as b9, getRouteRules as ba, getResponseStatusText as bb, getResponseStatus as bc, AUTHORIZATION_CODE as c, auditEvents as d, AUDIT_OUTCOME as e, AUDIT_CHANNEL as f, getDatabase as g, defineEventHandler as h, getValidatedQuery as i, createError$1 as j, documents as k, credentials as l, credentialCategories as m, getValidatedRouterParams as n, requireSession as o, projects as p, getRequestURL as q, requireSuperAdmin as r, setHeader as s, getAuth as t, useNitroApp as u, toWebRequest as v, getServerEnv as w, setResponseStatus as x, initializeRuntimeConfiguration as y, getObjectStorageEnv as z };;globalThis.__timing__.logEnd('Load chunks/_/nitro');
 //# sourceMappingURL=nitro.mjs.map

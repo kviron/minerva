@@ -1,0 +1,101 @@
+name: minerva-restore
+
+x-restore-hardening: &restore-hardening
+  read_only: true
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  init: true
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+
+services:
+  postgres:
+    image: postgres:17.5-alpine
+    environment:
+      POSTGRES_DB: minerva_restore
+      POSTGRES_USER: minerva
+      POSTGRES_PASSWORD_FILE: /run/secrets/restore_postgres_password
+    secrets:
+      - restore_postgres_password
+    volumes:
+      - restore-postgres-data:/var/lib/postgresql/data
+    networks:
+      - restore
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U minerva -d minerva_restore"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    tmpfs:
+      - /tmp:size=32m,mode=1777,nosuid,nodev
+
+  restore:
+    <<: *restore-hardening
+    build:
+      context: .
+      dockerfile: deploy/backup/Dockerfile
+    image: ${MINERVA_BACKUP_IMAGE:-minerva-backup:local}
+    command: ["/opt/minerva/restore.sh"]
+    environment:
+      BACKUP_REPOSITORY_FILE: /run/secrets/backup_repository
+      RESTIC_PASSWORD_FILE: /run/secrets/restic_password
+      BACKUP_ACCESS_KEY_ID_FILE: /run/secrets/backup_access_key_id
+      BACKUP_SECRET_ACCESS_KEY_FILE: /run/secrets/backup_secret_access_key
+      RESTORE_DATABASE_URL_FILE: /run/secrets/restore_database_url
+      CREDENTIAL_ENCRYPTION_KEYS_FILE: /run/secrets/credential_encryption_keys
+      RESTORE_S3_ACCESS_KEY_ID_FILE: /run/secrets/restore_s3_access_key_id
+      RESTORE_S3_SECRET_ACCESS_KEY_FILE: /run/secrets/restore_s3_secret_access_key
+      RESTORE_SNAPSHOT_ID: ${RESTORE_SNAPSHOT_ID:?RESTORE_SNAPSHOT_ID is required}
+      RESTORE_S3_ENDPOINT: ${RESTORE_S3_ENDPOINT:?RESTORE_S3_ENDPOINT is required}
+      RESTORE_S3_BUCKET: ${RESTORE_S3_BUCKET:?RESTORE_S3_BUCKET is required}
+    secrets:
+      - backup_repository
+      - restic_password
+      - backup_access_key_id
+      - backup_secret_access_key
+      - restore_database_url
+      - credential_encryption_keys
+      - restore_s3_access_key_id
+      - restore_s3_secret_access_key
+    tmpfs:
+      - /tmp:size=32m,mode=1777,noexec,nosuid,nodev
+      - /restore-stage:size=${RESTORE_STAGE_SIZE:-2g},mode=0700,uid=70,gid=70,nosuid,nodev
+    networks:
+      - restore
+      - egress
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+networks:
+  restore:
+    internal: true
+  egress:
+
+volumes:
+  restore-postgres-data:
+
+secrets:
+  restore_postgres_password:
+    file: ${RESTORE_POSTGRES_PASSWORD_FILE:-./secrets/restore/postgres_password}
+  restore_database_url:
+    file: ${RESTORE_DATABASE_URL_FILE:-./secrets/restore/database_url}
+  backup_repository:
+    file: ${BACKUP_REPOSITORY_FILE:-./secrets/backup_repository}
+  restic_password:
+    file: ${RESTIC_PASSWORD_FILE:-./secrets/restic_password}
+  backup_access_key_id:
+    file: ${BACKUP_ACCESS_KEY_ID_FILE:-./secrets/backup_access_key_id}
+  backup_secret_access_key:
+    file: ${BACKUP_SECRET_ACCESS_KEY_FILE:-./secrets/backup_secret_access_key}
+  credential_encryption_keys:
+    file: ${CREDENTIAL_ENCRYPTION_KEYS_FILE:-./secrets/restore/credential_encryption_keys}
+  restore_s3_access_key_id:
+    file: ${RESTORE_S3_ACCESS_KEY_ID_FILE:-./secrets/restore/s3_access_key_id}
+  restore_s3_secret_access_key:
+    file: ${RESTORE_S3_SECRET_ACCESS_KEY_FILE:-./secrets/restore/s3_secret_access_key}

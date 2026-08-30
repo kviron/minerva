@@ -76,7 +76,8 @@ describe('credentials table and editor', () => {
       read('../../../../app/features/credentials/model/credentials-state.ts'),
       read('../../../../app/features/credentials/model/actions/actions.ts'),
     ])
-    expect(api).toContain('parseCredentialList')
+    expect(api).toContain('decodeApiResponse')
+    expect(api).toContain('credentialListResponseSchema')
     expect(api).toContain('/api/projects/${projectId}/credentials')
     expect(api).toContain('/reveal')
     expect(actions).toContain('revealPassword')
@@ -107,6 +108,6 @@ describe('credentials table and editor', () => {
     expect(view).toContain('visibleRows')
     expect(view).toContain('selectedCategoryId')
     expect(view).toContain('state.canCreateCredentials')
-    expect(contract).toContain('canCreateCredentials: boolean')
+    expect(contract).toContain('canCreateCredentials: z.boolean()')
   })
 })

@@ -23,10 +23,32 @@ const credentialKeysSchema = z.string().transform((value, context) => {
   return keys
 })
 
+const mcpResourceUrlSchema = z.string().transform((value, context) => {
+  let url: URL
+  try {
+    url = new URL(value)
+  }
+  catch {
+    context.addIssue({ code: z.ZodIssueCode.custom, message: 'Invalid MCP resource URL' })
+    return z.NEVER
+  }
+
+  const loopback = url.hostname === '127.0.0.1' || url.hostname === 'localhost' || url.hostname === '[::1]'
+  const secureProtocol = url.protocol === 'https:' || (url.protocol === 'http:' && loopback)
+  const canonical = url.toString() === value
+  if (!secureProtocol || !canonical || url.pathname !== '/mcp' || url.username || url.password || url.search || url.hash) {
+    context.addIssue({ code: z.ZodIssueCode.custom, message: 'Invalid canonical MCP resource URL' })
+    return z.NEVER
+  }
+
+  return value
+})
+
 const serverEnvSchema = z.object({
   DATABASE_URL: z.string().url(),
   BETTER_AUTH_SECRET: z.string().min(32),
   BETTER_AUTH_URL: z.string().url(),
+  MCP_RESOURCE_URL: mcpResourceUrlSchema,
   TRUSTED_ORIGINS: z.string()
     .transform(value => value.split(',').map(origin => origin.trim()).filter(Boolean))
     .pipe(z.array(z.string().url()).min(1)),
@@ -35,7 +57,7 @@ const serverEnvSchema = z.object({
   SMTP_HOST: z.string().min(1),
   SMTP_PORT: z.coerce.number().int().min(1).max(65_535),
   MAIL_FROM: z.string().min(3),
-  MAILPIT_API_URL: z.string().url(),
+  MAILPIT_API_URL: z.string().url().optional(),
 })
 
 const credentialEncryptionEnvSchema = z.object({
@@ -74,20 +96,4 @@ export function parseCredentialEncryptionEnv(input: Record<string, string | unde
 
 export function parseObjectStorageEnv(input: Record<string, string | undefined>): ObjectStorageEnv {
   return objectStorageEnvSchema.parse(input)
-}
-
-let cachedServerEnv: ServerEnv | undefined
-let cachedCredentialEncryptionEnv: CredentialEncryptionEnv | undefined
-let cachedObjectStorageEnv: ObjectStorageEnv | undefined
-
-export function getServerEnv(): ServerEnv {
-  return cachedServerEnv ??= parseServerEnv(process.env)
-}
-
-export function getCredentialEncryptionEnv(): CredentialEncryptionEnv {
-  return cachedCredentialEncryptionEnv ??= parseCredentialEncryptionEnv(process.env)
-}
-
-export function getObjectStorageEnv(): ObjectStorageEnv {
-  return cachedObjectStorageEnv ??= parseObjectStorageEnv(process.env)
 }

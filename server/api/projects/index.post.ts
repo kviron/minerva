@@ -1,27 +1,20 @@
-import { defineEventHandler, readBody, setResponseStatus } from 'h3'
-import { AUDIT_CHANNEL } from '../../../shared/projects/constants'
-import type { AccountStatus } from '../../../shared/identity/types'
+import { defineEventHandler, readValidatedBody, setHeader, setResponseStatus } from 'h3'
+import { AUDIT_CHANNEL, CREATE_PROJECT_ERROR } from '../../../shared/projects/constants'
+import { createProjectRequestSchema } from '../../../shared/projects/contracts'
 import { requireSession } from '../../modules/identity/session/require-session'
-import { CREATE_PROJECT_ERROR, createProject } from '../../modules/projects/create-project'
-
-interface ProjectSession {
-  readonly user: { readonly id: string, readonly status: AccountStatus }
-}
-
-const isBody = (value: unknown): value is { name: string, description?: string | null } => {
-  if (typeof value !== 'object' || value === null || Array.isArray(value)) return false
-  const body = value as Record<string, unknown>
-  if (!Object.keys(body).every(key => key === 'name' || key === 'description')) return false
-  return typeof body.name === 'string'
-    && (body.description === undefined || body.description === null || typeof body.description === 'string')
-}
+import { createProject } from '../../modules/projects/create-project'
+import { createProjectHttpStatus } from '../../utils/create-project-http'
 
 export default defineEventHandler(async (event) => {
-  const session = await requireSession(event) as ProjectSession
-  const body: unknown = await readBody(event)
-  if (!isBody(body)) {
+  setHeader(event, 'Cache-Control', 'private, no-store')
+  const session = await requireSession(event)
+  let body
+  try {
+    body = await readValidatedBody(event, value => createProjectRequestSchema.parse(value))
+  }
+  catch {
     setResponseStatus(event, 400)
-    return { data: { code: CREATE_PROJECT_ERROR.INVALID_PROJECT_NAME } }
+    return { data: { code: CREATE_PROJECT_ERROR.INVALID_REQUEST } }
   }
 
   const result = await createProject({
@@ -33,9 +26,6 @@ export default defineEventHandler(async (event) => {
 
   if (result.ok) return result.value
 
-  const status = result.code === CREATE_PROJECT_ERROR.PROJECT_CREATE_FAILED ? 503
-    : result.code === CREATE_PROJECT_ERROR.AUTH_REQUIRED ? 401
-      : result.code === CREATE_PROJECT_ERROR.ACCOUNT_INACTIVE ? 403 : 400
-  setResponseStatus(event, status)
+  setResponseStatus(event, createProjectHttpStatus(result.code))
   return { data: { code: result.code } }
 })

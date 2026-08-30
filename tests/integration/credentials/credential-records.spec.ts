@@ -119,7 +119,7 @@ it('stores encrypted values, returns only masked rows, updates explicitly, and r
     const archivedRows = await listAccessibleArchivedCredentials(database.db, { actorUserId: admin!.id, projectId })
     expect(archivedRows).toEqual([expect.objectContaining({
       id: created.value.credentialId,
-      category: { id: category.value.categoryId, name: 'РџСЂРѕРґР°РєС€РµРЅ' },
+      category: { id: category.value.categoryId, name: 'Продакшен' },
       hasLogin: true,
       hasPassword: true,
       dynamicFieldCount: 1,

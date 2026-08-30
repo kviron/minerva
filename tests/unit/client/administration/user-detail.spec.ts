@@ -1,13 +1,13 @@
 import { readFile } from 'node:fs/promises'
 import { describe, expect, it } from 'vitest'
-import { parseAdministrationUserResponse } from '../../../../app/features/administration/api/users-api'
+import { administrationUserDetailSchema } from '../../../../shared/administration/contracts'
 
 const read = (path: string) => readFile(new URL(path, import.meta.url), 'utf8')
 const userId = '21b9fc31-6e20-4399-a2ea-fb4de1024821'
 
 describe('administration user detail', () => {
   it('accepts only the safe user projection', () => {
-    expect(parseAdministrationUserResponse({
+    expect(administrationUserDetailSchema.parse({
       id: userId,
       name: 'Администратор',
       email: 'admin@example.com',
@@ -18,10 +18,10 @@ describe('administration user detail', () => {
       lastLoginAt: null,
     })).toMatchObject({ id: userId, email: 'admin@example.com' })
 
-    expect(() => parseAdministrationUserResponse({
+    expect(() => administrationUserDetailSchema.parse({
       id: userId,
       password: 'private',
-    })).toThrow('Invalid administration user response')
+    })).toThrow()
   })
 
   it('opens the detail page from every users-table row', async () => {
@@ -48,6 +48,9 @@ describe('administration user detail', () => {
     expect(page).toContain('<AdministrationUserDetailView :user-id="userId" />')
     expect(endpoint).toContain('await requireSuperAdmin(event)')
     expect(endpoint).toContain('getAdministrationUser')
+    expect(endpoint).toContain('getValidatedRouterParams')
+    expect(endpoint).toContain('administrationUserRouteParamsSchema')
+    expect(endpoint).toContain("'Cache-Control', 'private, no-store'")
     expect(endpoint).toContain('statusCode: 404')
     expect(view).toContain('<UiCard>')
     expect(view).not.toMatch(/password|token|account|session|disabledReason/)

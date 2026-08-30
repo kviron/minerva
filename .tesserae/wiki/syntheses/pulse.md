@@ -1,5 +1,5 @@
 ---
-content_hash: sha256-04896a36987488a2445e0add8c245135f3117ce7742778924f304b1ef0eda088
+content_hash: sha256-12a6fb0e7527132d1a551a3d06a804656528bf5a0fe3782e3f58ae04bdba21fb
 generator: heuristic-v1
 inputs: []
 slug: pulse
@@ -23,8 +23,28 @@ sources:
   - docs/decisions/0013-keep-client-actions-stateless-and-feature-scoped.md
   - docs/decisions/0014-search-authorized-encrypted-credential-values.md
   - docs/decisions/0015-discard-never-published-document-branches.md
+  - docs/decisions/0016-link-oauth-consents-and-token-families.md
+  - docs/decisions/0017-serialize-oauth-token-issuance-with-grant-revocation.md
+  - docs/decisions/0018-use-leased-idempotency-records-for-mcp-mutations.md
+  - docs/decisions/0019-isolate-project-ai-connections-and-require-user-confirmed-mutations.md
+  - docs/decisions/0020-use-allow-listed-external-embeds.md
+  - docs/decisions/0021-use-postgresql-leases-and-content-free-ai-usage-events.md
+  - docs/decisions/0022-retain-private-ai-conversations-for-thirty-days.md
+  - docs/decisions/0023-use-short-lived-server-owned-ai-document-proposals.md
+  - docs/decisions/0024-use-revocable-capability-links-for-public-documentation.md
+  - docs/decisions/0025-run-production-on-a-hardened-single-vps.md
+  - docs/decisions/0026-compose-data-grids-from-shared-table-mechanics.md
+  - docs/decisions/0027-resolve-current-audit-targets-through-safe-projections.md
+  - docs/decisions/0028-compose-project-lifecycle-from-pure-transition-policies.md
+  - docs/operations/backup-and-restore.md
   - docs/operations/credential-encryption.md
+  - docs/operations/mcp-oauth.md
+  - docs/operations/production-configuration.md
+  - docs/operations/public-documentation-sharing.md
+  - docs/operations/restore-drill-2026-08-06-local.md
+  - docs/operations/restore-drill-record-template.md
   - docs/operations/tesserae.md
+  - docs/operations/transport-security-and-logging.md
   - docs/product-spec.md
   - docs/progress.md
   - docs/roadmap.md
@@ -54,6 +74,12 @@ sources:
   - docs/superpowers/plans/2026-07-14-document-publication-history.md
   - docs/superpowers/plans/2026-07-14-document-tree-create-child.md
   - docs/superpowers/plans/2026-07-14-document-tree-move-reorder.md
+  - docs/superpowers/plans/2026-07-14-mcp-documentation-interface.md
+  - docs/superpowers/plans/2026-07-15-project-ai-assistant.md
+  - docs/superpowers/plans/2026-07-31-project-ai-document-proposals.md
+  - docs/superpowers/plans/2026-07-31-public-documentation-sharing.md
+  - docs/superpowers/plans/2026-08-04-production-readiness.md
+  - docs/superpowers/plans/2026-08-28-project-lifecycle.md
   - docs/superpowers/specs/2026-06-24-minerva-mvp-design.md
   - docs/superpowers/specs/2026-06-24-minerva-ui-prototype-design.md
   - docs/superpowers/specs/2026-06-27-minerva-mvp-route-map-design.md
@@ -74,6 +100,14 @@ sources:
   - docs/superpowers/specs/2026-07-05-projects-list-and-create-ui-design.md
   - docs/superpowers/specs/2026-07-05-projects-rbac-foundation-design.md
   - docs/superpowers/specs/2026-07-11-project-credentials-design.md
+  - docs/superpowers/specs/2026-07-14-mcp-oauth-threat-model.md
+  - docs/superpowers/specs/2026-07-15-project-ai-assistant-design.md
+  - docs/superpowers/specs/2026-07-31-project-ai-document-proposals-design.md
+  - docs/superpowers/specs/2026-07-31-public-documentation-sharing-design.md
+  - docs/superpowers/specs/2026-08-04-production-readiness-design.md
+  - docs/superpowers/specs/2026-08-04-production-readiness-threat-model.md
+  - docs/superpowers/specs/2026-08-28-project-lifecycle-design.md
+  - docs/superpowers/specs/2026-08-28-project-lifecycle-threat-model.md
 synthesis_kind: pulse
 title: Project Pulse
 ---
@@ -86,7 +120,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 69
+- SourceDocument: 103
 
 ## Recently added
 - (none)

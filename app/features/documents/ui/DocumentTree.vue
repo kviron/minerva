@@ -10,6 +10,7 @@ import { DOCUMENT_ACTION } from '../model/actions/actions'
 import { useDocumentsActions } from '../model/actions/provider'
 import { useDocumentsStore } from '../model/documents-state'
 import CreateDocumentDialog from './CreateDocumentDialog.vue'
+import DocumentShareDialog from './DocumentShareDialog.vue'
 import DocumentTreeBranch from './DocumentTreeBranch.vue'
 import MoveDocumentDialog from './MoveDocumentDialog.vue'
 
@@ -26,6 +27,8 @@ const createOpen = ref(false)
 const selectedDocument = ref<DocumentTreeNode | null>(null)
 const moveOpen = ref(false)
 const moveError = ref<string | null>(null)
+const selectedShare = ref<DocumentTreeNode | null>(null)
+const shareOpen = ref(false)
 const selectedArchive = ref<DocumentTreeNode | null>(null)
 const archiveOpen = ref(false)
 const archiveError = ref<string | null>(null)
@@ -102,6 +105,16 @@ const moveDocument = async (input: MoveDocumentRequest): Promise<void> => {
   state.applyTree(result.tree)
   state.applyCurrent(result.document)
   setMoveOpen(false)
+}
+
+const openShare = (node: DocumentTreeNode): void => {
+  selectedShare.value = node
+  shareOpen.value = true
+}
+
+const setShareOpen = (open: boolean): void => {
+  shareOpen.value = open
+  if (!open) selectedShare.value = null
 }
 
 const containsDocument = (node: DocumentTreeNode, documentId: string): boolean =>
@@ -187,6 +200,7 @@ const discardDocument = async (): Promise<void> => {
           :active-document-id="activeDocumentId"
           @create="openCreate"
           @move="openMove"
+          @share="openShare"
           @archive="openArchive"
           @discard="openDiscard"
         />
@@ -211,6 +225,15 @@ const discardDocument = async (): Promise<void> => {
       :submit-error="moveError ?? undefined"
       @update:open="setMoveOpen"
       @move="moveDocument"
+    />
+
+    <DocumentShareDialog
+      v-if="selectedShare"
+      :open="shareOpen"
+      :project-id="projectId"
+      :document-id="selectedShare.id"
+      :has-published-version="selectedShare.hasPublishedVersions"
+      @update:open="setShareOpen"
     />
 
     <UiAlertDialog :open="archiveOpen" @update:open="setArchiveOpen">

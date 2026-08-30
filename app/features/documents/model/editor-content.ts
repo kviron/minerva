@@ -1,5 +1,12 @@
 import type { JSONContent } from '@tiptap/core'
 import type { DocumentContent, DocumentContentNode } from '../../../../shared/documents/contracts'
+import { documentContentSchema } from '../../../../shared/documents/contracts'
+
+export const parseEditorDocumentContent = (value: unknown): DocumentContent => {
+  const parsed = documentContentSchema.safeParse(value)
+  if (!parsed.success) throw new Error('Invalid editor document content')
+  return parsed.data
+}
 
 const toEditorNode = (node: DocumentContentNode): JSONContent => ({
   type: node.type,

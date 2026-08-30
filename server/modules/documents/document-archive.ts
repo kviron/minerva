@@ -12,6 +12,7 @@ import {
   projectRolePermissions,
   projects,
 } from '../../infrastructure/database/schema/projects'
+import { withMcpAuditAttribution, type McpAuditAttribution } from '../projects/audit-attribution'
 
 export const ARCHIVE_DOCUMENT_ERROR = {
   NOT_FOUND: 'NOT_FOUND',
@@ -59,6 +60,7 @@ interface DocumentArchiveBaseInput {
   readonly projectId: string
   readonly documentId: string
   readonly channel: AuditChannel
+  readonly mcpAttribution?: McpAuditAttribution
 }
 
 export type ArchiveDocumentInput = DocumentArchiveBaseInput
@@ -254,12 +256,12 @@ export const archiveDocumentPersistence = (db: DocumentsDatabase): ArchiveDocume
       projectId: command.projectId,
       targetType: 'document',
       targetId: command.documentId,
-      metadata: {
+      metadata: withMcpAuditAttribution({
         archiveBatchId: command.documentId,
         archivedCount: plan.value.archivedIds.length,
         parentId: plan.value.rootParentId,
         position: plan.value.rootPosition,
-      },
+      }, command.mcpAttribution),
     })
     return {
       ok: true,
@@ -321,7 +323,10 @@ export const restoreDocumentPersistence = (db: DocumentsDatabase): RestoreDocume
       projectId: command.projectId,
       targetType: 'document',
       targetId: command.documentId,
-      metadata: { archiveBatchId: command.documentId, restoredCount: batch.length, parentId: root.parentId },
+      metadata: withMcpAuditAttribution(
+        { archiveBatchId: command.documentId, restoredCount: batch.length, parentId: root.parentId },
+        command.mcpAttribution,
+      ),
     })
     return { ok: true, restoredCount: batch.length, restoredAt: restoredAt.toISOString() }
   })

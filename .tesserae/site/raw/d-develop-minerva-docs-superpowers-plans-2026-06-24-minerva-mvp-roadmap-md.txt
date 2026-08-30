@@ -58,7 +58,7 @@ Plan after Slice 2 approval. Required outcome:
 Plan after Slice 3 approval. Required outcome:
 
 - Ordered document tree and Tiptap editor.
-- Optimistic draft autosave.
+- Explicit optimistic draft saves; drafts are never saved by a timer or implicitly during navigation.
 - Publication summaries and complete immutable snapshots of title, content, links, and images.
 - Full-snapshot restore with a stable slug, archive/restore, internal links, backlinks.
 - Historical image references that prevent physical deletion while a version depends on them.

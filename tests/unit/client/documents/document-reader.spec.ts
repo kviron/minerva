@@ -93,8 +93,8 @@ describe('document reader', () => {
     expect(mocks.documentsApi.listTree).toHaveBeenCalledWith('project-1', expect.anything())
   })
 
-  it('composes the detail route from a tree, safe content renderer, and reader states', async () => {
-    const [page, workspace, treeSource, branchSource, moveDialog, viewer, renderer, breadcrumbs] = await Promise.all([
+  it('composes the detail route from a tree, safe compact typography renderer, and reader states', async () => {
+    const [page, workspace, treeSource, branchSource, moveDialog, viewer, renderer, versionControls, breadcrumbs] = await Promise.all([
       read('../../../../app/pages/projects/[id]/documents/[documentId]/index.vue'),
       read('../../../../app/features/documents/ui/DocumentWorkspace.vue'),
       read('../../../../app/features/documents/ui/DocumentTree.vue'),
@@ -102,6 +102,7 @@ describe('document reader', () => {
       read('../../../../app/features/documents/ui/MoveDocumentDialog.vue'),
       read('../../../../app/features/documents/ui/DocumentViewer.vue'),
       read('../../../../app/features/documents/ui/DocumentContentNode.vue'),
+      read('../../../../app/features/documents/ui/DocumentVersionControls.vue'),
       read('../../../../app/features/navigation/ui/AppBreadcrumbs.vue'),
     ])
 
@@ -132,6 +133,12 @@ describe('document reader', () => {
     expect(viewer).not.toContain('Дочерние страницы')
     expect(viewer).not.toContain('document.children')
     expect(renderer).not.toContain('v-html')
+    expect(renderer).toContain("level === 2 && 'mt-8 border-b pb-2 text-3xl'")
+    expect(renderer).toContain("level === 3 && 'mt-6 text-2xl'")
+    expect(renderer).toContain('class="my-2 ml-6 list-disc')
+    expect(renderer).toContain('class="my-2 ml-6 list-decimal')
+    expect(viewer).toContain('class="flex flex-col gap-2"')
+    expect(versionControls).toContain('class="flex flex-col gap-2"')
     expect(breadcrumbs).toContain('useDocumentsStore')
     expect(breadcrumbs).toContain('documentsState.current.title')
   })

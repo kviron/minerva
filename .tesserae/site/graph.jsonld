@@ -128,6 +128,97 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:adr-0016-link-oauth-consents-and-token-families-:74f8df6e8504",
+      "@type": "CreativeWork",
+      "name": "ADR 0016: Link OAuth consents and token families through a Minerva grant",
+      "url": "sources/adr-0016-link-oauth-consents-and-token-families-through-a-minerva-grant.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0017-serialize-oauth-token-issuance-with-gra:74eee0fbb575",
+      "@type": "CreativeWork",
+      "name": "ADR 0017: Serialize OAuth token issuance with grant revocation",
+      "url": "sources/adr-0017-serialize-oauth-token-issuance-with-grant-revocation.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0018-use-leased-idempotency-records-for-mcp-:433151c20ffb",
+      "@type": "CreativeWork",
+      "name": "ADR 0018: Use leased idempotency records for MCP mutations",
+      "url": "sources/adr-0018-use-leased-idempotency-records-for-mcp-mutations.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0019-isolate-project-ai-connections-and-requ:c6c43423f954",
+      "@type": "CreativeWork",
+      "name": "ADR 0019: Isolate project AI connections and require user-confirmed mutations",
+      "url": "sources/adr-0019-isolate-project-ai-connections-and-require-user-confirmed-mutations.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0020-use-allow-listed-structured-external-em:49c778db4d05",
+      "@type": "CreativeWork",
+      "name": "ADR 0020: Use allow-listed structured external embeds",
+      "url": "sources/adr-0020-use-allow-listed-structured-external-embeds.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0021-use-postgresql-leases-and-content-free-:ca02875937aa",
+      "@type": "CreativeWork",
+      "name": "ADR 0021: Use PostgreSQL leases and content-free AI usage events",
+      "url": "sources/adr-0021-use-postgresql-leases-and-content-free-ai-usage-events.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0022-retain-private-ai-conversations-for-thi:797aff917327",
+      "@type": "CreativeWork",
+      "name": "ADR 0022: Retain private AI conversations for thirty days",
+      "url": "sources/adr-0022-retain-private-ai-conversations-for-thirty-days.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0023-use-short-lived-server-owned-ai-documen:28ad1f7e33ac",
+      "@type": "CreativeWork",
+      "name": "ADR 0023: Use short-lived server-owned AI document proposals",
+      "url": "sources/adr-0023-use-short-lived-server-owned-ai-document-proposals.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0024-use-revocable-capability-links-for-publ:ae6bf21861e8",
+      "@type": "CreativeWork",
+      "name": "ADR 0024: Use revocable capability links for public documentation",
+      "url": "sources/adr-0024-use-revocable-capability-links-for-public-documentation.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0025-run-production-on-a-hardened-single-vps:2793135bdcb1",
+      "@type": "CreativeWork",
+      "name": "ADR 0025: Run production on a hardened single VPS with off-host recovery",
+      "url": "sources/adr-0025-run-production-on-a-hardened-single-vps-with-off-host-recovery.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0026-compose-data-grids-from-shared-table-me:909133c3269b",
+      "@type": "CreativeWork",
+      "name": "ADR 0026: Compose data grids from shared table mechanics",
+      "url": "sources/adr-0026-compose-data-grids-from-shared-table-mechanics.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0027-resolve-current-audit-targets-through-s:13f0928cd395",
+      "@type": "CreativeWork",
+      "name": "ADR 0027: Resolve current audit targets through safe projections",
+      "url": "sources/adr-0027-resolve-current-audit-targets-through-safe-projections.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:adr-0028-compose-project-lifecycle-from-pure-tra:7827b224a85e",
+      "@type": "CreativeWork",
+      "name": "ADR 0028: Compose project lifecycle from pure transition and operation policies",
+      "url": "sources/adr-0028-compose-project-lifecycle-from-pure-transition-and-operation-policies.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:authenticated-page-placeholder-design:a5867aed720c",
       "@type": "CreativeWork",
       "name": "Authenticated Page Placeholder Design",
@@ -212,6 +303,13 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:encrypted-backup-and-isolated-restore:3aa13f8ea267",
+      "@type": "CreativeWork",
+      "name": "Encrypted backup and isolated restore",
+      "url": "sources/encrypted-backup-and-isolated-restore.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:forgot-password-ui-design:4253f2296159",
       "@type": "CreativeWork",
       "name": "Forgot-password UI design",
@@ -279,6 +377,34 @@
       "@type": "CreativeWork",
       "name": "Identity Functional Refactor Implementation Plan",
       "url": "sources/identity-functional-refactor-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:local-restore-drill-record-2026-08-06:ec76f38040f7",
+      "@type": "CreativeWork",
+      "name": "Local restore drill record — 2026-08-06",
+      "url": "sources/local-restore-drill-record-2026-08-06.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:mcp-and-oauth-operations:00a05ba136f2",
+      "@type": "CreativeWork",
+      "name": "MCP and OAuth operations",
+      "url": "sources/mcp-and-oauth-operations.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:mcp-documentation-interface-implementation-plan:bc0b02c06bf3",
+      "@type": "CreativeWork",
+      "name": "MCP documentation interface implementation plan",
+      "url": "sources/mcp-documentation-interface-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:mcp-oauth-threat-model-and-design:b65b71477ce8",
+      "@type": "CreativeWork",
+      "name": "MCP OAuth threat model and design",
+      "url": "sources/mcp-oauth-threat-model-and-design.html",
       "additionalType": "SourceDocument"
     },
     {
@@ -408,6 +534,62 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:production-configuration-and-health:80638887288f",
+      "@type": "CreativeWork",
+      "name": "Production configuration and health",
+      "url": "sources/production-configuration-and-health.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:production-readiness-audited-design:a38e7c684bac",
+      "@type": "CreativeWork",
+      "name": "Production readiness: audited design",
+      "url": "sources/production-readiness-audited-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:production-readiness-implementation-plan:9ce17340df01",
+      "@type": "CreativeWork",
+      "name": "Production readiness implementation plan",
+      "url": "sources/production-readiness-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:production-readiness-threat-model:387307ee4395",
+      "@type": "CreativeWork",
+      "name": "Production readiness threat model",
+      "url": "sources/production-readiness-threat-model.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:project-ai-assistant-design:7657895969dc",
+      "@type": "CreativeWork",
+      "name": "Project AI Assistant design",
+      "url": "sources/project-ai-assistant-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:project-ai-assistant-implementation-plan:387afa89b3a9",
+      "@type": "CreativeWork",
+      "name": "Project AI Assistant implementation plan",
+      "url": "sources/project-ai-assistant-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:project-ai-document-proposals-audited-design:cb4c50fe0d3a",
+      "@type": "CreativeWork",
+      "name": "Project AI document proposals: audited design",
+      "url": "sources/project-ai-document-proposals-audited-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:project-ai-document-proposals-implementation-pla:0d2e72510456",
+      "@type": "CreativeWork",
+      "name": "Project AI document proposals implementation plan",
+      "url": "sources/project-ai-document-proposals-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:project-credentials-design:38735cbc9ec3",
       "@type": "CreativeWork",
       "name": "Project Credentials Design",
@@ -419,6 +601,27 @@
       "@type": "CreativeWork",
       "name": "Project Credentials Implementation Plan",
       "url": "sources/project-credentials-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:project-lifecycle-audited-design:8022c555e295",
+      "@type": "CreativeWork",
+      "name": "Project lifecycle: audited design",
+      "url": "sources/project-lifecycle-audited-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:project-lifecycle-implementation-plan:b38fbc78bc42",
+      "@type": "CreativeWork",
+      "name": "Project lifecycle implementation plan",
+      "url": "sources/project-lifecycle-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:project-lifecycle-threat-and-race-model:5d44516d631d",
+      "@type": "CreativeWork",
+      "name": "Project lifecycle threat and race model",
+      "url": "sources/project-lifecycle-threat-and-race-model.html",
       "additionalType": "SourceDocument"
     },
     {
@@ -450,6 +653,27 @@
       "additionalType": "SourceDocument"
     },
     {
+      "@id": "#SourceDocument:public-documentation-sharing-audited-design:13ba1b2a7cc8",
+      "@type": "CreativeWork",
+      "name": "Public documentation sharing: audited design",
+      "url": "sources/public-documentation-sharing-audited-design.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:public-documentation-sharing-implementation-plan:b042bb039eaf",
+      "@type": "CreativeWork",
+      "name": "Public documentation sharing implementation plan",
+      "url": "sources/public-documentation-sharing-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:public-documentation-sharing-operations:2dd6d7209036",
+      "@type": "CreativeWork",
+      "name": "Public documentation sharing operations",
+      "url": "sources/public-documentation-sharing-operations.html",
+      "additionalType": "SourceDocument"
+    },
+    {
       "@id": "#SourceDocument:reset-password-ui-design:ae063bdcc1cf",
       "@type": "CreativeWork",
       "name": "Reset-password UI design",
@@ -461,6 +685,13 @@
       "@type": "CreativeWork",
       "name": "Reset-Password UI Implementation Plan",
       "url": "sources/reset-password-ui-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:restore-drill-record:9b8d008a4129",
+      "@type": "CreativeWork",
+      "name": "Restore drill record",
+      "url": "sources/restore-drill-record.html",
       "additionalType": "SourceDocument"
     },
     {
@@ -496,6 +727,13 @@
       "@type": "CreativeWork",
       "name": "Tesserae Refresh Wrapper Implementation Plan",
       "url": "sources/tesserae-refresh-wrapper-implementation-plan.html",
+      "additionalType": "SourceDocument"
+    },
+    {
+      "@id": "#SourceDocument:transport-security-and-structured-logging:8aa2c67e6791",
+      "@type": "CreativeWork",
+      "name": "Transport security and structured logging",
+      "url": "sources/transport-security-and-structured-logging.html",
       "additionalType": "SourceDocument"
     },
     {

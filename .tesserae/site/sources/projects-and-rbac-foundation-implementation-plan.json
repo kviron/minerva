@@ -1,10 +1,10 @@
 {
   "title": "Projects and RBAC Foundation Implementation Plan",
   "kind": "sources",
-  "body_text": "# Projects and RBAC Foundation Implementation Plan\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "body_text": "# Projects and RBAC Foundation Implementation Plan\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
   "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-05-projects-rbac-foundation.md",
   "links": [],
-  "body": "# Projects and RBAC Foundation Implementation Plan\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "body": "# Projects and RBAC Foundation Implementation Plan\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
   "frontmatter": {
     "kind": "sources",
     "node_id": "SourceDocument:projects-and-rbac-foundation-implementation-plan:52b38258da99",

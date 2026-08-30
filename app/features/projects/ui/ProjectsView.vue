@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { Plus } from '@lucide/vue'
 import { computed, onMounted, ref } from 'vue'
+import type { ProjectsActions } from '../model/actions/actions'
 import { PROJECT_ACTION } from '../model/actions/actions'
 import { useProjectsActions } from '../model/actions/provider'
 import type { ProjectsScope } from '../model/actions/types'
 import { useProjectsStore } from '../model/projects-state'
 import { filterProjectsByStatus, PROJECT_STATUS_FILTER } from '../model/project-status-filter'
+import { administrationProjectTableRows, memberProjectTableRows } from '../model/presentation'
 import CreateProjectDialog from './CreateProjectDialog.vue'
 import ProjectsEmpty from './ProjectsEmpty.vue'
 import ProjectsFilterEmpty from './ProjectsFilterEmpty.vue'
@@ -16,30 +18,56 @@ import ProjectsTableSkeleton from './ProjectsTableSkeleton.vue'
 const props = withDefaults(defineProps<{ scope?: ProjectsScope }>(), { scope: 'member' })
 
 const actions = useProjectsActions()
+const router = useRouter()
 const state = useProjectsStore()
 const dialogOpen = ref(false)
 const statusFilter = ref(PROJECT_STATUS_FILTER.ALL)
-const projects = computed(() => state.projects)
+const projects = computed(() => state.list.scope === props.scope ? state.list.projects : [])
 const pending = computed(() => actions.isPendingFor(PROJECT_ACTION.LOAD, props.scope))
 const creating = computed(() => actions.isPendingFor(PROJECT_ACTION.CREATE, props.scope))
 const error = computed(() => actions.error.value)
-const filteredProjects = computed(() => filterProjectsByStatus(state.projects, statusFilter.value))
+const filteredProjects = computed(() => filterProjectsByStatus(projects.value, statusFilter.value))
+const nextCursor = computed(() => state.list.scope === props.scope ? state.list.nextCursor : null)
+const tableProjects = computed(() => {
+  if (props.scope === 'administration') {
+    return state.list.scope === 'administration'
+      ? administrationProjectTableRows(filterProjectsByStatus(state.list.projects, statusFilter.value))
+      : []
+  }
+  return state.list.scope === 'member'
+    ? memberProjectTableRows(filterProjectsByStatus(state.list.projects, statusFilter.value))
+    : []
+})
+
+const applyProjects = (result: Awaited<ReturnType<ProjectsActions['load']>>, append = false) => {
+  if (!result) return
+  if (result.scope === 'administration') {
+    if (append) state.appendAdministrationProjects(result.projects, result.nextCursor)
+    else state.applyAdministrationProjects(result.projects, result.nextCursor)
+  }
+  else if (append) state.appendMemberProjects(result.projects, result.nextCursor)
+  else state.applyMemberProjects(result.projects, result.nextCursor)
+}
 
 const load = async () => {
   const projects = await actions.load(props.scope)
-  if (projects) {
-    state.applyProjects(projects)
-  }
+  applyProjects(projects)
 }
 
 onMounted(load)
 
 const createProject = async (input: { name: string, description: string | null }) => {
-  const projects = await actions.create(input, props.scope)
-  if (projects) {
-    state.applyProjects(projects)
+  const result = await actions.create(input, props.scope)
+  if (result) {
+    applyProjects(result.list)
     dialogOpen.value = false
+    await router.push(`/projects/${result.created.projectId}`)
   }
+}
+
+const loadMore = async () => {
+  if (nextCursor.value === null) return
+  applyProjects(await actions.load(props.scope, nextCursor.value), true)
 }
 </script>
 
@@ -71,9 +99,14 @@ const createProject = async (input: { name: string, description: string | null }
     <ProjectsFilterEmpty v-else-if="filteredProjects.length === 0" />
     <ProjectsTable
       v-else
-      :projects="filteredProjects"
+      :projects="tableProjects"
       :mode="scope === 'administration' ? 'administration' : 'member'"
     />
+    <div v-if="nextCursor" class="flex justify-center">
+      <UiButton variant="outline" :disabled="pending" @click="loadMore">
+        Показать ещё
+      </UiButton>
+    </div>
 
     <CreateProjectDialog
       v-model:open="dialogOpen"

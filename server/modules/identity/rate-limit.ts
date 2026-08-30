@@ -1,5 +1,5 @@
 import { createHmac } from 'node:crypto'
-import { getServerEnv } from '../../../shared/config/env'
+import { getServerEnv } from '../../config/runtime-env'
 import { IDENTITY_CODE } from '../../../shared/identity/constants'
 import { getDatabase } from '../../infrastructure/database/client'
 import { IdentityError } from './identity-error'

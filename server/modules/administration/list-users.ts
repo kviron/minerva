@@ -2,7 +2,7 @@ import { asc, desc, eq } from 'drizzle-orm'
 import type {
   AdministrationUserDetail,
   AdministrationUsersResponse,
-} from '../../../shared/administration/users'
+} from '../../../shared/administration/contracts'
 import { getDatabase } from '../../infrastructure/database/client'
 import { user } from '../../infrastructure/database/schema/auth'
 

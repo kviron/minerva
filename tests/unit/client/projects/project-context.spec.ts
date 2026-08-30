@@ -5,7 +5,7 @@ import {
   PROJECT_SECTION,
   projectSectionPath,
 } from '../../../../app/features/projects/model/project-sections'
-import { parseProjectOverviewResponse } from '../../../../app/features/projects/api/projects-api'
+import { projectOverviewSchema } from '../../../../shared/projects/contracts'
 
 const read = (path: string) => readFile(new URL(path, import.meta.url), 'utf8')
 const projectId = '21b9fc31-6e20-4399-a2ea-fb4de1024821'
@@ -30,11 +30,13 @@ describe('project context', () => {
   })
 
   it('accepts only the safe project overview projection', () => {
-    expect(parseProjectOverviewResponse({
+    expect(projectOverviewSchema.parse({
       id: projectId,
       name: 'Минерва',
       description: null,
+      descriptionContent: { type: 'doc', content: [] },
       status: 'active',
+      iconId: null,
       createdAt: '2026-07-10T10:00:00.000Z',
       updatedAt: '2026-07-10T10:00:00.000Z',
       activeMemberCount: 3,
@@ -42,17 +44,17 @@ describe('project context', () => {
       permissions: ['project.view', 'documents.view', 'project.update'],
     })).toMatchObject({ name: 'Минерва', activeMemberCount: 3 })
 
-    expect(() => parseProjectOverviewResponse({ id: projectId, password: 'private' })).toThrow(
-      'Invalid project overview response',
-    )
+    expect(() => projectOverviewSchema.parse({ id: projectId, password: 'private' })).toThrow()
   })
 
   it('accepts credential permission codes returned for project roles', () => {
-    expect(parseProjectOverviewResponse({
+    expect(projectOverviewSchema.parse({
       id: projectId,
       name: 'Минерва',
       description: null,
+      descriptionContent: { type: 'doc', content: [] },
       status: 'active',
+      iconId: null,
       createdAt: '2026-07-10T10:00:00.000Z',
       updatedAt: '2026-07-10T10:00:00.000Z',
       activeMemberCount: 3,

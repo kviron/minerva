@@ -6,14 +6,14 @@
       "metadata": {},
       "name": "MATH"
     },
-    "CommunitySummary:3b2f36265a3f3828": {
+    "CommunitySummary:0b5b4ccbd0191c91": {
       "aliases": [],
-      "description": "Designs and implementation plans for Minerva's MVP navigation, identity, projects, route structure, feature modules, UI placeholders, and RBAC foundation.",
+      "description": "Designs, implementation plans, and progress notes for Minerva's MVP navigation, identity, project management, route structure, and UI foundations.",
       "metadata": {
         "extractor": "community_summaries.compile_community_summaries",
-        "member_count": 17
+        "member_count": 18
       },
-      "name": "Minerva MVP Planning"
+      "name": "Minerva MVP Blueprint"
     },
     "Metric:map:592bcbe13f80": {
       "aliases": [],
@@ -141,6 +141,110 @@
       },
       "name": "ADR 0015: Allow permanent discard only for never-published document branches"
     },
+    "SourceDocument:adr-0016-link-oauth-consents-and-token-families-:74f8df6e8504": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0016: Link OAuth consents and token families through a Minerva grant"
+    },
+    "SourceDocument:adr-0017-serialize-oauth-token-issuance-with-gra:74eee0fbb575": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0017: Serialize OAuth token issuance with grant revocation"
+    },
+    "SourceDocument:adr-0018-use-leased-idempotency-records-for-mcp-:433151c20ffb": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0018: Use leased idempotency records for MCP mutations"
+    },
+    "SourceDocument:adr-0019-isolate-project-ai-connections-and-requ:c6c43423f954": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0019: Isolate project AI connections and require user-confirmed mutations"
+    },
+    "SourceDocument:adr-0020-use-allow-listed-structured-external-em:49c778db4d05": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0020: Use allow-listed structured external embeds"
+    },
+    "SourceDocument:adr-0021-use-postgresql-leases-and-content-free-:ca02875937aa": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0021: Use PostgreSQL leases and content-free AI usage events"
+    },
+    "SourceDocument:adr-0022-retain-private-ai-conversations-for-thi:797aff917327": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0022: Retain private AI conversations for thirty days"
+    },
+    "SourceDocument:adr-0023-use-short-lived-server-owned-ai-documen:28ad1f7e33ac": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0023: Use short-lived server-owned AI document proposals"
+    },
+    "SourceDocument:adr-0024-use-revocable-capability-links-for-publ:ae6bf21861e8": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0024: Use revocable capability links for public documentation"
+    },
+    "SourceDocument:adr-0025-run-production-on-a-hardened-single-vps:2793135bdcb1": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0025: Run production on a hardened single VPS with off-host recovery"
+    },
+    "SourceDocument:adr-0026-compose-data-grids-from-shared-table-me:909133c3269b": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0026: Compose data grids from shared table mechanics"
+    },
+    "SourceDocument:adr-0027-resolve-current-audit-targets-through-s:13f0928cd395": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0027: Resolve current audit targets through safe projections"
+    },
+    "SourceDocument:adr-0028-compose-project-lifecycle-from-pure-tra:7827b224a85e": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "ADR 0028: Compose project lifecycle from pure transition and operation policies"
+    },
     "SourceDocument:authenticated-page-placeholder-design:a5867aed720c": {
       "aliases": [],
       "description": "",
@@ -237,6 +341,14 @@
       },
       "name": "Document tree move and reorder plan"
     },
+    "SourceDocument:encrypted-backup-and-isolated-restore:3aa13f8ea267": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Encrypted backup and isolated restore"
+    },
     "SourceDocument:forgot-password-ui-design:4253f2296159": {
       "aliases": [],
       "description": "",
@@ -316,6 +428,38 @@
         "source_kind": "SourceDocument"
       },
       "name": "Identity Functional Refactor Implementation Plan"
+    },
+    "SourceDocument:local-restore-drill-record-2026-08-06:ec76f38040f7": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Local restore drill record — 2026-08-06"
+    },
+    "SourceDocument:mcp-and-oauth-operations:00a05ba136f2": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "MCP and OAuth operations"
+    },
+    "SourceDocument:mcp-documentation-interface-implementation-plan:bc0b02c06bf3": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "MCP documentation interface implementation plan"
+    },
+    "SourceDocument:mcp-oauth-threat-model-and-design:b65b71477ce8": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "MCP OAuth threat model and design"
     },
     "SourceDocument:minerva-agent-instructions:7b4afaaff5ff": {
       "aliases": [],
@@ -461,6 +605,70 @@
       },
       "name": "PostgreSQL Docker Compose Implementation Plan"
     },
+    "SourceDocument:production-configuration-and-health:80638887288f": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Production configuration and health"
+    },
+    "SourceDocument:production-readiness-audited-design:a38e7c684bac": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Production readiness: audited design"
+    },
+    "SourceDocument:production-readiness-implementation-plan:9ce17340df01": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Production readiness implementation plan"
+    },
+    "SourceDocument:production-readiness-threat-model:387307ee4395": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Production readiness threat model"
+    },
+    "SourceDocument:project-ai-assistant-design:7657895969dc": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project AI Assistant design"
+    },
+    "SourceDocument:project-ai-assistant-implementation-plan:387afa89b3a9": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project AI Assistant implementation plan"
+    },
+    "SourceDocument:project-ai-document-proposals-audited-design:cb4c50fe0d3a": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project AI document proposals: audited design"
+    },
+    "SourceDocument:project-ai-document-proposals-implementation-pla:0d2e72510456": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project AI document proposals implementation plan"
+    },
     "SourceDocument:project-credentials-design:38735cbc9ec3": {
       "aliases": [],
       "description": "",
@@ -476,6 +684,30 @@
         "source_kind": "SourceDocument"
       },
       "name": "Project Credentials Implementation Plan"
+    },
+    "SourceDocument:project-lifecycle-audited-design:8022c555e295": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project lifecycle: audited design"
+    },
+    "SourceDocument:project-lifecycle-implementation-plan:b38fbc78bc42": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project lifecycle implementation plan"
+    },
+    "SourceDocument:project-lifecycle-threat-and-race-model:5d44516d631d": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Project lifecycle threat and race model"
     },
     "SourceDocument:projects-and-rbac-foundation-design:32e410d67569": {
       "aliases": [],
@@ -509,6 +741,30 @@
       },
       "name": "Projects List and Create UI Implementation Plan"
     },
+    "SourceDocument:public-documentation-sharing-audited-design:13ba1b2a7cc8": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Public documentation sharing: audited design"
+    },
+    "SourceDocument:public-documentation-sharing-implementation-plan:b042bb039eaf": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Public documentation sharing implementation plan"
+    },
+    "SourceDocument:public-documentation-sharing-operations:2dd6d7209036": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Public documentation sharing operations"
+    },
     "SourceDocument:reset-password-ui-design:ae063bdcc1cf": {
       "aliases": [],
       "description": "",
@@ -524,6 +780,14 @@
         "source_kind": "SourceDocument"
       },
       "name": "Reset-Password UI Implementation Plan"
+    },
+    "SourceDocument:restore-drill-record:9b8d008a4129": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Restore drill record"
     },
     "SourceDocument:route-authorization-design:2fc8906097c7": {
       "aliases": [],
@@ -565,6 +829,14 @@
       },
       "name": "Tesserae Refresh Wrapper Implementation Plan"
     },
+    "SourceDocument:transport-security-and-structured-logging:8aa2c67e6791": {
+      "aliases": [],
+      "description": "",
+      "metadata": {
+        "source_kind": "SourceDocument"
+      },
+      "name": "Transport security and structured logging"
+    },
     "SourceDocument:user-identity-and-profile-design:4c26d4b8aa62": {
       "aliases": [],
       "description": "",
@@ -577,7 +849,7 @@
       "aliases": [],
       "description": "Top-level snapshot of the wiki at compile time.",
       "metadata": {
-        "content_hash": "sha256-04896a36987488a2445e0add8c245135f3117ce7742778924f304b1ef0eda088",
+        "content_hash": "sha256-12a6fb0e7527132d1a551a3d06a804656528bf5a0fe3782e3f58ae04bdba21fb",
         "synthesis_kind": "pulse"
       },
       "name": "Project Pulse"

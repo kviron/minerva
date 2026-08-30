@@ -1,77 +1,48 @@
-import { z } from 'zod'
-import { PROJECT_PERMISSION } from '../../../../shared/projects/constants'
 import type {
   AdministrationProjectsResponse,
+  CreateProjectRequest,
+  CreateProjectResponse,
   MemberProjectsResponse,
+  ProjectMembersResponse,
   ProjectOverviewProjection,
+  ProjectDescriptionResponse,
+  UpdateProjectDescriptionRequest,
+} from '../../../../shared/projects/contracts'
+import { decodeApiResponse } from '../../../shared/api/decode-api-response'
+import {
+  administrationProjectsResponseSchema,
+  createProjectResponseSchema,
+  memberProjectsResponseSchema,
+  projectMembersResponseSchema,
+  projectOverviewSchema,
+  projectDescriptionResponseSchema,
 } from '../../../../shared/projects/contracts'
 
-const roleSchema = z.union([
-  z.object({ builtInKey: z.enum(['admin', 'editor', 'viewer']), customName: z.null() }).strict(),
-  z.object({ builtInKey: z.null(), customName: z.string().min(1) }).strict(),
-])
-const projectSchema = z.object({
-  id: z.string().uuid(),
-  name: z.string().min(1).max(120),
-  description: z.string().nullable(),
-  status: z.enum(['active', 'archived']),
-  updatedAt: z.string().datetime(),
-  role: roleSchema,
-}).strict()
-const administrationProjectSchema = z.object({
-  id: z.string().uuid(),
-  name: z.string().min(1).max(120),
-  description: z.string().nullable(),
-  status: z.enum(['active', 'archived']),
-  updatedAt: z.string().datetime(),
-  activeMemberCount: z.number().int().nonnegative(),
-}).strict()
-const projectOverviewSchema = z.object({
-  id: z.string().uuid(),
-  name: z.string().min(1).max(120),
-  description: z.string().nullable(),
-  status: z.enum(['active', 'archived']),
-  createdAt: z.string().datetime(),
-  updatedAt: z.string().datetime(),
-  activeMemberCount: z.number().int().nonnegative(),
-  role: roleSchema,
-  permissions: z.array(z.nativeEnum(PROJECT_PERMISSION)),
-}).strict()
-
-export function parseMemberProjectsResponse(value: unknown): MemberProjectsResponse {
-  const parsed = z.array(projectSchema).safeParse(value)
-  if (!parsed.success) throw new Error('Invalid projects response')
-  return parsed.data
-}
-
-export function parseAdministrationProjectsResponse(value: unknown): AdministrationProjectsResponse {
-  const parsed = z.array(administrationProjectSchema).safeParse(value)
-  if (!parsed.success) throw new Error('Invalid administration projects response')
-  return parsed.data
-}
-
-export function parseProjectOverviewResponse(value: unknown): ProjectOverviewProjection {
-  const parsed = projectOverviewSchema.safeParse(value)
-  if (!parsed.success) throw new Error('Invalid project overview response')
-  return parsed.data
-}
-
-export interface CreateProjectInput {
-  readonly name: string
-  readonly description: string | null
-}
+export type CreateProjectInput = CreateProjectRequest
 
 export const projectsApi = {
-  async list(signal?: AbortSignal): Promise<MemberProjectsResponse> {
-    return parseMemberProjectsResponse(await $fetch('/api/projects', { signal }))
+  async list(signal?: AbortSignal, cursor?: string): Promise<MemberProjectsResponse> {
+    const response: unknown = await $fetch('/api/projects', { query: cursor ? { cursor } : undefined, signal })
+    return decodeApiResponse(memberProjectsResponseSchema, response, 'GET /api/projects')
   },
-  async listAdministration(signal?: AbortSignal): Promise<AdministrationProjectsResponse> {
-    return parseAdministrationProjectsResponse(await $fetch('/api/administration/projects', { signal }))
+  async listAdministration(signal?: AbortSignal, cursor?: string): Promise<AdministrationProjectsResponse> {
+    const response: unknown = await $fetch('/api/administration/projects', { query: cursor ? { cursor } : undefined, signal })
+    return decodeApiResponse(administrationProjectsResponseSchema, response, 'GET /api/administration/projects')
   },
   async get(projectId: string, signal?: AbortSignal): Promise<ProjectOverviewProjection> {
-    return parseProjectOverviewResponse(await $fetch(`/api/projects/${projectId}`, { signal }))
+    const response: unknown = await $fetch(`/api/projects/${projectId}`, { signal })
+    return decodeApiResponse(projectOverviewSchema, response, 'GET /api/projects/:id')
   },
-  async create(input: CreateProjectInput, signal?: AbortSignal): Promise<void> {
-    await $fetch('/api/projects', { method: 'POST', body: input, signal })
+  async create(input: CreateProjectInput, signal?: AbortSignal): Promise<CreateProjectResponse> {
+    const response: unknown = await $fetch('/api/projects', { method: 'POST', body: input, signal })
+    return decodeApiResponse(createProjectResponseSchema, response, 'POST /api/projects')
+  },
+  async updateDescription(projectId: string, input: UpdateProjectDescriptionRequest, signal?: AbortSignal): Promise<ProjectDescriptionResponse> {
+    const response: unknown = await $fetch(`/api/projects/${projectId}/description`, { method: 'PATCH', body: input, signal })
+    return decodeApiResponse(projectDescriptionResponseSchema, response, 'PATCH /api/projects/:id/description')
+  },
+  async listMembers(projectId: string, signal?: AbortSignal): Promise<ProjectMembersResponse> {
+    const response: unknown = await $fetch(`/api/projects/${projectId}/members`, { signal })
+    return decodeApiResponse(projectMembersResponseSchema, response, 'GET /api/projects/:id/members')
   },
 }

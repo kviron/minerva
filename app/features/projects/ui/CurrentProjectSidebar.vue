@@ -6,6 +6,7 @@ import { PROJECT_ACTION } from '../model/actions/actions'
 import { useProjectsActions } from '../model/actions/provider'
 import { PROJECTS_SCOPE } from '../model/actions/types'
 import { projectIdFromPath } from '../model/current-project-route'
+import { projectIconUrl, projectInitials } from '../model/project-icon'
 import { useProjectsStore } from '../model/projects-state'
 
 const route = useRoute()
@@ -13,10 +14,12 @@ const { isMobile } = useSidebar()
 const actions = useProjectsActions()
 const state = useProjectsStore()
 const selectedProjectId = computed(() => projectIdFromPath(route.path))
-const projects = computed(() => state.projects)
+const projects = computed(() => state.list.scope === 'member' ? state.list.projects : [])
+const nextCursor = computed(() => state.list.scope === 'member' ? state.list.nextCursor : null)
 const pending = computed(() => actions.isPendingFor(PROJECT_ACTION.LOAD, PROJECTS_SCOPE.MEMBER))
+const initialPending = computed(() => pending.value && projects.value.length === 0)
 const selectedProject = computed(() =>
-  state.projects.find(project => project.id === selectedProjectId.value) ?? null,
+  projects.value.find(project => project.id === selectedProjectId.value) ?? null,
 )
 const projectNavigation = computed(() => selectedProjectId.value === null
   ? []
@@ -28,9 +31,17 @@ const projectNavigation = computed(() => selectedProjectId.value === null
     ])
 
 const load = async () => {
-  const projects = await actions.load(PROJECTS_SCOPE.MEMBER)
-  if (projects) {
-    state.applyProjects(projects)
+  const result = await actions.load(PROJECTS_SCOPE.MEMBER)
+  if (result?.scope === PROJECTS_SCOPE.MEMBER) {
+    state.applyMemberProjects(result.projects, result.nextCursor)
+  }
+}
+
+const loadMore = async () => {
+  if (nextCursor.value === null) return
+  const result = await actions.load(PROJECTS_SCOPE.MEMBER, nextCursor.value)
+  if (result?.scope === PROJECTS_SCOPE.MEMBER) {
+    state.appendMemberProjects(result.projects, result.nextCursor)
   }
 }
 
@@ -44,7 +55,7 @@ watch(selectedProjectId, (projectId) => {
 <template>
   <UiSidebarGroup class="group-data-[collapsible=icon]:hidden">
     <UiSidebarMenu>
-      <UiSidebarMenuItem v-if="selectedProjectId !== null && pending">
+      <UiSidebarMenuItem v-if="selectedProjectId !== null && initialPending">
         <UiSidebarMenuSkeleton show-icon />
       </UiSidebarMenuItem>
 
@@ -52,7 +63,14 @@ watch(selectedProjectId, (projectId) => {
         <UiDropdownMenu>
           <UiDropdownMenuTrigger as-child>
             <UiSidebarMenuButton size="lg" :is-active="true" tooltip="Выбрать проект">
-              <Folder />
+              <UiAvatar class="size-8 rounded-lg">
+                <UiAvatarImage
+                  v-if="selectedProject.iconId"
+                  :src="projectIconUrl(selectedProject.id, selectedProject.iconId)"
+                  :alt="`Иконка проекта ${selectedProject.name}`"
+                />
+                <UiAvatarFallback class="rounded-lg">{{ projectInitials(selectedProject.name) }}</UiAvatarFallback>
+              </UiAvatar>
               <span>{{ selectedProject.name }}</span>
               <ChevronsUpDown class="ml-auto" />
             </UiSidebarMenuButton>
@@ -66,9 +84,19 @@ watch(selectedProjectId, (projectId) => {
             <UiDropdownMenuGroup>
               <UiDropdownMenuItem v-for="project in projects" :key="project.id" as-child>
                 <NuxtLink :to="`/projects/${project.id}`">
-                  <Folder />
+                  <UiAvatar class="size-6 rounded-md">
+                    <UiAvatarImage
+                      v-if="project.iconId"
+                      :src="projectIconUrl(project.id, project.iconId)"
+                      :alt="`Иконка проекта ${project.name}`"
+                    />
+                    <UiAvatarFallback class="rounded-md">{{ projectInitials(project.name) }}</UiAvatarFallback>
+                  </UiAvatar>
                   <span>{{ project.name }}</span>
                 </NuxtLink>
+              </UiDropdownMenuItem>
+              <UiDropdownMenuItem v-if="nextCursor" :disabled="pending" @select.prevent="loadMore">
+                <span>Показать ещё</span>
               </UiDropdownMenuItem>
             </UiDropdownMenuGroup>
 

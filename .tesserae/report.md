@@ -1,7 +1,7 @@
 # Research Graph Report
 
-node_count: 74
-edge_count: 104
+node_count: 108
+edge_count: 140
 
 ## Node Types
 
@@ -9,14 +9,14 @@ edge_count: 104
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 69
+- SourceDocument: 103
 - Synthesis: 1
 
 ## Edge Types
 
 - evaluated_on: 1
-- summarizes: 86
-- uses_metric: 17
+- summarizes: 121
+- uses_metric: 18
 
 ## Papers by Analysis Date
 
@@ -30,9 +30,9 @@ _None._
 
 ## Top Degree Nodes
 
-- Project Pulse (Synthesis): 69
-- mAP (Metric): 18
-- Minerva MVP Planning (CommunitySummary): 17
+- Project Pulse (Synthesis): 103
+- mAP (Metric): 19
+- Minerva MVP Blueprint (CommunitySummary): 18
 - Authenticated Page Placeholder Design (SourceDocument): 3
 - Current User Sidebar Implementation Plan (SourceDocument): 3
 - Global Navigation Design (SourceDocument): 3
@@ -47,9 +47,9 @@ _None._
 - Minerva progress (SourceDocument): 3
 - Nuxt Feature Modules Implementation Plan (SourceDocument): 3
 - Nuxt feature modules design (SourceDocument): 3
+- Project AI Assistant design (SourceDocument): 3
 - Projects List and Create UI Implementation Plan (SourceDocument): 3
 - Projects and RBAC Foundation Implementation Plan (SourceDocument): 3
-- Projects list and create UI design (SourceDocument): 3
 
 ## Trends
 

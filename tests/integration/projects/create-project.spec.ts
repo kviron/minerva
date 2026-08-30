@@ -1,7 +1,7 @@
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { ACCOUNT_STATUS } from '../../../shared/identity/constants'
-import { AUDIT_CHANNEL, MEMBERSHIP_STATUS, PROJECT_ROLE_KEY, PROJECT_STATUS } from '../../../shared/projects/constants'
+import { AUDIT_CHANNEL, MEMBERSHIP_STATUS, PROJECT_PERMISSION, PROJECT_ROLE_KEY, PROJECT_STATUS } from '../../../shared/projects/constants'
 import { createProjectPersistence, createProjectWith } from '../../../server/modules/projects/create-project'
 import { BUILT_IN_PROJECT_ROLES } from '../../../server/modules/projects/project-templates'
 import { createTestDatabase, resetTestDatabase, TEST_DATABASE_URL } from '../../helpers/database'
@@ -82,6 +82,11 @@ describe('createProjectPersistence', () => {
       for (const projectId of [first.projectId, second.projectId]) {
         const projectRoles = roles.filter(role => role.project_id === projectId)
         expect(projectRoles.map(role => role.built_in_key).sort()).toEqual(Object.values(PROJECT_ROLE_KEY).sort())
+        expect(permissions
+          .filter(row => row.project_id === projectId && row.permission_code === PROJECT_PERMISSION.DOCUMENTS_SHARE)
+          .map(row => row.built_in_key)
+          .sort(), 'documents.share built-in defaults')
+          .toEqual([PROJECT_ROLE_KEY.ADMIN, PROJECT_ROLE_KEY.EDITOR])
         expect(new Set(projectRoles.map(role => role.id))).toHaveLength(3)
         for (const role of projectRoles) {
           expect(permissions.filter(row => row.project_id === projectId && row.built_in_key === role.built_in_key).map(row => row.permission_code).sort())

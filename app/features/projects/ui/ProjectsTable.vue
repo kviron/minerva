@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { ProjectListItem } from '../../../../shared/projects/contracts'
-import { projectRoleLabel, projectStatusLabel, projectUpdatedAtLabel } from '../model/presentation'
+import type { ProjectTableRow } from '../model/presentation'
+import { projectIconUrl, projectInitials } from '../model/project-icon'
+import { projectStatusLabel, projectUpdatedAtLabel } from '../model/presentation'
 
 withDefaults(defineProps<{
-  projects: readonly ProjectListItem[]
+  projects: readonly ProjectTableRow[]
   mode?: 'member' | 'administration'
 }>(), { mode: 'member' })
 
@@ -36,15 +37,19 @@ const openProject = (projectId: string) => router.push(`/projects/${projectId}`)
           @keydown.space.prevent="openProject(project.id)"
         >
           <UiTableCell class="font-medium">
-            {{ project.name }}
+            <div class="flex items-center gap-3">
+              <UiAvatar class="size-8 rounded-md">
+                <UiAvatarImage v-if="project.iconId" :src="projectIconUrl(project.id, project.iconId)" :alt="`Иконка проекта ${project.name}`" />
+                <UiAvatarFallback class="rounded-md">{{ projectInitials(project.name) }}</UiAvatarFallback>
+              </UiAvatar>
+              <span>{{ project.name }}</span>
+            </div>
           </UiTableCell>
           <UiTableCell class="max-w-80 truncate text-muted-foreground">
             {{ project.description || '—' }}
           </UiTableCell>
           <UiTableCell>
-            {{ mode === 'administration' && 'activeMemberCount' in project
-              ? project.activeMemberCount
-              : 'role' in project ? projectRoleLabel(project.role) : '—' }}
+            {{ project.access }}
           </UiTableCell>
           <UiTableCell>{{ projectStatusLabel(project.status) }}</UiTableCell>
           <UiTableCell>{{ projectUpdatedAtLabel(project.updatedAt) }}</UiTableCell>

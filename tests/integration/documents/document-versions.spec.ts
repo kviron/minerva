@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { DOCUMENT_TEMPLATE } from '../../../shared/documents/constants'
 import { AUDIT_CHANNEL, PROJECT_PERMISSION } from '../../../shared/projects/constants'
 import { createDocumentPersistence, createDocumentWith } from '../../../server/modules/documents/create-document'
+import { archiveDocumentPersistence, archiveDocumentWith } from '../../../server/modules/documents/document-archive'
 import {
   getDocumentVersionForUser,
   listDocumentVersionsForUser,
@@ -196,6 +197,17 @@ describe('document publication history', () => {
       `
       expect(JSON.stringify(audit)).not.toContain('Первая публикация')
       expect(JSON.stringify(audit)).not.toContain('Вторая публикация')
+
+      await expect(archiveDocumentWith({ archive: archiveDocumentPersistence(database.db) })({
+        actorUserId: ownerId,
+        projectId: project.projectId,
+        documentId,
+        channel: AUDIT_CHANNEL.WEB,
+      })).resolves.toMatchObject({ ok: true })
+      await expect(listDocumentVersionsForUser(database.db, project.projectId, documentId, ownerId))
+        .resolves.toBeNull()
+      await expect(getDocumentVersionForUser(database.db, project.projectId, documentId, 1, ownerId))
+        .resolves.toBeNull()
     }
     finally {
       await database.close()

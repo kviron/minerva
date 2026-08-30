@@ -20,7 +20,8 @@ describe('current project sidebar', () => {
 
     expect(sidebar).toContain('<CurrentProjectSidebar />')
     expect(component).toContain('<UiSidebarGroup class="group-data-[collapsible=icon]:hidden">')
-    expect(component).toContain('<UiSidebarGroupLabel>Текущий проект</UiSidebarGroupLabel>')
+    expect(component).not.toContain('<UiSidebarGroupLabel>Текущий проект</UiSidebarGroupLabel>')
+    expect(component).toContain('<UiSidebarMenu>')
     expect(component).toContain('projectIdFromPath(route.path)')
     expect(component).toContain('<UiDropdownMenuTrigger as-child>')
     expect(component).toContain('<UiSidebarMenuButton size="lg" :is-active="true" tooltip="Выбрать проект">')
@@ -37,6 +38,27 @@ describe('current project sidebar', () => {
     expect(component).toContain('watch(selectedProjectId')
     expect(component).toContain('useProjectsStore()')
     expect(component).toContain('useProjectsActions()')
+  })
+
+  it('can append another page without hiding projects from large workspaces', async () => {
+    const component = await read('../../../../app/features/projects/ui/CurrentProjectSidebar.vue')
+
+    expect(component).toContain('const nextCursor = computed(')
+    expect(component).toContain('actions.load(PROJECTS_SCOPE.MEMBER, nextCursor.value)')
+    expect(component).toContain('state.appendMemberProjects(result.projects, result.nextCursor)')
+    expect(component).toContain('@select.prevent="loadMore"')
+  })
+
+  it('renders project icons with initials fallbacks in the selector and dropdown', async () => {
+    const component = await read('../../../../app/features/projects/ui/CurrentProjectSidebar.vue')
+
+    expect(component).toContain("import { projectIconUrl, projectInitials } from '../model/project-icon'")
+    expect(component).toContain('v-if="selectedProject.iconId"')
+    expect(component).toContain('projectIconUrl(selectedProject.id, selectedProject.iconId)')
+    expect(component).toContain('{{ projectInitials(selectedProject.name) }}')
+    expect(component).toContain('v-if="project.iconId"')
+    expect(component).toContain('projectIconUrl(project.id, project.iconId)')
+    expect(component).toContain('{{ projectInitials(project.name) }}')
   })
 
   it('replaces the main navigation with project-scoped links', async () => {

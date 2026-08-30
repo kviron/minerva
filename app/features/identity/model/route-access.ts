@@ -30,6 +30,19 @@ function isPublicPath(path: string): boolean {
   return exactPublicPaths.has(path)
     || hasSingleSegmentAfter(path, '/auth/reset-password/')
     || hasSingleSegmentAfter(path, '/invitations/')
+    || isPublicDocumentationPath(path)
+}
+
+function isPublicDocumentationPath(path: string): boolean {
+  const segments = path.split('/').filter(Boolean)
+  const documentId = segments[3]
+  return segments.length >= 3
+    && segments.length <= 4
+    && segments[0] === 'share'
+    && segments[1] === 'documentation'
+    && segments[2]?.length === 43
+    && /^[A-Za-z0-9_-]+$/u.test(segments[2])
+    && (documentId === undefined || /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu.test(documentId))
 }
 
 function isAdministrationPath(path: string): boolean {

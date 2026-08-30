@@ -1,4 +1,4 @@
-import { getCredentialEncryptionEnv } from '../../../shared/config/env'
+import { getCredentialEncryptionEnv } from '../../config/runtime-env'
 import { createCredentialCrypto } from './crypto'
 
 let runtimeCrypto: ReturnType<typeof createCredentialCrypto> | undefined

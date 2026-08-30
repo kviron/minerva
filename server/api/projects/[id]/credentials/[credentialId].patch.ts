@@ -2,7 +2,7 @@ import { defineEventHandler, getRouterParam, readBody, setResponseStatus } from 
 import { AUDIT_CHANNEL } from '../../../../../shared/projects/constants'
 import { getDatabase } from '../../../../infrastructure/database/client'
 import { CREDENTIAL_ERROR, updateCredential } from '../../../../modules/credentials/credentials'
-import { updateCredentialBodySchema } from '../../../../modules/credentials/http-schemas'
+import { updateCredentialBodySchema } from '../../../../../shared/credentials/contracts'
 import { getCredentialCrypto } from '../../../../modules/credentials/runtime'
 import { requireSession } from '../../../../modules/identity/session/require-session'
 

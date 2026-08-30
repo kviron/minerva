@@ -1,16 +1,12 @@
-export interface SignInInput {
-  readonly identifier: string
-  readonly password: string
-}
+import type {
+  RequestPasswordResetRequest,
+  ResetPasswordRequest,
+  SignInRequest,
+} from '../../../../shared/identity/contracts'
 
-export interface RequestPasswordResetInput {
-  readonly email: string
-}
-
-export interface ResetPasswordInput {
-  readonly token: string
-  readonly newPassword: string
-}
+export type SignInInput = SignInRequest
+export type RequestPasswordResetInput = RequestPasswordResetRequest
+export type ResetPasswordInput = ResetPasswordRequest
 
 export interface RequestOptions {
   readonly method: 'POST'

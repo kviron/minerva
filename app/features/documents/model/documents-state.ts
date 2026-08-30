@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import type {
   DocumentDetailResponse,
+  DocumentSearchResultItem,
   ArchivedDocumentBatch,
   DocumentTreeNode,
   DocumentVersionDetail,
@@ -15,6 +16,7 @@ interface DocumentsState {
   versions: DocumentVersionSummary[]
   selectedVersion: DocumentVersionDetail | null
   archive: ArchivedDocumentBatch[]
+  searchResults: DocumentSearchResultItem[]
 }
 
 export const useDocumentsStore = defineStore('documents', {
@@ -25,6 +27,7 @@ export const useDocumentsStore = defineStore('documents', {
     versions: [],
     selectedVersion: null,
     archive: [],
+    searchResults: [],
   }),
 
   actions: {
@@ -34,6 +37,14 @@ export const useDocumentsStore = defineStore('documents', {
 
     clearRoots(): void {
       this.roots = []
+    },
+
+    applySearchResults(results: readonly DocumentSearchResultItem[]): void {
+      this.searchResults = results.map(result => ({ ...result }))
+    },
+
+    clearSearchResults(): void {
+      this.searchResults = []
     },
 
     applyArchive(archive: readonly ArchivedDocumentBatch[]): void {

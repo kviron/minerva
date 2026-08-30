@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import { PROJECT_DESCRIPTION_MAX_LENGTH, PROJECT_NAME_MAX_LENGTH } from '../../../../shared/projects/constants'
 
 const props = defineProps<{ open: boolean, pending?: boolean, submitError?: string }>()
 const emit = defineEmits<{
@@ -27,8 +28,8 @@ const submit = async () => {
   const normalizedName = name.value.trim()
   const normalizedDescription = description.value.trim()
   nameError.value = normalizedName.length === 0 ? 'Укажите название проекта.'
-    : normalizedName.length > 120 ? 'Название должно быть не длиннее 120 символов.' : ''
-  descriptionError.value = normalizedDescription.length > 2000
+    : normalizedName.length > PROJECT_NAME_MAX_LENGTH ? 'Название должно быть не длиннее 120 символов.' : ''
+  descriptionError.value = normalizedDescription.length > PROJECT_DESCRIPTION_MAX_LENGTH
     ? 'Описание должно быть не длиннее 2000 символов.' : ''
   if (nameError.value || descriptionError.value) return
 
@@ -49,12 +50,12 @@ const submit = async () => {
         <UiFieldGroup>
           <UiField :data-invalid="nameError ? true : undefined">
             <UiFieldLabel for="project-name">Название</UiFieldLabel>
-            <UiInput id="project-name" v-model="name" :aria-invalid="Boolean(nameError)" maxlength="120" autofocus />
+            <UiInput id="project-name" v-model="name" :aria-invalid="Boolean(nameError)" :maxlength="PROJECT_NAME_MAX_LENGTH" autofocus />
             <UiFieldError v-if="nameError" :errors="[nameError]" />
           </UiField>
           <UiField :data-invalid="descriptionError ? true : undefined">
             <UiFieldLabel for="project-description">Описание</UiFieldLabel>
-            <UiTextarea id="project-description" v-model="description" :aria-invalid="Boolean(descriptionError)" maxlength="2000" />
+            <UiTextarea id="project-description" v-model="description" :aria-invalid="Boolean(descriptionError)" :maxlength="PROJECT_DESCRIPTION_MAX_LENGTH" />
             <UiFieldError v-if="descriptionError" :errors="[descriptionError]" />
           </UiField>
           <UiFieldError v-if="invalid && submitError" :errors="[submitError]" />

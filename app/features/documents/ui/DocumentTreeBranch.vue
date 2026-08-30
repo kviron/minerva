@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Archive, ChevronDown, ChevronRight, FilePlus2, FileText, MoreHorizontal, Move, Trash2 } from '@lucide/vue'
+import { Archive, ChevronDown, ChevronRight, FilePlus2, FileText, MoreHorizontal, Move, Share2, Trash2 } from '@lucide/vue'
 import { computed, ref, watch } from 'vue'
 import { useProjectOverviewStore } from '@/features/projects'
 import { cn } from '@/lib/utils'
@@ -14,6 +14,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   create: [node: DocumentTreeNode]
   move: [node: DocumentTreeNode]
+  share: [node: DocumentTreeNode]
   archive: [node: DocumentTreeNode]
   discard: [node: DocumentTreeNode]
 }>()
@@ -28,6 +29,8 @@ const canCreate = computed(() => projectState.project?.id === props.projectId
   && projectState.project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_CREATE))
 const canMove = computed(() => projectState.project?.id === props.projectId
   && projectState.project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_MOVE))
+const canShare = computed(() => projectState.project?.id === props.projectId
+  && projectState.project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_SHARE))
 const canArchive = computed(() => projectState.project?.id === props.projectId
   && projectState.project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_ARCHIVE))
 const isDiscardableBranch = (node: DocumentTreeNode): boolean =>
@@ -69,7 +72,7 @@ watch(() => props.activeDocumentId, (activeId) => {
         <span class="truncate">{{ node.title }}</span>
         <span v-if="node.publicationState === 'draft'" class="sr-only">Черновик</span>
       </NuxtLink>
-      <UiDropdownMenu v-if="canCreate || canMove || canArchive">
+      <UiDropdownMenu v-if="canCreate || canMove || canShare || canArchive">
         <UiDropdownMenuTrigger as-child>
           <UiButton variant="ghost" size="icon-xs" :aria-label="`Действия со страницей ${node.title}`">
             <MoreHorizontal />
@@ -84,6 +87,10 @@ watch(() => props.activeDocumentId, (activeId) => {
             <UiDropdownMenuItem v-if="canMove" @select="emit('move', node)">
               <Move />
               Переместить
+            </UiDropdownMenuItem>
+            <UiDropdownMenuItem v-if="canShare" @select="emit('share', node)">
+              <Share2 />
+              Поделиться
             </UiDropdownMenuItem>
             <UiDropdownMenuItem
               v-if="canArchive && canDiscardBranch"
@@ -111,6 +118,7 @@ watch(() => props.activeDocumentId, (activeId) => {
         :active-document-id="activeDocumentId"
         @create="emit('create', $event)"
         @move="emit('move', $event)"
+        @share="emit('share', $event)"
         @archive="emit('archive', $event)"
         @discard="emit('discard', $event)"
       />

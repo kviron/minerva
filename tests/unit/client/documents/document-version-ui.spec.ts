@@ -35,10 +35,11 @@ describe('document version UI', () => {
     expect(mocks.documentsApi.listVersions).toHaveBeenCalledWith('project-1', 'document-1', expect.anything())
   })
 
-  it('composes titled publish, history, preview, and restore confirmation overlays', async () => {
-    const [viewer, controls, state] = await Promise.all([
+  it('composes publication and a Telegram-like right details panel', async () => {
+    const [viewer, controls, panel, state] = await Promise.all([
       readFile('app/features/documents/ui/DocumentViewer.vue', 'utf8'),
       readFile('app/features/documents/ui/DocumentVersionControls.vue', 'utf8'),
+      readFile('app/features/documents/ui/DocumentDetailsPanel.vue', 'utf8'),
       readFile('app/features/documents/model/documents-state.ts', 'utf8'),
     ])
     expect(viewer).toContain('<DocumentVersionControls')
@@ -48,11 +49,25 @@ describe('document version UI', () => {
     expect(controls).toContain('publishRequestError')
     expect(controls).toContain('<UiAlert v-if="publishRequestError" variant="destructive" role="alert">')
     expect(controls).not.toContain('<UiFieldError')
-    expect(controls).toContain("version.changeSummary || 'Без комментария'")
-    expect(controls).toContain('<UiSheetTitle>История версий</UiSheetTitle>')
-    expect(controls).toContain('<h3 class="px-4 text-sm font-medium">{{ document.title }}</h3>')
+    expect(panel).toContain("version.changeSummary || 'Без комментария'")
+    expect(controls).toContain('<DocumentDetailsPanel')
+    expect(panel).toContain('PanelRightIcon')
+    expect(panel).toContain('aria-label="Открыть сведения о странице"')
+    expect(panel).toContain('<UiSheetTitle>{{ document.title }}</UiSheetTitle>')
+    expect(panel).toContain('Изображения')
+    expect(panel).toContain('Файлы')
+    expect(panel).toContain('Ссылки')
+    expect(panel).toContain('История')
+    expect(panel).toContain('selectedImage')
+    expect(panel).toContain(':href="selectedImage.downloadUrl"')
+    expect(panel).toContain('Скачать')
+    expect(panel).toContain('<UiTabsContent v-if="canViewHistory" :value="DOCUMENT_DETAILS_TAB.HISTORY"')
+    expect(panel).toContain('v-for="version in versions"')
+    expect(panel).toContain("emit('selectVersion', version)")
+    expect(panel).not.toContain('setPanelOpen(false)\n  emit(\'openHistory\')')
+    expect(controls).not.toContain('<UiSheet :open="historyOpen"')
     expect(controls).not.toContain('{{ version.title }}')
-    expect(controls).toContain('class="h-auto w-full justify-start p-3 text-left"')
+    expect(panel).toContain('class="h-auto w-full justify-start p-3 text-left"')
     expect(controls).toContain('<UiDialog :open="versionPreviewOpen"')
     expect(controls).toContain('<UiDialogTitle>Предпросмотр версии</UiDialogTitle>')
     expect(controls).toContain('sm:max-w-4xl')

@@ -6,8 +6,14 @@ import type { AuditChannel } from '../../../shared/projects/types'
 import { getDatabase } from '../../infrastructure/database/client'
 import { documents } from '../../infrastructure/database/schema/documents'
 import { documentImages } from '../../infrastructure/database/schema/files'
-import { auditEvents, projectMemberships, projectRolePermissions } from '../../infrastructure/database/schema/projects'
+import { auditEvents, projectMemberships, projectRolePermissions, projects } from '../../infrastructure/database/schema/projects'
+import {
+  withDocumentMutationAuditAttribution,
+  type DocumentMutationAuditAttribution,
+} from '../projects/audit-attribution'
 import { extractInternalDocumentLinkTargetIds, extractReferencedImageIds, parseDocumentContent } from './content-schema'
+import type { DocumentMutationTransaction } from './create-document'
+import { extractDocumentSearchText } from './search-documents'
 
 export const UPDATE_DOCUMENT_DRAFT_ERROR = {
   INVALID_DRAFT: 'INVALID_DRAFT',
@@ -26,10 +32,12 @@ export interface UpdateDocumentDraftInput {
   readonly title: string
   readonly content: unknown
   readonly expectedRevision: number
+  readonly auditAttribution?: DocumentMutationAuditAttribution
 }
 
 export interface ValidDocumentDraftUpdate extends Omit<UpdateDocumentDraftInput, 'content'> {
   readonly content: DocumentContent
+  readonly searchText: string
   readonly internalLinkTargetIds: readonly string[]
   readonly referencedImageIds: readonly string[]
 }
@@ -70,14 +78,25 @@ export const validateDocumentDraftUpdate = (input: UpdateDocumentDraftInput): Va
       ...input,
       title,
       content,
+      searchText: extractDocumentSearchText(content),
       internalLinkTargetIds: extractInternalDocumentLinkTargetIds(content),
       referencedImageIds: extractReferencedImageIds(content),
     },
   }
 }
 
-export const updateDocumentDraftPersistence = (db: DocumentsDatabase): UpdateDocumentDraftDependencies['persist'] =>
-  command => db.transaction(async (tx): Promise<PersistenceResult> => {
+export const updateDocumentDraftInTransaction = async (
+  tx: DocumentMutationTransaction,
+  command: ValidDocumentDraftUpdate,
+): Promise<PersistenceResult> => {
+    const [project] = await tx.select({ id: projects.id })
+      .from(projects)
+      .where(and(eq(projects.id, command.projectId), isNull(projects.archivedAt)))
+      .for('update')
+    if (!project) {
+      return { ok: false, code: UPDATE_DOCUMENT_DRAFT_ERROR.NOT_FOUND }
+    }
+
     const [access] = await tx.select({ membershipId: projectMemberships.id })
       .from(projectMemberships)
       .innerJoin(projectRolePermissions, eq(projectMemberships.roleId, projectRolePermissions.roleId))
@@ -108,6 +127,7 @@ export const updateDocumentDraftPersistence = (db: DocumentsDatabase): UpdateDoc
       .set({
         title: command.title,
         draftContent: command.content,
+        draftSearchText: command.searchText,
         draftInternalLinkTargetIds: [...command.internalLinkTargetIds],
         draftReferencedImageIds: [...command.referencedImageIds],
         draftRevision: sql`${documents.draftRevision} + 1`,
@@ -144,10 +164,17 @@ export const updateDocumentDraftPersistence = (db: DocumentsDatabase): UpdateDoc
       projectId: command.projectId,
       targetType: 'document',
       targetId: command.documentId,
-      metadata: { draftRevision: updated.draftRevision },
+      metadata: withDocumentMutationAuditAttribution(
+        { draftRevision: updated.draftRevision },
+        command.auditAttribution,
+        { documentId: command.documentId, draftRevision: updated.draftRevision },
+      ),
     })
     return { ok: true, draftRevision: updated.draftRevision, updatedAt: updatedAt.toISOString() }
-  })
+}
+
+export const updateDocumentDraftPersistence = (db: DocumentsDatabase): UpdateDocumentDraftDependencies['persist'] =>
+  command => db.transaction(tx => updateDocumentDraftInTransaction(tx, command))
 
 export const updateDocumentDraftWith = (dependencies: UpdateDocumentDraftDependencies) =>
   async (input: UpdateDocumentDraftInput): Promise<UpdateDocumentDraftResult> => {

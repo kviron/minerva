@@ -1,4 +1,4 @@
-import { getServerEnv } from '../../../shared/config/env'
+import { getServerEnv } from '../../config/runtime-env'
 import { IDENTITY_CODE } from '../../../shared/identity/constants'
 import { checkDatabase } from '../../infrastructure/database/health'
 

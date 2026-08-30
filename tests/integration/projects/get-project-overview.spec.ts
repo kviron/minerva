@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { AUDIT_CHANNEL, PROJECT_PERMISSION } from '../../../shared/projects/constants'
 import { createProjectPersistence } from '../../../server/modules/projects/create-project'
 import { getProjectOverviewForUser } from '../../../server/modules/projects/get-project-overview'
+import { listMemberProjects } from '../../../server/modules/projects/list-projects'
 import { createTestDatabase, resetTestDatabase, TEST_DATABASE_URL } from '../../helpers/database'
 
 vi.stubEnv('DATABASE_URL', TEST_DATABASE_URL)
@@ -60,6 +61,32 @@ describe('getProjectOverviewForUser', () => {
       })
 
       await expect(getProjectOverviewForUser(database.db, created.projectId, outsiderId)).resolves.toBeNull()
+    } finally {
+      await database.close()
+    }
+  })
+
+  it('does not list a project when the active membership role lacks project.view', async () => {
+    const database = createTestDatabase()
+    try {
+      const created = await createProjectPersistence(database.db)({
+        actorUserId: ownerId,
+        channel: AUDIT_CHANNEL.WEB,
+        name: 'Restricted project',
+        description: null,
+      })
+      const [role] = await database.queryClient<{ id: string }[]>`
+        insert into project_roles (project_id, kind, display_name)
+        values (${created.projectId}, 'custom', 'No project access')
+        returning id
+      `
+      if (!role) throw new Error('Expected custom role')
+      await database.queryClient`
+        insert into project_memberships (project_id, user_id, role_id, status)
+        values (${created.projectId}, ${outsiderId}, ${role.id}, 'active')
+      `
+
+      await expect(listMemberProjects(database.db, outsiderId)).resolves.toEqual({ items: [], nextCursor: null })
     } finally {
       await database.close()
     }

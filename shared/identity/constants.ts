@@ -23,3 +23,8 @@ export const LOGIN_IDENTIFIER_KIND = {
   EMAIL: 'email',
   USERNAME: 'username',
 } as const
+
+export const OAUTH_GRANT_STATUS = {
+  ACTIVE: 'active',
+  REVOKED: 'revoked',
+} as const

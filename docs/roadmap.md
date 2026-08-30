@@ -1,6 +1,7 @@
 # Minerva roadmap
 
-Status: proposed after Superpowers audit
+Status: active canonical roadmap
+Last updated: 2026-08-29
 
 ## Slice 0: Project memory and approved design
 
@@ -24,9 +25,30 @@ Deliver project lifecycle, memberships, role templates, custom project roles, pe
 
 Acceptance: authorization results match across UI and API, and inaccessible projects are indistinguishable from missing projects where appropriate.
 
+## Slice 3.5: Audited project lifecycle completion
+
+The lifecycle design, threat/race model, ADR 0028, and PL.0-PL.6 tests-first
+plan were approved on 2026-08-29. Complete the previously scaffolded project
+lifecycle with `active`, `paused`, `closed`, and `archived`; semantic
+transitions; exact permissions; revision/idempotency/history; a shared
+operation-aware server boundary; concurrency control; public-share, AI, MCP,
+credentials, search, files, and privacy behavior; and localized Actions-based
+UX. Use composition and pure entity-specific policies rather than inheritance.
+
+PL.0 canonical adoption and permission-template correction, PL.1 pure lifecycle
+and operation policies, and PL.2 persistence, migration, and the transactional
+transition service are complete. PL.3 unified project-operation access and the
+read-only core is next. Application implementation continues through the
+approved PL.3-PL.6 vertical slices with tests first.
+Project lifecycle mutation remains excluded from MCP.
+
+Acceptance: every authenticated, public, AI, and MCP boundary observes the same
+committed project state; restore is recoverable but never silently resumes work
+or resurrects public links.
+
 ## Slice 4: Document core
 
-Deliver document tree, Tiptap editor, explicit draft saves, optimistic conflicts, publication summaries, complete immutable version snapshots, full-snapshot restore with stable slugs, archive, internal links, backlinks, protected historical image references, and system templates.
+Deliver document tree, Tiptap editor, explicit draft saves, optimistic conflicts, publication summaries, complete immutable version snapshots, full-snapshot restore with stable slugs, archive, internal links, backlinks, protected historical image references, allow-listed structured external embeds, and system templates.
 
 Acceptance: an Editor completes the full draft-to-publish-to-restore journey while a Viewer remains read-only.
 
@@ -48,7 +70,26 @@ Deliver Better Auth OAuth Provider integration, OAuth metadata/discovery, canoni
 
 Acceptance: a real MCP client can connect, read, edit, and publish only within both delegated scopes and RBAC; the first request after grant revocation receives `401 Unauthorized`.
 
+## Slice 6.5: Project AI assistant
+
+Deliver dedicated encrypted provider connections, stable `project.ai.use` and `project.ai.manage` authorization, provider-neutral read-only orchestration over existing document services, a project-wide streaming assistant widget, grounded citations, private retained conversations, the short-lived server-owned proposal foundation, and atomic idempotent confirmation through shared Documents transaction primitives. End-to-end update proposal generation, review, and confirmation UI is the active next increment.
+
+Acceptance: a currently authorized member receives a cancellable cited answer from only accessible project documentation; permission, membership, account, project, provider, and project-switch boundaries fail closed without exposing keys or content.
+
 ## Slice 7: Production readiness
+
+Documentation Sharing slices DS.1-DS.5 are complete: revocable encrypted capabilities, dedicated published-only projections and images, authenticated management, the isolated guest reader, and abuse/release verification now form one tested boundary.
+
+Production Readiness PR.1-PR.3 and PR.5 are complete: server-only secret-file
+configuration, content-free liveness/readiness, bounded PostgreSQL/S3 probes,
+required migration detection, an immutable non-root image, and the standalone
+hardened Caddy/application/migration/PostgreSQL graph are implemented. All
+response families now share defensive browser headers and validated request
+IDs, while closed structured logs contain only bounded safe metadata. PR.4
+encrypted off-host backup and restore tooling plus its local failure matrix are
+complete, but the external timed drill remains open. Safe read-only audit
+browsing is implemented. PR.6 release automation and clean-VPS acceptance is
+next where it does not depend on the external PR.4 providers.
 
 Deliver VPS Compose configuration, reverse-proxy guidance, backup jobs, restore drill, structured logs, audit browsing, security headers, dependency scanning, and release checklist.
 

@@ -1,13 +1,15 @@
 import { and, asc, count, eq } from 'drizzle-orm'
-import { MEMBERSHIP_STATUS, PROJECT_PERMISSION, PROJECT_ROLE_KIND } from '../../../shared/projects/constants'
+import { MEMBERSHIP_STATUS, PROJECT_PERMISSION } from '../../../shared/projects/constants'
 import type { ProjectOverviewProjection } from '../../../shared/projects/contracts'
 import { getDatabase } from '../../infrastructure/database/client'
+import { projectIcons } from '../../infrastructure/database/schema/files'
 import {
   projectMemberships,
   projectRolePermissions,
   projectRoles,
   projects,
 } from '../../infrastructure/database/schema/projects'
+import { toProjectOverview } from './project-projections'
 
 type ProjectDatabase = ReturnType<typeof getDatabase>['db']
 
@@ -20,9 +22,11 @@ export async function getProjectOverviewForUser(
     id: projects.id,
     name: projects.name,
     description: projects.description,
+    descriptionContent: projects.descriptionContent,
     status: projects.status,
     createdAt: projects.createdAt,
     updatedAt: projects.updatedAt,
+    iconId: projectIcons.id,
     roleId: projectRoles.id,
     roleKind: projectRoles.kind,
     builtInKey: projectRoles.builtInKey,
@@ -30,6 +34,7 @@ export async function getProjectOverviewForUser(
   })
     .from(projectMemberships)
     .innerJoin(projects, eq(projectMemberships.projectId, projects.id))
+    .leftJoin(projectIcons, eq(projectIcons.projectId, projects.id))
     .innerJoin(projectRoles, eq(projectMemberships.roleId, projectRoles.id))
     .innerJoin(projectRolePermissions, eq(projectRoles.id, projectRolePermissions.roleId))
     .where(and(
@@ -54,19 +59,11 @@ export async function getProjectOverviewForUser(
     .where(eq(projectRolePermissions.roleId, project.roleId))
     .orderBy(asc(projectRolePermissions.permissionCode))
 
-  return {
-    id: project.id,
-    name: project.name,
-    description: project.description,
-    status: project.status,
-    createdAt: project.createdAt.toISOString(),
-    updatedAt: project.updatedAt.toISOString(),
+  return toProjectOverview({
+    ...project,
     activeMemberCount: memberCount?.value ?? 0,
-    role: project.roleKind === PROJECT_ROLE_KIND.BUILT_IN
-      ? { builtInKey: project.builtInKey, customName: null }
-      : { builtInKey: null, customName: project.roleName },
     permissions: permissions.map(permission => permission.code),
-  }
+  })
 }
 
 export const getCurrentUserProjectOverview = (projectId: string, userId: string) =>

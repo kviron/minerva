@@ -5,62 +5,12 @@ import type {
   CredentialCategoryManagement,
   CredentialCategoryMutationResponse,
 } from '../../../../shared/credentials/category-contracts'
-
-const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value)
-const isStringArray = (value: unknown): value is string[] => Array.isArray(value) && value.every(item => typeof item === 'string')
-const invalidResponse = () => new Error('Invalid credential category response')
-
-export function parseCategoryManagement(value: unknown): CredentialCategoryManagement {
-  if (!isRecord(value) || typeof value.canManage !== 'boolean' || typeof value.canCreateCategories !== 'boolean'
-    || typeof value.canCreateCredentials !== 'boolean'
-    || !Array.isArray(value.categories) || !Array.isArray(value.roles) || !Array.isArray(value.members))
-  {
-    throw invalidResponse()
-  }
-  const categories = value.categories.map((item) => {
-    if (!isRecord(item) || typeof item.id !== 'string' || typeof item.name !== 'string'
-      || !(item.description === null || typeof item.description === 'string')
-      || !isStringArray(item.roleIds) || !isStringArray(item.membershipIds)) {
-      throw invalidResponse()
-    }
-    return { id: item.id, name: item.name, description: item.description, roleIds: item.roleIds, membershipIds: item.membershipIds }
-  })
-  const roles = value.roles.map((item) => {
-    if (!isRecord(item) || typeof item.id !== 'string' || typeof item.name !== 'string'
-      || !(item.builtInKey === null || item.builtInKey === 'admin' || item.builtInKey === 'editor' || item.builtInKey === 'viewer')) {
-      throw invalidResponse()
-    }
-    const builtInKey: 'admin' | 'editor' | 'viewer' | null = item.builtInKey
-    return { id: item.id, name: item.name, builtInKey }
-  })
-  const members = value.members.map((item) => {
-    if (!isRecord(item) || typeof item.membershipId !== 'string' || typeof item.userId !== 'string'
-      || typeof item.name !== 'string' || typeof item.email !== 'string') {
-      throw invalidResponse()
-    }
-    return { membershipId: item.membershipId, userId: item.userId, name: item.name, email: item.email }
-  })
-  return {
-    canManage: value.canManage,
-    canCreateCategories: value.canCreateCategories,
-    canCreateCredentials: value.canCreateCredentials,
-    categories, roles, members,
-  }
-}
-
-export function parseCategoryIdResponse(value: unknown): CredentialCategoryIdResponse {
-  if (!isRecord(value) || typeof value.categoryId !== 'string') {
-    throw invalidResponse()
-  }
-  return { categoryId: value.categoryId }
-}
-
-export function parseCategoryMutationResponse(value: unknown): CredentialCategoryMutationResponse {
-  if (!isRecord(value) || value.ok !== true) {
-    throw invalidResponse()
-  }
-  return { ok: true }
-}
+import {
+  credentialCategoryIdResponseSchema,
+  credentialCategoryManagementSchema,
+  credentialCategoryMutationResponseSchema,
+} from '../../../../shared/credentials/category-contracts'
+import { decodeApiResponse } from '../../../shared/api/decode-api-response'
 
 export type CredentialCategoryApi = Readonly<{
   load: (projectId: string, signal: AbortSignal) => Promise<CredentialCategoryManagement>
@@ -71,18 +21,24 @@ export type CredentialCategoryApi = Readonly<{
 }>
 
 export const categoryApi: CredentialCategoryApi = {
-  load: async (projectId, signal) =>
-    parseCategoryManagement(await $fetch(`/api/projects/${projectId}/credential-categories`, { signal })),
-  create: async (projectId, body, signal) => parseCategoryIdResponse(
-    await $fetch(`/api/projects/${projectId}/credential-categories`, { method: 'POST', body, signal }),
-  ),
-  update: async (projectId, categoryId, body, signal) => parseCategoryMutationResponse(
-    await $fetch(`/api/projects/${projectId}/credential-categories/${categoryId}`, { method: 'PATCH', body, signal }),
-  ),
-  replaceGrants: async (projectId, categoryId, body, signal) => parseCategoryMutationResponse(
-    await $fetch(`/api/projects/${projectId}/credential-categories/${categoryId}/grants`, { method: 'PUT', body, signal }),
-  ),
-  archive: async (projectId, categoryId, signal) => parseCategoryMutationResponse(
-    await $fetch(`/api/projects/${projectId}/credential-categories/${categoryId}`, { method: 'DELETE', signal }),
-  ),
+  load: async (projectId, signal) => {
+    const response: unknown = await $fetch(`/api/projects/${projectId}/credential-categories`, { signal })
+    return decodeApiResponse(credentialCategoryManagementSchema, response, 'GET /api/projects/:projectId/credential-categories')
+  },
+  create: async (projectId, body, signal) => {
+    const response: unknown = await $fetch(`/api/projects/${projectId}/credential-categories`, { method: 'POST', body, signal })
+    return decodeApiResponse(credentialCategoryIdResponseSchema, response, 'POST /api/projects/:projectId/credential-categories')
+  },
+  update: async (projectId, categoryId, body, signal) => {
+    const response: unknown = await $fetch(`/api/projects/${projectId}/credential-categories/${categoryId}`, { method: 'PATCH', body, signal })
+    return decodeApiResponse(credentialCategoryMutationResponseSchema, response, 'PATCH /api/projects/:projectId/credential-categories/:categoryId')
+  },
+  replaceGrants: async (projectId, categoryId, body, signal) => {
+    const response: unknown = await $fetch(`/api/projects/${projectId}/credential-categories/${categoryId}/grants`, { method: 'PUT', body, signal })
+    return decodeApiResponse(credentialCategoryMutationResponseSchema, response, 'PUT /api/projects/:projectId/credential-categories/:categoryId/grants')
+  },
+  archive: async (projectId, categoryId, signal) => {
+    const response: unknown = await $fetch(`/api/projects/${projectId}/credential-categories/${categoryId}`, { method: 'DELETE', signal })
+    return decodeApiResponse(credentialCategoryMutationResponseSchema, response, 'DELETE /api/projects/:projectId/credential-categories/:categoryId')
+  },
 }

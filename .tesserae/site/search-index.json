@@ -4,14 +4,14 @@
     "title": "mAP",
     "kind": "entities",
     "href": "entities/map.html",
-    "summary": "- **summarizes** → Minerva MVP Planning _(CommunitySummary)_ - **uses_metric** → Authenticated Page Placeholder Design _(SourceDocument)_ - **uses_metric** → Current User Sidebar Implementation Plan…",
+    "summary": "- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_ - **uses_metric** → Authenticated Page Placeholder Design _(SourceDocument)_ - **uses_metric** → Current User Sidebar Implementation Plan…",
     "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\progress.md",
     "tokens": [
       "map",
       "summarizes",
       "minerva",
       "mvp",
-      "planning",
+      "blueprint",
       "communitysummary",
       "uses_metric",
       "authenticated",
@@ -375,6 +375,291 @@
     "created_ts": null
   },
   {
+    "id": "sources:adr-0016-link-oauth-consents-and-token-families-through-a-minerva-grant",
+    "title": "ADR 0016: Link OAuth consents and token families through a Minerva grant",
+    "kind": "sources",
+    "href": "sources/adr-0016-link-oauth-consents-and-token-families-through-a-minerva-grant.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0016-link-oauth-consents-and-token-families.md",
+    "tokens": [
+      "adr",
+      "0016",
+      "link",
+      "oauth",
+      "consents",
+      "token",
+      "families",
+      "through",
+      "minerva",
+      "grant",
+      "sources"
+    ],
+    "len": 11,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0017-serialize-oauth-token-issuance-with-grant-revocation",
+    "title": "ADR 0017: Serialize OAuth token issuance with grant revocation",
+    "kind": "sources",
+    "href": "sources/adr-0017-serialize-oauth-token-issuance-with-grant-revocation.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0017-serialize-oauth-token-issuance-with-grant-revocation.md",
+    "tokens": [
+      "adr",
+      "0017",
+      "serialize",
+      "oauth",
+      "token",
+      "issuance",
+      "grant",
+      "revocation",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0018-use-leased-idempotency-records-for-mcp-mutations",
+    "title": "ADR 0018: Use leased idempotency records for MCP mutations",
+    "kind": "sources",
+    "href": "sources/adr-0018-use-leased-idempotency-records-for-mcp-mutations.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0018-use-leased-idempotency-records-for-mcp-mutations.md",
+    "tokens": [
+      "adr",
+      "0018",
+      "use",
+      "leased",
+      "idempotency",
+      "records",
+      "mcp",
+      "mutations",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0019-isolate-project-ai-connections-and-require-user-confirmed-mutations",
+    "title": "ADR 0019: Isolate project AI connections and require user-confirmed mutations",
+    "kind": "sources",
+    "href": "sources/adr-0019-isolate-project-ai-connections-and-require-user-confirmed-mutations.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0019-isolate-project-ai-connections-and-require-user-confirmed-mutations.md",
+    "tokens": [
+      "adr",
+      "0019",
+      "isolate",
+      "project",
+      "ai",
+      "connections",
+      "require",
+      "user",
+      "confirmed",
+      "mutations",
+      "sources"
+    ],
+    "len": 11,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0020-use-allow-listed-structured-external-embeds",
+    "title": "ADR 0020: Use allow-listed structured external embeds",
+    "kind": "sources",
+    "href": "sources/adr-0020-use-allow-listed-structured-external-embeds.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0020-use-allow-listed-external-embeds.md",
+    "tokens": [
+      "adr",
+      "0020",
+      "use",
+      "allow",
+      "listed",
+      "structured",
+      "external",
+      "embeds",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0021-use-postgresql-leases-and-content-free-ai-usage-events",
+    "title": "ADR 0021: Use PostgreSQL leases and content-free AI usage events",
+    "kind": "sources",
+    "href": "sources/adr-0021-use-postgresql-leases-and-content-free-ai-usage-events.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0021-use-postgresql-leases-and-content-free-ai-usage-events.md",
+    "tokens": [
+      "adr",
+      "0021",
+      "use",
+      "postgresql",
+      "leases",
+      "content",
+      "free",
+      "ai",
+      "usage",
+      "events",
+      "sources"
+    ],
+    "len": 11,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0022-retain-private-ai-conversations-for-thirty-days",
+    "title": "ADR 0022: Retain private AI conversations for thirty days",
+    "kind": "sources",
+    "href": "sources/adr-0022-retain-private-ai-conversations-for-thirty-days.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0022-retain-private-ai-conversations-for-thirty-days.md",
+    "tokens": [
+      "adr",
+      "0022",
+      "retain",
+      "private",
+      "ai",
+      "conversations",
+      "thirty",
+      "days",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0023-use-short-lived-server-owned-ai-document-proposals",
+    "title": "ADR 0023: Use short-lived server-owned AI document proposals",
+    "kind": "sources",
+    "href": "sources/adr-0023-use-short-lived-server-owned-ai-document-proposals.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0023-use-short-lived-server-owned-ai-document-proposals.md",
+    "tokens": [
+      "adr",
+      "0023",
+      "use",
+      "short",
+      "lived",
+      "server",
+      "owned",
+      "ai",
+      "document",
+      "proposals",
+      "sources"
+    ],
+    "len": 11,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0024-use-revocable-capability-links-for-public-documentation",
+    "title": "ADR 0024: Use revocable capability links for public documentation",
+    "kind": "sources",
+    "href": "sources/adr-0024-use-revocable-capability-links-for-public-documentation.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0024-use-revocable-capability-links-for-public-documentation.md",
+    "tokens": [
+      "adr",
+      "0024",
+      "use",
+      "revocable",
+      "capability",
+      "links",
+      "public",
+      "documentation",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0025-run-production-on-a-hardened-single-vps-with-off-host-recovery",
+    "title": "ADR 0025: Run production on a hardened single VPS with off-host recovery",
+    "kind": "sources",
+    "href": "sources/adr-0025-run-production-on-a-hardened-single-vps-with-off-host-recovery.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0025-run-production-on-a-hardened-single-vps.md",
+    "tokens": [
+      "adr",
+      "0025",
+      "run",
+      "production",
+      "hardened",
+      "single",
+      "vps",
+      "off",
+      "host",
+      "recovery",
+      "sources"
+    ],
+    "len": 11,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0026-compose-data-grids-from-shared-table-mechanics",
+    "title": "ADR 0026: Compose data grids from shared table mechanics",
+    "kind": "sources",
+    "href": "sources/adr-0026-compose-data-grids-from-shared-table-mechanics.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0026-compose-data-grids-from-shared-table-mechanics.md",
+    "tokens": [
+      "adr",
+      "0026",
+      "compose",
+      "data",
+      "grids",
+      "shared",
+      "table",
+      "mechanics",
+      "sources"
+    ],
+    "len": 9,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0027-resolve-current-audit-targets-through-safe-projections",
+    "title": "ADR 0027: Resolve current audit targets through safe projections",
+    "kind": "sources",
+    "href": "sources/adr-0027-resolve-current-audit-targets-through-safe-projections.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0027-resolve-current-audit-targets-through-safe-projections.md",
+    "tokens": [
+      "adr",
+      "0027",
+      "resolve",
+      "current",
+      "audit",
+      "targets",
+      "through",
+      "safe",
+      "projections",
+      "sources"
+    ],
+    "len": 10,
+    "created_ts": null
+  },
+  {
+    "id": "sources:adr-0028-compose-project-lifecycle-from-pure-transition-and-operation-policies",
+    "title": "ADR 0028: Compose project lifecycle from pure transition and operation policies",
+    "kind": "sources",
+    "href": "sources/adr-0028-compose-project-lifecycle-from-pure-transition-and-operation-policies.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\decisions\\\\0028-compose-project-lifecycle-from-pure-transition-policies.md",
+    "tokens": [
+      "adr",
+      "0028",
+      "compose",
+      "project",
+      "lifecycle",
+      "pure",
+      "transition",
+      "operation",
+      "policies",
+      "sources"
+    ],
+    "len": 10,
+    "created_ts": null
+  },
+  {
     "id": "sources:authenticated-page-placeholder-design",
     "title": "Authenticated Page Placeholder Design",
     "kind": "sources",
@@ -590,6 +875,23 @@
     "created_ts": null
   },
   {
+    "id": "sources:encrypted-backup-and-isolated-restore",
+    "title": "Encrypted backup and isolated restore",
+    "kind": "sources",
+    "href": "sources/encrypted-backup-and-isolated-restore.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\operations\\\\backup-and-restore.md",
+    "tokens": [
+      "encrypted",
+      "backup",
+      "isolated",
+      "restore",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
     "id": "sources:forgot-password-ui-design",
     "title": "Forgot-password UI design",
     "kind": "sources",
@@ -783,6 +1085,78 @@
       "sources"
     ],
     "len": 12,
+    "created_ts": null
+  },
+  {
+    "id": "sources:local-restore-drill-record-2026-08-06",
+    "title": "Local restore drill record — 2026-08-06",
+    "kind": "sources",
+    "href": "sources/local-restore-drill-record-2026-08-06.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\operations\\\\restore-drill-2026-08-06-local.md",
+    "tokens": [
+      "local",
+      "restore",
+      "drill",
+      "record",
+      "2026",
+      "08",
+      "06",
+      "sources"
+    ],
+    "len": 8,
+    "created_ts": null
+  },
+  {
+    "id": "sources:mcp-and-oauth-operations",
+    "title": "MCP and OAuth operations",
+    "kind": "sources",
+    "href": "sources/mcp-and-oauth-operations.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\operations\\\\mcp-oauth.md",
+    "tokens": [
+      "mcp",
+      "oauth",
+      "operations",
+      "sources"
+    ],
+    "len": 4,
+    "created_ts": null
+  },
+  {
+    "id": "sources:mcp-documentation-interface-implementation-plan",
+    "title": "MCP documentation interface implementation plan",
+    "kind": "sources",
+    "href": "sources/mcp-documentation-interface-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-14-mcp-documentation-interface.md",
+    "tokens": [
+      "mcp",
+      "documentation",
+      "interface",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:mcp-oauth-threat-model-and-design",
+    "title": "MCP OAuth threat model and design",
+    "kind": "sources",
+    "href": "sources/mcp-oauth-threat-model-and-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-14-mcp-oauth-threat-model.md",
+    "tokens": [
+      "mcp",
+      "oauth",
+      "threat",
+      "model",
+      "design",
+      "sources"
+    ],
+    "len": 6,
     "created_ts": null
   },
   {
@@ -1109,6 +1483,149 @@
     "created_ts": null
   },
   {
+    "id": "sources:production-configuration-and-health",
+    "title": "Production configuration and health",
+    "kind": "sources",
+    "href": "sources/production-configuration-and-health.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\operations\\\\production-configuration.md",
+    "tokens": [
+      "production",
+      "configuration",
+      "health",
+      "sources"
+    ],
+    "len": 4,
+    "created_ts": null
+  },
+  {
+    "id": "sources:production-readiness-implementation-plan",
+    "title": "Production readiness implementation plan",
+    "kind": "sources",
+    "href": "sources/production-readiness-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-08-04-production-readiness.md",
+    "tokens": [
+      "production",
+      "readiness",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:production-readiness-threat-model",
+    "title": "Production readiness threat model",
+    "kind": "sources",
+    "href": "sources/production-readiness-threat-model.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-08-04-production-readiness-threat-model.md",
+    "tokens": [
+      "production",
+      "readiness",
+      "threat",
+      "model",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:production-readiness-audited-design",
+    "title": "Production readiness: audited design",
+    "kind": "sources",
+    "href": "sources/production-readiness-audited-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-08-04-production-readiness-design.md",
+    "tokens": [
+      "production",
+      "readiness",
+      "audited",
+      "design",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:project-ai-assistant-design",
+    "title": "Project AI Assistant design",
+    "kind": "sources",
+    "href": "sources/project-ai-assistant-design.html",
+    "summary": "- **uses_metric** → mAP _(Metric)_",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-15-project-ai-assistant-design.md",
+    "tokens": [
+      "project",
+      "ai",
+      "assistant",
+      "design",
+      "uses_metric",
+      "map",
+      "metric",
+      "sources"
+    ],
+    "len": 8,
+    "created_ts": null
+  },
+  {
+    "id": "sources:project-ai-assistant-implementation-plan",
+    "title": "Project AI Assistant implementation plan",
+    "kind": "sources",
+    "href": "sources/project-ai-assistant-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-15-project-ai-assistant.md",
+    "tokens": [
+      "project",
+      "ai",
+      "assistant",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:project-ai-document-proposals-implementation-plan",
+    "title": "Project AI document proposals implementation plan",
+    "kind": "sources",
+    "href": "sources/project-ai-document-proposals-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-31-project-ai-document-proposals.md",
+    "tokens": [
+      "project",
+      "ai",
+      "document",
+      "proposals",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 7,
+    "created_ts": null
+  },
+  {
+    "id": "sources:project-ai-document-proposals-audited-design",
+    "title": "Project AI document proposals: audited design",
+    "kind": "sources",
+    "href": "sources/project-ai-document-proposals-audited-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-31-project-ai-document-proposals-design.md",
+    "tokens": [
+      "project",
+      "ai",
+      "document",
+      "proposals",
+      "audited",
+      "design",
+      "sources"
+    ],
+    "len": 7,
+    "created_ts": null
+  },
+  {
     "id": "sources:project-credentials-design",
     "title": "Project Credentials Design",
     "kind": "sources",
@@ -1136,6 +1653,58 @@
       "credentials",
       "implementation",
       "plan",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:project-lifecycle-implementation-plan",
+    "title": "Project lifecycle implementation plan",
+    "kind": "sources",
+    "href": "sources/project-lifecycle-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-08-28-project-lifecycle.md",
+    "tokens": [
+      "project",
+      "lifecycle",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:project-lifecycle-threat-and-race-model",
+    "title": "Project lifecycle threat and race model",
+    "kind": "sources",
+    "href": "sources/project-lifecycle-threat-and-race-model.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-08-28-project-lifecycle-threat-model.md",
+    "tokens": [
+      "project",
+      "lifecycle",
+      "threat",
+      "race",
+      "model",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:project-lifecycle-audited-design",
+    "title": "Project lifecycle: audited design",
+    "kind": "sources",
+    "href": "sources/project-lifecycle-audited-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-08-28-project-lifecycle-design.md",
+    "tokens": [
+      "project",
+      "lifecycle",
+      "audited",
+      "design",
       "sources"
     ],
     "len": 5,
@@ -1223,6 +1792,59 @@
     "created_ts": null
   },
   {
+    "id": "sources:public-documentation-sharing-implementation-plan",
+    "title": "Public documentation sharing implementation plan",
+    "kind": "sources",
+    "href": "sources/public-documentation-sharing-implementation-plan.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\plans\\\\2026-07-31-public-documentation-sharing.md",
+    "tokens": [
+      "public",
+      "documentation",
+      "sharing",
+      "implementation",
+      "plan",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:public-documentation-sharing-operations",
+    "title": "Public documentation sharing operations",
+    "kind": "sources",
+    "href": "sources/public-documentation-sharing-operations.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\operations\\\\public-documentation-sharing.md",
+    "tokens": [
+      "public",
+      "documentation",
+      "sharing",
+      "operations",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
+    "id": "sources:public-documentation-sharing-audited-design",
+    "title": "Public documentation sharing: audited design",
+    "kind": "sources",
+    "href": "sources/public-documentation-sharing-audited-design.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-31-public-documentation-sharing-design.md",
+    "tokens": [
+      "public",
+      "documentation",
+      "sharing",
+      "audited",
+      "design",
+      "sources"
+    ],
+    "len": 6,
+    "created_ts": null
+  },
+  {
     "id": "sources:reset-password-ui-design",
     "title": "Reset-password UI design",
     "kind": "sources",
@@ -1255,6 +1877,22 @@
       "sources"
     ],
     "len": 6,
+    "created_ts": null
+  },
+  {
+    "id": "sources:restore-drill-record",
+    "title": "Restore drill record",
+    "kind": "sources",
+    "href": "sources/restore-drill-record.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\operations\\\\restore-drill-record-template.md",
+    "tokens": [
+      "restore",
+      "drill",
+      "record",
+      "sources"
+    ],
+    "len": 4,
     "created_ts": null
   },
   {
@@ -1342,6 +1980,23 @@
     "created_ts": null
   },
   {
+    "id": "sources:transport-security-and-structured-logging",
+    "title": "Transport security and structured logging",
+    "kind": "sources",
+    "href": "sources/transport-security-and-structured-logging.html",
+    "summary": "",
+    "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\operations\\\\transport-security-and-logging.md",
+    "tokens": [
+      "transport",
+      "security",
+      "structured",
+      "logging",
+      "sources"
+    ],
+    "len": 5,
+    "created_ts": null
+  },
+  {
     "id": "sources:user-identity-and-profile-design",
     "title": "User identity and profile design",
     "kind": "sources",
@@ -1391,7 +2046,7 @@
       "metric",
       "1",
       "sourcedocument",
-      "69",
+      "103",
       "recently",
       "added",
       "none",

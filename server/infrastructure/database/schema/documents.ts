@@ -17,6 +17,7 @@ export const documents = pgTable('documents', {
   ownerUserId: uuid('owner_user_id').notNull().references(() => user.id, { onDelete: 'restrict' }),
   draftRevision: integer('draft_revision').default(0).notNull(),
   draftContent: jsonb('draft_content').$type<DocumentContent>().default(sql`'{"type":"doc","content":[]}'::jsonb`).notNull(),
+  draftSearchText: text('draft_search_text').default('').notNull(),
   draftInternalLinkTargetIds: uuid('draft_internal_link_target_ids').array().default(sql`ARRAY[]::uuid[]`).notNull(),
   draftReferencedImageIds: uuid('draft_referenced_image_ids').array().default(sql`ARRAY[]::uuid[]`).notNull(),
   publicationState: text('publication_state').$type<DocumentPublicationState>().default(DOCUMENT_PUBLICATION_STATE.DRAFT).notNull(),
@@ -43,6 +44,7 @@ export const documents = pgTable('documents', {
   index('documents_project_archive_batch_idx').on(table.projectId, table.archiveBatchId),
   index('documents_owner_user_id_idx').on(table.ownerUserId),
   index('documents_archived_by_user_id_idx').on(table.archivedByUserId),
+  index('documents_draft_search_idx').using('gin', sql`minerva_document_search_vector(${table.title}, ${table.draftSearchText})`),
 ])
 
 export const documentVersions = pgTable('document_versions', {
@@ -53,6 +55,7 @@ export const documentVersions = pgTable('document_versions', {
   sourceDraftRevision: integer('source_draft_revision').notNull(),
   title: text('title').notNull(),
   draftContent: jsonb('draft_content').$type<DocumentContent>().notNull(),
+  searchText: text('search_text').default('').notNull(),
   internalLinkTargetIds: uuid('internal_link_target_ids').array().default(sql`ARRAY[]::uuid[]`).notNull(),
   referencedImageIds: uuid('referenced_image_ids').array().default(sql`ARRAY[]::uuid[]`).notNull(),
   changeSummary: text('change_summary').notNull(),
@@ -71,4 +74,5 @@ export const documentVersions = pgTable('document_versions', {
   check('document_versions_change_summary_check', sql`${table.changeSummary} = btrim(${table.changeSummary}) and char_length(${table.changeSummary}) between 0 and 1000`),
   index('document_versions_project_document_idx').on(table.projectId, table.documentId, table.versionNumber),
   index('document_versions_published_by_user_id_idx').on(table.publishedByUserId),
+  index('document_versions_search_idx').using('gin', sql`minerva_document_search_vector(${table.title}, ${table.searchText})`),
 ])

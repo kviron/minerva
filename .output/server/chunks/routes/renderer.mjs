@@ -1,5 +1,5 @@
 globalThis.__timing__.logStart('Load chunks/routes//renderer');import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'vue-bundle-renderer/runtime';
-import { Y as joinRelativeURL, Z as useRuntimeConfig, _ as encodePath, $ as defineRenderHandler, x as getQuery, c as createError, a0 as destr, a1 as getRouteRules, a2 as getResponseStatusText, a3 as getResponseStatus, u as useNitroApp } from '../_/nitro.mjs';
+import { b5 as joinRelativeURL, b6 as useRuntimeConfig, b7 as encodePath, b8 as defineRenderHandler, aI as getQuery, j as createError, b9 as destr, ba as getRouteRules, bb as getResponseStatusText, bc as getResponseStatus, u as useNitroApp } from '../_/nitro.mjs';
 import { createHead as createHead$1, propsToString, renderSSRHead } from 'unhead/server';
 import { stringify, uneval } from 'devalue';
 import { isRef, toValue } from 'vue';
@@ -19,6 +19,7 @@ import 'better-auth/adapters/drizzle';
 import 'better-auth/plugins/username';
 import 'drizzle-orm';
 import 'drizzle-orm/pg-core';
+import '@better-auth/oauth-provider';
 
 const VueResolver = (_, value) => {
   return isRef(value) ? toValue(value) : value;

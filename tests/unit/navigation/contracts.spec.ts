@@ -1,5 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest'
 import { GLOBAL_NAVIGATION } from '../../../shared/navigation/constants'
+import { globalNavigationResponseSchema } from '../../../shared/navigation/contracts'
 import type {
   GlobalNavigationIcon,
   GlobalNavigationItem,
@@ -10,6 +11,14 @@ import type {
 } from '../../../shared/navigation/types'
 
 describe('global navigation contracts', () => {
+  it('accepts only exact closed navigation definitions', () => {
+    expect(globalNavigationResponseSchema.parse([GLOBAL_NAVIGATION.DASHBOARD])).toEqual([GLOBAL_NAVIGATION.DASHBOARD])
+    expect(() => globalNavigationResponseSchema.parse([{
+      ...GLOBAL_NAVIGATION.DASHBOARD,
+      to: GLOBAL_NAVIGATION.ADMINISTRATION.to,
+    }])).toThrow()
+  })
+
   it('defines the exact global navigation destinations', () => {
     expect(GLOBAL_NAVIGATION).toEqual({
       DASHBOARD: {

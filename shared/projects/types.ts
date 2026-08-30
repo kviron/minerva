@@ -7,3 +7,4 @@ export type ProjectRoleKind = ValueOf<typeof import('./constants').PROJECT_ROLE_
 export type MembershipStatus = ValueOf<typeof import('./constants').MEMBERSHIP_STATUS>
 export type AuditChannel = ValueOf<typeof import('./constants').AUDIT_CHANNEL>
 export type AuditOutcome = ValueOf<typeof import('./constants').AUDIT_OUTCOME>
+export type ProjectIconMimeType = ValueOf<typeof import('./constants').PROJECT_ICON_MIME_TYPE>

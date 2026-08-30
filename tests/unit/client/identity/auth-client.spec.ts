@@ -1,5 +1,6 @@
 import { expect, it, vi } from 'vitest'
 import { isRef, ref } from 'vue'
+import { readFile } from 'node:fs/promises'
 
 const { getSession, signOut, useSession } = vi.hoisted(() => ({
   getSession: vi.fn(),
@@ -14,6 +15,13 @@ vi.mock('better-auth/vue', () => ({
 const { getIdentitySession, signOutIdentity, useIdentitySession } = await import(
   '../../../../app/features/identity/api/auth-client'
 )
+
+it('infers additional session fields through the supported Better Auth client plugin', async () => {
+  const source = await readFile('app/features/identity/api/auth-client.ts', 'utf8')
+
+  expect(source).toContain('inferAdditionalFields<ReturnType<typeof createMinervaAuth>>()')
+  expect(source).not.toContain('as IdentitySessionView')
+})
 
 it('returns the browser-safe session data and lookup error from Better Auth', async () => {
   const error = new Error('lookup failed')

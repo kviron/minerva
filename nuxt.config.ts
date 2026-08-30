@@ -17,6 +17,22 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: [
+        '@lucide/vue',
+        '@vee-validate/zod',
+        '@vue/devtools-core',
+        '@vue/devtools-kit',
+        '@vueuse/core',
+        'better-auth/vue',
+        'class-variance-authority',
+        'clsx',
+        'reka-ui',
+        'tailwind-merge',
+        'vee-validate',
+        'zod',
+      ],
+    },
   },
   ssr: false,
   modules: ['shadcn-nuxt', '@nuxtjs/color-mode', '@pinia/nuxt'],

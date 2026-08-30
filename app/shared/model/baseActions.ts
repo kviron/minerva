@@ -23,6 +23,7 @@ export interface BaseActionsOptions {
 
 export interface ActionConfig {
   errorMessage?: string
+  errorParser?: (rawError: unknown) => string | undefined
   onError?: (errorMessage: string, rawError: unknown) => void
   mutation?: boolean
   concurrency?: 'abort' | 'ignore' | 'allow'
@@ -58,6 +59,10 @@ export abstract class BaseActions {
     this.error.value = null
   }
 
+  protected cancelPending(actionName: string, targetId: ActionTargetId = 'global'): void {
+    this.abortControllers.get(this.pendingKey(actionName, targetId))?.abort()
+  }
+
   protected createAsyncAction<Args extends unknown[], T>({ name, run, idGetter, options = {} }: AsyncActionDefinition<Args, T>) {
     return async (...args: Args): Promise<T | undefined> => {
       const targetId = idGetter?.(...args) ?? 'global'
@@ -89,7 +94,7 @@ export abstract class BaseActions {
         if (rawError instanceof DOMException && rawError.name === 'AbortError') {
           return undefined
         }
-        const message = options.errorMessage ?? parseApiError(rawError)
+        const message = options.errorMessage ?? options.errorParser?.(rawError) ?? parseApiError(rawError)
         this.error.value = message
         if (options.onError) {
           options.onError(message, rawError)
@@ -119,7 +124,7 @@ export abstract class BaseActions {
         return result
       }
       catch (rawError: unknown) {
-        const message = options.errorMessage ?? parseApiError(rawError)
+        const message = options.errorMessage ?? options.errorParser?.(rawError) ?? parseApiError(rawError)
         this.error.value = message
         if (options.onError) {
           options.onError(message, rawError)

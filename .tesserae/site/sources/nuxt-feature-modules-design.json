@@ -1,10 +1,10 @@
 {
   "title": "Nuxt feature modules design",
   "kind": "sources",
-  "body_text": "# Nuxt feature modules design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "body_text": "# Nuxt feature modules design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
   "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-06-29-nuxt-feature-modules-design.md",
   "links": [],
-  "body": "# Nuxt feature modules design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "body": "# Nuxt feature modules design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
   "frontmatter": {
     "kind": "sources",
     "node_id": "SourceDocument:nuxt-feature-modules-design:1dc66fa31506",

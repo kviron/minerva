@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { History, Rocket } from '@lucide/vue'
+import { Rocket } from '@lucide/vue'
 import { computed, ref } from 'vue'
 import { useProjectOverviewStore } from '@/features/projects'
 import type { DocumentDetailResponse, DocumentVersionSummary } from '../../../../shared/documents/contracts'
@@ -10,6 +10,7 @@ import { useDocumentsActions } from '../model/actions/provider'
 import { useDocumentsStore } from '../model/documents-state'
 import { formatDocumentUpdatedAt } from '../model/presentation'
 import DocumentContentNode from './DocumentContentNode.vue'
+import DocumentDetailsPanel from './DocumentDetailsPanel.vue'
 
 const props = defineProps<{
   projectId: string
@@ -20,7 +21,7 @@ const actions = useDocumentsActions()
 const state = useDocumentsStore()
 const projectState = useProjectOverviewStore()
 const publishOpen = ref(false)
-const historyOpen = ref(false)
+const historyLoaded = ref(false)
 const versionPreviewOpen = ref(false)
 const restoreOpen = ref(false)
 const changeSummary = ref('')
@@ -87,6 +88,8 @@ async function publishDocument(): Promise<void> {
     publishRequestError.value = mutationError(result.code)
     return
   }
+  historyLoaded.value = false
+  state.clearVersions()
   setPublishOpen(false)
   await refreshDocument()
 }
@@ -99,16 +102,11 @@ async function loadVersions(): Promise<void> {
     return
   }
   state.applyVersions(versions)
+  historyLoaded.value = true
 }
 
-function setHistoryOpen(open: boolean): void {
-  historyOpen.value = open
-  if (!open) {
-    versionPreviewOpen.value = false
-    restoreOpen.value = false
-    selectedVersionNumber.value = null
-    state.clearVersions()
-    historyError.value = null
+function openHistory(): void {
+  if (historyLoaded.value || loadingHistory.value) {
     return
   }
   void loadVersions()
@@ -160,7 +158,7 @@ async function restoreVersion(): Promise<void> {
   }
   restoreOpen.value = false
   versionPreviewOpen.value = false
-  historyOpen.value = false
+  historyLoaded.value = false
   state.clearVersions()
   await refreshDocument()
 }
@@ -168,10 +166,16 @@ async function restoreVersion(): Promise<void> {
 
 <template>
   <div class="flex flex-wrap items-center gap-2">
-    <UiButton v-if="canViewHistory" variant="outline" size="sm" @click="setHistoryOpen(true)">
-      <History data-icon="inline-start" />
-      История
-    </UiButton>
+    <DocumentDetailsPanel
+      :project-id="projectId"
+      :document="document"
+      :can-view-history="canViewHistory"
+      :versions="state.versions"
+      :loading-history="loadingHistory"
+      :history-error="historyError"
+      @open-history="openHistory"
+      @select-version="selectVersion"
+    />
     <UiButton v-if="canPublish" size="sm" @click="setPublishOpen(true)">
       <Rocket data-icon="inline-start" />
       Опубликовать
@@ -211,49 +215,6 @@ async function restoreVersion(): Promise<void> {
       </UiDialogContent>
     </UiDialog>
 
-    <UiSheet :open="historyOpen" @update:open="setHistoryOpen">
-      <UiSheetContent class="flex data-[side=right]:w-full sm:max-w-lg">
-        <UiSheetHeader>
-          <UiSheetTitle>История версий</UiSheetTitle>
-          <UiSheetDescription>Выберите версию, чтобы открыть её в полном размере.</UiSheetDescription>
-        </UiSheetHeader>
-
-        <p v-if="historyError" class="px-4 text-sm text-destructive" role="alert">{{ historyError }}</p>
-        <h3 class="px-4 text-sm font-medium">{{ document.title }}</h3>
-        <div v-if="loadingHistory && state.versions.length === 0" class="flex flex-1 items-center justify-center">
-          <UiSpinner class="size-6" />
-        </div>
-        <UiEmpty v-else-if="state.versions.length === 0" class="mx-4 border border-dashed">
-          <UiEmptyHeader>
-            <UiEmptyTitle>Опубликованных версий пока нет</UiEmptyTitle>
-            <UiEmptyDescription>Первая версия появится после публикации страницы.</UiEmptyDescription>
-          </UiEmptyHeader>
-        </UiEmpty>
-        <UiScrollArea v-else class="min-h-0 flex-1 px-4 pb-4">
-          <ol class="flex flex-col gap-2 pr-3">
-            <li v-for="version in state.versions" :key="version.versionNumber">
-              <UiButton
-                variant="outline"
-                class="h-auto w-full justify-start p-3 text-left"
-                @click="selectVersion(version)"
-              >
-                <span class="flex min-w-0 flex-1 flex-col items-start gap-1">
-                  <span class="flex w-full items-center justify-between gap-3">
-                    <span class="font-medium">Версия {{ version.versionNumber }}</span>
-                    <span class="shrink-0 text-xs text-muted-foreground">{{ formatDocumentUpdatedAt(version.publishedAt) }}</span>
-                  </span>
-                  <span class="flex w-full items-center justify-between gap-3 text-xs text-muted-foreground">
-                    <span class="truncate">{{ version.changeSummary || 'Без комментария' }}</span>
-                    <span class="shrink-0">{{ version.publishedByName }}</span>
-                  </span>
-                </span>
-              </UiButton>
-            </li>
-          </ol>
-        </UiScrollArea>
-      </UiSheetContent>
-    </UiSheet>
-
     <UiDialog :open="versionPreviewOpen" @update:open="setVersionPreviewOpen">
       <UiDialogContent class="flex max-h-[calc(100vh-2rem)] flex-col sm:max-w-4xl">
         <UiDialogHeader>
@@ -280,7 +241,7 @@ async function restoreVersion(): Promise<void> {
           <UiScrollArea class="min-h-0 flex-1 pr-4">
             <article class="flex flex-col gap-6 pb-4">
               <h2 class="text-2xl font-semibold tracking-tight">{{ state.selectedVersion.title }}</h2>
-              <div class="flex flex-col gap-3">
+              <div class="flex flex-col gap-2">
                 <DocumentContentNode
                   v-for="(node, index) in state.selectedVersion.content.content"
                   :key="index"

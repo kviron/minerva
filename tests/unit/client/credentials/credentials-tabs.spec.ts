@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import { describe, expect, it } from 'vitest'
-import { parseArchivedCredentialList } from '../../../../app/features/credentials/api/credentials-api'
+import { archivedCredentialListResponseSchema } from '../../../../shared/credentials/contracts'
 
 const read = (path: string) => readFile(new URL(path, import.meta.url), 'utf8')
 
@@ -46,27 +46,27 @@ describe('credentials tabs', () => {
   })
 
   it('validates the safe archive projection without accepting secret values', () => {
-    expect(parseArchivedCredentialList([{
-      id: 'credential-1',
+    expect(archivedCredentialListResponseSchema.parse([{
+      id: '11111111-1111-4111-8111-111111111111',
       title: 'Production',
-      category: { id: 'category-1', name: 'Servers' },
+      category: { id: '22222222-2222-4222-8222-222222222222', name: 'Servers' },
       hasLogin: true,
       hasPassword: true,
       dynamicFieldCount: 2,
       archivedAt: '2026-07-13T10:00:00.000Z',
       archivedBy: { name: 'Admin' },
-    }])).toEqual([expect.objectContaining({ id: 'credential-1', dynamicFieldCount: 2 })])
+    }])).toEqual([expect.objectContaining({ id: '11111111-1111-4111-8111-111111111111', dynamicFieldCount: 2 })])
 
-    expect(() => parseArchivedCredentialList([{
-      id: 'credential-1',
+    expect(() => archivedCredentialListResponseSchema.parse([{
+      id: '11111111-1111-4111-8111-111111111111',
       title: 'Production',
-      category: { id: 'category-1', name: 'Servers' },
+      category: { id: '22222222-2222-4222-8222-222222222222', name: 'Servers' },
       login: 'root@example.com',
       hasLogin: true,
       hasPassword: true,
       dynamicFieldCount: 2,
       archivedAt: '2026-07-13T10:00:00.000Z',
       archivedBy: { name: 'Admin' },
-    }])).toThrow('Invalid archived credential list')
+    }])).toThrow()
   })
 })

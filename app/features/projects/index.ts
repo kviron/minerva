@@ -5,6 +5,10 @@ export { default as ProjectNavigation } from './ui/ProjectNavigation.vue'
 export { default as ProjectOverview } from './ui/ProjectOverview.vue'
 export { default as ProjectSectionPlaceholder } from './ui/ProjectSectionPlaceholder.vue'
 export { default as ProjectShell } from './ui/ProjectShell.vue'
+export { default as ProjectIconSettings } from './ui/ProjectIconSettings.vue'
+export { default as ProjectDescriptionSettings } from './ui/ProjectDescriptionSettings.vue'
+export { default as ProjectGeneralSettings } from './ui/ProjectGeneralSettings.vue'
+export { default as ProjectMembersSettings } from './ui/ProjectMembersSettings.vue'
 export { default as ProjectStatusTabs } from './ui/ProjectStatusTabs.vue'
 export {
   filterProjectsByStatus,

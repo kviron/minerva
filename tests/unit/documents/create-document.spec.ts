@@ -22,10 +22,48 @@ describe('create document', () => {
   it('normalizes a valid command and rejects an empty or oversized title', () => {
     expect(validateCreateDocument({ ...validInput, title: '  Архитектура  ' })).toEqual({
       ok: true,
-      value: { ...validInput, title: 'Архитектура' },
+      value: {
+        actorUserId: validInput.actorUserId,
+        projectId: validInput.projectId,
+        channel: validInput.channel,
+        title: 'Архитектура',
+        parentId: null,
+        initialSource: { kind: 'template', template: DOCUMENT_TEMPLATE.BLANK },
+        searchText: '',
+        internalLinkTargetIds: [],
+        referencedImageIds: [],
+      },
     })
     expect(validateCreateDocument({ ...validInput, title: '   ' })).toEqual({ ok: false, code: 'INVALID_TITLE' })
     expect(validateCreateDocument({ ...validInput, title: 'A'.repeat(201) })).toEqual({ ok: false, code: 'INVALID_TITLE' })
+  })
+
+  it('normalizes validated content as an explicit initial source', () => {
+    const content = {
+      type: 'doc',
+      content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Initial text' }] }],
+    }
+    expect(validateCreateDocument({
+      actorUserId: validInput.actorUserId,
+      projectId: validInput.projectId,
+      channel: validInput.channel,
+      title: validInput.title,
+      parentId: null,
+      content,
+    })).toEqual({
+      ok: true,
+      value: {
+        actorUserId: validInput.actorUserId,
+        projectId: validInput.projectId,
+        channel: validInput.channel,
+        title: validInput.title,
+        parentId: null,
+        initialSource: { kind: 'content', content },
+        searchText: 'Initial text',
+        internalLinkTargetIds: [],
+        referencedImageIds: [],
+      },
+    })
   })
 
   it('creates stable transliterated slugs and resolves project-local collisions', () => {
@@ -50,7 +88,10 @@ describe('create document', () => {
     const create = createDocumentWith({ persist })
 
     await expect(create(validInput)).resolves.toEqual({ ok: true, value: { documentId: 'document-1' } })
-    expect(persist).toHaveBeenCalledWith(validInput)
+    expect(persist).toHaveBeenCalledWith(expect.objectContaining({
+      title: validInput.title,
+      initialSource: { kind: 'template', template: DOCUMENT_TEMPLATE.BLANK },
+    }))
 
     await expect(create({ ...validInput, title: '' })).resolves.toEqual({ ok: false, code: 'INVALID_TITLE' })
     expect(persist).toHaveBeenCalledOnce()

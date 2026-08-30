@@ -9,6 +9,7 @@ import {
   projectRolePermissions,
   projects,
 } from '../../infrastructure/database/schema/projects'
+import { withMcpAuditAttribution, type McpAuditAttribution } from '../projects/audit-attribution'
 
 export const MOVE_DOCUMENT_ERROR = {
   INVALID_MOVE: 'INVALID_MOVE',
@@ -25,6 +26,7 @@ export interface MoveDocumentInput {
   readonly channel: AuditChannel
   readonly targetParentId: string | null
   readonly targetPosition: number
+  readonly mcpAttribution?: McpAuditAttribution
 }
 
 export interface DocumentPlacement {
@@ -191,12 +193,12 @@ export const moveDocumentPersistence = (db: DocumentsDatabase): MoveDocumentDepe
       projectId: command.projectId,
       targetType: 'document',
       targetId: command.documentId,
-      metadata: {
+      metadata: withMcpAuditAttribution({
         fromParentId: source.parentId,
         fromPosition: source.position,
         toParentId: command.targetParentId,
         toPosition: command.targetPosition,
-      },
+      }, command.mcpAttribution),
     })
 
     return {

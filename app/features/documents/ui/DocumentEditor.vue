@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import Link from '@tiptap/extension-link'
+import { TableKit } from '@tiptap/extension-table'
 import StarterKit from '@tiptap/starter-kit'
 import { EditorContent, useEditor } from '@tiptap/vue-3'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { onBeforeRouteLeave } from 'vue-router'
 import { useProjectOverviewStore } from '@/features/projects'
-import type { DocumentContent, DocumentDetailResponse } from '../../../../shared/documents/contracts'
+import type { DocumentContent, DocumentDetailResponse, DocumentTreeNode } from '../../../../shared/documents/contracts'
+import type { EmbedTheme } from '../../../../shared/embeds/constants'
 import { DOCUMENT_DRAFT_UPDATE_CODE } from '../../../../shared/documents/constants'
 import { PROJECT_PERMISSION } from '../../../../shared/projects/constants'
-import { parseEditorDocumentContent } from '../api/documents-api'
+import { parseEditorDocumentContent } from '../model/editor-content'
 import { DOCUMENT_ACTION } from '../model/actions/actions'
 import { useDocumentsActions } from '../model/actions/provider'
 import { useDocumentsStore } from '../model/documents-state'
 import { toTiptapEditorContent } from '../model/editor-content'
 import { createDocumentImageExtension } from '../model/document-image'
+import { createDocumentEmbedExtension } from '../model/document-embed'
 import DocumentEditorToolbar from './DocumentEditorToolbar.vue'
 
 type EditorStatus = 'loading' | 'saved' | 'dirty' | 'saving' | 'conflict' | 'error'
@@ -26,6 +29,7 @@ const props = defineProps<{
 const actions = useDocumentsActions()
 const state = useDocumentsStore()
 const projectState = useProjectOverviewStore()
+const colorMode = useColorMode()
 const currentDocument = ref<DocumentDetailResponse | null>(null)
 const title = ref('')
 const revision = ref(0)
@@ -57,6 +61,19 @@ const canPublish = computed(() => {
   return project?.id === props.projectId
     && project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_PUBLISH)
 })
+const canShare = computed(() => {
+  const project = projectState.project
+  return project?.id === props.projectId
+    && project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_SHARE)
+})
+const treeHasPublishedVersion = (nodes: readonly DocumentTreeNode[], documentId: string): boolean => {
+  for (const node of nodes) {
+    if (node.id === documentId) return node.hasPublishedVersions
+    if (treeHasPublishedVersion(node.children, documentId)) return true
+  }
+  return false
+}
+const hasPublishedVersion = computed(() => treeHasPublishedVersion(state.tree, props.documentId))
 const canSaveAndPublish = computed(() => canPublish.value
   && (currentDocument.value?.publicationState === 'draft' || hasUnsavedChanges.value))
 const statusLabel = computed(() => {
@@ -74,13 +91,22 @@ const statusLabel = computed(() => {
   }
   return `Сохранено · ревизия ${revision.value}`
 })
+const currentEmbedTheme = (): EmbedTheme => colorMode.value === 'dark' ? 'dark' : 'light'
 
 const editor = useEditor({
   content: { type: 'doc', content: [{ type: 'paragraph' }] },
   extensions: [
     StarterKit.configure({ link: false }),
     Link.configure({ openOnClick: false, autolink: true, defaultProtocol: 'https', protocols: ['document'] }),
+    TableKit.configure({ table: { resizable: true, lastColumnResizable: true } }),
     createDocumentImageExtension(props.projectId),
+    createDocumentEmbedExtension({
+      current: currentEmbedTheme,
+      subscribe: listener => watch(
+        () => colorMode.value,
+        () => listener(currentEmbedTheme()),
+      ),
+    }),
   ],
   editorProps: {
     attributes: {
@@ -345,37 +371,28 @@ onBeforeUnmount(() => window.removeEventListener('beforeunload', handleBeforeUnl
       <UiAlertAction><UiButton variant="outline" size="sm" @click="saveDraft">Повторить</UiButton></UiAlertAction>
     </UiAlert>
 
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-      <UiField class="min-w-0 flex-1">
-        <UiFieldLabel for="document-title" class="sr-only">Название страницы</UiFieldLabel>
-        <UiInput id="document-title" v-model="title" maxlength="200" class="h-auto border-0 px-0 text-2xl font-semibold shadow-none focus-visible:ring-0" />
-      </UiField>
-      <div class="flex shrink-0 items-center gap-2">
-        <span class="text-xs text-muted-foreground" aria-live="polite">{{ statusLabel }}</span>
-        <UiButton size="sm" :disabled="saving || status === 'conflict' || !hasUnsavedChanges" @click="saveDraft">
-          <UiSpinner v-if="saving" data-icon="inline-start" />
-          Сохранить
-        </UiButton>
-        <UiButton
-          v-if="canPublish"
-          size="sm"
-          :disabled="saving || publishing || status === 'conflict' || !canSaveAndPublish"
-          @click="setPublishDialogOpen(true)"
-        >
-          Сохранить и опубликовать
-        </UiButton>
-        <UiButton as-child variant="outline" size="sm">
-          <NuxtLink :to="`/projects/${projectId}/documents/${documentId}`">Просмотр</NuxtLink>
-        </UiButton>
-      </div>
-    </div>
+    <UiField class="min-w-0">
+      <UiFieldLabel for="document-title" class="sr-only">Название страницы</UiFieldLabel>
+      <UiInput id="document-title" v-model="title" maxlength="200" class="h-auto border-0 px-0 text-2xl font-semibold shadow-none focus-visible:ring-0" />
+    </UiField>
 
-    <div class="overflow-hidden rounded-md border bg-background">
+    <div class="rounded-md border bg-background">
       <DocumentEditorToolbar
         :editor="editor"
         :documents="state.tree"
         :current-document-id="documentId"
         :project-id="projectId"
+        :status-label="statusLabel"
+        :saving="saving"
+        :publishing="publishing"
+        :can-save="status !== 'conflict' && hasUnsavedChanges"
+        :can-publish="canPublish"
+        :can-save-and-publish="status !== 'conflict' && canSaveAndPublish"
+        :can-share="canShare"
+        :has-published-version="hasPublishedVersion"
+        :view-href="`/projects/${projectId}/documents/${documentId}`"
+        @save="saveDraft"
+        @publish="setPublishDialogOpen(true)"
       />
       <EditorContent :editor="editor" />
     </div>
@@ -439,12 +456,23 @@ onBeforeUnmount(() => window.removeEventListener('beforeunload', handleBeforeUnl
   gap: 0.75rem;
 }
 
-:deep(.tiptap h1) { font-size: 1.875rem; font-weight: 600; line-height: 2.25rem; }
-:deep(.tiptap h2) { font-size: 1.5rem; font-weight: 600; line-height: 2rem; }
-:deep(.tiptap h3) { font-size: 1.25rem; font-weight: 600; line-height: 1.75rem; }
+:deep(.tiptap h1) { font-size: 2.25rem; font-weight: 800; line-height: 2.5rem; letter-spacing: -0.025em; text-wrap: balance; }
+:deep(.tiptap h2) { border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; font-size: 1.875rem; font-weight: 600; line-height: 2.25rem; letter-spacing: -0.025em; }
+:deep(.tiptap h3) { font-size: 1.5rem; font-weight: 600; line-height: 2rem; letter-spacing: -0.025em; }
+:deep(.tiptap h4) { font-size: 1.25rem; font-weight: 600; line-height: 1.75rem; letter-spacing: -0.025em; }
 :deep(.tiptap ul) { list-style: disc; padding-left: 1.5rem; }
 :deep(.tiptap ol) { list-style: decimal; padding-left: 1.5rem; }
 :deep(.tiptap blockquote) { border-left: 2px solid var(--border); padding-left: 1rem; color: var(--muted-foreground); }
 :deep(.tiptap pre) { overflow-x: auto; border-radius: var(--radius-md); background: var(--muted); padding: 1rem; font-size: 0.875rem; }
+:deep(.tiptap .tableWrapper) { margin: 0.25rem 0; overflow-x: auto; }
+:deep(.tiptap table) { width: 100%; table-layout: fixed; border-collapse: collapse; }
+:deep(.tiptap th),
+:deep(.tiptap td) { position: relative; min-width: 4rem; border: 1px solid var(--border); padding: 0.5rem 0.625rem; vertical-align: top; }
+:deep(.tiptap th) { background: var(--muted); font-weight: 600; text-align: left; }
+:deep(.tiptap th p),
+:deep(.tiptap td p) { margin: 0; }
+:deep(.tiptap .selectedCell::after) { position: absolute; inset: 0; background: color-mix(in oklab, var(--primary) 12%, transparent); content: ''; pointer-events: none; }
+:deep(.tiptap .column-resize-handle) { position: absolute; top: 0; right: -2px; bottom: -2px; width: 4px; background: var(--primary); pointer-events: none; }
+:deep(.tiptap.resize-cursor) { cursor: col-resize; }
 :deep(.tiptap p.is-editor-empty:first-child::before) { color: var(--muted-foreground); content: 'Начните писать…'; float: left; height: 0; pointer-events: none; }
 </style>

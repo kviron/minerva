@@ -2,7 +2,7 @@ import { defineEventHandler, getRequestIP, getRouterParam, readBody, setHeader, 
 import { AUDIT_CHANNEL } from '../../../../../../shared/projects/constants'
 import { getDatabase } from '../../../../../infrastructure/database/client'
 import { CREDENTIAL_ERROR, revealCredentialSecret } from '../../../../../modules/credentials/credentials'
-import { revealCredentialBodySchema } from '../../../../../modules/credentials/http-schemas'
+import { revealCredentialBodySchema } from '../../../../../../shared/credentials/contracts'
 import { getCredentialCrypto } from '../../../../../modules/credentials/runtime'
 import { consumeIdentityRateLimit } from '../../../../../modules/identity/rate-limit'
 import { requireSession } from '../../../../../modules/identity/session/require-session'
@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
     actorUserId: session.user.id,
     projectId: getRouterParam(event, 'id') ?? '',
     credentialId: getRouterParam(event, 'credentialId') ?? '',
-    target: body.data.target as 'login' | 'password' | `field:${string}`,
+    target: body.data.target,
     channel: AUDIT_CHANNEL.WEB,
   })
   if (result.ok) return { value: result.value }

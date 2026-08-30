@@ -13,6 +13,8 @@ describe('route access policy', () => {
     '/invitations/token',
     '/legal/terms',
     '/legal/privacy',
+    '/share/documentation/abcdefghijklmnopqrstuvwxyzABCDEFGH123456789',
+    '/share/documentation/abcdefghijklmnopqrstuvwxyzABCDEFGH123456789/21b9fc31-6e20-4399-a2ea-fb4de1024821',
   ])('allows a guest to open public path %s', (path) => {
     expect(decideRouteAccess({ path, ...guest })).toEqual({ type: 'allow' })
   })
@@ -26,6 +28,10 @@ describe('route access policy', () => {
     '/legal',
     '/legal/extra',
     '/projects',
+    '/share',
+    '/share/documentation',
+    '/share/documentation/token/page/extra',
+    '/share/documentation/abcdefghijklmnopqrstuvwxyzABCDEFGH123456789/not-a-document-id',
   ])('redirects a guest from protected path %s', (path) => {
     expect(decideRouteAccess({ path, ...guest })).toEqual({ type: 'redirect', to: '/auth' })
   })

@@ -19,6 +19,19 @@
 - [ADR 0013: Keep client actions stateless and feature-scoped](sources/adr-0013-keep-client-actions-stateless-and-feature-scoped.html)
 - [ADR 0014: Search authorized encrypted credential values server-side](sources/adr-0014-search-authorized-encrypted-credential-values-server-side.html)
 - [ADR 0015: Allow permanent discard only for never-published document branches](sources/adr-0015-allow-permanent-discard-only-for-never-published-document-branches.html)
+- [ADR 0016: Link OAuth consents and token families through a Minerva grant](sources/adr-0016-link-oauth-consents-and-token-families-through-a-minerva-grant.html)
+- [ADR 0017: Serialize OAuth token issuance with grant revocation](sources/adr-0017-serialize-oauth-token-issuance-with-grant-revocation.html)
+- [ADR 0018: Use leased idempotency records for MCP mutations](sources/adr-0018-use-leased-idempotency-records-for-mcp-mutations.html)
+- [ADR 0019: Isolate project AI connections and require user-confirmed mutations](sources/adr-0019-isolate-project-ai-connections-and-require-user-confirmed-mutations.html)
+- [ADR 0020: Use allow-listed structured external embeds](sources/adr-0020-use-allow-listed-structured-external-embeds.html)
+- [ADR 0021: Use PostgreSQL leases and content-free AI usage events](sources/adr-0021-use-postgresql-leases-and-content-free-ai-usage-events.html)
+- [ADR 0022: Retain private AI conversations for thirty days](sources/adr-0022-retain-private-ai-conversations-for-thirty-days.html)
+- [ADR 0023: Use short-lived server-owned AI document proposals](sources/adr-0023-use-short-lived-server-owned-ai-document-proposals.html)
+- [ADR 0024: Use revocable capability links for public documentation](sources/adr-0024-use-revocable-capability-links-for-public-documentation.html)
+- [ADR 0025: Run production on a hardened single VPS with off-host recovery](sources/adr-0025-run-production-on-a-hardened-single-vps-with-off-host-recovery.html)
+- [ADR 0026: Compose data grids from shared table mechanics](sources/adr-0026-compose-data-grids-from-shared-table-mechanics.html)
+- [ADR 0027: Resolve current audit targets through safe projections](sources/adr-0027-resolve-current-audit-targets-through-safe-projections.html)
+- [ADR 0028: Compose project lifecycle from pure transition and operation policies](sources/adr-0028-compose-project-lifecycle-from-pure-transition-and-operation-policies.html)
 - [Authenticated Page Placeholder Design](sources/authenticated-page-placeholder-design.html): - **uses_metric** → mAP _(Metric)_
 - [Authorization Readability Refactor Design](sources/authorization-readability-refactor-design.html)
 - [Authorization Readability Refactor Implementation Plan](sources/authorization-readability-refactor-implementation-plan.html)
@@ -31,6 +44,7 @@
 - [Document internal links and backlinks plan](sources/document-internal-links-and-backlinks-plan.html)
 - [Document publication, history, and restore plan](sources/document-publication-history-and-restore-plan.html)
 - [Document tree move and reorder plan](sources/document-tree-move-and-reorder-plan.html)
+- [Encrypted backup and isolated restore](sources/encrypted-backup-and-isolated-restore.html)
 - [Forgot-password UI design](sources/forgot-password-ui-design.html)
 - [Forgot-Password UI Implementation Plan](sources/forgot-password-ui-implementation-plan.html)
 - [Global Navigation and Page Placeholder Implementation Plan](sources/global-navigation-and-page-placeholder-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
@@ -41,6 +55,10 @@
 - [Identity Backend Foundation Implementation Plan](sources/identity-backend-foundation-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [Identity functional refactor design](sources/identity-functional-refactor-design.html)
 - [Identity Functional Refactor Implementation Plan](sources/identity-functional-refactor-implementation-plan.html): - **evaluated_on** → MATH _(Benchmark)_ - **uses_metric** → mAP _(Metric)_
+- [Local restore drill record — 2026-08-06](sources/local-restore-drill-record-2026-08-06.html)
+- [MCP and OAuth operations](sources/mcp-and-oauth-operations.html)
+- [MCP documentation interface implementation plan](sources/mcp-documentation-interface-implementation-plan.html)
+- [MCP OAuth threat model and design](sources/mcp-oauth-threat-model-and-design.html)
 - [Minerva agent instructions](sources/minerva-agent-instructions.html)
 - [Minerva architecture](sources/minerva-architecture.html)
 - [Minerva backlog](sources/minerva-backlog.html)
@@ -59,24 +77,40 @@
 - [Permanently discard never-published documents plan](sources/permanently-discard-never-published-documents-plan.html)
 - [PostgreSQL Docker Compose design](sources/postgresql-docker-compose-design.html)
 - [PostgreSQL Docker Compose Implementation Plan](sources/postgresql-docker-compose-implementation-plan.html)
+- [Production configuration and health](sources/production-configuration-and-health.html)
+- [Production readiness: audited design](sources/production-readiness-audited-design.html)
+- [Production readiness implementation plan](sources/production-readiness-implementation-plan.html)
+- [Production readiness threat model](sources/production-readiness-threat-model.html)
+- [Project AI Assistant design](sources/project-ai-assistant-design.html): - **uses_metric** → mAP _(Metric)_
+- [Project AI Assistant implementation plan](sources/project-ai-assistant-implementation-plan.html)
+- [Project AI document proposals: audited design](sources/project-ai-document-proposals-audited-design.html)
+- [Project AI document proposals implementation plan](sources/project-ai-document-proposals-implementation-plan.html)
 - [Project Credentials Design](sources/project-credentials-design.html)
 - [Project Credentials Implementation Plan](sources/project-credentials-implementation-plan.html)
+- [Project lifecycle: audited design](sources/project-lifecycle-audited-design.html)
+- [Project lifecycle implementation plan](sources/project-lifecycle-implementation-plan.html)
+- [Project lifecycle threat and race model](sources/project-lifecycle-threat-and-race-model.html)
 - [Projects and RBAC foundation design](sources/projects-and-rbac-foundation-design.html)
 - [Projects and RBAC Foundation Implementation Plan](sources/projects-and-rbac-foundation-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
 - [Projects list and create UI design](sources/projects-list-and-create-ui-design.html): - **uses_metric** → mAP _(Metric)_
 - [Projects List and Create UI Implementation Plan](sources/projects-list-and-create-ui-implementation-plan.html): - **uses_metric** → mAP _(Metric)_
+- [Public documentation sharing: audited design](sources/public-documentation-sharing-audited-design.html)
+- [Public documentation sharing implementation plan](sources/public-documentation-sharing-implementation-plan.html)
+- [Public documentation sharing operations](sources/public-documentation-sharing-operations.html)
 - [Reset-password UI design](sources/reset-password-ui-design.html)
 - [Reset-Password UI Implementation Plan](sources/reset-password-ui-implementation-plan.html)
+- [Restore drill record](sources/restore-drill-record.html)
 - [Route Authorization Design](sources/route-authorization-design.html)
 - [Route Authorization Implementation Plan](sources/route-authorization-implementation-plan.html)
 - [Tesserae development memory](sources/tesserae-development-memory.html)
 - [Tesserae refresh wrapper design](sources/tesserae-refresh-wrapper-design.html)
 - [Tesserae Refresh Wrapper Implementation Plan](sources/tesserae-refresh-wrapper-implementation-plan.html)
+- [Transport security and structured logging](sources/transport-security-and-structured-logging.html)
 - [User identity and profile design](sources/user-identity-and-profile-design.html)
 
 ## Entities
 
-- [mAP](entities/map.html): - **summarizes** → Minerva MVP Planning _(CommunitySummary)_ - **uses_metric** → Authenticated Page Placeholder Design _(SourceDocument)_ - **uses_metric** → Current User Sidebar Implementation Plan _(SourceDocument)_ - **uses_metric** → G…
+- [mAP](entities/map.html): - **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_ - **uses_metric** → Authenticated Page Placeholder Design _(SourceDocument)_ - **uses_metric** → Current User Sidebar Implementation Plan _(SourceDocument)_ - **uses_metric** →…
 - [MATH](entities/math.html): - **evaluated_on** → Identity Functional Refactor Implementation Plan _(SourceDocument)_
 
 ## Syntheses
@@ -162,6 +196,71 @@ _sources/adr-0015-allow-permanent-discard-only-for-never-published-document-bran
 
 # ADR 0015: Allow permanent discard only for never-published document branches
 
+### ADR 0016: Link OAuth consents and token families through a Minerva grant
+_sources/adr-0016-link-oauth-consents-and-token-families-through-a-minerva-grant.html_
+
+# ADR 0016: Link OAuth consents and token families through a Minerva grant
+
+### ADR 0017: Serialize OAuth token issuance with grant revocation
+_sources/adr-0017-serialize-oauth-token-issuance-with-grant-revocation.html_
+
+# ADR 0017: Serialize OAuth token issuance with grant revocation
+
+### ADR 0018: Use leased idempotency records for MCP mutations
+_sources/adr-0018-use-leased-idempotency-records-for-mcp-mutations.html_
+
+# ADR 0018: Use leased idempotency records for MCP mutations
+
+### ADR 0019: Isolate project AI connections and require user-confirmed mutations
+_sources/adr-0019-isolate-project-ai-connections-and-require-user-confirmed-mutations.html_
+
+# ADR 0019: Isolate project AI connections and require user-confirmed mutations
+
+### ADR 0020: Use allow-listed structured external embeds
+_sources/adr-0020-use-allow-listed-structured-external-embeds.html_
+
+# ADR 0020: Use allow-listed structured external embeds
+
+### ADR 0021: Use PostgreSQL leases and content-free AI usage events
+_sources/adr-0021-use-postgresql-leases-and-content-free-ai-usage-events.html_
+
+# ADR 0021: Use PostgreSQL leases and content-free AI usage events
+
+### ADR 0022: Retain private AI conversations for thirty days
+_sources/adr-0022-retain-private-ai-conversations-for-thirty-days.html_
+
+# ADR 0022: Retain private AI conversations for thirty days
+
+### ADR 0023: Use short-lived server-owned AI document proposals
+_sources/adr-0023-use-short-lived-server-owned-ai-document-proposals.html_
+
+# ADR 0023: Use short-lived server-owned AI document proposals
+
+### ADR 0024: Use revocable capability links for public documentation
+_sources/adr-0024-use-revocable-capability-links-for-public-documentation.html_
+
+# ADR 0024: Use revocable capability links for public documentation
+
+### ADR 0025: Run production on a hardened single VPS with off-host recovery
+_sources/adr-0025-run-production-on-a-hardened-single-vps-with-off-host-recovery.html_
+
+# ADR 0025: Run production on a hardened single VPS with off-host recovery
+
+### ADR 0026: Compose data grids from shared table mechanics
+_sources/adr-0026-compose-data-grids-from-shared-table-mechanics.html_
+
+# ADR 0026: Compose data grids from shared table mechanics
+
+### ADR 0027: Resolve current audit targets through safe projections
+_sources/adr-0027-resolve-current-audit-targets-through-safe-projections.html_
+
+# ADR 0027: Resolve current audit targets through safe projections
+
+### ADR 0028: Compose project lifecycle from pure transition and operation policies
+_sources/adr-0028-compose-project-lifecycle-from-pure-transition-and-operation-policies.html_
+
+# ADR 0028: Compose project lifecycle from pure transition and operation policies
+
 ### Authenticated Page Placeholder Design
 _sources/authenticated-page-placeholder-design.html_
 
@@ -173,7 +272,7 @@ _sources/authenticated-page-placeholder-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -216,7 +315,7 @@ _sources/current-user-sidebar-implementation-plan.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -248,6 +347,11 @@ _sources/document-tree-move-and-reorder-plan.html_
 
 # Document tree move and reorder plan
 
+### Encrypted backup and isolated restore
+_sources/encrypted-backup-and-isolated-restore.html_
+
+# Encrypted backup and isolated restore
+
 ### Forgot-password UI design
 _sources/forgot-password-ui-design.html_
 
@@ -269,7 +373,7 @@ _sources/global-navigation-and-page-placeholder-implementation-plan.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -287,7 +391,7 @@ _sources/global-navigation-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -310,7 +414,7 @@ _sources/header-theme-toggle-implementation-plan.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -328,7 +432,7 @@ _sources/identity-backend-foundation-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -346,7 +450,7 @@ _sources/identity-backend-foundation-implementation-plan.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -372,6 +476,26 @@ _sources/identity-functional-refactor-implementation-plan.html_
 
 - Benchmark: 1
 - Metric: 1
+
+### Local restore drill record — 2026-08-06
+_sources/local-restore-drill-record-2026-08-06.html_
+
+# Local restore drill record — 2026-08-06
+
+### MCP and OAuth operations
+_sources/mcp-and-oauth-operations.html_
+
+# MCP and OAuth operations
+
+### MCP documentation interface implementation plan
+_sources/mcp-documentation-interface-implementation-plan.html_
+
+# MCP documentation interface implementation plan
+
+### MCP OAuth threat model and design
+_sources/mcp-oauth-threat-model-and-design.html_
+
+# MCP OAuth threat model and design
 
 ### Minerva agent instructions
 _sources/minerva-agent-instructions.html_
@@ -419,7 +543,7 @@ _sources/minerva-mvp-route-map-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -437,7 +561,7 @@ _sources/minerva-mvp-ux-ui-prototype-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -460,7 +584,7 @@ _sources/minerva-progress.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -483,7 +607,7 @@ _sources/mvp-route-skeleton-implementation-plan.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -501,7 +625,7 @@ _sources/nuxt-feature-modules-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -519,7 +643,7 @@ _sources/nuxt-feature-modules-implementation-plan.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -541,6 +665,59 @@ _sources/postgresql-docker-compose-implementation-plan.html_
 
 # PostgreSQL Docker Compose Implementation Plan
 
+### Production configuration and health
+_sources/production-configuration-and-health.html_
+
+# Production configuration and health
+
+### Production readiness: audited design
+_sources/production-readiness-audited-design.html_
+
+# Production readiness: audited design
+
+### Production readiness implementation plan
+_sources/production-readiness-implementation-plan.html_
+
+# Production readiness implementation plan
+
+### Production readiness threat model
+_sources/production-readiness-threat-model.html_
+
+# Production readiness threat model
+
+### Project AI Assistant design
+_sources/project-ai-assistant-design.html_
+
+# Project AI Assistant design
+
+## Outgoing relations
+
+- **uses_metric** → mAP _(Metric)_
+
+## Incoming relations
+
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
+
+## Connected node types
+
+- CommunitySummary: 1
+- Metric: 1
+
+### Project AI Assistant implementation plan
+_sources/project-ai-assistant-implementation-plan.html_
+
+# Project AI Assistant implementation plan
+
+### Project AI document proposals: audited design
+_sources/project-ai-document-proposals-audited-design.html_
+
+# Project AI document proposals: audited design
+
+### Project AI document proposals implementation plan
+_sources/project-ai-document-proposals-implementation-plan.html_
+
+# Project AI document proposals implementation plan
+
 ### Project Credentials Design
 _sources/project-credentials-design.html_
 
@@ -550,6 +727,21 @@ _sources/project-credentials-design.html_
 _sources/project-credentials-implementation-plan.html_
 
 # Project Credentials Implementation Plan
+
+### Project lifecycle: audited design
+_sources/project-lifecycle-audited-design.html_
+
+# Project lifecycle: audited design
+
+### Project lifecycle implementation plan
+_sources/project-lifecycle-implementation-plan.html_
+
+# Project lifecycle implementation plan
+
+### Project lifecycle threat and race model
+_sources/project-lifecycle-threat-and-race-model.html_
+
+# Project lifecycle threat and race model
 
 ### Projects and RBAC foundation design
 _sources/projects-and-rbac-foundation-design.html_
@@ -567,7 +759,7 @@ _sources/projects-and-rbac-foundation-implementation-plan.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -585,7 +777,7 @@ _sources/projects-list-and-create-ui-design.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
@@ -603,12 +795,27 @@ _sources/projects-list-and-create-ui-implementation-plan.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 
 - CommunitySummary: 1
 - Metric: 1
+
+### Public documentation sharing: audited design
+_sources/public-documentation-sharing-audited-design.html_
+
+# Public documentation sharing: audited design
+
+### Public documentation sharing implementation plan
+_sources/public-documentation-sharing-implementation-plan.html_
+
+# Public documentation sharing implementation plan
+
+### Public documentation sharing operations
+_sources/public-documentation-sharing-operations.html_
+
+# Public documentation sharing operations
 
 ### Reset-password UI design
 _sources/reset-password-ui-design.html_
@@ -619,6 +826,11 @@ _sources/reset-password-ui-design.html_
 _sources/reset-password-ui-implementation-plan.html_
 
 # Reset-Password UI Implementation Plan
+
+### Restore drill record
+_sources/restore-drill-record.html_
+
+# Restore drill record
 
 ### Route Authorization Design
 _sources/route-authorization-design.html_
@@ -645,6 +857,11 @@ _sources/tesserae-refresh-wrapper-implementation-plan.html_
 
 # Tesserae Refresh Wrapper Implementation Plan
 
+### Transport security and structured logging
+_sources/transport-security-and-structured-logging.html_
+
+# Transport security and structured logging
+
 ### User identity and profile design
 _sources/user-identity-and-profile-design.html_
 
@@ -659,7 +876,7 @@ _entities/map.html_
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 - **uses_metric** → Authenticated Page Placeholder Design _(SourceDocument)_
 - **uses_metric** → Current User Sidebar Implementation Plan _(SourceDocument)_
 - **uses_metric** → Global Navigation Design _(SourceDocument)_
@@ -674,13 +891,14 @@ _entities/map.html_
 - **uses_metric** → Minerva progress _(SourceDocument)_
 - **uses_metric** → Nuxt Feature Modules Implementation Plan _(SourceDocument)_
 - **uses_metric** → Nuxt feature modules design _(SourceDocument)_
+- **uses_metric** → Project AI Assistant design _(SourceDocument)_
 - **uses_metric** → Projects List and Create UI Implementation Plan _(SourceDocument)_
 - **uses_metric** → Projects and RBAC Foundation Implementation Plan _(SourceDocument)_
 - **uses_metric** → Projects list and create UI design _(SourceDocument)_
 
 ## Connected node types
 
-- SourceDocument: 17
+- SourceDocument: 18
 - CommunitySummary: 1
 
 ### MATH
@@ -710,7 +928,7 @@ Snapshot of the wiki at the most recent compile.
 - CodeProject: 1
 - CommunitySummary: 1
 - Metric: 1
-- SourceDocument: 69
+- SourceDocument: 103
 
 ## Recently added
 - (none)

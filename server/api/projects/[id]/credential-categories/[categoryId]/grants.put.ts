@@ -2,12 +2,12 @@ import { defineEventHandler, getRouterParam, readBody, setResponseStatus } from 
 import { AUDIT_CHANNEL } from '../../../../../../shared/projects/constants'
 import { getDatabase } from '../../../../../infrastructure/database/client'
 import { CREDENTIAL_CATEGORY_ERROR, replaceCredentialCategoryGrants } from '../../../../../modules/credentials/categories'
-import { categoryGrantsBodySchema } from '../../../../../modules/credentials/category-http-schemas'
+import { credentialCategoryGrantsBodySchema } from '../../../../../../shared/credentials/category-contracts'
 import { requireSession } from '../../../../../modules/identity/session/require-session'
 
 export default defineEventHandler(async (event) => {
   const session = await requireSession(event) as { user: { id: string } }
-  const body = categoryGrantsBodySchema.safeParse(await readBody(event))
+  const body = credentialCategoryGrantsBodySchema.safeParse(await readBody(event))
   if (!body.success) {
     setResponseStatus(event, 400)
     return { data: { code: CREDENTIAL_CATEGORY_ERROR.INVALID_GRANT_SUBJECT } }

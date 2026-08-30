@@ -8,6 +8,7 @@ import {
 import type { AuditChannel, ProjectPermission } from '../../../shared/projects/types'
 import type {
   CredentialCategoryBody,
+  CredentialCategory,
   CredentialCategoryGrantsBody,
   CredentialCategoryIdResponse,
   CredentialCategoryListItem,
@@ -52,6 +53,18 @@ type ActorCommand = Readonly<{
 const normalizeIds = (ids: readonly string[]): readonly string[] => [...new Set(ids)].sort()
 const normalizeCategoryName = (name: string) => name.trim()
 const normalizedCategoryKey = (name: string) => normalizeCategoryName(name).toLocaleLowerCase('ru-RU')
+
+export const toCredentialCategoryProjection = (
+  category: CredentialCategoryListItem,
+  roleIds: readonly string[],
+  membershipIds: readonly string[],
+): CredentialCategory => ({
+  id: category.id,
+  name: category.name,
+  description: category.description,
+  roleIds,
+  membershipIds,
+})
 
 export const resolveCredentialActorAccess = async (db: CredentialDatabase, actorUserId: string, projectId: string) => {
   const rows = await db.select({
@@ -151,7 +164,7 @@ export async function getCredentialCategoryManagement(
       canManage,
       canCreateCategories,
       canCreateCredentials,
-      categories: visible.map(category => ({ ...category, roleIds: [], membershipIds: [] })),
+      categories: visible.map(category => toCredentialCategoryProjection(category, [], [])),
       roles: [],
       members: [],
     }
@@ -176,11 +189,11 @@ export async function getCredentialCategoryManagement(
     canManage,
     canCreateCategories,
     canCreateCredentials,
-    categories: visible.map(category => ({
-      ...category,
-      roleIds: roleGrants.filter(grant => grant.categoryId === category.id).map(grant => grant.roleId),
-      membershipIds: memberGrants.filter(grant => grant.categoryId === category.id).map(grant => grant.membershipId),
-    })),
+    categories: visible.map(category => toCredentialCategoryProjection(
+      category,
+      roleGrants.filter(grant => grant.categoryId === category.id).map(grant => grant.roleId),
+      memberGrants.filter(grant => grant.categoryId === category.id).map(grant => grant.membershipId),
+    )),
     roles: roles.map(role => ({ ...role, builtInKey: role.builtInKey as 'admin' | 'editor' | 'viewer' | null })),
     members,
   }

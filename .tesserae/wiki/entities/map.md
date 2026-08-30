@@ -9,7 +9,7 @@ title: mAP
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 - **uses_metric** → Authenticated Page Placeholder Design _(SourceDocument)_
 - **uses_metric** → Current User Sidebar Implementation Plan _(SourceDocument)_
 - **uses_metric** → Global Navigation Design _(SourceDocument)_
@@ -24,11 +24,12 @@ title: mAP
 - **uses_metric** → Minerva progress _(SourceDocument)_
 - **uses_metric** → Nuxt Feature Modules Implementation Plan _(SourceDocument)_
 - **uses_metric** → Nuxt feature modules design _(SourceDocument)_
+- **uses_metric** → Project AI Assistant design _(SourceDocument)_
 - **uses_metric** → Projects List and Create UI Implementation Plan _(SourceDocument)_
 - **uses_metric** → Projects and RBAC Foundation Implementation Plan _(SourceDocument)_
 - **uses_metric** → Projects list and create UI design _(SourceDocument)_
 
 ## Connected node types
 
-- SourceDocument: 17
+- SourceDocument: 18
 - CommunitySummary: 1

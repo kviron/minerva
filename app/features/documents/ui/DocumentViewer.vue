@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ChevronRight, Pencil } from '@lucide/vue'
-import { computed, provide } from 'vue'
+import { ChevronRight, Pencil, Share2 } from '@lucide/vue'
+import { computed, provide, ref } from 'vue'
 import { useProjectOverviewStore } from '@/features/projects'
-import type { DocumentDetailResponse } from '../../../../shared/documents/contracts'
+import type { DocumentDetailResponse, DocumentTreeNode } from '../../../../shared/documents/contracts'
 import { PROJECT_PERMISSION } from '../../../../shared/projects/constants'
 import { formatDocumentUpdatedAt } from '../model/presentation'
 import { DOCUMENT_LINK_CONTEXT } from '../model/document-link-context'
 import DocumentContentNode from './DocumentContentNode.vue'
 import DocumentVersionControls from './DocumentVersionControls.vue'
+import DocumentShareDialog from './DocumentShareDialog.vue'
+import { useDocumentsStore } from '../model/documents-state'
 
 const props = defineProps<{
   projectId: string
@@ -15,6 +17,8 @@ const props = defineProps<{
 }>()
 
 const projectState = useProjectOverviewStore()
+const documentsState = useDocumentsStore()
+const shareDialogOpen = ref(false)
 const canEdit = computed(() => {
   const project = projectState.project
   return project?.id === props.projectId
@@ -24,6 +28,19 @@ const linkContext = computed(() => ({
   projectId: props.projectId,
   targets: new Map(props.document.internalLinks.map(target => [target.id, target])),
 }))
+const canShare = computed(() => {
+  const project = projectState.project
+  return project?.id === props.projectId
+    && project.permissions.includes(PROJECT_PERMISSION.DOCUMENTS_SHARE)
+})
+const treeHasPublishedVersion = (nodes: readonly DocumentTreeNode[], documentId: string): boolean => {
+  for (const node of nodes) {
+    if (node.id === documentId) return node.hasPublishedVersions
+    if (treeHasPublishedVersion(node.children, documentId)) return true
+  }
+  return false
+}
+const hasPublishedVersion = computed(() => treeHasPublishedVersion(documentsState.tree, props.document.id))
 provide(DOCUMENT_LINK_CONTEXT, linkContext)
 </script>
 
@@ -49,6 +66,10 @@ provide(DOCUMENT_LINK_CONTEXT, linkContext)
         </p>
       </div>
       <div class="flex flex-wrap items-center gap-2">
+        <UiButton v-if="canShare" variant="outline" size="sm" @click="shareDialogOpen = true">
+          <Share2 data-icon="inline-start" />
+          Поделиться
+        </UiButton>
         <UiButton v-if="canEdit" as-child variant="outline" size="sm">
           <NuxtLink :to="`/projects/${projectId}/documents/${document.id}/edit`">
             <Pencil data-icon="inline-start" />
@@ -61,7 +82,7 @@ provide(DOCUMENT_LINK_CONTEXT, linkContext)
 
     <UiSeparator class="my-6" />
 
-    <div v-if="document.draftContent.content.length > 0" class="flex flex-col gap-3">
+    <div v-if="document.draftContent.content.length > 0" class="flex flex-col gap-2">
       <DocumentContentNode
         v-for="(node, index) in document.draftContent.content"
         :key="index"
@@ -84,5 +105,13 @@ provide(DOCUMENT_LINK_CONTEXT, linkContext)
         </ul>
       </section>
     </template>
+
+    <DocumentShareDialog
+      :open="shareDialogOpen"
+      :project-id="projectId"
+      :document-id="document.id"
+      :has-published-version="hasPublishedVersion"
+      @update:open="shareDialogOpen = $event"
+    />
   </article>
 </template>

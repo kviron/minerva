@@ -1,5 +1,5 @@
 import { readonly, ref } from 'vue'
-import type { AdministrationUserDetail } from '../../../../shared/administration/users'
+import type { AdministrationUserDetail } from '../../../../shared/administration/contracts'
 import { administrationUsersApi } from '../api/users-api'
 
 export function useAdministrationUser(userId: () => string) {

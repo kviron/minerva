@@ -10,6 +10,7 @@ const password = 'Correct-Horse-Battery-1'
 vi.stubEnv('DATABASE_URL', TEST_DATABASE_URL)
 vi.stubEnv('BETTER_AUTH_SECRET', 'test-secret-012345678901234567890')
 vi.stubEnv('BETTER_AUTH_URL', 'http://127.0.0.1:3000')
+vi.stubEnv('MCP_RESOURCE_URL', 'http://127.0.0.1:3000/mcp')
 vi.stubEnv('TRUSTED_ORIGINS', 'http://127.0.0.1:3000')
 vi.stubEnv('RATE_LIMIT_HMAC_SECRET', 'test-rate-limit-secret-01234567890')
 vi.stubEnv('SMTP_HOST', '127.0.0.1')

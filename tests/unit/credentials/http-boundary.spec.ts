@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import { describe, expect, it } from 'vitest'
-import { createCredentialBodySchema, revealCredentialBodySchema, searchCredentialBodySchema, updateCredentialBodySchema } from '../../../server/modules/credentials/http-schemas'
+import { createCredentialBodySchema, revealCredentialBodySchema, searchCredentialBodySchema, updateCredentialBodySchema } from '../../../shared/credentials/contracts'
 
 const read = (path: string) => readFile(new URL(path, import.meta.url), 'utf8')
 

@@ -34,3 +34,7 @@ export const publishDocumentBodySchema = z.object({
 export const restoreDocumentVersionBodySchema = z.object({
   expectedRevision: z.number().int().nonnegative(),
 }).strict()
+
+export const searchDocumentsBodySchema = z.object({
+  query: z.string().trim().min(1).max(200),
+}).strict()

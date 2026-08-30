@@ -28,13 +28,13 @@ Expected MCP tools: `schema`, `graph_summary`, `search_nodes`, `node_context`, `
 
 ## Graph summary
 
-- Nodes: 73
-- Edges: 104
+- Nodes: 107
+- Edges: 140
 
 ## Representative nodes
 
 - **MATH** (`Benchmark`) — D:\develop\minerva\docs\superpowers\plans\2026-06-29-identity-functional-refactor.md
-- **Minerva MVP Planning** (`CommunitySummary`) — Designs and implementation plans for Minerva's MVP navigation, identity, projects, route structure, feature modules, UI placeholders, and RBAC foundation.
+- **Minerva MVP Blueprint** (`CommunitySummary`) — Designs, implementation plans, and progress notes for Minerva's MVP navigation, identity, project management, route structure, and UI foundations.
 - **mAP** (`Metric`) — D:\develop\minerva\docs\progress.md
 - **ADR 0001: Use a modular Nuxt/Nitro monolith** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0001-modular-monolith.md
 - **ADR 0002: Use global super administration and project-scoped RBAC** (`SourceDocument`) — D:\develop\minerva\docs\decisions\0002-project-rbac.md

@@ -1,0 +1,11 @@
+[Unit]
+Description=Check Minerva backup repository weekly
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+RandomizedDelaySec=1h
+Unit=minerva-backup-check.service
+
+[Install]
+WantedBy=timers.target

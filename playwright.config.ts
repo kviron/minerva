@@ -12,7 +12,7 @@ export default defineConfig({
     command: 'bun run dev --envName test --host 127.0.0.1',
     url: 'http://127.0.0.1:3000/api/health/database',
     timeout: 180_000,
-    reuseExistingServer: false,
+    reuseExistingServer: process.env.CI !== 'true',
     env: {
       ...process.env,
       DATABASE_URL: 'postgresql://minerva:minerva@127.0.0.1:5433/minerva_test',

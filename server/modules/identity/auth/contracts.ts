@@ -11,4 +11,5 @@ export interface CreateMinervaAuthInput {
   baseURL: string
   trustedOrigins: string[]
   mailer: PasswordResetMailer
+  oauth?: Readonly<{ resource: string }>
 }

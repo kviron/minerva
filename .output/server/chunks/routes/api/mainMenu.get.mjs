@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/routes/api/mainMenu.get');import { d as defineEventHandler, m as requireSession } from '../../_/nitro.mjs';
+globalThis.__timing__.logStart('Load chunks/routes/api/mainMenu.get');import { h as defineEventHandler, o as requireSession } from '../../_/nitro.mjs';
 import 'node:events';
 import 'node:buffer';
 import 'node:fs';
@@ -15,6 +15,7 @@ import 'better-auth/adapters/drizzle';
 import 'better-auth/plugins/username';
 import 'drizzle-orm';
 import 'drizzle-orm/pg-core';
+import '@better-auth/oauth-provider';
 
 const GLOBAL_NAVIGATION = {
   DASHBOARD: {

@@ -71,7 +71,7 @@ test('enforces the complete credential access journey', async ({ page }) => {
   await signOut(page)
   await signIn(page, 'admin@example.com')
   await page.goto(`/projects/${projectId}/credentials`)
-  await page.getByRole('button', { name: 'Управление категориями' }).click()
+  await page.getByRole('tab', { name: 'Категории' }).click()
   await page.getByRole('button', { name: 'Продакшен E2E' }).click()
   await page.getByLabel('Viewer').click({ force: true })
   await Promise.all([

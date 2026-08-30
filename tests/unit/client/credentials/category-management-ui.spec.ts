@@ -39,7 +39,8 @@ describe('credential category management UI', () => {
     const api = await read('../../../../app/features/credentials/api/category-api.ts')
     const actions = await read('../../../../app/features/credentials/model/actions/category-actions.ts')
     expect(api).toContain('/api/projects/${projectId}/credential-categories')
-    expect(api).toContain('parseCategoryManagement')
+    expect(api).toContain('decodeApiResponse')
+    expect(api).toContain('credentialCategoryManagementSchema')
     expect(actions).not.toContain('error.message')
     expect(actions).toContain('createAsyncAction({')
   })
@@ -50,7 +51,7 @@ describe('credential category management UI', () => {
       read('../../../../app/features/credentials/ui/CredentialsView.vue'),
       read('../../../../app/features/credentials/model/category-management-state.ts'),
     ])
-    expect(contract).toContain('canCreateCategories: boolean')
+    expect(contract).toContain('canCreateCategories: z.boolean()')
     expect(view).toContain('state.canCreateCategories')
     expect(state).toContain('grants: this.data.canManage')
   })

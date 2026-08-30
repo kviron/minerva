@@ -43,10 +43,17 @@ These items are valuable but not required to prove the first secure end-to-end p
 - Automatic article translation.
 - Website monitoring and asset inventory.
 
+## AI assistant later increments
+
+- OAuth login to model vendors and multiple simultaneous providers per project.
+- Full-text search across retained assistant conversations.
+- Image and file understanding, web browsing, and external vector infrastructure.
+- Autonomous or background agents.
+- Direct document mutation, publication, archive, or restore without a Minerva-owned proposal, exact preview, explicit confirmation, and current authorization check.
+
 ## Sensitive data
 
 - Client credentials, FTP access, hosting panels, and password vault.
 - Credential sharing, reveal auditing, breach checks, and rotation workflows.
 
 This area requires a separate threat model, encryption/key-management ADR, recovery design, and MCP exclusion policy before implementation.
-

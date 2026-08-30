@@ -1,3 +1,4 @@
+import { readFile } from 'node:fs/promises'
 import { describe, expect, it } from 'vitest'
 import { extractReferencedImageIds, parseDocumentContent } from '../../../server/modules/documents/content-schema'
 import { validateDocumentImageUpload } from '../../../server/modules/files/document-images'
@@ -9,7 +10,7 @@ describe('document images', () => {
     const content = parseDocumentContent({
       type: 'doc',
       content: [
-        { type: 'image', attrs: { imageId: IMAGE_ID, alt: 'Схема' } },
+        { type: 'image', attrs: { imageId: IMAGE_ID, alt: 'Схема', width: 640, height: 360 } },
         { type: 'image', attrs: { imageId: IMAGE_ID, alt: '' } },
       ],
     })
@@ -20,6 +21,9 @@ describe('document images', () => {
   it('rejects malformed image attributes', () => {
     expect(parseDocumentContent({ type: 'doc', content: [{ type: 'image', attrs: { imageId: 'bad' } }] })).toBeNull()
     expect(parseDocumentContent({ type: 'doc', content: [{ type: 'image', attrs: { imageId: IMAGE_ID, alt: 'x'.repeat(501) } }] })).toBeNull()
+    expect(parseDocumentContent({ type: 'doc', content: [{ type: 'image', attrs: { imageId: IMAGE_ID, width: 159 } }] })).toBeNull()
+    expect(parseDocumentContent({ type: 'doc', content: [{ type: 'image', attrs: { imageId: IMAGE_ID, width: 1600.5 } }] })).toBeNull()
+    expect(parseDocumentContent({ type: 'doc', content: [{ type: 'image', attrs: { imageId: IMAGE_ID, height: 89 } }] })).toBeNull()
   })
 
   it('validates declared MIME type and file signature', () => {
@@ -32,5 +36,13 @@ describe('document images', () => {
       ok: false,
       code: 'INVALID_IMAGE',
     })
+  })
+
+  it('serves an explicit attachment response for the download action', async () => {
+    const endpoint = await readFile('server/api/projects/[id]/documents/images/[imageId].get.ts', 'utf8')
+
+    expect(endpoint).toContain("getQuery(event).download === '1'")
+    expect(endpoint).toContain("download ? 'attachment' : 'inline'")
+    expect(endpoint).toContain('encodeURIComponent(image.filename)')
   })
 })

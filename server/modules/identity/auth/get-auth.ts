@@ -1,4 +1,4 @@
-import { getServerEnv } from '../../../../shared/config/env'
+import { getServerEnv } from '../../../config/runtime-env'
 import { AUTH_MODE } from '../../../../shared/identity/constants'
 import { getDatabase } from '../../../infrastructure/database/client'
 import { createSmtpPasswordResetMailer } from '../../../infrastructure/mail/smtp-password-reset-mailer'
@@ -16,6 +16,7 @@ export function getAuth() {
     db: getDatabase().db,
     baseURL: env.BETTER_AUTH_URL,
     trustedOrigins: env.TRUSTED_ORIGINS,
+    oauth: { resource: env.MCP_RESOURCE_URL },
     mailer: createSmtpPasswordResetMailer({
       host: env.SMTP_HOST,
       port: env.SMTP_PORT,

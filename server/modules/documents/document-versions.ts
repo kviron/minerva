@@ -12,6 +12,7 @@ import { getDatabase } from '../../infrastructure/database/client'
 import { user } from '../../infrastructure/database/schema/auth'
 import { documents, documentVersions } from '../../infrastructure/database/schema/documents'
 import { auditEvents, projectMemberships, projectRolePermissions } from '../../infrastructure/database/schema/projects'
+import { withMcpAuditAttribution, type McpAuditAttribution } from '../projects/audit-attribution'
 
 export const DOCUMENT_VERSION_ERROR = {
   INVALID_REQUEST: 'INVALID_REQUEST',
@@ -27,6 +28,7 @@ interface DocumentVersionBaseInput {
   readonly projectId: string
   readonly documentId: string
   readonly channel: AuditChannel
+  readonly mcpAttribution?: McpAuditAttribution
 }
 
 export interface PublishDocumentInput extends DocumentVersionBaseInput {
@@ -136,6 +138,7 @@ export const publishDocumentPersistence = (db: DocumentsDatabase): PublishDocume
       content: documents.draftContent,
       internalLinkTargetIds: documents.draftInternalLinkTargetIds,
       referencedImageIds: documents.draftReferencedImageIds,
+      searchText: documents.draftSearchText,
     }).from(documents).where(and(
       eq(documents.id, command.documentId),
       eq(documents.projectId, command.projectId),
@@ -160,6 +163,7 @@ export const publishDocumentPersistence = (db: DocumentsDatabase): PublishDocume
       sourceDraftRevision: document.draftRevision,
       title: document.title,
       draftContent: document.content,
+      searchText: document.searchText,
       internalLinkTargetIds: document.internalLinkTargetIds,
       referencedImageIds: document.referencedImageIds,
       changeSummary: command.changeSummary,
@@ -178,7 +182,10 @@ export const publishDocumentPersistence = (db: DocumentsDatabase): PublishDocume
       projectId: command.projectId,
       targetType: 'document',
       targetId: command.documentId,
-      metadata: { versionNumber, draftRevision: document.draftRevision, summaryLength: command.changeSummary.length },
+      metadata: withMcpAuditAttribution(
+        { versionNumber, draftRevision: document.draftRevision, summaryLength: command.changeSummary.length },
+        command.mcpAttribution,
+      ),
     })
     return { ok: true, versionNumber, publishedAt: publishedAt.toISOString() }
   })
@@ -263,6 +270,11 @@ export const getDocumentVersionForUser = async (
     publishedAt: documentVersions.publishedAt,
     content: documentVersions.draftContent,
   }).from(documentVersions)
+    .innerJoin(documents, and(
+      eq(documents.id, documentVersions.documentId),
+      eq(documents.projectId, documentVersions.projectId),
+      isNull(documents.archivedAt),
+    ))
     .innerJoin(user, eq(documentVersions.publishedByUserId, user.id))
     .where(and(
       eq(documentVersions.projectId, projectId),
@@ -309,6 +321,7 @@ export const restoreDocumentVersionPersistence = (db: DocumentsDatabase): Restor
       content: documentVersions.draftContent,
       internalLinkTargetIds: documentVersions.internalLinkTargetIds,
       referencedImageIds: documentVersions.referencedImageIds,
+      searchText: documentVersions.searchText,
     }).from(documentVersions).where(and(
       eq(documentVersions.projectId, command.projectId),
       eq(documentVersions.documentId, command.documentId),
@@ -321,6 +334,7 @@ export const restoreDocumentVersionPersistence = (db: DocumentsDatabase): Restor
     const [updated] = await tx.update(documents).set({
       title: version.title,
       draftContent: version.content,
+      draftSearchText: version.searchText,
       draftInternalLinkTargetIds: version.internalLinkTargetIds,
       draftReferencedImageIds: version.referencedImageIds,
       draftRevision: sql`${documents.draftRevision} + 1`,

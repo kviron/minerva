@@ -3,6 +3,7 @@ import type {
   CreateDocumentRequest,
   DocumentDetailResponse,
   DocumentImageUploadResponse,
+  DocumentSearchResponse,
   ArchivedDocumentsResponse,
   DocumentVersionDetail,
   DocumentVersionMutationResult,
@@ -17,10 +18,17 @@ import type {
   UpdateDocumentDraftRequest,
   UpdateDocumentDraftResult,
 } from '../../../../../shared/documents/contracts'
+import type {
+  DocumentPublicShareCreateRequest,
+  DocumentPublicShareListResponse,
+  DocumentPublicShareMutationResponse,
+  DocumentPublicShareProjection,
+} from '../../../../../shared/documents/public-share-contracts'
 import { documentsApi } from '../../api/documents-api'
 
 export const DOCUMENT_ACTION = {
   LOAD_ROOTS: 'documents.roots.load',
+  SEARCH: 'documents.search',
   CREATE: 'document.create',
   LOAD_TREE: 'documents.tree.load',
   LOAD_DOCUMENT: 'document.load',
@@ -35,6 +43,11 @@ export const DOCUMENT_ACTION = {
   LOAD_VERSION: 'document.version.load',
   RESTORE_VERSION: 'document.version.restore',
   UPLOAD_IMAGE: 'document.image.upload',
+  SHARE_LIST: 'document.share.list',
+  SHARE_OPEN: 'document.share.open',
+  SHARE_COPY: 'document.share.copy',
+  SHARE_ROTATE: 'document.share.rotate',
+  SHARE_REVOKE: 'document.share.revoke',
 } as const
 
 export class DocumentsActions extends BaseActions {
@@ -42,9 +55,61 @@ export class DocumentsActions extends BaseActions {
     super({ ...options, analyticsTag: options.analyticsTag ?? 'documents' })
   }
 
+  public listShares = this.createAsyncAction({
+    name: DOCUMENT_ACTION.SHARE_LIST,
+    run: (signal: AbortSignal, projectId: string, documentId: string): Promise<DocumentPublicShareListResponse> =>
+      documentsApi.listShares(projectId, documentId, signal),
+    idGetter: (projectId, documentId) => `${projectId}:${documentId}`,
+    options: { concurrency: 'abort', mutation: false },
+  })
+
+  public openShare = this.createAsyncAction({
+    name: DOCUMENT_ACTION.SHARE_OPEN,
+    run: (
+      signal: AbortSignal,
+      projectId: string,
+      documentId: string,
+      input: DocumentPublicShareCreateRequest,
+    ): Promise<DocumentPublicShareMutationResponse> => documentsApi.openShare(projectId, documentId, input, signal),
+    idGetter: (projectId, documentId) => `${projectId}:${documentId}`,
+    options: { concurrency: 'ignore' },
+  })
+
+  public copyShare = this.createAsyncAction({
+    name: DOCUMENT_ACTION.SHARE_COPY,
+    run: (signal: AbortSignal, projectId: string, documentId: string, shareId: string): Promise<DocumentPublicShareMutationResponse> =>
+      documentsApi.copyShare(projectId, documentId, shareId, signal),
+    idGetter: (projectId, documentId) => `${projectId}:${documentId}`,
+    options: { concurrency: 'ignore', mutation: false },
+  })
+
+  public rotateShare = this.createAsyncAction({
+    name: DOCUMENT_ACTION.SHARE_ROTATE,
+    run: (signal: AbortSignal, projectId: string, documentId: string, shareId: string): Promise<DocumentPublicShareMutationResponse> =>
+      documentsApi.rotateShare(projectId, documentId, shareId, signal),
+    idGetter: (projectId, documentId) => `${projectId}:${documentId}`,
+    options: { concurrency: 'ignore' },
+  })
+
+  public revokeShare = this.createAsyncAction({
+    name: DOCUMENT_ACTION.SHARE_REVOKE,
+    run: (signal: AbortSignal, projectId: string, documentId: string, shareId: string): Promise<DocumentPublicShareProjection> =>
+      documentsApi.revokeShare(projectId, documentId, shareId, signal),
+    idGetter: (projectId, documentId) => `${projectId}:${documentId}`,
+    options: { concurrency: 'ignore' },
+  })
+
   public loadRoots = this.createAsyncAction({
     name: DOCUMENT_ACTION.LOAD_ROOTS,
     run: (signal: AbortSignal, projectId: string) => documentsApi.listRoots(projectId, signal),
+    idGetter: projectId => projectId,
+    options: { concurrency: 'abort', mutation: false },
+  })
+
+  public search = this.createAsyncAction({
+    name: DOCUMENT_ACTION.SEARCH,
+    run: (signal: AbortSignal, projectId: string, query: string): Promise<DocumentSearchResponse> =>
+      documentsApi.search(projectId, { query }, signal),
     idGetter: projectId => projectId,
     options: { concurrency: 'abort', mutation: false },
   })

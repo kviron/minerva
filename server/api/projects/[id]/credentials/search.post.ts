@@ -1,7 +1,7 @@
 import { defineEventHandler, getRouterParam, readBody, setHeader, setResponseStatus } from 'h3'
 import { getDatabase } from '../../../../infrastructure/database/client'
 import { searchAccessibleCredentials, CREDENTIAL_ERROR } from '../../../../modules/credentials/credentials'
-import { searchCredentialBodySchema } from '../../../../modules/credentials/http-schemas'
+import { searchCredentialBodySchema } from '../../../../../shared/credentials/contracts'
 import { getCredentialCrypto } from '../../../../modules/credentials/runtime'
 import { requireSession } from '../../../../modules/identity/session/require-session'
 

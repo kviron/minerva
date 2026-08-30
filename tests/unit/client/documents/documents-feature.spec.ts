@@ -72,10 +72,11 @@ describe('documents first-level feature', () => {
     expect(mocks.documentsApi.restore).toHaveBeenCalledWith('project-1', archive[0].id, expect.anything())
   })
 
-  it('renders root documents as links and includes loading, error, and empty states', async () => {
-    const [view, list, archive, page, dialog] = await Promise.all([
+  it('renders the documentation overview as a compact linked tree without child counters', async () => {
+    const [view, tree, branch, archive, page, dialog] = await Promise.all([
       read('../../../../app/features/documents/ui/DocumentsView.vue'),
-      read('../../../../app/features/documents/ui/DocumentRootList.vue'),
+      read('../../../../app/features/documents/ui/DocumentOutlineTree.vue'),
+      read('../../../../app/features/documents/ui/DocumentOutlineTreeBranch.vue'),
       read('../../../../app/features/documents/ui/DocumentsArchive.vue'),
       read('../../../../app/pages/projects/[id]/documents/index.vue'),
       read('../../../../app/features/documents/ui/CreateDocumentDialog.vue'),
@@ -83,18 +84,18 @@ describe('documents first-level feature', () => {
 
     expect(page).toContain('<DocumentsProvider>')
     expect(page).toContain('<DocumentsView :project-id="projectId" />')
-    expect(view).toContain('<DocumentRootList')
+    expect(view).toContain('<DocumentOutlineTree')
+    expect(view).toContain('actions.loadTree')
     expect(view).toContain('<UiTabsList>')
     expect(view).toContain('Архив')
     expect(view).toContain('<DocumentsArchive')
     expect(view).toContain('UiSkeleton')
     expect(view).toContain('UiAlert')
     expect(view).toContain('UiEmpty')
-    expect(list).toContain(':to="`/projects/${projectId}/documents/${document.id}`"')
-    expect(list).toContain('document.childCount')
-    expect(list).toContain('block truncate text-base font-semibold')
-    expect(list).toContain('block text-xs text-muted-foreground')
-    expect(list).toContain("class=\"text-xs text-muted-foreground\">Черновик")
+    expect(tree).toContain('<DocumentOutlineTreeBranch')
+    expect(branch).toContain(':to="`/projects/${projectId}/documents/${node.id}`"')
+    expect(branch).toContain('node.children')
+    expect(branch).not.toContain('childCount')
     expect(view).toContain('<CreateDocumentDialog')
     expect(view).toContain('DOCUMENTS_CREATE')
     expect(dialog).toContain('<UiDialogTitle>Создать страницу</UiDialogTitle>')

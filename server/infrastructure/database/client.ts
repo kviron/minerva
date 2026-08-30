@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
-import { getServerEnv } from '../../../shared/config/env'
+import { getServerEnv } from '../../config/runtime-env'
 
 export function createDatabase(url: string, max = 10) {
   const queryClient = postgres(url, { max })

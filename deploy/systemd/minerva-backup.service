@@ -1,0 +1,10 @@
+[Unit]
+Description=Minerva encrypted database backup
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/minerva
+ExecStart=/usr/bin/flock --nonblock /run/lock/minerva-backup.lock /usr/bin/docker compose --env-file /etc/minerva/production.env -f compose.production.yml --profile backup run --rm backup
+TimeoutStartSec=4h

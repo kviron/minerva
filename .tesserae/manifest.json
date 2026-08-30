@@ -133,11 +133,11 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\architecture.md": {
-      "sha256": "1aa29898916b96b1bb8d03da114dadc60b7d978a3660c8b0ef5d505d5ff584a6",
+      "sha256": "4e1d101e7943d3fbc0c89b48852c497a26ceca5cf8f55ba3137fb581e1de3757",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\backlog.md": {
-      "sha256": "d8f01db3791d77c1f479a1835a78a7b4bda138fdcb0ce764eb169f2d2ed8fc70",
+      "sha256": "47d47c17f343deb0537b4a7b36b0cc5af20870abb82c74ef1a73cf0e2a06e799",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\decisions\\0001-modular-monolith.md": {
@@ -153,11 +153,11 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\decisions\\0004-mcp-first-release-boundary.md": {
-      "sha256": "e71ad88565e4616b478d5309691439b6fa974c55c8ab38a87c549f8d505c1440",
+      "sha256": "d6a6a1786df4acd1a1a7ac33a54696d3f60a0ea9ac5d9093a9bf57d913a1cf41",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\decisions\\0005-mcp-oauth-resource-and-revocation.md": {
-      "sha256": "9384aa5ffb6e764c305eeffd2c7b8f049385d95575f7dcbff2690a8ffc992c1c",
+      "sha256": "40a6049f96b6b503207722358519ecfdf979ab3f0bc70d7c8210e62221e34c5c",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\decisions\\0006-use-bun-package-manager.md": {
@@ -200,24 +200,104 @@
       "sha256": "3b1c4cf4bb1490f6b3b41a7cd26b5a8f36bcac43a4d84fcaae648df8a560c792",
       "source_kind": "SourceDocument"
     },
+    "D:\\develop\\minerva\\docs\\decisions\\0016-link-oauth-consents-and-token-families.md": {
+      "sha256": "292cf5b8ac7e98c4b19de1558a3685c70d67be70f6eb3d806a729c3eae740de2",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0017-serialize-oauth-token-issuance-with-grant-revocation.md": {
+      "sha256": "5fcb83f5c8e46d6231b77e60db12762f412d6441b0598f6b05b9eea8b92316b7",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0018-use-leased-idempotency-records-for-mcp-mutations.md": {
+      "sha256": "4695407f17fb3c22424fe239a26cce3ab916daec16531c841da0eeca187fcfb1",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0019-isolate-project-ai-connections-and-require-user-confirmed-mutations.md": {
+      "sha256": "19416a9fddaabb56b6bb427466d3fb59dcb2d74389817d6edb97e3784ec1c5f0",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0020-use-allow-listed-external-embeds.md": {
+      "sha256": "068f4632e2633d9093448c66685a61f1eb35aa074b5d8c978172743a3f5f3eab",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0021-use-postgresql-leases-and-content-free-ai-usage-events.md": {
+      "sha256": "a527fefa536069d9f80bd8bcd969475522d6eba7b6cc12e5355eb78df1c45e8a",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0022-retain-private-ai-conversations-for-thirty-days.md": {
+      "sha256": "0687e56e948378d86c6faa1e8716aad23ddb0f562e804c331a07e095d6cdd45c",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0023-use-short-lived-server-owned-ai-document-proposals.md": {
+      "sha256": "fda700feea6c28e3163ea270b5099b8b8cd97ea37c8575e60438cff2f03194fe",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0024-use-revocable-capability-links-for-public-documentation.md": {
+      "sha256": "b022aea96e7b336797455adacf52b87175be54f6345272bdd178ca30076537e4",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0025-run-production-on-a-hardened-single-vps.md": {
+      "sha256": "dfb4804fa63a1852549ea649d8c453cbfa48e16752513a3d8835d237bc61c26a",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0026-compose-data-grids-from-shared-table-mechanics.md": {
+      "sha256": "32787bb926826866d3ae14f12d23d941a6f381a872cf99bd8dfed1db0fa4d708",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0027-resolve-current-audit-targets-through-safe-projections.md": {
+      "sha256": "82c54fd3802afea1d5d70e324d5b23bdfdd219a5f2869df89de9e3c64cc77f68",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\decisions\\0028-compose-project-lifecycle-from-pure-transition-policies.md": {
+      "sha256": "61d7fadf60eddde99d39d634500d4952f47a6db6dadf80c7cc2b5bf097f3a3bf",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\operations\\backup-and-restore.md": {
+      "sha256": "4c6664a58c562f4f712c76c145a3ca2d2205eadef1136feb018238501b03657d",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\docs\\operations\\credential-encryption.md": {
       "sha256": "1759722834776f493afed7b5cc3dc1ae47ed2a4296fff6069bc2c0091bcace6f",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\operations\\mcp-oauth.md": {
+      "sha256": "5f40aca629e3332cb655573f40b5fcde3d4ac537d3c2e8252f0a3c772ade69d4",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\operations\\production-configuration.md": {
+      "sha256": "3c23482e90cc4eba0f513f121bbca0936d5be6a138b9a1ab1587435a75d361c0",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\operations\\public-documentation-sharing.md": {
+      "sha256": "2d7ad22e5b4c14d841996eb50b4e7e58d0af5da20b18eac81f2914dafa4084f5",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\operations\\restore-drill-2026-08-06-local.md": {
+      "sha256": "ed90e4260c590476e01499a70b46719ec4264006829d03635cc863eb34d15d55",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\operations\\restore-drill-record-template.md": {
+      "sha256": "d7c1ef6952357e206e6817e346e00dd1e45b6f316f4c6b31d7551b4858a61b89",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\operations\\tesserae.md": {
       "sha256": "5e559e1ce185d68c412255a72d741c09abae46956646d0178a6aa3e5d9599ae8",
       "source_kind": "SourceDocument"
     },
+    "D:\\develop\\minerva\\docs\\operations\\transport-security-and-logging.md": {
+      "sha256": "4b79fbb92954c235dfa65c5f2be79a3a52500c705bc9573ae868bbe82ab6a12e",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\docs\\product-spec.md": {
-      "sha256": "727e1cd2ab2ffea21f25a25b7e46fb6b212fbc5f2e10f7c737f85b08f19eda23",
+      "sha256": "dc0e639af6f71be766905a97b82bf96e718bf80c3ed8d24863d58359d18e4bff",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\progress.md": {
-      "sha256": "ba9efb33badf538ae728a80a7aba187a309cd96e8c95ff004c78f923cb5ba511",
+      "sha256": "1f171fcb0b22c6e7db081952477807773c6ac047c48b0a4cf4c364583cdc2acf",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\roadmap.md": {
-      "sha256": "76c2305217db26031eb1573ec73d444c5d0c78fdc61004a71b877e3ee33a180f",
+      "sha256": "bf5d359fc4419adf8a0c993cf259f02cf006e0aa48baed9a708c7907fb1d4c38",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-foundation.md": {
@@ -229,7 +309,7 @@
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-24-minerva-mvp-roadmap.md": {
-      "sha256": "9869d57be193faf8000017a057c47003473c4b4a088c39e2d903219abda99e1f",
+      "sha256": "c6ffcff8483e425e846bb968e2bed722c9c9d8a968bb22102521d167a77255db",
       "source_kind": "SourceDocument"
     },
     "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-06-27-mvp-route-skeleton.md": {
@@ -324,6 +404,30 @@
       "sha256": "6f011745c92e5073f654235d464b25ef8704f8ddf20bb444a8286e6c588f4b15",
       "source_kind": "SourceDocument"
     },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-14-mcp-documentation-interface.md": {
+      "sha256": "0100e14f64b3c3d2ac184c4cc9144bc15da9da61e4275ad7b233b9c1afd34c32",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-15-project-ai-assistant.md": {
+      "sha256": "2479898292f7e257648e66810eb58de54a2d7ad5a4c4d54d50fd644338600b5f",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-31-project-ai-document-proposals.md": {
+      "sha256": "b75079c8fe8a10a22f00ee97dbfc7da27f272c7cfa971d55059a6fa618a55db3",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-07-31-public-documentation-sharing.md": {
+      "sha256": "dc15dffceef57cc65382d876d6ea8d8dcc9b938a636f9b8fad3c8548da4b31d9",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-08-04-production-readiness.md": {
+      "sha256": "82d0f7354d82c68cf245949ff96e9c10c4c2c29c4a8ed30f186e695d8d6394ea",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\plans\\2026-08-28-project-lifecycle.md": {
+      "sha256": "d92c99ae4428b72ec292a77d187674d6c67783b3d99cb6ad626d42bd11746747",
+      "source_kind": "SourceDocument"
+    },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-06-24-minerva-mvp-design.md": {
       "sha256": "68951988868ab0b552312d71c3b4dc0a03a9be2c3a1eb6582f4a3dcd292e85e4",
       "source_kind": "SourceDocument"
@@ -402,6 +506,38 @@
     },
     "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-11-project-credentials-design.md": {
       "sha256": "3ce87f43efeaf8005741e28bd2b305aaf73ecddd479e885fa52ca614a954f5b0",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-14-mcp-oauth-threat-model.md": {
+      "sha256": "9c67ba87caae8159baa59a35560b9646ea85aef692a21364ec16ff49a7b84602",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-15-project-ai-assistant-design.md": {
+      "sha256": "ae8112761f02c5138ccc5bc07b320020d475bb7a0dae3761346c9efeaf2a1143",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-31-project-ai-document-proposals-design.md": {
+      "sha256": "713c4b86e0b9b25d9c274fbcb7d375fc951120542fe717e713044501cf545bc0",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-07-31-public-documentation-sharing-design.md": {
+      "sha256": "c7a588d86d71af250ee82af6822a9de94ad01bb290f99e88024d0d0fb06941ae",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-08-04-production-readiness-design.md": {
+      "sha256": "3a3b54501f844b1c8bfa6cfc8c24445575c7ac918a938926c7344d984851f85a",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-08-04-production-readiness-threat-model.md": {
+      "sha256": "b6aa0b5c32627df02e37990066142183323313e30001024f7a98ff589129415c",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-08-28-project-lifecycle-design.md": {
+      "sha256": "7c715d76c239383e7af1118fde36fd9f9e119b2f6cb0b88c2759653b2c3d2cdf",
+      "source_kind": "SourceDocument"
+    },
+    "D:\\develop\\minerva\\docs\\superpowers\\specs\\2026-08-28-project-lifecycle-threat-model.md": {
+      "sha256": "4be0149f72ee525831d5847b51b1f6d1fb76b0230346dbe41d2e819f91e2c24a",
       "source_kind": "SourceDocument"
     }
   }

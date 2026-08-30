@@ -42,7 +42,7 @@ test('signs in by email', async ({ page }) => {
   await submitLogin(page, 'user@example.com')
   await expect(page).toHaveURL(/\/dashboard$/)
   await expect(page.getByRole('heading', { name: 'Страница в разработке' })).toBeVisible()
-  await expect(page.getByRole('link', { name: 'Главная' })).toBeVisible()
+  await expect(page.locator('a[data-sidebar="menu-button"]', { hasText: 'Главная' })).toBeVisible()
   await expect(page.getByRole('link', { name: 'Проекты' })).toBeVisible()
   await expect(page.getByRole('link', { name: 'Настройки' })).toBeVisible()
   await expect(page.getByRole('link', { name: 'Администрирование' })).toHaveCount(0)
@@ -53,7 +53,7 @@ test('signs in by email', async ({ page }) => {
   await page.goto('/projects/test-project/credentials')
   await expect(page).toHaveURL(/\/projects\/test-project\/credentials$/)
   await expect(page.getByRole('heading', { name: 'Учётные данные' })).toBeVisible()
-  await expect(page.getByText('Не удалось загрузить категории').first()).toBeVisible()
+  await expect(page.getByText('Не удалось загрузить учётные данные').first()).toBeVisible()
   await expect(page.locator('input')).toHaveCount(0)
 })
 

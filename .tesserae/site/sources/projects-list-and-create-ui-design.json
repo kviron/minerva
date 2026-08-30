@@ -1,10 +1,10 @@
 {
   "title": "Projects list and create UI design",
   "kind": "sources",
-  "body_text": "# Projects list and create UI design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "body_text": "# Projects list and create UI design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
   "source_path": "D:\\\\develop\\\\minerva\\\\docs\\\\superpowers\\\\specs\\\\2026-07-05-projects-list-and-create-ui-design.md",
   "links": [],
-  "body": "# Projects list and create UI design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Planning _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
+  "body": "# Projects list and create UI design\n\n## Outgoing relations\n\n- **uses_metric** → mAP _(Metric)_\n\n## Incoming relations\n\n- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_\n\n## Connected node types\n\n- CommunitySummary: 1\n- Metric: 1",
   "frontmatter": {
     "kind": "sources",
     "node_id": "SourceDocument:projects-list-and-create-ui-design:b11de69f5972",

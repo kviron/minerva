@@ -12,7 +12,7 @@ const projectId = computed(() => projectIdFromPath(route.path))
 const projectName = computed(() => {
   if (projectId.value === null) return null
 
-  const listedProject = projectsState.projects.find(project => project.id === projectId.value)
+  const listedProject = projectsState.list.projects.find(project => project.id === projectId.value)
   if (listedProject) return listedProject.name
   return overviewState.project?.id === projectId.value ? overviewState.project.name : null
 })

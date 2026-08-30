@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Files, Plus } from '@lucide/vue'
+import { Files, Plus, Search } from '@lucide/vue'
+import { watchDebounced } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
 import { useProjectOverviewStore } from '@/features/projects'
 import type { CreateDocumentRequest } from '../../../../shared/documents/contracts'
@@ -9,7 +10,8 @@ import { useDocumentsActions } from '../model/actions/provider'
 import { useDocumentsStore } from '../model/documents-state'
 import CreateDocumentDialog from './CreateDocumentDialog.vue'
 import DocumentsArchive from './DocumentsArchive.vue'
-import DocumentRootList from './DocumentRootList.vue'
+import DocumentOutlineTree from './DocumentOutlineTree.vue'
+import DocumentSearchResults from './DocumentSearchResults.vue'
 
 const props = defineProps<{ projectId: string }>()
 const actions = useDocumentsActions()
@@ -18,7 +20,12 @@ const projectState = useProjectOverviewStore()
 const createOpen = ref(false)
 const activeTab = ref('pages')
 const loadError = ref<string | null>(null)
-const pending = computed(() => actions.isPendingFor(DOCUMENT_ACTION.LOAD_ROOTS, props.projectId))
+const searchQuery = ref('')
+const searchError = ref<string | null>(null)
+const normalizedSearchQuery = computed(() => searchQuery.value.trim())
+const pending = computed(() => actions.isPendingFor(DOCUMENT_ACTION.LOAD_ROOTS, props.projectId)
+  || actions.isPendingFor(DOCUMENT_ACTION.LOAD_TREE, props.projectId))
+const searching = computed(() => actions.isPendingFor(DOCUMENT_ACTION.SEARCH, props.projectId))
 const creating = computed(() => actions.isPendingFor(DOCUMENT_ACTION.CREATE, props.projectId))
 const createError = computed(() => actions.error.value)
 const canCreate = computed(() => {
@@ -35,13 +42,38 @@ const canViewArchive = computed(() => {
 
 const load = async () => {
   state.clearRoots()
+  state.clearSearchResults()
+  searchQuery.value = ''
+  searchError.value = null
   loadError.value = null
-  const roots = await actions.loadRoots(props.projectId)
-  if (roots) {
+  const [roots, tree] = await Promise.all([
+    actions.loadRoots(props.projectId),
+    actions.loadTree(props.projectId),
+  ])
+  if (roots && tree) {
     state.applyRoots(roots)
+    state.applyTree(tree)
   }
   else {
     loadError.value = actions.error.value
+  }
+}
+
+const searchDocuments = async () => {
+  searchError.value = null
+  const projectId = props.projectId
+  const query = normalizedSearchQuery.value
+  if (!query) {
+    state.clearSearchResults()
+    return
+  }
+  const results = await actions.search(projectId, query)
+  if (projectId !== props.projectId || query !== normalizedSearchQuery.value) return
+  if (results) {
+    state.applySearchResults(results)
+  }
+  else {
+    searchError.value = actions.error.value
   }
 }
 
@@ -54,11 +86,14 @@ const createDocument = async (input: CreateDocumentRequest) => {
   const result = await actions.create(props.projectId, input)
   if (result) {
     state.applyRoots(result.roots)
+    const tree = await actions.loadTree(props.projectId)
+    if (tree) state.applyTree(tree)
     createOpen.value = false
   }
 }
 
 watch(() => props.projectId, load, { immediate: true })
+watchDebounced(searchQuery, searchDocuments, { debounce: 350, maxWait: 800 })
 </script>
 
 <template>
@@ -83,6 +118,35 @@ watch(() => props.projectId, load, { immediate: true })
       </UiTabsList>
 
       <UiTabsContent value="pages" class="flex flex-col gap-4">
+    <UiField class="max-w-xl">
+      <UiFieldLabel for="documents-search" class="sr-only">Поиск по документации</UiFieldLabel>
+      <UiInputGroup>
+        <UiInputGroupAddon><Search /></UiInputGroupAddon>
+        <UiInputGroupInput
+          id="documents-search"
+          v-model="searchQuery"
+          type="search"
+          autocomplete="off"
+          placeholder="Поиск по названию и содержимому"
+        />
+      </UiInputGroup>
+    </UiField>
+
+    <UiAlert v-if="searchError" variant="destructive" role="alert">
+      <UiAlertTitle>Не удалось выполнить поиск</UiAlertTitle>
+      <UiAlertDescription>{{ searchError }}</UiAlertDescription>
+    </UiAlert>
+
+    <div v-else-if="searching" class="flex flex-col gap-2">
+      <UiSkeleton v-for="index in 3" :key="index" class="h-24 w-full" />
+    </div>
+
+    <DocumentSearchResults
+      v-else-if="normalizedSearchQuery"
+      :project-id="projectId"
+      :results="state.searchResults"
+    />
+
     <UiCard v-if="pending">
       <UiCardHeader>
         <UiSkeleton class="h-5 w-48" />
@@ -93,7 +157,7 @@ watch(() => props.projectId, load, { immediate: true })
       </UiCardContent>
     </UiCard>
 
-    <UiAlert v-else-if="loadError" variant="destructive" role="alert">
+    <UiAlert v-else-if="!normalizedSearchQuery && loadError" variant="destructive" role="alert">
       <UiAlertTitle>Не удалось загрузить документацию</UiAlertTitle>
       <UiAlertDescription>{{ loadError }}</UiAlertDescription>
       <UiAlertAction>
@@ -101,7 +165,7 @@ watch(() => props.projectId, load, { immediate: true })
       </UiAlertAction>
     </UiAlert>
 
-    <UiEmpty v-else-if="state.roots.length === 0" class="border border-dashed">
+    <UiEmpty v-else-if="!normalizedSearchQuery && state.tree.length === 0" class="border border-dashed">
       <UiEmptyHeader>
         <UiEmptyMedia variant="icon"><Files /></UiEmptyMedia>
         <UiEmptyTitle>Документация пока пуста</UiEmptyTitle>
@@ -117,7 +181,7 @@ watch(() => props.projectId, load, { immediate: true })
       </UiEmptyContent>
     </UiEmpty>
 
-    <DocumentRootList v-else :project-id="projectId" :documents="state.roots" />
+    <DocumentOutlineTree v-else-if="!normalizedSearchQuery" :project-id="projectId" :nodes="state.tree" />
       </UiTabsContent>
 
       <UiTabsContent v-if="canViewArchive" value="archive">

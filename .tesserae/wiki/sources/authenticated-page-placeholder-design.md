@@ -13,7 +13,7 @@ title: Authenticated Page Placeholder Design
 
 ## Incoming relations
 
-- **summarizes** → Minerva MVP Planning _(CommunitySummary)_
+- **summarizes** → Minerva MVP Blueprint _(CommunitySummary)_
 
 ## Connected node types
 

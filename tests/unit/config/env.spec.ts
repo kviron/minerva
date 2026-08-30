@@ -5,6 +5,7 @@ const valid = {
   DATABASE_URL: 'postgresql://minerva:minerva@127.0.0.1:5432/minerva',
   BETTER_AUTH_SECRET: '01234567890123456789012345678901',
   BETTER_AUTH_URL: 'http://127.0.0.1:3000',
+  MCP_RESOURCE_URL: 'http://127.0.0.1:3000/mcp',
   TRUSTED_ORIGINS: 'http://127.0.0.1:3000,http://localhost:3000',
   RATE_LIMIT_HMAC_SECRET: 'abcdefghijklmnopqrstuvwxyz123456',
   SMTP_HOST: '127.0.0.1',
@@ -32,6 +33,23 @@ describe('parseServerEnv', () => {
 
   it('rejects short rate-limit secrets', () => {
     expect(() => parseServerEnv({ ...valid, RATE_LIMIT_HMAC_SECRET: 'short' })).toThrow()
+  })
+
+  it('accepts one exact HTTPS or loopback HTTP MCP resource without query or fragment', () => {
+    expect(parseServerEnv(valid).MCP_RESOURCE_URL).toBe('http://127.0.0.1:3000/mcp')
+    expect(parseServerEnv({ ...valid, MCP_RESOURCE_URL: 'https://minerva.example/mcp' }).MCP_RESOURCE_URL)
+      .toBe('https://minerva.example/mcp')
+
+    for (const MCP_RESOURCE_URL of [
+      'http://minerva.example/mcp',
+      'https://minerva.example/mcp/',
+      'https://user@minerva.example/mcp',
+      'https://minerva.example/mcp?tenant=a',
+      'https://minerva.example/mcp#fragment',
+      'https://minerva.example/other',
+    ]) {
+      expect(() => parseServerEnv({ ...valid, MCP_RESOURCE_URL })).toThrow()
+    }
   })
 
   it('parses versioned 256-bit credential encryption keys', () => {

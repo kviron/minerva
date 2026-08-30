@@ -1,14 +1,16 @@
-import { createError, defineEventHandler, getRequestIP, readBody } from 'h3'
-import { z } from 'zod'
-import { getServerEnv } from '../../../shared/config/env'
+import { createError, defineEventHandler, getRequestIP, readValidatedBody, setHeader } from 'h3'
+import { getServerEnv } from '../../config/runtime-env'
+import { requestPasswordResetRequestSchema } from '../../../shared/identity/contracts'
 import { IdentityError } from '../../modules/identity/identity-error'
 import { requestPasswordReset } from '../../modules/identity/recovery/password-recovery'
 
-const bodySchema = z.object({ email: z.string().email().max(255) })
-
 export default defineEventHandler(async (event) => {
-  const parsed = bodySchema.safeParse(await readBody(event))
-  if (!parsed.success) {
+  setHeader(event, 'Cache-Control', 'private, no-store')
+  let body
+  try {
+    body = await readValidatedBody(event, value => requestPasswordResetRequestSchema.parse(value))
+  }
+  catch {
     throw createError({ statusCode: 400, statusMessage: 'Bad Request' })
   }
 
@@ -16,7 +18,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const code = await requestPasswordReset({
-      email: parsed.data.email,
+      email: body.email,
       ip: getRequestIP(event, { xForwardedFor: env.TRUST_PROXY }) ?? 'unknown',
     })
     return { code }

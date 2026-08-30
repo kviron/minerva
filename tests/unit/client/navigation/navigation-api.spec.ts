@@ -8,7 +8,7 @@ describe('global navigation API', () => {
     const request = vi.fn().mockResolvedValue(items)
     const api = createGlobalNavigationApi(request)
 
-    await expect(api.load()).resolves.toBe(items)
+    await expect(api.load()).resolves.toEqual(items)
     expect(request).toHaveBeenCalledTimes(1)
     expect(request).toHaveBeenCalledWith()
   })
@@ -22,6 +22,6 @@ describe('global navigation API', () => {
   ])('rejects malformed or unknown transport data %#', async (response) => {
     const api = createGlobalNavigationApi(vi.fn().mockResolvedValue(response))
 
-    await expect(api.load()).rejects.toThrow('Invalid global navigation response')
+    await expect(api.load()).rejects.toThrow('Invalid API response: GET /api/mainMenu')
   })
 })

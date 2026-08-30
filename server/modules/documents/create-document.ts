@@ -1,41 +1,68 @@
-import { and, eq, isNull, max } from 'drizzle-orm'
+import { and, eq, inArray, isNull, max } from 'drizzle-orm'
 import type { DocumentTemplate } from '../../../shared/documents/constants'
+import type { DocumentContent } from '../../../shared/documents/contracts'
 import { AUDIT_OUTCOME, MEMBERSHIP_STATUS, PROJECT_PERMISSION } from '../../../shared/projects/constants'
 import type { AuditChannel } from '../../../shared/projects/types'
 import { getDatabase } from '../../infrastructure/database/client'
 import { documents } from '../../infrastructure/database/schema/documents'
+import { documentImages } from '../../infrastructure/database/schema/files'
 import {
   auditEvents,
   projectMemberships,
   projectRolePermissions,
   projects,
 } from '../../infrastructure/database/schema/projects'
+import {
+  withDocumentMutationAuditAttribution,
+  type DocumentMutationAuditAttribution,
+} from '../projects/audit-attribution'
+import {
+  extractInternalDocumentLinkTargetIds,
+  extractReferencedImageIds,
+  parseDocumentContent,
+} from './content-schema'
+import { extractDocumentSearchText } from './search-documents'
 import { documentTemplateContent } from './templates'
 
 export const CREATE_DOCUMENT_ERROR = {
   INVALID_TITLE: 'INVALID_TITLE',
+  INVALID_CONTENT: 'INVALID_CONTENT',
   NOT_FOUND: 'NOT_FOUND',
   CREATE_FAILED: 'CREATE_FAILED',
 } as const
 
 export type CreateDocumentErrorCode = typeof CREATE_DOCUMENT_ERROR[keyof typeof CREATE_DOCUMENT_ERROR]
 
-export interface CreateDocumentInput {
+interface CommonCreateDocumentInput {
   readonly actorUserId: string
   readonly projectId: string
   readonly channel: AuditChannel
   readonly title: string
   readonly parentId: string | null
-  readonly template: DocumentTemplate
+  readonly auditAttribution?: DocumentMutationAuditAttribution
 }
 
-export interface ValidCreateDocumentCommand extends CreateDocumentInput {
+export type CreateDocumentInput = CommonCreateDocumentInput & (
+  | Readonly<{ template: DocumentTemplate, content?: never }>
+  | Readonly<{ content: unknown, template?: never }>
+)
+
+export interface ValidCreateDocumentCommand extends CommonCreateDocumentInput {
   readonly title: string
+  readonly initialSource:
+    | Readonly<{ kind: 'template', template: DocumentTemplate }>
+    | Readonly<{ kind: 'content', content: DocumentContent }>
+  readonly searchText: string
+  readonly internalLinkTargetIds: readonly string[]
+  readonly referencedImageIds: readonly string[]
 }
 
 export type CreateDocumentValidationResult =
   | { readonly ok: true, readonly value: ValidCreateDocumentCommand }
-  | { readonly ok: false, readonly code: typeof CREATE_DOCUMENT_ERROR.INVALID_TITLE }
+  | { readonly ok: false, readonly code:
+    | typeof CREATE_DOCUMENT_ERROR.INVALID_TITLE
+    | typeof CREATE_DOCUMENT_ERROR.INVALID_CONTENT
+  }
 
 type CreateDocumentPersistenceResult =
   | { readonly ok: true, readonly documentId: string }
@@ -50,6 +77,7 @@ export interface CreateDocumentDependencies {
 }
 
 type DocumentsDatabase = ReturnType<typeof getDatabase>['db']
+export type DocumentMutationTransaction = Pick<DocumentsDatabase, 'select' | 'insert' | 'update'>
 
 const CYRILLIC_TO_LATIN: Readonly<Record<string, string>> = {
   а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'e', ж: 'zh', з: 'z', и: 'i', й: 'y',
@@ -88,11 +116,32 @@ export const validateCreateDocument = (input: CreateDocumentInput): CreateDocume
   if (title.length === 0 || title.length > 200) {
     return { ok: false, code: CREATE_DOCUMENT_ERROR.INVALID_TITLE }
   }
-  return { ok: true, value: { ...input, title } }
+  const content = 'content' in input
+    ? parseDocumentContent(input.content)
+    : documentTemplateContent(input.template)
+  if (content === null) {
+    return { ok: false, code: CREATE_DOCUMENT_ERROR.INVALID_CONTENT }
+  }
+  const { template: _template, content: _content, ...common } = input
+  return {
+    ok: true,
+    value: {
+      ...common,
+      title,
+      initialSource: 'content' in input
+        ? { kind: 'content', content }
+        : { kind: 'template', template: input.template },
+      searchText: extractDocumentSearchText(content),
+      internalLinkTargetIds: extractInternalDocumentLinkTargetIds(content),
+      referencedImageIds: extractReferencedImageIds(content),
+    },
+  }
 }
 
-export const createDocumentPersistence = (db: DocumentsDatabase): CreateDocumentDependencies['persist'] =>
-  command => db.transaction(async (tx): Promise<CreateDocumentPersistenceResult> => {
+export const createDocumentInTransaction = async (
+  tx: DocumentMutationTransaction,
+  command: ValidCreateDocumentCommand,
+): Promise<CreateDocumentPersistenceResult> => {
     const [project] = await tx.select({ id: projects.id })
       .from(projects)
       .where(and(eq(projects.id, command.projectId), isNull(projects.archivedAt)))
@@ -132,6 +181,17 @@ export const createDocumentPersistence = (db: DocumentsDatabase): CreateDocument
       }
     }
 
+    if (command.referencedImageIds.length > 0) {
+      const imageRows = await tx.select({ id: documentImages.id }).from(documentImages).where(and(
+        eq(documentImages.projectId, command.projectId),
+        isNull(documentImages.archivedAt),
+        inArray(documentImages.id, command.referencedImageIds),
+      ))
+      if (imageRows.length !== command.referencedImageIds.length) {
+        return { ok: false, code: CREATE_DOCUMENT_ERROR.NOT_FOUND }
+      }
+    }
+
     const siblingParent = command.parentId === null
       ? isNull(documents.parentId)
       : eq(documents.parentId, command.parentId)
@@ -147,6 +207,9 @@ export const createDocumentPersistence = (db: DocumentsDatabase): CreateDocument
       .where(eq(documents.projectId, command.projectId))
     const slug = nextAvailableSlug(slugBaseFromTitle(command.title), existingSlugs.map(row => row.slug))
 
+    const draftContent = command.initialSource.kind === 'template'
+      ? documentTemplateContent(command.initialSource.template)
+      : command.initialSource.content
     const [created] = await tx.insert(documents).values({
       projectId: command.projectId,
       parentId: command.parentId,
@@ -154,7 +217,10 @@ export const createDocumentPersistence = (db: DocumentsDatabase): CreateDocument
       slug,
       position: (lastPosition?.value ?? -1) + 1,
       ownerUserId: command.actorUserId,
-      draftContent: documentTemplateContent(command.template),
+      draftContent,
+      draftSearchText: command.searchText,
+      draftInternalLinkTargetIds: [...command.internalLinkTargetIds],
+      draftReferencedImageIds: [...command.referencedImageIds],
     }).returning({ id: documents.id })
 
     if (!created) {
@@ -169,11 +235,20 @@ export const createDocumentPersistence = (db: DocumentsDatabase): CreateDocument
       projectId: command.projectId,
       targetType: 'document',
       targetId: created.id,
-      metadata: { parentId: command.parentId, template: command.template },
+      metadata: withDocumentMutationAuditAttribution(
+        command.initialSource.kind === 'template'
+          ? { parentId: command.parentId, template: command.initialSource.template }
+          : { parentId: command.parentId, source: 'content' },
+        command.auditAttribution,
+        { documentId: created.id, draftRevision: 0 },
+      ),
     })
 
     return { ok: true, documentId: created.id }
-  })
+}
+
+export const createDocumentPersistence = (db: DocumentsDatabase): CreateDocumentDependencies['persist'] =>
+  command => db.transaction(tx => createDocumentInTransaction(tx, command))
 
 export const createDocumentWith = (dependencies: CreateDocumentDependencies) =>
   async (input: CreateDocumentInput): Promise<CreateDocumentResult> => {

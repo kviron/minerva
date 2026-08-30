@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue'
+import { ProjectAssistantWidget } from '@/features/ai-assistant'
+import { PROJECT_PERMISSION } from '../../../../shared/projects/constants'
 import { PROJECT_ACTION } from '../model/actions/actions'
 import { useProjectsActions } from '../model/actions/provider'
 import { useProjectOverviewStore } from '../model/project-overview-state'
@@ -15,6 +17,8 @@ const state = useProjectOverviewStore()
 const project = computed(() => state.project)
 const pending = computed(() => actions.isPendingFor(PROJECT_ACTION.LOAD_OVERVIEW, props.projectId))
 const error = computed(() => actions.error.value)
+const canUseAssistant = computed(() => project.value?.permissions.includes(PROJECT_PERMISSION.PROJECT_AI_USE) === true)
+const canManageAssistant = computed(() => project.value?.permissions.includes(PROJECT_PERMISSION.PROJECT_AI_MANAGE) === true)
 
 const load = async () => {
   state.clearProject()
@@ -43,6 +47,12 @@ watch(() => props.projectId, load, { immediate: true })
 
     <template v-else-if="project">
       <slot :project="project" />
+      <ProjectAssistantWidget
+        v-if="canUseAssistant"
+        :project-id="project.id"
+        :project-name="project.name"
+        :can-manage-assistant="canManageAssistant"
+      />
     </template>
   </div>
 </template>

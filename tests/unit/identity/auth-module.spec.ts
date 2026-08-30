@@ -9,6 +9,7 @@ it('can be imported during a build without runtime secrets', async () => {
   vi.stubEnv('DATABASE_URL', '')
   vi.stubEnv('BETTER_AUTH_SECRET', '')
   vi.stubEnv('BETTER_AUTH_URL', '')
+  vi.stubEnv('MCP_RESOURCE_URL', '')
   vi.stubEnv('TRUSTED_ORIGINS', '')
   vi.stubEnv('RATE_LIMIT_HMAC_SECRET', '')
   vi.stubEnv('SMTP_HOST', '')

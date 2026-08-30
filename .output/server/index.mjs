@@ -15,6 +15,7 @@ import 'better-auth/adapters/drizzle';
 import 'better-auth/plugins/username';
 import 'drizzle-orm';
 import 'drizzle-orm/pg-core';
+import '@better-auth/oauth-provider';
 
 const nitroApp = useNitroApp();
 const server = Bun.serve({

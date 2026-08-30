@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { SettingsHeader } from '@/features/settings'
+import { OAuthConnectionsView } from '@/features/oauth-grants'
 </script>
 
 <template>
-  <SettingsHeader active="connections" />
+  <div class="flex flex-col gap-6">
+    <SettingsHeader active="connections" />
+    <OAuthConnectionsView />
+  </div>
 </template>

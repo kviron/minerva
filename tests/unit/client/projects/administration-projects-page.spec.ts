@@ -29,7 +29,8 @@ describe('administration projects page', () => {
     expect(table).toContain("mode?: 'member' | 'administration'")
     expect(table).toContain("mode === 'administration'")
     expect(table).toContain('Участники')
-    expect(table).toContain('project.activeMemberCount')
+    expect(table).toContain('project.access')
+    expect(table).not.toContain("'activeMemberCount' in project")
   })
 
   it('opens a project from the whole table row with mouse or keyboard', async () => {
@@ -51,11 +52,13 @@ describe('administration projects page', () => {
       read('../../../../server/modules/projects/list-projects.ts'),
     ])
 
-    expect(endpoint).toContain('await requireSuperAdmin(event)')
-    expect(endpoint).toContain('return listAllProjects()')
+    expect(endpoint).toContain('await requireSession(event)')
+    expect(endpoint).toContain('listAllProjects(')
+    expect(query).toContain('listAdministrationProjectsForActor')
     expect(query).toContain('listAdministrationProjects')
     expect(query).toContain('activeMemberCount: count(projectMemberships.id)')
     expect(query).toContain('eq(projectMemberships.status, MEMBERSHIP_STATUS.ACTIVE)')
     expect(query).toContain('.leftJoin(projectMemberships')
+    expect(query).toContain('.limit(options.limit + 1)')
   })
 })

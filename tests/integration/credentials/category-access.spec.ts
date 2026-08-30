@@ -1,9 +1,11 @@
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import { beforeEach, expect, it } from 'vitest'
+import { credentialCategoryManagementSchema } from '../../../shared/credentials/category-contracts'
 import { AUDIT_CHANNEL } from '../../../shared/projects/constants'
 import {
   createCredentialCategory,
   archiveCredentialCategory,
+  getCredentialCategoryManagement,
   listAccessibleCredentialCategories,
   replaceCredentialCategoryGrants,
   updateCredentialCategory,
@@ -98,6 +100,9 @@ it('combines Admin, role, and individual category access and revokes it immediat
     })).toEqual({ ok: true })
     expect(await listAccessibleCredentialCategories(database.db, { actorUserId: admin!.id, projectId }))
       .toEqual([expect.objectContaining({ name: 'Production', description: null })])
+
+    const management = await getCredentialCategoryManagement(database.db, { actorUserId: admin!.id, projectId })
+    expect(credentialCategoryManagementSchema.parse(management).categories[0]).not.toHaveProperty('position')
 
     expect(await archiveCredentialCategory(database.db, {
       actorUserId: admin!.id,

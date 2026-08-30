@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
-import { getServerEnv } from '../../../../shared/config/env'
+import { getServerEnv } from '../../../config/runtime-env'
 import { AUTH_MODE } from '../../../../shared/identity/constants'
 import { createMinervaAuth } from '../auth/create-auth'
 import type { PasswordResetMailer } from '../auth/contracts'

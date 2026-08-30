@@ -1,7 +1,7 @@
 # ADR 0005: Bind MCP tokens to one resource and enforce immediate revocation
 
 Date: 2026-06-24  
-Status: proposed
+Status: accepted
 
 ## Context
 
@@ -16,8 +16,10 @@ The first-release acceptance criteria require the next MCP request after revocat
 - Validate token activity, issuer, canonical resource/audience, scopes, and current RBAC on every MCP request before tool dispatch.
 - Represent MCP access tokens in a form whose active state can be checked server-side on every request.
 - Revoke a grant atomically with all access and refresh tokens derived from that grant.
+- Allow the standard `offline_access` scope and `refresh_token` grant for public PKCE clients. `offline_access` controls token renewal only and grants no MCP tool capability by itself.
 - Return `401 Unauthorized` for the first request using a revoked or otherwise inactive token.
 - Record grant revocation and rejected post-revocation requests in the audit trail without storing raw tokens.
+- Because revocation deletes token rows, record every rejected bearer authentication uniformly as an anonymous event containing only its generated request ID; do not retain a token hash or infer a client, user, or grant after rejection.
 
 ## Consequences
 
@@ -25,3 +27,10 @@ The first-release acceptance criteria require the next MCP request after revocat
 - Token validation adds a server-side lookup or equivalent active-state check to each MCP request.
 - Revocation tests must cover consent, access tokens, refresh tokens, resource mismatch, scope enforcement, and current RBAC.
 - The exact canonical production URI is deployment configuration, but normalization and comparison rules are fixed before Slice 6 implementation.
+
+## Project lifecycle amendment
+
+Accepted ADR 0028 requires every MCP operation to recheck the selected
+project's lifecycle. Pausing, closing, or archiving one project denies
+operations for that project but does not revoke the resource-wide OAuth grant,
+which may remain valid for another active project.

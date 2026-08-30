@@ -3,21 +3,21 @@ import {
   createError,
   defineEventHandler,
   getRequestIP,
-  readBody,
+  readValidatedBody,
+  setHeader,
 } from 'h3'
-import { z } from 'zod'
-import { getServerEnv } from '../../../shared/config/env'
+import { getServerEnv } from '../../config/runtime-env'
+import { signInRequestSchema } from '../../../shared/identity/contracts'
 import { IdentityError } from '../../modules/identity/identity-error'
 import { signInWithIdentifier } from '../../modules/identity/sign-in/sign-in'
 
-const bodySchema = z.object({
-  identifier: z.string().min(1).max(255),
-  password: z.string().min(1).max(256),
-})
-
 export default defineEventHandler(async (event) => {
-  const parsed = bodySchema.safeParse(await readBody(event))
-  if (!parsed.success) {
+  setHeader(event, 'Cache-Control', 'private, no-store')
+  let body
+  try {
+    body = await readValidatedBody(event, value => signInRequestSchema.parse(value))
+  }
+  catch {
     throw createError({ statusCode: 400, statusMessage: 'Bad Request' })
   }
 
@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const result = await signInWithIdentifier({
-      ...parsed.data,
+      ...body,
       ip: getRequestIP(event, { xForwardedFor: env.TRUST_PROXY }) ?? 'unknown',
       requestHeaders: event.headers,
     })

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AdministrationUsersResponse } from '../../../../shared/administration/users'
+import type { AdministrationUsersResponse } from '../../../../shared/administration/contracts'
 import {
   administrationUserAccessLabel,
   administrationUserDateLabel,
